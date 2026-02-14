@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deep Dives Library | The Living Room</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -18,65 +20,50 @@
             }
         }
     </script>
+
     <style>
         body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        .nav-link { font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.85rem; color: #a1a1aa; transition: 0.3s; }
-        .nav-link:hover { color: #2d5a5a; }
-        .glass-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 2rem; padding: 2rem; transition: 0.3s ease; }
-        .year-btn { padding: 0.5rem 1.5rem; border-radius: 999px; font-weight: 600; transition: 0.3s; border: 2px solid #2d5a5a; color: #2d5a5a; }
-        .year-btn.active { background-color: #2d5a5a; color: white; }
+        .hero-title { font-size: 4.5rem; line-height: 1.1; font-weight: 700; }
+        .accent-teal { color: #2d5a5a; }
+        .year-btn { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: #a1a1aa; border-bottom: 2px solid transparent; padding-bottom: 4px; transition: 0.3s; }
+        .year-btn.active { color: #2d5a5a; border-color: #2d5a5a; }
     </style>
 </head>
-<body>
+
+<body class="antialiased" data-current="resources">
 
     <div id="header-placeholder"></div>
 
-    <main class="max-w-6xl mx-auto px-6 py-16">
-        <section class="text-center mb-16">
-            <h1 class="text-5xl md:text-6xl font-bold mb-6">Digital <span class="text-teal italic">Deep Dives</span></h1>
-            <p class="text-xl text-zinc-500 max-w-2xl mx-auto">Explore our library of messages and study materials designed for the home-centric life.</p>
+    <main class="max-w-7xl mx-auto px-6 py-24">
+        
+        <section class="text-center mb-24">
+            <h1 class="hero-title mb-8">Digital <span class="accent-teal italic">Deep Dives</span>.</h1>
+            <p class="text-xl text-zinc-500 max-w-2xl mx-auto">Explore our library of messages and study materials designed for a home-centric life.</p>
         </section>
 
-        <div class="flex justify-center gap-4 mb-16">
-            <button onclick="loadYear('2026', this)" class="year-btn active">2026</button>
-            <button onclick="loadYear('2025', this)" class="year-btn">2025</button>
-        </div>
-
-        <div id="library-grid" class="grid md:grid-cols-3 gap-8 mb-32">
+        <section id="featured-dive" class="mb-24">
+            <div id="featured-container">
+                <div class="animate-pulse bg-zinc-200 rounded-[3rem] h-[50vh] w-full"></div>
             </div>
+        </section>
+
+        <section class="border-t border-zinc-100 pt-24">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-8">
+                <h2 class="text-4xl font-bold">The Archive</h2>
+                <div class="flex gap-8">
+                    <button onclick="loadYear('2026', this)" class="year-btn active">2026</button>
+                    <button onclick="loadYear('2025', this)" class="year-btn">2025</button>
+                </div>
+            </div>
+
+            <div id="library-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12">
+                </div>
+        </section>
+
     </main>
 
     <div id="footer-placeholder"></div>
-
-    <script>
-        async function loadSharedComponents() {
-            try {
-                // FIXED: Standardized quotes and added catch for failed fetches
-                const headerRes = await fetch('/components/header.html');
-                if (headerRes.ok) {
-                    document.getElementById('header-placeholder').innerHTML = await headerRes.text();
-                }
-
-                const footerRes = await fetch('/components/footer.html');
-                if (footerRes.ok) {
-                    document.getElementById('footer-placeholder').innerHTML = await footerRes.text();
-                }
-
-                // Auto-highlight logic
-                const currentPage = document.body.getAttribute('data-current');
-                // We use a timeout to ensure the header HTML is fully parsed before searching for the link
-                setTimeout(() => {
-                    const activeLink = document.querySelector(`[data-page="${currentPage}"]`);
-                    if (activeLink) activeLink.classList.add('!text-teal');
-                }, 100);
-
-            } catch (error) {
-                console.error('Error loading shared components:', error);
-            }
-        }
-        loadSharedComponents();
-    </script>
 
     <script>
         async function loadYear(year, btnElement) {
@@ -84,38 +71,59 @@
             document.querySelectorAll('.year-btn').forEach(btn => btn.classList.remove('active'));
             if(btnElement) btnElement.classList.add('active');
 
-            const container = document.getElementById('library-grid');
-            container.innerHTML = '<p class="col-span-full text-center text-zinc-400 animate-pulse">Loading ' + year + ' archives...</p>';
-
+            const grid = document.getElementById('library-grid');
+            const featured = document.getElementById('featured-container');
+            
             try {
-                // Fetch from your new directory structure
                 const response = await fetch(`/res/deep/${year}/deepdives.json`);
                 if (!response.ok) throw new Error('File not found');
                 const messages = await response.json();
                 
-                container.innerHTML = ''; 
+                // 1. Featured Banner (Latest from JSON)
+                const latest = messages[0];
+                featured.innerHTML = `
+                    <a href="${latest.url}" class="group relative block overflow-hidden rounded-[3rem] shadow-2xl bg-charcoal h-[50vh]">
+                        <img src="${latest.image}" class="w-full h-full object-cover opacity-50 transition-transform duration-1000 group-hover:scale-105" alt="${latest.title}">
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent"></div>
+                        <div class="absolute bottom-12 left-10 right-10 text-left">
+                            <h2 class="text-white text-3xl md:text-5xl font-bold mb-6 leading-tight">${latest.title}</h2>
+                            <span class="text-gold font-bold uppercase tracking-[0.3em] text-[0.65rem] border-b border-gold pb-1">Start Deep Dive &rarr;</span>
+                        </div>
+                    </a>`;
 
-                messages.forEach(item => {
-                    container.innerHTML += `
-                        <a href="${item.url}" class="block group">
-                            <div class="relative rounded-[2rem] overflow-hidden mb-6 shadow-xl">
-                                <img src="${item.image}" class="w-full transition-transform duration-700 group-hover:scale-110" alt="${item.title}">
-                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
-                            </div>
-                            <h3 class="text-xl font-semibold font-body tracking-tight group-hover:text-teal transition-colors leading-tight">
-                                ${item.title}
-                            </h3>
-                            <p class="text-zinc-500 text-sm mt-3 line-clamp-2">${item.excerpt || ''}</p>
-                        </a>
-                    `;
-                });
+                // 2. The Rest of the Grid
+                grid.innerHTML = messages.slice(1).map(item => `
+                    <a href="${item.url}" class="block group">
+                        <div class="relative rounded-[2rem] overflow-hidden mb-6 shadow-lg bg-zinc-200 aspect-video">
+                            <img src="${item.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="${item.title}">
+                        </div>
+                        <h3 class="text-lg font-semibold tracking-tight group-hover:text-teal transition-colors leading-tight">${item.title}</h3>
+                        <p class="text-zinc-500 text-xs mt-3 line-clamp-2">${item.excerpt || ''}</p>
+                    </a>
+                `).join('');
+
             } catch (error) {
-                container.innerHTML = `<p class="col-span-full text-center text-zinc-400">No deep dives found for ${year} yet.</p>`;
+                grid.innerHTML = `<p class="col-span-full text-center text-zinc-400">No deep dives found for ${year} yet.</p>`;
+                featured.innerHTML = '';
             }
         }
 
-        // Initialize with 2026
-        window.onload = () => loadYear('2026');
+        // Standardized Component Loader
+        async function loadSharedComponents() {
+            try {
+                const [h, f] = await Promise.all([
+                    fetch('/components/header.html'),
+                    fetch('/components/footer.html')
+                ]);
+                if(h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
+                if(f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
+            } catch (e) { console.error(e); }
+        }
+
+        window.onload = () => {
+            loadSharedComponents();
+            loadYear('2026');
+        };
     </script>
 </body>
 </html>

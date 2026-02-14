@@ -1,33 +1,49 @@
-<footer class="bg-[#1a1a1a] text-white pt-32 pb-16 px-6 mt-0">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-20">
-            <h2 class="text-4xl mb-4 italic text-[#c5a059] font-display">"Church in Every Home, Life in Every Heart"</h2>
-            <p class="text-xl opacity-70 font-body">At The Living Room, every home is a church, every heart is a place for God’s love.</p>
-        </div>
-        
-        <div class="grid md:grid-cols-2 gap-12 border-t border-white/10 pt-16">
-            <div class="font-body">
-                <h4 class="text-[#c5a059] uppercase tracking-[0.2em] text-xs font-bold mb-4">Contact</h4>
-                <p class="opacity-70 leading-relaxed">
-                    PO Box 3707<br>
-                    Caroline Springs, 3023<br>
-                    Victoria, Australia
-                </p>
-                <a href="mailto:hello@thelivingroom.io" class="text-[#c5a059] hover:underline mt-4 block font-semibold transition-all">
-                    hello@thelivingroom.io
-                </a>
-            </div>
+<footer class="bg-charcoal text-white pt-24 pb-12 px-6 text-center">
+    <div class="max-w-2xl mx-auto mb-16">
+        <h3 class="text-3xl md:text-4xl font-display italic text-gold mb-6 leading-tight">
+            Church in Every Home, Life in Every Heart
+        </h3>
+        <p class="text-zinc-400 font-body text-sm tracking-wide leading-relaxed px-4">
+            At The Living Room, every home is a church, every heart is a place for God’s love, and every connection brings us closer to Him.
+        </p>
+    </div>
 
-            <div class="md:text-right flex flex-col justify-end font-body">
-                <p class="text-[0.65rem] opacity-30 uppercase tracking-[0.2em] mb-2 font-bold">
-                    © 2023 – 2026 THE LIVING ROOM CHURCH
-                </p>
-                <nav class="flex md:justify-end gap-6 text-[0.7rem] opacity-50 font-bold uppercase tracking-widest">
-                    <a href="/" class="hover:text-[#c5a059] transition-colors">Home</a>
-                    <a href="/about.html" class="hover:text-[#c5a059] transition-colors">About</a>
-                    <a href="/give.html" class="hover:text-[#c5a059] transition-colors">Give</a>
-                </nav>
-            </div>
+    <div class="space-y-4 mb-16 py-8 border-y border-white/5">
+        <p class="text-[0.65rem] uppercase tracking-[0.4em] text-gold font-bold mb-4">Contact</p>
+        <div class="text-zinc-300 text-sm space-y-1 font-light">
+            <p>PO Box 3707</p>
+            <p>Caroline Springs, 3023</p>
+            <p>Victoria, Australia</p>
         </div>
+        <a href="mailto:hello@thelivingroom.io" class="inline-block mt-4 text-white font-bold tracking-widest text-xs border-b border-gold/50 pb-1 hover:text-gold transition-colors">
+            hello@thelivingroom.io
+        </a>
+    </div>
+
+    <div class="max-w-xs mx-auto">
+        <nav class="flex flex-wrap justify-center gap-x-6 gap-y-4 mb-10">
+            <a href="/" class="footer-nav-link">Home</a>
+            <a href="/about.html" class="footer-nav-link">About</a>
+            <a href="/give.html" class="footer-nav-link">Give</a>
+            <a href="/live.html" class="footer-nav-link">Live</a>
+        </nav>
+        
+        <p class="text-[0.6rem] uppercase tracking-[0.3em] text-zinc-500">
+            &copy; 2023 &ndash; 2026 The Living Room Church
+        </p>
     </div>
 </footer>
+
+<style>
+    .footer-nav-link {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: #a1a1aa; /* zinc-400 */
+        transition: color 0.3s ease;
+    }
+    .footer-nav-link:hover {
+        color: #c5a059; /* Brand Gold */
+    }
+</style>

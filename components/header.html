@@ -1,19 +1,10 @@
-<header class="pt-8 pb-8 px-6 text-center relative z-[1000] !overflow-visible">
-    <a href="/" class="relative z-[1100]">
-        <img src="/img/TLR-LOGO-COL-STACKED.png" alt="The Living Room Logo" class="h-20 md:h-24 mx-auto mb-8 block">
+<header class="pt-8 pb-12 px-6 text-center relative border-b border-zinc-100/50">
+    <a href="/">
+        <img src="/img/TLR-LOGO-COL-STACKED.png" alt="The Living Room Logo" class="h-20 md:h-24 mx-auto mb-10 block">
     </a>
 
-    <button id="mobile-menu-btn" class="md:hidden absolute top-10 right-6 text-zinc-400 hover:text-[#2d5a5a] focus:outline-none z-[1200]">
-        <svg id="hamburger-icon" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-        </svg>
-        <svg id="close-icon" class="w-8 h-8 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-    </button>
-
-    <nav id="nav-menu" class="hidden md:flex flex-col md:flex-row items-center justify-center gap-x-8 gap-y-6 mt-4 md:mt-0 transition-all duration-300">
-        <a href="/" data-page="home" class="nav-link">Home</a>
+    <nav class="nav-wrapper max-w-sm mx-auto">
+        <a href="/" data-page="home" class="nav-link hidden md:inline-block">Home</a>
         <a href="/about.html" data-page="about" class="nav-link">About</a>
         <a href="/resources.html" data-page="resources" class="nav-link">Resources</a>
         <a href="/missions.html" data-page="missions" class="nav-link">Missions</a>
@@ -23,71 +14,51 @@
 </header>
 
 <style>
-    .nav-link {
-        font-weight: 700;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        font-size: 0.8rem;
-        color: #a1a1aa;
-        transition: all 0.3s ease;
+    /* 1. Base Mobile Styles (Polished Stack) */
+    .nav-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
+
+    .nav-link {
+        width: 100%;
+        padding: 1rem 0; /* Slightly more vertical room since we have fewer links */
+        font-weight: 600; 
+        letter-spacing: 0.2em; 
+        text-transform: uppercase;
+        font-size: 0.85rem; 
+        color: #a1a1aa;
+        transition: color 0.3s ease; /* Transition only color, not size or spacing */
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0,0,0,0.03); 
+    }
+
+    /* Keep the hover state simple and non-distracting */
     .nav-link:hover, .nav-link.active {
         color: #2d5a5a;
     }
-    
-    /* Absolute Mobile Override */
-    @media (max-width: 767px) {
-        #nav-menu.show-mobile {
-            display: flex !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            position: absolute !important;
-            top: 100% !important;
-            left: 0 !important;
-            width: 100% !important;
-            background-color: #faf9f6 !important; /* Matches your cream background */
-            padding: 3rem 0 !important;
-            flex-direction: column !important;
-            box-shadow: 0 40px 40px -10px rgba(0, 0, 0, 0.2) !important;
-            z-index: 9999 !important;
+
+    .nav-link:last-child {
+        border-bottom: none; 
+    }
+
+    /* 2. Desktop Styles (Horizontal) */
+    @media (min-width: 768px) {
+        .nav-wrapper {
+            flex-direction: row;
+            justify-content: center;
+            gap: 3rem;
+            max-width: none;
+        }
+        .nav-link {
+            width: auto;
+            border-bottom: none;
+            padding: 0.5rem 0;
+        }
+        /* Restore the Home link for desktop users */
+        .nav-link.hidden.md\:inline-block {
+            display: inline-block !important;
         }
     }
 </style>
-
-<script>
-    // Self-executing function to avoid scope conflicts
-    (function() {
-        const btn = document.getElementById('mobile-menu-btn');
-        const nav = document.getElementById('nav-menu');
-        const ham = document.getElementById('hamburger-icon');
-        const cls = document.getElementById('close-icon');
-
-        if (btn && nav) {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const isOpen = nav.classList.contains('show-mobile');
-                
-                if (!isOpen) {
-                    nav.classList.add('show-mobile');
-                    ham.classList.add('hidden');
-                    cls.classList.remove('hidden');
-                } else {
-                    nav.classList.remove('show-mobile');
-                    ham.classList.remove('hidden');
-                    cls.classList.add('hidden');
-                }
-            });
-
-            // Close if user clicks a link
-            nav.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    nav.classList.remove('show-mobile');
-                    ham.classList.remove('hidden');
-                    cls.classList.add('hidden');
-                });
-            });
-        }
-    })();
-</script>
