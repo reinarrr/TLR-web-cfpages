@@ -22,12 +22,15 @@
     </script>
 
     <style>
-        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; font-size: 1.15rem; -webkit-font-smoothing: antialiased; }
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        .hero-title { font-size: 4.5rem; line-height: 1.1; font-weight: 700; }
         .accent-teal { color: #2d5a5a; }
+        .editorial-header { border-bottom: 1px solid rgba(26, 26, 26, 0.05); }
         .year-btn { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: #a1a1aa; border-bottom: 2px solid transparent; padding-bottom: 4px; transition: 0.3s; }
         .year-btn.active { color: #2d5a5a; border-color: #2d5a5a; }
+        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .img-reveal { filter: grayscale(40%) contrast(90%); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .group:hover .img-reveal { filter: grayscale(0%) contrast(100%); transform: scale(1.03); }
     </style>
 </head>
 
@@ -37,29 +40,23 @@
 
     <main class="max-w-7xl mx-auto px-6 py-24">
         
-        <section class="text-center mb-24">
-            <h1 class="hero-title mb-8">Digital <span class="accent-teal italic">Deep Dives</span>.</h1>
-            <p class="text-xl text-zinc-500 max-w-2xl mx-auto">Explore our library of messages and study materials designed for a home-centric life.</p>
-        </section>
+        <header class="max-w-4xl mx-auto mb-32 editorial-header pb-16 text-center">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-8">Study Archive</h3>
+            <h1 class="text-6xl md:text-8xl font-bold mb-10 leading-[1.05] tracking-tight text-charcoal">
+                Digital <span class="accent-teal italic font-display font-normal">Deep Dives</span>.
+            </h1>
+            <p class="text-2xl text-zinc-500 font-light leading-relaxed max-w-2xl mx-auto">
+                Explore our library of messages and study materials designed for a home-centric life.
+            </p>
+        </header>
 
-        <section id="featured-dive" class="mb-24">
-            <div id="featured-container">
-                <div class="animate-pulse bg-zinc-200 rounded-[3rem] h-[50vh] w-full"></div>
-            </div>
-        </section>
+        <div class="flex justify-center gap-12 mb-24">
+            <button onclick="loadYear('2026', this)" class="year-btn active">2026</button>
+            <button onclick="loadYear('2025', this)" class="year-btn">2025</button>
+        </div>
 
-        <section class="border-t border-zinc-100 pt-24">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-8">
-                <h2 class="text-4xl font-bold">The Archive</h2>
-                <div class="flex gap-8">
-                    <button onclick="loadYear('2026', this)" class="year-btn active">2026</button>
-                    <button onclick="loadYear('2025', this)" class="year-btn">2025</button>
-                </div>
-            </div>
-
-            <div id="library-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12">
-                </div>
-        </section>
+        <section id="library-grid" class="grid grid-cols-1 md:grid-cols-12 gap-y-32 gap-x-16">
+            </section>
 
     </main>
 
@@ -67,48 +64,66 @@
 
     <script>
         async function loadYear(year, btnElement) {
-            // Update UI buttons
-            document.querySelectorAll('.year-btn').forEach(btn => btn.classList.remove('active'));
-            if(btnElement) btnElement.classList.add('active');
+            if(btnElement) {
+                document.querySelectorAll('.year-btn').forEach(btn => btn.classList.remove('active'));
+                btnElement.classList.add('active');
+            }
 
             const grid = document.getElementById('library-grid');
-            const featured = document.getElementById('featured-container');
             
             try {
+                // Fetching from your standard directory
                 const response = await fetch(`/res/deep/${year}/deepdives.json`);
                 if (!response.ok) throw new Error('File not found');
                 const messages = await response.json();
                 
-                // 1. Featured Banner (Latest from JSON)
-                const latest = messages[0];
-                featured.innerHTML = `
-                    <a href="${latest.url}" class="group relative block overflow-hidden rounded-[3rem] shadow-2xl bg-charcoal h-[50vh]">
-                        <img src="${latest.image}" class="w-full h-full object-cover opacity-50 transition-transform duration-1000 group-hover:scale-105" alt="${latest.title}">
-                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent"></div>
-                        <div class="absolute bottom-12 left-10 right-10 text-left">
-                            <h2 class="text-white text-3xl md:text-5xl font-bold mb-6 leading-tight">${latest.title}</h2>
-                            <span class="text-gold font-bold uppercase tracking-[0.3em] text-[0.65rem] border-b border-gold pb-1">Start Deep Dive &rarr;</span>
-                        </div>
-                    </a>`;
+                grid.innerHTML = messages.map((item, index) => {
+                    const isFeature = index % 3 === 0;
+                    const colSpan = isFeature ? 'md:col-span-8' : 'md:col-span-4';
+                    const imgAspect = isFeature ? 'aspect-[16/8]' : 'aspect-[4/5]';
+                    const titleSize = isFeature ? 'text-4xl md:text-6xl' : 'text-3xl';
 
-                // 2. The Rest of the Grid
-                grid.innerHTML = messages.slice(1).map(item => `
-                    <a href="${item.url}" class="block group">
-                        <div class="relative rounded-[2rem] overflow-hidden mb-6 shadow-lg bg-zinc-200 aspect-video">
-                            <img src="${item.image}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="${item.title}">
-                        </div>
-                        <h3 class="text-lg font-semibold tracking-tight group-hover:text-teal transition-colors leading-tight">${item.title}</h3>
-                        <p class="text-zinc-500 text-xs mt-3 line-clamp-2">${item.excerpt || ''}</p>
-                    </a>
-                `).join('');
+                    return `
+                    <article class="${colSpan} group">
+                        <a href="${item.url}" class="block no-underline">
+                            <div class="relative overflow-hidden mb-10 rounded-sm bg-zinc-100">
+                                <img src="${item.image}" 
+                                     class="w-full ${imgAspect} object-cover img-reveal" 
+                                     alt="${item.title}">
+                            </div>
+                            
+                            <div class="${isFeature ? 'max-w-3xl' : ''}">
+                                <div class="flex items-center gap-4 mb-6">
+                                    <span class="text-gold text-[0.65rem] font-bold tracking-[0.2em] uppercase">
+                                        ${item.date || year}
+                                    </span>
+                                </div>
+                                
+                                <h2 class="${titleSize} font-bold mb-6 leading-[1.2] text-charcoal group-hover:text-teal transition-colors duration-500 underline decoration-transparent group-hover:decoration-teal/10 underline-offset-[12px]">
+                                    ${item.title}
+                                </h2>
+                                
+                                <p class="text-zinc-500 ${isFeature ? 'text-xl' : 'text-lg'} leading-relaxed line-clamp-3 font-light mb-8">
+                                    ${item.excerpt || ''}
+                                </p>
+                                
+                                <div class="flex items-center gap-2 text-gold group-hover:text-teal transition-colors duration-300">
+                                    <span class="text-[0.7rem] font-bold uppercase tracking-[0.3em]">Explore Study</span>
+                                    <svg class="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    `;
+                }).join('');
 
             } catch (error) {
-                grid.innerHTML = `<p class="col-span-full text-center text-zinc-400">No deep dives found for ${year} yet.</p>`;
-                featured.innerHTML = '';
+                grid.innerHTML = `<p class="md:col-span-12 text-center text-zinc-400 font-body py-20">No study materials found for ${year} yet.</p>`;
             }
         }
 
-        // Standardized Component Loader
         async function loadSharedComponents() {
             try {
                 const [h, f] = await Promise.all([

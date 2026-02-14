@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Message Title | The Living Room</title>
+    <title>Red Light. Green Light. | Deep Dive</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,18 +22,14 @@
     </script>
 
     <style>
-        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        .nav-link { font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.85rem; color: #a1a1aa; transition: 0.3s; }
-        .nav-link:hover { color: #2d5a5a; }
-        .glass-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 2rem; padding: 2.5rem; }
+        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; font-size: 1.15rem; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        .accent-teal { color: #2d5a5a; }
+        .editorial-header { border-bottom: 1px solid rgba(26, 26, 26, 0.05); }
         
-        /* FIXED: Added missing video container styles for the YT embed */
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 2rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-
-        .btn-gold { background-color: #c5a059; color: #1a1a1a; padding: 0.75rem 1.5rem; border-radius: 999px; display: inline-block; font-weight: 600; transition: 0.3s; text-align: center; }
-        .btn-gold:hover { background-color: #d4b47a; transform: translateY(-2px); }
+        /* Typography Betterments */
+        .lead-quote { border-left: 4px solid rgba(45, 90, 90, 0.2); }
+        .discussion-card { background: #1a1a1a; border-radius: 3rem; }
     </style>
 </head>
 
@@ -41,50 +37,68 @@
 
     <div id="header-placeholder"></div>
 
-    <main class="max-w-4xl mx-auto px-6 py-12">
+    <main class="max-w-4xl mx-auto px-6 py-24">
         
-        <section class="mb-16">
-            <div class="video-container shadow-2xl mb-12">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <header class="text-center mb-20 editorial-header pb-16">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-8">Acts Journey | Part 04</h3>
+            <h1 class="text-5xl md:text-7xl font-bold mb-10 leading-tight">Red Light. <span class="accent-teal italic font-display font-normal">Green Light.</span></h1>
+            
+            <p class="text-2xl md:text-3xl text-charcoal font-light leading-relaxed italic lead-quote pl-8 text-left mx-auto max-w-3xl py-4">
+                "Movement is often measured by speed, but in the Kingdom, movement is measured by alignment. Sometimes the most spiritual thing you can do is stop."
+            </p>
+        </header>
+
+        <section class="mb-24">
+            <div class="relative rounded-[3rem] overflow-hidden shadow-2xl bg-zinc-200 aspect-video">
+                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <h1 class="text-4xl md:text-6xl font-bold mb-4">Message Title</h1>
-            <p class="text-xl text-zinc-500 italic">Scripture Reference (e.g., Acts 16:6-15)</p>
+            <p class="text-center text-zinc-400 text-[0.65rem] mt-8 tracking-[0.3em] uppercase italic">Watch the foundation message &bull; 35 Minutes</p>
         </section>
 
-        <div class="grid md:grid-cols-3 gap-12">
+        <article class="space-y-12 mb-32">
+            <h2 class="text-4xl font-bold text-charcoal mb-8">The Nuance of Navigation</h2>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                In Acts 16, we see Paul and Silas facing a "Red Light" from the Spirit. They had a good plan, but God had a better purpose. Deep diving into this text reveals that a closed door isn't a denial of mission; it's a redirection of focus.
+            </p>
             
-            <div class="md:col-span-2 space-y-12">
-                <section class="glass-card p-10">
-                    <h2 class="text-3xl mb-6">About this Deep Dive</h2>
-                    <div class="prose prose-zinc text-lg text-zinc-600">
-                        <p>This is where your primary teaching summary or blog post goes. Focus on the core heart of the message and the practical application for life in the living room.</p>
-                    </div>
-                </section>
-
-                <section class="p-10">
-                    <h2 class="text-3xl mb-6 font-bold">Discussion Questions</h2>
-                    <ul class="space-y-4 text-lg text-zinc-600 list-disc pl-6">
-                        <li>Question 1 related to the scripture...</li>
-                        <li>Question 2 for home-centric reflection...</li>
-                        <li>How does this change your week?</li>
-                    </ul>
-                </section>
+            <div class="bg-white border border-zinc-100 rounded-[2.5rem] p-12 shadow-sm">
+                <h4 class="text-gold uppercase tracking-[0.3em] text-[0.65rem] font-bold mb-6">Actionable Truth</h4>
+                <p class="text-charcoal text-2xl font-semibold leading-tight font-body">
+                    Don't mistake a pause for a full stop. Use the "Red Light" to recalibrate your heart for the "Green Light" that follows.
+                </p>
             </div>
 
-            <div class="space-y-8">
-                <div class="glass-card p-8">
-                    <h4 class="font-bold uppercase tracking-widest text-xs text-zinc-400 mb-4">Resources</h4>
-                    <a href="#" class="block text-teal font-bold hover:underline mb-3">Download PDF Study Guide</a>
-                    <a href="/give.html" class="block text-teal font-bold hover:underline">Support this Mission</a>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                When the Spirit forbade them to speak the word in Asia, they didn't quit—they pivoted. This is the "Acts Journey" in real-time: being sensitive enough to hear the 'no' so that you are positioned to hear the 'yes' that changes history.
+            </p>
+        </article>
+
+        <section class="discussion-card text-white p-12 md:p-20 shadow-2xl">
+            <div class="text-center mb-20">
+                <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-4">The Living Room Circle</h3>
+                <h2 class="text-4xl md:text-5xl font-bold">Discussion & Reflection</h2>
+                <div class="h-1 w-12 bg-teal mx-auto mt-8"></div>
+            </div>
+
+            <div class="space-y-16 max-w-2xl mx-auto">
+                <div class="group">
+                    <span class="text-teal font-display text-5xl italic opacity-30 block mb-6 group-hover:opacity-100 transition-opacity duration-500">01</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Where are you currently feeling a "Red Light" in your life? How are you responding to the wait?</p>
                 </div>
 
-                <div class="glass-card p-8 bg-teal text-white">
-                    <h4 class="font-bold uppercase tracking-widest text-xs opacity-70 mb-4">Connect</h4>
-                    <p class="text-sm mb-4 italic">"Faith starts at home."</p>
-                    <a href="https://www.youtube.com/@tlrhd" target="_blank" class="btn-gold w-full">Follow @tlrhd</a>
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-5xl italic opacity-30 block mb-6 group-hover:opacity-100 transition-opacity duration-500">02</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light italic leading-relaxed">
+                        <strong class="text-white not-italic block mb-2">Family Prompt:</strong> Imagine we are on a long road trip and the GPS suddenly changes the route. How do we feel? How can we trust God's "GPS" even when the route looks different?
+                    </p>
                 </div>
             </div>
-        </div>
+
+            <div class="mt-24 text-center">
+                <a href="/deepdives.html" class="inline-block border border-teal text-teal px-12 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[0.7rem] hover:bg-teal hover:text-white transition-all duration-500">Back to Library</a>
+            </div>
+        </section>
+
     </main>
 
     <div id="footer-placeholder"></div>
@@ -92,31 +106,15 @@
     <script>
         async function loadSharedComponents() {
             try {
-                // FIXED: Standardized quotes and added catch for failed fetches
-                const headerRes = await fetch('/components/header.html');
-                if (headerRes.ok) {
-                    document.getElementById('header-placeholder').innerHTML = await headerRes.text();
-                }
-
-                const footerRes = await fetch('/components/footer.html');
-                if (footerRes.ok) {
-                    document.getElementById('footer-placeholder').innerHTML = await footerRes.text();
-                }
-
-                // Auto-highlight logic
-                const currentPage = document.body.getAttribute('data-current');
-                // We use a timeout to ensure the header HTML is fully parsed before searching for the link
-                setTimeout(() => {
-                    const activeLink = document.querySelector(`[data-page="${currentPage}"]`);
-                    if (activeLink) activeLink.classList.add('!text-teal');
-                }, 100);
-
-            } catch (error) {
-                console.error('Error loading shared components:', error);
-            }
+                const [h, f] = await Promise.all([
+                    fetch('/components/header.html'),
+                    fetch('/components/footer.html')
+                ]);
+                if(h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
+                if(f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
+            } catch (e) { console.error(e); }
         }
-        loadSharedComponents();
+        window.onload = loadSharedComponents;
     </script>
-
 </body>
 </html>

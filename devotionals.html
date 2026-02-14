@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Devotionals | The Living Room</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #faf9f6; color: #charcoal; font-family: 'Outfit', sans-serif; line-height: 1.8; font-size: 1.15rem; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .accent-teal { color: #2d5a5a; }
+        .editorial-header { border-bottom: 1px solid rgba(26, 26, 26, 0.05); }
+        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        /* Custom image reveal effect */
+        .img-reveal { filter: grayscale(40%) contrast(90%); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .group:hover .img-reveal { filter: grayscale(0%) contrast(100%); transform: scale(1.03); }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <main class="max-w-7xl mx-auto px-6 py-24">
+        
+        <header class="max-w-4xl mx-auto mb-32 editorial-header pb-16 text-center">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-8">The Daily Rhythm</h3>
+            <h1 class="text-6xl md:text-8xl font-bold mb-10 leading-[1.05] tracking-tight text-charcoal">
+                Personal <span class="accent-teal italic font-display font-normal">Reflections</span>.
+            </h1>
+            <p class="text-2xl text-zinc-500 font-light leading-relaxed max-w-2xl mx-auto">
+                Quiet moments captured to anchor your day on God's Word and to keep in step with the movement of the Holy Spirit.
+            </p>
+        </header>
+
+        <section id="devotional-grid" class="grid grid-cols-1 md:grid-cols-12 gap-y-32 gap-x-16">
+            </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        async function loadDevotionals() {
+            const grid = document.getElementById('devotional-grid');
+            
+            try {
+                const response = await fetch('/res/dev/devotionals.json');
+                if (!response.ok) throw new Error('JSON not found');
+                const data = await response.json();
+                
+            grid.innerHTML = data.map((item, index) => {
+                const isFeature = index % 3 === 0;
+                const colSpan = isFeature ? 'md:col-span-8' : 'md:col-span-4';
+                const imgAspect = isFeature ? 'aspect-[16/8]' : 'aspect-[4/5]';
+                const titleSize = isFeature ? 'text-4xl md:text-6xl' : 'text-3xl';
+
+                return `
+                <article class="${colSpan} group">
+                    <a href="${item.url}" class="block no-underline">
+                        <div class="relative overflow-hidden mb-10 rounded-sm bg-zinc-100">
+                            <img src="${item.image}" 
+                                class="w-full ${imgAspect} object-cover img-reveal" 
+                                alt="${item.title}">
+                        </div>
+                        
+                        <div class="${isFeature ? 'max-w-3xl' : ''}">
+                            <h2 class="${titleSize} font-bold mb-6 leading-[1.2] text-charcoal group-hover:text-teal transition-colors duration-500 underline decoration-transparent group-hover:decoration-teal/10 underline-offset-[12px]">
+                                ${item.title}
+                            </h2>
+                            
+                            <p class="text-zinc-500 ${isFeature ? 'text-xl' : 'text-lg'} leading-relaxed line-clamp-3 font-light mb-8">
+                                ${item.excerpt}
+                            </p>
+                            
+                            <div class="flex items-center gap-2 text-gold group-hover:text-teal transition-colors duration-300">
+                                <span class="text-[0.7rem] font-bold uppercase tracking-[0.3em]">Read Now</span>
+                                <svg class="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                `;
+            }).join('');
+
+            } catch (error) {
+                console.error(error);
+                grid.innerHTML = `<p class="md:col-span-12 text-center text-zinc-400 font-body py-20">Reflections are being prepared for your rhythm.</p>`;
+            }
+        }
+
+        async function loadSharedComponents() {
+            try {
+                const [h, f] = await Promise.all([
+                    fetch('/components/header.html'),
+                    fetch('/components/footer.html')
+                ]);
+                if(h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
+                if(f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
+            } catch (e) { console.error(e); }
+        }
+
+        window.onload = () => {
+            loadSharedComponents();
+            loadDevotionals();
+        };
+    </script>
+</body>
+</html>

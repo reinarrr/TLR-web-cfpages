@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Light. Green Light. | Deep Dive</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; font-size: 1.15rem; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        .accent-teal { color: #2d5a5a; }
+        .editorial-header { border-bottom: 1px solid rgba(26, 26, 26, 0.05); }
+        .lead-quote { border-left: 4px solid rgba(45, 90, 90, 0.2); }
+        .scripture-box { background: rgba(45, 90, 90, 0.03); border-left: 2px solid #2d5a5a; }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <main class="max-w-4xl mx-auto px-6 py-24">
+        
+        <header class="text-center mb-20 editorial-header pb-16">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-8">Acts Journey | Part 04</h3>
+            <h1 class="text-5xl md:text-7xl font-bold mb-10 leading-tight text-charcoal">
+                Red Light. <span class="accent-teal italic font-display font-normal">Green Light.</span>
+            </h1>
+            
+            <p class="text-2xl md:text-3xl text-charcoal font-light leading-relaxed italic lead-quote pl-8 text-left mx-auto max-w-3xl py-4">
+                "God often redirects us away from what is logical to lead us into what is personal—because the mission begins with opened hearts and open homes."
+            </p>
+        </header>
+
+        <section class="max-w-2xl mx-auto text-center mb-24">
+            <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">The Foundation</h4>
+            <h2 class="text-3xl font-bold mb-6 italic">Acts 16:6–15</h2>
+            <a href="https://www.biblegateway.com/passage/?search=Acts+16%3A6-15&version=NLT" target="_blank" class="text-teal font-bold uppercase tracking-[0.2em] text-[0.7rem] border-b border-teal/30 pb-1 hover:text-gold hover:border-gold transition-all">
+                Read on Bible Gateway &rarr;
+            </a>
+        </section>
+
+        <section class="mb-32">
+            <div class="relative rounded-[3rem] overflow-hidden shadow-2xl bg-zinc-200 aspect-video">
+                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/iZGO60hHVqA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <p class="text-center text-zinc-400 text-[0.65rem] mt-8 tracking-[0.3em] uppercase italic">Watch the foundation message &bull; Acts 16:6–15</p>
+        </section>
+
+        <article class="space-y-24 mb-32">
+            
+            <section class="space-y-10">
+                <h2 class="text-4xl font-bold text-charcoal leading-tight">When the Logical Path Is Closed</h2>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    We all make plans. Plans make life feel manageable; they give us the illusion that the future is something we can navigate with foresight. But the problem isn’t planning—it’s depending on the plan for our peace. Paul and Silas were moving with strategic intent toward Asia, a choice that made every bit of sense.
+                </p>
+                
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="space-y-4">
+                        <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem]">Plans as Identity</h4>
+                        <p class="text-zinc-500 text-base">Over time, our plans stop being what we do and start becoming who we are. When a plan is interrupted, it doesn't just feel inconvenient—it feels personal.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem]">The Illusion of Security</h4>
+                        <p class="text-zinc-500 text-base">We think if we plan well enough, we won't get hurt. But security doesn't come from foresight—it comes from trust.</p>
+                    </div>
+                </div>
+
+                <div class="scripture-box p-8 italic text-zinc-600 rounded-r-xl">
+                    "Plans are good servants, but terrible masters. God isn’t against your plans; He is against anything that takes His place."
+                </div>
+            </section>
+
+            <section class="space-y-10">
+                <h2 class="text-4xl font-bold text-charcoal leading-tight">I. The Geography of the Funnel</h2>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    Geography became a divine wall. To their left was Asia—forbidden. To their right was Bithynia—blocked. They were squeezed into the narrow corridor of Mysia, forced toward the Aegean coast.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-12 my-16 py-12 border-y border-zinc-100">
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-bold text-teal italic">The "Spirit of Jesus" Says No</h3>
+                        <p class="text-zinc-500 text-lg leading-relaxed">
+                            Acts 16:7 is explicit: "the Spirit of Jesus did not allow them to go there." This tells us that Jesus is not just the fulfiller of promises; He is the Lord who directs paths. The same Jesus who saves us also stops us.
+                        </p>
+                    </div>
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-bold text-teal italic">Not Every Calling is God's</h3>
+                        <p class="text-zinc-500 text-lg leading-relaxed">
+                            Just because something has your attention doesn't mean it has God's assignment. Noise is not guidance. God pulling us away from a "good" thing is often an act of protection before it becomes an idol.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="space-y-10">
+                <h2 class="text-4xl font-bold text-charcoal leading-tight">II. Troas: The End of the Road</h2>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    Troas was the end of land travel. It is the place where all your skills have taken you as far as they can go. You’ve reached the limit of human control.
+                </p>
+
+                <div class="bg-charcoal text-white rounded-[2.5rem] p-12 shadow-xl relative overflow-hidden">
+                    <h4 class="text-gold uppercase tracking-widest text-xs font-bold mb-6">Pastoral Insight</h4>
+                    <p class="text-2xl md:text-3xl font-display italic leading-tight">
+                        "Troas is where God gently unravels us. Everything we thought was sure is laid down. It is where confidence turns into dependence."
+                    </p>
+                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-teal/20 rounded-full blur-3xl"></div>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed italic">
+                    "God doesn't compete with our plans—He patiently waits until they fall silent."
+                </p>
+            </section>
+
+            <section class="space-y-10">
+                <h2 class="text-4xl font-bold text-charcoal leading-tight">III. Vision and Redirection</h2>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    God gives a call, not a map. In Troas, once the noise of their own plans died down, they finally heard God’s voice through the Macedonian vision. Obedience often requires trust before clarity.
+                </p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="p-8 bg-zinc-50 rounded-2xl">
+                        <p class="text-charcoal font-bold mb-2">From Strategy...</p>
+                        <p class="text-zinc-500 text-sm">Paul wanted Asia—a broad Roman province.</p>
+                    </div>
+                    <div class="p-8 bg-teal/5 rounded-2xl border border-teal/10">
+                        <p class="text-teal font-bold mb-2">...To Personal</p>
+                        <p class="text-zinc-500 text-sm">God wanted Philippi—a specific riverbank and a woman named Lydia.</p>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        <section class="bg-charcoal text-white rounded-[3.5rem] p-12 md:p-20 shadow-2xl relative">
+            <div class="text-center mb-20">
+                <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-4">The Living Room Circle</h3>
+                <h2 class="text-4xl md:text-6xl font-bold">Discussion & Reflection</h2>
+                <div class="h-1 w-16 bg-teal mx-auto mt-10"></div>
+            </div>
+
+            <div class="space-y-16 max-w-2xl mx-auto">
+                <div class="group">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">01</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Which part of your life right now feels like a "Red Light"? How are you managing the feeling that God might be stopping <i>you</i> rather than just your plan?</p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">02</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">"Noise is not guidance." What are the voices (internal or external) currently competing for your attention that might be drowning out the Spirit?</p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">03</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Have you reached a "Troas"—the end of your skill set or your ability to fix a situation? What is the hardest part of being still there?</p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">04</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light italic leading-relaxed">
+                        <strong class="text-white not-italic block mb-2 underline decoration-gold/50 underline-offset-8">Family Prompt:</strong> When the GPS in the car suddenly changes our route, how do we feel? How can we trust God's "GPS" as a family when our plans for the week get changed?
+                    </p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">05</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Redirecting Paul led him to Lydia’s house. Who in your life might God be leading you toward while you are focused on your bigger "strategic" goals?</p>
+                </div>
+            </div>
+
+            <div class="mt-24 text-center">
+                <a href="/deepdives.html" class="inline-block border border-teal text-teal px-12 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[0.7rem] hover:bg-teal hover:text-white transition-all">Back to Library</a>
+            </div>
+        </section>
+
+        <section class="mt-32 text-center max-w-2xl mx-auto border-t border-zinc-100 pt-20">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.4em] uppercase mb-10">The Troas Prayer</h3>
+            <div class="space-y-6 text-2xl text-charcoal font-light italic leading-relaxed mb-12">
+                <p>"Lord, bring me to the end of my plans and my need to control what comes next."</p>
+                <p>"I choose to be still today, because You are God. If You say no, I will trust You. If You say go, I will move."</p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        async function loadSharedComponents() {
+            try {
+                const [h, f] = await Promise.all([
+                    fetch('/components/header.html'),
+                    fetch('/components/footer.html')
+                ]);
+                if(h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
+                if(f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
+            } catch (e) { console.error(e); }
+        }
+        window.onload = loadSharedComponents;
+    </script>
+</body>
+</html>
