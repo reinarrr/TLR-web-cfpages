@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Give | The Living Room</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .nav-link { font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.85rem; color: #a1a1aa; transition: 0.3s; }
+        .nav-link:hover { color: #2d5a5a; }
+        .glass-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 2rem; padding: 2.5rem; }
+        .btn-teal { background-color: #2d5a5a; color: white; padding: 1.25rem 2.5rem; border-radius: 999px; transition: all 0.3s ease; display: inline-block; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+        .btn-teal:hover { background-color: #3d7a7a; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(45, 90, 90, 0.1); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="header-placeholder"></div>
+
+    <main class="max-w-5xl mx-auto px-6 py-16">
+        
+        <section class="text-center mb-20">
+            <h1 class="text-5xl md:text-6xl font-bold mb-8">Partner With <span class="text-teal italic">Us</span></h1>
+            <p class="text-2xl font-light text-zinc-600 max-w-3xl mx-auto">
+                Building faithful communities where faith begins at home, grows in community, and reaches the world.
+            </p>
+        </section>
+
+        <section class="glass-card mb-20 text-center shadow-2xl py-16">
+            <p class="text-xl text-zinc-500 mb-10 max-w-2xl mx-auto">
+                Every gift supports our mission to connect people through home-centric, online-first, Bible-based, and Christ-centered gatherings.
+            </p>
+            <a href="https://tithe.ly/give" target="_blank" class="btn-teal text-xl px-16 py-5">
+                GIVE TODAY
+            </a>
+            <p class="mt-8 text-sm text-zinc-400 font-bold uppercase tracking-widest">Secure online giving via Tithely</p>
+        </section>
+
+        <section class="mb-32">
+            <h2 class="text-3xl text-center mb-12">Your generosity empowers:</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card">
+                    <h3 class="text-xl font-bold text-teal mb-4">Discipleship</h3>
+                    <p class="text-base text-zinc-500 mb-0">Providing resources for individuals, couples, and families to grow in their faith.</p>
+                </div>
+                <div class="glass-card">
+                    <h3 class="text-xl font-bold text-teal mb-4">Connection</h3>
+                    <p class="text-base text-zinc-500 mb-0">Supporting online and in-home gatherings that foster meaningful spiritual growth.</p>
+                </div>
+                <div class="glass-card">
+                    <h3 class="text-xl font-bold text-teal mb-4">Outreach</h3>
+                    <p class="text-base text-zinc-500 mb-0">Expanding our ability to serve locally and globally, sharing God’s love in practical ways.</p>
+                </div>
+            </div>
+            <p class="mt-12 text-center text-xl italic text-zinc-500 max-w-2xl mx-auto">
+                Your gift, no matter the size, is a seed planted in God’s Kingdom—bringing faith to every heart and home.
+            </p>
+        </section>
+
+        <section class="grid md:grid-cols-2 gap-12 py-20 border-t border-zinc-200">
+            <div>
+                <h2 class="text-4xl mb-8">How to give</h2>
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Online Giving</h4>
+                        <p class="text-zinc-500">Use our secure platform to make a one-time or recurring gift using the button above.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">Direct Deposit</h4>
+                        <p class="text-zinc-500">Bank details are available for direct transfers. Please <a href="mailto:hello@thelivingroom.io" class="text-teal font-bold hover:underline">contact us</a> for details.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2">PayPal</h4>
+                        <p class="text-zinc-500">PayPal details are available. Please <a href="mailto:hello@thelivingroom.io" class="text-teal font-bold hover:underline">contact us</a> for details.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white/40 rounded-[2rem] p-10 border border-zinc-100">
+                <h2 class="text-2xl mb-6">Your security is important</h2>
+                <p class="text-base text-zinc-600 mb-6">
+                    Online giving through our trusted partner, <strong>Tithely</strong>, ensures that your contributions are safe and secure.
+                </p>
+                <p class="text-base text-zinc-600 mb-0">
+                    Tithely uses bank-grade encryption to protect your transactions. Every transaction is encrypted, giving you peace of mind.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        async function loadSharedComponents() {
+            try {
+                // FIXED: Standardized quotes and added catch for failed fetches
+                const headerRes = await fetch('/components/header.html');
+                if (headerRes.ok) {
+                    document.getElementById('header-placeholder').innerHTML = await headerRes.text();
+                }
+
+                const footerRes = await fetch('/components/footer.html');
+                if (footerRes.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footerRes.text();
+                }
+
+                // Auto-highlight logic
+                const currentPage = document.body.getAttribute('data-current');
+                // We use a timeout to ensure the header HTML is fully parsed before searching for the link
+                setTimeout(() => {
+                    const activeLink = document.querySelector(`[data-page="${currentPage}"]`);
+                    if (activeLink) activeLink.classList.add('!text-teal');
+                }, 100);
+
+            } catch (error) {
+                console.error('Error loading shared components:', error);
+            }
+        }
+        loadSharedComponents();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Beliefs | The Living Room</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .hero-title { font-size: 4.5rem; line-height: 1.1; font-weight: 700; }
+        .accent-teal { color: #2d5a5a; }
+        .belief-card { border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 4rem; margin-bottom: 4rem; }
+        .scripture-box { background: rgba(45, 90, 90, 0.05); border-left: 4px solid #2d5a5a; padding: 2rem; border-radius: 0 1.5rem 1.5rem 0; margin-top: 2rem; }
+    </style>
+</head>
+
+<body class="antialiased" data-current="about">
+
+    <div id="header-placeholder"></div>
+
+    <section class="max-w-5xl mx-auto px-6 py-24 text-center">
+        <h1 class="hero-title mb-8">
+            Our <span class="accent-teal italic">Beliefs</span>.
+        </h1>
+        <p class="text-2xl text-zinc-500 max-w-3xl mx-auto mb-12">
+            Established on the Bible, this is our foundational statement of faith.
+        </p>
+    </section>
+
+    <section class="max-w-5xl mx-auto px-6 py-12 text-center border-y border-zinc-200 mb-24">
+        <p class="text-xl tracking-widest uppercase font-bold text-zinc-400 mb-0">
+            <span class="accent-teal italic">Bible-based</span> &bull; Christ-centered &bull; <span class="accent-teal italic">Missional</span>
+        </p>
+    </section>
+
+    <main class="max-w-4xl mx-auto px-6 pb-32">
+
+        <article class="belief-card">
+            <h2 class="text-4xl font-bold mb-6">One God</h2>
+            <p class="text-xl text-zinc-600">We believe in one omnipotent, omniscient, and omnipresent God who created and sustains everything. God exists in three persons: the Father, the Son, and the Holy Spirit.</p>
+            <div class="scripture-box italic text-zinc-700">
+                Matthew 28:19; 2 Corinthians 13:14
+            </div>
+        </article>
+
+        <article class="belief-card">
+            <h2 class="text-4xl font-bold mb-6">The Lord Jesus Christ</h2>
+            <p class="text-xl text-zinc-600">Jesus Christ is the eternal Son of God, born of a virgin, embodying both divine and human nature. He died, was resurrected on the third day, ascended into heaven, and will return with great power and glory.</p>
+            <div class="scripture-box italic text-zinc-700">
+                Luke 1:26-35; John 1:18; Isaiah 7:14; Isaiah 9:6
+            </div>
+        </article>
+
+        <article class="belief-card">
+            <h2 class="text-4xl font-bold mb-6">The Holy Scriptures</h2>
+            <p class="text-xl text-zinc-600">The Old and New Testaments of the Bible are divinely inspired and infallible, forming the authoritative foundation for all matters of faith and conduct.</p>
+            <div class="scripture-box italic text-zinc-700">
+                2 Timothy 3:16; 1 Corinthians 2:13
+            </div>
+        </article>
+
+        <article class="belief-card">
+            <h2 class="text-4xl font-bold mb-6">Justification By Faith</h2>
+            <p class="text-xl text-zinc-600">Salvation is a free gift from God, obtained through repentance, forgiveness of sins, and faith in Jesus Christ’s death and resurrection.</p>
+            <div class="scripture-box italic text-zinc-700">
+                Ephesians 2:8-9; Hebrews 9:12; Romans 5:11
+            </div>
+        </article>
+
+        <article class="belief-card">
+            <h2 class="text-4xl font-bold mb-6">The Enemy</h2>
+            <p class="text-xl text-zinc-600">The Devil instigated humanity’s fall and continues his work to destroy mankind. Ultimately, he will face eternal judgment and be cast into the Lake of Fire.</p>
+            <div class="scripture-box italic text-zinc-700">
+                Matthew 25:41; Revelation 20:14-15
+            </div>
+        </article>
+
+        <article class="belief-card">
+            <h2 class="text-4xl font-bold mb-6">Baptism In Water</h2>
+            <p class="text-xl text-zinc-600">Christ’s followers are commanded to be baptized in the name of the Father, the Son, and the Holy Spirit through immersion in water.</p>
+            <div class="scripture-box italic text-zinc-700">
+                Matthew 28:19; Acts 10:44-48
+            </div>
+        </article>
+
+        <article class="belief-card">
+            <h2 class="text-4xl font-bold mb-6">Baptism In The Holy Spirit</h2>
+            <p class="text-xl text-zinc-600">A genuine experience that occurs at or after salvation, marked by speaking in tongues as the Spirit enables.</p>
+            <div class="scripture-box italic text-zinc-700">
+                Acts 2:1-4
+            </div>
+        </article>
+
+        <article class="belief-card">
+            <h2 class="text-4xl font-bold mb-6">Communion</h2>
+            <p class="text-xl text-zinc-600">Communion is a time of fellowship among believers and with God, obeying Christ’s command to remember His sacrifice on the Cross.</p>
+            <div class="scripture-box italic text-zinc-700">
+                1 Corinthians 11:28-32; Matthew 26:26-28
+            </div>
+        </article>
+
+        <article class="belief-card">
+            <h2 class="text-4xl font-bold mb-6">Gifts of the Holy Spirit</h2>
+            <p class="text-xl text-zinc-600">The Holy Spirit bestows gifts evident in the early Church, intended to build up the congregation.</p>
+            <div class="scripture-box italic text-zinc-700">
+                1 Corinthians 12-14
+            </div>
+        </article>
+
+        <article class="belief-card">
+            <h2 class="text-4xl font-bold mb-6">Eternal Life</h2>
+            <p class="text-xl text-zinc-600">Believers will receive eternal life, while those who do not believe face eternal damnation.</p>
+            <div class="scripture-box italic text-zinc-700">
+                John 5:24; John 3:16; Revelation 20:10-15
+            </div>
+        </article>
+
+        <article class="belief-card">
+            <h2 class="text-4xl font-bold mb-6">The Church</h2>
+            <p class="text-xl text-zinc-600">The universal Church consists of all local congregations around the world whose members acknowledge Jesus as Lord and Savior.</p>
+            <div class="scripture-box italic text-zinc-700">
+                Matthew 16:18; Acts 15:22
+            </div>
+        </article>
+
+        <article class="belief-card border-none pb-0 mb-0">
+            <h2 class="text-4xl font-bold mb-6">The Return of Christ</h2>
+            <p class="text-xl text-zinc-600">Jesus Christ will physically return to earth in the same manner he ascended, with great power and authority, to reign as King and judge all humanity.</p>
+            <div class="scripture-box italic text-zinc-700">
+                John 14:2-3; 1 Thessalonians 4:13-18
+            </div>
+        </article>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        async function loadSharedComponents() {
+            try {
+                const headerRes = await fetch('/components/header.html');
+                if (headerRes.ok) document.getElementById('header-placeholder').innerHTML = await headerRes.text();
+
+                const footerRes = await fetch('/components/footer.html');
+                if (footerRes.ok) document.getElementById('footer-placeholder').innerHTML = await footerRes.text();
+
+                setTimeout(() => {
+                    const activeLink = document.querySelector(`[data-page="about"]`);
+                    if (activeLink) activeLink.classList.add('!text-teal');
+                }, 150);
+            } catch (error) { console.error('Error loading shared components:', error); }
+        }
+        loadSharedComponents();
+    </script>
+</body>
+</html>

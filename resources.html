@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources | The Living Room</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 2rem; padding: 2.5rem; transition: all 0.4s ease; }
+        .glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <main class="max-w-6xl mx-auto px-6 py-24">
+        <section class="text-center mb-20">
+            <h1 class="text-6xl font-bold mb-6">Equipping the <span class="text-teal italic">Home</span></h1>
+            <p class="text-xl text-zinc-500 max-w-2xl mx-auto">Tools and teachings designed to help faith grow where life happens—in the living room.</p>
+        </section>
+
+        <div class="grid md:grid-cols-2 gap-10 mb-32">
+            
+            <a href="/deepdives.html" class="glass-card group flex flex-col justify-between border-2 border-transparent hover:border-teal/20">
+                <div>
+                    <div class="w-16 h-16 bg-teal/10 rounded-2xl flex items-center justify-center mb-6 text-teal">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-4">Digital Deep Dives</h2>
+                    <p class="text-zinc-500 mb-8 leading-relaxed">Our complete archive of Sunday messages and specialized teachings. Organized by year for easy exploration.</p>
+                </div>
+                <span class="font-bold text-teal uppercase tracking-widest text-sm group-hover:translate-x-2 transition-transform inline-block">Explore Library &rarr;</span>
+            </a>
+
+            <div class="glass-card group flex flex-col justify-between border-2 border-transparent hover:border-gold/20">
+                <div>
+                    <div class="w-16 h-16 bg-gold/10 rounded-2xl flex items-center justify-center mb-6 text-gold">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5S19.832 5.477 21 6.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-4">Study Materials</h2>
+                    <p class="text-zinc-500 mb-8 leading-relaxed">Downloadable PDF guides and discussion questions for Supergroups or individual reflection.</p>
+                </div>
+                <p class="text-zinc-400 font-bold uppercase tracking-widest text-xs">Updated Weekly</p>
+            </div>
+
+        </div>
+
+        <section class="glass-card bg-charcoal text-white overflow-hidden p-0 relative">
+            <div class="grid md:grid-cols-2 items-center">
+                <div class="p-12 md:p-16">
+                    <h3 class="text-gold text-sm font-bold tracking-[0.2em] uppercase mb-4">Featured Resource</h3>
+                    <h2 class="text-4xl font-bold mb-6">The Acts Journey</h2>
+                    <p class="opacity-70 text-lg mb-8 leading-relaxed">Follow along with our current series as we explore the movement of the Spirit from Jerusalem to the ends of the earth.</p>
+                    <a href="/res/deep/2026/acts-journey.html" class="inline-block border-2 border-gold text-gold px-8 py-3 rounded-full font-bold hover:bg-gold hover:text-charcoal transition-all">Start Reading</a>
+                </div>
+                <div class="bg-zinc-800 h-64 md:h-full min-h-[300px]">
+                    <img src="/img/acts-series-graphic.jpg" alt="Acts Series" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        async function loadSharedComponents() {
+            try {
+                const headerRes = await fetch('/components/header.html');
+                if (headerRes.ok) document.getElementById('header-placeholder').innerHTML = await headerRes.text();
+
+                const footerRes = await fetch('/components/footer.html');
+                if (footerRes.ok) document.getElementById('footer-placeholder').innerHTML = await footerRes.text();
+
+                const currentPage = document.body.getAttribute('data-current');
+                setTimeout(() => {
+                    const activeLink = document.querySelector(`[data-page="${currentPage}"]`);
+                    if (activeLink) activeLink.classList.add('!text-teal');
+                }, 100);
+            } catch (error) {
+                console.error('Error loading shared components:', error);
+            }
+        }
+        loadSharedComponents();
+    </script>
+</body>
+</html>

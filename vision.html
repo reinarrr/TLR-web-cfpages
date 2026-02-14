@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Vision | The Living Room</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        /* Matches index.html Headline Styles */
+        .hero-title { font-size: 4.5rem; line-height: 1.1; font-weight: 700; }
+        .accent-teal { color: #2d5a5a; }
+        .vision-card { background: white; border-radius: 2.5rem; padding: 3.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.05); }
+    </style>
+</head>
+
+<body class="antialiased" data-current="about">
+
+    <div id="header-placeholder"></div>
+
+    <section class="max-w-5xl mx-auto px-6 py-20 text-center">
+        <h1 class="hero-title mb-8">
+            Faith in Every <span class="accent-teal italic">Home</span>.
+        </h1>
+        <h2 class="text-3xl md:text-4xl mb-10 font-light italic text-zinc-600">
+            Life in Every Heart
+        </h2>
+        <p class="text-2xl text-zinc-500 max-w-3xl mx-auto mb-12 leading-relaxed">
+            Our vision is to see faith thriving wherever life happens. We are a <strong>home-centric</strong>, online-first, Bible-based community committed to helping you live out God’s purpose in your everyday life.
+        </p>
+    </section>
+
+    <section class="max-w-5xl mx-auto px-6 py-12 text-center border-y border-zinc-200 mb-24">
+        <p class="text-xl tracking-widest uppercase font-bold text-zinc-400 mb-0">
+            <span class="accent-teal">Christ-centered</span> &bull; Bible-based &bull; <span class="accent-teal italic">Home-centric</span> &bull; Online-first
+        </p>
+    </section>
+
+    <main class="max-w-6xl mx-auto px-6 pb-32">
+        <div class="grid md:grid-cols-2 gap-8">
+            
+            <div class="vision-card">
+                <span class="text-teal font-bold uppercase tracking-widest text-xs mb-4 block">Pillar One</span>
+                <h3 class="text-3xl font-bold mb-4">Christ-Centered</h3>
+                <p class="text-zinc-500">Jesus Christ is the center of our community. We exist to reflect His goodness and lead others out of darkness and into His wonderful light.</p>
+            </div>
+
+            <div class="vision-card">
+                <span class="text-teal font-bold uppercase tracking-widest text-xs mb-4 block">Pillar Two</span>
+                <h3 class="text-3xl font-bold mb-4">Bible-Based</h3>
+                <p class="text-zinc-500">The Holy Scriptures are our authoritative foundation. Every gathering, teaching, and connection is rooted deeply in the Word of God.</p>
+            </div>
+
+            <div class="vision-card">
+                <span class="text-teal font-bold uppercase tracking-widest text-xs mb-4 block">Pillar Three</span>
+                <h3 class="text-3xl font-bold mb-4">Home-Centric</h3>
+                <p class="text-zinc-500">The living room is the front line. We believe faith is best nurtured in the intimacy of the home where real life and authentic connections happen.</p>
+            </div>
+
+            <div class="vision-card">
+                <span class="text-teal font-bold uppercase tracking-widest text-xs mb-4 block">Pillar Four</span>
+                <h3 class="text-3xl font-bold mb-4">Online-First</h3>
+                <p class="text-zinc-500">Technology allows us to be a church without borders. We use digital missions to connect families across Japan, Manila, the USA, and beyond.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        async function loadSharedComponents() {
+            try {
+                const headerRes = await fetch('/components/header.html');
+                if (headerRes.ok) document.getElementById('header-placeholder').innerHTML = await headerRes.text();
+
+                const footerRes = await fetch('/components/footer.html');
+                if (footerRes.ok) document.getElementById('footer-placeholder').innerHTML = await footerRes.text();
+
+                // Maintain 'About' highlight in the nav
+                setTimeout(() => {
+                    const activeLink = document.querySelector(`[data-page="about"]`);
+                    if (activeLink) activeLink.classList.add('!text-teal');
+                }, 150);
+            } catch (error) {
+                console.error('Error loading shared components:', error);
+            }
+        }
+        loadSharedComponents();
+    </script>
+</body>
+</html>

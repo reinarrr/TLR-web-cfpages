@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Dives Library | The Living Room</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .nav-link { font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.85rem; color: #a1a1aa; transition: 0.3s; }
+        .nav-link:hover { color: #2d5a5a; }
+        .glass-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 2rem; padding: 2rem; transition: 0.3s ease; }
+        .year-btn { padding: 0.5rem 1.5rem; border-radius: 999px; font-weight: 600; transition: 0.3s; border: 2px solid #2d5a5a; color: #2d5a5a; }
+        .year-btn.active { background-color: #2d5a5a; color: white; }
+    </style>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <main class="max-w-6xl mx-auto px-6 py-16">
+        <section class="text-center mb-16">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">Digital <span class="text-teal italic">Deep Dives</span></h1>
+            <p class="text-xl text-zinc-500 max-w-2xl mx-auto">Explore our library of messages and study materials designed for the home-centric life.</p>
+        </section>
+
+        <div class="flex justify-center gap-4 mb-16">
+            <button onclick="loadYear('2026', this)" class="year-btn active">2026</button>
+            <button onclick="loadYear('2025', this)" class="year-btn">2025</button>
+        </div>
+
+        <div id="library-grid" class="grid md:grid-cols-3 gap-8 mb-32">
+            </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        async function loadSharedComponents() {
+            try {
+                // FIXED: Standardized quotes and added catch for failed fetches
+                const headerRes = await fetch('/components/header.html');
+                if (headerRes.ok) {
+                    document.getElementById('header-placeholder').innerHTML = await headerRes.text();
+                }
+
+                const footerRes = await fetch('/components/footer.html');
+                if (footerRes.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footerRes.text();
+                }
+
+                // Auto-highlight logic
+                const currentPage = document.body.getAttribute('data-current');
+                // We use a timeout to ensure the header HTML is fully parsed before searching for the link
+                setTimeout(() => {
+                    const activeLink = document.querySelector(`[data-page="${currentPage}"]`);
+                    if (activeLink) activeLink.classList.add('!text-teal');
+                }, 100);
+
+            } catch (error) {
+                console.error('Error loading shared components:', error);
+            }
+        }
+        loadSharedComponents();
+    </script>
+
+    <script>
+        async function loadYear(year, btnElement) {
+            // Update UI buttons
+            document.querySelectorAll('.year-btn').forEach(btn => btn.classList.remove('active'));
+            if(btnElement) btnElement.classList.add('active');
+
+            const container = document.getElementById('library-grid');
+            container.innerHTML = '<p class="col-span-full text-center text-zinc-400 animate-pulse">Loading ' + year + ' archives...</p>';
+
+            try {
+                // Fetch from your new directory structure
+                const response = await fetch(`/res/deep/${year}/deepdives.json`);
+                if (!response.ok) throw new Error('File not found');
+                const messages = await response.json();
+                
+                container.innerHTML = ''; 
+
+                messages.forEach(item => {
+                    container.innerHTML += `
+                        <a href="${item.url}" class="block group">
+                            <div class="relative rounded-[2rem] overflow-hidden mb-6 shadow-xl">
+                                <img src="${item.image}" class="w-full transition-transform duration-700 group-hover:scale-110" alt="${item.title}">
+                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+                            </div>
+                            <h3 class="text-xl font-semibold font-body tracking-tight group-hover:text-teal transition-colors leading-tight">
+                                ${item.title}
+                            </h3>
+                            <p class="text-zinc-500 text-sm mt-3 line-clamp-2">${item.excerpt || ''}</p>
+                        </a>
+                    `;
+                });
+            } catch (error) {
+                container.innerHTML = `<p class="col-span-full text-center text-zinc-400">No deep dives found for ${year} yet.</p>`;
+            }
+        }
+
+        // Initialize with 2026
+        window.onload = () => loadYear('2026');
+    </script>
+</body>
+</html>

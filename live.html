@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Live | The Living Room</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .nav-link { font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.85rem; color: #a1a1aa; transition: 0.3s; }
+        .nav-link:hover { color: #2d5a5a; }
+        .glass-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 2rem; padding: 2.5rem; }
+        .btn-teal { background-color: #2d5a5a; color: white; padding: 1rem 2rem; border-radius: 999px; display: inline-block; font-weight: 600; transition: 0.3s; text-align: center; }
+        .btn-teal:hover { background-color: #3d7a7a; transform: translateY(-2px); }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 2rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    </style>
+</head>
+<body>
+
+<div id="header-placeholder"></div>
+
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">Join The Living Room <span class="text-teal italic">Live</span></h1>
+                <p class="text-xl text-zinc-600 max-w-3xl mx-auto">Welcome to <strong>Sundays in The Living Room</strong>, where we gather as a global community to worship, learn, and connect.</p>
+            </div>
+
+            <div id="live-player-container" class="video-container mb-12 shadow-2xl">
+                <div class="flex items-center justify-center h-full bg-zinc-100 animate-pulse">
+                    <p class="text-zinc-400 font-bold tracking-widest uppercase">Connecting to @tlrhd Live...</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+               <div class="glass-card text-center flex flex-col justify-between">
+                    <div>
+                        <p class="text-sm font-bold uppercase tracking-widest text-zinc-400 mb-2">Next Live Service</p>
+                        <p id="next-service-time" class="text-2xl font-bold mb-2">Calculating...</p>
+                        <p id="local-timezone" class="text-xs uppercase tracking-widest text-zinc-400 mb-6 font-bold"></p>
+                    </div>
+                    <a href="https://in.thelivingroom.io" target="_blank" class="btn-teal w-full">Join the Conversation</a>
+                </div>
+                
+                <div class="glass-card text-center flex flex-col justify-between">
+                    <div>
+                        <p class="text-sm font-bold uppercase tracking-widest text-zinc-400 mb-2">Support growth</p>
+                        <h3 class="text-2xl font-bold mb-2 font-body">Let's Build Faithful Communities</h3>
+                        <p class="text-xs uppercase tracking-widest text-zinc-400 mb-6 font-bold">Invest in the Mission</p>
+                    </div>
+                    <a href="/give.html" class="btn-teal w-full !bg-gold hover:!bg-gold/80 !text-charcoal">Give Today</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 border-t border-zinc-200">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-8">Join the Conversation</h2>
+                <p class="text-lg text-zinc-600 mb-10">
+                    Be part of the community by joining the chat! Share your thoughts, ask questions, and connect with others during <strong>Sundays in The Living Room</strong>. Head over to <a href="https://in.thelivingroom.io" class="text-teal font-bold hover:underline">in.thelivingroom.io</a> to join the conversation.
+                </p>
+                <a href="https://in.thelivingroom.io" target="_blank" class="text-teal font-bold text-xl uppercase tracking-widest hover:underline">Start Chatting &rarr;</a>
+            </div>
+        </section>
+
+        <section class="grid md:grid-cols-3 gap-8 pb-32">
+            <div class="glass-card text-center">
+                <h3 class="text-xl font-bold mb-4">Missed It?</h3>
+                <p class="text-base text-zinc-500 mb-6">Catch replays of Sundays in The Living Room anytime.</p>
+                <a href="https://www.youtube.com/@tlrhd" class="text-teal font-bold hover:underline">Watch Replays &rarr;</a>
+            </div>
+            <div class="glass-card text-center">
+                <h3 class="text-xl font-bold mb-4">YouTube</h3>
+                <p class="text-base text-zinc-500 mb-6">We stream simultaneously on YouTube for easy access anywhere.</p>
+                <a href="https://www.youtube.com/@tlrhd" class="text-teal font-bold hover:underline">Go to YouTube &rarr;</a>
+            </div>
+            <div class="glass-card text-center">
+                <h3 class="text-xl font-bold mb-4">Support Growth</h3>
+                <p class="text-base text-zinc-500 mb-6">Invest in the mission of reaching hearts and homes.</p>
+                <a href="/give.html" class="text-teal font-bold hover:underline">Learn More &rarr;</a>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        async function loadSharedComponents() {
+            try {
+                // FIXED: Standardized quotes and added catch for failed fetches
+                const headerRes = await fetch('/components/header.html');
+                if (headerRes.ok) {
+                    document.getElementById('header-placeholder').innerHTML = await headerRes.text();
+                }
+
+                const footerRes = await fetch('/components/footer.html');
+                if (footerRes.ok) {
+                    document.getElementById('footer-placeholder').innerHTML = await footerRes.text();
+                }
+
+                // Auto-highlight logic
+                const currentPage = document.body.getAttribute('data-current');
+                // We use a timeout to ensure the header HTML is fully parsed before searching for the link
+                setTimeout(() => {
+                    const activeLink = document.querySelector(`[data-page="${currentPage}"]`);
+                    if (activeLink) activeLink.classList.add('!text-teal');
+                }, 100);
+
+            } catch (error) {
+                console.error('Error loading shared components:', error);
+            }
+        }
+        loadSharedComponents();
+    </script>
+
+    <script>
+        function updateNextServiceTime() {
+            const timeElement = document.getElementById('next-service-time');
+            const zoneElement = document.getElementById('local-timezone');
+            const melbFormatter = new Intl.DateTimeFormat('en-AU', { timeZone: 'Australia/Melbourne', timeZoneName: 'short' });
+            const now = new Date();
+            const parts = melbFormatter.formatToParts(now);
+            const tzName = parts.find(p => p.type === 'timeZoneName').value;
+            const isDST = tzName === 'AEDT';
+            const melbStartHour = isDST ? 12 : 11;
+
+            let nextSunday = new Date();
+            nextSunday.setDate(now.getDate() + (7 - now.getDay()) % 7);
+            if (now.getDay() === 0 && now.getHours() >= melbStartHour) { nextSunday.setDate(nextSunday.getDate() + 7); }
+
+            const melbDateStr = nextSunday.toLocaleDateString('en-CA');
+            const targetISO = `${melbDateStr}T${melbStartHour}:00:00`;
+            const eventInLocalTime = new Date(new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Australia/Melbourne', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+            }).format(new Date(targetISO)));
+
+            const displayOptions = { weekday: 'long', day: 'numeric', month: 'long', hour: 'numeric', minute: '2-digit', hour12: true };
+            timeElement.innerHTML = eventInLocalTime.toLocaleString([], displayOptions);
+            zoneElement.innerHTML = `Converted to your time (${Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_', ' ')})`;
+        }
+        updateNextServiceTime();
+    </script>
+
+    <script>
+        async function fetchLiveVideo() {
+            const container = document.getElementById('live-player-container');
+            // Point to your Cloudflare Worker to save quota
+            const url = 'https://youtube-proxy.reinar-6fd.workers.dev/'; 
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                let videoId = '';
+                
+                // The Worker returns the latest 6 videos. 
+                // We check the first one (the most recent).
+                if (data.items && data.items.length > 0) {
+                    videoId = data.items[0].id.videoId;
+                }
+
+                if (videoId) {
+                    container.innerHTML = `
+                        <iframe 
+                            src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
+                            title="TLR Live Replay" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>`;
+                } else {
+                    container.innerHTML = `
+                        <div class="flex items-center justify-center h-full bg-zinc-100">
+                            <p class="text-zinc-400 font-bold tracking-widest uppercase">Visit youtube.com/@tlrhd for the live stream.</p>
+                        </div>`;
+                }
+            } catch (error) {
+                console.error('Error fetching via Worker:', error);
+                container.innerHTML = '<p class="text-zinc-400 p-12 text-center">Unable to load live stream. Please check back shortly.</p>';
+            }
+        }
+        // Execute the load
+        fetchLiveVideo();
+    </script>
+</body>
+</html>
