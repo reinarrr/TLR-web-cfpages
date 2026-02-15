@@ -34,7 +34,7 @@
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
     </style>
 </head>
-<body>
+<body data-current="live">
 
 <div id="header-placeholder"></div>
 
@@ -83,156 +83,96 @@
             </div>
         </section>
 
-        <section class="grid md:grid-cols-3 gap-8 pb-32">
-            <div class="glass-card text-center">
-                <h3 class="text-xl font-bold mb-4">Missed It?</h3>
-                <p class="text-base text-zinc-500 mb-6">Catch replays of Sundays in The Living Room anytime.</p>
-                <a href="https://www.youtube.com/@tlrhd" class="text-teal font-bold hover:underline">Watch Replays &rarr;</a>
-            </div>
-            <div class="glass-card text-center">
-                <h3 class="text-xl font-bold mb-4">YouTube</h3>
-                <p class="text-base text-zinc-500 mb-6">We stream simultaneously on YouTube for easy access anywhere.</p>
-                <a href="https://www.youtube.com/@tlrhd" class="text-teal font-bold hover:underline">Go to YouTube &rarr;</a>
-            </div>
-            <div class="glass-card text-center">
-                <h3 class="text-xl font-bold mb-4">Support Growth</h3>
-                <p class="text-base text-zinc-500 mb-6">Invest in the mission of reaching hearts and homes.</p>
-                <a href="/give.html" class="text-teal font-bold hover:underline">Learn More &rarr;</a>
-            </div>
-        </section>
-
     </main>
 
     <div id="footer-placeholder"></div>
 
     <script>
+        // Shared Component Loader
         async function loadSharedComponents() {
             try {
-                // FIXED: Standardized quotes and added catch for failed fetches
-                const headerRes = await fetch('/components/header.html');
-                if (headerRes.ok) {
-                    document.getElementById('header-placeholder').innerHTML = await headerRes.text();
-                }
+                const [h, f] = await Promise.all([
+                    fetch('/components/header.html'),
+                    fetch('/components/footer.html')
+                ]);
+                if (h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
+                if (f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
 
-                const footerRes = await fetch('/components/footer.html');
-                if (footerRes.ok) {
-                    document.getElementById('footer-placeholder').innerHTML = await footerRes.text();
-                }
-
-                // Auto-highlight logic
-                const currentPage = document.body.getAttribute('data-current');
-                // We use a timeout to ensure the header HTML is fully parsed before searching for the link
+                const currentPage = document.body.getAttribute('data-current') || 'live';
                 setTimeout(() => {
                     const activeLink = document.querySelector(`[data-page="${currentPage}"]`);
                     if (activeLink) activeLink.classList.add('!text-teal');
                 }, 100);
-
-            } catch (error) {
-                console.error('Error loading shared components:', error);
-            }
+            } catch (error) { console.error('Error loading components:', error); }
         }
-        loadSharedComponents();
-    </script>
 
-    <script>
+        // Global Time Conversion Logic (Fixes Manila/Japan Shift)
         function updateNextServiceTime() {
             const timeElement = document.getElementById('next-service-time');
             const zoneElement = document.getElementById('local-timezone');
             
-            // 1. Identify Melbourne's current offset to determine the start hour
-            // Melb starts at 12:00 (AEDT / UTC+11) or 11:00 (AEST / UTC+10)
+            // 1. Identify Melbourne's current status (AEDT vs AEST)
             const melbFormatter = new Intl.DateTimeFormat('en-AU', { 
                 timeZone: 'Australia/Melbourne', 
                 timeZoneName: 'short' 
             });
             const now = new Date();
-            const tzName = melbFormatter.formatToParts(now).find(p => p.type === 'timeZoneName').value;
+            const parts = melbFormatter.formatToParts(now);
+            const tzName = parts.find(p => p.type === 'timeZoneName').value;
             
-            // Melbourne services are typically at 12:00 PM AEDT or 11:00 AM AEST 
-            // to align with a consistent global UTC time.
+            // 2. Set the global start hour based on Melbourne's current offset
             const melbStartHour = (tzName === 'AEDT') ? 12 : 11;
 
-            // 2. Calculate the next Sunday
+            // 3. Find next Sunday based on Melbourne time
+            const melbNowString = now.toLocaleString('en-US', { timeZone: 'Australia/Melbourne' });
+            const melbNow = new Date(melbNowString);
+            
+            let daysUntilSunday = (7 - melbNow.getDay()) % 7;
             let nextSunday = new Date();
-            // Get Melbourne's current day/hour to see if we've already passed the service time today
-            const melbTime = new Date(now.toLocaleString('en-US', { timeZone: 'Australia/Melbourne' }));
-            const daysUntilSunday = (7 - melbTime.getDay()) % 7;
+            nextSunday.setDate(now.getDate() + daysUntilSunday);
             
-            nextSunday.setDate(melbTime.getDate() + daysUntilSunday);
-            
-            // If it's Sunday and the service already started/finished, move to next week
-            if (melbTime.getDay() === 0 && melbTime.getHours() >= melbStartHour) {
+            // If Sunday and already passed service time, go to next week
+            if (melbNow.getDay() === 0 && melbNow.getHours() >= melbStartHour) {
                 nextSunday.setDate(nextSunday.getDate() + 7);
             }
 
-            // 3. Create the target time in Melbourne and get its UTC equivalent
-            // This is the "Gold Standard" for preventing offset errors
-            const targetDateStr = nextSunday.toISOString().split('T')[0]; 
-            const targetISO = `${targetDateStr}T${melbStartHour.toString().padStart(2, '0')}:00:00`;
-            
-            // Force the browser to treat this string as a Melbourne-specific time
+            // 4. Create the moment in Melbourne specifically (Anchor)
+            // This prevents the browser from shifting the local user's offset onto the date string
             const melbEvent = new Date(new Intl.DateTimeFormat('en-US', {
                 timeZone: 'Australia/Melbourne',
-                year: 'numeric', month: '2-digit', day: '2-digit',
-                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                year: 'numeric', month: 'numeric', day: 'numeric',
+                hour: 'numeric', minute: 'numeric', second: 'numeric',
                 hour12: false
-            }).format(new Date(targetISO)));
+            }).format(new Date(nextSunday.getFullYear(), nextSunday.getMonth(), nextSunday.getDate(), melbStartHour, 0, 0)));
 
-            // 4. Display converted to Local User Time
             const displayOptions = { 
-                weekday: 'long', 
-                day: 'numeric', 
-                month: 'long', 
-                hour: 'numeric', 
-                minute: '2-digit', 
-                hour12: true 
+                weekday: 'long', day: 'numeric', month: 'long', 
+                hour: 'numeric', minute: '2-digit', hour12: true 
             };
 
             timeElement.innerHTML = melbEvent.toLocaleString([], displayOptions);
             zoneElement.innerHTML = `Converted to your time (${Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g, ' ')})`;
         }
-    </script>
 
-    <script>
         async function fetchLiveVideo() {
             const container = document.getElementById('live-player-container');
-            // Point to your Cloudflare Worker to save quota
             const url = 'https://youtube-proxy.reinar-6fd.workers.dev/'; 
-
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                
-                let videoId = '';
-                
-                // The Worker returns the latest 6 videos. 
-                // We check the first one (the most recent).
                 if (data.items && data.items.length > 0) {
-                    videoId = data.items[0].id.videoId;
+                    const videoId = data.items[0].id.videoId;
+                    container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="TLR Live" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
                 }
-
-                if (videoId) {
-                    container.innerHTML = `
-                        <iframe 
-                            src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
-                            title="TLR Live Replay" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>`;
-                } else {
-                    container.innerHTML = `
-                        <div class="flex items-center justify-center h-full bg-zinc-100">
-                            <p class="text-zinc-400 font-bold tracking-widest uppercase">Visit youtube.com/@tlrhd for the live stream.</p>
-                        </div>`;
-                }
-            } catch (error) {
-                console.error('Error fetching via Worker:', error);
-                container.innerHTML = '<p class="text-zinc-400 p-12 text-center">Unable to load live stream. Please check back shortly.</p>';
-            }
+            } catch (error) { container.innerHTML = '<p class="text-zinc-400 p-12 text-center uppercase tracking-widest">Connect at youtube.com/@tlrhd</p>'; }
         }
-        // Execute the load
-        fetchLiveVideo();
+
+        // Initialize all functions on load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSharedComponents();
+            fetchLiveVideo();
+            updateNextServiceTime();
+        });
     </script>
 </body>
 </html>
