@@ -138,28 +138,59 @@
         function updateNextServiceTime() {
             const timeElement = document.getElementById('next-service-time');
             const zoneElement = document.getElementById('local-timezone');
-            const melbFormatter = new Intl.DateTimeFormat('en-AU', { timeZone: 'Australia/Melbourne', timeZoneName: 'short' });
+            
+            // 1. Identify Melbourne's current offset to determine the start hour
+            // Melb starts at 12:00 (AEDT / UTC+11) or 11:00 (AEST / UTC+10)
+            const melbFormatter = new Intl.DateTimeFormat('en-AU', { 
+                timeZone: 'Australia/Melbourne', 
+                timeZoneName: 'short' 
+            });
             const now = new Date();
-            const parts = melbFormatter.formatToParts(now);
-            const tzName = parts.find(p => p.type === 'timeZoneName').value;
-            const isDST = tzName === 'AEDT';
-            const melbStartHour = isDST ? 12 : 11;
+            const tzName = melbFormatter.formatToParts(now).find(p => p.type === 'timeZoneName').value;
+            
+            // Melbourne services are typically at 12:00 PM AEDT or 11:00 AM AEST 
+            // to align with a consistent global UTC time.
+            const melbStartHour = (tzName === 'AEDT') ? 12 : 11;
 
+            // 2. Calculate the next Sunday
             let nextSunday = new Date();
-            nextSunday.setDate(now.getDate() + (7 - now.getDay()) % 7);
-            if (now.getDay() === 0 && now.getHours() >= melbStartHour) { nextSunday.setDate(nextSunday.getDate() + 7); }
+            // Get Melbourne's current day/hour to see if we've already passed the service time today
+            const melbTime = new Date(now.toLocaleString('en-US', { timeZone: 'Australia/Melbourne' }));
+            const daysUntilSunday = (7 - melbTime.getDay()) % 7;
+            
+            nextSunday.setDate(melbTime.getDate() + daysUntilSunday);
+            
+            // If it's Sunday and the service already started/finished, move to next week
+            if (melbTime.getDay() === 0 && melbTime.getHours() >= melbStartHour) {
+                nextSunday.setDate(nextSunday.getDate() + 7);
+            }
 
-            const melbDateStr = nextSunday.toLocaleDateString('en-CA');
-            const targetISO = `${melbDateStr}T${melbStartHour}:00:00`;
-            const eventInLocalTime = new Date(new Intl.DateTimeFormat('en-US', {
-                timeZone: 'Australia/Melbourne', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+            // 3. Create the target time in Melbourne and get its UTC equivalent
+            // This is the "Gold Standard" for preventing offset errors
+            const targetDateStr = nextSunday.toISOString().split('T')[0]; 
+            const targetISO = `${targetDateStr}T${melbStartHour.toString().padStart(2, '0')}:00:00`;
+            
+            // Force the browser to treat this string as a Melbourne-specific time
+            const melbEvent = new Date(new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Australia/Melbourne',
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                hour12: false
             }).format(new Date(targetISO)));
 
-            const displayOptions = { weekday: 'long', day: 'numeric', month: 'long', hour: 'numeric', minute: '2-digit', hour12: true };
-            timeElement.innerHTML = eventInLocalTime.toLocaleString([], displayOptions);
-            zoneElement.innerHTML = `Converted to your time (${Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_', ' ')})`;
+            // 4. Display converted to Local User Time
+            const displayOptions = { 
+                weekday: 'long', 
+                day: 'numeric', 
+                month: 'long', 
+                hour: 'numeric', 
+                minute: '2-digit', 
+                hour12: true 
+            };
+
+            timeElement.innerHTML = melbEvent.toLocaleString([], displayOptions);
+            zoneElement.innerHTML = `Converted to your time (${Intl.DateTimeFormat().resolvedOptions().timeZone.replace(/_/g, ' ')})`;
         }
-        updateNextServiceTime();
     </script>
 
     <script>
