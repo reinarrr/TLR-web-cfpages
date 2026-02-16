@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>40Flex | Journey Complete</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; font-size: 1.15rem; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        .hero-gradient { background: linear-gradient(180deg, #1a1a1a 0%, #2d5a5a 100%); }
+        .finish-card { background: white; border: 1px solid rgba(26, 26, 26, 0.05); padding: 3rem; border-radius: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.03); }
+        .divider { color: #c5a059; opacity: 0.3; letter-spacing: 0.2em; text-align: center; margin: 3rem 0; }
+    </style>
+</head>
+<body class="antialiased">
+    <div id="header-placeholder"></div>
+
+    <section class="hero-gradient text-cream py-32 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h3 class="text-gold text-[0.9rem] font-bold tracking-[0.5em] uppercase mb-8">40 Days Complete</h3>
+            <h1 class="text-5xl md:text-8xl font-bold mb-10 leading-tight text-white">Well Done!</h1>
+            <p class="text-2xl md:text-3xl font-light italic opacity-90 mb-12 max-w-2xl mx-auto">
+                "I have fought the good fight, I have finished the race, I have kept the faith." — 2 Timothy 4:7
+            </p>
+        </div>
+    </section>
+
+    <main class="max-w-4xl mx-auto px-6 py-24">
+        <div class="finish-card text-center mb-24">
+            <h2 class="text-4xl font-bold text-charcoal mb-8">The Walk Continues</h2>
+            <div class="h-1 w-20 bg-gold mx-auto mb-10"></div>
+            
+            <div class="space-y-8 text-zinc-600 text-lg leading-relaxed max-w-2xl mx-auto">
+                <p>You’ve spent forty days walking step-by-step through the Gospels. You've heard His voice, ruminated on His words, and witnessed His miracles. That is no small feat.</p>
+                
+                <p>But remember: the end of 40Flex isn't the end of the journey. It's just the beginning of a new pace. The habit you've built here is a foundation for a lifetime of intimacy with Jesus.</p>
+
+                <div class="divider">......................................................</div>
+                
+                <p class="font-display italic text-2xl text-charcoal">
+                    "He is right there next to you. It’s not some other person... It’s Jesus. He calls to us each moment of every day."
+                </p>
+
+                <p class="pt-8">Don't let the noise of the world crowd out the stillness you've found. Keep the momentum. Keep the connection. Keep walking.</p>
+            </div>
+        </div>
+
+        <section class="grid md:grid-cols-2 gap-8 mb-24">
+            <div class="bg-teal text-cream p-12 rounded-[2.5rem] flex flex-col justify-between">
+                <div>
+                    <h4 class="text-gold uppercase tracking-widest text-xs font-bold mb-4">Stay Connected</h4>
+                    <p class="text-xl font-light mb-8">Continue exploring the Word through our other resources and deep dives.</p>
+                </div>
+                <a href="../../../resources.html" class="inline-block border border-cream text-cream text-center py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-cream hover:text-teal transition-all">Explore Resources</a>
+            </div>
+            
+            <div class="bg-charcoal text-cream p-12 rounded-[2.5rem] flex flex-col justify-between">
+                <div>
+                    <h4 class="text-gold uppercase tracking-widest text-xs font-bold mb-4">Back to Start</h4>
+                    <p class="text-xl font-light mb-8">Need a refresh? The journey is always open for those who want to see Him again.</p>
+                </div>
+                <a href="../../../forty-flex.html" class="inline-block bg-gold text-charcoal text-center py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-white transition-all">Start 40Flex</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-charcoal text-cream py-24 px-6 text-center border-t border-white/5">
+        <div id="footer-placeholder"></div>
+        <p class="mt-12 opacity-40 text-xs tracking-widest uppercase">Copyright 2023 – 2026 | The Living Room</p>
+    </footer>
+
+    <script>
+        async function loadSharedComponents() {
+            try {
+                // Adjusting paths for components in /res/dev/forty-flex/
+                const [h, f] = await Promise.all([
+                    fetch('../../../components/header.html'), 
+                    fetch('../../../components/footer.html')
+                ]);
+                if(h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
+                if(f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
+            } catch (e) { console.error(e); }
+        }
+        window.onload = loadSharedComponents;
+    </script>
+</body>
+</html>

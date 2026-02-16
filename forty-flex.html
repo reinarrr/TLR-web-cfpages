@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>40Flex | A 40-Day Journey Through the Gospels</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; font-size: 1.15rem; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        .editorial-header { border-bottom: 1px solid rgba(26, 26, 26, 0.05); }
+        .hero-gradient { background: linear-gradient(180deg, #1a1a1a 0%, #2d5a5a 100%); }
+        .day-grid-item { background: white; border: 1px solid rgba(26, 26, 26, 0.05); transition: all 0.3s ease; }
+        .day-grid-item:hover { transform: translateY(-3px); border-color: #c5a059; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .faq-card { background: rgba(26, 26, 26, 0.02); border-radius: 1.5rem; padding: 2rem; border: 1px solid rgba(26, 26, 26, 0.05); }
+    </style>
+</head>
+<body class="antialiased">
+    <div id="header-placeholder"></div>
+
+    <section class="hero-gradient text-cream py-32 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h3 class="text-gold text-[0.9rem] font-bold tracking-[0.5em] uppercase mb-8">The Living Room Presents</h3>
+            <h1 class="text-5xl md:text-8xl font-bold mb-10 leading-tight text-white">40Flex</h1>
+            <p class="text-2xl md:text-3xl font-light italic opacity-90 mb-12 max-w-2xl mx-auto">
+                "Remain in me, and I will remain in you." — John 15:4
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-6">
+                <a href="res/dev/forty-flex/day-01.html" class="bg-gold text-charcoal px-12 py-5 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-white transition-all">Read Now</a>
+                <a href="#jump-to-day" class="border border-cream text-cream px-12 py-5 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-cream hover:text-charcoal transition-all">Jump to Day</a>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-5xl mx-auto px-6 py-24">
+        <div class="max-w-3xl mx-auto mb-32 space-y-10">
+            <div class="text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-charcoal mb-8">What Is 40Flex?</h2>
+                <div class="h-1 w-20 bg-gold mx-auto mb-10"></div>
+            </div>
+            
+            <div class="space-y-8 text-zinc-600 text-lg md:text-xl leading-relaxed">
+                <p>40Flex is a 40-day journey through the four Gospels, leading up to Resurrection Sunday. For over eight years, we’ve been walking through the life of Jesus together, discovering fresh revelations year after year.</p>
+                
+                <p>The disciples walked physically with Jesus; today, we walk with Him through His Word, prayer, and obedience. This is more than a devotional—it’s an invitation to stay close to Him and walk at His pace.</p>
+                
+                <div class="bg-zinc-50 border-l-4 border-teal p-8 italic text-charcoal text-center font-display">
+                    "As we walk with Jesus, we walk together. No one gets left behind. We are here to build good habits that last a lifetime."
+                </div>
+
+                <p class="font-semibold text-teal text-center pt-4">Join the Journey: Start reading, follow along every day, and invite someone to walk with you.</p>
+            </div>
+        </div>
+
+        <section class="mb-32">
+            <h2 class="text-center text-3xl font-bold text-charcoal mb-16 uppercase tracking-widest">The Path Forward</h2>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-gold text-4xl mb-4 font-display italic">01</div>
+                    <h4 class="font-bold mb-2">Step-by-Step</h4>
+                    <p class="text-sm text-zinc-500">Read a few chapters daily through the life and words of Christ.</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-gold text-4xl mb-4 font-display italic">02</div>
+                    <h4 class="font-bold mb-2">Daily Devotion</h4>
+                    <p class="text-sm text-zinc-500">Reflection, application, and moments to pause and listen.</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-gold text-4xl mb-4 font-display italic">03</div>
+                    <h4 class="font-bold mb-2">Engage</h4>
+                    <p class="text-sm text-zinc-500">Share thoughts, pray together, and encourage one another.</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-gold text-4xl mb-4 font-display italic">04</div>
+                    <h4 class="font-bold mb-2">Walk Together</h4>
+                    <p class="text-sm text-zinc-500">Invite a friend, a family member, or your small group.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="jump-to-day" class="mb-32">
+            <div class="editorial-header mb-16 pb-8 flex justify-between items-end">
+                <h2 class="text-4xl font-bold text-charcoal">The 40-Day Walk</h2>
+                <p class="text-gold font-bold uppercase tracking-widest text-xs">Jump to a specific day</p>
+            </div>
+            <div class="grid grid-cols-4 md:grid-cols-8 gap-4">
+                <script>
+                    for(let i=1; i<=40; i++) {
+                        // Leading zero logic to match your directory structure: day-01.html, etc.
+                        let dayNum = i < 10 ? '0' + i : i;
+                        document.write(`<a href="res/dev/forty-flex/day-${dayNum}.html" class="day-grid-item py-4 text-center rounded-xl font-bold text-zinc-400 hover:text-gold transition-colors">${i}</a>`);
+                    }
+                </script>
+            </div>
+        </section>
+
+        <section class="space-y-24 mb-12">
+            <div class="max-w-3xl mx-auto text-center font-display italic text-2xl md:text-3xl text-zinc-500 leading-relaxed px-6">
+                "The disciples didn’t just follow Jesus from a distance. They walked with Him. They heard His voice, saw His actions, and learned His ways by staying close. 40Flex is an invitation to do the same."
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-center text-4xl font-bold text-charcoal mb-12">FAQ</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="faq-card">
+                        <p class="font-bold mb-2">Can I start late?</p>
+                        <p class="text-sm text-zinc-600">Yes! Just jump in where we are or start from Day 01 at your own pace.</p>
+                    </div>
+                    <div class="faq-card">
+                        <p class="font-bold mb-2">Do I need a partner?</p>
+                        <p class="text-sm text-zinc-600">You can walk alone, but inviting someone to join is highly encouraged for shared growth.</p>
+                    </div>
+                    <div class="faq-card">
+                        <p class="font-bold mb-2">What do I need?</p>
+                        <p class="text-sm text-zinc-600">Simply a Bible, a journal, and an open heart to what the Word reveals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-charcoal text-cream py-24 px-6 text-center">
+        <div id="footer-placeholder"></div>
+        <p class="mt-12 opacity-40 text-xs tracking-widest uppercase">Copyright 2023 – 2025 | The Living Room</p>
+    </footer>
+
+    <script>
+        async function loadSharedComponents() {
+            try {
+                // Adjusting component paths to be root-relative
+                const [h, f] = await Promise.all([fetch('components/header.html'), fetch('components/footer.html')]);
+                if(h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
+                if(f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
+            } catch (e) { console.error(e); }
+        }
+        window.onload = loadSharedComponents;
+    </script>
+</body>
+</html>
