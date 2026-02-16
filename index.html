@@ -33,6 +33,8 @@
         .btn-teal:hover { background-color: #3d7a7a; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(45, 90, 90, 0.2); }
         .accent-teal { color: #2d5a5a; }
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .img-reveal { filter: grayscale(40%) contrast(90%); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .group:hover .img-reveal { filter: grayscale(0%) contrast(100%); transform: scale(1.03); }
     </style>
 </head>
 <body class="antialiased selection:bg-gold selection:text-white">
@@ -63,7 +65,7 @@
 
     <section id="messages" class="max-w-6xl mx-auto px-6 py-32">
         <div class="mb-16 text-center">
-            <h2 class="text-5xl mb-4 font-bold">Sunday <span class="accent-teal italic">Replay</span></h2>
+            <h2 class="text-5xl mb-4 font-bold text-charcoal">Sunday <span class="accent-teal italic">Replay</span></h2>
             <p class="text-xl text-zinc-500 max-w-prose mx-auto italic">Wherever you are, you can be part of a church that’s personal, connected, and Christ-centered.</p>
         </div>
 
@@ -113,8 +115,7 @@
                 </p>
             </div>
 
-            <div id="home-devotionals-grid" class="grid md:grid-cols-2 gap-16">
-                </div>
+            <div id="home-devotionals-grid" class="grid md:grid-cols-2 gap-16"></div>
 
             <div class="mt-20 text-center">
                 <a href="/resources.html" class="inline-block border-2 border-teal text-teal hover:bg-teal hover:text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-xs transition-all">
@@ -127,7 +128,6 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        // Standardized Component Loader
         async function loadSharedComponents() {
             try {
                 const headerRes = await fetch('/components/header.html');
@@ -144,8 +144,6 @@
             } catch (error) { console.error('Error loading components:', error); }
         }
 
-        // Fetch YouTube Replays (Limited to 3)
-        // Helper to format YouTube dates
         function formatYTDate(dateString) {
             const options = { year: 'numeric', month: 'short', day: 'numeric' };
             return new Date(dateString).toLocaleDateString(undefined, options).toUpperCase();
@@ -161,10 +159,13 @@
                 
                 if (data.items && data.items.length > 0) {
                     container.innerHTML = data.items.slice(0, 3).map(item => {
-                        const dateMeta = formatYTDate(item.snippet.publishedAt);
+                        // CHANGE: Use videoPublishedAt from contentDetails for the original date
+                        const originalDate = item.contentDetails.videoPublishedAt || item.snippet.publishedAt;
+                        const dateMeta = formatYTDate(originalDate);
+                        const videoId = item.contentDetails.videoId; 
                         
                         return `
-                        <a href="https://www.youtube.com/watch?v=${item.id.videoId}" target="_blank" class="block group">
+                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="block group">
                             <div class="relative rounded-[2rem] overflow-hidden mb-8 shadow-xl bg-zinc-200 aspect-video">
                                 <img src="${item.snippet.thumbnails.high.url}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="${item.snippet.title}">
                                 <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
@@ -184,11 +185,9 @@
                 }
             } catch (error) { 
                 console.error('YouTube Fetch Error:', error);
-                container.innerHTML = '<p class="text-zinc-400 col-span-full text-center italic">Visit YouTube for our latest replays.</p>'; 
             }
-            }
+        }
 
-        // Fetch Deep Dives (Limited to 3)
         async function fetchHomeDeepDives() {
             const grid = document.getElementById('home-deepdives-grid');
             try {
@@ -206,20 +205,16 @@
             } catch (e) { grid.innerHTML = ''; }
         }
 
-        // Fetch Devotionals (Limited to 2)
         async function fetchHomeDevotionals() {
             const grid = document.getElementById('home-devotionals-grid');
             try {
                 const res = await fetch('/res/dev/devotionals.json');
                 const data = await res.json();
-                
-                // Populate only the most recent 2 devotionals
                 grid.innerHTML = data.slice(0, 2).map(item => `
                     <a href="${item.url}" class="block group">
                         <div class="relative rounded-[2.5rem] overflow-hidden mb-8 shadow-xl bg-zinc-200 aspect-[16/10]">
                             <img src="${item.image}" class="w-full h-full object-cover img-reveal" alt="${item.title}">
                         </div>
-                        
                         <div class="max-w-xl">
                             <h3 class="text-3xl font-bold text-charcoal group-hover:text-teal transition-colors leading-tight mb-4">
                                 ${item.title}
@@ -230,7 +225,7 @@
                             <div class="flex items-center gap-2 text-gold group-hover:text-teal transition-colors duration-300">
                                 <span class="text-[0.65rem] font-bold uppercase tracking-[0.3em]">Open Journal</span>
                                 <svg class="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M17 8l4 4m0 0l-4 4m4-4H3\"></path>
                                 </svg>
                             </div>
                         </div>
