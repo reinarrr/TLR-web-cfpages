@@ -72,7 +72,7 @@
             const grid = document.getElementById('library-grid');
             
             try {
-                // We still fetch the list from your JSON index
+                // Fetching from your standard directory
                 const response = await fetch(`/res/deep/${year}/deepdives.json`);
                 if (!response.ok) throw new Error('File not found');
                 const messages = await response.json();
@@ -83,12 +83,9 @@
                     const imgAspect = isFeature ? 'aspect-[16/8]' : 'aspect-[4/5]';
                     const titleSize = isFeature ? 'text-4xl md:text-6xl' : 'text-3xl';
 
-                    // CHANGE: Point link to the template with the specific ID/Slug
-                    const templateLink = `/deepdive-template.html?id=${item.slug}`;
-
                     return `
                     <article class="${colSpan} group">
-                        <a href="${templateLink}" class="block no-underline">
+                        <a href="${item.url}" class="block no-underline">
                             <div class="relative overflow-hidden mb-10 rounded-sm bg-zinc-100">
                                 <img src="${item.image}" 
                                      class="w-full ${imgAspect} object-cover img-reveal" 
