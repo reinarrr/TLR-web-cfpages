@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Light. Green Light. | Deep Dive</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; font-size: 1.15rem; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        .accent-teal { color: #2d5a5a; }
+        .editorial-header { border-bottom: 1px solid rgba(26, 26, 26, 0.05); }
+        
+        /* Typography Betterments */
+        .lead-quote { border-left: 4px solid rgba(45, 90, 90, 0.2); }
+        .discussion-card { background: #1a1a1a; border-radius: 3rem; }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <main class="max-w-4xl mx-auto px-6 py-24">
+        
+        <header class="text-center mb-20 editorial-header pb-16">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-8">Acts Journey | Part 04</h3>
+            <h1 class="text-5xl md:text-7xl font-bold mb-10 leading-tight">Red Light. <span class="accent-teal italic font-display font-normal">Green Light.</span></h1>
+            
+            <p class="text-2xl md:text-3xl text-charcoal font-light leading-relaxed italic lead-quote pl-8 text-left mx-auto max-w-3xl py-4">
+                "Movement is often measured by speed, but in the Kingdom, movement is measured by alignment. Sometimes the most spiritual thing you can do is stop."
+            </p>
+        </header>
+
+        <section class="mb-24">
+            <div class="relative rounded-[3rem] overflow-hidden shadow-2xl bg-zinc-200 aspect-video">
+                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p class="text-center text-zinc-400 text-[0.65rem] mt-8 tracking-[0.3em] uppercase italic">Watch the foundation message &bull; 35 Minutes</p>
+        </section>
+
+        <article class="space-y-12 mb-32">
+            <h2 class="text-4xl font-bold text-charcoal mb-8">The Nuance of Navigation</h2>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                In Acts 16, we see Paul and Silas facing a "Red Light" from the Spirit. They had a good plan, but God had a better purpose. Deep diving into this text reveals that a closed door isn't a denial of mission; it's a redirection of focus.
+            </p>
+            
+            <div class="bg-white border border-zinc-100 rounded-[2.5rem] p-12 shadow-sm">
+                <h4 class="text-gold uppercase tracking-[0.3em] text-[0.65rem] font-bold mb-6">Actionable Truth</h4>
+                <p class="text-charcoal text-2xl font-semibold leading-tight font-body">
+                    Don't mistake a pause for a full stop. Use the "Red Light" to recalibrate your heart for the "Green Light" that follows.
+                </p>
+            </div>
+
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                When the Spirit forbade them to speak the word in Asia, they didn't quit—they pivoted. This is the "Acts Journey" in real-time: being sensitive enough to hear the 'no' so that you are positioned to hear the 'yes' that changes history.
+            </p>
+        </article>
+
+        <section class="discussion-card text-white p-12 md:p-20 shadow-2xl">
+            <div class="text-center mb-20">
+                <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-4">The Living Room Circle</h3>
+                <h2 class="text-4xl md:text-5xl font-bold">Discussion & Reflection</h2>
+                <div class="h-1 w-12 bg-teal mx-auto mt-8"></div>
+            </div>
+
+            <div class="space-y-16 max-w-2xl mx-auto">
+                <div class="group">
+                    <span class="text-teal font-display text-5xl italic opacity-30 block mb-6 group-hover:opacity-100 transition-opacity duration-500">01</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Where are you currently feeling a "Red Light" in your life? How are you responding to the wait?</p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-5xl italic opacity-30 block mb-6 group-hover:opacity-100 transition-opacity duration-500">02</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light italic leading-relaxed">
+                        <strong class="text-white not-italic block mb-2">Family Prompt:</strong> Imagine we are on a long road trip and the GPS suddenly changes the route. How do we feel? How can we trust God's "GPS" even when the route looks different?
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-24 text-center">
+                <a href="/deepdives.html" class="inline-block border border-teal text-teal px-12 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[0.7rem] hover:bg-teal hover:text-white transition-all duration-500">Back to Library</a>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        async function loadSharedComponents() {
+            try {
+                const [h, f] = await Promise.all([
+                    fetch('/components/header.html'),
+                    fetch('/components/footer.html')
+                ]);
+                if(h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
+                if(f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
+            } catch (e) { console.error(e); }
+        }
+        window.onload = loadSharedComponents;
+    </script>
+</body>
+</html>
