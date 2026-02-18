@@ -1,3 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Dive | The Living Room</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] },
+                    // This section ensures Markdown content follows your brand styles
+                    typography: (theme) => ({
+                        DEFAULT: {
+                            css: {
+                                color: theme('colors.charcoal'),
+                                h1: { fontFamily: theme('fontFamily.display').join(', '), fontWeight: '700' },
+                                h2: { fontFamily: theme('fontFamily.display').join(', '), fontWeight: '700' },
+                                h3: { fontFamily: theme('fontFamily.display').join(', '), fontWeight: '700' },
+                                strong: { color: theme('colors.teal'), fontWeight: '600' },
+                                blockquote: { 
+                                    fontStyle: 'italic', 
+                                    borderLeftColor: theme('colors.teal'),
+                                    color: theme('colors.zinc.600')
+                                },
+                            },
+                        },
+                    }),
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; font-size: 1.15rem; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        .accent-teal { color: #2d5a5a; }
+        .editorial-header { border-bottom: 1px solid rgba(26, 26, 26, 0.05); }
+        .lead-quote { border-left: 4px solid rgba(45, 90, 90, 0.2); }
+    </style>
+</head>
+
 <body class="antialiased" data-current="resources">
     <div id="header-placeholder"></div>
 
@@ -23,7 +72,7 @@
                 </div>
         </section>
 
-        <article id="dive-body" class="space-y-24 mb-32 prose prose-xl prose-stone max-w-none">
+        <article id="dive-body" class="prose prose-xl prose-stone max-w-none mb-32">
             </article>
 
         <section class="mt-32 text-center max-w-2xl mx-auto border-t border-zinc-100 pt-20">
@@ -36,13 +85,13 @@
 
     <div id="footer-placeholder"></div>
 
- <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
     async function loadContent() {
         const urlParams = new URLSearchParams(window.location.search);
         const diveId = urlParams.get('id');
         
-        console.log("Searching for message ID:", diveId); // Debugging line
+        console.log("Searching for message ID:", diveId);
 
         if (!diveId) {
             document.getElementById('dive-title').innerText = "No ID Provided";
@@ -50,7 +99,6 @@
         }
 
         try {
-            // Updated Path: Ensure this matches your GitHub structure exactly
             const filePath = `/res/deep/2026/${diveId}.md`;
             const response = await fetch(filePath);
             
@@ -61,31 +109,27 @@
             }
             
             const rawText = await response.text();
-
-            // 1. Split by the triple dashes
             const parts = rawText.split('---');
+            
             if (parts.length < 3) {
                 console.error("Markdown format error: Missing frontmatter dashes.");
                 return;
             }
 
-            // 2. Parse Metadata (The Frontmatter)
             const metadata = {};
             parts[1].trim().split('\n').forEach(line => {
                 const [key, ...val] = line.split(':');
                 if (key) metadata[key.trim().toLowerCase()] = val.join(':').trim().replace(/^"(.*)"$/, '$1');
             });
 
-            console.log("Metadata Loaded:", metadata); // Debugging line
+            console.log("Metadata Loaded:", metadata);
 
-            // 3. Inject into the Page with Fallbacks
             document.title = `${metadata.title || 'Study'} | The Living Room`;
             document.getElementById('dive-title').innerText = metadata.title || "Untitled";
             document.getElementById('dive-part').innerText = metadata.part || "Sunday Deep Dive";
             document.getElementById('dive-lead-quote').innerText = metadata.lead_quote || "";
             document.getElementById('dive-scripture').innerText = metadata.scripture || "";
             
-            // 4. Handle YouTube
             if (metadata.youtube_id) {
                 document.getElementById('video-placeholder').innerHTML = `
                     <iframe class="absolute inset-0 w-full h-full" 
@@ -93,7 +137,6 @@
                             frameborder="0" allowfullscreen></iframe>`;
             }
 
-            // 5. Render the Body (Everything after the second ---)
             const bodyMarkdown = parts.slice(2).join('---').trim();
             document.getElementById('dive-body').innerHTML = marked.parse(bodyMarkdown);
 
@@ -112,3 +155,4 @@
     window.onload = () => { loadShared(); loadContent(); };
 </script>
 </body>
+</html>
