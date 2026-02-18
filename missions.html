@@ -30,6 +30,20 @@
         .glass-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 2rem; padding: 2.5rem; }
         .img-box { background-color: #e5e7eb; border-radius: 2rem; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transition: 0.5s ease; }
         .btn-teal { background-color: #2d5a5a; color: white; padding: 1.25rem 2.5rem; border-radius: 999px; transition: all 0.3s ease; display: inline-block; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+        .video-container { 
+            position: relative; 
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0; 
+            overflow: hidden; 
+            border-radius: 2rem; 
+        }
+        .video-container iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+        }
     </style>
 </head>
 
@@ -75,6 +89,33 @@
         </div>
     </section>
 
+    <section class="max-w-6xl mx-auto px-6 py-20">
+        <div class="glass-card shadow-2xl overflow-hidden !p-8 md:!p-12">
+            <div class="mb-10 text-center">
+                <h3 class="text-gold text-[0.6rem] font-bold tracking-[0.5em] uppercase mb-4">Missions Spotlight</h3>
+                <h2 class="text-3xl md:text-4xl font-bold text-charcoal leading-tight">
+                    Common <span class="accent-teal italic font-display">Language</span>
+                </h2>
+            </div>
+
+            <div class="video-container shadow-lg">
+                <iframe 
+                    src="https://www.youtube.com/embed/fRAHqCEE2wg" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            
+            <div class="mt-10 text-center max-w-2xl mx-auto">
+                <p class="text-zinc-500 text-lg leading-relaxed italic">
+                    Joint worship in Japan.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <section class="max-w-6xl mx-auto px-6 py-32 border-t border-zinc-200">
         <div class="text-center mb-20">
             <h2 class="text-5xl font-bold mb-6">Neighborhood Representatives</h2>
@@ -83,7 +124,7 @@
 
         <div class="grid md:grid-cols-2 gap-16 items-center mb-32">
             <div class="img-box aspect-[4/5] relative">
-                <img src="/img/mission-japan.jpg" alt="Japan Missions" class="w-full h-full object-cover">
+                <img src="/img/missions_03.jpeg" alt="Japan Missions" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent flex items-end p-10">
                     <h4 class="text-white text-3xl italic">Japan</h4>
                 </div>
@@ -103,7 +144,7 @@
 
         <div class="grid md:grid-cols-2 gap-16 items-center">
             <div class="md:order-2 img-box aspect-[4/5] relative">
-                <img src="/img/mission-taiwan.jpg" alt="Taiwan Missions" class="w-full h-full object-cover">
+                <img src="/img/missions_02.jpeg" alt="Taiwan Missions" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent flex items-end p-10">
                     <h4 class="text-white text-3xl italic">Taiwan & Hong Kong</h4>
                 </div>
