@@ -35,6 +35,20 @@
         .accent-teal { color: #2d5a5a; }
         .glass-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 2rem; padding: 2.5rem; transition: 0.3s; }
         .glass-card:hover { transform: translateY(-5px); border-color: rgba(45, 90, 90, 0.2); }
+        .video-container { 
+            position: relative; 
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0; 
+            overflow: hidden; 
+            border-radius: 2rem; 
+        }
+        .video-container iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+        }
     </style>
 </head>
 
@@ -149,6 +163,23 @@
             </div>
         </div>
     </main>
+
+    <section class="max-w-6xl mx-auto px-6 py-20">
+    <div class="mb-12 text-center">
+        <h3 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">This Is Church</h3>
+        <h2 class="text-4xl md:text-5xl font-bold text-charcoal">Life <span class="accent-teal italic">Together</span></h2>
+    </div>
+
+    <div class="video-container shadow-2xl">
+        <iframe 
+            src="https://www.youtube.com/embed/mI43wbrZZ3s" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+        </iframe>
+    </div>
+    </section>
 
     <section class="max-w-4xl mx-auto px-6 py-24">
         <div class="glass-card border-2 border-teal/5 p-10 md:p-16 shadow-sm relative overflow-hidden">
