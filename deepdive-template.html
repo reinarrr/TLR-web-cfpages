@@ -36,68 +36,79 @@
 
     <div id="footer-placeholder"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    
-    <script>
-        async function loadContent() {
-            // 1. Get the ID from the URL (e.g., deepdive.html?id=the-open-road)
-            const urlParams = new URLSearchParams(window.location.search);
-            const diveId = urlParams.get('id');
+ <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+    async function loadContent() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const diveId = urlParams.get('id');
+        
+        console.log("Searching for message ID:", diveId); // Debugging line
+
+        if (!diveId) {
+            document.getElementById('dive-title').innerText = "No ID Provided";
+            return;
+        }
+
+        try {
+            // Updated Path: Ensure this matches your GitHub structure exactly
+            const filePath = `/res/deep/2026/${diveId}.md`;
+            const response = await fetch(filePath);
             
-            if (!diveId) {
-                window.location.href = '/deepdives.html';
+            if (!response.ok) {
+                console.error("File not found at:", filePath);
+                document.getElementById('dive-title').innerText = "Message Not Found";
+                return;
+            }
+            
+            const rawText = await response.text();
+
+            // 1. Split by the triple dashes
+            const parts = rawText.split('---');
+            if (parts.length < 3) {
+                console.error("Markdown format error: Missing frontmatter dashes.");
                 return;
             }
 
-            try {
-                // 2. Fetch the Markdown file from your res/deep/2026 folder
-                const response = await fetch(`/res/deep/2026/${diveId}.md`);
-                if (!response.ok) throw new Error('File not found');
-                
-                const rawText = await response.text();
+            // 2. Parse Metadata (The Frontmatter)
+            const metadata = {};
+            parts[1].trim().split('\n').forEach(line => {
+                const [key, ...val] = line.split(':');
+                if (key) metadata[key.trim().toLowerCase()] = val.join(':').trim().replace(/^"(.*)"$/, '$1');
+            });
 
-                // 3. Simple Frontmatter Extractor
-                // Decap saves info like Title and YouTube ID at the top between ---
-                const parts = rawText.split('---');
-                const frontmatter = {};
-                if (parts.length > 2) {
-                    const lines = parts[1].trim().split('\n');
-                    lines.forEach(line => {
-                        const [key, ...val] = line.split(':');
-                        if (key) frontmatter[key.trim()] = val.join(':').trim();
-                    });
-                }
+            console.log("Metadata Loaded:", metadata); // Debugging line
 
-                const bodyMarkdown = parts.slice(2).join('---').trim();
-
-                // 4. Inject into Page
-                document.title = `${frontmatter.title} | Deep Dive`;
-                document.getElementById('dive-title').innerText = frontmatter.title;
-                document.getElementById('dive-part').innerText = frontmatter.part || "Sunday Deep Dive";
-                document.getElementById('dive-lead-quote').innerText = frontmatter.lead_quote || "";
-                document.getElementById('dive-scripture').innerText = frontmatter.scripture || "";
-                
-                if (frontmatter.youtube_id) {
-                    document.getElementById('video-placeholder').innerHTML = `
-                        <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/${frontmatter.youtube_id}" frameborder="0" allowfullscreen></iframe>`;
-                }
-
-                // 5. Render the Body Content
-                document.getElementById('dive-body').innerHTML = marked.parse(bodyMarkdown);
-
-            } catch (err) {
-                console.error("Error:", err);
-                document.getElementById('dive-title').innerText = "Message Not Found";
+            // 3. Inject into the Page with Fallbacks
+            document.title = `${metadata.title || 'Study'} | The Living Room`;
+            document.getElementById('dive-title').innerText = metadata.title || "Untitled";
+            document.getElementById('dive-part').innerText = metadata.part || "Sunday Deep Dive";
+            document.getElementById('dive-lead-quote').innerText = metadata.lead_quote || "";
+            document.getElementById('dive-scripture').innerText = metadata.scripture || "";
+            
+            // 4. Handle YouTube
+            if (metadata.youtube_id) {
+                document.getElementById('video-placeholder').innerHTML = `
+                    <iframe class="absolute inset-0 w-full h-full" 
+                            src="https://www.youtube.com/embed/${metadata.youtube_id}" 
+                            frameborder="0" allowfullscreen></iframe>`;
             }
-        }
 
-        // Standard Component Loader
-        async function loadShared() {
-            const [h, f] = await Promise.all([fetch('/components/header.html'), fetch('/components/footer.html')]);
-            if(h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
-            if(f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
-        }
+            // 5. Render the Body (Everything after the second ---)
+            const bodyMarkdown = parts.slice(2).join('---').trim();
+            document.getElementById('dive-body').innerHTML = marked.parse(bodyMarkdown);
 
-        window.onload = () => { loadShared(); loadContent(); };
-    </script>
+        } catch (err) {
+            console.error("Critical Error:", err);
+            document.getElementById('dive-title').innerText = "Error Loading Content";
+        }
+    }
+
+    async function loadShared() {
+        const [h, f] = await Promise.all([fetch('/components/header.html'), fetch('/components/footer.html')]);
+        if(h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
+        if(f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
+    }
+
+    window.onload = () => { loadShared(); loadContent(); };
+</script>
 </body>
