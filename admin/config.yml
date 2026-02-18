@@ -1,0 +1,58 @@
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/TLR-web-cfpages # Matches your folder structure
+  branch: main
+
+media_folder: "img/uploads"
+public_folder: "/img/uploads"
+
+collections:
+  # 1. SUNDAY DEEP DIVES
+  - name: "deepdives"
+    label: "Sunday Deep Dives"
+    folder: "res/deep/2026" # Matches your folder structure
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Subtitle", name: "subtitle", widget: "string" }
+      - { label: "YouTube ID", name: "youtube_id", widget: "string" }
+      - { label: "Scripture Reference", name: "scripture", widget: "string" }
+      - { label: "Body Content", name: "body", widget: "markdown" }
+
+  # 2. FUTURE DEVOTIONALS
+  - name: "devotionals"
+    label: "Daily Devotionals"
+    folder: "content/devotionals"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Reflection", name: "body", widget: "markdown" }
+
+  # 3. 40FLEX (Structured Program)
+  - name: "fortyflex"
+    label: "40 Flex Program"
+    files:
+      - label: "Program Content"
+        name: "forty-flex-data"
+        file: "res/forty-flex.json"
+        fields:
+          - label: "Days"
+            name: "days"
+            widget: "list"
+            fields:
+              - { label: "Day Number", name: "day_num", widget: "number" }
+              - { label: "Focus", name: "focus", widget: "string" }
+              - { label: "Exercise/Prompt", name: "prompt", widget: "markdown" }
+
+  # 4. WORSHIP SECTION
+  - name: "worship"
+    label: "Worship Library"
+    folder: "res/worship"
+    create: true
+    fields:
+      - { label: "Song Title", name: "title", widget: "string" }
+      - { label: "Spotify Link", name: "spotify_url", widget: "string" }
+      - { label: "Lyrics/Notes", name: "body", widget: "markdown" }
