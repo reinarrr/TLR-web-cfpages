@@ -23,12 +23,16 @@ function formatYTDate(dateString) {
     return new Date(dateString).toLocaleDateString(undefined, options).toUpperCase();
 }
 
-// 3. Global Initializer
+// 3. Global Initializer in main.js
 window.addEventListener('DOMContentLoaded', () => {
     loadShared();
+    
     // Auto-run page specific logic if container exists
     if (document.getElementById('youtube-feed')) fetchHomeYouTube();
     if (document.getElementById('latest-container')) fetchReplayGallery();
+    
+    // ADD THIS LINE:
+    if (document.getElementById('home-deepdives-grid')) fetchHomeDeepDives();
 });
 
 // 4. Page Specific: Fetch Homepage YouTube Feed
