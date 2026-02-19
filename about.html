@@ -16,6 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
     <script>
         tailwind.config = {
             theme: {
@@ -26,30 +28,6 @@
             }
         }
     </script>
-
-    <style>
-        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        /* High-Impact Headline Styles from Index.html */
-        .hero-title { font-size: 4.5rem; line-height: 1.1; font-weight: 700; }
-        .accent-teal { color: #2d5a5a; }
-        .glass-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 2rem; padding: 2.5rem; transition: 0.3s; }
-        .glass-card:hover { transform: translateY(-5px); border-color: rgba(45, 90, 90, 0.2); }
-        .video-container { 
-            position: relative; 
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0; 
-            overflow: hidden; 
-            border-radius: 2rem; 
-        }
-        .video-container iframe { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-        }
-    </style>
 </head>
 
 <body class="antialiased" data-current="about">
@@ -57,27 +35,17 @@
     <div id="header-placeholder"></div>
 
     <section class="relative h-[80vh] w-full overflow-hidden flex items-center justify-center bg-charcoal">
-        <video 
-            autoplay 
-            muted 
-            loop 
-            playsinline 
-            poster="/img/video-fallback.jpg" 
-            class="absolute z-0 w-auto min-w-full min-h-full max-w-none object-cover opacity-40">
+        <video autoplay muted loop playsinline poster="/img/video-fallback.jpg" class="absolute z-0 w-auto min-w-full min-h-full max-w-none object-cover opacity-40">
             <source src="/img/TLR-HELLO-720.mov" type="video/mp4">
-            Your browser does not support the video tag.
         </video>
 
         <div class="absolute inset-0 bg-black/30 z-10"></div>
 
         <div class="relative z-20 text-center px-6 max-w-4xl">
-            <h1 class="hero-title mb-8 text-white">
-                Our <span class="text-white italic">Story</span>.
-            </h1>
+            <h1 class="hero-title mb-8 text-white">Our <span class="italic">Story</span>.</h1>
             <p class="text-2xl text-white/90 leading-relaxed font-light mb-10">
                 A <span class="font-bold">Christ-centred</span> community living out God’s calling in everyday life.
             </p>
-            
             <div class="inline-block px-8 py-3 bg-gold/20 backdrop-blur-md rounded-full border border-gold/30">
                 <p class="text-sm font-bold uppercase tracking-[0.2em] text-gold m-0">
                     A Ministry of <span class="text-white underline">Logos Global Missions</span>
@@ -94,48 +62,34 @@
 
     <main class="max-w-6xl mx-auto px-6 py-24">
         <div class="grid md:grid-cols-2 gap-10 mb-32">
-            <a href="/vision.html" class="glass-card group border-2 border-transparent hover:border-teal/20">
+            <a href="/vision.html" class="glass-card group hover:border-teal/20">
                 <h3 class="text-4xl font-bold mb-4 group-hover:text-teal transition-colors">Our Vision</h3>
                 <p class="text-lg text-zinc-500 mb-8 leading-relaxed">To see faith thriving in every home and heart through a community that is online-first and Christ-centered.</p>
                 <span class="text-teal font-bold uppercase tracking-widest text-xs border-b-2 border-teal pb-1">See the Vision &rarr;</span>
             </a>
 
-            <a href="/beliefs.html" class="glass-card group border-2 border-transparent hover:border-teal/20">
+            <a href="/beliefs.html" class="glass-card group hover:border-teal/20">
                 <h3 class="text-4xl font-bold mb-4 group-hover:text-teal transition-colors">Our Beliefs</h3>
                 <p class="text-lg text-zinc-500 mb-8 leading-relaxed">Our authoritative foundation for faith and conduct, established on the God's Word.</p>
                 <span class="text-teal font-bold uppercase tracking-widest text-xs border-b-2 border-teal pb-1">Foundational Truths &rarr;</span>
             </a>
         </div>
 
-    <section class="my-24 px-6">
-        <div class="max-w-4xl mx-auto relative group">
-            <div class="absolute -inset-4 bg-teal/5 rounded-[3rem] -rotate-1 transition-transform group-hover:rotate-0 duration-700"></div>
-            
-            <div class="relative glass-card border-2 border-teal/10 p-12 md:p-20 text-center overflow-hidden">
-                <div class="mb-8 flex justify-center">
-                    <div class="h-1 w-10 bg-gold rounded-full opacity-80"></div>
-                </div>
-
-                <h2 class="text-2xl md:text-4xl font-display font-bold leading-[1.4] mb-12 italic text-charcoal/90 tracking-tight">
-                    "But you are a chosen people, a royal priesthood, a holy nation, God’s special possession, that you may declare the praises of him who called you out of darkness into his wonderful light."
-                </h2>
-                
-                <div class="flex items-center justify-center gap-4">
-                    <div class="h-[1px] w-6 bg-zinc-200"></div>
-                    <p class="text-[0.7rem] font-body font-bold uppercase tracking-[0.4em] text-teal/70">
-                        1 Peter 2:9
-                    </p>
-                    <div class="h-[1px] w-6 bg-zinc-200"></div>
-                </div>
-
-                <div class="absolute top-0 right-0 p-8 opacity-5 pointer-events-none text-teal">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="1"/>
-                    </svg>
+        <section class="my-24 px-6">
+            <div class="max-w-4xl mx-auto relative group">
+                <div class="absolute -inset-4 bg-teal/5 rounded-[3rem] -rotate-1 transition-transform group-hover:rotate-0 duration-700"></div>
+                <div class="relative glass-card border-2 border-teal/10 p-12 md:p-20 text-center overflow-hidden">
+                    <h2 class="text-2xl md:text-4xl font-display font-bold leading-[1.4] mb-12 italic text-charcoal/90 tracking-tight">
+                        "But you are a chosen people, a royal priesthood, a holy nation, God’s special possession, that you may declare the praises of him who called you out of darkness into his wonderful light."
+                    </h2>
+                    <div class="flex items-center justify-center gap-4">
+                        <div class="h-[1px] w-6 bg-zinc-200"></div>
+                        <p class="text-[0.7rem] font-body font-bold uppercase tracking-[0.4em] text-teal/70">1 Peter 2:9</p>
+                        <div class="h-[1px] w-6 bg-zinc-200"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
         <div class="border-t border-zinc-200 pt-24">
             <h2 class="text-center text-5xl font-bold mb-20">Inside The Living Room</h2>
@@ -165,78 +119,36 @@
     </main>
 
     <section class="max-w-6xl mx-auto px-6 py-20">
-    <div class="mb-12 text-center">
-        <h3 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">This Is Church</h3>
-        <h2 class="text-4xl md:text-5xl font-bold text-charcoal">Life <span class="accent-teal italic">Together</span></h2>
-    </div>
-
-    <div class="video-container shadow-2xl">
-        <iframe 
-            src="https://www.youtube.com/embed/mI43wbrZZ3s" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowfullscreen>
-        </iframe>
-    </div>
+        <div class="mb-12 text-center">
+            <h3 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">This Is Church</h3>
+            <h2 class="text-4xl md:text-5xl font-bold text-charcoal">Life <span class="accent-teal italic">Together</span></h2>
+        </div>
+        <div class="video-container shadow-2xl">
+            <iframe src="https://www.youtube.com/embed/mI43wbrZZ3s" frameborder="0" allowfullscreen></iframe>
+        </div>
     </section>
 
     <section class="max-w-4xl mx-auto px-6 py-24">
-        <div class="glass-card border-2 border-teal/5 p-10 md:p-16 shadow-sm relative overflow-hidden">
-            
+        <div class="glass-card border-2 border-teal/5 p-10 md:p-16 shadow-sm relative">
             <div class="text-center mb-12">
                 <h2 class="text-4xl font-bold mb-4">Get in <span class="accent-teal italic">Touch</span></h2>
                 <p class="text-lg text-zinc-500 font-light">Have a question or just want to say hello? We’d love to hear from you.</p>
             </div>
-
             <form action="mailto:hello@thelivingroom.io" method="post" enctype="text/plain" class="space-y-6">
                 <div class="grid md:grid-cols-2 gap-6">
-                    <div class="space-y-2">
-                        <label class="text-[0.65rem] uppercase tracking-[0.2em] font-bold text-teal/70 ml-4">Your Name</label>
-                        <input type="text" name="name" required class="w-full bg-cream/50 border border-zinc-200 rounded-full px-6 py-4 focus:outline-none focus:border-teal transition-colors font-body text-sm" placeholder="John Doe">
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-[0.65rem] uppercase tracking-[0.2em] font-bold text-teal/70 ml-4">Email Address</label>
-                        <input type="email" name="email" required class="w-full bg-cream/50 border border-zinc-200 rounded-full px-6 py-4 focus:outline-none focus:border-teal transition-colors font-body text-sm" placeholder="john@example.com">
-                    </div>
+                    <input type="text" name="name" required class="w-full bg-cream/50 border border-zinc-200 rounded-full px-6 py-4 focus:border-teal outline-none text-sm" placeholder="Your Name">
+                    <input type="email" name="email" required class="w-full bg-cream/50 border border-zinc-200 rounded-full px-6 py-4 focus:border-teal outline-none text-sm" placeholder="Email Address">
                 </div>
-
-                <div class="space-y-2">
-                    <label class="text-[0.65rem] uppercase tracking-[0.2em] font-bold text-teal/70 ml-4">Message</label>
-                    <textarea name="message" rows="4" required class="w-full bg-cream/50 border border-zinc-200 rounded-[2rem] px-6 py-4 focus:outline-none focus:border-teal transition-colors font-body text-sm" placeholder="How can we help?"></textarea>
-                </div>
-
+                <textarea name="message" rows="4" required class="w-full bg-cream/50 border border-zinc-200 rounded-[2rem] px-6 py-4 focus:border-teal outline-none text-sm" placeholder="How can we help?"></textarea>
                 <div class="text-center pt-4">
-                    <button type="submit" class="btn-teal shadow-md hover:shadow-xl px-12 py-4 text-sm tracking-[0.2em]">
-                        Send Message
-                    </button>
+                    <button type="submit" class="btn-teal px-12 py-4 text-sm tracking-[0.2em]">Send Message</button>
                 </div>
             </form>
-
         </div>
     </section>
 
     <div id="footer-placeholder"></div>
 
-    <script>
-        async function loadSharedComponents() {
-            try {
-                const headerRes = await fetch('/components/header.html');
-                if (headerRes.ok) document.getElementById('header-placeholder').innerHTML = await headerRes.text();
-
-                const footerRes = await fetch('/components/footer.html');
-                if (footerRes.ok) document.getElementById('footer-placeholder').innerHTML = await footerRes.text();
-
-                setTimeout(() => {
-                    const currentPage = document.body.getAttribute('data-current');
-                    const activeLink = document.querySelector(`[data-page="${currentPage}"]`);
-                    if (activeLink) activeLink.classList.add('!text-teal');
-                }, 150);
-            } catch (error) {
-                console.error('Error loading shared components:', error);
-            }
-        }
-        loadSharedComponents();
-    </script>
+    <script src="/js/main.js" defer></script>
 </body>
 </html>

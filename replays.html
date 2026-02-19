@@ -16,6 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
     <script>
         tailwind.config = {
             theme: {
@@ -26,14 +28,6 @@
             }
         }
     </script>
-
-    <style>
-        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        .hero-title { font-size: 4.5rem; line-height: 1.1; font-weight: 700; }
-        .accent-teal { color: #2d5a5a; }
-        .glass-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 2rem; transition: 0.4s; }
-    </style>
 </head>
 
 <body class="antialiased" data-current="resources">
@@ -43,8 +37,8 @@
     <main class="max-w-7xl mx-auto px-6 py-24">
         
         <section class="text-center mb-24">
-            <h1 class="hero-title mb-8">Sunday <span class="accent-teal italic">Replays</span>.</h1>
-            <p class="text-xl text-zinc-500 max-w-2xl mx-auto">Wherever you are, catch up on our latest gatherings and join the movement of faith in the living room.</p>
+            <h1 class="hero-title mb-8">Sunday <span class="accent-teal italic font-display">Replays</span>.</h1>
+            <p class="text-xl text-zinc-500 max-w-2xl mx-auto font-light leading-relaxed">Wherever you are, catch up on our latest gatherings and join the movement of faith in the living room.</p>
         </section>
 
         <section id="latest-feature" class="mb-24">
@@ -64,92 +58,21 @@
 
         <section class="border-t border-zinc-100 pt-24">
             <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-8">
-                <h2 class="text-4xl font-bold">Message Archive</h2>
+                <h2 class="text-4xl font-bold text-charcoal">Message Archive</h2>
             </div>
             <div id="archive-grid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10"></div>
         </section>
 
-        <section class="mt-32 py-20 bg-teal rounded-[3rem] text-center text-white">
+        <section class="mt-32 py-20 bg-teal rounded-[3rem] text-center text-white mx-6">
             <h2 class="text-4xl font-bold mb-6">Explore the Full Archive</h2>
-            <p class="text-white/70 mb-10 text-lg max-w-2xl mx-auto">View every conversation and service in our "Sundays in The Living Room" collection on YouTube.</p>
-            <a href="https://www.youtube.com/playlist?list=PLZiZ5Rf7q5TYbKYxKsJtMvkgwpvIjX6OY" target="_blank" class="inline-block bg-white text-teal px-10 py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-gold hover:text-charcoal transition-all">View YouTube Playlist</a>
+            <p class="text-white/70 mb-10 text-lg max-w-2xl mx-auto font-light">View every conversation and service in our "Sundays in The Living Room" collection on YouTube.</p>
+            <a href="https://www.youtube.com/playlist?list=PLZiZ5Rf7q5TYbKYxKsJtMvkgwpvIjX6OY" target="_blank" class="inline-block bg-white text-teal px-10 py-4 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-gold hover:text-charcoal transition-all shadow-lg">View YouTube Playlist</a>
         </section>
 
     </main>
 
     <div id="footer-placeholder"></div>
 
-    <script>
-    function formatYTDate(dateString) {
-        const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        return new Date(dateString).toLocaleDateString(undefined, options).toUpperCase();
-    }
-
-    async function fetchReplays() {
-        const latestContainer = document.getElementById('latest-container');
-        const recentGrid = document.getElementById('recent-grid');
-        const archiveGrid = document.getElementById('archive-grid');
-        const url = 'https://youtube-proxy.reinar-6fd.workers.dev/'; 
-
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            
-            if (data.items && data.items.length > 0) {
-                const videos = data.items;
-
-                // 1. Latest Feature (Video 1)
-                const latest = videos[0];
-                const latestVideoId = latest.contentDetails.videoId; 
-                const latestDate = formatYTDate(latest.contentDetails.videoPublishedAt || latest.snippet.publishedAt);
-                
-                latestContainer.innerHTML = `
-                    <a href="https://www.youtube.com/watch?v=${latestVideoId}" target="_blank" class="group relative block overflow-hidden rounded-[3rem] shadow-2xl bg-charcoal h-[50vh]">
-                        <img src="${latest.snippet.thumbnails.high.url}" class="w-full h-full object-cover opacity-50 transition-transform duration-1000 group-hover:scale-105" alt="${latest.snippet.title}">
-                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent"></div>
-                        <div class="absolute bottom-12 left-10 right-10">
-                            <span class="text-gold text-[0.65rem] font-bold tracking-[0.3em] uppercase mb-4 block">${latestDate}</span>
-                            <h2 class="text-white text-3xl md:text-5xl font-bold mb-6 leading-tight">${latest.snippet.title}</h2>
-                            <span class="text-gold font-bold uppercase tracking-[0.3em] text-[0.65rem] border-b border-gold pb-1">Watch Now &rarr;</span>
-                        </div>
-                    </a>`;
-
-                // 2. Recent (Videos 2-4)
-                recentGrid.innerHTML = videos.slice(1, 4).map(v => createCard(v, 'text-xl')).join('');
-
-                // 3. Archive (Videos 5-12) - Updated slice to 12
-                archiveGrid.innerHTML = videos.slice(4, 12).map(v => createCard(v, 'text-sm')).join('');
-            }
-        } catch (e) { console.error('Error fetching replays:', e); }
-    }
-
-    function createCard(video, sizeClass) {
-        const videoId = video.contentDetails.videoId; 
-        const dateMeta = formatYTDate(video.contentDetails.videoPublishedAt || video.snippet.publishedAt);
-        
-        return `
-            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="block group">
-                <div class="relative rounded-[2rem] overflow-hidden mb-6 shadow-lg bg-zinc-200 aspect-video">
-                    <img src="${video.snippet.thumbnails.high.url}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="${video.snippet.title}">
-                </div>
-                <div class="space-y-3">
-                    <span class="text-gold text-[0.65rem] font-bold tracking-[0.2em] uppercase">${dateMeta}</span>
-                    <h3 class="${sizeClass} font-semibold tracking-tight group-hover:text-teal transition-colors leading-tight">${video.snippet.title}</h3>
-                </div>
-            </a>`;
-    }
-
-    async function loadSharedComponents() {
-        const h = await fetch('/components/header.html');
-        if(h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
-        const f = await fetch('/components/footer.html');
-        if(f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-        loadSharedComponents();
-        fetchReplays();
-    });
-    </script>
+    <script src="/js/main.js" defer></script>
 </body>
 </html>

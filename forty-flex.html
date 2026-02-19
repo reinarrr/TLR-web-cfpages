@@ -10,11 +10,15 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
+    <meta property="og:image" content="https://thelivingroom.io/img/forty-flex-cover.jpg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
     <script>
         tailwind.config = {
             theme: {
@@ -25,17 +29,8 @@
             }
         }
     </script>
-    <style>
-        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; font-size: 1.15rem; -webkit-font-smoothing: antialiased; }
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
-        .editorial-header { border-bottom: 1px solid rgba(26, 26, 26, 0.05); }
-        .hero-gradient { background: linear-gradient(180deg, #1a1a1a 0%, #2d5a5a 100%); }
-        .day-grid-item { background: white; border: 1px solid rgba(26, 26, 26, 0.05); transition: all 0.3s ease; }
-        .day-grid-item:hover { transform: translateY(-3px); border-color: #c5a059; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .faq-card { background: rgba(26, 26, 26, 0.02); border-radius: 1.5rem; padding: 2rem; border: 1px solid rgba(26, 26, 26, 0.05); }
-    </style>
 </head>
-<body class="antialiased">
+<body class="antialiased" data-current="40flex">
     <div id="header-placeholder"></div>
 
     <section class="hero-gradient text-cream py-32 px-6">
@@ -61,13 +56,11 @@
             
             <div class="space-y-8 text-zinc-600 text-lg md:text-xl leading-relaxed">
                 <p>40Flex is a 40-day journey through the four Gospels, leading up to Resurrection Sunday. For over eight years, we’ve been walking through the life of Jesus together, discovering fresh revelations year after year.</p>
-                
                 <p>The disciples walked physically with Jesus; today, we walk with Him through His Word, prayer, and obedience. This is more than a devotional—it’s an invitation to stay close to Him and walk at His pace.</p>
                 
                 <div class="bg-zinc-50 border-l-4 border-teal p-8 italic text-charcoal text-center font-display">
                     "As we walk with Jesus, we walk together. No one gets left behind. We are here to build good habits that last a lifetime."
                 </div>
-
                 <p class="font-semibold text-teal text-center pt-4">Join the Journey: Start reading, follow along every day, and invite someone to walk with you.</p>
             </div>
         </div>
@@ -103,15 +96,7 @@
                 <h2 class="text-4xl font-bold text-charcoal">The 40-Day Walk</h2>
                 <p class="text-gold font-bold uppercase tracking-widest text-xs">Jump to a specific day</p>
             </div>
-            <div class="grid grid-cols-4 md:grid-cols-8 gap-4">
-                <script>
-                    for(let i=1; i<=40; i++) {
-                        // Leading zero logic to match your directory structure: day-01.html, etc.
-                        let dayNum = i < 10 ? '0' + i : i;
-                        document.write(`<a href="res/dev/forty-flex/day-${dayNum}.html" class="day-grid-item py-4 text-center rounded-xl font-bold text-zinc-400 hover:text-gold transition-colors">${i}</a>`);
-                    }
-                </script>
-            </div>
+            <div id="flex-grid-container" class="grid grid-cols-4 md:grid-cols-8 gap-4"></div>
         </section>
 
         <section class="space-y-24 mb-12">
@@ -139,21 +124,7 @@
         </section>
     </main>
 
-    <footer class="bg-charcoal text-cream py-24 px-6 text-center">
-        <div id="footer-placeholder"></div>
-        <p class="mt-12 opacity-40 text-xs tracking-widest uppercase">Copyright 2023 – 2025 | The Living Room</p>
-    </footer>
-
-    <script>
-        async function loadSharedComponents() {
-            try {
-                // Adjusting component paths to be root-relative
-                const [h, f] = await Promise.all([fetch('components/header.html'), fetch('components/footer.html')]);
-                if(h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
-                if(f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
-            } catch (e) { console.error(e); }
-        }
-        window.onload = loadSharedComponents;
-    </script>
+    <div id="footer-placeholder"></div>
+    <script src="/js/main.js" defer></script>
 </body>
 </html>

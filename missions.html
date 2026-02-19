@@ -16,6 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
     <script>
         tailwind.config = {
             theme: {
@@ -26,31 +28,6 @@
             }
         }
     </script>
-
-    <style>
-        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
-        /* High-Impact Headline Styles from Index.html */
-        .hero-title { font-size: 4.5rem; line-height: 1.1; font-weight: 700; }
-        .accent-teal { color: #2d5a5a; }
-        .glass-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 2rem; padding: 2.5rem; }
-        .img-box { background-color: #e5e7eb; border-radius: 2rem; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transition: 0.5s ease; }
-        .btn-teal { background-color: #2d5a5a; color: white; padding: 1.25rem 2.5rem; border-radius: 999px; transition: all 0.3s ease; display: inline-block; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
-        .video-container { 
-            position: relative; 
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0; 
-            overflow: hidden; 
-            border-radius: 2rem; 
-        }
-        .video-container iframe { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-        }
-    </style>
 </head>
 
 <body class="antialiased" data-current="missions">
@@ -58,15 +35,9 @@
     <div id="header-placeholder"></div>
 
     <section class="max-w-5xl mx-auto px-6 py-24 text-center">
-        <h1 class="hero-title mb-8">
-            An Open <span class="accent-teal italic">Door</span>.
-        </h1>
-        <h2 class="text-3xl md:text-4xl mb-10 font-light italic text-zinc-600">
-            "I have placed before you an open door that no one can shut."
-        </h2>
-        <p class="text-xl tracking-widest uppercase font-bold text-zinc-400 mb-0">
-            — Revelation 3:8
-        </p>
+        <h1 class="hero-title mb-8">An Open <span class="accent-teal italic font-display">Door</span>.</h1>
+        <h2 class="text-3xl md:text-4xl mb-10 font-light italic text-zinc-600">"I have placed before you an open door that no one can shut."</h2>
+        <p class="text-xl tracking-widest uppercase font-bold text-zinc-400 mb-0">— Revelation 3:8</p>
     </section>
 
     <section class="max-w-5xl mx-auto px-6 py-12 text-center border-y border-zinc-200 mb-24">
@@ -79,45 +50,27 @@
         <div class="grid md:grid-cols-2 gap-16">
             <div>
                 <h2 class="text-5xl font-bold mb-8">What is Open Doors?</h2>
-                <p class="text-xl text-zinc-600 mb-6">
-                    At The Living Room, <strong>Open Doors</strong> represents the opportunities God has placed before us to advance His Kingdom. It is a call to step into missions with courage, faith, and obedience.
-                </p>
-                <p class="text-xl text-zinc-600">
-                    We respond to God’s invitation to bring the Gospel to the nations through digital evangelism, supporting global workers, and engaging in local outreach.
-                </p>
+                <p class="text-xl text-zinc-600 mb-6">At The Living Room, <strong>Open Doors</strong> represents the opportunities God has placed before us to advance His Kingdom. It is a call to step into missions with courage, faith, and obedience.</p>
+                <p class="text-xl text-zinc-600">We respond to God’s invitation to bring the Gospel to the nations through digital evangelism, supporting global workers, and engaging in local outreach.</p>
             </div>
-            <div class="glass-card bg-charcoal text-white flex flex-col justify-center p-12">
+            <div class="glass-card bg-charcoal text-white flex flex-col justify-center p-12 border-none">
                 <h3 class="text-3xl text-gold italic mb-6">Your Mission, Should You Choose to Accept It...</h3>
-                <p class="text-lg opacity-80 mb-0">
-                    From the very beginning, the Gospel has been about movement—Jesus walking from village to village, His disciples crossing borders to bring hope.
-                </p>
+                <p class="text-lg opacity-80 mb-0 font-light">From the very beginning, the Gospel has been about movement—Jesus walking from village to village, His disciples crossing borders to bring hope.</p>
             </div>
         </div>
     </section>
 
     <section class="max-w-6xl mx-auto px-6 py-20">
-        <div class="glass-card shadow-2xl overflow-hidden !p-8 md:!p-12">
+        <div class="glass-card shadow-2xl overflow-hidden !p-8 md:!p-12 border-none">
             <div class="mb-10 text-center">
                 <h3 class="text-gold text-[0.6rem] font-bold tracking-[0.5em] uppercase mb-4">Missions Spotlight</h3>
-                <h2 class="text-3xl md:text-4xl font-bold text-charcoal leading-tight">
-                    Common <span class="accent-teal italic font-display">Language</span>
-                </h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-charcoal leading-tight">Common <span class="accent-teal italic font-display">Language</span></h2>
             </div>
-
             <div class="video-container shadow-lg">
-                <iframe 
-                    src="https://www.youtube.com/embed/fRAHqCEE2wg" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen>
-                </iframe>
+                <iframe src="https://www.youtube.com/embed/fRAHqCEE2wg" frameborder="0" allowfullscreen></iframe>
             </div>
-            
             <div class="mt-10 text-center max-w-2xl mx-auto">
-                <p class="text-zinc-500 text-lg leading-relaxed italic">
-                    Joint worship in Japan.
-                </p>
+                <p class="text-zinc-500 text-lg leading-relaxed italic font-light">Joint worship in Japan.</p>
             </div>
         </div>
     </section>
@@ -125,22 +78,20 @@
     <section class="max-w-6xl mx-auto px-6 py-32 border-t border-zinc-200">
         <div class="text-center mb-20">
             <h2 class="text-5xl font-bold mb-6">Neighborhood Representatives</h2>
-            <p class="text-xl text-zinc-500 max-w-2xl mx-auto">Every home is a church, and every family is a light to their street.</p>
+            <p class="text-xl text-zinc-500 max-w-2xl mx-auto font-light">Every home is a church, and every family is a light to their street.</p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-16 items-center mb-32">
             <div class="img-box aspect-[4/5] relative">
                 <img src="/img/missions_03.jpeg" alt="Japan Missions" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent flex items-end p-10">
-                    <h4 class="text-white text-3xl italic">Japan</h4>
+                    <h4 class="text-white text-3xl italic font-display">Japan</h4>
                 </div>
             </div>
             <div>
                 <h3 class="text-4xl font-bold mb-6">Breaking Silence in Tokyo & Beyond</h3>
-                <p class="text-lg text-zinc-600 mb-8">
-                    In Japan, we are seeing families open their doors to their neighbors, creating safe spaces for those who have never heard the Name of Jesus. Our partners are God's representatives in cities where traditional church structures are few.
-                </p>
-                <ul class="space-y-4 text-zinc-500 font-bold uppercase tracking-widest text-sm">
+                <p class="text-lg text-zinc-600 mb-8 font-light">In Japan, we are seeing families open their doors to their neighbors, creating safe spaces for those who have never heard the Name of Jesus.</p>
+                <ul class="space-y-4 text-zinc-400 font-bold uppercase tracking-[0.2em] text-[0.7rem]">
                     <li>&bull; Home-Centric Discipleship</li>
                     <li>&bull; Cultural Connection</li>
                     <li>&bull; Faith at the Table</li>
@@ -152,63 +103,42 @@
             <div class="md:order-2 img-box aspect-[4/5] relative">
                 <img src="/img/missions_02.jpeg" alt="Taiwan Missions" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent flex items-end p-10">
-                    <h4 class="text-white text-3xl italic">Taiwan & Hong Kong</h4>
+                    <h4 class="text-white text-3xl italic font-display">Taiwan & Hong Kong</h4>
                 </div>
             </div>
             <div class="md:order-1">
                 <h3 class="text-4xl font-bold mb-6">City Lights in the Concrete Jungle</h3>
-                <p class="text-lg text-zinc-600 mb-8">
-                    In the high-density neighborhoods of Hong Kong and Taiwan, our mission is to be the peace of Christ in a fast-paced world. These are families living as God's representatives in high-rise apartments and crowded streets.
-                </p>
-                <p class="text-xl italic text-teal">"Every connection brings us closer to Him."</p>
+                <p class="text-lg text-zinc-600 mb-8 font-light">In the high-density neighborhoods of Hong Kong and Taiwan, our mission is to be the peace of Christ in a fast-paced world.</p>
+                <p class="text-xl italic text-teal font-display">"Every connection brings us closer to Him."</p>
             </div>
         </div>
     </section>
 
-    <section class="bg-teal py-32 px-6 text-white">
+    <section class="bg-teal py-32 px-6 text-white rounded-[3rem] mx-6 mb-20">
         <div class="max-w-5xl mx-auto">
             <h2 class="text-5xl font-bold mb-20 text-center">How You Can Be Part of the Mission</h2>
             <div class="grid md:grid-cols-3 gap-16">
                 <div>
-                    <h3 class="text-gold text-3xl italic mb-4">Go</h3>
-                    <p class="opacity-80">Step into the mission field through digital evangelism or physical presence. The harvest is great, and there is a place for you to serve.</p>
+                    <h3 class="text-gold text-3xl italic mb-4 font-display">Go</h3>
+                    <p class="opacity-80 font-light">Step into the mission field through digital evangelism or physical presence. The harvest is great.</p>
                 </div>
                 <div>
-                    <h3 class="text-gold text-3xl italic mb-4">Send</h3>
-                    <p class="opacity-80">Your generosity sustains those who go. You are resourcing the movement of the Gospel and opening doors that no one can shut.</p>
+                    <h3 class="text-gold text-3xl italic mb-4 font-display">Send</h3>
+                    <p class="opacity-80 font-light">Your generosity sustains those who go. You are resourcing the movement of the Gospel.</p>
                 </div>
                 <div>
-                    <h3 class="text-gold text-3xl italic mb-4">Pray</h3>
-                    <p class="opacity-80">Prayer is the engine of missions. Stand with those on the field, believing for breakthroughs and open hearts.</p>
+                    <h3 class="text-gold text-3xl italic mb-4 font-display">Pray</h3>
+                    <p class="opacity-80 font-light">Prayer is the engine of missions. Stand with those on the field, believing for breakthroughs.</p>
                 </div>
             </div>
             <div class="mt-20 text-center">
-                <a href="/give.html" class="btn-teal !bg-gold !text-charcoal hover:scale-105 font-bold uppercase tracking-widest">Send Today</a>
+                <a href="/give.html" class="btn-teal !bg-gold !text-charcoal hover:scale-105 shadow-xl">Send Today</a>
             </div>
         </div>
     </section>
 
     <div id="footer-placeholder"></div>
 
-    <script>
-        async function loadSharedComponents() {
-            try {
-                const headerRes = await fetch('/components/header.html');
-                if (headerRes.ok) document.getElementById('header-placeholder').innerHTML = await headerRes.text();
-
-                const footerRes = await fetch('/components/footer.html');
-                if (footerRes.ok) document.getElementById('footer-placeholder').innerHTML = await footerRes.text();
-
-                const currentPage = document.body.getAttribute('data-current');
-                setTimeout(() => {
-                    const activeLink = document.querySelector(`[data-page="${currentPage}"]`);
-                    if (activeLink) activeLink.classList.add('!text-teal');
-                }, 100);
-            } catch (error) {
-                console.error('Error loading shared components:', error);
-            }
-        }
-        loadSharedComponents();
-    </script>
+    <script src="/js/main.js" defer></script>
 </body>
 </html>
