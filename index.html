@@ -16,7 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <link rel="stylesheet" href="/css/style.css">
+
     <script>
         tailwind.config = {
             theme: {
@@ -27,101 +28,64 @@
             }
         }
     </script>
-
-    <style>
-        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; -webkit-font-smoothing: antialiased; }
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        .hero-title { font-size: 4.5rem; line-height: 1.1; font-weight: 700; }
-        .nav-link { font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.85rem; color: #a1a1aa; transition: 0.3s; }
-        .nav-link:hover { color: #2d5a5a; }
-        .glass-card { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 2rem; padding: 2.5rem; }
-        .btn-teal { background-color: #2d5a5a; color: white; padding: 1.25rem 2.5rem; border-radius: 999px; transition: all 0.3s ease; display: inline-block; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-        .btn-teal:hover { background-color: #3d7a7a; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(45, 90, 90, 0.2); }
-        .accent-teal { color: #2d5a5a; }
-        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .img-reveal { filter: grayscale(40%) contrast(90%); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-        .group:hover .img-reveal { filter: grayscale(0%) contrast(100%); transform: scale(1.03); }
-    </style>
 </head>
-<body class="antialiased selection:bg-gold selection:text-white">
+<body class="antialiased selection:bg-gold selection:text-white" data-current="home">
 
     <div id="header-placeholder"></div>
 
     <section class="max-w-5xl mx-auto px-6 py-20 text-center">
-        <h1 class="hero-title mb-8">
-            The <span class="accent-teal">Church</span> Is Us.
-        </h1>
-        <h2 class="text-3xl md:text-4xl mb-10 font-light italic text-zinc-600">
-            Church in Every Home, Life in Every Heart
-        </h2>
-        <p class="text-2xl text-zinc-500 max-w-3xl mx-auto mb-12">
-            At <strong>The Living Room</strong>, we believe that faith starts at home and extends to every part of life. Gathered in living rooms, online, and within our communities, we are a family of believers growing together.
-        </p>
+        <h1 class="hero-title mb-8">The <span class="accent-teal">Church</span> Is Us.</h1>
+        <h2 class="text-3xl md:text-4xl mb-10 font-light italic text-zinc-600">Church in Every Home, Life in Every Heart</h2>
         <div class="flex flex-col md:flex-row justify-center items-center gap-6">
             <a href="/live.html" class="btn-teal shadow-lg">Join Live</a>
-            <a href="/about.html" class="font-semibold text-zinc-600 hover:text-teal-900 border-b-2 border-transparent hover:border-teal-900 transition-all pb-1 uppercase tracking-widest text-sm">Our Story &rarr;</a>
+            <a href="/about.html" class="font-semibold text-zinc-600 hover:text-teal border-b-2 border-transparent hover:border-teal transition-all pb-1 uppercase tracking-widest text-sm">Our Story &rarr;</a>
         </div>
-    </section>
-
-    <section class="max-w-4xl mx-auto px-6 py-12 text-center border-y border-zinc-200">
-        <p class="text-xl tracking-widest uppercase font-bold text-zinc-400 mb-0">
-            <span class="accent-teal">Christ-centered</span> &bull; Bible-based &bull; <span class="italic">Home-centric</span> &bull; Online-first
-        </p>
     </section>
 
     <section id="messages" class="max-w-6xl mx-auto px-6 py-32">
         <div class="mb-16 text-center">
             <h2 class="text-5xl mb-4 font-bold text-charcoal">Sunday <span class="accent-teal italic">Replay</span></h2>
-            <p class="text-xl text-zinc-500 max-w-prose mx-auto italic">Wherever you are, you can be part of a church that’s personal, connected, and Christ-centered.</p>
         </div>
-
         <div id="youtube-feed" class="grid md:grid-cols-3 gap-12">
-            <p class="text-zinc-400 animate-pulse col-span-full text-center">Loading latest messages from @tlrhd...</p>
-        </div>
-
-        <div class="mt-16 text-center">
-            <a href="/replays.html" class="inline-block border-2 border-teal text-teal hover:bg-teal hover:text-white font-bold py-4 px-12 rounded-full transition-all duration-300 tracking-widest text-xs uppercase">
-                View All Replays &rarr;
-            </a>
+            <p class="text-zinc-400 animate-pulse col-span-full text-center">Loading latest messages...</p>
         </div>
     </section>
 
+    <section class="max-w-6xl mx-auto px-6 py-32 border-t border-zinc-100">
+        <div id="home-deepdives-grid" class="grid md:grid-cols-3 gap-12">
+            </div>
+    </section>
+
     <section class="max-w-6xl mx-auto px-6 py-20">
-        <div class="glass-card bg-charcoal text-white overflow-hidden p-0 relative border-none shadow-2xl">
-            <div class="grid md:grid-cols-2 items-stretch">
+        <div class="glass-card bg-charcoal text-white p-0 overflow-hidden border-none shadow-2xl">
+            <div class="grid md:grid-cols-2">
                 <div class="p-12 md:p-16 flex flex-col justify-center">
                     <div class="flex items-center gap-3 mb-6">
                         <span class="h-[1px] w-8 bg-gold"></span>
                         <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.4em] uppercase">Limited Series</h3>
                     </div>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6 leading-tight font-display">Forty <span class="text-gold italic">Flex</span>.</h2>
-                    <p class="opacity-70 text-lg mb-10 leading-relaxed font-light">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 font-display">Forty <span class="text-gold italic">Flex</span>.</h2>
+                    <p class="opacity-70 text-lg mb-10 font-light leading-relaxed">
                         A 40-day intentional stretch for the soul. Strengthening the muscles of faith through daily discipline, prayer, and Christ-centered devotion.
                     </p>
-                    <div>
-                        <a href="/forty-flex.html" class="inline-block bg-gold text-charcoal px-10 py-4 rounded-full font-bold hover:bg-white transition-all uppercase tracking-widest text-xs shadow-lg">
-                            Begin the Journey &rarr;
-                        </a>
-                    </div>
+                    <a href="/forty-flex.html" class="btn-teal !bg-gold !text-charcoal px-10">Begin the Journey &rarr;</a>
                 </div>
                 
-                <div class="relative h-80 md:h-auto min-h-full overflow-hidden bg-zinc-800">
-                    <img src="/img/forty-flex-cover.png" 
-                        alt="Forty Flex Journey" 
-                        class="absolute inset-0 w-full h-full object-cover object-center opacity-80 hover:opacity-100 transition-opacity duration-1000">
+                <div class="relative h-80 md:h-auto bg-zinc-800">
+                    <img src="/img/forty-flex-cover.png" alt="Forty Flex" class="absolute inset-0 w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-1000">
                     <div class="absolute inset-0 bg-gradient-to-r from-charcoal/40 to-transparent md:hidden"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="max-w-6xl mx-auto px-6 py-32">
+    <section class="max-w-6xl mx-auto px-6 py-32 border-t border-zinc-100">
         <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
             <div class="max-w-xl">
                 <h3 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">Study Archive</h3>
-                <h2 class="text-5xl font-bold">Digital <span class="accent-teal italic font-display font-normal">Deep Dives</span>.</h2>
+                <h2 class="text-5xl font-bold">Digital <span class="accent-teal italic font-display">Deep Dives</span>.</h2>
             </div>
-            <a href="/deepdives.html" class="nav-link !text-teal border-b border-teal/20 pb-1">Enter the Library &rarr;</a>
+            <a href="/deepdives.html" class="text-teal font-bold uppercase tracking-widest text-xs border-b border-teal/20 pb-1 hover:border-teal transition-all">Enter the Library &rarr;</a>
         </div>
         
         <div id="home-deepdives-grid" class="grid md:grid-cols-3 gap-12">
@@ -129,152 +93,17 @@
         </div>
     </section>
 
-    <section class="px-6 py-24 bg-cream border-y border-zinc-100">
+    <section class="px-6 py-24 bg-cream border-t border-zinc-100">
         <div class="max-w-4xl mx-auto text-center">
             <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-8">Generosity</h3>
-            <h2 class="text-4xl md:text-5xl font-bold mb-8 text-charcoal leading-tight">Investing in the <span class="accent-teal">Movement</span>.</h2>
-            <p class="text-xl text-zinc-500 mb-12 max-w-2xl mx-auto leading-relaxed">Your giving fuels the mission of taking the Gospel into every living room. Together, we are building a church that is personal and connected.</p>
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 text-charcoal">Investing in the <span class="accent-teal">Movement</span>.</h2>
+            <p class="text-xl text-zinc-500 mb-12 max-w-2xl mx-auto leading-relaxed font-light">Your giving fuels the mission of taking the Gospel into every living room. Together, we are building a church that is personal and connected.</p>
             <a href="/give.html" class="btn-teal shadow-xl">Support the Mission</a>
         </div>
     </section>
-    
-    <!-- <section class="bg-zinc-50 py-32 px-6 border-t border-zinc-100">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-24">
-                <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-8">Daily Rhythm</h3>
-                <h2 class="text-4xl md:text-6xl font-bold text-charcoal leading-tight">
-                    Written <span class="accent-teal italic font-display font-normal">Reflections</span>.
-                </h2>
-                <p class="text-xl text-zinc-500 max-w-2xl mx-auto mt-6 italic font-light">
-                    Quiet moments captured in ink and pixels—designed to anchor your day in the movement of the Spirit.
-                </p>
-            </div>
-
-            <div id="home-devotionals-grid" class="grid md:grid-cols-2 gap-16"></div>
-
-            <div class="mt-20 text-center">
-                <a href="/resources.html" class="inline-block border-2 border-teal text-teal hover:bg-teal hover:text-white px-10 py-4 rounded-full font-bold uppercase tracking-widest text-xs transition-all">
-                    View All Reflections &rarr;
-                </a>
-            </div>
-        </div>
-    </section> -->
 
     <div id="footer-placeholder"></div>
 
-    <script>
-        async function loadSharedComponents() {
-            try {
-                const headerRes = await fetch('/components/header.html');
-                if (headerRes.ok) document.getElementById('header-placeholder').innerHTML = await headerRes.text();
-
-                const footerRes = await fetch('/components/footer.html');
-                if (footerRes.ok) document.getElementById('footer-placeholder').innerHTML = await footerRes.text();
-
-                const currentPage = document.body.getAttribute('data-current') || 'home';
-                setTimeout(() => {
-                    const activeLink = document.querySelector(`[data-page="${currentPage}"]`);
-                    if (activeLink) activeLink.classList.add('!text-teal');
-                }, 100);
-            } catch (error) { console.error('Error loading components:', error); }
-        }
-
-        function formatYTDate(dateString) {
-            const options = { year: 'numeric', month: 'short', day: 'numeric' };
-            return new Date(dateString).toLocaleDateString(undefined, options).toUpperCase();
-        }
-
-        async function fetchYouTubeVideos() {
-            const container = document.getElementById('youtube-feed');
-            const url = 'https://youtube-proxy.reinar-6fd.workers.dev/'; 
-
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                
-                if (data.items && data.items.length > 0) {
-                    container.innerHTML = data.items.slice(0, 3).map(item => {
-                        // CHANGE: Use videoPublishedAt from contentDetails for the original date
-                        const originalDate = item.contentDetails.videoPublishedAt || item.snippet.publishedAt;
-                        const dateMeta = formatYTDate(originalDate);
-                        const videoId = item.contentDetails.videoId; 
-                        
-                        return `
-                        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" class="block group">
-                            <div class="relative rounded-[2rem] overflow-hidden mb-8 shadow-xl bg-zinc-200 aspect-video">
-                                <img src="${item.snippet.thumbnails.high.url}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="${item.snippet.title}">
-                                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
-                            </div>
-                            
-                            <div class="space-y-3">
-                                <span class="text-gold text-[0.65rem] font-bold tracking-[0.2em] uppercase">
-                                    ${dateMeta}
-                                </span>
-                                <h3 class="text-xl font-bold tracking-tight text-charcoal group-hover:text-teal transition-colors leading-tight">
-                                    ${item.snippet.title}
-                                </h3>
-                            </div>
-                        </a>
-                        `;
-                    }).join('');
-                }
-            } catch (error) { 
-                console.error('YouTube Fetch Error:', error);
-            }
-        }
-
-        async function fetchHomeDeepDives() {
-            const grid = document.getElementById('home-deepdives-grid');
-            try {
-                const res = await fetch('/res/deep/2026/deepdives.json');
-                const data = await res.json();
-                grid.innerHTML = data.slice(0, 3).map(item => `
-                    <a href="${item.url}" class="block group">
-                        <div class="relative rounded-[2rem] overflow-hidden mb-8 shadow-lg bg-zinc-100 aspect-video">
-                            <img src="${item.image}" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700" alt="${item.title}">
-                        </div>
-                        <h3 class="text-xl font-bold group-hover:text-teal transition-colors">${item.title}</h3>
-                        <p class="text-zinc-500 text-sm mt-3 line-clamp-2">${item.excerpt || ''}</p>
-                    </a>
-                `).join('');
-            } catch (e) { grid.innerHTML = ''; }
-        }
-
-        async function fetchHomeDevotionals() {
-            const grid = document.getElementById('home-devotionals-grid');
-            try {
-                const res = await fetch('/res/dev/devotionals.json');
-                const data = await res.json();
-                grid.innerHTML = data.slice(0, 2).map(item => `
-                    <a href="${item.url}" class="block group">
-                        <div class="relative rounded-[2.5rem] overflow-hidden mb-8 shadow-xl bg-zinc-200 aspect-[16/10]">
-                            <img src="${item.image}" class="w-full h-full object-cover img-reveal" alt="${item.title}">
-                        </div>
-                        <div class="max-w-xl">
-                            <h3 class="text-3xl font-bold text-charcoal group-hover:text-teal transition-colors leading-tight mb-4">
-                                ${item.title}
-                            </h3>
-                            <p class="text-zinc-500 text-lg line-clamp-2 font-light mb-6 leading-relaxed">
-                                ${item.excerpt || 'Read this reflection...'}
-                            </p>
-                            <div class="flex items-center gap-2 text-gold group-hover:text-teal transition-colors duration-300">
-                                <span class="text-[0.65rem] font-bold uppercase tracking-[0.3em]">Open Journal</span>
-                                <svg class="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M17 8l4 4m0 0l-4 4m4-4H3\"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </a>
-                `).join('');
-            } catch (e) { grid.innerHTML = ''; }
-        }
-
-        window.onload = () => {
-            loadSharedComponents();
-            fetchYouTubeVideos();
-            fetchHomeDeepDives();
-            fetchHomeDevotionals();
-        };
-    </script>
+    <script src="/js/main.js" defer></script>
 </body>
 </html>
