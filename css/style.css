@@ -194,3 +194,28 @@ h1, h2, h3, h4, .font-display {
 .footer-nav-link:hover {
     color: #c5a059; /* Brand Gold */
 }
+
+/* 11. --- 40Flex Hub Visuals --- */
+.hero-gradient { 
+    background: linear-gradient(180deg, #1a1a1a 0%, #2d5a5a 100%); 
+}
+
+.day-grid-item { 
+    background: white; 
+    border: 1px solid rgba(26, 26, 26, 0.05); 
+    transition: all 0.3s ease; 
+}
+
+.day-grid-item:hover { 
+    transform: translateY(-3px); 
+    border-color: #c5a059; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+    color: #c5a059 !important;
+}
+
+.faq-card { 
+    background: rgba(26, 26, 26, 0.02); 
+    border-radius: 1.5rem; 
+    padding: 2rem; 
+    border: 1px solid rgba(26, 26, 26, 0.05); 
+}
