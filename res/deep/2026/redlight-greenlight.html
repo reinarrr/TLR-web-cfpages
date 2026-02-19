@@ -16,6 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
     <script>
         tailwind.config = {
             theme: {
@@ -26,15 +28,6 @@
             }
         }
     </script>
-
-    <style>
-        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; font-size: 1.15rem; -webkit-font-smoothing: antialiased; }
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
-        .accent-teal { color: #2d5a5a; }
-        .editorial-header { border-bottom: 1px solid rgba(26, 26, 26, 0.05); }
-        .lead-quote { border-left: 4px solid rgba(45, 90, 90, 0.2); }
-        .scripture-box { background: rgba(45, 90, 90, 0.03); border-left: 2px solid #2d5a5a; }
-    </style>
 </head>
 
 <body class="antialiased" data-current="resources">
@@ -63,8 +56,8 @@
         </section>
 
         <section class="mb-32">
-            <div class="relative rounded-[3rem] overflow-hidden shadow-2xl bg-zinc-200 aspect-video">
-                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/iZGO60hHVqA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div class="video-container shadow-2xl">
+                <iframe src="https://www.youtube.com/embed/iZGO60hHVqA" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
             </div>
             <p class="text-center text-zinc-400 text-[0.65rem] mt-8 tracking-[0.3em] uppercase italic">Watch the foundation message &bull; Acts 16:6–15</p>
         </section>
@@ -123,11 +116,11 @@
 
                 <div class="bg-charcoal text-white rounded-[2.5rem] p-12 shadow-xl relative overflow-hidden">
                     <h4 class="text-gold uppercase tracking-widest text-xs font-bold mb-6">Pastoral Insight</h4>
-                    <p class="text-2xl md:text-3xl font-display italic leading-tight">
+                    <p class="text-2xl md:text-3xl font-display italic leading-tight relative z-10">
                         "Troas is where God gently unravels us. Everything we thought was sure is laid down. It is where confidence turns into dependence."
                     </p>
                     <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-teal/20 rounded-full blur-3xl"></div>
-                </div>
+                </section>
 
                 <p class="text-zinc-600 text-xl leading-relaxed italic">
                     "God doesn't compete with our plans—He patiently waits until they fall silent."
@@ -177,7 +170,7 @@
 
                 <div class="group border-t border-white/10 pt-12">
                     <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">04</span>
-                    <p class="text-xl md:text-2xl text-zinc-300 font-light italic leading-relaxed">
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed italic">
                         <strong class="text-white not-italic block mb-2 underline decoration-gold/50 underline-offset-8">Family Prompt:</strong> When the GPS in the car suddenly changes our route, how do we feel? How can we trust God's "GPS" as a family when our plans for the week get changed?
                     </p>
                 </div>
@@ -205,18 +198,6 @@
 
     <div id="footer-placeholder"></div>
 
-    <script>
-        async function loadSharedComponents() {
-            try {
-                const [h, f] = await Promise.all([
-                    fetch('/components/header.html'),
-                    fetch('/components/footer.html')
-                ]);
-                if(h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
-                if(f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
-            } catch (e) { console.error(e); }
-        }
-        window.onload = loadSharedComponents;
-    </script>
+    <script src="/js/main.js" defer></script>
 </body>
 </html>
