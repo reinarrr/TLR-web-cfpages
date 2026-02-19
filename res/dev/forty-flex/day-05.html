@@ -15,7 +15,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
     <script>
         tailwind.config = {
             theme: {
@@ -26,15 +29,6 @@
             }
         }
     </script>
-    <style>
-        body { background-color: #faf9f6; color: #1a1a1a; font-family: 'Outfit', sans-serif; line-height: 1.8; font-size: 1.15rem; -webkit-font-smoothing: antialiased; }
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
-        .editorial-header { border-bottom: 1px solid rgba(26, 26, 26, 0.05); }
-        .lead-quote { border-left: 4px solid rgba(45, 90, 90, 0.2); }
-        .scripture-box { background: rgba(45, 90, 90, 0.03); border-left: 4px solid #c5a059; padding: 2rem; border-radius: 0 1rem 1rem 0; }
-        .challenge-card { background: white; border: 1px solid rgba(26, 26, 26, 0.05); transition: all 0.3s ease; height: 100%; }
-        .challenge-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-    </style>
 </head>
 <body class="antialiased" data-current="40flex">
     <div id="header-placeholder"></div>
@@ -125,15 +119,6 @@
         </footer>
     </main>
     <div id="footer-placeholder"></div>
-    <script>
-        async function loadSharedComponents() {
-            try {
-                const [h, f] = await Promise.all([fetch('/components/header.html'), fetch('/components/footer.html')]);
-                if(h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
-                if(f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
-            } catch (e) { console.error(e); }
-        }
-        window.onload = loadSharedComponents;
-    </script>
+    <script src="/js/main.js" defer></script>
 </body>
 </html>

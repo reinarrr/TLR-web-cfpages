@@ -127,15 +127,6 @@
         </footer>
     </main>
     <div id="footer-placeholder"></div>
-    <script>
-        async function loadSharedComponents() {
-            try {
-                const [h, f] = await Promise.all([fetch('/components/header.html'), fetch('/components/footer.html')]);
-                if(h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
-                if(f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
-            } catch (e) { console.error(e); }
-        }
-        window.onload = loadSharedComponents;
-    </script>
+    <script src="/js/main.js" defer></script>
 </body>
 </html>

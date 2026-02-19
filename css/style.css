@@ -219,3 +219,77 @@ h1, h2, h3, h4, .font-display {
     padding: 2rem; 
     border: 1px solid rgba(26, 26, 26, 0.05); 
 }
+
+/* --- 11. 40Flex Journey Specifics --- */
+
+/* The "Big Steps" Forward Cards */
+.challenge-card { 
+    background: white; 
+    border: 1px solid rgba(26, 26, 26, 0.05); 
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+    height: 100%; 
+}
+
+.challenge-card:hover { 
+    transform: translateY(-8px); 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.06); 
+    border-color: rgba(197, 160, 89, 0.3); /* Soft Gold border on hover */
+}
+
+/* The Subtle Divider (Dots) */
+.divider { 
+    color: #c5a059; 
+    opacity: 0.3; 
+    letter-spacing: 0.2em; 
+    text-align: center; 
+    margin: 3.5rem 0; 
+    font-weight: 300;
+}
+
+/* The Main Journey Hub Grid Items */
+.day-grid-item { 
+    background: white; 
+    border: 1px solid rgba(26, 26, 26, 0.05); 
+    transition: all 0.3s ease; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1/1;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-decoration: none;
+}
+
+.day-grid-item:hover { 
+    transform: translateY(-3px); 
+    border-color: #c5a059; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+    color: #c5a059 !important;
+}
+
+/* 40Flex Hero Gradient */
+.hero-gradient { 
+    background: linear-gradient(180deg, #1a1a1a 0%, #2d5a5a 100%); 
+}
+
+/* Button Outline (For "Back to Journey") */
+.btn-outline {
+    display: inline-block;
+    border: 1px solid #2d5a5a;
+    color: #2d5a5a;
+    padding: 1.25rem 2.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-size: 0.75rem;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn-outline:hover {
+    background-color: #2d5a5a;
+    color: white !important;
+    transform: translateY(-2px);
+}

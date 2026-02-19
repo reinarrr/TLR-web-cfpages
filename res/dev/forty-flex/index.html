@@ -145,15 +145,6 @@
         <p class="mt-12 opacity-40 text-xs tracking-widest uppercase">Copyright 2023 – 2025 | The Living Room</p>
     </footer>
 
-    <script>
-        async function loadSharedComponents() {
-            try {
-                const [h, f] = await Promise.all([fetch('/components/header.html'), fetch('/components/footer.html')]);
-                if(h.ok) document.getElementById('header-placeholder').innerHTML = await h.text();
-                if(f.ok) document.getElementById('footer-placeholder').innerHTML = await f.text();
-            } catch (e) { console.error(e); }
-        }
-        window.onload = loadSharedComponents;
-    </script>
+    <script src="/js/main.js" defer></script>
 </body>
 </html>
