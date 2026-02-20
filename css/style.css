@@ -46,7 +46,8 @@ h1, h2, h3, h4, .font-display {
     padding: 1.25rem 2.5rem; 
     border-radius: 999px; 
     transition: all 0.3s ease; 
-    display: inline-block; 
+    display: inline-block;
+    font-size: small !important; 
     font-weight: 600; 
     text-transform: uppercase; 
     letter-spacing: 0.1em; 
