@@ -213,7 +213,7 @@ function generateFlexGrid() {
     let html = '';
     for (let i = 1; i <= 40; i++) {
         let dayNum = i < 10 ? '0' + i : i;
-        html += `<a href="res/dev/forty-flex/day-${dayNum}.html" class="day-grid-item py-4 text-center rounded-xl font-bold text-zinc-400 hover:text-gold transition-colors">${i}</a>`;
+        html += `<a href="res/forty-flex/day-${dayNum}.html" class="day-grid-item py-4 text-center rounded-xl font-bold text-zinc-400 hover:text-gold transition-colors">${i}</a>`;
     }
     container.innerHTML = html;
 }
