@@ -254,46 +254,50 @@ function generateFlexGrid() {
 
 /**
  * 9. Replay Specific: Fetch YouTube Gallery
- * Ghost-first: pulls messages from Ghost deep-dive posts (title, date, youtubeId).
- * Falls back to YouTube proxy + messages.json if Ghost is unavailable.
+ *
+ * YouTube is always the base — it holds the full historical library.
+ * Ghost sunday-message posts act as an override layer: where a Ghost post
+ * exists for a video, its clean title and date replace the YouTube defaults.
+ * Old videos with no Ghost post still appear using YouTube's raw data.
+ *
+ * Both sources are fetched in parallel. Ghost failure is non-fatal.
  */
 async function fetchReplays() {
     const latestContainer = document.getElementById('latest-container');
     if (!latestContainer) return;
 
     try {
-        let messages;
+        // Fetch YouTube and Ghost in parallel — Ghost failure is non-fatal
+        const [ytResult, ghostResult] = await Promise.allSettled([
+            fetch(PROXY_URL).then(r => r.json()),
+            fetchGhostMessages()
+        ]);
 
-        // Ghost-first
-        try {
-            const ghostMessages = await fetchGhostMessages();
-            if (ghostMessages.length === 0) throw new Error('No Ghost messages');
-            messages = ghostMessages.map(m => ({
-                id: m.id,
-                title: m.title,
-                date: formatYTDate(m.publishedAt),
-                thumbnail: m.thumbnail
-            }));
-        } catch (_) {
-            // Fallback: YouTube proxy + messages.json overrides
-            const [ytRes, jsonRes] = await Promise.all([
-                fetch(PROXY_URL),
-                fetch('/messages.json').catch(() => ({ ok: false }))
-            ]);
-            const ytData = await ytRes.json();
-            const manualOverrides = jsonRes.ok ? await jsonRes.json() : [];
-            const rawVideos = ytData.items.filter(isPastEvent);
-            messages = rawVideos.map(ytVideo => {
+        if (ytResult.status === 'rejected' || !ytResult.value?.items) {
+            console.error('YouTube fetch failed'); return;
+        }
+
+        // Build Ghost lookup: youtubeId → { title, date }
+        const ghostMap = {};
+        if (ghostResult.status === 'fulfilled') {
+            ghostResult.value.forEach(m => {
+                ghostMap[m.id] = { title: m.title, date: formatYTDate(m.publishedAt) };
+            });
+        }
+
+        // Merge: YouTube is the list, Ghost enriches where available
+        const messages = ytResult.value.items
+            .filter(isPastEvent)
+            .map(ytVideo => {
                 const videoId = ytVideo.contentDetails?.videoId || ytVideo.id;
-                const override = manualOverrides.find(m => m.id === videoId);
+                const ghost = ghostMap[videoId];
                 return {
                     id: videoId,
-                    title: override ? override.title : ytVideo.snippet.title,
-                    date: override ? override.date : formatYTDate(getAccurateDate(ytVideo)),
+                    title: ghost ? ghost.title : ytVideo.snippet.title,
+                    date: ghost ? ghost.date : formatYTDate(getAccurateDate(ytVideo)),
                     thumbnail: ytVideo.snippet.thumbnails.high.url
                 };
             });
-        }
 
         if (messages.length === 0) return;
 
