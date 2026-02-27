@@ -96,13 +96,27 @@ function ghostPostToCard(post) {
 }
 
 /**
- * Fetch all deep-dive posts and map them to the message card shape
- * used by the replays page and home YouTube feed.
+ * Fetch all sunday-message posts and map them to the message card shape
+ * used by the replays page, home YouTube feed, and resources banner.
  * Returns: [{ id, title, publishedAt, thumbnail }]
+ *
+ * sunday-message is a lightweight tag applied immediately after every Sunday
+ * service — it only requires a title, youtubeId in dd-meta, and a publish date.
+ * The deep-dive tag is added separately, later, when the full study is ready.
+ *
  * Posts without a youtubeId in dd-meta are silently skipped.
  */
 async function fetchGhostMessages() {
-    const posts = await fetchGhostDeepDives();
+    const url = `${GHOST_API}/posts/?key=${GHOST_KEY}` +
+        `&filter=tag%3Asunday-message` +
+        `&order=published_at%20desc` +
+        `&limit=all`;
+
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Ghost API ${res.status}`);
+    const data = await res.json();
+    const posts = data.posts || [];
+
     return posts
         .map(post => {
             const meta = parseDdMeta(post.codeinjection_head);
