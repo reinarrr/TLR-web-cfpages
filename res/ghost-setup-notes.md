@@ -7,7 +7,7 @@ These notes cover what was built, why decisions were made, and where things live
 
 ## What Was Built
 
-The TLR site (hosted on Cloudflare Pages, `ghost-link` branch) now loads Deep Dive content directly from Ghost CMS. When a new study is published in Ghost, it appears on the site automatically — no code push required.
+Ghost CMS is the single source of truth for all published content on the TLR site. When a new study is published in Ghost, the Deep Dives library, the home feed, the replays page, and the individual study page all update automatically — no code push required.
 
 **The pipeline:**
 
@@ -16,7 +16,7 @@ Ghost CMS (cms.tlrhd.com)
     ↓  [Content API]
 Cloudflare Worker (ghost-proxy.reinar-6fd.workers.dev)
     ↓  [CORS proxy + secret header]
-Browser (deepdives.html / deep-dive.html)
+Browser (index.html / replays.html / deepdives.html / deep-dive.html)
     ↓  [ghost.js + main.js]
 Rendered page
 ```
@@ -29,8 +29,10 @@ Rendered page
 
 | File | Purpose |
 |---|---|
-| `js/ghost.js` | Ghost API integration — fetches posts, maps to card format |
-| `js/main.js` | Page logic — calls `fetchGhostDeepDives()`, renders cards |
+| `js/ghost.js` | Ghost API integration — fetches posts, maps to card and message formats |
+| `js/main.js` | Page logic — all Ghost-first data fetching for every page |
+| `index.html` | Home page — loads `ghost.js` + `main.js` |
+| `replays.html` | Replays page — loads `ghost.js` + `main.js` |
 | `deep-dive.html` | Dynamic template — renders any Ghost post via `?slug=` param |
 | `deepdives.html` | Library listing page — year filter buttons |
 | `css/style.css` | `.ghost-content` block — styles Ghost-rendered HTML |
@@ -46,9 +48,11 @@ Rendered page
 | File | Purpose |
 |---|---|
 | `res/ghost-snippets.html` | Reusable HTML components for complex Ghost cards (optional, advanced use) |
-| `res/ghost-ready/net-worth-ghost.html` | Net Worth study — reference for how to write a Ghost post |
+| `res/ghost-ready/net-worth-ghost.html` | Net Worth study — reference format for Ghost-ready content |
 | `res/deep-dive-author-guide.md` | Author guide — step-by-step for content creators |
-| `res/deep/2026/deepdives.json` | Local JSON fallback for the library listing |
+| `res/deep-dive-workflow.md` | Simplified legacy workflow — the day-to-day publishing process |
+| `res/deep/2026/deepdives.json` | Local JSON fallback for the Deep Dives library |
+| `messages.json` | Legacy fallback for replays/home feed — no longer maintained |
 
 ---
 
@@ -87,7 +91,7 @@ The Worker runs server-side, proxies the request, adds CORS headers, and uses a 
 
 ## Cloudflare WAF (cms.tlrhd.com)
 
-Two custom rules on `cms.tlrhd.com`:
+Three custom rules on `cms.tlrhd.com`:
 
 ### Rule 1 — Skip (must be FIRST)
 ```
@@ -98,10 +102,13 @@ This whitelists Worker requests. **Order matters — must be the first rule eval
 
 ### Rule 2 — Block
 ```
-Expression: [blocks all direct browser access to cms frontend]
+Expression: (http.host eq "cms.tlrhd.com"
+  and not starts_with(http.request.uri.path, "/ghost")
+  and not starts_with(http.request.uri.path, "/content")
+  and not starts_with(http.request.uri.path, "/p/"))
 Action: Block
 ```
-This prevents public access to the Ghost CMS admin/frontend.
+Blocks all public access to the Ghost frontend. The `/p/` exclusion allows Ghost's draft preview URLs (e.g. `cms.tlrhd.com/p/{uuid}/`) to work from the admin — without it, previewing a post returns a block page.
 
 **Shared secret:** `tlr-ghost-2026` (set in worker headers, matched by WAF skip rule)
 
@@ -109,7 +116,8 @@ This prevents public access to the Ghost CMS admin/frontend.
 
 ## How Posts Are Fetched
 
-**ghost.js `fetchGhostDeepDives(year)`:**
+### `fetchGhostDeepDives(year)` — Deep Dives library
+
 ```js
 const url = `${GHOST_API}/posts/?key=${GHOST_KEY}`
     + `&filter=tag%3Adeep-dive`
@@ -121,6 +129,47 @@ const url = `${GHOST_API}/posts/?key=${GHOST_KEY}`
 - Fetches ALL `deep-dive` tagged posts (no server-side year filter — WAF blocks NQL date operators)
 - Year filtering is done client-side: `posts.filter(p => new Date(p.published_at).getFullYear() === year)`
 - Results are cached browser-side for ~60 seconds (set by Worker's `Cache-Control` header)
+- Used by: `deepdives.html` (library), `index.html` (home Deep Dives grid)
+
+### `fetchGhostMessages()` — Replays page and home YouTube feed
+
+```js
+async function fetchGhostMessages() {
+    const posts = await fetchGhostDeepDives();
+    return posts
+        .map(post => {
+            const meta = parseDdMeta(post.codeinjection_head);
+            if (!meta.youtubeId) return null;
+            return {
+                id: meta.youtubeId,
+                title: post.title,
+                publishedAt: post.published_at,
+                thumbnail: `https://img.youtube.com/vi/${meta.youtubeId}/maxresdefault.jpg`
+            };
+        })
+        .filter(Boolean);
+}
+```
+
+Maps Ghost posts to a message card shape. Posts without a `youtubeId` in dd-meta are skipped silently. Used by: `replays.html`, `index.html` (YouTube feed section).
+
+**Replaces `messages.json`** — that file previously required a manual code edit for every new Sunday. Now publishing a Ghost post with a `youtubeId` in dd-meta is sufficient. `messages.json` still exists as a silent fallback if Ghost is unavailable.
+
+### Ghost-first fallback pattern
+
+Both `fetchHomeYouTube()` and `fetchReplays()` in `main.js` follow the same pattern:
+
+```js
+try {
+    // Ghost-first
+    const ghostMessages = await fetchGhostMessages();
+    if (ghostMessages.length === 0) throw new Error('No Ghost messages');
+    messages = ghostMessages.map(...);
+} catch (_) {
+    // Fallback: YouTube proxy + messages.json
+    ...
+}
+```
 
 ---
 
@@ -186,7 +235,37 @@ return {
 };
 ```
 
-This means setting the `youtubeId` in dd-meta is sufficient — no separate image upload needed.
+Setting the `youtubeId` in dd-meta is sufficient — no separate image upload needed.
+
+## Dynamic YouTube Embed in Legacy HTML Files
+
+Legacy static HTML files (e.g. `net-worth.html`) pull the YouTube ID from Ghost at runtime rather than hardcoding it. This means the HTML can be generated and committed before the video is uploaded — just add the `youtubeId` to the Ghost post's dd-meta when the video is ready.
+
+**How it works:**
+
+```html
+<section id="yt-section" style="display:none">
+    <iframe id="yt-iframe" src=""></iframe>
+    <p id="yt-caption"></p>
+</section>
+
+<script>
+(async function () {
+    const slug = location.pathname.split('/').pop().replace('.html', '');
+    const res = await fetch(`${PROXY}/ghost/api/content/posts/slug/${slug}/?key=${KEY}`);
+    const meta = parseDdMeta(data.posts[0].codeinjection_head);
+    if (meta.youtubeId) {
+        document.getElementById('yt-iframe').src = `https://www.youtube.com/embed/${meta.youtubeId}`;
+        document.getElementById('yt-section').style.display = '';
+    }
+})();
+</script>
+```
+
+- The section is hidden by default
+- Script reads its own slug from the URL path, fetches that Ghost post, injects the YouTube ID
+- If Ghost is unavailable, the section stays hidden — the rest of the page loads normally
+- Copy this pattern into every new legacy HTML file generated
 
 ---
 
@@ -228,6 +307,12 @@ The `ghost-link` branch will eventually be merged to `main` when Ghost integrati
 4. **Browser cache.** If content looks stale, hard-refresh (Cmd+Shift+R). Worker sets 60-second cache.
 
 5. **Feature image upload is broken in Ghost Docker instance.** Not fixed — bypassed via YouTube thumbnail fallback. The Docker `volumes:` config likely has a storage path issue; left as-is since the workaround is clean.
+
+6. **Ghost post preview blocked by WAF.** The Ghost editor's preview opens at `/p/{uuid}/` — this path wasn't whitelisted in the block rule, so previewing a draft returned a Cloudflare block page. Fixed by adding `and not starts_with(http.request.uri.path, "/p/")` to the block rule expression.
+
+7. **`messages.json` is now legacy.** It was previously edited manually every Sunday to provide clean titles and dates for the YouTube feed. Ghost posts now serve this data via `fetchGhostMessages()`. The file still exists as a fallback but should not be maintained going forward.
+
+8. **`ghost.js` must be loaded before `main.js`.** Any page that calls Ghost functions needs both scripts, in order. `index.html` and `replays.html` both load `ghost.js` then `main.js`. Forgetting `ghost.js` causes silent failures — the Ghost-first path errors and falls through to the fallback.
 
 ---
 
