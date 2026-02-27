@@ -319,6 +319,8 @@ async function fetchReplays() {
 
 /**
  * 10. Resource Specific: Fetch Latest Sunday Message for Banner
+ * Ghost-first: uses most recent deep-dive post for title and thumbnail.
+ * Falls back to YouTube proxy if Ghost is unavailable.
  */
 async function fetchLatestBanner() {
     const titleEl = document.getElementById('banner-title');
@@ -326,9 +328,20 @@ async function fetchLatestBanner() {
     if (!titleEl || !imageEl) return;
 
     try {
+        // Ghost-first
+        try {
+            const messages = await fetchGhostMessages();
+            if (messages.length === 0) throw new Error('No Ghost messages');
+            const latest = messages[0];
+            titleEl.textContent = latest.title;
+            imageEl.src = latest.thumbnail;
+            imageEl.classList.add('opacity-80');
+            return;
+        } catch (_) {}
+
+        // Fallback: YouTube proxy
         const response = await fetch(PROXY_URL);
         const data = await response.json();
-        
         if (data.items && data.items.length > 0) {
             const latest = data.items[0];
             titleEl.textContent = latest.snippet.title;
