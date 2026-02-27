@@ -9,17 +9,13 @@ const GHOST_API = `${GHOST_URL}/ghost/api/content`;
 // ---------------------------------------------------------------------------
 
 /**
- * Fetch all deep-dive posts for the listing pages.
- * Optionally filter by year (e.g. '2026') using published_at date range.
+ * Fetch all deep-dive posts, optionally filtered to a specific year.
+ * Year filtering is done client-side to avoid NQL date operators in the URL
+ * which can trigger WAF rules on the proxy.
  */
 async function fetchGhostDeepDives(year = null) {
-    let filter = 'tag:deep-dive';
-    if (year) {
-        filter += `+published_at:>=${year}-01-01+published_at:<${parseInt(year) + 1}-01-01`;
-    }
-
     const url = `${GHOST_API}/posts/?key=${GHOST_KEY}` +
-        `&filter=${encodeURIComponent(filter)}` +
+        `&filter=tag%3Adeep-dive` +
         `&include=tags` +
         `&order=published_at%20desc` +
         `&limit=all`;
@@ -27,7 +23,13 @@ async function fetchGhostDeepDives(year = null) {
     const res = await fetch(url);
     if (!res.ok) throw new Error(`Ghost API ${res.status}`);
     const data = await res.json();
-    return data.posts || [];
+    const posts = data.posts || [];
+
+    // Filter by year client-side if requested
+    if (year) {
+        return posts.filter(p => new Date(p.published_at).getFullYear() === parseInt(year));
+    }
+    return posts;
 }
 
 /**
