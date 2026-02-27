@@ -95,6 +95,28 @@ function ghostPostToCard(post) {
     };
 }
 
+/**
+ * Fetch all deep-dive posts and map them to the message card shape
+ * used by the replays page and home YouTube feed.
+ * Returns: [{ id, title, publishedAt, thumbnail }]
+ * Posts without a youtubeId in dd-meta are silently skipped.
+ */
+async function fetchGhostMessages() {
+    const posts = await fetchGhostDeepDives();
+    return posts
+        .map(post => {
+            const meta = parseDdMeta(post.codeinjection_head);
+            if (!meta.youtubeId) return null;
+            return {
+                id: meta.youtubeId,
+                title: post.title,
+                publishedAt: post.published_at,
+                thumbnail: `https://img.youtube.com/vi/${meta.youtubeId}/maxresdefault.jpg`
+            };
+        })
+        .filter(Boolean);
+}
+
 // ---------------------------------------------------------------------------
 // 3. Page Renderer (for /deep-dive.html)
 // ---------------------------------------------------------------------------

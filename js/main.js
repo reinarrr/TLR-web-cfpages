@@ -77,49 +77,59 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * 4. Page Specific: Fetch Homepage YouTube Feed (Hybrid Filtered)
- * Restored the date span to display manual overrides from messages.json.
+ * 4. Page Specific: Fetch Homepage YouTube Feed
+ * Ghost-first: pulls titles, dates, and YouTube IDs from Ghost deep-dive posts.
+ * Falls back to YouTube proxy + messages.json if Ghost is unavailable.
  */
 async function fetchHomeYouTube() {
     const container = document.getElementById('youtube-feed');
     if (!container) return;
 
     try {
-        const [ytRes, jsonRes] = await Promise.all([
-            fetch(PROXY_URL),
-            fetch('/messages.json').catch(() => ({ ok: false }))
-        ]);
+        let messages;
 
-        const ytData = await ytRes.json();
-        const manualOverrides = jsonRes.ok ? await jsonRes.json() : [];
-        
-        if (ytData.items) {
+        // Ghost-first
+        try {
+            const ghostMessages = await fetchGhostMessages();
+            if (ghostMessages.length === 0) throw new Error('No Ghost messages');
+            messages = ghostMessages.map(m => ({
+                id: m.id,
+                title: m.title,
+                date: formatYTDate(m.publishedAt),
+                thumbnail: m.thumbnail
+            }));
+        } catch (_) {
+            // Fallback: YouTube proxy + messages.json overrides
+            const [ytRes, jsonRes] = await Promise.all([
+                fetch(PROXY_URL),
+                fetch('/messages.json').catch(() => ({ ok: false }))
+            ]);
+            const ytData = await ytRes.json();
+            const manualOverrides = jsonRes.ok ? await jsonRes.json() : [];
             const rawVideos = ytData.items.filter(isPastEvent);
-
-            const mergedHomeVideos = rawVideos.slice(0, 3).map(ytVideo => {
+            messages = rawVideos.map(ytVideo => {
                 const videoId = ytVideo.contentDetails?.videoId || ytVideo.id;
                 const override = manualOverrides.find(m => m.id === videoId);
-                
                 return {
                     id: videoId,
                     title: override ? override.title : ytVideo.snippet.title,
-                    date: override ? override.date : formatYTDate(getAccurateDate(ytVideo)), // Ensure date is merged
+                    date: override ? override.date : formatYTDate(getAccurateDate(ytVideo)),
                     thumbnail: ytVideo.snippet.thumbnails.high.url
                 };
             });
-
-            // Added the date span back to the return template
-            container.innerHTML = mergedHomeVideos.map(item => `
-                <a href="https://www.youtube.com/watch?v=${item.id}" target="_blank" class="block group">
-                    <div class="relative rounded-[2rem] overflow-hidden mb-8 shadow-xl bg-zinc-200 aspect-video">
-                        <img src="${item.thumbnail}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="${item.title}">
-                    </div>
-                    <div class="space-y-3">
-                        <span class="text-gold text-[0.65rem] font-bold tracking-[0.2em] uppercase">${item.date}</span>
-                        <h3 class="text-xl font-bold tracking-tight text-charcoal group-hover:text-teal transition-colors leading-tight">${item.title}</h3>
-                    </div>
-                </a>`).join('');
         }
+
+        container.innerHTML = messages.slice(0, 3).map(item => `
+            <a href="https://www.youtube.com/watch?v=${item.id}" target="_blank" class="block group">
+                <div class="relative rounded-[2rem] overflow-hidden mb-8 shadow-xl bg-zinc-200 aspect-video">
+                    <img src="${item.thumbnail}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="${item.title}">
+                </div>
+                <div class="space-y-3">
+                    <span class="text-gold text-[0.65rem] font-bold tracking-[0.2em] uppercase">${item.date}</span>
+                    <h3 class="text-xl font-bold tracking-tight text-charcoal group-hover:text-teal transition-colors leading-tight">${item.title}</h3>
+                </div>
+            </a>`).join('');
+
     } catch (error) { console.error('Home YouTube Error:', error); }
 }
 
@@ -243,32 +253,39 @@ function generateFlexGrid() {
 }
 
 /**
- * 9. Replay Specific: Fetch YouTube Gallery (Hybrid JSON Override)
- * Prioritizes manual entries from messages.json before using YouTube API data.
+ * 9. Replay Specific: Fetch YouTube Gallery
+ * Ghost-first: pulls messages from Ghost deep-dive posts (title, date, youtubeId).
+ * Falls back to YouTube proxy + messages.json if Ghost is unavailable.
  */
 async function fetchReplays() {
     const latestContainer = document.getElementById('latest-container');
     if (!latestContainer) return;
 
     try {
-        // 1. Fetch both data sources simultaneously
-        const [ytRes, jsonRes] = await Promise.all([
-            fetch(PROXY_URL),
-            fetch('/messages.json').catch(() => ({ ok: false })) // Fallback if file missing
-        ]);
+        let messages;
 
-        const ytData = await ytRes.json();
-        const manualOverrides = jsonRes.ok ? await jsonRes.json() : [];
-
-        if (ytData.items) {
-            // 2. Filter out future events
+        // Ghost-first
+        try {
+            const ghostMessages = await fetchGhostMessages();
+            if (ghostMessages.length === 0) throw new Error('No Ghost messages');
+            messages = ghostMessages.map(m => ({
+                id: m.id,
+                title: m.title,
+                date: formatYTDate(m.publishedAt),
+                thumbnail: m.thumbnail
+            }));
+        } catch (_) {
+            // Fallback: YouTube proxy + messages.json overrides
+            const [ytRes, jsonRes] = await Promise.all([
+                fetch(PROXY_URL),
+                fetch('/messages.json').catch(() => ({ ok: false }))
+            ]);
+            const ytData = await ytRes.json();
+            const manualOverrides = jsonRes.ok ? await jsonRes.json() : [];
             const rawVideos = ytData.items.filter(isPastEvent);
-
-            // 3. Merge: If a video exists in JSON, use that data; otherwise use YT
-            const mergedVideos = rawVideos.map(ytVideo => {
+            messages = rawVideos.map(ytVideo => {
                 const videoId = ytVideo.contentDetails?.videoId || ytVideo.id;
                 const override = manualOverrides.find(m => m.id === videoId);
-                
                 return {
                     id: videoId,
                     title: override ? override.title : ytVideo.snippet.title,
@@ -276,28 +293,28 @@ async function fetchReplays() {
                     thumbnail: ytVideo.snippet.thumbnails.high.url
                 };
             });
-
-            if (mergedVideos.length > 0) {
-                const latest = mergedVideos[0];
-                
-                // Render Feature Card
-                latestContainer.innerHTML = `
-                    <a href="https://www.youtube.com/watch?v=${latest.id}" target="_blank" class="group relative block overflow-hidden rounded-[3rem] shadow-2xl bg-charcoal h-[50vh]">
-                        <img src="${latest.thumbnail}" class="w-full h-full object-cover opacity-50 transition-transform duration-1000 group-hover:scale-105" alt="${latest.title}">
-                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent"></div>
-                        <div class="absolute bottom-12 left-10 right-10">
-                            <span class="text-gold text-[0.65rem] font-bold tracking-[0.3em] uppercase mb-4 block">${latest.date}</span>
-                            <h2 class="text-white text-3xl md:text-5xl font-bold mb-6 leading-tight">${latest.title}</h2>
-                            <span class="text-gold font-bold uppercase tracking-[0.3em] text-[0.65rem] border-b border-gold pb-1">Watch Now &rarr;</span>
-                        </div>
-                    </a>`;
-
-                // Render Grids using the merged data
-                document.getElementById('recent-grid').innerHTML = mergedVideos.slice(1, 4).map(v => createHybridCard(v, 'text-xl')).join('');
-                document.getElementById('archive-grid').innerHTML = mergedVideos.slice(4, 12).map(v => createHybridCard(v, 'text-sm')).join('');
-            }
         }
-    } catch (e) { console.error('Error fetching hybrid replays:', e); }
+
+        if (messages.length === 0) return;
+
+        const latest = messages[0];
+
+        // Feature card
+        latestContainer.innerHTML = `
+            <a href="https://www.youtube.com/watch?v=${latest.id}" target="_blank" class="group relative block overflow-hidden rounded-[3rem] shadow-2xl bg-charcoal h-[50vh]">
+                <img src="${latest.thumbnail}" class="w-full h-full object-cover opacity-50 transition-transform duration-1000 group-hover:scale-105" alt="${latest.title}">
+                <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent"></div>
+                <div class="absolute bottom-12 left-10 right-10">
+                    <span class="text-gold text-[0.65rem] font-bold tracking-[0.3em] uppercase mb-4 block">${latest.date}</span>
+                    <h2 class="text-white text-3xl md:text-5xl font-bold mb-6 leading-tight">${latest.title}</h2>
+                    <span class="text-gold font-bold uppercase tracking-[0.3em] text-[0.65rem] border-b border-gold pb-1">Watch Now &rarr;</span>
+                </div>
+            </a>`;
+
+        document.getElementById('recent-grid').innerHTML = messages.slice(1, 4).map(v => createHybridCard(v, 'text-xl')).join('');
+        document.getElementById('archive-grid').innerHTML = messages.slice(4, 12).map(v => createHybridCard(v, 'text-sm')).join('');
+
+    } catch (e) { console.error('Error fetching replays:', e); }
 }
 
 /**
