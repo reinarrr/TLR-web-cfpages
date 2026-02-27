@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deep Dives Library | The Living Room</title>
-   
+    <title>Deep Dive | The Living Room</title>
+
+    <meta property="og:title" content="Deep Dive | The Living Room">
+    <meta property="og:type" content="article">
+
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
@@ -14,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/css/style.css">
 
@@ -28,34 +31,37 @@
             }
         }
     </script>
+
+    <style>
+        .accent-teal  { color: #2d5a5a; }
+        .scripture-box {
+            border-left: 3px solid #2d5a5a;
+            background: #f4f7f7;
+        }
+        .editorial-header { border-bottom: 1px solid #e5e7eb; }
+        .lead-quote { border-left: 3px solid #c5a059; }
+        .greek-callout {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.02em;
+        }
+    </style>
 </head>
 
-<body class="antialiased" data-current="resources">
+<body class="antialiased bg-cream font-body" data-current="resources">
 
     <div id="header-placeholder"></div>
 
-    <main class="max-w-7xl mx-auto px-6 py-24">
-        
-        <header class="max-w-4xl mx-auto mb-32 editorial-header pb-16 text-center">
-            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-8">Study Archive</h3>
-            <h1 class="text-6xl md:text-8xl font-bold mb-10 leading-[1.05] tracking-tight text-charcoal">
-                Digital <span class="accent-teal italic font-display">Deep Dives</span>.
-            </h1>
-            <p class="text-2xl text-zinc-500 font-light leading-relaxed max-w-2xl mx-auto">
-                Explore our library of messages and study materials designed for a home-centric life.
-            </p>
-        </header>
+    <main class="max-w-4xl mx-auto px-6 py-24">
 
-        <div class="flex justify-center gap-12 mb-24">
-            <button onclick="loadYear('2026', this)" class="year-btn active">2026</button>
-            <button onclick="loadYear('2025', this)" class="year-btn">2025</button>
+        <!-- Loading state -->
+        <div id="dd-loading" class="text-center py-40">
+            <p class="text-zinc-400 animate-pulse font-bold tracking-widest uppercase text-sm">
+                Opening Study&hellip;
+            </p>
         </div>
 
-        <section id="library-grid" class="grid grid-cols-1 md:grid-cols-12 gap-y-32 gap-x-16">
-            <div class="md:col-span-12 text-center py-20">
-                <p class="text-zinc-400 animate-pulse font-bold tracking-widest uppercase">Opening Archive...</p>
-            </div>
-        </section>
+        <!-- Content injected by ghost.js → renderDeepDive() -->
+        <div id="dd-content" class="hidden"></div>
 
     </main>
 

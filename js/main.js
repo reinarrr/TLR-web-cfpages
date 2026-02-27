@@ -129,10 +129,19 @@ async function fetchHomeDeepDives() {
     if (!grid) return;
 
     try {
-        const res = await fetch('/res/deep/2026/deepdives.json');
-        if (!res.ok) throw new Error('Deep Dives not found');
-        const data = await res.json();
-        grid.innerHTML = data.slice(0, 3).map(item => `
+        // Ghost-first; fall back to local JSON if Ghost is unreachable
+        let items;
+        try {
+            const posts = await fetchGhostDeepDives('2026');
+            if (posts.length === 0) throw new Error('No Ghost posts');
+            items = posts.map(ghostPostToCard);
+        } catch (_) {
+            const res = await fetch('/res/deep/2026/deepdives.json');
+            if (!res.ok) throw new Error('Deep Dives not found');
+            items = await res.json();
+        }
+
+        grid.innerHTML = items.slice(0, 3).map(item => `
             <a href="${item.url || '#'}" class="block group">
                 <div class="relative rounded-[2rem] overflow-hidden mb-8 shadow-lg bg-zinc-100 aspect-video">
                     <img src="${item.image || '/img/placeholder.jpg'}" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700" alt="${item.title}">
@@ -152,10 +161,22 @@ async function loadYear(year, button = null) {
         document.querySelectorAll('.year-btn').forEach(btn => btn.classList.remove('active'));
         button.classList.add('active');
     }
+
+    grid.innerHTML = '<div class="md:col-span-12 text-center py-20"><p class="text-zinc-400 animate-pulse font-bold tracking-widest uppercase text-sm">Opening Archive&hellip;</p></div>';
+
     try {
-        const response = await fetch(`/res/deep/${year}/deepdives.json`);
-        if (!response.ok) throw new Error('Archive not found');
-        const data = await response.json();
+        // Ghost-first; fall back to local JSON if Ghost is unreachable or has no posts for this year
+        let data;
+        try {
+            const posts = await fetchGhostDeepDives(year);
+            if (posts.length === 0) throw new Error('No Ghost posts for year');
+            data = posts.map(ghostPostToCard);
+        } catch (_) {
+            const response = await fetch(`/res/deep/${year}/deepdives.json`);
+            if (!response.ok) throw new Error('Archive not found');
+            data = await response.json();
+        }
+
         grid.innerHTML = data.map((item, index) => {
             const isFeatured = index % 3 === 0;
             const colSpan = isFeatured ? 'md:col-span-12 mb-16' : 'md:col-span-6';
@@ -174,7 +195,10 @@ async function loadYear(year, button = null) {
                     </a>
                 </article>`;
         }).join('');
-    } catch (error) { console.error('Library Load Error:', error); }
+    } catch (error) {
+        console.error('Library Load Error:', error);
+        grid.innerHTML = '<div class="md:col-span-12 text-center py-20"><p class="text-zinc-400">Archive could not be loaded.</p></div>';
+    }
 }
 
 // 7. Devotional Specific: Load Daily Reflections
