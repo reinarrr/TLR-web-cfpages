@@ -8,6 +8,12 @@
 
 const GHOST_ORIGIN = 'https://cms.tlrhd.com';
 
+// Shared secret — must match the value in your CF WAF Skip rule on cms.tlrhd.com
+// CF Dashboard → cms.tlrhd.com → Security → WAF → Create rule:
+//   IF http.request.headers["x-proxy-secret"] eq "tlr-ghost-2026"
+//   THEN Skip → All remaining custom rules + Bot Fight Mode
+const PROXY_SECRET = 'tlr-ghost-2026';
+
 export default {
     async fetch(request) {
         // Handle CORS preflight
@@ -26,11 +32,23 @@ export default {
         }
 
         const url = new URL(request.url);
+
+        // Only allow Content API paths — block anything else (admin, frontend, etc.)
+        if (!url.pathname.startsWith('/ghost/api/content/')) {
+            return new Response(JSON.stringify({ error: 'Not found' }), {
+                status: 404,
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+            });
+        }
+
         const ghostUrl = `${GHOST_ORIGIN}${url.pathname}${url.search}`;
 
         try {
             const response = await fetch(ghostUrl, {
-                headers: { 'Accept': 'application/json' }
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Proxy-Secret': PROXY_SECRET,
+                }
             });
 
             const body = await response.text();
