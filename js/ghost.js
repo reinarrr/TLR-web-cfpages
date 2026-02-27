@@ -10,15 +10,17 @@ const GHOST_API = `${GHOST_URL}/ghost/api/content`;
 
 /**
  * Fetch all deep-dive posts for the listing pages.
- * Optionally filter by year tag (e.g. '2026' → filters tag:year-2026).
+ * Optionally filter by year (e.g. '2026') using published_at date range.
  */
-async function fetchGhostDeepDives(yearTag = null) {
+async function fetchGhostDeepDives(year = null) {
     let filter = 'tag:deep-dive';
-    if (yearTag) filter += `+tag:year-${yearTag}`;
+    if (year) {
+        filter += `+published_at:>=${year}-01-01+published_at:<${parseInt(year) + 1}-01-01`;
+    }
 
     const url = `${GHOST_API}/posts/?key=${GHOST_KEY}` +
         `&filter=${encodeURIComponent(filter)}` +
-        `&fields=title,slug,feature_image,custom_excerpt,tags,published_at,canonical_url` +
+        `&fields=title,slug,feature_image,custom_excerpt,tags,published_at,canonical_url,codeinjection_head` +
         `&include=tags` +
         `&order=published_at%20desc` +
         `&limit=all`;
@@ -66,18 +68,28 @@ function parseDdMeta(codeinjectionHead) {
  */
 function getDeepDiveUrl(post) {
     const isLegacy = post.tags?.some(t => t.slug === 'legacy-static');
-    if (isLegacy && post.canonical_url) return post.canonical_url;
+    if (isLegacy) {
+        if (post.canonical_url) return post.canonical_url;
+        // Derive path from publish year + slug (e.g. 2026 + redlight-greenlight → /res/deep/2026/redlight-greenlight.html)
+        const year = post.published_at ? new Date(post.published_at).getFullYear() : '2026';
+        return `/res/deep/${year}/${post.slug}.html`;
+    }
     return `/deep-dive.html?slug=${post.slug}`;
 }
 
 /**
  * Map a Ghost post to the flat card shape used by the listing renderers.
+ * Falls back to the YouTube maxresdefault thumbnail if no feature image is set.
  */
 function ghostPostToCard(post) {
+    const meta = parseDdMeta(post.codeinjection_head);
+    const ytFallback = meta.youtubeId
+        ? `https://img.youtube.com/vi/${meta.youtubeId}/maxresdefault.jpg`
+        : '';
     return {
         title: post.title,
         url: getDeepDiveUrl(post),
-        image: post.feature_image || '',
+        image: post.feature_image || ytFallback,
         excerpt: post.custom_excerpt || ''
     };
 }
