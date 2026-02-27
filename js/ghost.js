@@ -1,7 +1,7 @@
 /* ghost.js - Ghost CMS Integration | The Living Room */
 
 const GHOST_URL = 'https://cms.tlrhd.com';
-const GHOST_KEY = 'REPLACE_WITH_YOUR_CONTENT_API_KEY';
+const GHOST_KEY = 'c306251d7f0f57012025d2fdc4';
 const GHOST_API = `${GHOST_URL}/ghost/api/content`;
 
 // ---------------------------------------------------------------------------
