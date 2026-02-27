@@ -73,12 +73,37 @@
             </a>
         </section>
 
-        <section class="mb-32">
+        <section class="mb-32" id="yt-section" style="display:none">
             <div class="relative rounded-[3rem] overflow-hidden shadow-2xl bg-zinc-200 aspect-video">
-                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/XXXXX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe id="yt-iframe" class="absolute inset-0 w-full h-full" src="" title="Net Worth — Deep Dive" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-            <p class="text-center text-zinc-400 text-[0.65rem] mt-8 tracking-[0.3em] uppercase italic">Watch the foundation message &bull; Acts 16:13–15</p>
+            <p id="yt-caption" class="text-center text-zinc-400 text-[0.65rem] mt-8 tracking-[0.3em] uppercase italic"></p>
         </section>
+
+        <script>
+            (async function () {
+                const PROXY = 'https://ghost-proxy.reinar-6fd.workers.dev';
+                const KEY   = 'c306251d7f0f57012025d2fdc4';
+                // Derive slug from filename: /res/deep/2026/net-worth.html → net-worth
+                const slug  = location.pathname.split('/').pop().replace('.html', '');
+                try {
+                    const res  = await fetch(`${PROXY}/ghost/api/content/posts/slug/${slug}/?key=${KEY}`);
+                    if (!res.ok) return;
+                    const data = await res.json();
+                    const post = data.posts?.[0];
+                    if (!post?.codeinjection_head) return;
+                    const match = post.codeinjection_head.match(/<script[^>]*id="dd-meta"[^>]*>([\s\S]*?)<\/script>/);
+                    if (!match) return;
+                    const meta = JSON.parse(match[1].trim());
+                    if (!meta.youtubeId) return;
+                    document.getElementById('yt-iframe').src = `https://www.youtube.com/embed/${meta.youtubeId}`;
+                    document.getElementById('yt-caption').textContent = meta.videoCaption || '';
+                    document.getElementById('yt-section').style.display = '';
+                } catch (e) {
+                    // Ghost unavailable — section stays hidden, page unaffected
+                }
+            })();
+        </script>
 
         <!-- SETUP: THE SCENT CONTRAST -->
         <section class="mb-24 space-y-8">
