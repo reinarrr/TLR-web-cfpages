@@ -20,7 +20,6 @@ async function fetchGhostDeepDives(year = null) {
 
     const url = `${GHOST_API}/posts/?key=${GHOST_KEY}` +
         `&filter=${encodeURIComponent(filter)}` +
-        `&fields=title,slug,feature_image,custom_excerpt,tags,published_at,canonical_url,codeinjection_head` +
         `&include=tags` +
         `&order=published_at%20desc` +
         `&limit=all`;
