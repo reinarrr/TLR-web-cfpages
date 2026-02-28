@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<!--
+    GHOST SNIPPET LIBRARY — The Living Room Deep Dives
+    =====================================================
+    Each section below is a reusable HTML component.
+    In Ghost editor: type /html to insert an HTML card, then paste the snippet.
+    Save frequently used ones as Ghost Snippets (highlight block → Save as snippet).
+
+    COLOUR REFERENCE
+    ─────────────────
+    Gold    #c5a059  →  text-gold  / border-gold
+    Teal    #2d5a5a  →  text-teal  / bg-teal / border-teal
+    Charcoal #1a1a1a  →  text-charcoal / bg-charcoal
+    Cream   #faf9f6  →  bg-cream
+-->
+
+<!-- ═══════════════════════════════════════════════════════════
+     SNIPPET 1: SECTION HEADER
+     Use at the start of a major section.
+     Replace: LABEL TEXT, Section Title
+     ═══════════════════════════════════════════════════════════ -->
+<div style="margin: 4rem 0 1.5rem;">
+    <p style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.4em; color:#c5a059; margin-bottom:0.5rem;">LABEL TEXT</p>
+    <h2 style="font-family:'Playfair Display',serif; font-size:2.25rem; font-weight:700; color:#1a1a1a; line-height:1.2; margin:0;">Section Title</h2>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SNIPPET 2: DARK CALLOUT BOX
+     Use for the central big idea of a section — the "money quote."
+     Replace: LABEL TEXT, the large italic quote, the body paragraph.
+     ═══════════════════════════════════════════════════════════ -->
+<div style="background:#1a1a1a; color:white; border-radius:2.5rem; padding:3rem; margin:3rem 0; position:relative; overflow:hidden;">
+    <p style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.4em; color:#c5a059; margin-bottom:1.5rem;">LABEL TEXT</p>
+    <p style="font-family:'Playfair Display',serif; font-size:1.75rem; font-style:italic; line-height:1.3; margin-bottom:1.5rem; position:relative; z-index:1;">
+        "Replace this with the central quote or big idea of the section."
+    </p>
+    <p style="color:#a1a1aa; font-size:1rem; line-height:1.7; position:relative; z-index:1;">
+        Optional body text underneath the quote. Expand the idea, add scripture reference or context. Delete this paragraph if not needed.
+    </p>
+    <div style="position:absolute; bottom:-2.5rem; right:-2.5rem; width:10rem; height:10rem; background:rgba(45,90,90,0.2); border-radius:50%; filter:blur(3rem);"></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SNIPPET 3: SCRIPTURE / QUOTE BOX
+     Use for Bible passages, key quotes, or reflective statements.
+     Replace: the passage text. Optionally add a reference label.
+     ═══════════════════════════════════════════════════════════ -->
+<div style="border-left:4px solid #2d5a5a; background:#f4f7f7; padding:2rem 2.5rem; border-radius:0 1rem 1rem 0; margin:2.5rem 0;">
+    <p style="font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.3em; color:#c5a059; margin-bottom:0.75rem;">Scripture / Quote Reference</p>
+    <p style="font-style:italic; color:#52525b; font-size:1.1rem; line-height:1.8; margin:0;">
+        "Paste the Bible passage or quote here. You can leave the reference label above or delete that line entirely."
+    </p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SNIPPET 4: TWO-COLUMN COMPARE
+     Use to contrast two ideas side by side.
+     Replace: both column headings and body paragraphs.
+     ═══════════════════════════════════════════════════════════ -->
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; margin:3rem 0; padding:3rem 0; border-top:1px solid #e4e4e7; border-bottom:1px solid #e4e4e7;">
+    <div>
+        <p style="font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.3em; color:#c5a059; margin-bottom:0.75rem;">Column One Heading</p>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; font-style:italic; color:#2d5a5a; margin-bottom:1rem;">Subtitle or idea</h3>
+        <p style="color:#71717a; font-size:1rem; line-height:1.75;">Replace with the first column body text. Keep it roughly the same length as the second column.</p>
+    </div>
+    <div>
+        <p style="font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.3em; color:#c5a059; margin-bottom:0.75rem;">Column Two Heading</p>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.4rem; font-style:italic; color:#2d5a5a; margin-bottom:1rem;">Subtitle or idea</h3>
+        <p style="color:#71717a; font-size:1rem; line-height:1.75;">Replace with the second column body text. Keep it roughly the same length as the first column.</p>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SNIPPET 5: THREE-COLUMN COMPARE
+     Use for three-way contrasts (e.g. Official / Street / Human Cost).
+     Replace: all three column headings and body paragraphs.
+     ═══════════════════════════════════════════════════════════ -->
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2rem; margin:3rem 0; padding:2.5rem 0; border-top:1px solid #e4e4e7; border-bottom:1px solid #e4e4e7;">
+    <div>
+        <p style="font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.3em; color:#c5a059; margin-bottom:0.75rem;">Column One</p>
+        <p style="color:#71717a; font-size:0.95rem; line-height:1.75;">First column body text. Keep all three columns roughly equal in length.</p>
+    </div>
+    <div>
+        <p style="font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.3em; color:#c5a059; margin-bottom:0.75rem;">Column Two</p>
+        <p style="color:#71717a; font-size:0.95rem; line-height:1.75;">Second column body text. Keep all three columns roughly equal in length.</p>
+    </div>
+    <div>
+        <p style="font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.3em; color:#c5a059; margin-bottom:0.75rem;">Column Three</p>
+        <p style="color:#71717a; font-size:0.95rem; line-height:1.75;">Third column body text. Keep all three columns roughly equal in length.</p>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SNIPPET 6: NUMBERED POINT
+     Use for a series of themed points (repeat this block for each point).
+     Replace: the number, heading, and body.
+     TIP: Add a border-top + padding-top on blocks 02, 03, etc.
+     ═══════════════════════════════════════════════════════════ -->
+<div style="margin:3rem 0;">
+    <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+        <span style="font-family:'Playfair Display',serif; font-size:3rem; font-style:italic; color:#2d5a5a; opacity:0.25; line-height:1;">01</span>
+        <h3 style="font-size:1.5rem; font-weight:700; color:#1a1a1a; margin:0;">Point Heading</h3>
+    </div>
+    <p style="color:#52525b; font-size:1.1rem; line-height:1.8; padding-left:4.5rem;">
+        Body text for this numbered point. Can be as long as needed. The number is intentionally faded so it doesn't compete with the heading.
+    </p>
+</div>
+
+<!-- Copy the block above and change 01 → 02, 03 etc. Add this style to blocks 02+ for the divider: -->
+<!-- style="margin:3rem 0; border-top:1px solid #f4f4f5; padding-top:3rem;" -->
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SNIPPET 7: GREEK / HEBREW WORD HIGHLIGHT
+     Use when diving into original language words.
+     Replace: the word, its transliteration, meaning, and context.
+     ═══════════════════════════════════════════════════════════ -->
+<div style="background:#1a1a1a; color:white; border-radius:2.5rem; padding:3rem; margin:3rem 0; text-align:center; position:relative; overflow:hidden;">
+    <p style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.4em; color:#c5a059; margin-bottom:1rem;">Original Word</p>
+    <p style="font-family:'Playfair Display',serif; font-size:4rem; font-style:italic; color:#2d5a5a; opacity:0.8; margin-bottom:0.5rem; line-height:1;">ontōs</p>
+    <p style="color:#a1a1aa; font-size:0.85rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:2rem;">Replace with transliteration</p>
+    <p style="color:#d4d4d8; font-size:1.1rem; line-height:1.8; max-width:36rem; margin:0 auto; position:relative; z-index:1;">
+        Truly. Actually. In reality. Explain what the word means and why it matters in this context. Replace with your own word and explanation.
+    </p>
+    <div style="position:absolute; bottom:-2.5rem; right:-2.5rem; width:10rem; height:10rem; background:rgba(45,90,90,0.2); border-radius:50%; filter:blur(3rem);"></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SNIPPET 8: DISCUSSION SECTION
+     Use at the end of the study. Add/remove question blocks as needed.
+     Replace: all question texts. The numbered items auto-style.
+     ═══════════════════════════════════════════════════════════ -->
+<div style="background:#1a1a1a; color:white; border-radius:3.5rem; padding:4rem; margin:4rem 0;">
+
+    <div style="text-align:center; margin-bottom:4rem;">
+        <p style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5em; color:#c5a059; margin-bottom:1rem;">The Living Room Circle</p>
+        <h2 style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; color:white; margin-bottom:1.5rem;">Discussion &amp; Reflection</h2>
+        <div style="height:3px; width:4rem; background:#2d5a5a; margin:0 auto;"></div>
+    </div>
+
+    <!-- Question — copy/paste this block for each question -->
+    <div style="margin-bottom:3rem;">
+        <span style="font-family:'Playfair Display',serif; font-size:3.5rem; font-style:italic; color:#2d5a5a; opacity:0.25; display:block; margin-bottom:1rem; line-height:1;">01</span>
+        <p style="font-size:1.2rem; color:#d4d4d8; font-weight:300; line-height:1.7; margin:0;">Replace with your first discussion question. Keep them open-ended and personal.</p>
+    </div>
+
+    <div style="margin-bottom:3rem; border-top:1px solid rgba(255,255,255,0.08); padding-top:3rem;">
+        <span style="font-family:'Playfair Display',serif; font-size:3.5rem; font-style:italic; color:#2d5a5a; opacity:0.25; display:block; margin-bottom:1rem; line-height:1;">02</span>
+        <p style="font-size:1.2rem; color:#d4d4d8; font-weight:300; line-height:1.7; margin:0;">Replace with your second discussion question.</p>
+    </div>
+
+    <div style="margin-bottom:3rem; border-top:1px solid rgba(255,255,255,0.08); padding-top:3rem;">
+        <span style="font-family:'Playfair Display',serif; font-size:3.5rem; font-style:italic; color:#2d5a5a; opacity:0.25; display:block; margin-bottom:1rem; line-height:1;">03</span>
+        <p style="font-size:1.2rem; color:#d4d4d8; font-weight:300; line-height:1.7; margin:0;">Replace with your third discussion question.</p>
+    </div>
+
+    <!-- Family Prompt — optional, delete if not needed -->
+    <div style="margin-bottom:3rem; border-top:1px solid rgba(255,255,255,0.08); padding-top:3rem;">
+        <span style="font-family:'Playfair Display',serif; font-size:3.5rem; font-style:italic; color:#2d5a5a; opacity:0.25; display:block; margin-bottom:1rem; line-height:1;">04</span>
+        <p style="font-size:1.2rem; color:#d4d4d8; font-weight:300; line-height:1.7; margin:0;">
+            <strong style="color:white; font-weight:600; display:block; margin-bottom:0.5rem; text-decoration:underline; text-decoration-color:rgba(197,160,89,0.5); text-underline-offset:6px;">Family Prompt:</strong>
+            Replace with a family-focused question for the week. Usually more practical and home-based.
+        </p>
+    </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SNIPPET 9: CLOSING THOUGHT
+     Use just before the prayer / final section.
+     Replace: the closing paragraph text.
+     ═══════════════════════════════════════════════════════════ -->
+<div style="margin:4rem 0; text-align:center; max-width:36rem; margin-left:auto; margin-right:auto; border-top:1px solid #f4f4f5; padding-top:4rem;">
+    <p style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.4em; color:#c5a059; margin-bottom:2rem;">A Thought</p>
+    <p style="font-size:1.35rem; font-style:italic; color:#1a1a1a; font-weight:300; line-height:1.8;">
+        Replace with the closing meditative paragraph. This is usually the most poetic section — a final image or observation that lands the theme before the prayer.
+    </p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SNIPPET 10: CLOSING PRAYER
+     Use as the final element before "Back to Library."
+     Replace: the prayer text.
+     ═══════════════════════════════════════════════════════════ -->
+<div style="border-left:4px solid #2d5a5a; background:#f4f7f7; padding:2.5rem 3rem; border-radius:0 1rem 1rem 0; margin:2.5rem 0;">
+    <p style="font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.3em; color:#c5a059; margin-bottom:1.5rem;">A Prayer to Take Home</p>
+    <p style="font-style:italic; color:#52525b; font-size:1.05rem; line-height:2;">
+        "Replace with the closing prayer. Use line breaks between paragraphs for breathing room. End with a clear Amen."
+    </p>
+</div>

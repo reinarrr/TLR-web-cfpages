@@ -77,49 +77,59 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * 4. Page Specific: Fetch Homepage YouTube Feed (Hybrid Filtered)
- * Restored the date span to display manual overrides from messages.json.
+ * 4. Page Specific: Fetch Homepage YouTube Feed
+ * Ghost-first: pulls titles, dates, and YouTube IDs from Ghost deep-dive posts.
+ * Falls back to YouTube proxy + messages.json if Ghost is unavailable.
  */
 async function fetchHomeYouTube() {
     const container = document.getElementById('youtube-feed');
     if (!container) return;
 
     try {
-        const [ytRes, jsonRes] = await Promise.all([
-            fetch(PROXY_URL),
-            fetch('/messages.json').catch(() => ({ ok: false }))
-        ]);
+        let messages;
 
-        const ytData = await ytRes.json();
-        const manualOverrides = jsonRes.ok ? await jsonRes.json() : [];
-        
-        if (ytData.items) {
+        // Ghost-first
+        try {
+            const ghostMessages = await fetchGhostMessages();
+            if (ghostMessages.length === 0) throw new Error('No Ghost messages');
+            messages = ghostMessages.map(m => ({
+                id: m.id,
+                title: m.title,
+                date: formatYTDate(m.publishedAt),
+                thumbnail: m.thumbnail
+            }));
+        } catch (_) {
+            // Fallback: YouTube proxy + messages.json overrides
+            const [ytRes, jsonRes] = await Promise.all([
+                fetch(PROXY_URL),
+                fetch('/messages.json').catch(() => ({ ok: false }))
+            ]);
+            const ytData = await ytRes.json();
+            const manualOverrides = jsonRes.ok ? await jsonRes.json() : [];
             const rawVideos = ytData.items.filter(isPastEvent);
-
-            const mergedHomeVideos = rawVideos.slice(0, 3).map(ytVideo => {
+            messages = rawVideos.map(ytVideo => {
                 const videoId = ytVideo.contentDetails?.videoId || ytVideo.id;
                 const override = manualOverrides.find(m => m.id === videoId);
-                
                 return {
                     id: videoId,
                     title: override ? override.title : ytVideo.snippet.title,
-                    date: override ? override.date : formatYTDate(getAccurateDate(ytVideo)), // Ensure date is merged
+                    date: override ? override.date : formatYTDate(getAccurateDate(ytVideo)),
                     thumbnail: ytVideo.snippet.thumbnails.high.url
                 };
             });
-
-            // Added the date span back to the return template
-            container.innerHTML = mergedHomeVideos.map(item => `
-                <a href="https://www.youtube.com/watch?v=${item.id}" target="_blank" class="block group">
-                    <div class="relative rounded-[2rem] overflow-hidden mb-8 shadow-xl bg-zinc-200 aspect-video">
-                        <img src="${item.thumbnail}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="${item.title}">
-                    </div>
-                    <div class="space-y-3">
-                        <span class="text-gold text-[0.65rem] font-bold tracking-[0.2em] uppercase">${item.date}</span>
-                        <h3 class="text-xl font-bold tracking-tight text-charcoal group-hover:text-teal transition-colors leading-tight">${item.title}</h3>
-                    </div>
-                </a>`).join('');
         }
+
+        container.innerHTML = messages.slice(0, 3).map(item => `
+            <a href="https://www.youtube.com/watch?v=${item.id}" target="_blank" class="block group">
+                <div class="relative rounded-[2rem] overflow-hidden mb-8 shadow-xl bg-zinc-200 aspect-video">
+                    <img src="${item.thumbnail}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="${item.title}">
+                </div>
+                <div class="space-y-3">
+                    <span class="text-gold text-[0.65rem] font-bold tracking-[0.2em] uppercase">${item.date}</span>
+                    <h3 class="text-xl font-bold tracking-tight text-charcoal group-hover:text-teal transition-colors leading-tight">${item.title}</h3>
+                </div>
+            </a>`).join('');
+
     } catch (error) { console.error('Home YouTube Error:', error); }
 }
 
@@ -129,10 +139,19 @@ async function fetchHomeDeepDives() {
     if (!grid) return;
 
     try {
-        const res = await fetch('/res/deep/2026/deepdives.json');
-        if (!res.ok) throw new Error('Deep Dives not found');
-        const data = await res.json();
-        grid.innerHTML = data.slice(0, 3).map(item => `
+        // Ghost-first; fall back to local JSON if Ghost is unreachable
+        let items;
+        try {
+            const posts = await fetchGhostDeepDives('2026');
+            if (posts.length === 0) throw new Error('No Ghost posts');
+            items = posts.map(ghostPostToCard);
+        } catch (_) {
+            const res = await fetch('/res/deep/2026/deepdives.json');
+            if (!res.ok) throw new Error('Deep Dives not found');
+            items = await res.json();
+        }
+
+        grid.innerHTML = items.slice(0, 3).map(item => `
             <a href="${item.url || '#'}" class="block group">
                 <div class="relative rounded-[2rem] overflow-hidden mb-8 shadow-lg bg-zinc-100 aspect-video">
                     <img src="${item.image || '/img/placeholder.jpg'}" class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700" alt="${item.title}">
@@ -152,10 +171,22 @@ async function loadYear(year, button = null) {
         document.querySelectorAll('.year-btn').forEach(btn => btn.classList.remove('active'));
         button.classList.add('active');
     }
+
+    grid.innerHTML = '<div class="md:col-span-12 text-center py-20"><p class="text-zinc-400 animate-pulse font-bold tracking-widest uppercase text-sm">Opening Archive&hellip;</p></div>';
+
     try {
-        const response = await fetch(`/res/deep/${year}/deepdives.json`);
-        if (!response.ok) throw new Error('Archive not found');
-        const data = await response.json();
+        // Ghost-first; fall back to local JSON if Ghost is unreachable or has no posts for this year
+        let data;
+        try {
+            const posts = await fetchGhostDeepDives(year);
+            if (posts.length === 0) throw new Error('No Ghost posts for year');
+            data = posts.map(ghostPostToCard);
+        } catch (_) {
+            const response = await fetch(`/res/deep/${year}/deepdives.json`);
+            if (!response.ok) throw new Error('Archive not found');
+            data = await response.json();
+        }
+
         grid.innerHTML = data.map((item, index) => {
             const isFeatured = index % 3 === 0;
             const colSpan = isFeatured ? 'md:col-span-12 mb-16' : 'md:col-span-6';
@@ -174,7 +205,10 @@ async function loadYear(year, button = null) {
                     </a>
                 </article>`;
         }).join('');
-    } catch (error) { console.error('Library Load Error:', error); }
+    } catch (error) {
+        console.error('Library Load Error:', error);
+        grid.innerHTML = '<div class="md:col-span-12 text-center py-20"><p class="text-zinc-400">Archive could not be loaded.</p></div>';
+    }
 }
 
 // 7. Devotional Specific: Load Daily Reflections
@@ -219,65 +253,78 @@ function generateFlexGrid() {
 }
 
 /**
- * 9. Replay Specific: Fetch YouTube Gallery (Hybrid JSON Override)
- * Prioritizes manual entries from messages.json before using YouTube API data.
+ * 9. Replay Specific: Fetch YouTube Gallery
+ *
+ * YouTube is always the base — it holds the full historical library.
+ * Ghost sunday-message posts act as an override layer: where a Ghost post
+ * exists for a video, its clean title and date replace the YouTube defaults.
+ * Old videos with no Ghost post still appear using YouTube's raw data.
+ *
+ * Both sources are fetched in parallel. Ghost failure is non-fatal.
  */
 async function fetchReplays() {
     const latestContainer = document.getElementById('latest-container');
     if (!latestContainer) return;
 
     try {
-        // 1. Fetch both data sources simultaneously
-        const [ytRes, jsonRes] = await Promise.all([
-            fetch(PROXY_URL),
-            fetch('/messages.json').catch(() => ({ ok: false })) // Fallback if file missing
+        // Fetch YouTube and Ghost in parallel — Ghost failure is non-fatal
+        const [ytResult, ghostResult] = await Promise.allSettled([
+            fetch(PROXY_URL).then(r => r.json()),
+            fetchGhostMessages()
         ]);
 
-        const ytData = await ytRes.json();
-        const manualOverrides = jsonRes.ok ? await jsonRes.json() : [];
+        if (ytResult.status === 'rejected' || !ytResult.value?.items) {
+            console.error('YouTube fetch failed'); return;
+        }
 
-        if (ytData.items) {
-            // 2. Filter out future events
-            const rawVideos = ytData.items.filter(isPastEvent);
+        // Build Ghost lookup: youtubeId → { title, date }
+        const ghostMap = {};
+        if (ghostResult.status === 'fulfilled') {
+            ghostResult.value.forEach(m => {
+                ghostMap[m.id] = { title: m.title, date: formatYTDate(m.publishedAt) };
+            });
+        }
 
-            // 3. Merge: If a video exists in JSON, use that data; otherwise use YT
-            const mergedVideos = rawVideos.map(ytVideo => {
+        // Merge: YouTube is the list, Ghost enriches where available
+        const messages = ytResult.value.items
+            .filter(isPastEvent)
+            .map(ytVideo => {
                 const videoId = ytVideo.contentDetails?.videoId || ytVideo.id;
-                const override = manualOverrides.find(m => m.id === videoId);
-                
+                const ghost = ghostMap[videoId];
                 return {
                     id: videoId,
-                    title: override ? override.title : ytVideo.snippet.title,
-                    date: override ? override.date : formatYTDate(getAccurateDate(ytVideo)),
+                    title: ghost ? ghost.title : ytVideo.snippet.title,
+                    date: ghost ? ghost.date : formatYTDate(getAccurateDate(ytVideo)),
                     thumbnail: ytVideo.snippet.thumbnails.high.url
                 };
             });
 
-            if (mergedVideos.length > 0) {
-                const latest = mergedVideos[0];
-                
-                // Render Feature Card
-                latestContainer.innerHTML = `
-                    <a href="https://www.youtube.com/watch?v=${latest.id}" target="_blank" class="group relative block overflow-hidden rounded-[3rem] shadow-2xl bg-charcoal h-[50vh]">
-                        <img src="${latest.thumbnail}" class="w-full h-full object-cover opacity-50 transition-transform duration-1000 group-hover:scale-105" alt="${latest.title}">
-                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent"></div>
-                        <div class="absolute bottom-12 left-10 right-10">
-                            <span class="text-gold text-[0.65rem] font-bold tracking-[0.3em] uppercase mb-4 block">${latest.date}</span>
-                            <h2 class="text-white text-3xl md:text-5xl font-bold mb-6 leading-tight">${latest.title}</h2>
-                            <span class="text-gold font-bold uppercase tracking-[0.3em] text-[0.65rem] border-b border-gold pb-1">Watch Now &rarr;</span>
-                        </div>
-                    </a>`;
+        if (messages.length === 0) return;
 
-                // Render Grids using the merged data
-                document.getElementById('recent-grid').innerHTML = mergedVideos.slice(1, 4).map(v => createHybridCard(v, 'text-xl')).join('');
-                document.getElementById('archive-grid').innerHTML = mergedVideos.slice(4, 12).map(v => createHybridCard(v, 'text-sm')).join('');
-            }
-        }
-    } catch (e) { console.error('Error fetching hybrid replays:', e); }
+        const latest = messages[0];
+
+        // Feature card
+        latestContainer.innerHTML = `
+            <a href="https://www.youtube.com/watch?v=${latest.id}" target="_blank" class="group relative block overflow-hidden rounded-[3rem] shadow-2xl bg-charcoal h-[50vh]">
+                <img src="${latest.thumbnail}" class="w-full h-full object-cover opacity-50 transition-transform duration-1000 group-hover:scale-105" alt="${latest.title}">
+                <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-transparent to-transparent"></div>
+                <div class="absolute bottom-12 left-10 right-10">
+                    <span class="text-gold text-[0.65rem] font-bold tracking-[0.3em] uppercase mb-4 block">${latest.date}</span>
+                    <h2 class="text-white text-3xl md:text-5xl font-bold mb-6 leading-tight">${latest.title}</h2>
+                    <span class="text-gold font-bold uppercase tracking-[0.3em] text-[0.65rem] border-b border-gold pb-1">Watch Now &rarr;</span>
+                </div>
+            </a>`;
+
+        document.getElementById('recent-grid').innerHTML = messages.slice(1, 4).map(v => createHybridCard(v, 'text-xl')).join('');
+        document.getElementById('archive-grid').innerHTML = messages.slice(4, 12).map(v => createHybridCard(v, 'text-sm')).join('');
+
+    } catch (e) { console.error('Error fetching replays:', e); }
 }
 
 /**
  * 10. Resource Specific: Fetch Latest Sunday Message for Banner
+ * Ghost-first: uses most recent deep-dive post for title and thumbnail.
+ * Falls back to YouTube proxy if Ghost is unavailable.
  */
 async function fetchLatestBanner() {
     const titleEl = document.getElementById('banner-title');
@@ -285,9 +332,20 @@ async function fetchLatestBanner() {
     if (!titleEl || !imageEl) return;
 
     try {
+        // Ghost-first
+        try {
+            const messages = await fetchGhostMessages();
+            if (messages.length === 0) throw new Error('No Ghost messages');
+            const latest = messages[0];
+            titleEl.textContent = latest.title;
+            imageEl.src = latest.thumbnail;
+            imageEl.classList.add('opacity-80');
+            return;
+        } catch (_) {}
+
+        // Fallback: YouTube proxy
         const response = await fetch(PROXY_URL);
         const data = await response.json();
-        
         if (data.items && data.items.length > 0) {
             const latest = data.items[0];
             titleEl.textContent = latest.snippet.title;
