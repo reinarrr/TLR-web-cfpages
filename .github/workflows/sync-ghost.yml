@@ -1,0 +1,41 @@
+name: Sync Ghost CMS
+
+# Runs on a schedule and can be triggered manually from the GitHub UI.
+# Fetches the latest posts from Ghost and commits updated JSON fallback files.
+# CF Pages auto-deploys when the JSON changes land on main.
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'   # Every 2 hours — well within a Sunday turnaround
+  workflow_dispatch:          # Manual trigger: Actions tab → "Run workflow"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch Ghost data and write JSON
+        run: node scripts/sync-ghost.js
+        env:
+          GHOST_ORIGIN: https://cms.tlrhd.com
+          GHOST_KEY: c306251d7f0f57012025d2fdc4
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name  "ghost-sync[bot]"
+          git config user.email "ghost-sync@users.noreply.github.com"
+          git add res/deep/*/deepdives.json messages.json
+          git diff --staged --quiet && echo "No changes." || (
+            git commit -m "chore: sync Ghost CMS data" &&
+            git push
+          )
