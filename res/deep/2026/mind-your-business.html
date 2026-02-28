@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Your Business | Deep Dive</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .accent-teal { color: #2d5a5a; }
+        .scripture-box {
+            border-left: 3px solid #2d5a5a;
+            background: #f4f7f7;
+        }
+        .editorial-header { border-bottom: 1px solid #e5e7eb; }
+        .lead-quote { border-left: 3px solid #c5a059; }
+        .audit-section {
+            border: 1px solid #e5e7eb;
+            border-radius: 2rem;
+            overflow: hidden;
+        }
+        .audit-header {
+            background: #1a1a1a;
+            color: white;
+            padding: 2rem 2.5rem;
+        }
+        .audit-body {
+            padding: 2rem 2.5rem;
+            background: white;
+        }
+        .audit-question {
+            border-left: 3px solid #c5a059;
+            background: #fffdf7;
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 0.75rem 0.75rem 0;
+            margin-bottom: 0.75rem;
+        }
+        .audit-question:last-child { margin-bottom: 0; }
+        .section-tag {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #c5a059;
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-cream font-body" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <main class="max-w-4xl mx-auto px-6 py-24">
+
+        <!-- HEADER -->
+        <header class="text-center mb-20 editorial-header pb-16">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-8">The Acts Journey</h3>
+            <h1 class="text-6xl md:text-8xl font-bold mb-10 leading-[1.05] tracking-tight text-charcoal">
+                Mind Your <span class="accent-teal italic font-display font-normal">Business</span>.
+            </h1>
+            <p class="text-2xl md:text-3xl text-charcoal font-light leading-relaxed italic lead-quote pl-8 text-left mx-auto max-w-3xl py-4">
+                A Kingdom Due Diligence — the audit every follower of Jesus should run on how they work, lead, spend, and build.
+            </p>
+        </header>
+
+        <!-- FOUNDATION -->
+        <section class="max-w-2xl mx-auto text-center mb-24">
+            <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">The Foundation</h4>
+            <h2 class="text-3xl font-bold mb-6 italic">Acts 16:19–24</h2>
+            <a href="https://www.biblegateway.com/passage/?search=Acts+16%3A19-24&version=NLT" target="_blank" class="text-teal font-bold uppercase tracking-[0.2em] text-[0.7rem] border-b border-teal/30 pb-1 hover:text-gold hover:border-gold transition-all">
+                Read on Bible Gateway &rarr;
+            </a>
+        </section>
+
+        <!-- VIDEO -->
+        <section class="mb-32" id="yt-section" style="display:none">
+            <div class="relative rounded-[3rem] overflow-hidden shadow-2xl bg-zinc-200 aspect-video">
+                <iframe id="yt-iframe" class="absolute inset-0 w-full h-full" src="" title="Mind Your Business — Deep Dive" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <p id="yt-caption" class="text-center text-zinc-400 text-[0.65rem] mt-8 tracking-[0.3em] uppercase italic"></p>
+        </section>
+
+        <script>
+            (async function () {
+                const PROXY = 'https://ghost-proxy.reinar-6fd.workers.dev';
+                const KEY   = 'c306251d7f0f57012025d2fdc4';
+                const slug  = location.pathname.split('/').pop().replace('.html', '');
+                try {
+                    const res  = await fetch(`${PROXY}/ghost/api/content/posts/slug/${slug}/?key=${KEY}`);
+                    if (!res.ok) return;
+                    const data = await res.json();
+                    const post = data.posts?.[0];
+                    if (!post?.codeinjection_head) return;
+                    const match = post.codeinjection_head.match(/<script[^>]*id="dd-meta"[^>]*>([\s\S]*?)<\/script>/);
+                    if (!match) return;
+                    const meta = JSON.parse(match[1].trim());
+                    if (!meta.youtubeId) return;
+                    document.getElementById('yt-iframe').src = `https://www.youtube.com/embed/${meta.youtubeId}`;
+                    document.getElementById('yt-caption').textContent = meta.videoCaption || '';
+                    document.getElementById('yt-section').style.display = '';
+                } catch (e) {}
+            })();
+        </script>
+
+        <!-- INTRO -->
+        <section class="mb-24 space-y-8">
+            <h4 class="section-tag">Why This Exists</h4>
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">What Is Kingdom Due Diligence?</h2>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                In the business world, <strong>due diligence</strong> is the structured, honest audit a company runs before a major decision — surfacing what comfortable assumptions tend to hide. Many corporations now run a specific version called a <strong>Human Rights Due Diligence</strong> — an examination of whether their operations and supply chains cause harm to people. The UN Guiding Principles on Business and Human Rights describe it as an ongoing responsibility, not a one-time checkbox.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                The Kingdom of God has always held a higher standard than the UN. It does not merely ask <em>"are you causing harm?"</em> It asks <em>"are you actively doing justice, loving mercy, and walking humbly?"</em> It asks whether the people in your orbit are being treated as <em>images of God</em> — or as instruments of your agenda.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                The masters in Philippi weren't monsters. They were businessmen who never stopped to ask the question. They had been hearing the Gospel on repeat for days — from the mouth of their own asset — and they chose the ledger anyway. This document is an invitation to choose differently before it gets to a courthouse.
+            </p>
+            <div class="scripture-box p-8 italic text-zinc-600 rounded-r-xl">
+                This is not a guilt trip. It is a working document — a set of honest questions drawn from Scripture and from the practical reality of how most of us spend our days. It is designed to be run regularly. Not just once.
+            </div>
+        </section>
+
+        <!-- THE AUDIT -->
+        <article class="space-y-10 mb-32">
+
+            <div class="text-center py-10 border-y border-zinc-200 mb-16">
+                <h4 class="section-tag mb-4">The Audit</h4>
+                <h2 class="text-5xl font-bold text-charcoal">Kingdom<br/><span class="accent-teal italic font-display font-normal">Due Diligence</span></h2>
+                <p class="text-zinc-400 text-sm mt-6 max-w-lg mx-auto">Six areas. Honest questions. Scripture-anchored standards. Run this on your business, your team, your household, your habits — anywhere you hold influence over others.</p>
+            </div>
+
+            <!-- AREA 1 -->
+            <div class="audit-section">
+                <div class="audit-header">
+                    <p class="section-tag mb-2" style="color:#c5a059;">Area 01</p>
+                    <h3 class="text-2xl font-bold">How You See People</h3>
+                    <p class="text-zinc-400 text-sm mt-2 font-light">The Imago Dei Standard</p>
+                </div>
+                <div class="audit-body space-y-6">
+                    <p class="text-zinc-600 text-base leading-relaxed">
+                        Genesis 1:27 establishes the most foundational business principle in existence: every person you will ever hire, manage, serve, or negotiate with carries the image of God. Not as a metaphor. As a reality. The Roman world called a slave a <em>res</em> — a thing. The Kingdom has no things. Only images.
+                    </p>
+                    <p class="text-zinc-600 text-base leading-relaxed">
+                        The masters in Philippi saw an asset. Paul saw a person. Same girl. Completely different operating framework. The question this area asks is simple: which framework are you actually running?
+                    </p>
+                    <div class="space-y-3 pt-2">
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">When someone is no longer useful to you — their project ends, their season of service is over — do you lose interest in them as a person?</p>
+                        </div>
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">Can you name the personal circumstances of the people who work closest to you — not their job titles, their actual lives?</p>
+                        </div>
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">Is there anyone in your orbit whose dignity you have compromised — through dismissiveness, public criticism, or simply never seeing them at all?</p>
+                        </div>
+                    </div>
+                    <div class="scripture-box p-6 rounded-r-xl mt-4">
+                        <p class="text-zinc-500 text-sm leading-relaxed"><strong class="text-charcoal block mb-2">James 3:9–10 (NLT)</strong>
+                        <em>"Sometimes it praises our Lord and Father, and sometimes it curses those who have been made in the image of God... this is not right."</em></p>
+                        <p class="text-zinc-500 text-sm mt-3">You cannot honor God and dishonor the people He made. The same leadership style cannot praise God on Sunday and reduce people to functions on Monday. James calls this out with zero softness.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AREA 2 -->
+            <div class="audit-section">
+                <div class="audit-header">
+                    <p class="section-tag mb-2" style="color:#c5a059;">Area 02</p>
+                    <h3 class="text-2xl font-bold">How You Pay & Compensate</h3>
+                    <p class="text-zinc-400 text-sm mt-2 font-light">The Justice Standard</p>
+                </div>
+                <div class="audit-body space-y-6">
+                    <p class="text-zinc-600 text-base leading-relaxed">
+                        James 5:4 is one of the most economically direct verses in the New Testament. It does not speak in metaphor. It says the wages you withheld have <em>cried out to God</em> — and He heard them. This is not a passage about attitude. It is about the actual paycheck.
+                    </p>
+                    <p class="text-zinc-600 text-base leading-relaxed">
+                        In the ancient world, wage theft was a primary mechanism of exploitation — paying less than agreed, delaying payment to maintain dependency, or simply never paying because the worker had no legal recourse. The Bible addressed it repeatedly because it was, and remains, one of the most common ways power is abused in the marketplace. Ministry contexts are not exempt. Especially ministry contexts.
+                    </p>
+                    <div class="space-y-3 pt-2">
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">Are the people who generate value in your business or ministry compensated fairly — not just legally, but genuinely proportionally to what they contribute?</p>
+                        </div>
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">Do you use volunteer labour, unpaid internships, or "exposure" as a substitute for fair payment — in contexts where people feel unable to push back?</p>
+                        </div>
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">Is there a gap between what you charge for your services and what you pay the people who make those services possible?</p>
+                        </div>
+                    </div>
+                    <div class="scripture-box p-6 rounded-r-xl mt-4">
+                        <p class="text-zinc-500 text-sm leading-relaxed"><strong class="text-charcoal block mb-2">James 5:4 (NLT)</strong>
+                        <em>"For listen! Hear the cries of the field workers whom you have cheated of their pay. The cries of those who harvest your fields have reached the ears of the Lord of Heaven's Armies."</em></p>
+                        <p class="text-zinc-500 text-sm mt-3">God sees the paycheck before He hears the praise report. The gap between what you receive and what you distribute to those who make it possible is a theological statement, not just a financial one.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AREA 3 -->
+            <div class="audit-section">
+                <div class="audit-header">
+                    <p class="section-tag mb-2" style="color:#c5a059;">Area 03</p>
+                    <h3 class="text-2xl font-bold">How You Use Power</h3>
+                    <p class="text-zinc-400 text-sm mt-2 font-light">The Servant Leadership Standard</p>
+                </div>
+                <div class="audit-body space-y-6">
+                    <p class="text-zinc-600 text-base leading-relaxed">
+                        The masters had legal authority over the girl. Roman law backed them completely. But legal authority and Kingdom authority operate on entirely different principles. Jesus redefined leadership at its foundation: the greatest is the servant of all. This is not a motivational slogan. It is an operating system.
+                    </p>
+                    <p class="text-zinc-600 text-base leading-relaxed">
+                        Power in the Kingdom is held in trust, never in ownership. The moment a leader's primary concern becomes protecting their own position, they have begun operating in the spirit of the Philippian masters — using the machinery of authority to secure personal advantage. This includes pastors. Especially pastors.
+                    </p>
+                    <div class="space-y-3 pt-2">
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">Do the people you lead feel safe enough to disagree with you, raise concerns, or say no — without fear of consequences to their position or their relationship with you?</p>
+                        </div>
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">When a decision benefits you but costs the people around you, what is your default? Do you share the cost or absorb it yourself?</p>
+                        </div>
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">Have you ever used spiritual language — "vision," "calling," "sacrifice" — to make others feel guilty for having reasonable limits?</p>
+                        </div>
+                    </div>
+                    <div class="scripture-box p-6 rounded-r-xl mt-4">
+                        <p class="text-zinc-500 text-sm leading-relaxed"><strong class="text-charcoal block mb-2">Mark 10:42–45 (NLT)</strong>
+                        <em>"You know that the rulers in this world lord it over their people... But among you it will be different. Whoever wants to be a leader among you must be your servant."</em></p>
+                        <p class="text-zinc-500 text-sm mt-3">The test is not how you feel about your team. It is how your team feels about speaking honestly to you. That single question will tell you more about your leadership than any performance review.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AREA 4 -->
+            <div class="audit-section">
+                <div class="audit-header">
+                    <p class="section-tag mb-2" style="color:#c5a059;">Area 04</p>
+                    <h3 class="text-2xl font-bold">What Your Money Funds</h3>
+                    <p class="text-zinc-400 text-sm mt-2 font-light">The Supply Chain Standard</p>
+                </div>
+                <div class="audit-body space-y-6">
+                    <p class="text-zinc-600 text-base leading-relaxed">
+                        The masters didn't personally enslave the girl. They purchased access to her gift from within an existing system. That distinction did not make them innocent — it made them participants. Modern supply chains work the same way. The distance between the consumer and the exploited person is greater now, but the participation is no less real.
+                    </p>
+                    <p class="text-zinc-600 text-base leading-relaxed">
+                        A Kingdom due diligence asks not just <em>"did I personally harm anyone?"</em> but <em>"does my spending, sourcing, and consumption fund harm to others?"</em> The clothes, the coffee, the technology, the platforms — every purchase is a vote for the system that produced it.
+                    </p>
+                    <div class="space-y-3 pt-2">
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">Do you know where the products and services you rely on most come from — and whether the people who made them were treated fairly?</p>
+                        </div>
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">Is there a supplier, platform, or vendor you use primarily because they are cheap — and have you asked why they are cheap?</p>
+                        </div>
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">Where you have a choice between a more ethical option and a cheaper one, what usually wins — and is that a conscious decision or simply a default?</p>
+                        </div>
+                    </div>
+                    <div class="scripture-box p-6 rounded-r-xl mt-4">
+                        <p class="text-zinc-500 text-sm leading-relaxed"><strong class="text-charcoal block mb-2">Proverbs 14:31 (NLT)</strong>
+                        <em>"Those who oppress the poor insult their Maker, but helping the poor honors him."</em></p>
+                        <p class="text-zinc-500 text-sm mt-3">Oppression does not require intent. It requires participation. The proverb makes no distinction between the person who designed the exploitative system and the person who quietly benefits from it. Both are in the frame.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AREA 5 -->
+            <div class="audit-section">
+                <div class="audit-header">
+                    <p class="section-tag mb-2" style="color:#c5a059;">Area 05</p>
+                    <h3 class="text-2xl font-bold">How You Treat Rest</h3>
+                    <p class="text-zinc-400 text-sm mt-2 font-light">The Sabbath Standard</p>
+                </div>
+                <div class="audit-body space-y-6">
+                    <p class="text-zinc-600 text-base leading-relaxed">
+                        The slave girl followed Paul day after day. Never off the clock. Her masters exploited her continuously because commodities do not get rest days. Sabbath in the Old Testament was not just a personal spiritual practice — it was an <em>economic justice mechanism</em>. Exodus 20 extended the Sabbath command explicitly to servants and employees. The rest was mandatory. For everyone in your household. Including the people who worked for you.
+                    </p>
+                    <p class="text-zinc-600 text-base leading-relaxed">
+                        When God freed Israel from Egypt, the first gift He gave a liberated people was a day of rest. Not a burden — a gift. One day per week to be entirely useless to the economy so they could be entirely present with their Creator. A leader who cannot rest will always — consciously or not — communicate to others that they shouldn't either.
+                    </p>
+                    <div class="space-y-3 pt-2">
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">Do the people who work for you — employees, contractors, volunteers — have genuine permission to rest, or does your culture implicitly reward those who are always available?</p>
+                        </div>
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">Do you send messages or assign tasks outside of working hours in ways that make rest practically impossible for others?</p>
+                        </div>
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">Are you taking Sabbath yourself — not just a day off, but a genuine cessation of productivity — or are you modeling the "always-on" culture you may be criticizing?</p>
+                        </div>
+                    </div>
+                    <div class="scripture-box p-6 rounded-r-xl mt-4">
+                        <p class="text-zinc-500 text-sm leading-relaxed"><strong class="text-charcoal block mb-2">Exodus 20:10 (NLT)</strong>
+                        <em>"On that day no one in your household may do any work. This includes you, your sons and daughters, your male and female servants..."</em></p>
+                        <p class="text-zinc-500 text-sm mt-3">The Sabbath command was designed to protect the powerless from the powerful. Rest was not optional for those who held authority over others. It was a structural command that forced even employers to stop extracting — one day in seven.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AREA 6 -->
+            <div class="audit-section">
+                <div class="audit-header">
+                    <p class="section-tag mb-2" style="color:#c5a059;">Area 06</p>
+                    <h3 class="text-2xl font-bold">What You Do When God Disrupts</h3>
+                    <p class="text-zinc-400 text-sm mt-2 font-light">The Repentance Standard</p>
+                </div>
+                <div class="audit-body space-y-6">
+                    <p class="text-zinc-600 text-base leading-relaxed">
+                        The masters had an exit ramp. God removed their idol and in doing so cleared the table for a different kind of life. The same hands that grabbed Paul could have reached toward him. The river was minutes away. They chose the courthouse.
+                    </p>
+                    <p class="text-zinc-600 text-base leading-relaxed">
+                        Disruption in the Kingdom is almost always an invitation in disguise. Zacchaeus understood this instinctively — he saw the disruption and ran toward it. He didn't wait to be asked to change. He started restructuring his ledger before Jesus finished his sentence. That is what repentance looks like when it is real: it doesn't just change your heart, it reorganizes your balance sheet.
+                    </p>
+                    <div class="space-y-3 pt-2">
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">Is there a system, habit, or relationship in your professional life that you know does not align with Kingdom values — but you have maintained because dismantling it feels too costly?</p>
+                        </div>
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">When God has disrupted your income or business in the past, what was your first response — the courthouse or the riverbank?</p>
+                        </div>
+                        <div class="audit-question">
+                            <p class="text-zinc-700 text-base">What would it look like to reorganize your ledger — your time, your money, your influence — the way Zacchaeus did? Not someday. This quarter.</p>
+                        </div>
+                    </div>
+                    <div class="scripture-box p-6 rounded-r-xl mt-4">
+                        <p class="text-zinc-500 text-sm leading-relaxed"><strong class="text-charcoal block mb-2">Luke 19:8 (NLT)</strong>
+                        <em>"I will give half my wealth to the poor, Lord, and if I have cheated people on their taxes, I will give them back four times as much!"</em></p>
+                        <p class="text-zinc-500 text-sm mt-3">He did not ask what the minimum requirement was. He did not negotiate. He saw the Kingdom economy and immediately restructured. Real repentance does not just change your heart. It reorganizes your balance sheet.</p>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+
+        <!-- THE KINGDOM MODEL -->
+        <section class="mb-32 space-y-10">
+            <h4 class="section-tag">The Alternative</h4>
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">What the Kingdom Business Model Actually Looks Like</h2>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                The Kingdom is not anti-business. It does not call followers of Jesus to poverty, inefficiency, or naivety about how commerce works. What it offers is a genuinely different operating framework — built on a different definition of value, a different relationship to power, and a different vision of what success is.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                Lydia is the model. A successful, independent businesswoman — a dealer in luxury goods, head of a household, operating in a world that gave women like her almost no structural protection. When the Gospel reached her, it did not ask her to abandon her business. It reoriented it. Her home became the first church in Europe. Her resources became the infrastructure of the mission. Her table was the platform.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-10 my-10">
+                <div class="space-y-4">
+                    <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem]">The World's Model</h4>
+                    <p class="text-zinc-500 text-base leading-relaxed">How much can I extract? People are inputs. Loyalty is leverage. Success accumulates at the top. The bottom line is the final word.</p>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem]">The Kingdom Model</h4>
+                    <p class="text-zinc-500 text-base leading-relaxed">How much can I invest? People are the point. Generosity is strategy. Success is measured by the flourishing of everyone in your orbit. The bottom line serves the mission.</p>
+                </div>
+            </div>
+
+            <div class="scripture-box p-8 italic text-zinc-600 rounded-r-xl">
+                <strong class="text-charcoal not-italic block mb-3">Micah 6:8 (NLT)</strong>
+                <em>"No, O people, the Lord has told you what is good, and this is what he requires of you: to do what is right, to love mercy, and to walk humbly with your God."</em>
+                <p class="not-italic text-zinc-500 text-base mt-4">This is not a devotional posture. It is a business model. Act justly — in every transaction. Love mercy — in every employment decision. Walk humbly — in every negotiation where you hold the power. Three clauses. A complete operating framework.</p>
+            </div>
+        </section>
+
+        <!-- DISCUSSION -->
+        <section class="bg-charcoal text-white rounded-[3.5rem] p-12 md:p-20 shadow-2xl relative">
+            <div class="text-center mb-20">
+                <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-4">The Living Room Circle</h3>
+                <h2 class="text-4xl md:text-6xl font-bold">Discussion & Reflection</h2>
+                <div class="h-1 w-16 bg-teal mx-auto mt-10"></div>
+            </div>
+
+            <div class="space-y-16 max-w-2xl mx-auto">
+                <div class="group">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">01</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Which of the six areas felt most uncomfortable as you read it? What does that discomfort tell you?</p>
+                </div>
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">02</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Lydia (Acts 16) didn't abandon her business when the Gospel arrived — she reoriented it. What would it look like to reorient yours? What would change, and what would stay the same?</p>
+                </div>
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">03</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">The Sabbath command protected employees, not just employers. Who in your world needs you to enforce rest — not just take it yourself?</p>
+                </div>
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">04</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed italic">
+                        <strong class="text-white not-italic block mb-2 underline decoration-gold/50 underline-offset-8">Family Prompt:</strong> Zacchaeus (Luke 19) reorganized his ledger the same day. As a family, is there one spending habit or one way you use people's time that you could bring into better alignment with Micah 6:8 this week?
+                    </p>
+                </div>
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">05</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">The exit ramp is still open. What is the one thing God has been disrupting in your business or work life — and have you been running toward it or dragging it to court?</p>
+                </div>
+            </div>
+
+            <div class="mt-24 text-center">
+                <a href="/deepdives.html" class="inline-block border border-teal text-teal px-12 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[0.7rem] hover:bg-teal hover:text-white transition-all">Back to Library</a>
+            </div>
+        </section>
+
+        <!-- CLOSING -->
+        <section class="mt-32 text-center max-w-2xl mx-auto border-t border-zinc-100 pt-20">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.4em] uppercase mb-10">A Thought</h3>
+            <div class="space-y-6 text-2xl text-charcoal font-light italic leading-relaxed mb-12">
+                <p>The masters ran to the courthouse to protect what they were losing. The river was right there. It's still right there. The same God who disrupted their business is standing in yours right now — not to destroy it, but to redeem it.</p>
+                <p>The question is the same one they faced that afternoon in Philippi: What are you going to do when God interrupts your income?</p>
+            </div>
+
+            <div class="scripture-box p-10 text-left rounded-r-xl mt-16 text-zinc-600 leading-relaxed text-lg not-italic">
+                <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-6 not-italic">A Prayer to Take Into Your Week</h4>
+                <p class="italic">
+                    Lord, search the ledger. Not just the financial one — the one that records how we have treated people, how we have used power, and what we have funded with our choices.<br/><br/>
+                    Where we have extracted when we should have invested, forgive us. Where we have dressed greed in the language of responsibility, expose it. Where we have benefited from systems that require someone else to stay small, give us the courage to name it and the grace to change it.<br/><br/>
+                    We want to build the way Lydia built — with an open door, an open table, and people valued before the transaction. Reorient our ledgers. Reorganize our priorities. Help us to run toward disruption instead of away from it.<br/><br/>
+                    In the name of Jesus, who turned the economy of the Kingdom upside down. Amen.
+                </p>
+            </div>
+
+            <p class="text-zinc-400 text-sm mt-16 italic leading-relaxed">
+                The courthouse is always hiring.<br/>
+                <strong class="text-charcoal not-italic">The river is always open.</strong>
+            </p>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="/js/main.js" defer></script>
+</body>
+</html>
