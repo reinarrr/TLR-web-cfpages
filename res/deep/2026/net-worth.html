@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Net Worth | Deep Dive</title>
-    
+
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/css/style.css">
 
@@ -35,15 +35,45 @@
             border-left: 3px solid #2d5a5a;
             background: #f4f7f7;
         }
-        .editorial-header {
-            border-bottom: 1px solid #e5e7eb;
+        .editorial-header { border-bottom: 1px solid #e5e7eb; }
+        .lead-quote { border-left: 3px solid #c5a059; }
+        .word-entry {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 4rem;
+            margin-top: 4rem;
         }
-        .lead-quote {
-            border-left: 3px solid #c5a059;
+        .word-entry:first-child {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
         }
-        .greek-callout {
+        .word-display {
             font-family: 'Playfair Display', serif;
             letter-spacing: 0.02em;
+            line-height: 1;
+        }
+        .word-meta {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+        }
+        .modern-tag {
+            display: inline-block;
+            background: #1a1a1a;
+            color: #c5a059;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+        }
+        .etymology-box {
+            background: #1a1a1a;
+            color: white;
+            border-radius: 2rem;
+            padding: 2.5rem 3rem;
         }
     </style>
 </head>
@@ -53,18 +83,19 @@
     <div id="header-placeholder"></div>
 
     <main class="max-w-4xl mx-auto px-6 py-24">
-        
+
+        <!-- HEADER -->
         <header class="text-center mb-20 editorial-header pb-16">
             <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-8">The Acts Journey</h3>
             <h1 class="text-6xl md:text-8xl font-bold mb-10 leading-[1.05] tracking-tight text-charcoal">
                 Net <span class="accent-teal italic font-display font-normal">Worth</span>.
             </h1>
-            
             <p class="text-2xl md:text-3xl text-charcoal font-light leading-relaxed italic lead-quote pl-8 text-left mx-auto max-w-3xl py-4">
-                "The moment the spirit left her, her 'utility' vanished. She became, in the eyes of the market, useless. However, she always was, in the eyes of the King, priceless."
+                The words we use to describe people reveal what we actually believe about them. This is a close reading of the vocabulary Acts 16 uses — and what it quietly dismantles.
             </p>
         </header>
 
+        <!-- FOUNDATION -->
         <section class="max-w-2xl mx-auto text-center mb-24">
             <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">The Foundation</h4>
             <h2 class="text-3xl font-bold mb-6 italic">Acts 16:16–24</h2>
@@ -73,6 +104,7 @@
             </a>
         </section>
 
+        <!-- VIDEO -->
         <section class="mb-32" id="yt-section" style="display:none">
             <div class="relative rounded-[3rem] overflow-hidden shadow-2xl bg-zinc-200 aspect-video">
                 <iframe id="yt-iframe" class="absolute inset-0 w-full h-full" src="" title="Net Worth — Deep Dive" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -84,7 +116,6 @@
             (async function () {
                 const PROXY = 'https://ghost-proxy.reinar-6fd.workers.dev';
                 const KEY   = 'c306251d7f0f57012025d2fdc4';
-                // Derive slug from filename: /res/deep/2026/net-worth.html → net-worth
                 const slug  = location.pathname.split('/').pop().replace('.html', '');
                 try {
                     const res  = await fetch(`${PROXY}/ghost/api/content/posts/slug/${slug}/?key=${KEY}`);
@@ -99,262 +130,277 @@
                     document.getElementById('yt-iframe').src = `https://www.youtube.com/embed/${meta.youtubeId}`;
                     document.getElementById('yt-caption').textContent = meta.videoCaption || '';
                     document.getElementById('yt-section').style.display = '';
-                } catch (e) {
-                    // Ghost unavailable — section stays hidden, page unaffected
-                }
+                } catch (e) {}
             })();
         </script>
 
-        <!-- SETUP: THE SCENT CONTRAST -->
+        <!-- INTRO -->
         <section class="mb-24 space-y-8">
-            <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase">The Setup</h4>
-            <h2 class="text-4xl font-bold text-charcoal leading-tight">The Agora vs. The Atrium</h2>
+            <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase">Why Words Matter</h4>
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">Language Is Never Neutral</h2>
             <p class="text-zinc-600 text-xl leading-relaxed">
-                Last week we were in Lydia's home—the atrium of a wealthy merchant, smelling of expensive Tyrian dye, warm with hospitality and open doors. This week, Paul steps out of that sanctuary into the <strong>Agora</strong>—the Roman marketplace. The air changes. The smell changes. The social register changes entirely.
+                The moment you name something, you reveal your relationship to it. A timber company and an environmentalist look at the same forest and use completely different words — and those words tell you everything about what each person believes that forest is <em>for</em>.
             </p>
             <p class="text-zinc-600 text-xl leading-relaxed">
-                The Agora wasn't just a marketplace. It was the <em>arena of Roman identity</em>—where status was performed, transactions were power, and value was always on public display. And it is exactly here, in the economic center of a Roman colony, that the Gospel makes its most radical economic claim.
+                Acts 16 is a short passage. But it contains one of the most remarkable vocabulary collisions in the New Testament — a direct confrontation between two completely different lexicons for describing human beings. One is the language of the Roman marketplace. The other is the language of the Kingdom of God. They use different words because they inhabit different worlds.
             </p>
-
-            <div class="grid md:grid-cols-2 gap-10 my-10">
-                <div class="space-y-4">
-                    <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem]">Last Week: The Atrium</h4>
-                    <p class="text-zinc-500 text-base">Lydia's home. The smell of dye. A heart "unbolted" (dianoigō) by God. The Church in Europe born quietly, around a table, over a meal. The business of <em>purple</em>—status, beauty, wealth willingly surrendered at the door of grace.</p>
-                </div>
-                <div class="space-y-4">
-                    <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem]">This Week: The Agora</h4>
-                    <p class="text-zinc-500 text-base">Street dust. The noise of commerce. A girl who is both spiritually enslaved and legally owned. The business of <em>people</em>—not as beings, but as assets. The same Gospel, a completely different battlefield.</p>
-                </div>
-            </div>
-
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                What follows is a close reading of the key words in this passage — where they come from, what they carried in their original world, and what they still carry in ours. This is not background information. These words are the argument.
+            </p>
             <div class="scripture-box p-8 italic text-zinc-600 rounded-r-xl">
-                "The Gospel doesn't just meet us in the luxury of the atrium—it follows us into the grime of the market. The King of the Universe is at home in both, and He is not impressed by either."
+                "Seven words changed everything: 'I command you in the name of Jesus Christ.' The vocabulary of the Kingdom, spoken into the vocabulary of the market. The collision was economic, spiritual, and personal — all at once."
             </div>
         </section>
 
-        <article class="space-y-24 mb-32">
+        <!-- THE WORDS -->
+        <article class="mb-32">
 
-            <!-- SECTION I: THE ORIGIN OF VALUE -->
-            <section class="space-y-10">
-                <h2 class="text-4xl font-bold text-charcoal leading-tight">I. The Origin of Value</h2>
-                <p class="text-zinc-600 text-xl leading-relaxed">
-                    Here is the central question of Acts 16:16–24, and honestly, of most of human history: <em>Where does a person's worth come from?</em> The Roman world had a very clean answer. The Kingdom of God has a completely different one. And these two answers are still at war today.
+            <!-- WORD 1: RES -->
+            <div class="word-entry">
+                <div class="mb-8">
+                    <span class="modern-tag mb-4 inline-block">Latin · Roman Law</span>
+                    <p class="word-display text-7xl md:text-9xl text-zinc-100 font-bold mb-2 select-none" aria-hidden="true">res</p>
+                    <p class="word-meta text-zinc-400 mt-4">Latin — "thing" · Legal category for property · The word Roman law used for slaves</p>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    Before we get to the Greek, we need to sit with a Latin word that never appears in the text but haunts every line of it. In Roman law, the fundamental distinction that organized all of society was between <em>personae</em> — persons — and <em>res</em> — things. You were one or the other. There was nothing in between.
+                </p>
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    A slave was legally classified as <em>res</em>. Not a diminished person. Not a person with reduced rights. A thing. Property. An object that could be owned, transferred, hired out, used, and disposed of exactly like any other asset. The law did not recognize the interior life of a <em>res</em>. It did not ask whether a <em>res</em> was suffering. It only asked who owned it and what it was worth.
+                </p>
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    The slave girl in Acts 16 was a <em>res</em>. That was not the opinion of her masters — it was the legal and cultural consensus of the entire civilization Paul was walking through. When the masters dragged Paul before the authorities, they weren't making an unusual complaint. They were filing a property dispute.
                 </p>
 
-                <div class="grid md:grid-cols-2 gap-12 my-16 py-12 border-y border-zinc-100">
-                    <div class="space-y-6">
-                        <h3 class="text-2xl font-bold text-teal italic">The World's Metric</h3>
-                        <p class="text-zinc-500 text-lg leading-relaxed">
-                            Value is <em>earned</em> through production, performance, and position. Net worth equals net utility. In accounting, an "Asset" is defined as something you own that will generate future economic benefit. By this logic, a person who stops producing stops being valuable.
-                        </p>
-                    </div>
-                    <div class="space-y-6">
-                        <h3 class="text-2xl font-bold text-teal italic">The Kingdom's Metric</h3>
-                        <p class="text-zinc-500 text-lg leading-relaxed">
-                            Value is <em>endowed</em> by the Creator. In Genesis 1:27, God creates humans <em>b'tselem Elohim</em>—in the image of God. The Hebrew word <em>tselem</em> (image/shadow) means the value is in the likeness itself, not in what the likeness does for you.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="bg-charcoal text-white rounded-[2.5rem] p-12 shadow-xl relative overflow-hidden">
-                    <h4 class="text-gold uppercase tracking-widest text-xs font-bold mb-6">Imago Dei — The Blueprint</h4>
-                    <p class="text-2xl md:text-3xl font-display italic leading-tight relative z-10">
-                        "In the Roman world, a slave was legally a <em>res</em>—a 'thing.' In the Kingdom, there are no things. There are only Images."
+                <div class="etymology-box my-10">
+                    <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">The Modern Equivalent</h4>
+                    <p class="text-xl text-zinc-300 font-light leading-relaxed">
+                        We retired the word <em>res</em> but kept the logic. Today we use terms like "headcount," "human capital," "talent pipeline," and "human resources." Each phrase categorizes people as inputs to a system rather than ends in themselves. The vocabulary is softer. The underlying framework is the same.
                     </p>
-                    <div class="mt-8 text-zinc-400 text-base leading-relaxed relative z-10">
-                        Paul is carrying the charter of Galatians 3:28 into the marketplace: <em>"There is neither Jew nor Gentile, slave nor free, male and female—you are all one in Christ Jesus."</em> That verse was not just spiritual poetry. In Philippi, a Roman colony obsessed with legal status, it was a declaration of economic war.
-                    </div>
-                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-teal/20 rounded-full blur-3xl"></div>
-                </div>
-            </section>
-
-            <!-- SECTION II: THE PYTHON SPIRIT -->
-            <section class="space-y-10">
-                <h2 class="text-4xl font-bold text-charcoal leading-tight">II. The Python Spirit — A Deep Dive</h2>
-                <p class="text-zinc-600 text-xl leading-relaxed">
-                    The original Greek text says the girl had a <em>Pneuma Pythōna</em>—a "Python Spirit." Luke's language here is extremely precise, and most modern readers skip right past it. Let's slow down, because understanding what this actually meant in the ancient world completely changes the stakes of what Paul does next.
-                </p>
-
-                <div class="grid md:grid-cols-2 gap-10">
-                    <div class="space-y-4">
-                        <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem]">The Myth Behind the Name</h4>
-                        <p class="text-zinc-500 text-base">In Greek mythology, the <em>Python</em> was the great serpent that guarded the "navel of the earth" at Delphi. When Apollo killed the Python, the serpent's spirit was believed to inhabit the priestesses (called Pythiai), granting them prophetic sight. The Oracle at Delphi was built on this mythology.</p>
-                    </div>
-                    <div class="space-y-4">
-                        <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem]">The Oracle Was a Google</h4>
-                        <p class="text-zinc-500 text-base">The Oracle at Delphi was the most powerful information monopoly in the ancient world. Kings, generals, and emperors paid fortunes to access prophetic intelligence. To invoke the "Python spirit" wasn't a minor spiritual detail—it was a reference to the most prestigious supernatural institution of the age.</p>
-                    </div>
-                </div>
-
-                <div class="scripture-box p-8 italic text-zinc-600 rounded-r-xl">
-                    Paul wasn't just facing a demon. He was facing a commercial monopoly on the supernatural. The girl was a pirate stream of Delphi's signal—the 'mobile app' version of the most powerful oracle in the world.
-                </div>
-
-                <div class="space-y-6 mt-8">
-                    <h3 class="text-2xl font-bold text-charcoal italic">The Engastrimythos: The Belly-Talker</h3>
-                    <p class="text-zinc-600 text-xl leading-relaxed">
-                        The ancient writers called these women <em>engastrimythos</em>—literally "belly-speakers" or ventriloquists. It was believed the spirit of the Python lived <em>in their gut</em> and spoke through them. The image is deliberately grotesque: a human being reduced to a vessel, a hollow instrument, a channel for something that used her and owned her.
-                    </p>
-                    <p class="text-zinc-600 text-xl leading-relaxed">
-                        She had no voice of her own. Her body was the product. Her masters were the shareholders. And her only purpose was to keep generating the signal.
+                    <p class="text-zinc-400 text-base mt-4 font-light">
+                        Notice: we don't say "human resource." We say "human resources" — plural, like a commodity to be stockpiled and drawn down as needed.
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-8 my-12 py-10 border-y border-zinc-100">
-                    <div class="space-y-3">
-                        <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem]">The Official Version</h4>
-                        <p class="text-zinc-500 text-sm">The Oracle at Delphi. For kings and emperors. A stone temple. State religion. Enormous fees. Controlled access.</p>
-                    </div>
-                    <div class="space-y-3">
-                        <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem]">The Street Version</h4>
-                        <p class="text-zinc-500 text-sm">This girl in the Agora. For anyone with a coin. No temple, no ritual. Pay your silver, get your answer. A "down-market" oracle for the masses.</p>
-                    </div>
-                    <div class="space-y-3">
-                        <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem]">The Human Cost</h4>
-                        <p class="text-zinc-500 text-sm">Zero. That was her value to herself in their ledger. 100% of her worth was assigned to her output. When the signal stopped, she was nothing.</p>
-                    </div>
+                <div class="scripture-box p-8 rounded-r-xl">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">The Kingdom's Answer to Res</strong>
+                    The Gospel did not enter the Roman world and argue for better treatment of <em>res</em>. It demolished the category entirely. In Christ, Paul wrote, there is neither slave nor free — not "slaves should be treated more kindly," but the classification itself does not exist here. You cannot have a <em>res</em> in the Kingdom because the Kingdom has no things. Only images.</p>
                 </div>
-            </section>
+            </div>
 
-            <!-- SECTION III: THE UTILITY TRAP -->
-            <section class="space-y-10">
-                <h2 class="text-4xl font-bold text-charcoal leading-tight">III. The Utility Trap</h2>
-                <p class="text-zinc-600 text-xl leading-relaxed">
-                    The girl suffered from what we might call <strong>double slavery</strong>. She was spiritually enslaved to a spirit and legally enslaved to a group of men. The tragedy is that neither form of slavery cared about her. One used her as a channel; the other used her as a cash flow.
+            <!-- WORD 2: TSELEM -->
+            <div class="word-entry">
+                <div class="mb-8">
+                    <span class="modern-tag mb-4 inline-block">Hebrew · Genesis 1</span>
+                    <p class="word-display text-7xl md:text-9xl text-zinc-100 font-bold mb-2 select-none" aria-hidden="true">tselem</p>
+                    <p class="word-meta text-zinc-400 mt-4">Hebrew — "image / shadow / likeness" · Used in Genesis 1:27 · The word that defines human dignity</p>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    Genesis 1:27 says God created humanity <em>b'tselem Elohim</em> — in the image of God. The Hebrew word <em>tselem</em> originally referred to a physical image or statue — specifically the kind of representative image that a king would place in distant territories to assert his presence and authority. When a king couldn't be everywhere, he sent his <em>tselem</em> — a carved likeness that said: the king is here, his authority extends here, this place belongs to him.
+                </p>
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    When God says humanity is made in His <em>tselem</em>, He is saying: every human being is a royal representative. A living declaration that God is present, that His authority extends here, that this person belongs to Him. Not as property — as a bearer of His likeness.
+                </p>
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    This means that when you encounter any human being — any — you are encountering the <em>tselem</em> of the living God. Not a symbol of it. Not a reminder of it. The thing itself. A walking, breathing, suffering, hoping image of the Creator of the universe.
                 </p>
 
-                <p class="text-zinc-600 text-xl leading-relaxed">
-                    The masters saw an Asset. In accounting, an Asset is something you own to generate future economic benefit. The moment an asset stops generating benefit, it becomes a liability. The logic is clean and cold. And this is exactly the logic Paul walked into.
-                </p>
-
-                <div class="bg-charcoal text-white rounded-[2.5rem] p-12 shadow-xl relative overflow-hidden">
-                    <h4 class="text-gold uppercase tracking-widest text-xs font-bold mb-6">The Masterpiece vs. The Resource</h4>
-                    <p class="text-2xl md:text-3xl font-display italic leading-tight relative z-10">
-                        "A 'resource' is a tool you use until it breaks. A 'masterpiece' is a work of art you protect because of what it <em>is</em>."
+                <div class="etymology-box my-10">
+                    <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">The Weight of This</h4>
+                    <p class="text-xl text-zinc-300 font-light leading-relaxed">
+                        James 3:9 makes the implication explicit: cursing a person is cursing God's image. Not an insult to God's creation — an assault on God's representative. When you belittle, exploit, dismiss, or demean a person, you are not just being unkind. You are defacing the image of the King. That is the theological category James uses. It is a strong word.
                     </p>
-                    <div class="mt-8 text-zinc-400 text-base leading-relaxed relative z-10">
-                        Paul's letter to the Ephesians (written years after Philippi) says: <em>"We are God's poiēma."</em> The Greek word <em>poiēma</em> is where we get the word <em>poem</em>. Not a unit of production. Not a revenue stream. A poem. A crafted thing, made with intention, held with care, not because of what it earns but because of who wrote it.
-                    </div>
-                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-teal/20 rounded-full blur-3xl"></div>
-                </div>
-
-                <!-- FOUR MODERN PARALLELS -->
-                <div class="space-y-16 mt-16">
-
-                    <div class="space-y-6">
-                        <div class="flex items-center gap-4">
-                            <span class="text-teal font-display text-4xl italic opacity-30">01</span>
-                            <h3 class="text-2xl font-bold text-charcoal">The Asset vs. The Image</h3>
-                        </div>
-                        <p class="text-zinc-600 text-lg leading-relaxed pl-16">
-                            Genesis 1:27 says God created humanity in His image—<em>male and female</em>. Note: it says male AND female. Not male, then female. Not male more than female. The <em>Imago Dei</em> is not gendered, classed, or nationalized. The high-end merchant Lydia and the unnamed exploited slave girl are drawn from the same divine blueprint. The same intrinsic worth. The same irreplaceable signature.
-                        </p>
-                        <div class="scripture-box p-6 ml-16 rounded-r-xl italic text-zinc-500 text-base">
-                            <strong class="text-charcoal not-italic">Galatians 3:28 (NLT)</strong><br/>
-                            "There is no longer Jew or Gentile, slave or free, male and female. For you are all one in Christ Jesus."
-                        </div>
-                    </div>
-
-                    <div class="space-y-6 border-t border-zinc-100 pt-12">
-                        <div class="flex items-center gap-4">
-                            <span class="text-teal font-display text-4xl italic opacity-30">02</span>
-                            <h3 class="text-2xl font-bold text-charcoal">The Dehumanization of Data</h3>
-                        </div>
-                        <p class="text-zinc-600 text-lg leading-relaxed pl-16">
-                            The masters treated the girl's prophetic ability as a data point in their ledger. We do the same thing with a different vocabulary. We call people "users," "leads," "subscribers," "headcount," and "human resources." The last one is worth pausing on: when we call it <em>Human Resources</em>, we are subtly saying that the human is merely the raw material from which the resource is extracted. It's the exact logic of the Philippian Agora, wearing a business casual shirt.
-                        </p>
-                    </div>
-
-                    <div class="space-y-6 border-t border-zinc-100 pt-12">
-                        <div class="flex items-center gap-4">
-                            <span class="text-teal font-display text-4xl italic opacity-30">03</span>
-                            <h3 class="text-2xl font-bold text-charcoal">The Slavery of Always-On</h3>
-                        </div>
-                        <p class="text-zinc-600 text-lg leading-relaxed pl-16">
-                            The text says the slave girl followed Paul <em>day after day</em>, shouting. She was never off the clock. Her masters exploited her continuously because she was a commodity, not a neighbor. There was no Sabbath in her schedule. No rest. No silence. Only output.
-                        </p>
-                        <p class="text-zinc-600 text-lg leading-relaxed pl-16">
-                            Consider this: when God liberated Israel from Egypt, the <em>first gift</em> He gave a freed people was the Sabbath. Not a law to burden them. A gift: one day per week to be <em>useless to the economy</em> so they could be <em>present with their Creator</em>. The Python spirit of our age demands we are always available, always producing, always "on." Rest is resistance. Sabbath is subversive.
-                        </p>
-                    </div>
-
-                    <div class="space-y-6 border-t border-zinc-100 pt-12">
-                        <div class="flex items-center gap-4">
-                            <span class="text-teal font-display text-4xl italic opacity-30">04</span>
-                            <h3 class="text-2xl font-bold text-charcoal">The Disposable Culture</h3>
-                        </div>
-                        <p class="text-zinc-600 text-lg leading-relaxed pl-16">
-                            When the girl was freed, the masters didn't celebrate her sanity. They mourned their money. They would rather she remain possessed and profitable than healthy and "unproductive." The logic of disposability: keep people as long as they serve the bottom line; discard them when they don't.
-                        </p>
-                        <p class="text-zinc-600 text-lg leading-relaxed pl-16">
-                            Paul took a beating to prove that one girl's mental and spiritual health was worth more than an entire city's spiritual economy. That's not just pastoral care. That's a countereconomic declaration.
-                        </p>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- SECTION IV: THE SIDE NOTE OF FREEDOM -->
-            <section class="space-y-10">
-                <h2 class="text-4xl font-bold text-charcoal leading-tight">IV. The Exasperation of God</h2>
-                <p class="text-zinc-600 text-xl leading-relaxed">
-                    Verse 18 says Paul became "exasperated." This is a detail Luke could have left out. He kept it. And it matters. The Greek word is <em>diaponeo</em>—it implies a deep, grieved annoyance. Not an explosion of anger, but a sustained grinding frustration.
-                </p>
-                <p class="text-zinc-600 text-xl leading-relaxed">
-                    Paul was annoyed. And God used his annoyance. Sometimes liberation doesn't arrive on a wave of mystical inspiration. Sometimes it arrives because a follower of Jesus got fed up with watching someone be exploited, and decided today was the day.
-                </p>
-
-                <div class="grid md:grid-cols-2 gap-12 my-16 py-12 border-y border-zinc-100">
-                    <div class="space-y-6">
-                        <h3 class="text-2xl font-bold text-teal italic">The Girl's Freedom</h3>
-                        <p class="text-zinc-500 text-lg leading-relaxed">
-                            She became "useless" to the world's market—but priceless to the King. Her silence was her liberation. For the first time, perhaps, she could hear her own thoughts. The spirit that spoke through her was gone. She was no longer a channel. She was a person.
-                        </p>
-                    </div>
-                    <div class="space-y-6">
-                        <h3 class="text-2xl font-bold text-teal italic">The Masters' Opportunity</h3>
-                        <p class="text-zinc-500 text-lg leading-relaxed">
-                            By removing their idol of greed, God was extending an invitation to the masters too. They could have been free. They could have walked away from the revenue stream and into the River of Life. Instead, they chose their ledger over their Lord, and dragged Paul into court.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION V: ONTŌS -->
-            <section class="space-y-10">
-                <h2 class="text-4xl font-bold text-charcoal leading-tight">V. Ontōs — Truly, Actually, In Reality Free</h2>
-                <p class="text-zinc-600 text-xl leading-relaxed">
-                    In John 8:36, Jesus says: <em>"If the Son sets you free, you are truly free."</em> The word translated "truly" is <strong>ontōs</strong>. It's a word worth pausing over, because it's the root of the word <em>ontology</em>—the philosophical study of the nature of being itself.
-                </p>
-
-                <div class="bg-charcoal text-white rounded-[2.5rem] p-12 shadow-xl relative overflow-hidden my-10">
-                    <h4 class="text-gold uppercase tracking-widest text-xs font-bold mb-6">A Greek Word That Changes Everything</h4>
-                    <p class="text-5xl md:text-7xl greek-callout italic text-teal mb-6 opacity-80">ontōs</p>
-                    <p class="text-xl text-zinc-300 font-light leading-relaxed relative z-10">
-                        Truly. Actually. In reality. Not just legally. Not just theoretically. Not just "on paper."
-                        <br/><br/>
-                        Jesus was speaking to people who claimed they had never been slaves—because of their family lineage. Jesus corrected them: anyone who sins is a slave to sin. Status, ancestry, and résumé cannot confer the freedom that only He can give. When He sets you free, He doesn't just change your legal status. He changes your <em>being</em>.
+                    <p class="text-zinc-400 text-base mt-4 font-light">
+                        The irony James identifies: the same mouth, the same person, can praise God in one sentence and curse His image in the next. He calls this incompatible — not just inconsistent, but structurally impossible in the Kingdom. You cannot honor the King while desecrating His representative.
                     </p>
-                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-teal/20 rounded-full blur-3xl"></div>
                 </div>
 
-                <p class="text-zinc-600 text-xl leading-relaxed">
-                    In Philippi, "freedom" was a legal status granted by the Emperor—a stamp in a document that said you were no longer owned. In the Kingdom, freedom is an ontological reality granted by the Son. It is not a category. It is a new mode of existence.
+                <div class="scripture-box p-8 rounded-r-xl">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Genesis 1:27 (NLT)</strong>
+                    <em>"So God created human beings in his own image. In the image of God he created them; male and female he created them."</em></p>
+                    <p class="text-zinc-500 text-base mt-3">Note: male <em>and</em> female. Not male, then female. Not male more than female. The <em>tselem</em> is not gendered or ranked. The wealthy merchant Lydia and the unnamed slave girl carry the same image, the same weight, the same royal representative status. The Empire sorted them into different legal categories. The Kingdom gives them the same word.</p>
+                </div>
+            </div>
+
+            <!-- WORD 3: PNEUMA PYTHONA -->
+            <div class="word-entry">
+                <div class="mb-8">
+                    <span class="modern-tag mb-4 inline-block">Greek · Acts 16:16</span>
+                    <p class="word-display text-5xl md:text-7xl text-zinc-100 font-bold mb-2 select-none leading-tight" aria-hidden="true">Pneuma<br/>Pythōna</p>
+                    <p class="word-meta text-zinc-400 mt-4">Greek — "Python Spirit" · The spirit of divination · Luke's precise term for what possessed the slave girl</p>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    Luke is a careful writer. When he says the girl had a <em>Pneuma Pythōna</em>, he is not reaching for a generic word for "evil spirit." He is invoking a specific, culturally loaded reference that every reader in the ancient world would have recognized immediately. This is the Python — the great serpent of Greek mythology that guarded the "navel of the earth" at Delphi.
+                </p>
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    According to myth, when Apollo killed the Python, its spirit remained — inhabiting the priestesses of Delphi (called <em>Pythiai</em>), speaking through them in riddles and prophecies that kings paid fortunes to hear. The Oracle at Delphi was the most powerful information monopoly in the ancient world. Empires made military decisions based on its pronouncements. Its authority was absolute.
+                </p>
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    The girl in Philippi was carrying a street-level version of this. Delphi was roughly 500 kilometers away — a week's travel. But the Via Egnatia connected the entire region, and the Python's reputation traveled with the armies. Everyone in that marketplace knew exactly what <em>Pneuma Pythōna</em> meant. This girl wasn't an oddity. She was a product serving an existing market.
                 </p>
 
-                <div class="scripture-box p-8 italic text-zinc-600 rounded-r-xl">
-                    <strong class="text-charcoal not-italic block mb-2">The Question That Walks Out With You:</strong>
-                    If your worth is based on your <em>utility</em>, you will live in constant fear of being replaced. But if your worth is based on your <em>identity in Christ</em>, you can rest knowing you are irreplaceable. <em>Ontōs</em> free. Actually free. In reality, free.
+                <div class="etymology-box my-10">
+                    <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">Engastrimythos — The Belly-Talker</h4>
+                    <p class="text-xl text-zinc-300 font-light leading-relaxed">
+                        Ancient writers called these women <em>engastrimythos</em> — literally "belly-speakers," or ventriloquists. It was believed the spirit of the Python lived in their gut and spoke through them. The image is deliberately grotesque: a human being reduced to a hollow vessel. A channel. An instrument with no voice of its own.
+                    </p>
+                    <p class="text-zinc-400 text-base mt-4 font-light">
+                        She had no voice of her own. Her body was the product. Her masters were the shareholders. Her only function was to keep generating the signal. The spirit used her; the masters monetized the spirit. She was two layers removed from personhood — a <em>res</em> possessed by a <em>Pythōna</em>.
+                    </p>
                 </div>
 
-                <div class="scripture-box p-8 rounded-r-xl mt-8">
-                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Luke 4:18 (NLT) — Jesus' Mandate</strong>
-                    <em>"The Spirit of the Lord is upon me, for he has anointed me to bring Good News to the poor. He has sent me to proclaim that captives will be released, that the blind will see, that the oppressed will be set free."</em></p>
-                    <p class="text-zinc-500 text-base mt-4">Paul was not improvising in Acts 16. He was fulfilling a mandate. This is what the anointing of Jesus looks like in practice: it walks into a marketplace, it sees a person being treated as a product, and it commands liberation.</p>
+                <div class="scripture-box p-8 rounded-r-xl">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">The Modern Equivalent</strong>
+                    The Python spirit doesn't require mythology to operate. Any system that extracts a person's gift while ignoring their humanity is running the same logic. The enemy doesn't need to destroy your gift — he just needs to monetize it. Keep you producing, performing, generating signal, without ever asking how you are doing on the inside. The Python's business model is still very much in operation. It just runs on different platforms now.</p>
                 </div>
-            </section>
+            </div>
+
+            <!-- WORD 4: DIAPONEO -->
+            <div class="word-entry">
+                <div class="mb-8">
+                    <span class="modern-tag mb-4 inline-block">Greek · Acts 16:18</span>
+                    <p class="word-display text-6xl md:text-8xl text-zinc-100 font-bold mb-2 select-none" aria-hidden="true">diaponeo</p>
+                    <p class="word-meta text-zinc-400 mt-4">Greek — "to be grieved through and through" · Translated "exasperated" in Acts 16:18 · Paul's internal state before the exorcism</p>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    Acts 16:18 says Paul became "exasperated." Most English translations leave it there — which undersells what Luke is actually saying. The Greek word is <em>diaponeo</em>, a compound of <em>dia</em> (through, thoroughly) and <em>ponos</em> (pain, labor, distress). It describes a grief that has worked its way through you completely. Not a flash of anger. A sustained, grinding, bone-deep frustration with something that should not be.
+                </p>
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    Luke uses this same word in Acts 4:2 to describe the reaction of the religious authorities when Peter healed the lame man. It carries the sense of being troubled to the point where you cannot let it go. It accumulates. It builds. And then it moves.
+                </p>
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    Paul had been watching this girl for days. Day after day she followed them, shouting. Day after day, the <em>diaponeo</em> built — until it became the catalyst for liberation. God used Paul's annoyance. Which means that the frustrated, grieved, bone-tired response to injustice you feel when you see someone being exploited is not a distraction from the spiritual work. It may be the beginning of it.
+                </p>
+
+                <div class="etymology-box my-10">
+                    <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">The Theology of Holy Frustration</h4>
+                    <p class="text-xl text-zinc-300 font-light leading-relaxed">
+                        We often treat spiritual work as calm, composed, and serene. <em>Diaponeo</em> tells a different story. Sometimes the most spiritual thing in the room is the person who is no longer able to look away from what everyone else has normalized. The prophets operated here. Jesus wept here. Paul acted here.
+                    </p>
+                    <p class="text-zinc-400 text-base mt-4 font-light">
+                        The question is not whether you ever feel <em>diaponeo</em> about injustice. The question is whether you let it build long enough to do something about it — or whether you manage it back down to a comfortable level and keep walking.
+                    </p>
+                </div>
+
+                <div class="scripture-box p-8 rounded-r-xl">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">A Note on Timing</strong>
+                    Paul waited several days before acting. This is worth noting. <em>Diaponeo</em> is not impulsive. It is not reactive. It accumulates through sustained exposure to something wrong, and it moves when it is ready. The liberation of this girl did not happen because Paul had a spontaneous spiritual moment. It happened because he had been paying attention long enough that he could no longer not act.</p>
+                </div>
+            </div>
+
+            <!-- WORD 5: POIEMA -->
+            <div class="word-entry">
+                <div class="mb-8">
+                    <span class="modern-tag mb-4 inline-block">Greek · Ephesians 2:10</span>
+                    <p class="word-display text-6xl md:text-8xl text-zinc-100 font-bold mb-2 select-none" aria-hidden="true">poiēma</p>
+                    <p class="word-meta text-zinc-400 mt-4">Greek — "that which has been made" · Root of the English word "poem" · Paul's word for what a human being is to God</p>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    Ephesians 2:10 says we are God's <em>poiēma</em>. Most translations render this "masterpiece," which is good — but the etymology goes further. <em>Poiēma</em> is the root of our word <em>poem</em>. It refers to something crafted with intention, shaped with care, made to carry meaning that exceeds its raw materials. A poem is not efficient. It is not optimized. It is not evaluated by its word count or its productivity. It is evaluated by what it <em>is</em> — by the meaning compressed into it by the one who made it.
+                </p>
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    In the ancient world, <em>poiēma</em> was also used for great works of architecture and art — things made to be contemplated, preserved, and protected because of their intrinsic quality. Not used. Not consumed. Kept.
+                </p>
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    Paul writes this word a decade or so after Philippi. He has seen the slave girl. He has seen Lydia. He has seen what it looks like when the world treats a person as <em>res</em> — a thing — and what it looks like when the Kingdom treats a person as <em>poiēma</em> — a crafted work, irreplaceable, made by God, held by God. The word carries the memory of that collision.
+                </p>
+
+                <div class="etymology-box my-10">
+                    <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">Resource vs. Poem</h4>
+                    <p class="text-xl text-zinc-300 font-light leading-relaxed">
+                        A resource is something you draw down until it is depleted, then replace. A poem is something you return to — not to extract from it, but because something in it keeps revealing itself the more you pay attention.
+                    </p>
+                    <p class="text-zinc-400 text-base mt-4 font-light">
+                        The masters in Philippi treated the girl as a resource. Paul treated her as a poem that had been vandalized — not broken beyond recognition, but needing restoration so it could be what it was always meant to be. The difference between those two postures is the difference between the Agora and the Kingdom.
+                    </p>
+                </div>
+
+                <div class="scripture-box p-8 rounded-r-xl">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Ephesians 2:10 (NLT)</strong>
+                    <em>"For we are God's masterpiece. He has created us anew in Christ Jesus, so we can do the good things he planned for us long ago."</em></p>
+                    <p class="text-zinc-500 text-base mt-3">Notice: the good things were planned before you were born. Your value is not generated by your performance — it was authored before your performance began. You are not a <em>poiēma</em> because of what you do. You are a <em>poiēma</em> because of who made you. That's the whole point.</p>
+                </div>
+            </div>
+
+            <!-- WORD 6: ONTOS -->
+            <div class="word-entry">
+                <div class="mb-8">
+                    <span class="modern-tag mb-4 inline-block">Greek · John 8:36</span>
+                    <p class="word-display text-6xl md:text-8xl text-zinc-100 font-bold mb-2 select-none" aria-hidden="true">ontōs</p>
+                    <p class="word-meta text-zinc-400 mt-4">Greek — "truly / actually / in reality" · Root of "ontology" · The word Jesus uses for the kind of freedom only He can give</p>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    John 8:36: <em>"If the Son sets you free, you are truly free."</em> The word translated "truly" is <em>ontōs</em> — and it is one of the most philosophically loaded words in the New Testament. <em>Ontōs</em> is the adverb form of <em>ontos</em>, the present participle of the Greek verb "to be." It is the root of the English word <em>ontology</em> — the philosophical study of the nature of being itself.
+                </p>
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    Jesus is not saying you will feel free, or be declared free on paper, or achieve a legal status called freedom. He is saying that when the Son sets you free, your <em>being</em> changes. Your ontological category shifts. You are not a freer version of what you were. You are something new at the level of what you are.
+                </p>
+                <p class="text-zinc-600 text-xl leading-relaxed mb-6">
+                    In Philippi, "freedom" was a legal document — a stamp from the Emperor that said you were no longer classified as property. It changed your legal status but nothing deeper. Paul and Silas were in chains in the inner dungeon — legally prisoners, ontologically free. The girl was technically still a slave after her exorcism — legally property, ontologically liberated. The Kingdom's freedom operates at a different layer than the Empire's.
+                </p>
+
+                <div class="etymology-box my-10">
+                    <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">The Question Ontōs Asks</h4>
+                    <p class="text-xl text-zinc-300 font-light leading-relaxed">
+                        Are you free? Not legally. Not theoretically. Not "on paper." <em>Ontōs</em> — in the actual texture of your being, in the way you move through the world, in what you believe about your own worth when no one is watching and nothing is performing.
+                    </p>
+                    <p class="text-zinc-400 text-base mt-4 font-light">
+                        If your worth is tied to your utility — your output, your productivity, your usefulness to others — then you are not <em>ontōs</em> free. You are a <em>res</em> who has been told to feel good about being one. The Son's freedom goes deeper than that. It changes what you believe you <em>are</em> — not just what you are allowed to do.
+                    </p>
+                </div>
+
+                <div class="scripture-box p-8 rounded-r-xl">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">John 8:36 (NLT)</strong>
+                    <em>"So if the Son sets you free, you are truly free."</em></p>
+                    <p class="text-zinc-500 text-base mt-3">Jesus spoke this to people who insisted they had never been enslaved — because of their lineage, their identity, their history. Jesus didn't argue with their legal status. He diagnosed their actual condition: anyone who sins is a slave to sin, regardless of what the documentation says. And then He offered the only freedom that goes deep enough to matter. Not a new legal category. A new <em>being</em>.</p>
+                </div>
+            </div>
 
         </article>
+
+        <!-- THE COLLISION -->
+        <section class="mb-32 space-y-8">
+            <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase">Putting It Together</h4>
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">Two Vocabularies. One Collision.</h2>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                The story of Acts 16:16–24 is a collision between two complete systems for describing human beings. On one side: <em>res</em>, <em>Pneuma Pythōna</em>, asset, signal, revenue stream. On the other: <em>tselem</em>, <em>poiēma</em>, image, poem, <em>ontōs</em> free.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                Paul walked into the marketplace carrying the second vocabulary into the territory of the first — and the first vocabulary fought back with everything it had. A mob. A beating. An inner dungeon. The market does not give up its language quietly.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                But here is what the passage records: by the end of it, a girl who had been a <em>res</em> was free. And Paul and Silas, beaten and chained in the dark, were singing. The vocabulary of the Kingdom had done what it always does — it told the truth about what people actually are, and that truth turned out to be stronger than the cell.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-0 border border-zinc-200 rounded-[2rem] overflow-hidden mt-10">
+                <div class="p-10 bg-zinc-50 border-r border-zinc-200">
+                    <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem] mb-6">The Market's Vocabulary</h4>
+                    <div class="space-y-4 text-zinc-500 text-base">
+                        <p><em>Res</em> — thing, property, asset</p>
+                        <p><em>Pneuma Pythōna</em> — a spirit to be monetized</p>
+                        <p>Signal — the extractable gift</p>
+                        <p>Revenue stream — the person reduced to their output</p>
+                        <p>Useless — what she became when the signal stopped</p>
+                    </div>
+                </div>
+                <div class="p-10 bg-white">
+                    <h4 class="text-teal font-bold uppercase tracking-widest text-[0.65rem] mb-6">The Kingdom's Vocabulary</h4>
+                    <div class="space-y-4 text-zinc-500 text-base">
+                        <p><em>Tselem</em> — image, royal representative, bearer of God's likeness</p>
+                        <p><em>Diaponeo</em> — grief that moves toward justice</p>
+                        <p><em>Poiēma</em> — poem, masterpiece, crafted with intention</p>
+                        <p>Restoration — what Paul performed, not just exorcism</p>
+                        <p><em>Ontōs</em> free — free at the level of being, not just documentation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- DISCUSSION -->
         <section class="bg-charcoal text-white rounded-[3.5rem] p-12 md:p-20 shadow-2xl relative">
@@ -365,39 +411,32 @@
             </div>
 
             <div class="space-y-16 max-w-2xl mx-auto">
-
                 <div class="group">
                     <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">01</span>
-                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Is there anyone in your life whose value you primarily measure by what they do for you? What would it look like to see them as a <em>poiēma</em>—a masterpiece—instead?</p>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Which of the six words landed hardest for you — and why? What did it surface that the sermon alone didn't?</p>
                 </div>
 
                 <div class="group border-t border-white/10 pt-12">
                     <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">02</span>
-                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">The Python spirit kept the girl "always on"—never off the clock, never resting. Where in your own life are you trapped in an "always-on" loop? What would it cost you to take a real Sabbath?</p>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">We retired the word <em>res</em> but kept the logic. Where do you see <em>res</em>-thinking operating in your world — at work, in your community, possibly in your church?</p>
                 </div>
 
                 <div class="group border-t border-white/10 pt-12">
                     <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">03</span>
-                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Paul's freedom moment came through <em>exasperation</em>—a grinding frustration with injustice. Is there a situation in your life or community where righteous annoyance is actually a call to action?</p>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed"><em>Diaponeo</em> is the grief that moves toward action. Is there something you have been feeling <em>diaponeo</em> about — an injustice you keep seeing — that you have been managing back down instead of acting on?</p>
                 </div>
 
                 <div class="group border-t border-white/10 pt-12">
                     <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">04</span>
-                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">The masters had an "exit ramp"—they could have walked away from the revenue stream into freedom. Is there a system, habit, or relationship in your life that profits from someone else's bondage? What would it take to get off that road?</p>
-                </div>
-
-                <div class="group border-t border-white/10 pt-12">
-                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">05</span>
                     <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed italic">
-                        <strong class="text-white not-italic block mb-2 underline decoration-gold/50 underline-offset-8">Family Prompt:</strong> The masters saw the girl as a revenue stream. Jesus saw her as a person worth a beating. Look at your family this week—are you treating each other as conveniences or as treasures? What's one thing you can do to make someone feel like a masterpiece, not a resource?
+                        <strong class="text-white not-italic block mb-2 underline decoration-gold/50 underline-offset-8">Family Prompt:</strong> Pick one word from this list — <em>tselem, poiēma,</em> or <em>ontōs</em> — and talk about what it would look like to treat each person in your household as that word describes them this week. What would change?
                     </p>
                 </div>
 
                 <div class="group border-t border-white/10 pt-12">
-                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">06</span>
-                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Jesus said freedom is <em>ontōs</em>—truly, actually, in reality. Not theoretically. Not "on paper." Are you living in the <em>ontological</em> freedom Jesus won for you, or are you still operating like you have to earn it?</p>
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">05</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Are you living <em>ontōs</em> free — free at the level of your being — or are you still operating as though your worth depends on your output? What would it feel like to actually believe you are a <em>poiēma</em> and not a resource?</p>
                 </div>
-
             </div>
 
             <div class="mt-24 text-center">
@@ -405,35 +444,37 @@
             </div>
         </section>
 
-        <!-- COMMUNION CLOSE -->
+        <!-- CLOSING -->
         <section class="mt-32 text-center max-w-2xl mx-auto border-t border-zinc-100 pt-20">
             <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.4em] uppercase mb-10">A Thought</h3>
             <div class="space-y-6 text-2xl text-charcoal font-light italic leading-relaxed mb-12">
-                <p>You don't know her name. Luke doesn't give it to us. She shouted Paul's name for days, and history never returned the favor. But here's what we do know: somewhere in Philippi, on an ordinary afternoon, a girl heard silence for the first time. No voice in her gut. No masters waiting. No signal to run. Just quiet. Just her. Just free. God knows her name. That was always enough.</p>
+                <p>You don't know her name. Luke doesn't give it to us. She shouted Paul's name for days, and history never returned the favor.</p>
+                <p>But here's what we do know: somewhere in Philippi, on an ordinary afternoon, a girl heard silence for the first time. No voice in her gut. No masters waiting. No signal to run. Just quiet. Just her. Just free."</p>
+                <p>"God knows her name. That was always enough.</p>
             </div>
 
-            <!-- CLOSING PRAYER -->
             <div class="scripture-box p-10 text-left rounded-r-xl mt-16 text-zinc-600 leading-relaxed text-lg not-italic">
                 <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-6 not-italic">A Prayer to Take Home</h4>
                 <p class="italic">
-                    "Heavenly Father, we confess: there are times we have looked at our neighbors, our coworkers, and even our families through the lens of utility. We have seen revenue streams where we should have seen souls.<br/><br/>
-                    Right now, we ask for that Dianoigō moment—the divine unbolting. For those of us feeling the weight of production pressure, remind us that we are Your Masterpiece, not Your Human Resource.<br/><br/>
-                    Jesus, You said You came to set the captives free. Break the chains of greed that bind our perspective. We receive Your promise today: that if the Son sets us free, we are free indeed—not legally free, not theoretically free, but <em>ontōs</em>—truly, actually, and in reality free.<br/><br/>
-                    In the name of Jesus, the Chain-Breaker. Amen."
+                    Heavenly Father, we confess: there are times we have looked at our neighbors, our coworkers, and even our families through the lens of utility. We have seen revenue streams where we should have seen souls.<br/><br/>
+                    Right now, we ask for that dianoigō moment — the divine unbolting. For those of us feeling the weight of production pressure, remind us that we are Your poiēma — Your poem — not Your human resource.<br/><br/>
+                    Teach us the Kingdom's vocabulary. Let us see tselem where the market sees res. Let us feel diaponeo where the world feels nothing. Let us call people poiēma when the system calls them assets.<br/><br/>
+                    And let us live ontōs free — truly, actually, in reality free — because the Son has set us free and that changes everything.<br/><br/>
+                    In the name of Jesus, the Chain-Breaker. Amen.
                 </p>
             </div>
 
             <p class="text-zinc-400 text-sm mt-16 italic leading-relaxed">
-                If you're watching this and you've felt like just a number all week—know this:<br/>
-                The King of the Universe knows your name. He didn't come to manage your bondage.<br/>
-                He came to give you a Song. <strong class="text-charcoal not-italic">You are free indeed.</strong>
+                If you've felt like just a number all week — know this:<br/>
+                The King of the Universe knows your name.<br/>
+                He didn't come to manage your bondage.<br/>
+                <strong class="text-charcoal not-italic">You are free indeed.</strong>
             </p>
         </section>
 
     </main>
 
     <div id="footer-placeholder"></div>
-
     <script src="/js/main.js" defer></script>
 </body>
 </html>
