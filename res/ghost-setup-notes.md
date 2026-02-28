@@ -1,5 +1,5 @@
 # Ghost CMS Integration — Technical Notes
-## TLR Website · ghost-link branch
+## TLR Website · main branch
 
 These notes cover what was built, why decisions were made, and where things live. Written for anyone maintaining or extending this system.
 
@@ -13,12 +13,12 @@ Ghost CMS is the single source of truth for all published content on the TLR sit
 
 ```
 Ghost CMS (cms.tlrhd.com)
-    ↓  [Content API]
-Cloudflare Worker (ghost-proxy.reinar-6fd.workers.dev)
-    ↓  [CORS proxy + secret header]
-Browser (index.html / replays.html / deepdives.html / deep-dive.html)
-    ↓  [ghost.js + main.js]
-Rendered page
+    ↓  [Content API — live]            ↓  [Content API — scheduled]
+CF Worker (ghost-proxy)           GitHub Actions (every 2 hrs)
+    ↓  [CORS proxy]                    ↓  [writes JSON to repo]
+Browser (ghost.js + main.js)      Static JSON fallback files
+    ↓                                  ↓  [CF Pages deploys]
+Rendered page ←────────────── fallback if Worker/Ghost down
 ```
 
 ---
@@ -42,6 +42,8 @@ Rendered page
 | File | Purpose |
 |---|---|
 | `workers/ghost-proxy.js` | Cloudflare Worker source — NOT auto-deployed, manual push to CF dashboard |
+| `scripts/sync-ghost.js` | Node script — fetches Ghost and writes JSON fallback files server-side |
+| `.github/workflows/sync-ghost.yml` | GitHub Action — runs sync script every 2 hours + manual trigger |
 
 ### Content / Reference
 
@@ -51,8 +53,8 @@ Rendered page
 | `res/ghost-ready/net-worth-ghost.html` | Net Worth study — reference format for Ghost-ready content |
 | `res/deep-dive-author-guide.md` | Author guide — step-by-step for content creators |
 | `res/sunday-workflow.md` | Weekly publishing process — two-step Sunday → Deep Dive workflow |
-| `res/deep/2026/deepdives.json` | Local JSON fallback for the Deep Dives library |
-| `messages.json` | Legacy fallback for replays/home feed — no longer maintained |
+| `res/deep/{year}/deepdives.json` | JSON fallback for the Deep Dives library — auto-synced from Ghost every 2 hrs |
+| `messages.json` | JSON fallback for replays/home feed — auto-synced from Ghost every 2 hrs |
 
 ---
 
@@ -151,11 +153,10 @@ Used by: `replays.html`, `index.html` (YouTube feed), `resources.html` (banner).
 
 ### Ghost-first fallback pattern
 
-Both `fetchHomeYouTube()` and `fetchReplays()` in `main.js` follow the same pattern:
+`fetchHomeYouTube()` follows Ghost-first:
 
 ```js
 try {
-    // Ghost-first
     const ghostMessages = await fetchGhostMessages();
     if (ghostMessages.length === 0) throw new Error('No Ghost messages');
     messages = ghostMessages.map(...);
@@ -164,6 +165,29 @@ try {
     ...
 }
 ```
+
+### Replays: YouTube-as-base + Ghost-as-override
+
+`fetchReplays()` uses a different pattern — YouTube holds the full historical library, Ghost enriches where a post exists:
+
+```js
+const [ytResult, ghostResult] = await Promise.allSettled([
+    fetch(PROXY_URL).then(r => r.json()),
+    fetchGhostMessages()
+]);
+// Build Ghost lookup: youtubeId → { title, date }
+const ghostMap = {};
+if (ghostResult.status === 'fulfilled') {
+    ghostResult.value.forEach(m => { ghostMap[m.id] = { title: m.title, date: ... }; });
+}
+// Merge: YouTube is the list, Ghost enriches where available
+const messages = ytResult.value.items.filter(isPastEvent).map(ytVideo => {
+    const ghost = ghostMap[videoId];
+    return { title: ghost ? ghost.title : ytVideo.snippet.title, ... };
+});
+```
+
+Ghost failure is non-fatal (`Promise.allSettled`) — the full YouTube archive always shows, Ghost just adds clean titles/dates to recent posts.
 
 ---
 
@@ -281,28 +305,39 @@ Legacy static HTML files (e.g. `net-worth.html`) pull the YouTube ID from Ghost 
 
 ## Local JSON Fallback
 
-If the Ghost API fails entirely, `main.js` falls back to `res/deep/2026/deepdives.json`:
+If the Ghost API or Worker fails, `main.js` falls back to static JSON files baked into the repo:
 
 ```js
 try {
     posts = await fetchGhostDeepDives(year);
 } catch (e) {
-    // fall back to local JSON
     const res = await fetch(`/res/deep/${year}/deepdives.json`);
     posts = await res.json();
 }
 ```
 
-Keep `deepdives.json` updated as a backup — it contains title, url, image, excerpt for each study.
+**These files are now auto-synced — do not edit them manually.**
+
+The GitHub Actions workflow (`sync-ghost.yml`) fetches Ghost every 2 hours and commits updated JSON directly to `main`. CF Pages then redeploys with fresh data baked in.
+
+**Full resilience chain:**
+```
+Normal:           Browser → Worker → Ghost         (live, always fresh)
+Worker down:      Browser → static JSON            (≤ 2 hrs stale max)
+Ghost down:       Browser → Worker fails → JSON    (≤ 2 hrs stale max)
+Everything down:  CF Pages serves static HTML+JSON (always works)
+```
+
+**To trigger an immediate sync** (e.g. after publishing a new post):
+GitHub → Actions tab → "Sync Ghost CMS" → Run workflow
 
 ---
 
 ## Deployment
 
-**Cloudflare Pages** auto-deploys the `ghost-link` branch on every push to GitHub.
+**Cloudflare Pages** auto-deploys the `main` branch on every push to GitHub.
 **Cloudflare Worker** (`ghost-proxy`) is deployed manually — it is NOT connected to Git.
-
-The `ghost-link` branch will eventually be merged to `main` when Ghost integration is confirmed stable.
+**GitHub Actions** (`sync-ghost.yml`) runs every 2 hours on a schedule and commits updated JSON to `main`, which triggers a CF Pages redeploy.
 
 ---
 
@@ -320,9 +355,11 @@ The `ghost-link` branch will eventually be merged to `main` when Ghost integrati
 
 6. **Ghost post preview blocked by WAF.** The Ghost editor's preview opens at `/p/{uuid}/` — this path wasn't whitelisted in the block rule, so previewing a draft returned a Cloudflare block page. Fixed by adding `and not starts_with(http.request.uri.path, "/p/")` to the block rule expression.
 
-7. **`messages.json` is now legacy.** It was previously edited manually every Sunday to provide clean titles and dates for the YouTube feed. Ghost posts now serve this data via `fetchGhostMessages()`. The file still exists as a fallback but should not be maintained going forward.
+7. **`messages.json` and `deepdives.json` are auto-synced — don't edit them manually.** The GitHub Actions sync script overwrites them every 2 hours from Ghost. Any manual edits will be overwritten on the next sync run.
 
-8. **`ghost.js` must be loaded before `main.js`.** Any page that calls Ghost functions needs both scripts, in order. `index.html` and `replays.html` both load `ghost.js` then `main.js`. Forgetting `ghost.js` causes silent failures — the Ghost-first path errors and falls through to the fallback.
+8. **GitHub Actions needs write permissions to push JSON updates.** Repo → Settings → Actions → General → Workflow permissions → "Read and write permissions". Without this the sync job fails at the push step with exit code 128.
+
+9. **`ghost.js` must be loaded before `main.js`.** Any page that calls Ghost functions needs both scripts, in order. `index.html` and `replays.html` both load `ghost.js` then `main.js`. Forgetting `ghost.js` causes silent failures — the Ghost-first path errors and falls through to the fallback.
 
 ---
 
