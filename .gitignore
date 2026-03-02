@@ -3,3 +3,7 @@
 
 # Claude Code
 .claude/
+
+# Auto-synced by GitHub Actions from Ghost CMS — never commit locally
+messages.json
+res/deep/*/deepdives.json
