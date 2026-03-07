@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Are All Here | Deep Dive</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .accent-teal { color: #2d5a5a; }
+        .scripture-box {
+            border-left: 3px solid #2d5a5a;
+            background: #f4f7f7;
+        }
+        .editorial-header { border-bottom: 1px solid #e5e7eb; }
+        .lead-quote { border-left: 3px solid #c5a059; }
+
+        /* Diner menu card */
+        .course-card {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 4rem;
+            margin-top: 4rem;
+        }
+        .course-card:first-child {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
+        }
+        .course-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 10vw, 7rem);
+            line-height: 1;
+            color: #2d5a5a;
+            opacity: 0.15;
+            letter-spacing: -0.02em;
+        }
+        .course-label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: #c5a059;
+        }
+        .etymology-box {
+            background: #1a1a1a;
+            color: white;
+            border-radius: 2rem;
+            padding: 2.5rem 3rem;
+        }
+        .word-display {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.02em;
+            line-height: 1;
+            color: #3d3d3d;
+        }
+        .word-meta {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+        }
+
+        /* Chalkboard specials block */
+        .chalkboard {
+            background: #1a1a1a;
+            border-radius: 2.5rem;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .chalkboard::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 28px,
+                rgba(255,255,255,0.02) 28px,
+                rgba(255,255,255,0.02) 29px
+            );
+            pointer-events: none;
+        }
+
+        /* Menu divider */
+        .menu-divider {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        .menu-divider::before,
+        .menu-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+        .menu-divider span {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #c5a059;
+            white-space: nowrap;
+        }
+
+        /* Communion close */
+        .communion-card {
+            background: #2d5a5a;
+            color: white;
+            border-radius: 3rem;
+            padding: 4rem;
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-cream font-body" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <main class="max-w-4xl mx-auto px-6 py-24">
+
+        <!-- HEADER -->
+        <header class="text-center mb-20 editorial-header pb-16">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-8">The Acts Journey</h3>
+            <h1 class="text-6xl md:text-8xl font-bold mb-10 leading-[1.05] tracking-tight text-charcoal">
+                We Are All <span class="accent-teal italic font-display font-normal">Here</span>.
+            </h1>
+            <p class="text-2xl md:text-3xl text-charcoal font-light leading-relaxed italic lead-quote pl-8 text-left mx-auto max-w-3xl py-4">
+                At midnight, in a Roman prison, God opened a diner. The menu was unusual. The guests were unexpected. And everyone who sat at the table left changed.
+            </p>
+        </header>
+
+        <!-- FOUNDATION -->
+        <section class="max-w-2xl mx-auto text-center mb-24">
+            <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">The Foundation</h4>
+            <h2 class="text-3xl font-bold mb-6 italic">Acts 16:25–34</h2>
+            <a href="https://www.biblegateway.com/passage/?search=Acts+16%3A25-34&version=NLT" target="_blank" class="text-teal font-bold uppercase tracking-[0.2em] text-[0.7rem] border-b border-teal/30 pb-1 hover:text-gold hover:border-gold transition-all">
+                Read on Bible Gateway &rarr;
+            </a>
+        </section>
+
+        <!-- VIDEO -->
+        <section class="mb-32" id="yt-section" style="display:none">
+            <div class="relative rounded-[3rem] overflow-hidden shadow-2xl bg-zinc-200 aspect-video">
+                <iframe id="yt-iframe" class="absolute inset-0 w-full h-full" src="" title="We Are All Here — Acts 16:25–34" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <p id="yt-caption" class="text-center text-zinc-400 text-[0.65rem] mt-8 tracking-[0.3em] uppercase italic"></p>
+        </section>
+
+        <script>
+            (async function () {
+                const PROXY = 'https://ghost-proxy.reinar-6fd.workers.dev';
+                const KEY   = 'c306251d7f0f57012025d2fdc4';
+                const slug  = location.pathname.split('/').pop().replace('.html', '');
+                try {
+                    const res  = await fetch(`${PROXY}/ghost/api/content/posts/slug/${slug}/?key=${KEY}`);
+                    if (!res.ok) return;
+                    const data = await res.json();
+                    const post = data.posts?.[0];
+                    if (!post?.codeinjection_head) return;
+                    const match = post.codeinjection_head.match(/<script[^>]*id="dd-meta"[^>]*>([\s\S]*?)<\/script>/);
+                    if (!match) return;
+                    const meta = JSON.parse(match[1]);
+                    if (meta.youtubeId) {
+                        document.getElementById('yt-iframe').src =
+                            `https://www.youtube.com/embed/${meta.youtubeId}`;
+                        if (meta.caption)
+                            document.getElementById('yt-caption').textContent = meta.caption;
+                        document.getElementById('yt-section').style.display = 'block';
+                    }
+                } catch (e) {}
+            })();
+        </script>
+
+        <!-- INTRO: THE SETUP -->
+        <section class="mb-24 space-y-8">
+            <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase">Before We Read the Menu</h4>
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">The Room Nobody Left</h2>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                Three messages in, we know this building. We know who put Paul and Silas here. We know the girl who has just been freed. We know the masters who chose the courthouse. We know the jailer — he was given the order to lock them in the deepest cell, and he obeyed it.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                Now it is midnight. The city is asleep. And in a Roman prison in Philippi — a city of soldiers, merchants, and colonial ambition — God is about to open a Midnight Diner with a table that nobody had a reservation at.
+            </p>
+            <div class="grid md:grid-cols-3 gap-4 mt-10">
+                <a href="/res/deep/2026/net-worth.html" class="border border-zinc-200 rounded-[1.5rem] p-6 text-center hover:border-teal/30 hover:bg-teal/5 transition-all group">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Scene 1</p>
+                    <p class="text-charcoal font-bold text-lg leading-tight group-hover:text-teal transition-colors">Net Worth</p>
+                    <p class="text-zinc-400 text-sm mt-2 font-light">What are people worth?</p>
+                </a>
+                <a href="/res/deep/2026/mind-your-business.html" class="border border-zinc-200 rounded-[1.5rem] p-6 text-center hover:border-teal/30 hover:bg-teal/5 transition-all group">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Scene 2</p>
+                    <p class="text-charcoal font-bold text-lg leading-tight group-hover:text-teal transition-colors">Mind Your Business</p>
+                    <p class="text-zinc-400 text-sm mt-2 font-light">How do we treat people in our marketplace?</p>
+                </a>
+                <div class="border-2 border-teal/30 bg-teal/5 rounded-[1.5rem] p-6 text-center">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Scene 3</p>
+                    <p class="text-charcoal font-bold text-lg leading-tight">We Are All Here</p>
+                    <p class="text-zinc-400 text-sm mt-2 font-light">What happens when the Gospel reaches the man enforcing the system?</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="menu-divider"><span>Tonight's Menu</span></div>
+
+        <!-- THE MENU -->
+        <article class="space-y-0 mb-32">
+
+            <!-- COURSE 01: HYMNEO -->
+            <section class="course-card">
+                <div class="flex items-start gap-6 mb-8">
+                    <span class="course-number">01</span>
+                    <div class="pt-4">
+                        <p class="course-label mb-2">First Course</p>
+                        <h2 class="text-4xl font-bold text-charcoal leading-tight">The Worship Before the Miracle</h2>
+                    </div>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed mb-8">
+                    The most important word in Acts 16:25 is not "earthquake." It is "around midnight." Luke is precise about the hour because the hour is the point. Nothing had changed yet. The doors were still locked. The chains were still on. The beatings were still fresh. And Paul and Silas were singing.
+                </p>
+
+                <div class="word-display text-zinc-600 text-7xl md:text-8xl font-bold mb-4">hymneō</div>
+                <p class="word-meta text-zinc-400 mb-10">Greek | ὑμνέω | to sing a hymn, to praise with song</p>
+
+                <div class="etymology-box mb-10">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">What the Word Actually Means</p>
+                    <p class="text-zinc-300 text-lg leading-relaxed">
+                        <em>Hymneō</em> is not background ambience. It is an active, sustained, intentional act of musical praise. The same word appears in Matthew 26:30 — Jesus and His disciples sang a hymn before walking to Gethsemane. Before the arrest. Before the cross. The pattern is consistent: in the New Testament, the hymn precedes the darkest moment, not the brightest one.
+                    </p>
+                    <p class="text-zinc-300 text-lg leading-relaxed mt-4">
+                        And Luke adds a detail that changes the entire scene: "the other prisoners were listening." Paul and Silas were loud enough that the whole cellblock could hear them. Their worship was never private. Before God moved, before a single door opened, the atmosphere of that dungeon had already been changed by people who decided to praise before anything improved.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-10">
+                    <div class="space-y-4">
+                        <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem]">The World's Logic</h4>
+                        <p class="text-zinc-500 text-base leading-relaxed">Praise when things improve. Sing when the miracle is visible. Worship is the response to what God has done.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <h4 class="text-teal font-bold uppercase tracking-widest text-[0.65rem]">The Kingdom's Logic</h4>
+                        <p class="text-zinc-500 text-base leading-relaxed">Praise in the middle of what hasn't changed yet. Worship is the atmosphere in which God moves — not the reward after He has.</p>
+                    </div>
+                </div>
+
+                <div class="scripture-box p-8 rounded-r-xl">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Acts 16:25 (NLT)</strong>
+                    <em>"Around midnight Paul and Silas were praying and singing hymns to God, and the other prisoners were listening."</em></p>
+                    <p class="text-zinc-500 text-base mt-3">The prisoners who were listening didn't ask for a sermon. They didn't fill out a contact card. They were changed by overhearing two beaten men choose worship. That is the oldest form of evangelism in the book — not a program, but a posture. When you worship in your midnight, you are never worshipping alone. Someone in the cell next to yours is listening.</p>
+                </div>
+            </section>
+
+            <div class="menu-divider"><span>Second Course</span></div>
+
+            <!-- COURSE 02: THEMELIOS -->
+            <section class="course-card">
+                <div class="flex items-start gap-6 mb-8">
+                    <span class="course-number">02</span>
+                    <div class="pt-4">
+                        <p class="course-label mb-2">Second Course</p>
+                        <h2 class="text-4xl font-bold text-charcoal leading-tight">The Earthquake That Was Never About the Doors</h2>
+                    </div>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed mb-8">
+                    Three things happen at once in verse 26: the building shakes, every door opens, every chain falls. This is total, simultaneous, structural liberation. God did not open Paul's door. He opened every door for everyone — including people who had nothing to do with the Gospel. And then nobody ran.
+                </p>
+
+                <div class="word-display text-zinc-600 text-7xl md:text-8xl font-bold mb-4">themelios</div>
+                <p class="word-meta text-zinc-400 mb-10">Greek | θεμέλιος | foundation, bedrock, the base on which everything rests</p>
+
+                <div class="etymology-box mb-10">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">What the Word Actually Means</p>
+                    <p class="text-zinc-300 text-lg leading-relaxed">
+                        Luke writes that the earthquake shook the prison "to its foundations" — <em>eis ta themelia</em>. This is not a minor tremor. This is a foundational disruption. Crucially, <em>themelios</em> is the same word Paul uses in 1 Corinthians 3:11 — "No one can lay any foundation (<em>themelion</em>) other than the one already laid, which is Jesus Christ." And in Ephesians 2:20, the Church is described as built on the <em>themelion</em> of the apostles and prophets.
+                    </p>
+                    <p class="text-zinc-300 text-lg leading-relaxed mt-4">
+                        God shook the <em>themelios</em> of the Roman penal system to make room for a different foundation entirely. The earthquake was not destruction. It was demolition in preparation for new construction — and the new building would be a household, not a prison.
+                    </p>
+                </div>
+
+                <div class="chalkboard mb-10">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-6">The Detail Everyone Skips</p>
+                    <p class="text-2xl md:text-3xl font-display italic leading-tight text-white relative z-10">
+                        "Every door was open. Every chain was loose. And nobody ran. You don't stay in an open prison unless something greater than freedom is holding you there."
+                    </p>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed mb-8">
+                    By Roman law, a jailer whose prisoners escaped was executed — often in the same manner the prisoners would have been. So Paul staying was not passive. It was the most deliberate act of grace in the passage. He chose the jailer's life over his own freedom. He stayed in an open prison for a man who had locked him in the deepest cell.
+                </p>
+
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    That is the shape of the Gospel. The one who is free choosing to remain for the sake of the one who isn't. The earthquake opened the doors. But it was Paul's staying that opened the jailer.
+                </p>
+            </section>
+
+            <div class="menu-divider"><span>Third Course</span></div>
+
+            <!-- COURSE 03: SOZO -->
+            <section class="course-card">
+                <div class="flex items-start gap-6 mb-8">
+                    <span class="course-number">03</span>
+                    <div class="pt-4">
+                        <p class="course-label mb-2">Third Course</p>
+                        <h2 class="text-4xl font-bold text-charcoal leading-tight">The Question in the Dark</h2>
+                    </div>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed mb-8">
+                    The jailer woke to open doors and drew his sword. He was seconds from death. And what stopped him was not an angel, not a vision, not a theological argument. It was a voice in the dark from the man he had locked in the deepest cell.
+                </p>
+
+                <p class="text-zinc-600 text-xl leading-relaxed mb-10">
+                    Three words. <em>We are all here.</em>
+                </p>
+
+                <div class="word-display text-zinc-600 text-7xl md:text-8xl font-bold mb-4">sōzō</div>
+                <p class="word-meta text-zinc-400 mb-10">Greek | σῴζω | to save, to rescue, to heal, to deliver from danger</p>
+
+                <div class="etymology-box mb-10">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">What the Word Actually Means</p>
+                    <p class="text-zinc-300 text-lg leading-relaxed">
+                        When the jailer asks "what must I do to be <em>sōzō</em>?" he is asking a word that holds three things simultaneously. <em>Sōzō</em> is used in the New Testament for physical rescue (Matthew 8:25 — "Save us, Lord, we're going to drown!"), for spiritual salvation (Romans 10:9), and for healing from illness (Mark 5:34 — "your faith has made you well/sōzō"). The jailer was asking all three at once. Save me from my sword. Save me from the law. Save me from everything I have been.
+                    </p>
+                    <p class="text-zinc-300 text-lg leading-relaxed mt-4">
+                        And the answer Paul gives is not a doctrine. It is a direction: <em>Believe in the Lord Jesus.</em> The Greek word for "believe" here is <em>pisteuō</em> — not merely intellectual assent, but a full entrusting of yourself to someone. The jailer was not asked to understand theology. He was asked to trust a Person.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-0 border border-zinc-200 rounded-[2rem] overflow-hidden mt-2 mb-10">
+                    <div class="p-10 bg-zinc-50 border-r border-zinc-200">
+                        <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem] mb-4">What Did Not Save the Jailer</h4>
+                        <div class="space-y-3 text-zinc-500 text-base">
+                            <p>The earthquake</p>
+                            <p>The open doors</p>
+                            <p>The fallen chains</p>
+                            <p>The miracle itself</p>
+                        </div>
+                    </div>
+                    <div class="p-10 bg-white">
+                        <h4 class="text-teal font-bold uppercase tracking-widest text-[0.65rem] mb-4">What Saved the Jailer</h4>
+                        <div class="space-y-3 text-zinc-500 text-base">
+                            <p>A voice in the dark</p>
+                            <p>Three words: <em>We are all here</em></p>
+                            <p>Someone who chose to stay</p>
+                            <p>Grace that spoke before doctrine</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scripture-box p-8 rounded-r-xl">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Acts 16:30–31 (NLT)</strong>
+                    <em>"Sirs, what must I do to be saved?" They replied, "Believe in the Lord Jesus and you will be saved, along with everyone in your household."</em></p>
+                    <p class="text-zinc-500 text-base mt-3">This is the most direct evangelistic question in the Book of Acts. And it did not come from a prepared audience at a planned event. It came from a broken man in the dark, thirty seconds after he almost died by his own hand. The Gospel is not most powerful in the polished moment. It is most powerful in the undone one.</p>
+                </div>
+
+                <div class="mt-8 p-8 border border-zinc-200 rounded-[1.5rem]">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">On the Jailer's Guilt</p>
+                    <p class="text-zinc-600 text-lg leading-relaxed">The jailer was not an innocent bystander. He was the instrument of the state that beat Paul and Silas and chained them in the dark. He was complicit in everything the masters set in motion when they dragged them to the magistrates. And he is the one who gets saved. Grace does not travel to the deserving. It travels to the desperate. Nobody is too far into the system to be reached by the earthquake.</p>
+                </div>
+            </section>
+
+            <div class="menu-divider"><span>Fourth Course</span></div>
+
+            <!-- COURSE 04: OIKOS -->
+            <section class="course-card">
+                <div class="flex items-start gap-6 mb-8">
+                    <span class="course-number">04</span>
+                    <div class="pt-4">
+                        <p class="course-label mb-2">Fourth Course</p>
+                        <h2 class="text-4xl font-bold text-charcoal leading-tight">The Household</h2>
+                    </div>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed mb-8">
+                    "Believe in the Lord Jesus and you will be saved — along with everyone in your household." This is not a throwaway line. It is the theological engine of Acts 16 — and of the entire early church movement. The Gospel in Acts does not travel through institutions. It travels through households.
+                </p>
+
+                <div class="word-display text-zinc-600 text-7xl md:text-8xl font-bold mb-4">oikos</div>
+                <p class="word-meta text-zinc-400 mb-10">Greek | οἶκος | household, family unit, the people under one roof</p>
+
+                <div class="etymology-box mb-10">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">What the Word Actually Means</p>
+                    <p class="text-zinc-300 text-lg leading-relaxed">
+                        In the Greco-Roman world, the <em>oikos</em> was not just a physical building. It was a social and economic unit — everyone under a paterfamilias: family members, slaves, workers, dependents. When the jailer's <em>oikos</em> was baptized, it was a total household conversion. Not a private spiritual experience, but a collective realignment of an entire social unit around a new Lord.
+                    </p>
+                    <p class="text-zinc-300 text-lg leading-relaxed mt-4">
+                        This is the third <em>oikos</em> conversion in Acts 16 alone. Lydia's household at the riverbank. The slave girl's implied household in her liberation. Now the jailer's household at midnight. Luke is telling us something structural about how the Kingdom spreads. It does not go to buildings first. It goes to households first. The church building is downstream of the dinner table.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4 mb-10">
+                    <div class="border border-zinc-200 rounded-[1.5rem] p-6 text-center">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Household One</p>
+                        <p class="text-charcoal font-bold">Lydia</p>
+                        <p class="text-zinc-400 text-sm mt-2 font-light italic">A riverbank. Morning.</p>
+                    </div>
+                    <div class="border border-zinc-200 rounded-[1.5rem] p-6 text-center">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Household Two</p>
+                        <p class="text-charcoal font-bold">The Slave Girl</p>
+                        <p class="text-zinc-400 text-sm mt-2 font-light italic">A marketplace. Afternoon.</p>
+                    </div>
+                    <div class="border-2 border-teal/30 bg-teal/5 rounded-[1.5rem] p-6 text-center">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Household Three</p>
+                        <p class="text-charcoal font-bold">The Jailer</p>
+                        <p class="text-zinc-400 text-sm mt-2 font-light italic">A prison. Midnight.</p>
+                    </div>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed mb-8">
+                    No building. No platform. No clergy class. No Sunday morning service. A riverbank, a marketplace, a prison — and in each one, an <em>oikos</em> realigned. The Church in Europe was born in homes, and it spread through them. That was not a logistical compromise. It was the design.
+                </p>
+
+                <div class="scripture-box p-8 rounded-r-xl">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Acts 16:33–34 (NLT)</strong>
+                    <em>"Even at that hour of the night, the jailer cared for them and washed their wounds. Then he and everyone in his household were immediately baptized. He brought them into his house and set a meal before them, and he and his entire household rejoiced because they all believed in God."</em></p>
+                    <p class="text-zinc-500 text-base mt-3">Luke gives us the sequence deliberately: washing, baptism, table, joy. This is not accidental liturgy. It is the Kingdom sequence in four movements — and it happens not in a temple but in a jailer's house, before dawn, after an earthquake, over a meal that nobody had planned.</p>
+                </div>
+            </section>
+
+        </article>
+
+        <!-- THE SEQUENCE -->
+        <section class="mb-32 space-y-8">
+            <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase">Putting It Together</h4>
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">The Sequence of the Table</h2>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                There is a four-movement arc inside Acts 16:33–34 that Luke does not draw attention to — but it is there. And it is not accidental. It is the Gospel in miniature, compressed into a single night in a jailer's house.
+            </p>
+
+            <div class="grid md:grid-cols-4 gap-4 mt-10">
+                <div class="bg-zinc-50 rounded-[1.5rem] p-8 text-center border border-zinc-200">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Movement One</p>
+                    <p class="text-3xl font-display italic text-charcoal mb-3">Washing</p>
+                    <p class="text-zinc-500 text-sm leading-relaxed">The jailer washed their wounds. Compassion before sacrament. You don't have to be fully initiated to begin to love people.</p>
+                </div>
+                <div class="bg-zinc-50 rounded-[1.5rem] p-8 text-center border border-zinc-200">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Movement Two</p>
+                    <p class="text-3xl font-display italic text-charcoal mb-3">Baptism</p>
+                    <p class="text-zinc-500 text-sm leading-relaxed">Immediately. The same hour. The entire household. Identity realigned before sunrise.</p>
+                </div>
+                <div class="bg-zinc-50 rounded-[1.5rem] p-8 text-center border border-zinc-200">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Movement Three</p>
+                    <p class="text-3xl font-display italic text-charcoal mb-3">Table</p>
+                    <p class="text-zinc-500 text-sm leading-relaxed">He set a meal before them. The man who was their jailer is now their host. Same hands. New purpose.</p>
+                </div>
+                <div class="bg-teal rounded-[1.5rem] p-8 text-center">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Movement Four</p>
+                    <p class="text-3xl font-display italic text-white mb-3">Joy</p>
+                    <p class="text-white/70 text-sm leading-relaxed">The entire household rejoiced because they all believed in God. Joy is the final course. It is always the final course.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DISCUSSION -->
+        <section class="bg-charcoal text-white rounded-[3.5rem] p-12 md:p-20 shadow-2xl relative mb-16">
+            <div class="text-center mb-20">
+                <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-4">The Living Room Circle</h3>
+                <h2 class="text-4xl md:text-6xl font-bold">Discussion & Reflection</h2>
+                <div class="h-1 w-16 bg-teal mx-auto mt-10"></div>
+            </div>
+
+            <div class="space-y-16 max-w-2xl mx-auto">
+                <div class="group">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">01</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Paul and Silas worshipped before the earthquake — not after. Is there a situation in your life right now where you are waiting for the miracle before you will praise? What would it look like to worship first?</p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">02</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Paul stayed in an open prison for the sake of the jailer. Is there a "door" in your life that God has opened — an exit, an escape, an opportunity to walk away — but He may be asking you to stay for someone who is still trapped?</p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">03</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">The jailer asked his question at the worst moment of his life — not his best. Is there someone in your <em>oikos</em>, your household, your circle — who is at their worst right now? What would it mean to be a voice in the dark for them this week?</p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">04</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed italic">
+                        <strong class="text-white not-italic block mb-2 underline decoration-gold/50 underline-offset-8">Family Prompt:</strong> The jailer didn't wait — he brought Paul and Silas into his home that same night. What would a "midnight table" moment look like in your home this week? Who could you invite to sit down, eat, and belong?
+                    </p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">05</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Three households in one chapter. A riverbank, a marketplace, a prison. No buildings. No programmes. Just ordinary people in ordinary spaces, becoming the Church. What space in your everyday life is God trying to turn into a <em>themelios</em> — a foundation — for someone else's faith?</p>
+                </div>
+            </div>
+
+            <div class="mt-24 text-center">
+                <a href="/deepdives.html" class="inline-block border border-teal text-teal px-12 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[0.7rem] hover:bg-teal hover:text-white transition-all">Back to Library</a>
+            </div>
+        </section>
+
+        <!-- COMMUNION CLOSE -->
+        <section class="mt-0 mb-16">
+            <div class="communion-card">
+                <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.4em] uppercase mb-8 text-center">Communion</h3>
+                <div class="space-y-6 text-2xl text-white font-light italic leading-relaxed mb-12 text-center max-w-2xl mx-auto">
+                    <p>"A few hours ago this man was their jailer. Now he is their host. The same hands that locked their chains are setting the table."</p>
+                    <p>"That is the miracle the earthquake was always pointing toward — not the open doors, but the open home."</p>
+                </div>
+                <div class="border-t border-white/20 pt-12 max-w-2xl mx-auto">
+                    <p class="text-white/80 text-lg leading-relaxed mb-6">
+                        Every time we take Communion, we are sitting at that table. We are the household that has been reached by the earthquake — shaken loose from what was holding us, brought into the house of God, washed, fed, and sent back into the world as people who know what it feels like when someone chose to stay in an open prison for you.
+                    </p>
+                    <p class="text-white/80 text-lg leading-relaxed mb-6">
+                        Jesus did not just choose to stay. He chose to be chained. He chose the inner dungeon. He chose the midnight hour — so that when our earthquake came, every door would be open and every chain would fall. And then He set the table.
+                    </p>
+                    <p class="text-white font-bold text-xl text-center mt-10 italic font-display">We are all here. Because He was.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRAYER -->
+        <section class="mt-16 text-center max-w-2xl mx-auto border-t border-zinc-100 pt-20">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.4em] uppercase mb-10">A Prayer to Take Home</h3>
+
+            <div class="scripture-box p-10 text-left rounded-r-xl text-zinc-600 leading-relaxed text-lg not-italic">
+                <p class="italic">
+                    Father, we confess that we have often waited for the earthquake before we would worship. We have waited for the doors to open before we would believe You were present in the cell.<br/><br/>
+                    Teach us the midnight song. Teach us to praise before the miracle, to stay when we could leave, to speak into the dark when someone near us is about to give up.<br/><br/>
+                    And remind us — every time we gather at this table — that the same hands that were nailed to a cross are the hands that set it. That the host of this meal was once a prisoner, and chose it, so that we would never have to be.<br/><br/>
+                    Let our homes be the households of Acts 16. Let our tables be the altars. Let our midnight meals be the communion.<br/><br/>
+                    We are all here. Because You were.<br/><br/>
+                    In the name of Jesus. Amen.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="/js/main.js" defer></script>
+</body>
+</html>
