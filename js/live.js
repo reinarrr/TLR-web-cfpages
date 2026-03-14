@@ -12,10 +12,15 @@ async function fetchLiveVideo() {
         const response = await fetch('https://youtube-proxy.reinar-6fd.workers.dev/');
         const data = await response.json();
         if (data.items && data.items.length > 0) {
-            const videoId = data.items[0].contentDetails.videoId; 
+            // Priority: live → upcoming → most recent
+            const live     = data.items.find(i => i.snippet?.liveBroadcastContent === 'live');
+            const upcoming = data.items.find(i => i.snippet?.liveBroadcastContent === 'upcoming');
+            const target   = live || upcoming || data.items[0];
+
+            const videoId = target.contentDetails?.videoId || target.id;
             container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
         }
-    } catch (e) { 
+    } catch (e) {
         console.error('YouTube Fetch Error:', e);
         container.innerHTML = `<p class="text-zinc-400 p-20 text-center">Unable to load stream. Please check our YouTube channel.</p>`;
     }
