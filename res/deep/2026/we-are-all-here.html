@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>We Are All Here | Deep Dive</title>
+    <title>Before the Earthquake | Deep Dive</title>
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
@@ -31,6 +31,7 @@
 
     <style>
         .accent-teal { color: #2d5a5a; }
+
         .scripture-box {
             border-left: 3px solid #2d5a5a;
             background: #f4f7f7;
@@ -38,38 +39,17 @@
         .editorial-header { border-bottom: 1px solid #e5e7eb; }
         .lead-quote { border-left: 3px solid #c5a059; }
 
-        /* Diner menu card */
-        .course-card {
+        .section-entry {
             border-top: 1px solid #e5e7eb;
             padding-top: 4rem;
             margin-top: 4rem;
         }
-        .course-card:first-child {
+        .section-entry:first-child {
             border-top: none;
             padding-top: 0;
             margin-top: 0;
         }
-        .course-number {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(4rem, 10vw, 7rem);
-            line-height: 1;
-            color: #2d5a5a;
-            opacity: 0.15;
-            letter-spacing: -0.02em;
-        }
-        .course-label {
-            font-size: 0.6rem;
-            font-weight: 700;
-            letter-spacing: 0.5em;
-            text-transform: uppercase;
-            color: #c5a059;
-        }
-        .etymology-box {
-            background: #1a1a1a;
-            color: white;
-            border-radius: 2rem;
-            padding: 2.5rem 3rem;
-        }
+
         .word-display {
             font-family: 'Playfair Display', serif;
             letter-spacing: 0.02em;
@@ -83,57 +63,96 @@
             text-transform: uppercase;
         }
 
-        /* Chalkboard specials block */
-        .chalkboard {
+        .dark-callout {
             background: #1a1a1a;
-            border-radius: 2.5rem;
-            padding: 3rem;
+            color: white;
+            border-radius: 2rem;
+            padding: 2.5rem 3rem;
             position: relative;
             overflow: hidden;
         }
-        .chalkboard::before {
+        .dark-callout::after {
             content: '';
             position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 28px,
-                rgba(255,255,255,0.02) 28px,
-                rgba(255,255,255,0.02) 29px
-            );
-            pointer-events: none;
+            bottom: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            background: #2d5a5a;
+            opacity: 0.2;
+            border-radius: 50%;
+            filter: blur(30px);
         }
 
-        /* Menu divider */
-        .menu-divider {
-            display: flex;
-            align-items: center;
+        /* Timeline */
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 3rem 1fr;
             gap: 1.5rem;
-            margin: 3rem 0;
+            padding-bottom: 3rem;
+            position: relative;
         }
-        .menu-divider::before,
-        .menu-divider::after {
+        .timeline-item:not(:last-child)::before {
             content: '';
-            flex: 1;
-            height: 1px;
+            position: absolute;
+            left: 1.4rem;
+            top: 2.5rem;
+            bottom: 0;
+            width: 1px;
             background: #e5e7eb;
         }
-        .menu-divider span {
+        .timeline-dot {
+            width: 2.8rem;
+            height: 2.8rem;
+            border-radius: 50%;
+            border: 2px solid #e5e7eb;
+            background: #faf9f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #c5a059;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+        .timeline-dot.active {
+            background: #2d5a5a;
+            border-color: #2d5a5a;
+            color: white;
+        }
+
+        /* Contrast grid */
+        .contrast-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border: 1px solid #e5e7eb;
+            border-radius: 2rem;
+            overflow: hidden;
+        }
+        .contrast-grid > div:first-child {
+            border-right: 1px solid #e5e7eb;
+        }
+
+        /* Tension bar */
+        .tension-label {
             font-size: 0.6rem;
             font-weight: 700;
             letter-spacing: 0.4em;
             text-transform: uppercase;
             color: #c5a059;
-            white-space: nowrap;
         }
 
-        /* Communion close */
-        .communion-card {
-            background: #2d5a5a;
-            color: white;
-            border-radius: 3rem;
-            padding: 4rem;
+        /* Section number watermark */
+        .section-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(5rem, 14vw, 9rem);
+            line-height: 1;
+            color: #2d5a5a;
+            opacity: 0.08;
+            letter-spacing: -0.03em;
+            user-select: none;
         }
     </style>
 </head>
@@ -148,18 +167,18 @@
         <header class="text-center mb-20 editorial-header pb-16">
             <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-8">The Acts Journey</h3>
             <h1 class="text-6xl md:text-8xl font-bold mb-10 leading-[1.05] tracking-tight text-charcoal">
-                We Are All <span class="accent-teal italic font-display font-normal">Here</span>.
+                Before the <span class="accent-teal italic font-display font-normal">Earthquake</span>.
             </h1>
             <p class="text-2xl md:text-3xl text-charcoal font-light leading-relaxed italic lead-quote pl-8 text-left mx-auto max-w-3xl py-4">
-                At midnight, in a Roman prison, God opened a diner. The menu was unusual. The guests were unexpected. And everyone who sat at the table left changed.
+                The earthquake gets all the headlines. But everything that mattered happened before the ground moved.
             </p>
         </header>
 
         <!-- FOUNDATION -->
         <section class="max-w-2xl mx-auto text-center mb-24">
             <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">The Foundation</h4>
-            <h2 class="text-3xl font-bold mb-6 italic">Acts 16:25–34</h2>
-            <a href="https://www.biblegateway.com/passage/?search=Acts+16%3A25-34&version=NLT" target="_blank" class="text-teal font-bold uppercase tracking-[0.2em] text-[0.7rem] border-b border-teal/30 pb-1 hover:text-gold hover:border-gold transition-all">
+            <h2 class="text-3xl font-bold mb-6 italic">Acts 16:25–26</h2>
+            <a href="https://www.biblegateway.com/passage/?search=Acts+16%3A25-26&version=NLT" target="_blank" class="text-teal font-bold uppercase tracking-[0.2em] text-[0.7rem] border-b border-teal/30 pb-1 hover:text-gold hover:border-gold transition-all">
                 Read on Bible Gateway &rarr;
             </a>
         </section>
@@ -167,7 +186,7 @@
         <!-- VIDEO -->
         <section class="mb-32" id="yt-section" style="display:none">
             <div class="relative rounded-[3rem] overflow-hidden shadow-2xl bg-zinc-200 aspect-video">
-                <iframe id="yt-iframe" class="absolute inset-0 w-full h-full" src="" title="We Are All Here — Acts 16:25–34" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe id="yt-iframe" class="absolute inset-0 w-full h-full" src="" title="Before the Earthquake — Acts 16:25–26" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
             <p id="yt-caption" class="text-center text-zinc-400 text-[0.65rem] mt-8 tracking-[0.3em] uppercase italic"></p>
         </section>
@@ -197,284 +216,278 @@
             })();
         </script>
 
-        <!-- INTRO: THE SETUP -->
+        <!-- INTRO -->
         <section class="mb-24 space-y-8">
-            <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase">Before We Read the Menu</h4>
-            <h2 class="text-4xl font-bold text-charcoal leading-tight">The Room Nobody Left</h2>
+            <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase">Setting the Scene</h4>
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">What the Story Is Actually About</h2>
             <p class="text-zinc-600 text-xl leading-relaxed">
-                Three messages in, we know this building. We know who put Paul and Silas here. We know the girl who has just been freed. We know the masters who chose the courthouse. We know the jailer — he was given the order to lock them in the deepest cell, and he obeyed it.
+                When we read Acts 16:25–26, we almost always start with the earthquake. The ground shaking. The doors flying open. The chains falling off. It is cinematic, it is dramatic, and it pulls the eye immediately. But Luke is a precise writer. He does not waste words. And the very first thing he tells us — before the miracle, before the liberation, before anything moves — is that Paul and Silas were singing.
             </p>
             <p class="text-zinc-600 text-xl leading-relaxed">
-                Now it is midnight. The city is asleep. And in a Roman prison in Philippi — a city of soldiers, merchants, and colonial ambition — God is about to open a Midnight Diner with a table that nobody had a reservation at.
+                That sequence is not accidental. It is the point. The earthquake is the response, not the event. The event happened before the ground moved — in the dark, in chains, in the deepest cell of a Roman prison, at midnight, before a single door opened. This deep dive is about everything that happened in that gap. Because that gap is where the Kingdom actually operates.
             </p>
-            <div class="grid md:grid-cols-3 gap-4 mt-10">
-                <a href="/res/deep/2026/net-worth.html" class="border border-zinc-200 rounded-[1.5rem] p-6 text-center hover:border-teal/30 hover:bg-teal/5 transition-all group">
-                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Scene 1</p>
-                    <p class="text-charcoal font-bold text-lg leading-tight group-hover:text-teal transition-colors">Net Worth</p>
-                    <p class="text-zinc-400 text-sm mt-2 font-light">What are people worth?</p>
-                </a>
-                <a href="/res/deep/2026/mind-your-business.html" class="border border-zinc-200 rounded-[1.5rem] p-6 text-center hover:border-teal/30 hover:bg-teal/5 transition-all group">
-                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Scene 2</p>
-                    <p class="text-charcoal font-bold text-lg leading-tight group-hover:text-teal transition-colors">Mind Your Business</p>
-                    <p class="text-zinc-400 text-sm mt-2 font-light">How do we treat people in our marketplace?</p>
-                </a>
-                <div class="border-2 border-teal/30 bg-teal/5 rounded-[1.5rem] p-6 text-center">
-                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Scene 3</p>
-                    <p class="text-charcoal font-bold text-lg leading-tight">We Are All Here</p>
-                    <p class="text-zinc-400 text-sm mt-2 font-light">What happens when the Gospel reaches the man enforcing the system?</p>
+
+            <!-- Timeline: before and after -->
+            <div class="mt-12 space-y-0">
+                <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-10">The Sequence Luke Gives Us</h4>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot">I</div>
+                    <div>
+                        <p class="font-bold text-charcoal text-lg mb-1">Beaten and chained</p>
+                        <p class="text-zinc-500 text-base">Acts 16:23–24 — thrown into the inner dungeon, feet in stocks. Nothing has been done wrong. No trial. No due process.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot active">II</div>
+                    <div>
+                        <p class="font-bold text-teal text-lg mb-1">Around midnight — they sang</p>
+                        <p class="text-zinc-500 text-base">Acts 16:25 — <em>hymneō</em>. Sustained, loud, intentional worship. Before anything changed. This is the moment the deep dive is about.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot active">III</div>
+                    <div>
+                        <p class="font-bold text-teal text-lg mb-1">The other prisoners listened</p>
+                        <p class="text-zinc-500 text-base">Acts 16:25 — still before the earthquake. The atmosphere of the cellblock was already being rewritten by the worship. The miracle had already begun — invisibly.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot" style="border-color:#c5a059; color:#c5a059;">IV</div>
+                    <div>
+                        <p class="font-bold text-charcoal text-lg mb-1">The earthquake</p>
+                        <p class="text-zinc-500 text-base">Acts 16:26 — <em>then</em> the ground moved. Every door. Every chain. Every prisoner. The earthquake was the response to what had already happened in the Spirit.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" style="padding-bottom:0">
+                    <div class="timeline-dot">V</div>
+                    <div>
+                        <p class="font-bold text-charcoal text-lg mb-1">Nobody ran</p>
+                        <p class="text-zinc-500 text-base">Acts 16:28 — the most extraordinary detail in the passage. We'll get there. But notice: the miracle didn't produce chaos. It produced stillness. The worship had already changed the room.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <div class="menu-divider"><span>Tonight's Menu</span></div>
+        <!-- MAIN ARTICLE -->
+        <article class="mb-32">
 
-        <!-- THE MENU -->
-        <article class="space-y-0 mb-32">
-
-            <!-- COURSE 01: HYMNEO -->
-            <section class="course-card">
-                <div class="flex items-start gap-6 mb-8">
-                    <span class="course-number">01</span>
-                    <div class="pt-4">
-                        <p class="course-label mb-2">First Course</p>
-                        <h2 class="text-4xl font-bold text-charcoal leading-tight">The Worship Before the Miracle</h2>
-                    </div>
+            <!-- SECTION I: HYMNEO -->
+            <section class="section-entry space-y-10">
+                <div class="flex items-start gap-2 mb-2">
+                    <span class="section-number">I</span>
                 </div>
-
-                <p class="text-zinc-600 text-xl leading-relaxed mb-8">
-                    The most important word in Acts 16:25 is not "earthquake." It is "around midnight." Luke is precise about the hour because the hour is the point. Nothing had changed yet. The doors were still locked. The chains were still on. The beatings were still fresh. And Paul and Silas were singing.
-                </p>
-
-                <div class="word-display text-zinc-600 text-7xl md:text-8xl font-bold mb-4">hymneō</div>
-                <p class="word-meta text-zinc-400 mb-10">Greek | ὑμνέω | to sing a hymn, to praise with song</p>
-
-                <div class="etymology-box mb-10">
-                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">What the Word Actually Means</p>
-                    <p class="text-zinc-300 text-lg leading-relaxed">
-                        <em>Hymneō</em> is not background ambience. It is an active, sustained, intentional act of musical praise. The same word appears in Matthew 26:30 — Jesus and His disciples sang a hymn before walking to Gethsemane. Before the arrest. Before the cross. The pattern is consistent: in the New Testament, the hymn precedes the darkest moment, not the brightest one.
-                    </p>
-                    <p class="text-zinc-300 text-lg leading-relaxed mt-4">
-                        And Luke adds a detail that changes the entire scene: "the other prisoners were listening." Paul and Silas were loud enough that the whole cellblock could hear them. Their worship was never private. Before God moved, before a single door opened, the atmosphere of that dungeon had already been changed by people who decided to praise before anything improved.
-                    </p>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-8 mb-10">
-                    <div class="space-y-4">
-                        <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem]">The World's Logic</h4>
-                        <p class="text-zinc-500 text-base leading-relaxed">Praise when things improve. Sing when the miracle is visible. Worship is the response to what God has done.</p>
-                    </div>
-                    <div class="space-y-4">
-                        <h4 class="text-teal font-bold uppercase tracking-widest text-[0.65rem]">The Kingdom's Logic</h4>
-                        <p class="text-zinc-500 text-base leading-relaxed">Praise in the middle of what hasn't changed yet. Worship is the atmosphere in which God moves — not the reward after He has.</p>
-                    </div>
-                </div>
-
-                <div class="scripture-box p-8 rounded-r-xl">
-                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Acts 16:25 (NLT)</strong>
-                    <em>"Around midnight Paul and Silas were praying and singing hymns to God, and the other prisoners were listening."</em></p>
-                    <p class="text-zinc-500 text-base mt-3">The prisoners who were listening didn't ask for a sermon. They didn't fill out a contact card. They were changed by overhearing two beaten men choose worship. That is the oldest form of evangelism in the book — not a program, but a posture. When you worship in your midnight, you are never worshipping alone. Someone in the cell next to yours is listening.</p>
-                </div>
-            </section>
-
-            <div class="menu-divider"><span>Second Course</span></div>
-
-            <!-- COURSE 02: THEMELIOS -->
-            <section class="course-card">
-                <div class="flex items-start gap-6 mb-8">
-                    <span class="course-number">02</span>
-                    <div class="pt-4">
-                        <p class="course-label mb-2">Second Course</p>
-                        <h2 class="text-4xl font-bold text-charcoal leading-tight">The Earthquake That Was Never About the Doors</h2>
-                    </div>
-                </div>
-
-                <p class="text-zinc-600 text-xl leading-relaxed mb-8">
-                    Three things happen at once in verse 26: the building shakes, every door opens, every chain falls. This is total, simultaneous, structural liberation. God did not open Paul's door. He opened every door for everyone — including people who had nothing to do with the Gospel. And then nobody ran.
-                </p>
-
-                <div class="word-display text-zinc-600 text-7xl md:text-8xl font-bold mb-4">themelios</div>
-                <p class="word-meta text-zinc-400 mb-10">Greek | θεμέλιος | foundation, bedrock, the base on which everything rests</p>
-
-                <div class="etymology-box mb-10">
-                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">What the Word Actually Means</p>
-                    <p class="text-zinc-300 text-lg leading-relaxed">
-                        Luke writes that the earthquake shook the prison "to its foundations" — <em>eis ta themelia</em>. This is not a minor tremor. This is a foundational disruption. Crucially, <em>themelios</em> is the same word Paul uses in 1 Corinthians 3:11 — "No one can lay any foundation (<em>themelion</em>) other than the one already laid, which is Jesus Christ." And in Ephesians 2:20, the Church is described as built on the <em>themelion</em> of the apostles and prophets.
-                    </p>
-                    <p class="text-zinc-300 text-lg leading-relaxed mt-4">
-                        God shook the <em>themelios</em> of the Roman penal system to make room for a different foundation entirely. The earthquake was not destruction. It was demolition in preparation for new construction — and the new building would be a household, not a prison.
-                    </p>
-                </div>
-
-                <div class="chalkboard mb-10">
-                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-6">The Detail Everyone Skips</p>
-                    <p class="text-2xl md:text-3xl font-display italic leading-tight text-white relative z-10">
-                        "Every door was open. Every chain was loose. And nobody ran. You don't stay in an open prison unless something greater than freedom is holding you there."
-                    </p>
-                </div>
-
-                <p class="text-zinc-600 text-xl leading-relaxed mb-8">
-                    By Roman law, a jailer whose prisoners escaped was executed — often in the same manner the prisoners would have been. So Paul staying was not passive. It was the most deliberate act of grace in the passage. He chose the jailer's life over his own freedom. He stayed in an open prison for a man who had locked him in the deepest cell.
-                </p>
-
+                <h2 class="text-4xl font-bold text-charcoal leading-tight -mt-6">The Word That Starts Everything</h2>
                 <p class="text-zinc-600 text-xl leading-relaxed">
-                    That is the shape of the Gospel. The one who is free choosing to remain for the sake of the one who isn't. The earthquake opened the doors. But it was Paul's staying that opened the jailer.
-                </p>
-            </section>
-
-            <div class="menu-divider"><span>Third Course</span></div>
-
-            <!-- COURSE 03: SOZO -->
-            <section class="course-card">
-                <div class="flex items-start gap-6 mb-8">
-                    <span class="course-number">03</span>
-                    <div class="pt-4">
-                        <p class="course-label mb-2">Third Course</p>
-                        <h2 class="text-4xl font-bold text-charcoal leading-tight">The Question in the Dark</h2>
-                    </div>
-                </div>
-
-                <p class="text-zinc-600 text-xl leading-relaxed mb-8">
-                    The jailer woke to open doors and drew his sword. He was seconds from death. And what stopped him was not an angel, not a vision, not a theological argument. It was a voice in the dark from the man he had locked in the deepest cell.
+                    Luke uses a specific Greek word for what Paul and Silas were doing. He did not write that they were humming quietly to themselves, or that they were murmuring prayers under their breath. He wrote <em>hymneō</em> — and the word carries weight that the English translation does not fully convey.
                 </p>
 
-                <p class="text-zinc-600 text-xl leading-relaxed mb-10">
-                    Three words. <em>We are all here.</em>
-                </p>
+                <div class="word-display text-zinc-600 text-7xl md:text-8xl font-bold mb-2">hymneō</div>
+                <p class="word-meta text-zinc-400 mb-10">Greek | ὑμνέω | to sing a hymn, to praise with sustained musical worship</p>
 
-                <div class="word-display text-zinc-600 text-7xl md:text-8xl font-bold mb-4">sōzō</div>
-                <p class="word-meta text-zinc-400 mb-10">Greek | σῴζω | to save, to rescue, to heal, to deliver from danger</p>
-
-                <div class="etymology-box mb-10">
-                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">What the Word Actually Means</p>
+                <div class="dark-callout mb-10">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">The Weight of the Word</p>
+                    <p class="text-zinc-300 text-lg leading-relaxed mb-4">
+                        <em>Hymneō</em> appears only four times in the New Testament. One of those appearances is Matthew 26:30 — Jesus and His disciples singing a hymn before walking to Gethsemane. Before the arrest. Before the cross. Before the darkest night in human history. The pattern is not coincidental: in the New Testament, the hymn always precedes the darkness. It is not the celebration of what has been survived. It is the declaration of what is believed before the cost is paid.
+                    </p>
                     <p class="text-zinc-300 text-lg leading-relaxed">
-                        When the jailer asks "what must I do to be <em>sōzō</em>?" he is asking a word that holds three things simultaneously. <em>Sōzō</em> is used in the New Testament for physical rescue (Matthew 8:25 — "Save us, Lord, we're going to drown!"), for spiritual salvation (Romans 10:9), and for healing from illness (Mark 5:34 — "your faith has made you well/sōzō"). The jailer was asking all three at once. Save me from my sword. Save me from the law. Save me from everything I have been.
-                    </p>
-                    <p class="text-zinc-300 text-lg leading-relaxed mt-4">
-                        And the answer Paul gives is not a doctrine. It is a direction: <em>Believe in the Lord Jesus.</em> The Greek word for "believe" here is <em>pisteuō</em> — not merely intellectual assent, but a full entrusting of yourself to someone. The jailer was not asked to understand theology. He was asked to trust a Person.
+                        And the word implies volume. Paul and Silas were loud enough that the entire cellblock could hear them. Luke makes this explicit: "the other prisoners were listening." This was not a private spiritual moment between two men and God. Before God moved, the worship had already created an audience — and that audience would be changed before they ever heard a sermon.
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-0 border border-zinc-200 rounded-[2rem] overflow-hidden mt-2 mb-10">
-                    <div class="p-10 bg-zinc-50 border-r border-zinc-200">
-                        <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem] mb-4">What Did Not Save the Jailer</h4>
-                        <div class="space-y-3 text-zinc-500 text-base">
-                            <p>The earthquake</p>
-                            <p>The open doors</p>
-                            <p>The fallen chains</p>
-                            <p>The miracle itself</p>
+                <div class="contrast-grid mb-10">
+                    <div class="p-10 bg-zinc-50">
+                        <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem] mb-6">What hymneō is not</h4>
+                        <div class="space-y-4 text-zinc-500 text-base">
+                            <p>A quiet internal prayer</p>
+                            <p>A coping mechanism for pain</p>
+                            <p>A response to improvement</p>
+                            <p>Performance for an audience</p>
+                            <p>Something you ease into</p>
                         </div>
                     </div>
                     <div class="p-10 bg-white">
-                        <h4 class="text-teal font-bold uppercase tracking-widest text-[0.65rem] mb-4">What Saved the Jailer</h4>
-                        <div class="space-y-3 text-zinc-500 text-base">
-                            <p>A voice in the dark</p>
-                            <p>Three words: <em>We are all here</em></p>
-                            <p>Someone who chose to stay</p>
-                            <p>Grace that spoke before doctrine</p>
+                        <h4 class="text-teal font-bold uppercase tracking-widest text-[0.65rem] mb-6">What hymneō actually is</h4>
+                        <div class="space-y-4 text-zinc-500 text-base">
+                            <p>A sustained, active declaration</p>
+                            <p>A theological statement about God</p>
+                            <p>A pre-miracle confidence</p>
+                            <p>Directed at God, received by everyone</p>
+                            <p>The opening move, not the closing one</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="scripture-box p-8 rounded-r-xl">
-                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Acts 16:30–31 (NLT)</strong>
-                    <em>"Sirs, what must I do to be saved?" They replied, "Believe in the Lord Jesus and you will be saved, along with everyone in your household."</em></p>
-                    <p class="text-zinc-500 text-base mt-3">This is the most direct evangelistic question in the Book of Acts. And it did not come from a prepared audience at a planned event. It came from a broken man in the dark, thirty seconds after he almost died by his own hand. The Gospel is not most powerful in the polished moment. It is most powerful in the undone one.</p>
-                </div>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    The worship of Paul and Silas was credible because it cost something. Anyone can praise on a good Sunday. The worship that changes atmospheres is the worship that happens when the chains are still on, the wounds are still fresh, and nothing visible has shifted yet. That is the worship that Luke records. That is the worship the enemy has no answer for.
+                </p>
 
-                <div class="mt-8 p-8 border border-zinc-200 rounded-[1.5rem]">
-                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">On the Jailer's Guilt</p>
-                    <p class="text-zinc-600 text-lg leading-relaxed">The jailer was not an innocent bystander. He was the instrument of the state that beat Paul and Silas and chained them in the dark. He was complicit in everything the masters set in motion when they dragged them to the magistrates. And he is the one who gets saved. Grace does not travel to the deserving. It travels to the desperate. Nobody is too far into the system to be reached by the earthquake.</p>
+                <div class="scripture-box p-8 rounded-r-xl">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Hebrews 13:15 (ESV)</strong>
+                    <em>"Through him then let us continually offer up a sacrifice of praise to God, that is, the fruit of lips that acknowledge his name."</em></p>
+                    <p class="text-zinc-500 text-base mt-3">The word <em>sacrifice</em> is doing work there. A sacrifice costs you something. It is offered not because the circumstances are right but because He is worthy regardless of them. Paul and Silas did not wait for conditions to improve before they praised. They made conditions worse — for the enemy — by praising anyway. That is the sacrifice of praise. It is offered precisely when it costs the most.</p>
                 </div>
             </section>
 
-            <div class="menu-divider"><span>Fourth Course</span></div>
-
-            <!-- COURSE 04: OIKOS -->
-            <section class="course-card">
-                <div class="flex items-start gap-6 mb-8">
-                    <span class="course-number">04</span>
-                    <div class="pt-4">
-                        <p class="course-label mb-2">Fourth Course</p>
-                        <h2 class="text-4xl font-bold text-charcoal leading-tight">The Household</h2>
-                    </div>
+            <!-- SECTION II: THE AUDIENCE -->
+            <section class="section-entry space-y-10">
+                <div class="flex items-start gap-2 mb-2">
+                    <span class="section-number">II</span>
                 </div>
-
-                <p class="text-zinc-600 text-xl leading-relaxed mb-8">
-                    "Believe in the Lord Jesus and you will be saved — along with everyone in your household." This is not a throwaway line. It is the theological engine of Acts 16 — and of the entire early church movement. The Gospel in Acts does not travel through institutions. It travels through households.
+                <h2 class="text-4xl font-bold text-charcoal leading-tight -mt-6">The Audience Nobody Noticed</h2>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    "The other prisoners were listening." Luke places this detail at the end of verse 25 and moves on without comment. It is easy to read past it. But it is one of the most significant lines in the passage — because it tells us that before any miracle occurred, the worship had already changed the room.
                 </p>
 
-                <div class="word-display text-zinc-600 text-7xl md:text-8xl font-bold mb-4">oikos</div>
-                <p class="word-meta text-zinc-400 mb-10">Greek | οἶκος | household, family unit, the people under one roof</p>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    These were not people who had come to hear the Gospel. They were not seekers at a service. They were prisoners in the same building, on the same night, with the same chains — and they were overhearing two men choose to praise God in the dark. That is not evangelism by program. That is evangelism by posture.
+                </p>
 
-                <div class="etymology-box mb-10">
-                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">What the Word Actually Means</p>
+                <div class="dark-callout mb-10">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">What the Roman Prison Actually Looked Like</p>
+                    <p class="text-zinc-300 text-lg leading-relaxed mb-4">
+                        A Roman <em>carcer</em> — prison — was not a collection of isolated cells. It was typically a single large underground chamber, or a series of connected holding rooms, where prisoners were kept together. The <em>inner dungeon</em> or <em>innermost prison</em> (<em>esōteron phylakēn</em> in Acts 16:24) was the most secure section — typically the deepest, darkest, and most restrictive. But it was not soundproof. The prisoners in the outer sections would have heard everything.
+                    </p>
                     <p class="text-zinc-300 text-lg leading-relaxed">
-                        In the Greco-Roman world, the <em>oikos</em> was not just a physical building. It was a social and economic unit — everyone under a paterfamilias: family members, slaves, workers, dependents. When the jailer's <em>oikos</em> was baptized, it was a total household conversion. Not a private spiritual experience, but a collective realignment of an entire social unit around a new Lord.
-                    </p>
-                    <p class="text-zinc-300 text-lg leading-relaxed mt-4">
-                        This is the third <em>oikos</em> conversion in Acts 16 alone. Lydia's household at the riverbank. The slave girl's implied household in her liberation. Now the jailer's household at midnight. Luke is telling us something structural about how the Kingdom spreads. It does not go to buildings first. It goes to households first. The church building is downstream of the dinner table.
+                        Which means when Paul and Silas sang at midnight, the sound traveled. Every prisoner in that building — condemned criminals, debtors, political prisoners, people awaiting execution — heard two men in the worst cell praising God with everything they had. And when the earthquake came, and every door flew open, not one of them ran. That is not a coincidence. The worship had already done something to the atmosphere of that building that no Roman architecture could contain.
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-4 mb-10">
-                    <div class="border border-zinc-200 rounded-[1.5rem] p-6 text-center">
-                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Household One</p>
-                        <p class="text-charcoal font-bold">Lydia</p>
-                        <p class="text-zinc-400 text-sm mt-2 font-light italic">A riverbank. Morning.</p>
+                <div class="scripture-box p-8 rounded-r-xl">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Luke 15:10 (NLT)</strong>
+                    <em>"In the same way, there is joy in the presence of God's angels when even one sinner repents."</em></p>
+                    <p class="text-zinc-500 text-base mt-3">The worship you offer in your midnight registers in dimensions you cannot see. Paul and Silas had no idea what their singing was doing to the cellblock. They were not performing for the prisoners — they were worshipping God. But faithfulness in the dark is always witnessed by someone you did not know was watching. Your midnight worship has an audience larger than the room you are standing in.</p>
+                </div>
+
+                <div class="mt-10 p-10 border-2 border-teal/15 rounded-[2rem] bg-teal/5">
+                    <h4 class="text-teal font-bold uppercase tracking-widest text-[0.65rem] mb-6">The Unavoidable Question This Raises</h4>
+                    <p class="text-zinc-600 text-xl leading-relaxed italic">
+                        We arrive late to worship because we think it is the warm-up. In Acts 16, the worship was the main event. The earthquake was the response. God did not show up and then they worshipped — they worshipped and then God showed up. You are not late for the opening act. You are late for the thing that shakes the building.
+                    </p>
+                    <p class="text-zinc-500 text-lg leading-relaxed mt-6">
+                        There is a kind of reserved worship that is really just self-protection — the careful management of how much of yourself you are willing to give in a room full of people. Paul and Silas had no such luxury. No reputation left to protect. No dignity left to manage. They had already lost everything the world uses to measure a person. And so they gave everything they had left to the only One worth giving it to. Full surrender in worship almost always looks like you have nothing left to lose. Because you don't.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECTION III: WORSHIP AS WEAPON -->
+            <section class="section-entry space-y-10">
+                <div class="flex items-start gap-2 mb-2">
+                    <span class="section-number">III</span>
+                </div>
+                <h2 class="text-4xl font-bold text-charcoal leading-tight -mt-6">The Strategy the Enemy Never Saw Coming</h2>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    The story of Acts 16:25 is not the first time the Bible records worship preceding a military breakthrough. It is a pattern — and once you see it, you cannot unsee it.
+                </p>
+
+                <div class="scripture-box p-8 rounded-r-xl mb-10">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">2 Chronicles 20:21–22 (NLT)</strong>
+                    <em>"After consulting the people, the king appointed singers to walk ahead of the army, singing to the Lord and praising him for his holy splendor... At the very moment they began to sing and give praise, the Lord caused the armies of Ammon, Moab, and Mount Seir to start fighting among themselves."</em></p>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    Jehoshaphat did not send the army first. He sent the choir. Not because it was safer, but because he understood something about the nature of spiritual warfare that most of us have not yet internalized: the enemy has a strategy for an army. He does not have a strategy for a people whose first response to an impossible situation is to declare the faithfulness of God out loud.
+                </p>
+
+                <div class="dark-callout mb-10">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">What Psalm 8:2 Actually Says</p>
+                    <p class="text-zinc-300 text-lg leading-relaxed mb-4">
+                        "You have taught children and infants to tell of your strength, silencing your enemies and all who oppose you." The word Jesus quotes in Matthew 21:16 for what the children's praise accomplishes is <em>katargeo</em> — to render inoperative. To nullify. To bring to nothing.
+                    </p>
+                    <p class="text-zinc-300 text-lg leading-relaxed">
+                        Praise does not just irritate the enemy. It disables him. God specifically chose the weakest, most unstrategic voices — children, infants — to silence the most strategic being in creation. The enemy was once the worship leader of heaven. He lost that position. He has never recovered his relationship with worship. He cannot fight what he was built to lead. When you worship, you are wielding the one weapon he has no counter for.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4 mt-8">
+                    <div class="border border-zinc-200 rounded-[1.5rem] p-7 text-center">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Jehoshaphat</p>
+                        <p class="text-zinc-600 text-base leading-relaxed font-light">Sent the choir ahead of the army. The worship preceded the victory and created the conditions for it.</p>
                     </div>
-                    <div class="border border-zinc-200 rounded-[1.5rem] p-6 text-center">
-                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Household Two</p>
-                        <p class="text-charcoal font-bold">The Slave Girl</p>
-                        <p class="text-zinc-400 text-sm mt-2 font-light italic">A marketplace. Afternoon.</p>
+                    <div class="border border-zinc-200 rounded-[1.5rem] p-7 text-center">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Jesus</p>
+                        <p class="text-zinc-600 text-base leading-relaxed font-light">Sang a hymn before Gethsemane. The worship preceded the cross and declared confidence before the cost arrived.</p>
                     </div>
-                    <div class="border-2 border-teal/30 bg-teal/5 rounded-[1.5rem] p-6 text-center">
-                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Household Three</p>
-                        <p class="text-charcoal font-bold">The Jailer</p>
-                        <p class="text-zinc-400 text-sm mt-2 font-light italic">A prison. Midnight.</p>
+                    <div class="border-2 border-teal/30 bg-teal/5 rounded-[1.5rem] p-7 text-center">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Paul & Silas</p>
+                        <p class="text-zinc-600 text-base leading-relaxed font-light">Sang before the earthquake. The worship preceded the liberation and changed the atmosphere before the ground moved.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION IV: WORSHIP AS SURRENDER -->
+            <section class="section-entry space-y-10">
+                <div class="flex items-start gap-2 mb-2">
+                    <span class="section-number">IV</span>
+                </div>
+                <h2 class="text-4xl font-bold text-charcoal leading-tight -mt-6">The Worship That Had No Melody</h2>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    The earthquake opened every door. Every chain fell. And Paul stayed. No angel told him to. No voice from heaven narrated the moment. A man in an open prison made a quiet decision in the dark — and it is, in many ways, the most powerful act of worship in the entire passage. Because he never sang a note.
+                </p>
+
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    We think worship is what happened at midnight when the singing started. But staying in an open prison for the man who put you there — that is also worship. Worship is not only the song. Worship is the surrender. It is the moment you look at your open door, your legal exit, your completely justified escape — and you lay it down for someone else.
+                </p>
+
+                <div class="dark-callout mb-10">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">Two Acts of Worship in One Night</p>
+                    <div class="grid md:grid-cols-2 gap-8 mt-2">
+                        <div>
+                            <p class="text-white font-bold mb-3 text-lg">The hymneō</p>
+                            <p class="text-zinc-400 text-base leading-relaxed">Sung before the earthquake. Directed at God. Changed the spiritual atmosphere of the building. Got the miracle.</p>
+                        </div>
+                        <div>
+                            <p class="text-white font-bold mb-3 text-lg">The staying</p>
+                            <p class="text-zinc-400 text-base leading-relaxed">Silent. No melody. No audience. After the miracle. Got the jailer. Got the household. Got the first church in Europe.</p>
+                        </div>
+                    </div>
+                    <div class="border-t border-white/10 mt-8 pt-8">
+                        <p class="text-zinc-300 text-lg leading-relaxed italic">
+                            <em>Hymneō</em> got the earthquake. But staying in the open prison got the jailer. Both were worship. The song declared that God was worthy. The staying proved it.
+                        </p>
                     </div>
                 </div>
 
-                <p class="text-zinc-600 text-xl leading-relaxed mb-8">
-                    No building. No platform. No clergy class. No Sunday morning service. A riverbank, a marketplace, a prison — and in each one, an <em>oikos</em> realigned. The Church in Europe was born in homes, and it spread through them. That was not a logistical compromise. It was the design.
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    Genuine authority is not the person who leads when they have to. It is the person who stays when they don't have to. Every prisoner in that building stayed because Paul stayed. That is not crowd control. That is the weight of a life so surrendered to God that the people around it are held still — not by command, but by the gravity of genuine worship.
                 </p>
 
                 <div class="scripture-box p-8 rounded-r-xl">
-                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Acts 16:33–34 (NLT)</strong>
-                    <em>"Even at that hour of the night, the jailer cared for them and washed their wounds. Then he and everyone in his household were immediately baptized. He brought them into his house and set a meal before them, and he and his entire household rejoiced because they all believed in God."</em></p>
-                    <p class="text-zinc-500 text-base mt-3">Luke gives us the sequence deliberately: washing, baptism, table, joy. This is not accidental liturgy. It is the Kingdom sequence in four movements — and it happens not in a temple but in a jailer's house, before dawn, after an earthquake, over a meal that nobody had planned.</p>
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">John 10:17–18 (NLT)</strong>
+                    <em>"The Father loves me because I sacrifice my life so I may take it back again. No one can take my life from me. I sacrifice it voluntarily."</em></p>
+                    <p class="text-zinc-500 text-base mt-3">Paul was not the first person to stay in an open prison. Jesus stood at an open door His entire ministry — the door of heaven, always available, always accessible — and He chose to remain. Not because He had to. Because we were on the other side. The staying of Paul on that midnight was a small echo of the staying of Jesus at Calvary. That is the shape of the Gospel: the one who is free choosing to remain for the sake of the one who isn't.</p>
                 </div>
             </section>
 
         </article>
 
-        <!-- THE SEQUENCE -->
+        <!-- PUTTING IT TOGETHER -->
         <section class="mb-32 space-y-8">
             <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase">Putting It Together</h4>
-            <h2 class="text-4xl font-bold text-charcoal leading-tight">The Sequence of the Table</h2>
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">What Happened Before the Ground Moved</h2>
             <p class="text-zinc-600 text-xl leading-relaxed">
-                There is a four-movement arc inside Acts 16:33–34 that Luke does not draw attention to — but it is there. And it is not accidental. It is the Gospel in miniature, compressed into a single night in a jailer's house.
+                The earthquake is the miracle everyone talks about. But by the time the ground shook, three things had already happened that made the earthquake possible — and made its fruit lasting rather than spectacular.
             </p>
 
-            <div class="grid md:grid-cols-4 gap-4 mt-10">
-                <div class="bg-zinc-50 rounded-[1.5rem] p-8 text-center border border-zinc-200">
-                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Movement One</p>
-                    <p class="text-3xl font-display italic text-charcoal mb-3">Washing</p>
-                    <p class="text-zinc-500 text-sm leading-relaxed">The jailer washed their wounds. Compassion before sacrament. You don't have to be fully initiated to begin to love people.</p>
+            <div class="grid md:grid-cols-3 gap-6 mt-10">
+                <div class="bg-zinc-50 border border-zinc-200 rounded-[1.5rem] p-8">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Before the Earthquake</p>
+                    <p class="text-2xl font-display italic text-charcoal mb-4">The Worship</p>
+                    <p class="text-zinc-500 text-sm leading-relaxed">Costly, sustained, pre-miracle praise. It changed the spiritual atmosphere. It armed the moment. It created the conditions for what was about to happen.</p>
                 </div>
-                <div class="bg-zinc-50 rounded-[1.5rem] p-8 text-center border border-zinc-200">
-                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Movement Two</p>
-                    <p class="text-3xl font-display italic text-charcoal mb-3">Baptism</p>
-                    <p class="text-zinc-500 text-sm leading-relaxed">Immediately. The same hour. The entire household. Identity realigned before sunrise.</p>
+                <div class="bg-zinc-50 border border-zinc-200 rounded-[1.5rem] p-8">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Before the Earthquake</p>
+                    <p class="text-2xl font-display italic text-charcoal mb-4">The Audience</p>
+                    <p class="text-zinc-500 text-sm leading-relaxed">Every prisoner listening. Nobody asked to hear the Gospel. They just heard two men worship in the worst circumstances imaginable — and the cellblock was changed before the doors opened.</p>
                 </div>
-                <div class="bg-zinc-50 rounded-[1.5rem] p-8 text-center border border-zinc-200">
-                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Movement Three</p>
-                    <p class="text-3xl font-display italic text-charcoal mb-3">Table</p>
-                    <p class="text-zinc-500 text-sm leading-relaxed">He set a meal before them. The man who was their jailer is now their host. Same hands. New purpose.</p>
-                </div>
-                <div class="bg-teal rounded-[1.5rem] p-8 text-center">
-                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Movement Four</p>
-                    <p class="text-3xl font-display italic text-white mb-3">Joy</p>
-                    <p class="text-white/70 text-sm leading-relaxed">The entire household rejoiced because they all believed in God. Joy is the final course. It is always the final course.</p>
+                <div class="bg-teal rounded-[1.5rem] p-8">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">After the Earthquake</p>
+                    <p class="text-2xl font-display italic text-white mb-4">The Staying</p>
+                    <p class="text-white/70 text-sm leading-relaxed">The second act of worship. Silent. Costly. The song got the miracle. The staying got the jailer. And the jailer got a household. And the household became a church.</p>
                 </div>
             </div>
         </section>
@@ -490,29 +503,29 @@
             <div class="space-y-16 max-w-2xl mx-auto">
                 <div class="group">
                     <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">01</span>
-                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Paul and Silas worshipped before the earthquake — not after. Is there a situation in your life right now where you are waiting for the miracle before you will praise? What would it look like to worship first?</p>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Paul and Silas sang before anything changed. What is the midnight hour in your life right now where you have been waiting for conditions to improve before you will praise? What would it cost you to worship first?</p>
                 </div>
 
                 <div class="group border-t border-white/10 pt-12">
                     <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">02</span>
-                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Paul stayed in an open prison for the sake of the jailer. Is there a "door" in your life that God has opened — an exit, an escape, an opportunity to walk away — but He may be asking you to stay for someone who is still trapped?</p>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">The other prisoners were listening without being invited. Who in your life right now is in the cell next to yours — watching how you handle your midnight? Do they know you are worshipping through it?</p>
                 </div>
 
                 <div class="group border-t border-white/10 pt-12">
                     <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">03</span>
-                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">The jailer asked his question at the worst moment of his life — not his best. Is there someone in your <em>oikos</em>, your household, your circle — who is at their worst right now? What would it mean to be a voice in the dark for them this week?</p>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Worship is the song <em>and</em> the surrender. Is there an open door in your life — a way out, a justified exit — that God might be asking you to stay in front of for the sake of someone else? What is holding you back from staying?</p>
                 </div>
 
                 <div class="group border-t border-white/10 pt-12">
                     <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">04</span>
                     <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed italic">
-                        <strong class="text-white not-italic block mb-2 underline decoration-gold/50 underline-offset-8">Family Prompt:</strong> The jailer didn't wait — he brought Paul and Silas into his home that same night. What would a "midnight table" moment look like in your home this week? Who could you invite to sit down, eat, and belong?
+                        <strong class="text-white not-italic block mb-2 underline decoration-gold/50 underline-offset-8">Family Prompt:</strong> What does worship look like in your home when things are hard? This week, pick one night to worship together before you ask God for anything — no requests, just praise. What happened in the room?
                     </p>
                 </div>
 
                 <div class="group border-t border-white/10 pt-12">
                     <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">05</span>
-                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Three households in one chapter. A riverbank, a marketplace, a prison. No buildings. No programmes. Just ordinary people in ordinary spaces, becoming the Church. What space in your everyday life is God trying to turn into a <em>themelios</em> — a foundation — for someone else's faith?</p>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">The enemy has no counter for pre-miracle worship. What battle in your life have you been fighting with endurance when God might be asking you to fight it with <em>hymneō</em>? What would it look like to send the choir out first?</p>
                 </div>
             </div>
 
@@ -521,38 +534,24 @@
             </div>
         </section>
 
-        <!-- COMMUNION CLOSE -->
-        <section class="mt-0 mb-16">
-            <div class="communion-card">
-                <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.4em] uppercase mb-8 text-center">Communion</h3>
-                <div class="space-y-6 text-2xl text-white font-light italic leading-relaxed mb-12 text-center max-w-2xl mx-auto">
-                    <p>"A few hours ago this man was their jailer. Now he is their host. The same hands that locked their chains are setting the table."</p>
-                    <p>"That is the miracle the earthquake was always pointing toward — not the open doors, but the open home."</p>
-                </div>
-                <div class="border-t border-white/20 pt-12 max-w-2xl mx-auto">
-                    <p class="text-white/80 text-lg leading-relaxed mb-6">
-                        Every time we take Communion, we are sitting at that table. We are the household that has been reached by the earthquake — shaken loose from what was holding us, brought into the house of God, washed, fed, and sent back into the world as people who know what it feels like when someone chose to stay in an open prison for you.
-                    </p>
-                    <p class="text-white/80 text-lg leading-relaxed mb-6">
-                        Jesus did not just choose to stay. He chose to be chained. He chose the inner dungeon. He chose the midnight hour — so that when our earthquake came, every door would be open and every chain would fall. And then He set the table.
-                    </p>
-                    <p class="text-white font-bold text-xl text-center mt-10 italic font-display">We are all here. Because He was.</p>
-                </div>
+        <!-- CLOSING -->
+        <section class="mt-0 text-center max-w-2xl mx-auto border-t border-zinc-100 pt-20">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.4em] uppercase mb-10">A Thought to Take Home</h3>
+            <div class="space-y-6 text-2xl text-charcoal font-light italic leading-relaxed mb-12">
+                <p>Paul and Silas were not strong men who worshipped well. They were surrendered men who worshipped first. The earthquake did not come because they were exceptional. It came because they were faithful in the dark.</p>
+                <p>Suffering is common. Worshipping through it is rare. And it is the rare thing that moves the rare thing.</p>
+                <p>The earthquake gets all the headlines. But God was already in the room before the ground moved. He was there the moment they opened their mouths.</p>
             </div>
-        </section>
 
-        <!-- PRAYER -->
-        <section class="mt-16 text-center max-w-2xl mx-auto border-t border-zinc-100 pt-20">
-            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.4em] uppercase mb-10">A Prayer to Take Home</h3>
-
-            <div class="scripture-box p-10 text-left rounded-r-xl text-zinc-600 leading-relaxed text-lg not-italic">
+            <div class="scripture-box p-10 text-left rounded-r-xl mt-16 text-zinc-600 leading-relaxed text-lg not-italic">
+                <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-6 not-italic">A Prayer Before the Earthquake</h4>
                 <p class="italic">
-                    Father, we confess that we have often waited for the earthquake before we would worship. We have waited for the doors to open before we would believe You were present in the cell.<br/><br/>
-                    Teach us the midnight song. Teach us to praise before the miracle, to stay when we could leave, to speak into the dark when someone near us is about to give up.<br/><br/>
-                    And remind us — every time we gather at this table — that the same hands that were nailed to a cross are the hands that set it. That the host of this meal was once a prisoner, and chose it, so that we would never have to be.<br/><br/>
-                    Let our homes be the households of Acts 16. Let our tables be the altars. Let our midnight meals be the communion.<br/><br/>
-                    We are all here. Because You were.<br/><br/>
-                    In the name of Jesus. Amen.
+                    Father, we confess that we have been waiting for the doors to open before we would sing. We have been managing our midnight instead of worshipping through it.<br/><br/>
+                    Teach us the midnight song. The costly one. The kind that fills the cellblock before the miracle arrives. The kind that the enemy has no answer for.<br/><br/>
+                    And where there is an open door we have been standing at — a justified exit, a legal escape — give us the grace to ask first: is there a jailer on the other side who needs me to stay?<br/><br/>
+                    Let our worship be the song and the surrender. Let it be loud enough that the prisoners around us hear it in the dark. Let it shake the foundations of everything that is holding people who were never meant to be held.<br/><br/>
+                    We worship You before the earthquake. Because You are worthy before it, during it, and long after the doors have opened.<br/><br/>
+                    In the name of Jesus — the One who stayed. Amen.
                 </p>
             </div>
         </section>
