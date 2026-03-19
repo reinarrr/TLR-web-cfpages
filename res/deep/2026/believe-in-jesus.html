@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Believe In Jesus | Deep Dive</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .accent-teal { color: #2d5a5a; }
+
+        .editorial-header { border-bottom: 1px solid #e5e7eb; }
+        .lead-quote { border-left: 3px solid #c5a059; }
+
+        .scripture-box {
+            border-left: 3px solid #2d5a5a;
+            background: #f4f7f7;
+        }
+
+        .step-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 2rem;
+            padding: 2.5rem;
+            background: white;
+            position: relative;
+        }
+
+        .step-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            line-height: 1;
+            color: #2d5a5a;
+            opacity: 0.12;
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            font-weight: 700;
+        }
+
+        .honest-box {
+            background: #1a1a1a;
+            color: white;
+            border-radius: 2.5rem;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .honest-box::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 160px;
+            height: 160px;
+            background: #2d5a5a;
+            opacity: 0.2;
+            border-radius: 50%;
+            filter: blur(40px);
+        }
+
+        .verse-big {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            line-height: 1.5;
+            font-style: italic;
+            color: #1a1a1a;
+        }
+
+        .divider-line {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        .divider-line::before,
+        .divider-line::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+        .divider-line span {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #c5a059;
+            white-space: nowrap;
+        }
+
+        .teal-card {
+            background: #2d5a5a;
+            color: white;
+            border-radius: 2.5rem;
+            padding: 3rem;
+        }
+
+        .prayer-box {
+            border: 2px solid #2d5a5a20;
+            border-radius: 2.5rem;
+            padding: 3rem;
+            background: #f4f7f7;
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-cream font-body" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <main class="max-w-4xl mx-auto px-6 py-24">
+
+        <!-- HEADER -->
+        <header class="text-center mb-20 editorial-header pb-16">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-8">Acts Journey | Part 09</h3>
+            <h1 class="text-6xl md:text-8xl font-bold mb-10 leading-[1.05] tracking-tight text-charcoal">
+                Believe In <span class="accent-teal italic font-display font-normal">Jesus</span>.
+            </h1>
+            <p class="text-2xl md:text-3xl text-charcoal font-light leading-relaxed italic lead-quote pl-8 text-left mx-auto max-w-3xl py-4">
+                "A man on a prison floor, thirty seconds from death, asked the most important question a human being can ask. The answer he got was the simplest thing in the world — and it changed everything."
+            </p>
+        </header>
+
+        <!-- THE QUESTION -->
+        <section class="max-w-2xl mx-auto text-center mb-24">
+            <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-6">The Question</h4>
+            <p class="verse-big mb-8">"Sirs, what must I do to be saved?"</p>
+            <p class="text-zinc-400 text-sm font-bold tracking-[0.3em] uppercase">Acts 16:30</p>
+        </section>
+
+        <!-- VIDEO -->
+        <section class="mb-32" id="yt-section" style="display:none">
+            <div class="relative rounded-[3rem] overflow-hidden shadow-2xl bg-zinc-200 aspect-video">
+                <iframe id="yt-iframe" class="absolute inset-0 w-full h-full" src="" title="Believe In Jesus — Acts 16:27–34" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <p id="yt-caption" class="text-center text-zinc-400 text-[0.65rem] mt-8 tracking-[0.3em] uppercase italic"></p>
+        </section>
+
+        <script>
+            (async function () {
+                const PROXY = 'https://ghost-proxy.reinar-6fd.workers.dev';
+                const KEY   = 'c306251d7f0f57012025d2fdc4';
+                const slug  = location.pathname.split('/').pop().replace('.html', '');
+                try {
+                    const res  = await fetch(`${PROXY}/ghost/api/content/posts/slug/${slug}/?key=${KEY}`);
+                    if (!res.ok) return;
+                    const data = await res.json();
+                    const post = data.posts?.[0];
+                    if (!post?.codeinjection_head) return;
+                    const match = post.codeinjection_head.match(/<script[^>]*id="dd-meta"[^>]*>([\s\S]*?)<\/script>/);
+                    if (!match) return;
+                    const meta = JSON.parse(match[1]);
+                    if (meta.youtubeId) {
+                        document.getElementById('yt-iframe').src =
+                            `https://www.youtube.com/embed/${meta.youtubeId}`;
+                        if (meta.caption)
+                            document.getElementById('yt-caption').textContent = meta.caption;
+                        document.getElementById('yt-section').style.display = 'block';
+                    }
+                } catch (e) {}
+            })();
+        </script>
+
+        <!-- THE SCENE -->
+        <section class="mb-20 space-y-8">
+            <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase">Where This Started</h4>
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">A Man at the End of His Options</h2>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                His name is never given. Luke just calls him the jailer. He worked at a Roman prison in a city called Philippi — a tough, no-nonsense job in a tough city. He was not a bad person in the way we usually mean. He was just a man doing what the system told him.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                One night, an earthquake hit the prison. Every door flew open. Every chain fell off. By Roman law, a jailer who lost his prisoners was executed — he took their punishment. So when he woke up and saw the open doors, he drew his sword. He had run out of options and he knew it.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                Then a voice came from inside the prison. From the deepest cell. From a man who had every reason to have run. <em>"Stop. Don't do this. We are all here."</em>
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                The jailer dropped his sword, ran inside, fell to his knees — and asked the question. What must I do to be saved?
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                He was not asking in a church. He was not asking after years of searching. He was on the floor of a prison in the dark, thirty seconds from death, with no dignity left and nothing to offer. And he got the clearest, most direct answer in the entire Bible.
+            </p>
+        </section>
+
+        <div class="divider-line"><span>The Answer</span></div>
+
+        <!-- THE ANSWER -->
+        <section class="mb-20 space-y-8">
+            <div class="text-center py-10">
+                <p class="verse-big max-w-2xl mx-auto mb-6">
+                    "Believe in the Lord Jesus and you will be saved — along with everyone in your household."
+                </p>
+                <p class="text-zinc-400 text-sm font-bold tracking-[0.3em] uppercase">Acts 16:31</p>
+            </div>
+
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                That is it. That is the whole answer. Not a course. Not a checklist. Not a requirement to clean yourself up first or figure out all your questions before you're allowed in. The answer to the most important question in the world is one sentence long.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                Believe in the Lord Jesus. And you will be saved.
+            </p>
+
+            <div class="honest-box my-10">
+                <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-6">We should be honest about something</p>
+                <p class="text-zinc-300 text-xl leading-relaxed mb-4">
+                    Religion has spent a long time making this feel more complicated than it is. Attendance requirements. Behavior checklists. The feeling that you need to be a certain kind of person before God will take you seriously.
+                </p>
+                <p class="text-zinc-300 text-xl leading-relaxed">
+                    The man on the prison floor had none of that. He had no track record, no preparation, no church background. He had a question and an honest heart. And that was enough. It has always been enough.
+                </p>
+            </div>
+        </section>
+
+        <div class="divider-line"><span>What Believing Actually Means</span></div>
+
+        <!-- WHAT BELIEVING MEANS -->
+        <section class="mb-20 space-y-8">
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">It's Not What You Think</h2>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                When most people hear the word "believe," they think it means agreeing that something is true. Like believing the earth is round, or that a historical figure existed. Intellectual agreement. A mental tick in a box.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                But that is not what the word means here. Believing in Jesus — the kind of believing Acts 16:31 is talking about — is less like agreeing with a statement and more like stepping onto a bridge.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6 my-10">
+                <div class="step-card">
+                    <span class="step-number">1</span>
+                    <h4 class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Agreeing It's True</h4>
+                    <p class="text-zinc-600 text-lg leading-relaxed font-light">You can stand on a riverbank and look at a bridge and agree it's well-built. That is not the same as crossing it.</p>
+                </div>
+                <div class="step-card border-teal/20" style="border-color: #2d5a5a33;">
+                    <span class="step-number">2</span>
+                    <h4 class="text-teal text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Putting Your Weight On It</h4>
+                    <p class="text-zinc-600 text-lg leading-relaxed font-light">Believing in Jesus means putting your full weight on Him. Trusting Him not just as an idea but as the thing you are actually standing on.</p>
+                </div>
+            </div>
+
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                The jailer demonstrated this physically before he did it spiritually. The moment he dropped his sword and trusted the voice in the dark — that was the movement. He transferred his weight from his own solution to someone else. And then Paul asked him to do the same thing toward Jesus.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                Salvation is not a process you complete. It is a weight transfer you make. You stop holding yourself up by your own effort, your own record, your own attempts to be good enough — and you put your full weight on Jesus. That is the whole movement.
+            </p>
+        </section>
+
+        <div class="divider-line"><span>But Why Jesus?</span></div>
+
+        <!-- WHY JESUS -->
+        <section class="mb-20 space-y-8">
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">The Reason the Answer Is Specifically Him</h2>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                It is worth asking honestly: why is the answer believe in Jesus specifically? Why not just "be a good person" or "believe in something bigger than yourself"?
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                Here is the clearest way to say it: Jesus is the only person in history who dealt with the actual problem.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                The problem is not just that we do bad things. The problem is that we are separated from God — the source of everything good, everything alive, everything that lasts. And that separation has a cost. Every major religion in the world agrees on this. The disagreement is about who pays.
+            </p>
+
+            <div class="honest-box my-10">
+                <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-6">What Jesus Actually Did</p>
+                <p class="text-zinc-300 text-xl leading-relaxed mb-4">
+                    Jesus lived the only life that did not owe the debt — and then paid it anyway. On a cross, He took the full weight of everything that separates us from God. Not as a symbol. As a transaction.
+                </p>
+                <p class="text-zinc-300 text-xl leading-relaxed mb-4">
+                    And then He came back from the dead. Which means death — the final evidence of that separation — does not have the final word anymore.
+                </p>
+                <p class="text-zinc-300 text-xl leading-relaxed">
+                    When you put your weight on Jesus, you are not just adopting a philosophy. You are connecting yourself to the only person who has actually been through death and come out the other side — and who offers to take you with Him.
+                </p>
+            </div>
+
+            <div class="scripture-box p-8 rounded-r-xl">
+                <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">John 3:16 (NLT)</strong>
+                <em>"For this is how God loved the world: He gave his one and only Son, so that everyone who believes in him will not perish but have eternal life."</em></p>
+                <p class="text-zinc-500 text-base mt-4">Notice the word "everyone." Not everyone who has been good enough. Not everyone who has been religious enough. Everyone who believes. The door is not narrow in the way religion makes it feel. The door is open to anyone who wants to walk through it.</p>
+            </div>
+        </section>
+
+        <div class="divider-line"><span>What About My Life</span></div>
+
+        <!-- WHAT ABOUT MY LIFE -->
+        <section class="mb-20 space-y-8">
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">You Don't Have to Have It Together First</h2>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                One of the biggest things that stops people from taking this step is the feeling that they need to sort their life out first. Get to a better place. Stop doing the things they know they shouldn't be doing. And then, once they're in a reasonable state, approach God.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                The jailer had a sword in his hand thirty seconds before he was saved. He had not cleaned anything up. He had not fixed anything. He was at his absolute worst — and that was the moment grace found him. That is not unusual in this story. That is the pattern.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-4 my-10">
+                <div class="step-card text-center">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">The Tax Collector</p>
+                    <p class="text-zinc-600 text-base font-light leading-relaxed">Hated by everyone, including himself. Jesus called him down from a tree before he changed a single thing.</p>
+                </div>
+                <div class="step-card text-center">
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">The Woman at the Well</p>
+                    <p class="text-zinc-600 text-base font-light leading-relaxed">A complicated life, a long record, a social outcast. Jesus sat down with her in the middle of all of it.</p>
+                </div>
+                <div class="step-card text-center" style="border-color: #2d5a5a33;">
+                    <p class="text-teal text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">The Jailer</p>
+                    <p class="text-zinc-600 text-base font-light leading-relaxed">Sword in hand. Prison floor. Worst night of his life. Saved before sunrise.</p>
+                </div>
+            </div>
+
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                The consistent pattern is this: Jesus does not wait for you to arrive in a better condition. He meets you in the actual condition you are in right now. You do not need to earn the right to the conversation. You just need to have it.
+            </p>
+
+            <div class="scripture-box p-8 rounded-r-xl">
+                <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Romans 5:8 (NLT)</strong>
+                <em>"But God showed his great love for us by sending Christ to die for us while we were still sinners."</em></p>
+                <p class="text-zinc-500 text-base mt-4">Not after we sorted it out. Not when we were ready. While we were still in the middle of it. That is when He moved.</p>
+            </div>
+        </section>
+
+        <div class="divider-line"><span>The Step</span></div>
+
+        <!-- THE STEP -->
+        <section class="mb-20 space-y-8">
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">What You Actually Do</h2>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                If you have read this far and something in you is saying yes — that you want to put your weight on Jesus — here is what that looks like. It is not complicated. It does not require a building or a ceremony or a particular set of words. It requires honesty and a decision.
+            </p>
+
+            <div class="space-y-4 my-10">
+                <div class="step-card flex gap-6 items-start">
+                    <div class="w-10 h-10 rounded-full bg-teal/10 flex items-center justify-center flex-shrink-0 mt-1">
+                        <span class="text-teal font-bold text-sm">01</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-charcoal text-lg mb-2">Be honest about where you are</h4>
+                        <p class="text-zinc-500 text-base leading-relaxed font-light">You do not have to pretend. God already knows. The jailer did not dress it up — he just asked. Start there. Acknowledge that you need something you cannot provide for yourself.</p>
+                    </div>
+                </div>
+
+                <div class="step-card flex gap-6 items-start">
+                    <div class="w-10 h-10 rounded-full bg-teal/10 flex items-center justify-center flex-shrink-0 mt-1">
+                        <span class="text-teal font-bold text-sm">02</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-charcoal text-lg mb-2">Believe that Jesus is who He said He is</h4>
+                        <p class="text-zinc-500 text-base leading-relaxed font-light">That He is the Son of God. That He died for you specifically — not just for humanity in general, but for you. That He came back from the dead. You do not need to understand all of it. You just need to believe it enough to step onto the bridge.</p>
+                    </div>
+                </div>
+
+                <div class="step-card flex gap-6 items-start">
+                    <div class="w-10 h-10 rounded-full bg-teal/10 flex items-center justify-center flex-shrink-0 mt-1">
+                        <span class="text-teal font-bold text-sm">03</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-charcoal text-lg mb-2">Put your weight on Him</h4>
+                        <p class="text-zinc-500 text-base leading-relaxed font-light">Stop trying to hold yourself up. Stop managing your own case. Stop waiting until you are good enough. Transfer the weight. Tell Him — out loud if you can, in your own words — that you are done doing this alone and you are choosing to trust Him with your life.</p>
+                    </div>
+                </div>
+
+                <div class="step-card flex gap-6 items-start" style="border-color: #2d5a5a33;">
+                    <div class="w-10 h-10 rounded-full bg-teal flex items-center justify-center flex-shrink-0 mt-1">
+                        <span class="text-white font-bold text-sm">04</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-teal text-lg mb-2">Receive it</h4>
+                        <p class="text-zinc-500 text-base leading-relaxed font-light">This is the part people miss. The jailer did not ask the question and then spend a month waiting to feel saved. He believed, and the response was immediate. Salvation is not something you work toward — it is something you receive. The moment the weight transfers, it is done. Not because of how you feel, but because of what He did.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRAYER -->
+        <section class="mb-20">
+            <div class="prayer-box">
+                <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-8 text-center">If You Want To, You Can Pray Something Like This</h4>
+                <p class="text-zinc-600 text-lg leading-relaxed italic text-center max-w-2xl mx-auto mb-8">
+                    These are not magic words. God does not need perfect language. He needs an honest heart. Say it in your own words if you prefer — but if it helps to have a place to start:
+                </p>
+                <div class="border-t border-zinc-200 pt-8 max-w-2xl mx-auto">
+                    <p class="text-zinc-700 text-xl leading-relaxed italic font-light text-center">
+                        "Jesus, I'm not sure I have this all figured out. But I'm done trying to hold everything together on my own. I believe You are who You said You are. I believe You died for me and came back. I'm putting my weight on You — my life, my record, everything I've been carrying. I'm not coming to You because I've earned it. I'm coming because You said I could. Save me. I'm yours."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-line"><span>What Happens Next</span></div>
+
+        <!-- WHAT HAPPENS NEXT -->
+        <section class="mb-20 space-y-8">
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">The Night Doesn't End There</h2>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                After the jailer believed, something happened. He did not go back to bed. He brought Paul and Silas into his home. He washed their wounds. He fed them. His whole household heard what had happened — and by the time the sun came up, every one of them had believed too.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                The moment of believing is the beginning, not the end. What comes after is a life — a real, ordinary, sometimes complicated life — that now has a different foundation. The weight is on someone who can actually hold it.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                That life is better with people in it. People who are on the same road, asking the same questions, sitting at the same table. That is what a church is supposed to be — not a performance you attend, but a household you belong to.
+            </p>
+
+            <div class="teal-card mt-10">
+                <h4 class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-6 text-center">You Don't Have to Figure Out What Comes Next Alone</h4>
+                <p class="text-white/80 text-lg leading-relaxed text-center mb-8 font-light">
+                    If you prayed that prayer — or if you're still thinking and want to talk to someone — we would genuinely love to hear from you. No pressure. No agenda. Just people who have been on this road and want to help you find your footing.
+                </p>
+                <div class="text-center">
+                    <a href="/about.html#contact" class="inline-block bg-gold text-charcoal font-bold px-10 py-4 rounded-full text-sm tracking-[0.2em] uppercase hover:scale-105 transition-transform shadow-lg">Get In Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- DISCUSSION -->
+        <section class="bg-charcoal text-white rounded-[3.5rem] p-12 md:p-20 shadow-2xl relative mb-16">
+            <div class="text-center mb-20">
+                <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-4">If You're Still Thinking</h3>
+                <h2 class="text-4xl md:text-5xl font-bold">Questions Worth Sitting With</h2>
+                <div class="h-1 w-16 bg-teal mx-auto mt-10"></div>
+            </div>
+
+            <div class="space-y-16 max-w-2xl mx-auto">
+                <div class="group">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">01</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">What have you been holding yourself up with? What is the thing you are relying on instead of Jesus — your own effort, your record, your sense that you're basically a good person?</p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">02</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">The jailer asked his question from the worst moment of his life. Is there something in your life right now — a situation, a weight, a fear — that has brought you to a similar place? What would it feel like to put that down?</p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">03</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Is there something specific that has made you feel like you are not the kind of person God would take seriously? What would it mean if that thing was not actually a barrier?</p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">04</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">The answer in Acts 16:31 includes "you and your entire household." Is there someone in your life — a family member, a friend, someone close — who you wish could have what you are finding? What would it look like to share this with them?</p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">05</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed italic"><strong class="text-white not-italic block mb-2 underline decoration-gold/50 underline-offset-8">Family Prompt:</strong> The jailer brought Paul and Silas home that same night — and his whole family heard what had happened and believed together. Talk about it around the table this week: what would it mean for your family to put your weight on Jesus together? Is there anyone in your household who has never taken that step? How can you, as a family, make it easy for them to ask the question?</p>
+                </div>
+            </div>
+
+            <div class="mt-24 text-center">
+                <a href="/deepdives.html" class="inline-block border border-teal text-teal px-12 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[0.7rem] hover:bg-teal hover:text-white transition-all">Back to Library</a>
+            </div>
+        </section>
+
+        <!-- CLOSING -->
+        <section class="mt-0 text-center max-w-2xl mx-auto border-t border-zinc-100 pt-20">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.4em] uppercase mb-10">One Last Thing</h3>
+            <div class="space-y-6 text-2xl text-charcoal font-light italic leading-relaxed mb-12">
+                <p>"The jailer did not ask his question in the right place, at the right time, with the right preparation. He asked it on a prison floor in the dark with nothing left."</p>
+                <p>"And the answer came immediately. Completely. Without conditions."</p>
+                <p>"That answer has not changed. It is the same answer for you, right now, wherever you are reading this."</p>
+            </div>
+
+            <div class="scripture-box p-10 text-left rounded-r-xl mt-10 text-zinc-600 leading-relaxed text-lg not-italic">
+                <p class="text-zinc-700 text-xl leading-relaxed italic">
+                    "Believe in the Lord Jesus and you will be saved."
+                </p>
+                <p class="text-zinc-400 text-sm font-bold tracking-[0.3em] uppercase mt-4">Acts 16:31</p>
+                <p class="text-zinc-500 text-base mt-6 leading-relaxed">
+                    Not believe harder. Not believe better. Not believe once you've fixed everything first. Just believe. Put your weight on Him. That is the whole step. And it is enough. It has always been enough.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="/js/main.js" defer></script>
+</body>
+</html>
