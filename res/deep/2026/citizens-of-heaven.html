@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizens of Heaven | Deep Dive</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .accent-teal { color: #2d5a5a; }
+        .scripture-box { border-left: 3px solid #2d5a5a; background: #f4f7f7; }
+        .editorial-header { border-bottom: 1px solid #e5e7eb; }
+        .lead-quote { border-left: 3px solid #c5a059; }
+        .section-entry { border-top: 1px solid #e5e7eb; padding-top: 4rem; margin-top: 4rem; }
+        .section-entry:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+        .dark-callout { background: #1a1a1a; color: white; border-radius: 2rem; padding: 2.5rem 3rem; position: relative; overflow: hidden; }
+        .dark-callout::after { content: ''; position: absolute; bottom: -20px; right: -20px; width: 120px; height: 120px; background: #2d5a5a; opacity: 0.2; border-radius: 50%; filter: blur(30px); }
+        .word-display { font-family: 'Playfair Display', serif; letter-spacing: 0.02em; line-height: 1; color: #3d3d3d; }
+        .word-meta { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; }
+        .contrast-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #e5e7eb; border-radius: 2rem; overflow: hidden; }
+        .contrast-grid > div:first-child { border-right: 1px solid #e5e7eb; }
+        .section-number { font-family: 'Playfair Display', serif; font-size: clamp(5rem, 14vw, 9rem); line-height: 1; color: #2d5a5a; opacity: 0.08; letter-spacing: -0.03em; user-select: none; }
+
+        /* Test */
+        .test-option { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border: 1px solid #e8e4dc; border-radius: 12px; cursor: pointer; transition: all 0.2s; background: #faf9f6; margin-bottom: 10px; }
+        .test-option:hover { border-color: #2d5a5a; background: #f0f5f5; }
+        .test-option.selected { border-color: #2d5a5a; background: #eaf2f2; }
+        .test-option-dot { width: 18px; height: 18px; min-width: 18px; border-radius: 50%; border: 1.5px solid #ccc; margin-top: 2px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .test-option.selected .test-option-dot { border-color: #2d5a5a; background: #2d5a5a; }
+        .test-option.selected .test-option-dot::after { content: ''; width: 6px; height: 6px; background: white; border-radius: 50%; display: block; }
+        .test-option-text { font-size: 14px; line-height: 1.6; color: #444; }
+        .test-verse-box { border-left: 3px solid #c5a059; background: #fffdf7; padding: 10px 16px; border-radius: 0 8px 8px 0; margin-bottom: 1.25rem; }
+        .test-verse-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 13px; color: #666; line-height: 1.6; }
+        .test-verse-ref { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #c5a059; margin-top: 4px; }
+        .test-q-card { display: none; animation: testFadeUp 0.4s ease forwards; }
+        .test-q-card.active { display: block; }
+        @keyframes testFadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .test-btn-next { width: 100%; padding: 13px; background: #2d5a5a; color: white; border: none; border-radius: 10px; font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; opacity: 0.35; pointer-events: none; }
+        .test-btn-next.ready { opacity: 1; pointer-events: all; }
+        .test-btn-next:hover { background: #1e3e3e; }
+        .test-result { display: none; animation: testFadeUp 0.5s ease forwards; }
+        .test-result.active { display: block; }
+        .progress-track { height: 3px; background: #e8e4dc; border-radius: 2px; overflow: hidden; margin-bottom: 2rem; }
+        .progress-fill { height: 100%; background: #2d5a5a; border-radius: 2px; transition: width 0.5s ease; }
+    </style>
+</head>
+
+<body class="antialiased bg-cream font-body" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <main class="max-w-4xl mx-auto px-6 py-24">
+
+        <!-- HEADER -->
+        <header class="text-center mb-20 editorial-header pb-16">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-8">The Acts Journey</h3>
+            <h1 class="text-6xl md:text-8xl font-bold mb-10 leading-[1.05] tracking-tight text-charcoal">
+                Citizens of <span class="accent-teal italic font-display font-normal">Heaven</span>.
+            </h1>
+            <p class="text-2xl md:text-3xl text-charcoal font-light leading-relaxed italic lead-quote pl-8 text-left mx-auto max-w-3xl py-4">
+                Your citizenship was never contingent on your performance. You don't earn it. You receive it. The question is not whether you have it — the question is whether you're living from it.
+            </p>
+        </header>
+
+        <!-- FOUNDATION -->
+        <section class="max-w-2xl mx-auto text-center mb-24">
+            <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">The Foundation</h4>
+            <h2 class="text-3xl font-bold mb-6 italic">Acts 16:35–40 · Philippians 3:18–20</h2>
+            <a href="https://www.biblegateway.com/passage/?search=Acts+16%3A35-40%3BPhilippians+3%3A18-20&version=NLT" target="_blank" class="text-teal font-bold uppercase tracking-[0.2em] text-[0.7rem] border-b border-teal/30 pb-1 hover:text-gold hover:border-gold transition-all">
+                Read on Bible Gateway &rarr;
+            </a>
+        </section>
+
+        <!-- VIDEO -->
+        <section class="mb-32" id="yt-section" style="display:none">
+            <div class="relative rounded-[3rem] overflow-hidden shadow-2xl bg-zinc-200 aspect-video">
+                <iframe id="yt-iframe" class="absolute inset-0 w-full h-full" src="" title="Citizens of Heaven — Acts 16:35–40" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <p id="yt-caption" class="text-center text-zinc-400 text-[0.65rem] mt-8 tracking-[0.3em] uppercase italic"></p>
+        </section>
+
+        <script>
+            (async function () {
+                const PROXY = 'https://ghost-proxy.reinar-6fd.workers.dev';
+                const KEY   = 'c306251d7f0f57012025d2fdc4';
+                const slug  = location.pathname.split('/').pop().replace('.html', '');
+                try {
+                    const res  = await fetch(`${PROXY}/ghost/api/content/posts/slug/${slug}/?key=${KEY}`);
+                    if (!res.ok) return;
+                    const data = await res.json();
+                    const post = data.posts?.[0];
+                    if (!post?.codeinjection_head) return;
+                    const match = post.codeinjection_head.match(/<script[^>]*id="dd-meta"[^>]*>([\s\S]*?)<\/script>/);
+                    if (!match) return;
+                    const meta = JSON.parse(match[1]);
+                    if (meta.youtubeId) {
+                        document.getElementById('yt-iframe').src = `https://www.youtube.com/embed/${meta.youtubeId}`;
+                        if (meta.caption) document.getElementById('yt-caption').textContent = meta.caption;
+                        document.getElementById('yt-section').style.display = 'block';
+                    }
+                } catch (e) {}
+            })();
+        </script>
+
+        <!-- INTRO -->
+        <section class="mb-24 space-y-8">
+            <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase">Setting the Scene</h4>
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">The Close of Acts 16</h2>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                Acts 16 ends with a pivot that says everything. Paul is publicly vindicated by the magistrates — and walks straight past the victory into Lydia's living room. Not to leverage the win. To be with his people.
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                Years later he writes to that same church: <em>"We are citizens of heaven."</em> Not in addition to your earthly identity. Instead of it, at the deepest level. That is what this deep dive is about.
+            </p>
+        </section>
+
+        <!-- MAIN ARTICLE -->
+        <article class="mb-32">
+
+            <!-- SECTION I -->
+            <section class="section-entry space-y-8">
+                <div class="flex items-start gap-2 mb-2">
+                    <span class="section-number">I</span>
+                </div>
+                <h2 class="text-4xl font-bold text-charcoal leading-tight -mt-6">A Tool, Not a Home</h2>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    Roman citizenship was real power — the Porcian Law forbade magistrates from beating a Roman citizen without trial. When Paul invokes it in Acts 16:37 the magistrates are terrified. But notice when he uses it: not to protect himself while being beaten. After. He uses it to clear the name of the church he is leaving behind.
+                </p>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    The moment it is done, the tool goes down. He goes to Lydia's house. Paul had earthly citizenship and heavenly citizenship. He used one and <em>lived from</em> the other. That distinction is everything.
+                </p>
+                <div class="scripture-box p-8 rounded-r-xl">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Acts 16:40 (NLT)</strong>
+                    <em>"When Paul and Silas left the prison, they returned to the home of Lydia. There they met with the believers and encouraged them once more. Then they left town."</em></p>
+                </div>
+            </section>
+
+            <!-- SECTION II -->
+            <section class="section-entry space-y-8">
+                <div class="flex items-start gap-2 mb-2">
+                    <span class="section-number">II</span>
+                </div>
+                <h2 class="text-4xl font-bold text-charcoal leading-tight -mt-6">The Word That Reorients Everything</h2>
+
+                <div class="word-display text-zinc-600 text-6xl md:text-8xl font-bold mb-2">politeuma</div>
+                <p class="word-meta text-zinc-400 mb-8">Greek | πολίτευμα | citizenship, commonwealth — the governing state that claims your ultimate loyalty</p>
+
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    Philippi was a Roman colony — intensely proud of its Roman identity. When Paul writes <em>politeuma</em> to these people, the word lands like a grenade. He is not saying heaven is a nice bonus to your Roman citizenship. He is saying: your real governing state is not Rome. It is not Caesar who holds your city. And that changes who you are.
+                </p>
+
+                <div class="contrast-grid">
+                    <div class="p-8 bg-zinc-50">
+                        <h4 class="text-gold font-bold uppercase tracking-widest text-[0.65rem] mb-5">Roman citizenship</h4>
+                        <div class="space-y-3 text-zinc-500 text-base">
+                            <p>Inherited or purchased</p>
+                            <p>Revocable by the state</p>
+                            <p>Dependent on Rome's survival</p>
+                            <p>Ends at death</p>
+                        </div>
+                    </div>
+                    <div class="p-8 bg-white">
+                        <h4 class="text-teal font-bold uppercase tracking-widest text-[0.65rem] mb-5">Heavenly citizenship</h4>
+                        <div class="space-y-3 text-zinc-500 text-base">
+                            <p>Received by grace through faith</p>
+                            <p>Irrevocable — secured in Christ</p>
+                            <p>Dependent on the King who cannot fall</p>
+                            <p>Begins now and has no end</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scripture-box p-8 rounded-r-xl">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Philippians 3:20 (NLT)</strong>
+                    <em>"But we are citizens of heaven, where the Lord Jesus Christ lives."</em></p>
+                    <p class="text-zinc-500 text-base mt-3">Not <em>we will be.</em> We are. Present tense. Your citizenship is not a future reward. It is your current reality.</p>
+                </div>
+            </section>
+
+            <!-- SECTION III -->
+            <section class="section-entry space-y-8">
+                <div class="flex items-start gap-2 mb-2">
+                    <span class="section-number">III</span>
+                </div>
+                <h2 class="text-4xl font-bold text-charcoal leading-tight -mt-6">From No People to God's People</h2>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    Peter writes to literal migrants — scattered exiles living in cities that do not fully accept them. And he says:
+                </p>
+
+                <div class="dark-callout">
+                    <p class="text-zinc-300 text-2xl md:text-3xl font-display italic leading-tight relative z-10">
+                        "Once you had no identity as a people; now you are God's people. Once you received no mercy; now you have received God's mercy."
+                    </p>
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mt-6">1 Peter 2:10 (NLT)</p>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    This is not consolation for people on the outside. This is foundation. Heavenly citizenship does not add belonging on top of what you already have — it creates belonging where there was none. You were not included in an existing community. You were <em>made into a people.</em> Your belonging is not borrowed. It is yours.
+                </p>
+            </section>
+
+            <!-- SECTION IV -->
+            <section class="section-entry space-y-8">
+                <div class="flex items-start gap-2 mb-2">
+                    <span class="section-number">IV</span>
+                </div>
+                <h2 class="text-4xl font-bold text-charcoal leading-tight -mt-6">What It Produces</h2>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    Heavenly citizenship is not a concept to believe — it is an identity to inhabit. In Philippians 4, right after his citizenship declaration, Paul names what it looks like in practice.
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-6 mt-4">
+                    <div class="border border-zinc-200 rounded-[1.5rem] p-7">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Joy that is visible</p>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Not dependent on circumstances. Grounded in what cannot be taken. Citizens of heaven do not wait for things to improve before living well.</p>
+                    </div>
+                    <div class="border border-zinc-200 rounded-[1.5rem] p-7">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Gentleness that is evident</p>
+                        <p class="text-zinc-500 text-sm leading-relaxed">When your identity is secure you stop protecting yourself through hardness. Gentleness is the fruit of someone not fighting for their place.</p>
+                    </div>
+                    <div class="border border-zinc-200 rounded-[1.5rem] p-7">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Presence that strengthens</p>
+                        <p class="text-zinc-500 text-sm leading-relaxed">Paul went to Lydia's house bruised and exhausted. His presence said: we are still here, we still believe. Showing up broken is one of the most powerful things a citizen of heaven can do.</p>
+                    </div>
+                    <div class="border-2 border-teal/20 bg-teal/5 rounded-[1.5rem] p-7">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Freedom to stop waiting</p>
+                        <p class="text-zinc-500 text-sm leading-relaxed">The tragedy is not failing to earn citizenship. It is living like it is still pending when it has already been granted. Stop asking for permission to live from what is already yours.</p>
+                    </div>
+                </div>
+            </section>
+
+        </article>
+
+        <!-- CITIZENSHIP TEST -->
+        <section class="mb-32">
+            <div class="max-w-2xl mx-auto">
+
+                <div class="text-center mb-16">
+                    <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">Interactive</h4>
+                    <h2 class="text-4xl md:text-5xl font-bold text-charcoal mb-8">The Citizenship <span class="accent-teal italic font-display font-normal">Test</span>.</h2>
+                    <p class="text-zinc-600 text-xl leading-relaxed">
+                        You cannot fail your way out of your heavenly citizenship — it was never earned and it cannot be revoked. But there is a gap worth naming: the gap between <em>having</em> it and <em>living from it</em>. Five questions. Answer honestly. The result is not a verdict — it is an invitation.
+                    </p>
+                </div>
+
+                <div class="bg-white border border-zinc-200 rounded-[2rem] p-8 md:p-12 shadow-sm">
+
+                    <div class="progress-track">
+                        <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+                    </div>
+                    <div class="flex justify-between items-center mb-8">
+                        <span id="prog-label" class="text-[0.65rem] font-bold tracking-[0.2em] uppercase text-zinc-400">Question 1 of 5</span>
+                        <span id="prog-pct" class="text-[0.65rem] font-bold tracking-[0.2em] uppercase text-zinc-400">0%</span>
+                    </div>
+
+                    <!-- Q1 -->
+                    <div id="tq1" class="test-q-card active">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Question 01</p>
+                        <p class="text-charcoal font-bold text-xl leading-snug mb-6" style="font-family:'Playfair Display',serif;">When life gets hard — when the system fails you, when things don't go your way — where does your sense of security actually come from?</p>
+                        <div class="test-verse-box">
+                            <p class="test-verse-text">"I have learned, in whatever state I am, to be content."</p>
+                            <p class="test-verse-ref">Philippians 4:11</p>
+                        </div>
+                        <div id="opts1">
+                            <div class="test-option" onclick="tSelect(this,1,3)"><div class="test-option-dot"></div><p class="test-option-text">My circumstances. When things are stable I feel secure. When they're not, I struggle.</p></div>
+                            <div class="test-option" onclick="tSelect(this,1,2)"><div class="test-option-dot"></div><p class="test-option-text">Mostly from God, but difficult seasons shake me more than I'd like to admit.</p></div>
+                            <div class="test-option" onclick="tSelect(this,1,1)"><div class="test-option-dot"></div><p class="test-option-text">From my identity in Christ. My circumstances don't change who I am or whose I am.</p></div>
+                        </div>
+                        <button class="test-btn-next mt-6" id="tbtn1" onclick="tNext(1)">Next Question &rarr;</button>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div id="tq2" class="test-q-card">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Question 02</p>
+                        <p class="text-charcoal font-bold text-xl leading-snug mb-6" style="font-family:'Playfair Display',serif;">How tightly are you holding your earthly identity — your status, your reputation, your nationality, your platform?</p>
+                        <div class="test-verse-box">
+                            <p class="test-verse-text">"But we are citizens of heaven, where the Lord Jesus Christ lives."</p>
+                            <p class="test-verse-ref">Philippians 3:20 (NLT)</p>
+                        </div>
+                        <div id="opts2">
+                            <div class="test-option" onclick="tSelect(this,2,3)"><div class="test-option-dot"></div><p class="test-option-text">Very tightly. My standing in the world matters a lot to how I feel about myself.</p></div>
+                            <div class="test-option" onclick="tSelect(this,2,2)"><div class="test-option-dot"></div><p class="test-option-text">I know they're temporary, but I still catch myself chasing approval and status.</p></div>
+                            <div class="test-option" onclick="tSelect(this,2,1)"><div class="test-option-dot"></div><p class="test-option-text">Loosely. I use them as tools but they don't define me. My real identity is elsewhere.</p></div>
+                        </div>
+                        <button class="test-btn-next mt-6" id="tbtn2" onclick="tNext(2)">Next Question &rarr;</button>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div id="tq3" class="test-q-card">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Question 03</p>
+                        <p class="text-charcoal font-bold text-xl leading-snug mb-6" style="font-family:'Playfair Display',serif;">Is the joy you carry visible to the people around you — even when things are difficult?</p>
+                        <div class="test-verse-box">
+                            <p class="test-verse-text">"Always be full of joy in the Lord. I say it again — rejoice! Let your gentleness be evident to all."</p>
+                            <p class="test-verse-ref">Philippians 4:4–5 (NLT)</p>
+                        </div>
+                        <div id="opts3">
+                            <div class="test-option" onclick="tSelect(this,3,3)"><div class="test-option-dot"></div><p class="test-option-text">Honestly, no. My joy is mostly dependent on how things are going at the time.</p></div>
+                            <div class="test-option" onclick="tSelect(this,3,2)"><div class="test-option-dot"></div><p class="test-option-text">Sometimes. I have real moments of joy but it's not consistent — not something others would notice.</p></div>
+                            <div class="test-option" onclick="tSelect(this,3,1)"><div class="test-option-dot"></div><p class="test-option-text">Yes. People around me would describe me as someone with a settled, genuine joy.</p></div>
+                        </div>
+                        <button class="test-btn-next mt-6" id="tbtn3" onclick="tNext(3)">Next Question &rarr;</button>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div id="tq4" class="test-q-card">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Question 04</p>
+                        <p class="text-charcoal font-bold text-xl leading-snug mb-6" style="font-family:'Playfair Display',serif;">When someone around you is struggling or broken — do you show up, or do you pull back?</p>
+                        <div class="test-verse-box">
+                            <p class="test-verse-text">"Let us not neglect our meeting together... but encourage one another."</p>
+                            <p class="test-verse-ref">Hebrews 10:25 (NLT)</p>
+                        </div>
+                        <div id="opts4">
+                            <div class="test-option" onclick="tSelect(this,4,3)"><div class="test-option-dot"></div><p class="test-option-text">I tend to pull back. Other people's pain makes me uncomfortable and I don't know what to do.</p></div>
+                            <div class="test-option" onclick="tSelect(this,4,2)"><div class="test-option-dot"></div><p class="test-option-text">I want to show up but I often wait until I feel ready or have the right words first.</p></div>
+                            <div class="test-option" onclick="tSelect(this,4,1)"><div class="test-option-dot"></div><p class="test-option-text">I show up — not because I have answers, but because presence matters more than solutions.</p></div>
+                        </div>
+                        <button class="test-btn-next mt-6" id="tbtn4" onclick="tNext(4)">Next Question &rarr;</button>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div id="tq5" class="test-q-card">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Question 05</p>
+                        <p class="text-charcoal font-bold text-xl leading-snug mb-6" style="font-family:'Playfair Display',serif;">Are you living like someone who already belongs — or are you still waiting for permission to arrive?</p>
+                        <div class="test-verse-box">
+                            <p class="test-verse-text">"Once you had no identity as a people; now you are God's people."</p>
+                            <p class="test-verse-ref">1 Peter 2:10 (NLT)</p>
+                        </div>
+                        <div id="opts5">
+                            <div class="test-option" onclick="tSelect(this,5,3)"><div class="test-option-dot"></div><p class="test-option-text">Still waiting. I often feel like I need to earn my place — in the church, in life, with God.</p></div>
+                            <div class="test-option" onclick="tSelect(this,5,2)"><div class="test-option-dot"></div><p class="test-option-text">I know the truth in my head, but my heart still seeks approval and validation from others.</p></div>
+                            <div class="test-option" onclick="tSelect(this,5,1)"><div class="test-option-dot"></div><p class="test-option-text">I live from belonging. My identity is settled and I move through the world from that place.</p></div>
+                        </div>
+                        <button class="test-btn-next mt-6" id="tbtn5" onclick="tFinish()">See My Results &rarr;</button>
+                    </div>
+
+                    <!-- RESULT -->
+                    <div id="tresult" class="test-result">
+                        <div class="bg-charcoal rounded-[1.5rem] p-8 text-center mb-6">
+                            <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-3">Your Citizenship Profile</p>
+                            <p id="t-score" class="text-white font-bold mb-1" style="font-family:'Playfair Display',serif;font-size:clamp(2.5rem,8vw,4rem);line-height:1;"></p>
+                            <p id="t-verdict" class="text-zinc-400 italic text-lg" style="font-family:'Playfair Display',serif;"></p>
+                        </div>
+                        <div class="border border-zinc-200 rounded-[1.5rem] p-8 mb-6 bg-zinc-50">
+                            <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">What This Reveals</p>
+                            <p id="t-body" class="text-zinc-600 text-base leading-relaxed"></p>
+                        </div>
+                        <div class="bg-teal rounded-[1.5rem] p-8 mb-6">
+                            <p class="text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-5" style="color:#9ecece;">Your Challenge This Week</p>
+                            <div id="t-challenge" class="text-white/90 text-base leading-relaxed space-y-4"></div>
+                        </div>
+                        <button onclick="tRestart()" class="w-full py-3 bg-transparent border border-teal text-teal rounded-xl font-bold uppercase tracking-[0.15em] text-xs cursor-pointer hover:bg-teal hover:text-white transition-all" style="font-family:'Outfit',sans-serif;">&#8635; Take It Again</button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- DISCUSSION -->
+        <section class="bg-charcoal text-white rounded-[3.5rem] p-12 md:p-20 shadow-2xl relative mb-16">
+            <div class="text-center mb-20">
+                <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-4">The Living Room Circle</h3>
+                <h2 class="text-4xl md:text-6xl font-bold">Discussion &amp; Reflection</h2>
+                <div class="h-1 w-16 bg-teal mx-auto mt-10"></div>
+            </div>
+
+            <div class="space-y-16 max-w-2xl mx-auto">
+                <div class="group">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">01</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Paul used his Roman citizenship as a tool — to protect the church, not himself. Are there resources, platforms, or privileges in your life that you have been using for your own protection? What would it look like to redirect them for the sake of others?</p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">02</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">After his public vindication, Paul went straight to Lydia's living room. Where do you go after a win? After the applause, the approval, the moment things finally go your way — what is pulling your attention? What does your destination say about where you think the real power is?</p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">03</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">1 Peter 2:10 says you were once no people and are now God's people — total and permanent. Is there an area of your life where you are still operating as if you were <em>no people</em>? Still displaced. Still excluded. Still waiting to be accepted. What would it mean to stop living from that old identity this week?</p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">04</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed italic">
+                        <strong class="text-white not-italic block mb-2 underline decoration-gold/50 underline-offset-8">Family Prompt:</strong> Abraham lived in Canaan for sixty years and still called himself a stranger. Talk together: what does it look like for your family to be fully present in your neighbourhood and city — while holding it loosely, because your deepest home is elsewhere? Where do you feel most like strangers? Where do you feel most at home?
+                    </p>
+                </div>
+
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">05</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Philippians 4:5 says "let your gentleness be evident to all." Gentleness is the visible fruit of a person who is not fighting for their place. Would the people in your world describe you as someone at peace with who you are? What would need to change for your gentleness to become evident?</p>
+                </div>
+            </div>
+
+            <div class="mt-24 text-center">
+                <a href="/deepdives.html" class="inline-block border border-teal text-teal px-12 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[0.7rem] hover:bg-teal hover:text-white transition-all">Back to Library</a>
+            </div>
+        </section>
+
+        <!-- CLOSING -->
+        <section class="mt-0 text-center max-w-2xl mx-auto border-t border-zinc-100 pt-20">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.4em] uppercase mb-10">A Thought to Take Home</h3>
+            <div class="space-y-6 text-2xl text-charcoal font-light italic leading-relaxed mb-12">
+                <p>Paul used everything Rome gave him — and then walked away from it. Not because Roman power was worthless, but because he knew exactly what it was worth: a tool, not a home.</p>
+                <p>The tragedy is not using earthly systems. The tragedy is building your life on them. They will use you back. They will make you promises. And eventually, every empire runs out of road.</p>
+                <p>You are a citizen of heaven. Not someday. Now. The passport has been issued, the name has been written, the belonging has been settled. The only question left is whether you are living like it.</p>
+            </div>
+
+            <div class="scripture-box p-10 text-left rounded-r-xl mt-16 text-zinc-600 leading-relaxed text-lg not-italic">
+                <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-6 not-italic">A Prayer for Those Who Are Still Waiting</h4>
+                <p class="italic">
+                    Father, we confess that we have been living as if our citizenship were still pending. As if the approval of the world were still required before we could fully belong.<br/><br/>
+                    Remind us of what is already true: we were no people, and now we are Your people. We were without mercy, and now mercy is what we live inside of. We have been gathered from every scattered place — every country that did not fully want us, every room that fell quiet when we walked in — and made into something that will outlast all of it.<br/><br/>
+                    Let us hold the world's tools wisely and its approval loosely. Let us walk toward the living room — toward fellowship, toward presence, toward the people who love us — rather than toward the magistrates who only just decided to cooperate.<br/><br/>
+                    And where we have been waiting for permission to arrive: let us stop waiting. We are already here. We already belong.<br/><br/>
+                    In the name of Jesus — the one who is preparing a city for us, and who is not ashamed to be called our God. Amen.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="/js/main.js" defer></script>
+
+    <script>
+        const tScores = {};
+
+        function tSelect(el, q, val) {
+            document.getElementById('opts'+q).querySelectorAll('.test-option').forEach(o => o.classList.remove('selected'));
+            el.classList.add('selected');
+            tScores[q] = val;
+            const btn = document.getElementById('tbtn'+q);
+            if (btn) btn.classList.add('ready');
+        }
+
+        function tNext(q) {
+            if (!tScores[q]) return;
+            document.getElementById('tq'+q).classList.remove('active');
+            const next = document.getElementById('tq'+(q+1));
+            if (next) { next.classList.add('active'); tUpdateProgress(q+1); }
+        }
+
+        function tUpdateProgress(q) {
+            const pct = Math.round(((q-1)/5)*100);
+            document.getElementById('prog-fill').style.width = pct+'%';
+            document.getElementById('prog-label').textContent = 'Question '+q+' of 5';
+            document.getElementById('prog-pct').textContent = pct+'%';
+        }
+
+        function tFinish() {
+            if (!tScores[5]) return;
+            document.getElementById('tq5').classList.remove('active');
+            document.getElementById('prog-fill').style.width = '100%';
+            document.getElementById('prog-label').textContent = 'Complete';
+            document.getElementById('prog-pct').textContent = '100%';
+
+            const living = Object.values(tScores).filter(v => v === 1).length;
+            let verdict, body, challenges;
+
+            if (living >= 4) {
+                verdict = 'Living from your citizenship';
+                body = 'You show the marks of someone whose identity is genuinely rooted in Christ. You hold earthly things loosely, show up for others, and your joy is not dependent on circumstances. This is what it looks like to live from belonging rather than toward it. The invitation now is not to achieve more — it is to help others find what you have found.';
+                challenges = [
+                    'This week, name what you have for someone who is still waiting to arrive. Not a lecture — just your presence. Let them see that it is real, and tell them why. Your settled peace is not yours alone. It is meant to spread.',
+                    'Reflect: Who in your world is still living as "no people"? What is one concrete way you can point them toward what is already true about them?'
+                ];
+            } else if (living >= 2) {
+                verdict = 'Knowing it, but not yet living it';
+                body = 'You have the theology right — you know your citizenship is in heaven. But there is a gap between knowing and living. Some areas of your life are still operating from earthly approval, fear, or waiting for permission that has already been granted. That gap is not a failure. It is an invitation. The truth is already yours. The work is letting it reach the parts of your life that have not heard it yet.';
+                challenges = [
+                    'Identify the one area where you are most dependent on earthly approval — your career, your relationships, your standing in the church. Sit with 1 Peter 2:10 every morning this week. Read it slowly. Let "now you are God\'s people" land somewhere new.',
+                    'Reflect: What would change in how you carry yourself this week if you genuinely stopped waiting for the world\'s permission to belong? Write it down. Be specific.',
+                    'Take one action this week that only makes sense if your identity is already secure — something generous, or gentle, or vulnerable — that you would not normally risk.'
+                ];
+            } else {
+                verdict = 'Still waiting to arrive';
+                body = 'Much of your life is still running on earthly operating systems — security from circumstances, identity from status, joy dependent on outcomes. That is not a verdict against you. It is a description of where you are. The good news is that your citizenship was never contingent on your performance. You do not earn it. You receive it. The door is open. You do not have to keep knocking.';
+                challenges = [
+                    'Start with one truth this week: you are already God\'s people (1 Peter 2:10). Write it somewhere you will see it every day. Do not try to feel it yet — just let it be true. Heavenly citizenship begins with receiving, not achieving.',
+                    'Reflect: Where did the idea come from that you need to earn your place? A specific voice, a specific season, a specific wound. Bring that thing — by name — to God in prayer this week.',
+                    'Find one person in your community and simply show up for them this week. No agenda, no fixing, just presence. Practise living like someone whose belonging is secure enough to give away.'
+                ];
+            }
+
+            document.getElementById('t-score').innerHTML = living + '<span style="color:#c5a059">/5</span>';
+            document.getElementById('t-verdict').textContent = verdict;
+            document.getElementById('t-body').textContent = body;
+
+            const challengeEl = document.getElementById('t-challenge');
+            challengeEl.innerHTML = '';
+            challenges.forEach(c => {
+                const p = document.createElement('p');
+                p.textContent = c;
+                challengeEl.appendChild(p);
+            });
+
+            document.getElementById('tresult').classList.add('active');
+        }
+
+        function tRestart() {
+            Object.keys(tScores).forEach(k => delete tScores[k]);
+            document.querySelectorAll('.test-q-card').forEach(c => {
+                c.classList.remove('active');
+                c.querySelectorAll('.test-option').forEach(o => o.classList.remove('selected'));
+            });
+            document.querySelectorAll('.test-btn-next').forEach(b => b.classList.remove('ready'));
+            document.getElementById('tresult').classList.remove('active');
+            document.getElementById('tq1').classList.add('active');
+            document.getElementById('prog-fill').style.width = '0%';
+            document.getElementById('prog-label').textContent = 'Question 1 of 5';
+            document.getElementById('prog-pct').textContent = '0%';
+        }
+    </script>
+
+</body>
+</html>
