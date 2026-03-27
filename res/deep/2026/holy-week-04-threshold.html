@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Threshold | The Weight, The Price, The Dawn | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --gold: #c8a055;
+            --gold-bright: #ddb96a;
+            --teal: #2d5a5a;
+            --dark-bg: #111210;
+            --dark-surface: #191c17;
+            --dark-border: #272e22;
+            --warm-light: rgba(220,195,120,0.1);
+            --text-primary: #f2ede0;
+            --text-body: #a8a48a;
+            --text-muted: #545040;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ── HERO — doorway light. warm, still, waiting ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Light coming through a doorway — warm, wide, from above and below */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 100% 80% at 50% 110%, rgba(210,180,100,0.16) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 30% at 50% 100%, rgba(240,210,130,0.09) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 40% at 50% -10%, rgba(210,180,100,0.06) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* Doorway lines — two vertical pillars of light, open centre */
+        .door-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .door-bg svg { width: 100%; height: 100%; }
+
+        .series-tag {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--gold-bright);
+            opacity: 0.7;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .hero-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(7rem, 20vw, 14rem);
+            font-weight: 700;
+            color: rgba(210,180,100,0.04);
+            line-height: 1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-question {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(0.75rem, 2vw, 0.95rem);
+            font-style: italic;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            margin-bottom: 1.75rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1.0;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .hero h1 em { color: var(--gold-bright); font-style: italic; }
+
+        .hero-label {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            font-style: italic;
+            color: rgba(210,180,100,0.35);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: #6a6450;
+            max-width: 32rem;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+            line-height: 1.75;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.35;
+            animation: fadeDown 2s ease infinite;
+        }
+
+        .scroll-hint span { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; }
+        .scroll-hint-line { width: 1px; height: 3rem; background: linear-gradient(to bottom, var(--gold-bright), transparent); }
+
+        @keyframes fadeDown {
+            0%, 100% { opacity: 0.35; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.65; transform: translateX(-50%) translateY(6px); }
+        }
+
+        /* ── SERIES NAV — full four-panel ── */
+        .series-nav {
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid var(--dark-border);
+            border-bottom: 1px solid var(--dark-border);
+            background: var(--dark-surface);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .series-nav::-webkit-scrollbar { display: none; }
+
+        .series-panel {
+            flex: 1;
+            min-width: 7rem;
+            max-width: 12rem;
+            padding: 1.1rem 1.25rem;
+            text-align: center;
+            border-right: 1px solid var(--dark-border);
+            text-decoration: none;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .series-panel:last-child { border-right: none; }
+        .series-panel:hover:not(.active) { background: rgba(255,255,255,0.02); }
+
+        .series-panel.active {
+            background: rgba(210,180,100,0.07);
+            border-bottom: 2px solid var(--gold-bright);
+            margin-bottom: -1px;
+        }
+
+        .series-panel .panel-num { font-size: 0.55rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.2rem; }
+        .series-panel.active .panel-num { color: var(--gold-bright); opacity: 0.8; }
+        .series-panel .panel-label { font-family: 'Playfair Display', serif; font-size: 0.85rem; font-style: italic; color: var(--text-muted); }
+        .series-panel.active .panel-label { color: var(--text-primary); }
+
+        /* ── CONTENT ── */
+        .content-wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+
+        .section { padding: 6rem 0; border-bottom: 1px solid var(--dark-border); }
+        .section:last-of-type { border-bottom: none; }
+
+        .section-tag { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 1.5rem; display: block; }
+
+        .section h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; line-height: 1.2; color: var(--text-primary); margin-bottom: 2.5rem; }
+
+        .section p { font-size: 1.05rem; color: var(--text-body); margin-bottom: 1.5rem; line-height: 1.85; }
+        .section p strong { color: #d4c8a0; font-weight: 600; }
+        .section p em { color: #d4c8a0; }
+
+        .scripture-pull { margin: 2.5rem 0; padding: 2rem 2rem 2rem 2.5rem; border-left: 2px solid var(--gold); background: rgba(210,180,100,0.05); border-radius: 0 0.5rem 0.5rem 0; }
+        .scripture-pull p { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic; color: #d8cc98; margin-bottom: 0.75rem; line-height: 1.7; }
+        .scripture-pull .ref { font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); opacity: 0.7; }
+
+        .fracture-divider { display: flex; align-items: center; gap: 1rem; margin: 3rem 0; opacity: 0.35; }
+        .fracture-divider::before, .fracture-divider::after { content: ''; flex: 1; height: 1px; background: var(--dark-border); }
+        .fracture-divider span { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+
+        /* ── THE ANSWER — large, central, unmissable ── */
+        .answer-block {
+            margin: 3.5rem 0;
+            padding: 3.5rem 2.5rem;
+            background: var(--dark-surface);
+            border: 1px solid rgba(210,180,100,0.2);
+            border-radius: 1.25rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .answer-block::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 90% 60% at 50% 100%, rgba(210,180,100,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 90% 60% at 50% 0%, rgba(210,180,100,0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .answer-block::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 60%; height: 1px;
+            background: linear-gradient(to right, transparent, rgba(210,180,100,0.4), transparent);
+        }
+
+        .answer-eyebrow {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .answer-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 5vw, 2.8rem);
+            font-style: italic;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.25;
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .answer-text em { color: var(--gold-bright); font-style: normal; }
+
+        .answer-ref {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            position: relative;
+        }
+
+        /* ── WHAT BELIEVE MEANS — the bridge ── */
+        .bridge-visual {
+            margin: 3rem 0;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 0;
+            align-items: center;
+        }
+
+        .bridge-side {
+            padding: 1.75rem;
+            background: var(--dark-surface);
+            border: 1px solid var(--dark-border);
+            text-align: center;
+        }
+
+        .bridge-side:first-child { border-radius: 0.75rem 0 0 0.75rem; border-right: none; }
+        .bridge-side:last-child { border-radius: 0 0.75rem 0.75rem 0; border-left: none; }
+
+        .bridge-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 0.25rem;
+            background: var(--dark-surface);
+            border-top: 1px solid var(--dark-border);
+            border-bottom: 1px solid var(--dark-border);
+            position: relative;
+        }
+
+        .bridge-arrow {
+            font-size: 1.2rem;
+            color: var(--gold);
+            opacity: 0.4;
+            line-height: 1;
+        }
+
+        .bridge-side-label {
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .bridge-side-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--text-body);
+            line-height: 1.3;
+        }
+
+        .bridge-side.active-side {
+            border-color: rgba(210,180,100,0.25);
+            background: rgba(210,180,100,0.05);
+        }
+
+        .bridge-side.active-side .bridge-side-title { color: var(--text-primary); }
+        .bridge-side.active-side .bridge-side-label { color: var(--gold); opacity: 0.7; }
+
+        /* ── THE STEP — four honest actions ── */
+        .step-list { display: grid; gap: 1px; margin: 2.5rem 0; background: var(--dark-border); border-radius: 1rem; overflow: hidden; }
+
+        .step-item {
+            display: grid;
+            grid-template-columns: 3rem 1fr;
+            align-items: start;
+            gap: 0;
+            background: var(--dark-surface);
+            transition: background 0.2s;
+        }
+
+        .step-item:hover { background: rgba(210,180,100,0.04); }
+
+        .step-num {
+            padding: 1.75rem 0 1.75rem 1.75rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: rgba(210,180,100,0.12);
+            line-height: 1;
+            padding-top: 1.6rem;
+        }
+
+        .step-content { padding: 1.5rem 1.75rem 1.5rem 1rem; }
+
+        .step-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+            line-height: 1.3;
+        }
+
+        .step-body {
+            font-size: 0.9rem;
+            color: var(--text-body);
+            line-height: 1.75;
+        }
+
+        /* ── PRAYER ── */
+        .prayer-block {
+            margin: 3.5rem 0;
+            padding: 2.5rem;
+            border: 1px solid var(--dark-border);
+            border-radius: 1rem;
+            position: relative;
+        }
+
+        .prayer-block::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 40%; height: 1px;
+            background: linear-gradient(to right, transparent, rgba(210,180,100,0.3), transparent);
+        }
+
+        .prayer-eyebrow {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 1.75rem;
+        }
+
+        .prayer-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-style: italic;
+            color: #a09880;
+            line-height: 1.9;
+            text-align: center;
+        }
+
+        /* ── REFLECTION QUESTIONS ── */
+        .questions-list {
+            margin: 2.5rem 0;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .question-item {
+            padding: 1.5rem 1.75rem;
+            background: var(--dark-surface);
+            border: 1px solid var(--dark-border);
+            border-radius: 0.75rem;
+            font-size: 0.98rem;
+            color: var(--text-body);
+            line-height: 1.75;
+            border-left: 2px solid rgba(210,180,100,0.2);
+        }
+
+        /* ── CONNECT ── */
+        .connect-block {
+            margin: 3.5rem 0 0;
+            padding: 2.5rem;
+            background: var(--dark-surface);
+            border: 1px solid rgba(210,180,100,0.15);
+            border-radius: 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .connect-block::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 60%;
+            background: radial-gradient(ellipse 80% 100% at 50% 100%, rgba(210,180,100,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .connect-block h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-style: italic; color: var(--text-primary); margin-bottom: 0.75rem; position: relative; }
+        .connect-block p { font-size: 0.95rem; color: var(--text-muted); max-width: 26rem; margin: 0 auto 2rem; position: relative; }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 0.9rem 2.5rem;
+            background: rgba(210,180,100,0.12);
+            border: 1px solid rgba(210,180,100,0.45);
+            color: var(--gold-bright);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: background 0.2s, border-color 0.2s;
+            position: relative;
+        }
+
+        .btn-primary:hover { background: rgba(210,180,100,0.2); border-color: rgba(210,180,100,0.7); }
+
+        /* ── CLOSING ── */
+        .closing {
+            padding: 6rem 0 4rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .closing::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 60%; height: 1px;
+            background: linear-gradient(to right, transparent, rgba(210,180,100,0.25), transparent);
+        }
+
+        .closing blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 3vw, 1.6rem);
+            font-style: italic;
+            color: #5a5440;
+            max-width: 36rem;
+            margin: 0 auto 1.5rem;
+            line-height: 1.65;
+        }
+
+        .closing-ref {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            display: block;
+        }
+
+        .btn-series { display: inline-block; padding: 0.75rem 2rem; background: transparent; border: 1px solid rgba(210,180,100,0.2); color: var(--text-muted); font-family: 'Outfit', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none; border-radius: 100px; transition: color 0.2s, border-color 0.2s; }
+        .btn-series:hover { color: var(--gold-bright); border-color: rgba(210,180,100,0.4); }
+
+        /* ── FOOTER ── */
+        .footer-strip { border-top: 1px solid var(--dark-border); padding: 3rem 1.5rem 4rem; display: flex; align-items: center; justify-content: space-between; max-width: 44rem; margin: 0 auto; width: 100%; }
+        .footer-strip a { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-strip a:hover { color: var(--gold-bright); }
+
+        #footer-placeholder, #footer-placeholder > *, #footer-placeholder footer, #footer-placeholder section, #footer-placeholder div {
+            background-color: transparent !important;
+            color: var(--text-muted) !important;
+            border-color: var(--dark-border) !important;
+        }
+
+        #footer-placeholder a { color: var(--text-muted) !important; }
+        #footer-placeholder a:hover { color: var(--gold-bright) !important; }
+        #footer-placeholder h2, #footer-placeholder h3, #footer-placeholder p { color: var(--text-muted) !important; }
+
+        .footer-glow-wrap {
+            position: relative;
+            background-color: var(--dark-bg);
+            border-top: 1px solid var(--dark-border);
+            overflow: hidden;
+        }
+
+        .footer-glow-wrap::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 80%; height: 1px;
+            background: linear-gradient(to right, transparent, rgba(210,180,100,0.25), transparent);
+            pointer-events: none;
+        }
+
+        .footer-glow-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 18rem;
+            background: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(210,180,100,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        @media (max-width: 640px) {
+            .series-panel { padding: 0.9rem 0.75rem; }
+            .series-panel .panel-label { font-size: 0.75rem; }
+            .section { padding: 4rem 0; }
+            .bridge-side-title { font-size: 0.85rem; }
+            .answer-text { font-size: clamp(1.4rem, 6vw, 2rem); }
+        }
+    </style>
+</head>
+<body class="antialiased" data-current="">
+
+    <div id="header-placeholder"></div>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+        <div class="door-bg" aria-hidden="true">
+            <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Two vertical pillars, open centre — a doorway -->
+                <line x1="560" y1="0" x2="560" y2="900" stroke="#d4b870" stroke-width="0.6" opacity="0.07"/>
+                <line x1="840" y1="0" x2="840" y2="900" stroke="#d4b870" stroke-width="0.6" opacity="0.07"/>
+                <!-- Horizontal threshold line -->
+                <line x1="400" y1="850" x2="1000" y2="850" stroke="#d4b870" stroke-width="0.5" opacity="0.06"/>
+                <!-- Warm glow through the open door -->
+                <ellipse cx="700" cy="450" rx="140" ry="400" fill="#d4b870" opacity="0.025"/>
+                <!-- Light spilling at the base -->
+                <ellipse cx="700" cy="900" rx="200" ry="80" fill="#d4b870" opacity="0.04"/>
+            </svg>
+        </div>
+
+        <div class="hero-number" aria-hidden="true">IV</div>
+
+        <p class="series-tag">The Weight, The Price, The Dawn &nbsp;·&nbsp; Now</p>
+        <p class="hero-question">"What must I do to be saved?"</p>
+        <h1>Believe in<br><em>Jesus</em>.</h1>
+        <p class="hero-label">The Threshold</p>
+        <p class="hero-sub">You have read the case. You know what He suffered, what it cost, and what the empty tomb means. There is only one question left.</p>
+
+        <div class="scroll-hint" aria-hidden="true">
+            <span>Read</span>
+            <div class="scroll-hint-line"></div>
+        </div>
+    </section>
+
+    <!-- ── SERIES NAV — all four ── -->
+    <nav class="series-nav" aria-label="Series navigation">
+        <a href="holy-week-01-suffer.html" class="series-panel">
+            <div class="panel-num">One</div>
+            <div class="panel-label">The Weight</div>
+        </a>
+        <a href="holy-week-02-die.html" class="series-panel">
+            <div class="panel-num">Two</div>
+            <div class="panel-label">The Price</div>
+        </a>
+        <a href="holy-week-03-rise.html" class="series-panel">
+            <div class="panel-num">Three</div>
+            <div class="panel-label">The Dawn</div>
+        </a>
+        <div class="series-panel active" aria-current="page">
+            <div class="panel-num">Now</div>
+            <div class="panel-label">The Threshold</div>
+        </div>
+    </nav>
+
+    <!-- ── THE ANSWER ── -->
+    <section class="section">
+        <div class="content-wrap">
+            <span class="section-tag reveal">The Answer</span>
+            <h2 class="reveal">One sentence.<br>No conditions.</h2>
+
+            <p class="reveal">After everything — the suffering, the death, the empty tomb — it resolves to one thing. One sentence, given to a man who had nothing left and was asking in the dark. The clearest, most direct answer in the entire Bible.</p>
+
+            <div class="answer-block reveal">
+                <div class="answer-eyebrow">Acts 16:31</div>
+                <div class="answer-text">"Believe in the <em>Lord Jesus</em> and you will be saved."</div>
+                <div class="answer-ref">That is the whole answer.</div>
+            </div>
+
+            <p class="reveal">Not a course. Not a checklist. Not a requirement to clean yourself up first, or figure out all your questions before you're allowed in. One sentence. And the door it describes is not narrow in the way religion makes it feel. It is open to anyone who wants to walk through it.</p>
+
+            <div class="scripture-pull reveal">
+                <p>"For this is how God loved the world: He gave his one and only Son, so that everyone who believes in him will not perish but have eternal life."</p>
+                <span class="ref">John 3:16</span>
+            </div>
+
+            <p class="reveal">Notice the word <em>everyone</em>. Not everyone who has been good enough. Not everyone who has been religious enough. <strong>Everyone who believes.</strong></p>
+        </div>
+    </section>
+
+    <!-- ── WHAT BELIEVE MEANS ── -->
+    <section class="section">
+        <div class="content-wrap">
+            <span class="section-tag reveal">What It Means</span>
+            <h2 class="reveal">It is not agreement.<br>It is <em>weight transfer</em>.</h2>
+
+            <p class="reveal">When most people hear the word believe, they think it means agreeing that something is true. Like believing a historical figure existed. Intellectual agreement. A mental tick in a box. That is not what believing in Jesus means.</p>
+
+            <p class="reveal">It is less like agreeing with a statement and more like stepping onto a bridge. You can stand on the bank and agree the bridge is well-built. You can examine its engineering, read about its materials, conclude it is sound. But none of that is the same as putting your weight on it and crossing.</p>
+
+            <div class="bridge-visual reveal">
+                <div class="bridge-side">
+                    <div class="bridge-side-label">Not this</div>
+                    <div class="bridge-side-title">Agreeing it is true from a distance</div>
+                </div>
+                <div class="bridge-connector">
+                    <span class="bridge-arrow">→</span>
+                </div>
+                <div class="bridge-side active-side">
+                    <div class="bridge-side-label">This</div>
+                    <div class="bridge-side-title">Putting your full weight on Him</div>
+                </div>
+            </div>
+
+            <p class="reveal"><strong>Believing in Jesus means trusting Him</strong> — not just as an idea, but as the actual thing you are standing on. Transferring the weight from your own effort, your own record, your own attempts to be good enough — and placing it on Him. That is the whole movement. And it is enough. It has always been enough.</p>
+
+            <div class="fracture-divider reveal"><span>You don't have to have it together first</span></div>
+
+            <p class="reveal">One of the biggest things that stops people is the feeling that they need to sort their life out first. Get to a better place. And then, once they're in a reasonable state, approach God. That is not how this works. You do not need to earn the right to the conversation. You just need to have it.</p>
+
+            <div class="scripture-pull reveal">
+                <p>"But God showed his great love for us by sending Christ to die for us while we were still sinners."</p>
+                <span class="ref">Romans 5:8</span>
+            </div>
+
+            <p class="reveal">Not after you sorted it out. Not when you were ready. <em>While you were still in the middle of it.</em> That is when He moved. That is when He moves now.</p>
+        </div>
+    </section>
+
+    <!-- ── THE STEP ── -->
+    <section class="section">
+        <div class="content-wrap">
+            <span class="section-tag reveal">The Step</span>
+            <h2 class="reveal">What this looks like<br>right <em>now</em>.</h2>
+
+            <p class="reveal">It does not require a building or a ceremony or a particular set of words. It requires honesty and a decision. Here is what that looks like.</p>
+
+            <div class="step-list reveal">
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Be honest about where you are.</div>
+                        <div class="step-body">You do not have to pretend. God already knows. Start there — acknowledge that you need something you cannot provide for yourself.</div>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Believe that Jesus is who He said He is.</div>
+                        <div class="step-body">That He is the Son of God. That He died for you — not just for humanity in general, but for you. That He came back from the dead. You do not need to understand all of it. You just need to believe it enough to step onto the bridge.</div>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Put your weight on Him.</div>
+                        <div class="step-body">Stop trying to hold yourself up. Stop managing your own case. Transfer the weight. Tell Him — in your own words — that you are done doing this alone and you are choosing to trust Him with your life.</div>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Receive it.</div>
+                        <div class="step-body">Salvation is not something you work toward — it is something you receive. The moment the weight transfers, it is done. Not because of how you feel, but because of what He did.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prayer-block reveal">
+                <div class="prayer-eyebrow">If you want to, you can pray something like this</div>
+                <div class="prayer-text">
+                    "Jesus, I'm not sure I have this all figured out.<br>
+                    But I'm done trying to hold everything together on my own.<br>
+                    I believe You are who You said You are.<br>
+                    I believe You died for me and came back.<br>
+                    I'm putting my weight on You —<br>
+                    my life, my record, everything I've been carrying.<br>
+                    I'm not coming to You because I've earned it.<br>
+                    I'm coming because You said I could.<br>
+                    Save me. I'm yours."
+                </div>
+            </div>
+
+            <p class="reveal" style="font-size: 0.9rem; color: var(--text-muted); text-align: center;">These are not magic words. God does not need perfect language. He needs an honest heart.</p>
+
+            <div class="fracture-divider reveal"><span>If you're still thinking</span></div>
+
+            <p class="reveal">That is okay. Here are a few questions worth sitting with honestly.</p>
+
+            <div class="questions-list reveal">
+                <div class="question-item">What have you been holding yourself up with — your effort, your record, your sense that you're basically a good person? What would it feel like to put that down?</div>
+                <div class="question-item">Is there something specific that has made you feel like you are not the kind of person God would take seriously? What would it mean if that thing was not actually a barrier?</div>
+                <div class="question-item">Is there someone in your life — a family member, a friend — who you wish could have what you are finding here? What would it look like to share this with them?</div>
+            </div>
+
+            <div class="connect-block reveal">
+                <h3>You don't have to figure out what comes next alone.</h3>
+                <p>If you prayed that prayer — or if you're still thinking and want to talk to someone — we would genuinely love to hear from you.</p>
+                <a href="/about.html#contact" class="btn-primary">Get in Touch →</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="content-wrap">
+        <div class="closing reveal">
+            <blockquote>"Believe in the Lord Jesus and you will be saved."</blockquote>
+            <span class="closing-ref">Acts 16:31</span>
+            <br>
+            <a href="the-weight-the-price-the-dawn.html" class="btn-series">← Back to the Series</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-strip">
+            <a href="holy-week-03-rise.html">← The Dawn</a>
+            <a href="the-weight-the-price-the-dawn.html">The Series →</a>
+        </div>
+    </footer>
+
+    <div style="padding-bottom: 6rem;"></div>
+    <div class="footer-glow-wrap">
+        <div id="footer-placeholder"></div>
+    </div>
+    <script src="/js/main.js" defer></script>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

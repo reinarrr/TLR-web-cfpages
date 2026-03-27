@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Did He Have to Die? | The Weight, The Price, The Dawn | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --cream: #faf9f6;
+            --charcoal: #1a1a1a;
+            --gold: #c5a059;
+            --teal: #2d5a5a;
+            --dark-bg: #0e0808;
+            --dark-surface: #180e0e;
+            --dark-border: #2e1818;
+            --accent: #7a2020;
+            --accent-bright: #b03030;
+            --accent-muted: rgba(176,48,48,0.12);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #e8e0dc;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Deep blood-red glow rising from below */
+        .fracture-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .fracture-bg svg { width: 100%; height: 100%; }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 55% at 50% 110%, rgba(140,30,30,0.18) 0%, transparent 65%),
+                radial-gradient(ellipse 40% 30% at 50% 100%, rgba(100,15,15,0.12) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .series-tag {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--accent-bright);
+            opacity: 0.7;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .hero-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(7rem, 20vw, 14rem);
+            font-weight: 700;
+            color: #3a0a0a;
+            line-height: 1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.5;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: #f0e8e8;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .hero h1 em { color: var(--accent-bright); font-style: italic; }
+
+        .hero-label {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            font-style: italic;
+            color: rgba(176,48,48,0.4);
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .hero-sub { font-size: 1.15rem; color: #7a6868; max-width: 36rem; margin: 0 auto 3rem; font-weight: 300; }
+
+        .hero-read-time {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #4a3030;
+            border: 1px solid var(--dark-border);
+            padding: 0.5rem 1.5rem;
+            border-radius: 100px;
+            display: inline-block;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.3;
+            animation: fadeDown 2s ease infinite;
+        }
+
+        .scroll-hint span { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; }
+        .scroll-hint-line { width: 1px; height: 3rem; background: linear-gradient(to bottom, var(--accent-bright), transparent); }
+
+        @keyframes fadeDown {
+            0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.6; transform: translateX(-50%) translateY(6px); }
+        }
+
+        /* ── TRIPTYCH NAV ── */
+                .series-nav {
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid var(--dark-border);
+            border-bottom: 1px solid var(--dark-border);
+            background: var(--dark-surface);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .series-nav::-webkit-scrollbar { display: none; }
+
+        .series-panel {
+            flex: 1;
+            min-width: 7rem;
+            max-width: 12rem;
+            padding: 1.1rem 1.25rem;
+            text-align: center;
+            border-right: 1px solid var(--dark-border);
+            text-decoration: none;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .series-panel:last-child { border-right: none; }
+        .series-panel:hover:not(.active) { background: rgba(255,255,255,0.02); }
+
+        .series-panel.active {
+            background: rgba(197,160,89,0.06);
+            border-bottom: 2px solid var(--gold);
+            margin-bottom: -1px;
+        }
+
+        .series-panel .panel-num { font-size: 0.55rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #4a4a45; margin-bottom: 0.2rem; }
+        .series-panel.active .panel-num { color: var(--gold); opacity: 0.8; }
+        .series-panel .panel-label { font-family: 'Playfair Display', serif; font-size: 0.85rem; font-style: italic; color: #4a4a45; }
+        .series-panel.active .panel-label { color: #e8e4dc; }
+
+        /* ── CONTENT ── */
+        .content-wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+
+        .movement { padding: 6rem 0; border-bottom: 1px solid var(--dark-border); position: relative; }
+        .movement:last-of-type { border-bottom: none; }
+
+        .movement-tag { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.45em; text-transform: uppercase; color: var(--accent-bright); opacity: 0.6; margin-bottom: 1.5rem; display: block; }
+
+        .movement h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; line-height: 1.2; color: #f0e8e8; margin-bottom: 2.5rem; }
+
+        .movement p { font-size: 1.05rem; color: #9a8888; margin-bottom: 1.5rem; line-height: 1.85; }
+        .movement p strong { color: #c8b8b8; font-weight: 600; }
+        .movement p em { color: #c8b8b8; }
+
+        .scripture-pull { margin: 2.5rem 0; padding: 2rem 2rem 2rem 2.5rem; border-left: 2px solid var(--accent); background: rgba(176,48,48,0.05); border-radius: 0 0.5rem 0.5rem 0; }
+        .scripture-pull p { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic; color: #c8b8b8; margin-bottom: 0.75rem; line-height: 1.7; }
+        .scripture-pull .ref { font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent-bright); opacity: 0.7; }
+
+        .key-statement { margin: 3rem 0; padding: 2.5rem; background: var(--dark-surface); border: 1px solid var(--dark-border); border-radius: 1rem; text-align: center; }
+        .key-statement p { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.6rem); font-style: italic; color: #f0e8e8; line-height: 1.5; margin: 0; }
+        .key-statement p em { color: var(--accent-bright); font-style: normal; }
+
+        .fracture-divider { display: flex; align-items: center; gap: 1rem; margin: 3rem 0; opacity: 0.3; }
+        .fracture-divider::before, .fracture-divider::after { content: ''; flex: 1; height: 1px; background: var(--dark-border); }
+        .fracture-divider span { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: #4a4a45; white-space: nowrap; }
+
+        /* ── WAGES STATEMENT — Romans 6:23 callout ── */
+        .wages-statement {
+            margin: 3rem 0;
+            padding: 2.5rem;
+            border: 1px solid var(--dark-border);
+            border-radius: 1rem;
+            background: var(--dark-surface);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wages-statement::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent, rgba(176,48,48,0.5), transparent);
+        }
+
+        .wages-equation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .wages-term {
+            text-align: center;
+        }
+
+        .wages-term .term-word {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 3vw, 1.6rem);
+            font-style: italic;
+            color: #f0ebe0;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .wages-term .term-def {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #4a4a45;
+        }
+
+        .wages-operator {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--accent-bright);
+            opacity: 0.5;
+            flex-shrink: 0;
+        }
+
+        .wages-ref {
+            text-align: center;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: #4a2828;
+        }
+
+        /* ── OT SACRIFICE SCROLL TIMELINE ── */
+        .timeline-section {
+            margin: 3.5rem 0;
+            background: var(--dark-surface);
+            border: 1px solid var(--dark-border);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .timeline-header {
+            padding: 1.5rem 2rem 1rem;
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        .timeline-header p { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--accent-bright); opacity: 0.7; margin-bottom: 0.35rem; }
+        .timeline-header h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: #c8b8b8; font-weight: 400; }
+
+        /* Scroll hint */
+        .timeline-scroll-hint {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 2rem;
+            border-bottom: 1px solid var(--dark-border);
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #3a3a35;
+        }
+
+        .timeline-scroll-hint svg { opacity: 0.4; flex-shrink: 0; }
+
+        /* The horizontal scroll track */
+        .timeline-track-wrap {
+            overflow-x: auto;
+            overflow-y: visible;
+            scrollbar-width: thin;
+            scrollbar-color: var(--dark-border) transparent;
+            padding: 2.5rem 2rem 2rem;
+            cursor: grab;
+        }
+
+        .timeline-track-wrap:active { cursor: grabbing; }
+        .timeline-track-wrap::-webkit-scrollbar { height: 3px; }
+        .timeline-track-wrap::-webkit-scrollbar-track { background: transparent; }
+        .timeline-track-wrap::-webkit-scrollbar-thumb { background: var(--dark-border); border-radius: 2px; }
+
+        /* The line + nodes */
+        .timeline-track {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            min-width: max-content;
+            padding-bottom: 1rem;
+            padding-right: 60%;
+        }
+
+        /* Connecting line running through all nodes */
+        .timeline-track::before {
+            content: '';
+            position: absolute;
+            top: 1.1rem;
+            left: 1.5rem;
+            right: 1.5rem;
+            height: 1px;
+            background: var(--dark-border);
+        }
+
+        /* Scarlet progress line */
+        .timeline-progress-line {
+            position: absolute;
+            top: 1.1rem;
+            left: 1.5rem;
+            height: 1px;
+            background: linear-gradient(to right, rgba(176,48,48,0.7), rgba(176,48,48,0.2));
+            width: 0;
+            transition: width 0.1s linear;
+            pointer-events: none;
+        }
+
+        /* Each stop */
+        .tl-stop {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 15rem;
+            flex-shrink: 0;
+            padding: 0 1.5rem;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .tl-stop:first-child { padding-left: 0; }
+        .tl-stop:last-child { padding-right: 0; }
+
+        /* Node circle */
+        .tl-node {
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 50%;
+            border: 1px solid var(--dark-border);
+            background: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            flex-shrink: 0;
+            transition: border-color 0.25s, background 0.25s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tl-stop.active .tl-node {
+            border-color: var(--accent-bright);
+            background: rgba(176,48,48,0.12);
+        }
+
+        /* Final cross node */
+        .tl-stop.is-cross .tl-node {
+            width: 2.6rem;
+            height: 2.6rem;
+            border-color: rgba(176,48,48,0.35);
+        }
+
+        .tl-stop.is-cross.active .tl-node {
+            border-color: var(--accent-bright);
+            background: rgba(176,48,48,0.18);
+        }
+
+        /* Glow burst behind the cross node */
+        .tl-stop.is-cross::before {
+            content: '';
+            position: absolute;
+            top: 1.1rem;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.3);
+            width: 10rem;
+            height: 10rem;
+            border-radius: 50%;
+            background: radial-gradient(ellipse at center, rgba(176,48,48,0.35) 0%, rgba(140,20,20,0.18) 35%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .tl-stop.is-cross.active::before {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Icon inside node */
+        .tl-icon {
+            font-size: 0.75rem;
+            opacity: 0.3;
+            transition: opacity 0.25s;
+            line-height: 1;
+        }
+
+        .tl-stop.active .tl-icon { opacity: 0.9; }
+
+        /* Date tag */
+        .tl-date {
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #4a2828;
+            margin-bottom: 0.4rem;
+            transition: color 0.25s;
+            text-align: center;
+        }
+
+        .tl-stop.active .tl-date { color: rgba(176,48,48,0.7); }
+
+        /* Stop name */
+        .tl-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #4a3030;
+            text-align: center;
+            line-height: 1.3;
+            transition: color 0.25s;
+        }
+
+        .tl-stop.active .tl-name { color: #c8b8b8; }
+
+        /* Arrow tag */
+        .tl-points {
+            margin-top: 0.75rem;
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-bright);
+            opacity: 0;
+            transition: opacity 0.25s;
+            text-align: center;
+        }
+
+        .tl-stop.active .tl-points { opacity: 0.6; }
+        .tl-stop.is-cross .tl-points { display: none; }
+
+        /* Detail panel below track */
+        .timeline-detail {
+            border-top: 1px solid var(--dark-border);
+            padding: 2rem;
+            min-height: 12rem;
+        }
+
+        .tl-detail-pane { display: none; animation: fadeIn 0.3s ease; }
+        .tl-detail-pane.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+        .tl-detail-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #f0e8e8;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .tl-detail-body {
+            font-size: 0.95rem;
+            color: #9a8888;
+            line-height: 1.8;
+        }
+
+        .tl-detail-body strong { color: #c8b8b8; font-weight: 600; }
+        .tl-detail-body em { color: #c8b8b8; }
+
+        .tl-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.25rem;
+            padding: 0.5rem 1rem;
+            background: rgba(176,48,48,0.07);
+            border: 1px solid rgba(176,48,48,0.2);
+            border-radius: 100px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-bright);
+            opacity: 0.8;
+        }
+
+        .tetelestai {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-style: italic;
+            color: #f0e8e8;
+            margin: 0.5rem 0 0.25rem;
+            opacity: 0.12;
+            letter-spacing: 0.05em;
+        }
+
+        /* When cross detail is active, Tetelestai glows in */
+        .tl-detail-pane#detail-cross.active .tetelestai {
+            opacity: 0.22;
+            animation: tetelestaiPulse 3s ease 0.4s infinite alternate;
+        }
+
+        @keyframes tetelestaiPulse {
+            from { opacity: 0.15; text-shadow: none; }
+            to   { opacity: 0.28; text-shadow: 0 0 40px rgba(176,48,48,0.4); }
+        }
+
+        /* Warm blush behind the cross detail panel */
+        .tl-detail-pane#detail-cross.active {
+            position: relative;
+        }
+
+        .tl-detail-pane#detail-cross.active::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(140,20,20,0.1) 0%, transparent 70%);
+            pointer-events: none;
+            border-radius: 0.5rem;
+        }
+
+        .tetelestai-sub {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #4a2828;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* ── EFFECT CARDS ── */
+        .effect-cards { display: grid; gap: 1rem; margin: 2.5rem 0; }
+        .effect-card { padding: 1.75rem 2rem; background: var(--dark-surface); border: 1px solid var(--dark-border); border-radius: 0.75rem; transition: border-color 0.2s, background 0.2s; }
+        .effect-card:hover { border-color: rgba(176,48,48,0.3); background: rgba(176,48,48,0.04); }
+        .effect-card h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: var(--accent-bright); margin-bottom: 0.6rem; }
+        .effect-card p { font-size: 0.95rem; color: #7a6868; margin: 0; line-height: 1.7; }
+
+        /* ── CLOSING ── */
+        .closing { padding: 6rem 0 4rem; text-align: center; }
+        .closing h3 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 2.2rem); font-style: italic; color: #f0e8e8; margin-bottom: 1rem; }
+        .closing p { color: #7a6868; font-size: 1rem; max-width: 28rem; margin: 0 auto 2.5rem; }
+
+        .btn-series { display: inline-block; padding: 0.9rem 2.5rem; background: transparent; border: 1px solid rgba(176,48,48,0.35); color: var(--accent-bright); font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; text-decoration: none; border-radius: 100px; transition: background 0.2s, border-color 0.2s; }
+        .btn-series:hover { background: rgba(176,48,48,0.08); border-color: rgba(176,48,48,0.6); }
+
+        /* ── FOOTER STRIP ── */
+        .footer-strip { border-top: 1px solid var(--dark-border); padding: 3rem 1.5rem 4rem; display: flex; align-items: center; justify-content: space-between; max-width: 44rem; margin: 0 auto; width: 100%; }
+        .footer-strip a { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #4a3030; text-decoration: none; transition: color 0.2s; }
+        .footer-strip a:hover { color: var(--accent-bright); }
+
+        /* ── FOOTER OVERRIDE ── */
+        #footer-placeholder,
+        #footer-placeholder > *,
+        #footer-placeholder footer,
+        #footer-placeholder section,
+        #footer-placeholder div {
+            background-color: transparent !important;
+            color: #4a4a45 !important;
+            border-color: var(--dark-border) !important;
+        }
+
+        #footer-placeholder a { color: #4a4a45 !important; }
+        #footer-placeholder a:hover { color: var(--gold) !important; }
+        #footer-placeholder h2, #footer-placeholder h3, #footer-placeholder p { color: #4a4a45 !important; }
+
+        .footer-glow-wrap {
+            position: relative;
+            background-color: var(--dark-bg);
+            border-top: 1px solid var(--dark-border);
+            overflow: hidden;
+        }
+
+        .footer-glow-wrap::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 80%; height: 1px;
+            background: linear-gradient(to right, transparent, rgba(176,48,48,0.3), transparent);
+            pointer-events: none;
+        }
+
+        .footer-glow-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 18rem;
+            background: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(140,30,30,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        @media (max-width: 640px) {
+            .series-panel { padding: 1rem 0.75rem; }
+            .series-panel .panel-label { font-size: 0.8rem; }
+            .movement { padding: 4rem 0; }
+            .tl-detail-title { font-size: 1.1rem; }
+            .wages-equation { gap: 0.75rem; }
+            .tl-stop { width: 11rem; }
+        }
+    </style>
+</head>
+<body class="antialiased" data-current="">
+
+    <div id="header-placeholder"></div>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+        <div class="fracture-bg" aria-hidden="true">
+            <svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="600" y1="0" x2="500" y2="900" stroke="#8b2020" stroke-width="0.8" opacity="0.5"/>
+                <line x1="600" y1="0" x2="700" y2="900" stroke="#8b2020" stroke-width="0.4" opacity="0.35"/>
+                <line x1="500" y1="900" x2="340" y2="580" stroke="#8b2020" stroke-width="0.4" opacity="0.25"/>
+                <line x1="700" y1="900" x2="880" y2="520" stroke="#8b2020" stroke-width="0.4" opacity="0.25"/>
+                <!-- Blood pooling at base -->
+                <ellipse cx="600" cy="920" rx="160" ry="100" fill="#6b1515" opacity="0.12"/>
+                <ellipse cx="600" cy="905" rx="60" ry="40" fill="#4a0e0e" opacity="0.1"/>
+            </svg>
+        </div>
+
+        <div class="hero-number" aria-hidden="true">II</div>
+        <p class="series-tag">The Weight, The Price, The Dawn &nbsp;·&nbsp; Part Two</p>
+        <h1>Why Did He Have<br>to <em>Die</em>?</h1>
+        <p class="hero-label">The Price</p>
+        <p class="hero-sub">The sentence was not pain. It was separation. And the solution had to go all the way there.</p>
+        <span class="hero-read-time">4–5 min read</span>
+
+        <div class="scroll-hint" aria-hidden="true">
+            <span>Read</span>
+            <div class="scroll-hint-line"></div>
+        </div>
+    </section>
+
+    <!-- ── TRIPTYCH NAV ── -->
+        <nav class="series-nav" aria-label="Series navigation">
+        <a href="holy-week-01-suffer.html" class="series-panel">
+            <div class="panel-num">One</div>
+            <div class="panel-label">The Weight</div>
+        </a>
+        <div class="series-panel active" aria-current="page">
+            <div class="panel-num">Two</div>
+            <div class="panel-label">The Price</div>
+        </div>
+        <a href="holy-week-03-rise.html" class="series-panel">
+            <div class="panel-num">Three</div>
+            <div class="panel-label">The Dawn</div>
+        </a>
+        <a href="holy-week-04-threshold.html" class="series-panel">
+            <div class="panel-num">Now</div>
+            <div class="panel-label">The Threshold</div>
+        </a>
+    </nav>
+
+    <!-- ── MOVEMENT 1: THE PROBLEM ── -->
+    <section class="movement">
+        <div class="content-wrap">
+            <span class="movement-tag reveal">The Problem</span>
+            <h2 class="reveal">Death is not what<br>we think it is.</h2>
+
+            <p class="reveal">When most people hear the word death, they picture a physical event — a heartbeat stopping, a body going still. That is part of it. But the Bible uses death to describe something far deeper, and far more devastating than the end of a biological process.</p>
+
+            <p class="reveal">Go back to the Garden. God tells Adam plainly: <em>"On the day you eat of it, you will surely die."</em> Adam eats. And then — he doesn't drop dead. He lives on for years and years.<br><br>So what happened? He hid. He was expelled. The relationship was severed. <strong>That is the death.</strong> The physical dying that follows later is just the trailing consequence of something that had already happened at a deeper level. The real death was the separation.</p>
+
+            <div class="scripture-pull reveal">
+                <p>"Then the Lord God called to the man, 'Where are you?' He replied, 'I heard you walking in the garden, so I hid.'"</p>
+                <span class="ref">Genesis 3:9–10</span>
+            </div>
+
+            <p class="reveal">The hiding is the death. The instinct to conceal yourself from God — to put distance between you and the one who made you — that is what sin produces. And that distance, left unresolved, is what the Bible calls death. Not just an ending. An <strong>exile</strong>.</p>
+
+            <div class="fracture-divider reveal"><span>The sentence</span></div>
+
+            <p class="reveal">And here is the confronting part. This is not an arbitrary punishment God decided to impose. It is the natural consequence of severing yourself from the source of life itself. God does not just sustain the universe — He is the ground of all existence. Cut yourself off from Him, and death is simply what is left. It is not a fine. It is not a penalty. It is physics.</p>
+
+            <!-- WAGES STATEMENT -->
+            <div class="wages-statement reveal">
+                <div class="wages-equation">
+                    <div class="wages-term">
+                        <span class="term-word">Sin</span>
+                        <span class="term-def">Separation from God</span>
+                    </div>
+                    <span class="wages-operator">=</span>
+                    <div class="wages-term">
+                        <span class="term-word">Death</span>
+                        <span class="term-def">Physical &amp; spiritual</span>
+                    </div>
+                </div>
+                <p class="wages-ref">Romans 6:23 · "The wages of sin is death."</p>
+            </div>
+
+            <p class="reveal">A wage is something earned. Not imposed — <em>earned</em>. The language is deliberate. Sin does not trigger a punishment from outside. It produces death from within, the way cutting a branch from a vine produces withering. You were made for union with God. Without it, something in you begins to die — and has been dying since the Garden.</p>
+
+            <p class="reveal">This is the problem at its truest scale. Not bad behaviour to be corrected. Not a score to be settled. A broken connection that runs all the way down to the root of what it means to be human — and it demanded a solution that could reach just as far.</p>
+        </div>
+    </section>
+
+    <!-- ── MOVEMENT 2: GOD'S ANSWER ── -->
+    <section class="movement">
+        <div class="content-wrap">
+            <span class="movement-tag reveal">God's Answer</span>
+            <h2 class="reveal">He didn't just absorb<br>the pain. He took<br>the <em>sentence</em>.</h2>
+
+            <p class="reveal">If death is separation from God, then the cross is not simply the moment Jesus experiences physical execution. It is the moment the eternal Son — in unbroken communion with the Father from before time began — experiences the one thing He had never experienced: <strong>abandonment</strong>.</p>
+
+            <p class="reveal">The cry from the cross is the most theologically loaded sentence in all of Scripture. <em>"My God, my God, why have you forsaken me?"</em> This is not distress language. This is not a metaphor. This is the literal mechanics of what sin does, playing out in real time on a Roman cross outside Jerusalem. The Son takes the full sentence of human sin — exile from God — into Himself. He doesn't just die physically. He dies <em>theologically</em>.</p>
+
+            <div class="key-statement reveal">
+                <p>He was not a victim<br>overtaken by death.<br>He was a <em>substitute</em> who stepped in front of it.</p>
+            </div>
+
+            <p class="reveal">A victim is overtaken by what kills them. A substitute steps in front of it. The difference is agency. Jesus lays His life down — no one takes it. And what He steps in front of is not just a physical death but the full consequence of humanity's exile from God. Every dimension of it. All the way to the bottom.</p>
+
+            <div class="fracture-divider reveal"><span>The forward-pointing arrows</span></div>
+
+            <p class="reveal">This did not come without warning. For over a thousand years, God had been building a visual argument — a system of sacrifice that was pointing, collectively, at a single moment. Every lamb, every altar, every drop of blood in the temple was God saying: <em>something is coming that will settle this permanently.</em> Below is that argument, unfolded.</p>
+
+            <!-- OT SACRIFICE TIMELINE -->
+            <div class="timeline-section reveal">
+                <div class="timeline-header">
+                    <p>Interactive</p>
+                    <h3>Every sacrifice was a promissory note.</h3>
+                </div>
+
+                <div class="timeline-scroll-hint">
+                    <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
+                        <path d="M1 5h14M10 1l4 4-4 4" stroke="#b03030" stroke-width="1" stroke-linecap="round"/>
+                    </svg>
+                    Scroll to move through history
+                </div>
+
+                <div class="timeline-track-wrap" id="tlWrap">
+                    <div class="timeline-track" id="tlTrack">
+                        <div class="timeline-progress-line" id="tlProgress"></div>
+
+                        <div class="tl-stop active" data-stop="passover">
+                            <div class="tl-node"><span class="tl-icon">✦</span></div>
+                            <div class="tl-date">c. 1446 BC</div>
+                            <div class="tl-name">The Passover</div>
+                            <div class="tl-points">→ Substitution</div>
+                        </div>
+                        <div class="tl-stop" data-stop="atonement">
+                            <div class="tl-node"><span class="tl-icon">✦</span></div>
+                            <div class="tl-date">Leviticus 16</div>
+                            <div class="tl-name">Day of Atonement</div>
+                            <div class="tl-points">→ Access restored</div>
+                        </div>
+                        <div class="tl-stop" data-stop="temple">
+                            <div class="tl-node"><span class="tl-icon">✦</span></div>
+                            <div class="tl-date">Daily · 1000 BC+</div>
+                            <div class="tl-name">Temple Sacrifices</div>
+                            <div class="tl-points">→ Still incomplete</div>
+                        </div>
+                        <div class="tl-stop" data-stop="isaiah">
+                            <div class="tl-node"><span class="tl-icon">✦</span></div>
+                            <div class="tl-date">c. 700 BC</div>
+                            <div class="tl-name">Isaiah's Servant</div>
+                            <div class="tl-points">→ Voluntary death</div>
+                        </div>
+                        <div class="tl-stop is-cross" data-stop="cross">
+                            <div class="tl-node"><span class="tl-icon">✝</span></div>
+                            <div class="tl-date">c. AD 33</div>
+                            <div class="tl-name">The Cross</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-detail">
+                    <div class="tl-detail-pane active" id="detail-passover">
+                        <div class="tl-detail-title">A lamb dies so a household lives.</div>
+                        <div class="tl-detail-body">In Egypt, each Israelite family slaughters a spotless lamb and paints its blood on the doorframe. The angel of death passes over every house marked with blood. The lamb is not dying for its own sins — it has none. It dies <strong>in the place of</strong> the firstborn. This is the first and clearest image of substitution in Scripture: the innocent dies so the guilty is spared.<br><br>It is not a coincidence that Jesus is crucified at Passover, that John the Baptist calls Him <em>"the Lamb of God,"</em> or that Paul writes: <em>"Christ, our Passover lamb, has been sacrificed."</em></div>
+                        <span class="tl-tag">→ Substitution · Innocence · Blood as covering</span>
+                    </div>
+                    <div class="tl-detail-pane" id="detail-atonement">
+                        <div class="tl-detail-title">Once a year, the priest goes where no one else can.</div>
+                        <div class="tl-detail-body">On Yom Kippur, the High Priest alone enters the Most Holy Place — behind the veil separating humanity from the presence of God. He carries blood, not his own, to atone for the entire nation. This ritual happens <strong>every single year</strong> — because the blood of animals cannot permanently resolve the problem. The writer of Hebrews notes: if those sacrifices had truly worked, they would have stopped. The annual repetition was itself an admission that the real solution had not yet arrived.</div>
+                        <span class="tl-tag">→ Access to God · Annual reset · Still incomplete</span>
+                    </div>
+                    <div class="tl-detail-pane" id="detail-temple">
+                        <div class="tl-detail-title">Every morning. Every evening. Day after day.</div>
+                        <div class="tl-detail-body">In the Jerusalem temple, two lambs were sacrificed every single day — one at dawn, one at dusk. Not counting individual sin offerings, festival offerings, or consecrations. The temple ran on blood, continuously, for hundreds of years. Thousands of animals. An ocean of sacrifice.<br><br>All of it saying the same thing: <em>the problem is real, the cost is real, and what we are doing here is not enough.</em> Every sacrifice was an IOU — a promissory note waiting on a payment that would finally clear the account.</div>
+                        <span class="tl-tag">→ Continuous cost · Perpetual incompleteness · Anticipation</span>
+                    </div>
+                    <div class="tl-detail-pane" id="detail-isaiah">
+                        <div class="tl-detail-title">He was led like a lamb to the slaughter.</div>
+                        <div class="tl-detail-body">Seven hundred years before Jesus, Isaiah writes about a figure who will not merely offer a sacrifice — he will <strong>become</strong> one. Pierced for our transgressions. Crushed for our iniquities. Cut off from the land of the living. Assigned a grave with the wicked. This is not a warrior Messiah. This is a suffering servant who absorbs what we deserved.<br><br>Isaiah 53 is so precise in its description of crucifixion — centuries before crucifixion was invented — that it has been debated ever since. The New Testament writers had no doubt who it described.</div>
+                        <span class="tl-tag">→ Suffering servant · Bearing sin · Voluntary death</span>
+                    </div>
+                    <div class="tl-detail-pane" id="detail-cross">
+                        <div class="tl-detail-title">Every arrow lands here.</div>
+                        <div class="tetelestai">Tetelestai.</div>
+                        <span class="tetelestai-sub">It is finished · John 19:30</span>
+                        <div class="tl-detail-body">In the ancient world, <em>tetelestai</em> was stamped on commercial receipts when a debt had been paid in full. Not reduced. Not restructured. <strong>Cancelled.</strong> When Jesus says it from the cross, He is declaring that the accumulated debt of human sin — every IOU written in the blood of every animal across a thousand years — has just been settled. Permanently. Once.<br><br>At that same moment, the temple veil tore in two. From top to bottom. God tearing it, not humans. The barrier between humanity and God removed. The exile undone.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scripture-pull reveal">
+                <p>"He entered the Most Holy Place once for all time, not with the blood of goats and calves, but with his own blood, having obtained eternal redemption."</p>
+                <span class="ref">Hebrews 9:12</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── MOVEMENT 3: THE ONWARD EFFECT ── -->
+    <section class="movement">
+        <div class="content-wrap">
+            <span class="movement-tag reveal">Because of That</span>
+            <h2 class="reveal">The exile is over.<br>You are brought back<br>into the <em>room</em>.</h2>
+
+            <p class="reveal">If death is separation from God, then what the resurrection announces — what the torn veil declares — is that the separation is finished. Not managed. Not partially resolved. Finished. The thing that happened in the Garden, the fundamental break that sent humanity into exile from the presence of God, has been undone at the cross.</p>
+
+            <p class="reveal">This is not just legal language — a courtroom verdict of "not guilty." It is relational restoration. You are not just acquitted. You are <strong>welcomed back</strong>. The door that closed in the Garden has been torn open from the inside.</p>
+
+            <div class="scripture-pull reveal">
+                <p>"So now there is no condemnation for those who belong to Christ Jesus."</p>
+                <span class="ref">Romans 8:1</span>
+            </div>
+
+            <div class="fracture-divider reveal"><span>What is now true</span></div>
+
+            <div class="effect-cards reveal">
+                <div class="effect-card">
+                    <h4>You carry no remaining debt.</h4>
+                    <p>Tetelestai — paid in full. The guilt, the shame, the accumulated weight of everything that separated you from God — it was laid on Him and settled there. You do not owe what has already been paid.</p>
+                </div>
+                <div class="effect-card">
+                    <h4>The hiding is over.</h4>
+                    <p>The first thing sin produced was hiding. The first thing the cross undoes is the need to hide. You do not have to conceal yourself from God. The exile that began in the Garden ends here.</p>
+                </div>
+                <div class="effect-card">
+                    <h4>Access is restored.</h4>
+                    <p>The veil tore. What the High Priest could only enter once a year, and only with blood, you now walk into freely — not because you earned it, but because the price was paid for you.</p>
+                </div>
+            </div>
+
+            <p class="reveal">He had to die because the sentence was death — not just physical death, but the full separation from God that sin produces. And the only way to resolve it was for someone who had never sinned to take the full sentence, absorb it completely, and come out the other side. Which is exactly what happened. But that is the subject of Part Three.</p>
+
+            <div class="scripture-pull reveal">
+                <p>"For God in all his fullness was pleased to live in Christ, and through him God reconciled everything to himself. He made peace with everything in heaven and on earth by means of Christ's blood on the cross."</p>
+                <span class="ref">Colossians 1:19–20</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="content-wrap">
+        <div class="closing reveal">
+            <h3>"It is finished."</h3>
+            <p>The final piece — what the resurrection means for you right now.</p>
+            <a href="holy-week-03-rise.html" class="btn-series">Next: Why Did He Rise? →</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-strip">
+            <a href="holy-week-01-suffer.html">← Part One</a>
+            <a href="holy-week-03-rise.html">Part Three →</a>
+        </div>
+    </footer>
+
+    <div style="padding-bottom: 6rem;"></div>
+    <div class="footer-glow-wrap">
+        <div id="footer-placeholder"></div>
+    </div>
+    <script src="/js/main.js" defer></script>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(el => observer.observe(el));
+
+        // Timeline — click a node to select, drag to scroll
+        const tlStops = document.querySelectorAll('.tl-stop');
+        const tlDetailPanes = document.querySelectorAll('.tl-detail-pane');
+        const tlWrap = document.getElementById('tlWrap');
+        const tlProgress = document.getElementById('tlProgress');
+
+        function activateStop(stop) {
+            const id = stop.dataset.stop;
+            tlStops.forEach(s => s.classList.remove('active'));
+            tlDetailPanes.forEach(p => p.classList.remove('active'));
+            stop.classList.add('active');
+            const pane = document.getElementById('detail-' + id);
+            if (pane) pane.classList.add('active');
+        }
+
+        tlStops.forEach(stop => {
+            stop.addEventListener('click', () => activateStop(stop));
+        });
+
+        // Update gold progress line on scroll
+        tlWrap.addEventListener('scroll', () => {
+            const track = document.getElementById('tlTrack');
+            const maxScroll = tlWrap.scrollWidth - tlWrap.clientWidth;
+            const pct = maxScroll > 0 ? tlWrap.scrollLeft / maxScroll : 0;
+            const trackWidth = track.scrollWidth - 48;
+            tlProgress.style.width = (pct * trackWidth) + 'px';
+
+            // Auto-activate nearest node as user scrolls
+            const wrapRect = tlWrap.getBoundingClientRect();
+            let closest = null, closestDist = Infinity;
+            tlStops.forEach(stop => {
+                const nodeEl = stop.querySelector('.tl-node');
+                const rect = nodeEl.getBoundingClientRect();
+                const center = rect.left + rect.width / 2;
+                const targetX = wrapRect.left + wrapRect.width * 0.25;
+                const dist = Math.abs(center - targetX);
+                if (dist < closestDist) { closestDist = dist; closest = stop; }
+            });
+            if (closest) activateStop(closest);
+        });
+
+        // Drag to scroll
+        let isDown = false, startX, scrollLeft;
+        tlWrap.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - tlWrap.offsetLeft; scrollLeft = tlWrap.scrollLeft; });
+        tlWrap.addEventListener('mouseleave', () => isDown = false);
+        tlWrap.addEventListener('mouseup', () => isDown = false);
+        tlWrap.addEventListener('mousemove', e => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - tlWrap.offsetLeft;
+            tlWrap.scrollLeft = scrollLeft - (x - startX);
+        });
+    </script>
+
+</body>
+</html>

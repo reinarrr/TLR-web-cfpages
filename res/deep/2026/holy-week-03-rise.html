@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Did He Rise? | The Weight, The Price, The Dawn | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --gold: #d4aa6a;
+            --gold-bright: #e8c882;
+            --gold-glow: rgba(232,200,130,0.12);
+            --dark-bg: #16140f;
+            --dark-surface: #211e17;
+            --dark-border: #38332a;
+            --text-primary: #f4eed8;
+            --text-body: #b0a888;
+            --text-muted: #5e5848;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ── HERO — the fracture is open, light floods through ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Wide dawn glow — warm, present, unmissable */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 120% 70% at 50% 115%, rgba(232,200,130,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 50% 100%, rgba(255,230,160,0.10) 0%, transparent 45%),
+                radial-gradient(ellipse 30% 25% at 50% 100%, rgba(255,245,200,0.06) 0%, transparent 35%);
+            pointer-events: none;
+        }
+
+        .fracture-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .fracture-bg svg { width: 100%; height: 100%; }
+
+        .series-tag {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--gold-bright);
+            opacity: 0.85;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .hero-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(7rem, 20vw, 14rem);
+            font-weight: 700;
+            line-height: 1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.05;
+            pointer-events: none;
+            user-select: none;
+            color: var(--gold-bright);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .hero h1 em { color: var(--gold-bright); font-style: italic; }
+
+        .hero-label {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            font-style: italic;
+            color: rgba(232,200,130,0.45);
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .hero-sub { font-size: 1.15rem; color: #7a7260; max-width: 36rem; margin: 0 auto 3rem; font-weight: 300; }
+
+        .hero-read-time {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #504838;
+            border: 1px solid var(--dark-border);
+            padding: 0.5rem 1.5rem;
+            border-radius: 100px;
+            display: inline-block;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.4;
+            animation: fadeDown 2s ease infinite;
+        }
+
+        .scroll-hint span { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; }
+        .scroll-hint-line { width: 1px; height: 3rem; background: linear-gradient(to bottom, var(--gold), transparent); }
+
+        @keyframes fadeDown {
+            0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.7; transform: translateX(-50%) translateY(6px); }
+        }
+
+        /* ── TRIPTYCH NAV ── */
+                .series-nav {
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid var(--dark-border);
+            border-bottom: 1px solid var(--dark-border);
+            background: var(--dark-surface);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .series-nav::-webkit-scrollbar { display: none; }
+
+        .series-panel {
+            flex: 1;
+            min-width: 7rem;
+            max-width: 12rem;
+            padding: 1.1rem 1.25rem;
+            text-align: center;
+            border-right: 1px solid var(--dark-border);
+            text-decoration: none;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .series-panel:last-child { border-right: none; }
+        .series-panel:hover:not(.active) { background: rgba(255,255,255,0.02); }
+
+        .series-panel.active {
+            background: rgba(197,160,89,0.06);
+            border-bottom: 2px solid var(--gold);
+            margin-bottom: -1px;
+        }
+
+        .series-panel .panel-num { font-size: 0.55rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #4a4a45; margin-bottom: 0.2rem; }
+        .series-panel.active .panel-num { color: var(--gold); opacity: 0.8; }
+        .series-panel .panel-label { font-family: 'Playfair Display', serif; font-size: 0.85rem; font-style: italic; color: #4a4a45; }
+        .series-panel.active .panel-label { color: #e8e4dc; }
+
+        /* ── CONTENT ── */
+        .content-wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+
+        .movement { padding: 6rem 0; border-bottom: 1px solid var(--dark-border); position: relative; }
+        .movement:last-of-type { border-bottom: none; }
+
+        .movement-tag { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 1.5rem; display: block; }
+
+        .movement h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; line-height: 1.2; color: var(--text-primary); margin-bottom: 2.5rem; }
+
+        .movement p { font-size: 1.05rem; color: var(--text-body); margin-bottom: 1.5rem; line-height: 1.85; }
+        .movement p strong { color: #d4c8a8; font-weight: 600; }
+        .movement p em { color: #d4c8a8; }
+
+        .scripture-pull { margin: 2.5rem 0; padding: 2rem 2rem 2rem 2.5rem; border-left: 2px solid var(--gold); background: rgba(232,200,130,0.06); border-radius: 0 0.5rem 0.5rem 0; }
+        .scripture-pull p { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic; color: #ddd0b0; margin-bottom: 0.75rem; line-height: 1.7; }
+        .scripture-pull .ref { font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); opacity: 0.8; }
+
+        .key-statement { margin: 3rem 0; padding: 2.5rem; background: var(--dark-surface); border: 1px solid var(--dark-border); border-radius: 1rem; text-align: center; }
+        .key-statement p { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.6rem); font-style: italic; color: var(--text-primary); line-height: 1.5; margin: 0; }
+        .key-statement p em { color: var(--gold-bright); font-style: normal; }
+
+        .fracture-divider { display: flex; align-items: center; gap: 1rem; margin: 3rem 0; opacity: 0.4; }
+        .fracture-divider::before, .fracture-divider::after { content: ''; flex: 1; height: 1px; background: var(--dark-border); }
+        .fracture-divider span { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
+
+        /* ── THE CHALLENGE INTERACTIVE ── */
+        .challenge-section {
+            margin: 3.5rem 0;
+            border: 1px solid var(--dark-border);
+            border-radius: 1rem;
+            overflow: hidden;
+            background: var(--dark-surface);
+        }
+
+        .challenge-header {
+            padding: 1.5rem 2rem 1rem;
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        .challenge-header p { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); opacity: 0.8; margin-bottom: 0.35rem; }
+        .challenge-header h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: #ddd0b0; font-weight: 400; }
+
+        /* Challenge selector pills */
+        .challenge-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        .challenge-pill {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--dark-border);
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            cursor: pointer;
+            background: none;
+            font-family: 'Outfit', sans-serif;
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+        }
+
+        .challenge-pill:hover { color: var(--text-body); border-color: #504838; }
+        .challenge-pill.active { color: var(--gold-bright); border-color: var(--gold); background: rgba(232,200,130,0.07); }
+
+        /* Challenge body — three stacked panels */
+        .challenge-body { padding: 0; }
+
+        .challenge-pane { display: none; animation: fadeIn 0.3s ease; }
+        .challenge-pane.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+        /* Claim */
+        .c-claim {
+            padding: 1.75rem 2rem;
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        .c-label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .c-claim-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        /* Objection */
+        .c-objection {
+            padding: 1.75rem 2rem;
+            border-bottom: 1px solid var(--dark-border);
+            background: rgba(0,0,0,0.2);
+        }
+
+        .c-objection .c-label { color: #6a4040; }
+
+        .c-objection-text {
+            font-size: 1rem;
+            color: #7a6858;
+            line-height: 1.75;
+            font-style: italic;
+        }
+
+        /* Response */
+        .c-response {
+            padding: 1.75rem 2rem;
+            position: relative;
+        }
+
+        .c-response::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(232,200,130,0.2), transparent);
+        }
+
+        .c-response .c-label { color: var(--gold); opacity: 0.7; }
+
+        .c-response-text {
+            font-size: 1rem;
+            color: var(--text-body);
+            line-height: 1.8;
+        }
+
+        .c-response-text strong { color: #d4c8a8; font-weight: 600; }
+
+        /* ── MOVEMENT 3 — warmest, most open ── */
+        .power-statement {
+            margin: 3rem 0;
+            padding: 3rem 2.5rem;
+            background: var(--dark-surface);
+            border: 1px solid rgba(232,200,130,0.2);
+            border-radius: 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .power-statement::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 70%;
+            background: radial-gradient(ellipse 90% 100% at 50% 100%, rgba(232,200,130,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .power-statement::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 60%; height: 1px;
+            background: linear-gradient(to right, transparent, rgba(232,200,130,0.3), transparent);
+        }
+
+        .power-statement p {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 3vw, 1.55rem);
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.65;
+            margin: 0;
+            position: relative;
+        }
+
+        .power-statement p em { color: var(--gold-bright); font-style: normal; }
+
+        /* Effect cards — bright, hopeful */
+        .effect-cards { display: grid; gap: 1rem; margin: 2.5rem 0; }
+
+        .effect-card {
+            padding: 1.75rem 2rem;
+            background: var(--dark-surface);
+            border: 1px solid var(--dark-border);
+            border-radius: 0.75rem;
+            transition: border-color 0.25s, background 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .effect-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(232,200,130,0.25), transparent);
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+
+        .effect-card:hover { border-color: rgba(232,200,130,0.3); background: rgba(232,200,130,0.05); }
+        .effect-card:hover::before { opacity: 1; }
+        .effect-card h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: var(--gold-bright); margin-bottom: 0.6rem; }
+        .effect-card p { font-size: 0.95rem; color: #7a7260; margin: 0; line-height: 1.7; }
+
+        /* ── CLOSING — the warmest, most open point ── */
+        .closing {
+            padding: 6rem 0 4rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .closing::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 60%; height: 1px;
+            background: linear-gradient(to right, transparent, rgba(232,200,130,0.3), transparent);
+        }
+
+        /* Glow behind the closing */
+        .closing::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,200,130,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .closing h3 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 2.2rem); font-style: italic; color: var(--text-primary); margin-bottom: 1rem; position: relative; }
+        .closing p { color: #6a6050; font-size: 1rem; max-width: 28rem; margin: 0 auto 2.5rem; position: relative; }
+
+        .btn-gold {
+            display: inline-block;
+            padding: 0.9rem 2.5rem;
+            background: rgba(232,200,130,0.1);
+            border: 1px solid rgba(232,200,130,0.5);
+            color: var(--gold-bright);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: background 0.2s, border-color 0.2s;
+            position: relative;
+        }
+
+        .btn-gold:hover { background: rgba(232,200,130,0.16); border-color: rgba(232,200,130,0.8); }
+
+        .btn-series { display: inline-block; padding: 0.9rem 2.5rem; background: transparent; border: 1px solid rgba(232,200,130,0.25); color: var(--text-muted); font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; text-decoration: none; border-radius: 100px; transition: background 0.2s, border-color 0.2s, color 0.2s; }
+        .btn-series:hover { background: rgba(232,200,130,0.05); border-color: rgba(232,200,130,0.4); color: var(--gold-bright); }
+
+        /* ── FOOTER ── */
+        .footer-strip { border-top: 1px solid var(--dark-border); padding: 3rem 1.5rem 4rem; display: flex; align-items: center; justify-content: space-between; max-width: 44rem; margin: 0 auto; width: 100%; }
+        .footer-strip a { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .footer-strip a:hover { color: var(--gold-bright); }
+
+        #footer-placeholder, #footer-placeholder > *, #footer-placeholder footer, #footer-placeholder section, #footer-placeholder div {
+            background-color: transparent !important;
+            color: var(--text-muted) !important;
+            border-color: var(--dark-border) !important;
+        }
+
+        #footer-placeholder a { color: var(--text-muted) !important; }
+        #footer-placeholder a:hover { color: var(--gold-bright) !important; }
+        #footer-placeholder h2, #footer-placeholder h3, #footer-placeholder p { color: var(--text-muted) !important; }
+
+        .footer-glow-wrap {
+            position: relative;
+            background-color: var(--dark-bg);
+            border-top: 1px solid var(--dark-border);
+            overflow: hidden;
+        }
+
+        .footer-glow-wrap::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 80%; height: 1px;
+            background: linear-gradient(to right, transparent, rgba(232,200,130,0.35), transparent);
+            pointer-events: none;
+        }
+
+        .footer-glow-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 18rem;
+            background: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(232,200,130,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        @media (max-width: 640px) {
+            .series-panel { padding: 1rem 0.75rem; }
+            .series-panel .panel-label { font-size: 0.8rem; }
+            .movement { padding: 4rem 0; }
+            .challenge-pills { gap: 0.4rem; }
+        }
+    </style>
+</head>
+<body class="antialiased" data-current="">
+
+    <div id="header-placeholder"></div>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+        <div class="fracture-bg" aria-hidden="true">
+            <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Wide open fractures — the tomb is empty, light pours through -->
+                <line x1="700" y1="900" x2="560" y2="0" stroke="#e8c882" stroke-width="0.7" opacity="0.1"/>
+                <line x1="700" y1="900" x2="840" y2="0" stroke="#e8c882" stroke-width="0.7" opacity="0.1"/>
+                <line x1="560" y1="0" x2="340" y2="900" stroke="#e8c882" stroke-width="0.4" opacity="0.07"/>
+                <line x1="840" y1="0" x2="1060" y2="900" stroke="#e8c882" stroke-width="0.4" opacity="0.07"/>
+                <line x1="340" y1="900" x2="140" y2="300" stroke="#e8c882" stroke-width="0.3" opacity="0.05"/>
+                <line x1="1060" y1="900" x2="1260" y2="300" stroke="#e8c882" stroke-width="0.3" opacity="0.05"/>
+                <!-- Light pooling at the base of the central fracture -->
+                <ellipse cx="700" cy="930" rx="220" ry="140" fill="#e8c882" opacity="0.055"/>
+                <ellipse cx="700" cy="910" rx="100" ry="70" fill="#fff8e0" opacity="0.03"/>
+                <ellipse cx="700" cy="895" rx="40" ry="28" fill="#fff8e0" opacity="0.025"/>
+            </svg>
+        </div>
+
+        <div class="hero-number" aria-hidden="true">III</div>
+        <p class="series-tag">The Weight, The Price, The Dawn &nbsp;·&nbsp; Part Three</p>
+        <h1>Why Did He<br><em>Rise</em>?</h1>
+        <p class="hero-label">The Dawn</p>
+        <p class="hero-sub">A dead Messiah is a failed Messiah. The resurrection is not a bonus — it is the verdict.</p>
+        <span class="hero-read-time">4–5 min read</span>
+
+        <div class="scroll-hint" aria-hidden="true">
+            <span>Read</span>
+            <div class="scroll-hint-line"></div>
+        </div>
+    </section>
+
+    <!-- ── TRIPTYCH NAV ── -->
+        <nav class="series-nav" aria-label="Series navigation">
+        <a href="holy-week-01-suffer.html" class="series-panel">
+            <div class="panel-num">One</div>
+            <div class="panel-label">The Weight</div>
+        </a>
+        <a href="holy-week-02-die.html" class="series-panel">
+            <div class="panel-num">Two</div>
+            <div class="panel-label">The Price</div>
+        </a>
+        <div class="series-panel active" aria-current="page">
+            <div class="panel-num">Three</div>
+            <div class="panel-label">The Dawn</div>
+        </div>
+        <a href="holy-week-04-threshold.html" class="series-panel">
+            <div class="panel-num">Now</div>
+            <div class="panel-label">The Threshold</div>
+        </a>
+    </nav>
+
+    <!-- ── MOVEMENT 1: THE PROBLEM ── -->
+    <section class="movement">
+        <div class="content-wrap">
+            <span class="movement-tag reveal">The Problem</span>
+            <h2 class="reveal">Death is the one problem<br>we have never solved.</h2>
+
+            <p class="reveal">Every civilisation in history has tried. The Egyptians built pyramids and filled them with provisions for the afterlife. The Greeks philosophised their way to the idea that the soul was immortal. The Romans engineered everything — and fell silent in the face of the tomb. Death is the great leveller, the one thing no amount of power, wealth, or wisdom has ever managed to defeat.</p>
+
+            <p class="reveal">And for the followers of Jesus, standing outside a sealed tomb on that Saturday, this was the final verdict. Whatever He had taught, whatever miracles they had witnessed — none of it mattered anymore. Dead men do not come back. Everyone knew that. The women bringing spices to the tomb on Sunday morning knew that. They were not going to anoint a risen teacher. They were going to grieve a dead one.</p>
+
+            <div class="fracture-divider reveal"><span>The stakes</span></div>
+
+            <p class="reveal">The apostle Paul says it plainly in 1 Corinthians 15: <em>"If Christ has not been raised, your faith is futile."</em> He does not soften it. He does not offer a spiritual metaphor. He stakes the entire claim on a historical event. Either Jesus walked out of that tomb, or Christianity is — in his own words — a lie.</p>
+
+            <p class="reveal">A dead Messiah is not a tragic hero. He is simply a <strong>failed Messiah</strong>. The resurrection is not a bonus feature of the Gospel. It is the verdict that validates everything that came before it. Without it, the cross is just a tragedy. With it, the cross becomes the turning point of all of history.</p>
+
+            <div class="scripture-pull reveal">
+                <p>"And if Christ has not been raised, your faith is futile and you are still in your sins."</p>
+                <span class="ref">1 Corinthians 15:17</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── MOVEMENT 2: GOD'S ANSWER ── -->
+    <section class="movement">
+        <div class="content-wrap">
+            <span class="movement-tag reveal">God's Answer</span>
+            <h2 class="reveal">He didn't come back<br>to the same life. He came<br>through to a <em>new one</em>.</h2>
+
+            <p class="reveal">There is a word for coming back to the same life after nearly dying: resuscitation. Lazarus was resuscitated. He came back — and eventually died again. What happened to Jesus on the third day was categorically different. He passed through death and emerged on the other side in a body that was real and touchable — but no longer subject to death.</p>
+
+            <p class="reveal">The apostle Paul uses the word <em>aparche</em> — first fruits. In the ancient agricultural world, the first fruits were the guarantee of the full harvest to come. Jesus is not the only one who will rise. He is the <strong>first</strong>. What happened to Him is the prototype of what will happen to all who are in Him.</p>
+
+            <div class="key-statement reveal">
+                <p>The resurrection is not the end<br>of the story. It is the<br><em>beginning of a new kind of story</em>.</p>
+            </div>
+
+            <p class="reveal">Paul spent three Sabbaths in Thessalonica making this argument from the Old Testament alone. He opened Psalm 16 and showed that David had written: <em>"You will not abandon me to the grave, nor will you let your Holy One see decay."</em> David wrote that. David died, was buried, and his tomb was known to everyone in Jerusalem. The only person this verse could describe is someone who died — and did not stay dead.</p>
+
+            <div class="scripture-pull reveal">
+                <p>"You will not abandon me to the realm of the dead, nor will you let your faithful one see decay."</p>
+                <span class="ref">Psalm 16:10</span>
+            </div>
+
+            <div class="fracture-divider reveal"><span>The honest objections</span></div>
+
+            <p class="reveal">This is not a matter of blind faith. The early disciples made a historical claim in a city full of people who had watched the crucifixion days earlier. And those people raised objections. Below are the strongest ones — and the responses that have never been adequately answered.</p>
+
+            <!-- ── THE CHALLENGE INTERACTIVE ── -->
+            <div class="challenge-section reveal">
+                <div class="challenge-header">
+                    <p>Interactive</p>
+                    <h3>The strongest objections. The honest responses.</h3>
+                </div>
+
+                <div class="challenge-pills" role="tablist">
+                    <button class="challenge-pill active" role="tab" data-ch="body" aria-selected="true">They stole the body</button>
+                    <button class="challenge-pill" role="tab" data-ch="hallucination" aria-selected="false">They hallucinated</button>
+                    <button class="challenge-pill" role="tab" data-ch="wrong-tomb" aria-selected="false">Wrong tomb</button>
+                    <button class="challenge-pill" role="tab" data-ch="swoon" aria-selected="false">He didn't really die</button>
+                    <button class="challenge-pill" role="tab" data-ch="legend" aria-selected="false">It's legend</button>
+                </div>
+
+                <div class="challenge-body">
+
+                    <div class="challenge-pane active" id="ch-body">
+                        <div class="c-claim">
+                            <div class="c-label">The Claim</div>
+                            <div class="c-claim-text">"The disciples stole the body and invented the resurrection story."</div>
+                        </div>
+                        <div class="c-objection">
+                            <div class="c-label">The Objection</div>
+                            <div class="c-objection-text">The Romans had sealed the tomb and stationed a guard precisely to prevent this. The disciples were in hiding, terrified, and had no motive to risk their lives stealing a body — only to then die for a claim they had fabricated.</div>
+                        </div>
+                        <div class="c-response">
+                            <div class="c-label">The Response</div>
+                            <div class="c-response-text">People die for what they genuinely believe to be true. But <strong>no one dies for what they know to be a lie they themselves invented</strong>. Every disciple who died for the resurrection claim had direct personal involvement in the events they were claiming happened. They were not passing on someone else's story. They were dying for something they said they had personally witnessed. The disciples went from hiding in fear to publicly proclaiming the resurrection in Jerusalem — the same city, to the same crowds — within fifty days. If there was a body to produce, Rome or the Sanhedrin would have produced it. They could not.</div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-pane" id="ch-hallucination">
+                        <div class="c-claim">
+                            <div class="c-label">The Claim</div>
+                            <div class="c-claim-text">"The appearances were grief-induced hallucinations — they saw what they desperately wanted to see."</div>
+                        </div>
+                        <div class="c-objection">
+                            <div class="c-label">The Objection</div>
+                            <div class="c-objection-text">Grief is real, and grief hallucinations do occur. It is psychologically plausible that individuals in acute bereavement might experience vivid visions of the person they lost.</div>
+                        </div>
+                        <div class="c-response">
+                            <div class="c-label">The Response</div>
+                            <div class="c-response-text">Hallucinations are private events. Paul records that Jesus appeared to <strong>more than five hundred people at one time</strong> — and explicitly tells his readers that most of them are still alive, go and ask them. A shared hallucination of that scale has no clinical precedent. The appearances also happened to people who were not expecting them and were not wanting them — Mary thought He was a gardener, the disciples on the road to Emmaus did not recognise Him, Thomas flatly refused to believe. These are not the profile of wish-fulfilment visions. And Paul himself — who was actively persecuting the church when Jesus appeared to him — is the hardest case of all to explain as grief.</div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-pane" id="ch-wrong-tomb">
+                        <div class="c-claim">
+                            <div class="c-label">The Claim</div>
+                            <div class="c-claim-text">"The women went to the wrong tomb in the dark and found it empty — a simple mistake, not a miracle."</div>
+                        </div>
+                        <div class="c-objection">
+                            <div class="c-label">The Objection</div>
+                            <div class="c-objection-text">Jerusalem was not a large city. The tomb was a known, specific location — a wealthy man's tomb, sealed and guarded by Roman soldiers. It was not a public cemetery where one might get confused.</div>
+                        </div>
+                        <div class="c-response">
+                            <div class="c-label">The Response</div>
+                            <div class="c-response-text">The women who went to the tomb were the same women who had <strong>watched the burial two days earlier</strong>. They knew where the tomb was. But more decisively: if they had simply gone to the wrong tomb, the authorities would have immediately corrected the error by pointing to the right one and producing the body. No one did. Not then, not in the following weeks when the disciples began openly preaching the resurrection to thousands of people in Jerusalem. The wrong-tomb theory refutes itself — because the right tomb was known, guarded, and accessible to Rome.</div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-pane" id="ch-swoon">
+                        <div class="c-claim">
+                            <div class="c-label">The Claim</div>
+                            <div class="c-claim-text">"Jesus didn't actually die — he survived the crucifixion, revived in the tomb, and was mistaken for risen."</div>
+                        </div>
+                        <div class="c-objection">
+                            <div class="c-label">The Objection</div>
+                            <div class="c-objection-text">Roman crucifixion was designed by professionals specifically to ensure death. The soldiers who carried out the execution were experts at their task — their own lives depended on completing it.</div>
+                        </div>
+                        <div class="c-response">
+                            <div class="c-label">The Response</div>
+                            <div class="c-response-text">Before being crucified, Jesus had been flogged with a Roman flagellum — a whip designed to shred flesh and frequently fatal on its own. He then spent six hours on the cross before the soldiers, satisfied He was dead, did not break His legs — the normal method of hastening death. Instead, a spear was thrust into His side, and John records that blood and water came out separately, which modern medicine recognises as a sign of a ruptured pericardium. Even if someone survived all of that, <strong>emerging from a sealed tomb in that condition and convincing people He had conquered death</strong> is a greater miracle than the resurrection itself. The swoon theory was definitively rejected by the Journal of the American Medical Association in 1986 on purely medical grounds.</div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-pane" id="ch-legend">
+                        <div class="c-claim">
+                            <div class="c-label">The Claim</div>
+                            <div class="c-claim-text">"The resurrection is a legend that developed over centuries — early Christianity didn't actually claim Jesus physically rose."</div>
+                        </div>
+                        <div class="c-objection">
+                            <div class="c-label">The Objection</div>
+                            <div class="c-objection-text">Religious legends do take time to develop. Mythology often grows around historical figures as their stories are retold across generations.</div>
+                        </div>
+                        <div class="c-response">
+                            <div class="c-label">The Response</div>
+                            <div class="c-response-text">The timeline does not allow for legend. Paul's creed in 1 Corinthians 15 — listing the resurrection appearances — is dated by scholars to within <strong>two to five years of the crucifixion</strong>, and Paul explicitly says he received it from Peter and James, who were themselves eyewitnesses. This is not legend. This is living testimony from people who were there. The early church's claim was always physical and bodily — it was the thing that made them scandalous to Greeks, who considered the body a prison, and to Romans, who found the idea absurd. No one invents a story that offends everyone. The physical resurrection was the original, scandalous, eyewitness claim from day one.</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── MOVEMENT 3: THE ONWARD EFFECT ── -->
+    <section class="movement">
+        <div class="content-wrap">
+            <span class="movement-tag reveal">Because of That</span>
+            <h2 class="reveal">The power that raised Him<br>is not <em>past tense</em>.</h2>
+
+            <p class="reveal">Here is what most people miss about Resurrection Sunday. The tendency is to treat the resurrection as a historical event to be remembered — something that happened in a garden outside Jerusalem two thousand years ago. And it is that. But Paul, the man who built the case in Thessalonica, writes something that stops that reading flat.</p>
+
+            <div class="scripture-pull reveal">
+                <p>"I want to know Christ — yes, to know the power of his resurrection."</p>
+                <span class="ref">Philippians 3:10</span>
+            </div>
+
+            <p class="reveal">Present tense. Ongoing. Available. Paul is not writing about a power that was active in the first century and has since been archived. He is writing about a power that is <strong>alive right now</strong> — the same power that raised a dead body from a sealed, guarded tomb — and describing it as something that can be known personally, in the present moment.</p>
+
+            <div class="power-statement reveal">
+                <p>The same power that opened<br>a sealed tomb is the power<br>that is <em>living in you</em> right now.</p>
+            </div>
+
+            <div class="fracture-divider reveal"><span>What is now true</span></div>
+
+            <div class="effect-cards reveal">
+                <div class="effect-card">
+                    <h4>Death is not the final word.</h4>
+                    <p>Jesus did not simply survive death — He defeated it. Which means the thing you fear most about the future has already been walked through by the one who walks with you. The ending of the story has been rewritten.</p>
+                </div>
+                <div class="effect-card">
+                    <h4>You are not living a dead life.</h4>
+                    <p>Resurrection power is not a theological concept. It is the same energy that reversed death itself, available to the life you are living right now. Not theoretical. Operative. Now.</p>
+                </div>
+                <div class="effect-card">
+                    <h4>The prototype guarantees the harvest.</h4>
+                    <p>First fruits. What happened to Jesus is the guarantee of what will happen to everyone in Him. The resurrection is not a one-time miracle — it is a preview of the world that is coming, and of who you are becoming.</p>
+                </div>
+            </div>
+
+            <p class="reveal">He suffered — so you are not alone in your pain. He died — so you carry no debt. He rose — so you are not living a dead life. Three questions, one answer: a person who entered the worst of what it means to be human, and came out the other side carrying the keys to everything that had held us.</p>
+
+            <div class="scripture-pull reveal">
+                <p>"I am the Living One; I was dead, and now look, I am alive for ever and ever. And I hold the keys of death and Hades."</p>
+                <span class="ref">Revelation 1:18</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="content-wrap">
+        <div class="closing reveal">
+            <h3>"This Jesus I'm telling you about is the Messiah."</h3>
+            <p>You've read the case. Now there's one question left.</p>
+            <a href="holy-week-04-threshold.html" class="btn-gold" style="margin-right: 1rem;">What do I do with this? →</a>
+            <br><br>
+            <a href="the-weight-the-price-the-dawn.html" class="btn-series">← Back to the Series</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-strip">
+            <a href="holy-week-02-die.html">← Part Two</a>
+            <a href="holy-week-04-threshold.html">The Threshold →</a>
+        </div>
+    </footer>
+
+    <div style="padding-bottom: 6rem;"></div>
+    <div class="footer-glow-wrap">
+        <div id="footer-placeholder"></div>
+    </div>
+    <script src="/js/main.js" defer></script>
+
+    <script>
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(el => observer.observe(el));
+
+        // Challenge interactive
+        const pills = document.querySelectorAll('.challenge-pill');
+        const panes = document.querySelectorAll('.challenge-pane');
+
+        pills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                const id = pill.dataset.ch;
+                pills.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-selected', 'false'); });
+                panes.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                pill.setAttribute('aria-selected', 'true');
+                const pane = document.getElementById('ch-' + id);
+                if (pane) pane.classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>

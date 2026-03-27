@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Did He Have to Suffer? | Holy Week | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --cream: #faf9f6;
+            --charcoal: #1a1a1a;
+            --gold: #c5a059;
+            --teal: #2d5a5a;
+            --dark-bg: #111110;
+            --dark-surface: #1c1c1a;
+            --dark-border: #2a2a27;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #e8e4dc;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(197,160,89,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .fracture-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; opacity: 0.06; }
+        .fracture-bg svg { width: 100%; height: 100%; }
+
+        .series-tag {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.7;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(7rem, 20vw, 14rem);
+            font-weight: 700;
+            color: var(--charcoal);
+            line-height: 1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.07;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: #f0ebe0;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .hero h1 em { color: var(--gold); font-style: italic; }
+
+        .hero-sub { font-size: 1.15rem; color: #7a746a; max-width: 36rem; margin: 0 auto 3rem; font-weight: 300; }
+
+        .hero-label {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            font-style: italic;
+            color: #3a3a35;
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+
+        .hero-read-time {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #4a4a45;
+            border: 1px solid #2a2a27;
+            padding: 0.5rem 1.5rem;
+            border-radius: 100px;
+            display: inline-block;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.3;
+            animation: fadeDown 2s ease infinite;
+        }
+
+        .scroll-hint span { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; }
+        .scroll-hint-line { width: 1px; height: 3rem; background: linear-gradient(to bottom, var(--gold), transparent); }
+
+        @keyframes fadeDown {
+            0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.6; transform: translateX(-50%) translateY(6px); }
+        }
+
+                .series-nav {
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid var(--dark-border);
+            border-bottom: 1px solid var(--dark-border);
+            background: var(--dark-surface);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .series-nav::-webkit-scrollbar { display: none; }
+
+        .series-panel {
+            flex: 1;
+            min-width: 7rem;
+            max-width: 12rem;
+            padding: 1.1rem 1.25rem;
+            text-align: center;
+            border-right: 1px solid var(--dark-border);
+            text-decoration: none;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .series-panel:last-child { border-right: none; }
+        .series-panel:hover:not(.active) { background: rgba(255,255,255,0.02); }
+
+        .series-panel.active {
+            background: rgba(197,160,89,0.06);
+            border-bottom: 2px solid var(--gold);
+            margin-bottom: -1px;
+        }
+
+        .series-panel .panel-num { font-size: 0.55rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #4a4a45; margin-bottom: 0.2rem; }
+        .series-panel.active .panel-num { color: var(--gold); opacity: 0.8; }
+        .series-panel .panel-label { font-family: 'Playfair Display', serif; font-size: 0.85rem; font-style: italic; color: #4a4a45; }
+        .series-panel.active .panel-label { color: #e8e4dc; }
+
+        .content-wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+
+        .movement { padding: 6rem 0; border-bottom: 1px solid var(--dark-border); position: relative; }
+        .movement:last-of-type { border-bottom: none; }
+
+        .movement-tag { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); opacity: 0.6; margin-bottom: 1.5rem; display: block; }
+
+        .movement h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; line-height: 1.2; color: #f0ebe0; margin-bottom: 2.5rem; }
+
+        .movement p { font-size: 1.05rem; color: #9a9489; margin-bottom: 1.5rem; line-height: 1.85; }
+        .movement p strong { color: #c8c2b5; font-weight: 600; }
+
+        .scripture-pull { margin: 2.5rem 0; padding: 2rem 2rem 2rem 2.5rem; border-left: 2px solid var(--gold); background: rgba(197,160,89,0.04); border-radius: 0 0.5rem 0.5rem 0; }
+        .scripture-pull p { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-style: italic; color: #c8c2b5; margin-bottom: 0.75rem; line-height: 1.7; }
+        .scripture-pull .ref { font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); opacity: 0.7; }
+
+        .key-statement { margin: 3rem 0; padding: 2.5rem; background: var(--dark-surface); border: 1px solid var(--dark-border); border-radius: 1rem; text-align: center; }
+        .key-statement p { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.6rem); font-style: italic; color: #f0ebe0; line-height: 1.5; margin: 0; }
+        .key-statement p em { color: var(--gold); font-style: normal; }
+
+        .fracture-divider { display: flex; align-items: center; gap: 1rem; margin: 3rem 0; opacity: 0.3; }
+        .fracture-divider::before, .fracture-divider::after { content: ''; flex: 1; height: 1px; background: var(--dark-border); }
+        .fracture-divider span { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: #4a4a45; white-space: nowrap; }
+
+        /* ─── PASSION MAP ─── */
+        .passion-map-section { margin: 3.5rem 0; background: var(--dark-surface); border: 1px solid var(--dark-border); border-radius: 1rem; overflow: hidden; }
+
+        .passion-map-header { padding: 1.5rem 2rem 1rem; border-bottom: 1px solid var(--dark-border); }
+        .passion-map-header p { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 0.35rem; }
+        .passion-map-header h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: #c8c2b5; font-weight: 400; }
+
+        .category-tabs { display: flex; overflow-x: auto; border-bottom: 1px solid var(--dark-border); scrollbar-width: none; }
+        .category-tabs::-webkit-scrollbar { display: none; }
+
+        .cat-tab {
+            flex-shrink: 0;
+            padding: 0.85rem 1.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #4a4a45;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            border-right: 1px solid var(--dark-border);
+            transition: color 0.2s, border-color 0.2s;
+            background: none;
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: -1px;
+        }
+
+        .cat-tab:last-child { border-right: none; }
+        .cat-tab:hover { color: #9a9489; }
+        .cat-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+        .passion-map-body { padding: 2rem; }
+
+        .map-display { display: none; }
+        .map-display.active { display: block; animation: fadeIn 0.3s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+        .moment-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); opacity: 0.6; margin-bottom: 0.5rem; }
+        .moment-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-style: italic; color: #f0ebe0; margin-bottom: 1.25rem; line-height: 1.3; }
+        .moment-body { font-size: 1rem; color: #9a9489; line-height: 1.8; margin-bottom: 1.5rem; }
+        .moment-body strong { color: #c8c2b5; font-weight: 600; }
+
+        .map-verse { padding: 1rem 1rem 1rem 1.5rem; border-left: 1px solid rgba(197,160,89,0.3); margin-top: 1rem; }
+        .map-verse p { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-style: italic; color: #7a746a; margin-bottom: 0.4rem; line-height: 1.65; }
+        .map-verse .ref { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #4a4a45; }
+
+        /* ─── EFFECT CARDS ─── */
+        .effect-cards { display: grid; gap: 1rem; margin: 2.5rem 0; }
+
+        .effect-card { padding: 1.75rem 2rem; background: var(--dark-surface); border: 1px solid var(--dark-border); border-radius: 0.75rem; transition: border-color 0.2s, background 0.2s; }
+        .effect-card:hover { border-color: rgba(197,160,89,0.3); background: rgba(197,160,89,0.04); }
+        .effect-card h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: var(--gold); margin-bottom: 0.6rem; }
+        .effect-card p { font-size: 0.95rem; color: #7a746a; margin: 0; line-height: 1.7; }
+
+        .closing { padding: 6rem 0 4rem; text-align: center; }
+        .closing h3 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 2.2rem); font-style: italic; color: #f0ebe0; margin-bottom: 1rem; }
+        .closing p { color: #7a746a; font-size: 1rem; max-width: 28rem; margin: 0 auto 2.5rem; }
+
+        .btn-series { display: inline-block; padding: 0.9rem 2.5rem; background: transparent; border: 1px solid rgba(197,160,89,0.4); color: var(--gold); font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; text-decoration: none; border-radius: 100px; transition: background 0.2s, border-color 0.2s; }
+        .btn-series:hover { background: rgba(197,160,89,0.08); border-color: rgba(197,160,89,0.7); }
+
+        .footer-strip { border-top: 1px solid var(--dark-border); padding: 3rem 1.5rem 4rem; display: flex; align-items: center; justify-content: space-between; max-width: 44rem; margin: 0 auto; width: 100%; }
+        .footer-strip a { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: #4a4a45; text-decoration: none; transition: color 0.2s; }
+        .footer-strip a:hover { color: var(--gold); }
+        .footer-strip .logo { font-family: 'Playfair Display', serif; font-size: 0.85rem; font-style: italic; color: #3a3a35; }
+
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        @media (max-width: 640px) {
+            .series-panel { padding: 1rem 0.75rem; }
+            .series-panel .panel-label { font-size: 0.8rem; }
+            .movement { padding: 4rem 0; }
+            .passion-map-body { padding: 1.25rem; }
+            .moment-title { font-size: 1.2rem; }
+        }
+
+        /* ── FOOTER OVERRIDE — match page dark tone ── */
+        #footer-placeholder,
+        #footer-placeholder > *,
+        #footer-placeholder footer,
+        #footer-placeholder section,
+        #footer-placeholder div {
+            background-color: transparent !important;
+            color: #4a4a45 !important;
+            border-color: var(--dark-border) !important;
+        }
+
+        #footer-placeholder a { color: #4a4a45 !important; }
+        #footer-placeholder a:hover { color: var(--gold) !important; }
+        #footer-placeholder h2, #footer-placeholder h3, #footer-placeholder p { color: #4a4a45 !important; }
+
+        /* Glow wrapper around footer */
+        .footer-glow-wrap {
+            position: relative;
+            background-color: var(--dark-bg);
+            border-top: 1px solid var(--dark-border);
+            overflow: hidden;
+        }
+
+        .footer-glow-wrap::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(197,160,89,0.25), transparent);
+            pointer-events: none;
+        }
+
+        .footer-glow-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 18rem;
+            background: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(197,160,89,0.055) 0%, transparent 70%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="antialiased" data-current="">
+    
+    <div id="header-placeholder"></div>
+
+<section class="hero">
+    <div class="fracture-bg" aria-hidden="true">
+        <svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="600" y1="0" x2="480" y2="900" stroke="#c5a059" stroke-width="1"/>
+            <line x1="600" y1="0" x2="720" y2="900" stroke="#c5a059" stroke-width="0.5"/>
+            <line x1="480" y1="900" x2="320" y2="600" stroke="#c5a059" stroke-width="0.5"/>
+            <line x1="720" y1="900" x2="900" y2="500" stroke="#c5a059" stroke-width="0.5"/>
+        </svg>
+    </div>
+
+    <div class="hero-number" aria-hidden="true">I</div>
+    <p class="series-tag">The Weight, The Price, The Dawn &nbsp;·&nbsp; Part One</p>
+    <h1>Why Did He Have<br>to <em>Suffer</em>?</h1>
+    <p class="hero-label">The Weight</p>
+    <p class="hero-sub">A question that matters — whether you believe the answers or not.</p>
+    <span class="hero-read-time">4–5 min read</span>
+
+    <div class="scroll-hint" aria-hidden="true">
+        <span>Read</span>
+        <div class="scroll-hint-line"></div>
+    </div>
+</section>
+
+    <nav class="series-nav" aria-label="Series navigation">
+        <div class="series-panel active" aria-current="page">
+            <div class="panel-num">One</div>
+            <div class="panel-label">The Weight</div>
+        </div>
+        <a href="holy-week-02-die.html" class="series-panel">
+            <div class="panel-num">Two</div>
+            <div class="panel-label">The Price</div>
+        </a>
+        <a href="holy-week-03-rise.html" class="series-panel">
+            <div class="panel-num">Three</div>
+            <div class="panel-label">The Dawn</div>
+        </a>
+        <a href="holy-week-04-threshold.html" class="series-panel">
+            <div class="panel-num">Now</div>
+            <div class="panel-label">The Threshold</div>
+        </a>
+    </nav>
+
+<!-- MOVEMENT 1: THE PROBLEM -->
+<section class="movement">
+    <div class="content-wrap">
+        <span class="movement-tag reveal">The Problem</span>
+        <h2 class="reveal">Something is deeply wrong.</h2>
+
+        <p class="reveal">You don't need to be religious to feel it. You just need to be human. The world is not the way it should be — and somewhere in you, you know it. Children get sick. Good people suffer. Injustice outlasts justice. The gap between how things <em>are</em> and how they <em>ought to be</em> is the oldest ache in human experience.</p>
+
+        <p class="reveal">Every civilisation in history has tried to explain it. Some call it karma. Some call it chaos. Some call it the nature of things. But the ache remains — and it points to something. The fact that we recognise suffering as <strong>wrong</strong> implies we have some sense of what <strong>right</strong> looks like. Broken things can only be called broken if you know what whole looks like.</p>
+
+        <div class="fracture-divider reveal"><span>The fracture</span></div>
+
+        <p class="reveal">The Bible has a name for it: sin. Not just bad behaviour — a structural break in the relationship between humanity and God. And the suffering that followed is not accidental. It is the sound of something collapsing that was meant to stand.</p>
+
+        <div class="scripture-pull reveal">
+            <p>"When Adam sinned, sin entered the world. Adam's sin brought death, so death spread to everyone, for everyone sinned."</p>
+            <span class="ref">Romans 5:12</span>
+        </div>
+
+        <p class="reveal">This is the problem at its fullest scale. Not a problem of bad luck, or bad systems, or bad people. A problem that runs through all of us — and it demanded a solution that could reach just as deep.</p>
+    </div>
+</section>
+
+<!-- MOVEMENT 2: GOD'S ANSWER -->
+<section class="movement">
+    <div class="content-wrap">
+        <span class="movement-tag reveal">God's Answer</span>
+        <h2 class="reveal">He didn't send a solution.<br>He <em>became</em> one.</h2>
+
+        <p class="reveal">If you were designing a religion, you would probably have God solve the suffering problem from a safe distance. A command. A decree. A policy change from the throne room. What you would not design is God stepping down into the wreckage — becoming human, becoming vulnerable, becoming the kind of being that can be hurt.</p>
+
+        <p class="reveal">But that is exactly what happened. And the suffering of Jesus was not incidental to the plan — it was the plan. The New Testament writers use a specific word when they describe it: <em>dei</em>. It had to happen. Divine necessity. Not a tragedy that got out of hand. The suffering was the mechanism.</p>
+
+        <div class="key-statement reveal">
+            <p>He was not overtaken by suffering.<br>He <em>walked into it</em>.</p>
+        </div>
+
+        <p class="reveal">Seven hundred years before Jesus was born, Isaiah described a coming figure — a servant who would be pierced, crushed, and led like a lamb to slaughter. Someone acquainted, deeply and personally, with grief. Not grief observed from above. Grief <em>felt</em>. What is remarkable about Isaiah 53 is not just that it is prophecy — it is that it describes a God who considers suffering worth entering.</p>
+
+        <div class="scripture-pull reveal">
+            <p>"He was despised and rejected — a man of sorrows, acquainted with deepest grief... Yet it was our weaknesses he carried; it was our sorrows that weighed him down."</p>
+            <span class="ref">Isaiah 53:3–4</span>
+        </div>
+
+        <p class="reveal">Jesus did not suffer because things went wrong. He suffered because <strong>justice required a cost</strong> — and love volunteered to pay it. The cross is not the place where God lost control of the story. It is the place where God revealed what He was willing to do about ours.</p>
+
+        <div class="fracture-divider reveal"><span>A map of His suffering</span></div>
+
+        <p class="reveal">Human suffering has many faces. What is striking about the Passion narrative is that Jesus did not encounter one form of suffering — He encountered every form. Select a category below and see where it meets the story.</p>
+
+        <!-- INTERACTIVE PASSION MAP -->
+        <div class="passion-map-section reveal">
+            <div class="passion-map-header">
+                <p>Interactive</p>
+                <h3>Where does your suffering meet His?</h3>
+            </div>
+
+            <div class="category-tabs" role="tablist" aria-label="Categories of suffering">
+                <button class="cat-tab active" role="tab" data-cat="grief" aria-selected="true">Grief</button>
+                <button class="cat-tab" role="tab" data-cat="injustice" aria-selected="false">Injustice</button>
+                <button class="cat-tab" role="tab" data-cat="shame" aria-selected="false">Shame</button>
+                <button class="cat-tab" role="tab" data-cat="abandonment" aria-selected="false">Abandonment</button>
+                <button class="cat-tab" role="tab" data-cat="betrayal" aria-selected="false">Betrayal</button>
+                <button class="cat-tab" role="tab" data-cat="fear" aria-selected="false">Fear</button>
+            </div>
+
+            <div class="passion-map-body">
+
+                <div class="map-display active" id="map-grief" role="tabpanel">
+                    <div class="moment-label">Gethsemane · The night before</div>
+                    <div class="moment-title">He wept. He asked if there was another way.</div>
+                    <div class="moment-body">The night before the crucifixion, Jesus goes to a garden and falls to the ground. Luke records that His sweat fell like drops of blood — a real medical phenomenon called <strong>hematidrosis</strong>, caused by extreme psychological anguish. This is not composure. This is grief at its deepest. He is fully aware of what is coming, and He feels the weight of it completely.<br><br>Whatever grief you carry — loss, heartbreak, the death of something you loved — He has been in that same darkness. Not watching from above. In it.</div>
+                    <div class="map-verse">
+                        <p>"He was in such agony of spirit that his sweat fell to the ground like great drops of blood."</p>
+                        <span class="ref">Luke 22:44</span>
+                    </div>
+                </div>
+
+                <div class="map-display" id="map-injustice" role="tabpanel">
+                    <div class="moment-label">The Trial · Pilate's courtyard</div>
+                    <div class="moment-title">Condemned by a judge who knew He was innocent.</div>
+                    <div class="moment-body">Three times, Pilate declares that he finds no fault in Jesus. Three times, he condemns Him anyway — driven by political pressure, crowd noise, and the fear of a riot. Jesus is beaten, mocked, and handed over to execution by a system designed to protect the innocent, failing to do exactly that.<br><br>If you have ever been on the wrong side of a verdict you didn't deserve — a decision, a rumour, a system that failed you — He knows what it is to be wrongly condemned. He was not just a witness to injustice. He was its object.</div>
+                    <div class="map-verse">
+                        <p>"Pilate called together the chief priests, the rulers and the people, and said, 'I have examined him in your presence and have found no basis for your charges against him.'"</p>
+                        <span class="ref">Luke 23:13–14</span>
+                    </div>
+                </div>
+
+                <div class="map-display" id="map-shame" role="tabpanel">
+                    <div class="moment-label">The Crucifixion · Outside the city</div>
+                    <div class="moment-title">Public. Exposed. Stripped of dignity.</div>
+                    <div class="moment-body">Crucifixion was engineered not just to kill but to humiliate. Victims were stripped, suspended in public, and left to die slowly in full view of the road. The Romans chose it precisely because it maximised degradation alongside death. Jesus was crucified outside the city walls — a deliberate exclusion, a statement of rejection.<br><br>Shame says: <em>you are exposed, you are less than, you don't belong</em>. The cross says: He took that position — publicly, willingly — so that shame would never have the final word over you.</div>
+                    <div class="map-verse">
+                        <p>"He was willing to die a shameful death on the cross because of the joy he knew would follow."</p>
+                        <span class="ref">Hebrews 12:2</span>
+                    </div>
+                </div>
+
+                <div class="map-display" id="map-abandonment" role="tabpanel">
+                    <div class="moment-label">The Cross · The ninth hour</div>
+                    <div class="moment-title">"My God, my God, why have you abandoned me?"</div>
+                    <div class="moment-body">These are the only words of Jesus on the cross recorded in both Matthew and Mark. They are a direct quote of Psalm 22 — words David wrote a thousand years earlier. But what they describe in the mouth of Jesus is something that had never happened before in all of eternity: the Son, separated from the Father.<br><br>This is not poetic distress. This is the mechanics of what sin does — it severs the relationship with God. Jesus experienced the fullest possible form of abandonment so that you would never have to be truly, finally alone.</div>
+                    <div class="map-verse">
+                        <p>"At about three o'clock, Jesus called out with a loud voice, 'My God, my God, why have you abandoned me?'"</p>
+                        <span class="ref">Matthew 27:46</span>
+                    </div>
+                </div>
+
+                <div class="map-display" id="map-betrayal" role="tabpanel">
+                    <div class="moment-label">The Garden · Judas</div>
+                    <div class="moment-title">Handed over by someone He called a friend.</div>
+                    <div class="moment-body">Judas Iscariot had walked with Jesus for three years. He had heard the teaching, witnessed the miracles, shared the meals. And he chose thirty pieces of silver. The method of identification he used to hand Jesus over to the soldiers was a kiss — the greeting of a close friend.<br><br>Betrayal stings most when it comes from the inside. Jesus was not betrayed by an enemy. He was handed over by someone He had chosen, trusted, and loved. He knows what it feels like when the person who should have protected you becomes the one who gives you away.</div>
+                    <div class="map-verse">
+                        <p>"Judas came straight to Jesus. 'Greetings, Rabbi!' he exclaimed and gave him the kiss."</p>
+                        <span class="ref">Matthew 26:49</span>
+                    </div>
+                </div>
+
+                <div class="map-display" id="map-fear" role="tabpanel">
+                    <div class="moment-label">Gethsemane · Before the arrest</div>
+                    <div class="moment-title">He knew what was coming. He went anyway.</div>
+                    <div class="moment-body">Jesus was not ignorant of what the cross would cost. He was God incarnate — He knew exactly what was ahead. The prayer in the garden is not confusion. It is a fully-informed person, standing at the edge of something terrible, feeling the full weight of fear, and choosing to step forward.<br><br>Courage is not the absence of fear. It is moving toward the right thing while fear is present. Jesus models this — not by bypassing the feeling, but by submitting the feeling to the will of the Father. <em>"Not my will, but yours."</em></div>
+                    <div class="map-verse">
+                        <p>"'My Father! If it is possible, let this cup of suffering be taken away from me. Yet I want your will to be done, not mine.'"</p>
+                        <span class="ref">Matthew 26:39</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <p class="reveal">This is what separates the Christian answer from every other framework for dealing with suffering: it does not offer an explanation from a distance. It offers a God who entered the problem personally. Every category of human pain has a corresponding moment in the Passion — not as metaphor, but as lived experience.</p>
+    </div>
+</section>
+
+<!-- MOVEMENT 3: THE ONWARD EFFECT -->
+<section class="movement">
+    <div class="content-wrap">
+        <span class="movement-tag reveal">Because of That</span>
+        <h2 class="reveal">Suffering is no longer<br>proof that God is <em>absent</em>.</h2>
+
+        <p class="reveal">This is the shift that changes everything. Before Jesus, you could look at suffering and conclude — reasonably — that God either doesn't exist, or doesn't care, or is unable to help. Suffering looked like evidence of absence.</p>
+
+        <p class="reveal">After Jesus, it looks like something completely different. Because whatever you are walking through — whatever form the pain takes — God has already been there. Not watching from a distance. Not sending sympathy from above. <strong>There. In it. Ahead of you.</strong></p>
+
+        <div class="effect-cards reveal">
+            <div class="effect-card">
+                <h4>You are not alone in it.</h4>
+                <p>Jesus was acquainted with grief. That is not a metaphor. It means there is no category of human suffering that He does not know from the inside. He has been in your particular darkness.</p>
+            </div>
+            <div class="effect-card">
+                <h4>Your pain is not punishment.</h4>
+                <p>The suffering of Jesus was not random — and neither is yours. That doesn't mean we always get the explanation. But it means suffering is never simply evidence that God has turned away from you.</p>
+            </div>
+            <div class="effect-card">
+                <h4>Something is being redeemed.</h4>
+                <p>The cross took what looked like utter defeat and turned it into the hinge of all of history. That is what God does with suffering. He does not waste it. He works through it.</p>
+            </div>
+        </div>
+
+        <div class="fracture-divider reveal"><span>Romans 8</span></div>
+
+        <p class="reveal">Paul — a man who was beaten, imprisoned, shipwrecked, and eventually executed for his faith — writes: <em>"I consider that our present sufferings are not worth comparing with the glory that will be revealed in us."</em> This is not denial. He knows exactly what suffering costs. He is saying that what is coming is so vast, so complete — that the pain of the present will not be the final word.</p>
+
+        <div class="scripture-pull reveal">
+            <p>"And we know that God causes everything to work together for the good of those who love God and are called according to his purpose for them."</p>
+            <span class="ref">Romans 8:28</span>
+        </div>
+
+        <p class="reveal">He had to suffer — not because the universe is cruel, but because the problem was real and the solution had to be just as real. He entered every dimension of human pain so that no dimension of your pain would be beyond His reach.</p>
+    </div>
+</section>
+
+<div class="content-wrap">
+    <div class="closing reveal">
+        <h3>"He was pierced for our transgressions."</h3>
+        <p>Continue the series — each piece builds on the last.</p>
+        <a href="holy-week-02-die.html" class="btn-series">Next: Why Did He Have to Die? →</a>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-strip">
+        <a href="the-weight-the-price-the-dawn.html">← The Weight, The Price, The Dawn</a>
+        <a href="holy-week-02-die.html">Part Two →</a>
+    </div>
+</footer>
+
+<div style="padding-bottom: 6rem;"></div>
+<div class="footer-glow-wrap">
+    <div id="footer-placeholder"></div>
+</div>
+<script src="/js/main.js" defer></script>
+
+<script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    const tabs = document.querySelectorAll('.cat-tab');
+    const displays = document.querySelectorAll('.map-display');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const cat = tab.dataset.cat;
+            tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+            displays.forEach(d => d.classList.remove('active'));
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            const target = document.getElementById('map-' + cat);
+            if (target) target.classList.add('active');
+        });
+    });
+</script>
+
+</body>
+</html>

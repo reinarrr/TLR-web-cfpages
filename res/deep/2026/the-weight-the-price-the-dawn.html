@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Weight, The Price, The Dawn | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --gold: #c5a059;
+            --gold-bright: #d4b870;
+            --teal: #2d5a5a;
+            --bg: #1a1812;
+            --surface: #221f17;
+            --surface-lift: #2a2720;
+            --border: #38342a;
+            --border-light: #46412e;
+            --text-primary: #f2ead8;
+            --text-body: #a8a080;
+            --text-muted: #5a5240;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ── HERO ── warmer, more luminous than the deep dives */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 5rem 1.5rem 7rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Warm ambient light — feels like candlelight, not a void */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 110% 70% at 50% 120%, rgba(212,184,112,0.16) 0%, transparent 60%),
+                radial-gradient(ellipse 70% 50% at 50% 100%, rgba(240,210,140,0.09) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 40% at 20% 0%, rgba(180,150,80,0.05) 0%, transparent 60%),
+                radial-gradient(ellipse 80% 40% at 80% 0%, rgba(180,150,80,0.04) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* Fracture lines — same motif, warmer and slightly more open */
+        .hero-fracture {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .hero-fracture svg { width: 100%; height: 100%; }
+
+        .series-eyebrow {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--gold-bright);
+            opacity: 0.6;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        /* Title — three lines stepping from bright to present */
+        .hero-title {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .title-line {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.01em;
+        }
+
+        .title-line.t-weight {
+            font-size: clamp(3.2rem, 9vw, 7.5rem);
+            color: #f2ead8;
+            opacity: 0;
+            animation: riseIn 1s ease 0.2s forwards;
+        }
+
+        .title-line.t-price {
+            font-size: clamp(3.2rem, 9vw, 7.5rem);
+            color: #b09070;
+            opacity: 0;
+            animation: riseIn 1s ease 0.55s forwards;
+        }
+
+        .title-line.t-dawn {
+            font-size: clamp(3.2rem, 9vw, 7.5rem);
+            color: var(--gold-bright);
+            opacity: 0;
+            animation: riseIn 1s ease 0.9s forwards;
+        }
+
+        .title-sep {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0;
+            margin: 0.5rem 0;
+            animation: fadeOnly 0.6s ease 1.1s forwards;
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 30rem;
+            margin: 0 auto;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeOnly 1s ease 1.3s forwards;
+        }
+
+        .scroll-cue {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+            animation: fadeOnly 1s ease 1.8s forwards;
+        }
+
+        .scroll-cue span { font-size: 0.55rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--text-muted); }
+        .scroll-cue-line { width: 1px; height: 2.5rem; background: linear-gradient(to bottom, var(--gold), transparent); animation: pulse 2.5s ease 2.5s infinite; }
+
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: none; }
+        }
+
+        @keyframes fadeOnly { from { opacity: 0; } to { opacity: 1; } }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50%       { opacity: 1; }
+        }
+
+        /* ── INTRO BAND ── */
+        .intro-band {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 1.75rem 1.5rem;
+            text-align: center;
+            background: var(--surface);
+        }
+
+        .intro-band p {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .intro-band p em { color: var(--gold-bright); font-style: normal; opacity: 0.85; }
+
+        /* ── CONTENT ── */
+        .content-section {
+            max-width: 52rem;
+            margin: 0 auto;
+            padding: 5rem 1.5rem 2rem;
+        }
+
+        /* ── INVITATION ── */
+        .invitation {
+            max-width: 44rem;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+
+        .invitation-tag {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.45em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.7;
+            margin-bottom: 1.25rem;
+            display: block;
+        }
+
+        .invitation h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.25;
+        }
+
+        .invitation h2 em { font-style: italic; color: var(--gold-bright); }
+
+        .invitation p {
+            font-size: 1.05rem;
+            color: var(--text-body);
+            line-height: 1.85;
+            margin-bottom: 1.25rem;
+        }
+
+        .invitation p strong { color: #d0c090; font-weight: 600; }
+
+        .share-nudge {
+            margin-top: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 0.65rem 1.4rem;
+            border-radius: 100px;
+            background: none;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+        }
+
+        .share-nudge:hover {
+            color: var(--gold-bright);
+            border-color: rgba(212,184,112,0.4);
+            background: rgba(212,184,112,0.06);
+        }
+
+        .share-nudge.copied {
+            color: var(--gold-bright);
+            border-color: rgba(212,184,112,0.5);
+            background: rgba(212,184,112,0.08);
+        }
+
+        .share-nudge svg { opacity: 0.5; flex-shrink: 0; transition: opacity 0.2s; }
+        .share-nudge:hover svg, .share-nudge.copied svg { opacity: 0.9; }
+
+        /* ── PANEL GRID ── */
+        .panel-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .deep-dive-panel {
+            display: block;
+            text-decoration: none;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 2.25rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s, transform 0.3s, background 0.3s;
+        }
+
+        .deep-dive-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--panel-accent, var(--gold));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .deep-dive-panel:hover {
+            border-color: rgba(212,184,112,0.3);
+            background: var(--surface-lift);
+            transform: translateY(-2px);
+        }
+
+        .deep-dive-panel:hover::before { opacity: 1; }
+
+        /* Ghost numeral */
+        .panel-numeral {
+            position: absolute;
+            top: 50%;
+            right: 1.75rem;
+            transform: translateY(-50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 7rem;
+            font-weight: 700;
+            color: #ffffff;
+            opacity: 0.025;
+            line-height: 1;
+            user-select: none;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .deep-dive-panel:hover .panel-numeral { opacity: 0.045; }
+
+        .panel-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .panel-number-tag {
+            font-size: 0.58rem;
+            font-weight: 600;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.65;
+        }
+
+        .panel-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+
+        .panel-read {
+            font-size: 0.58rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .panel-title-word {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+            font-weight: 700;
+            font-style: italic;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+            line-height: 1.1;
+            display: block;
+            transition: color 0.2s;
+        }
+
+        .deep-dive-panel:hover .panel-title-word { color: var(--gold-bright); }
+
+        .panel-subtitle {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        .panel-body {
+            font-size: 0.95rem;
+            color: var(--text-body);
+            line-height: 1.8;
+            max-width: 36rem;
+        }
+
+        .panel-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.75rem;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: 0.5;
+            transition: opacity 0.2s, gap 0.2s;
+        }
+
+        .deep-dive-panel:hover .panel-cta { opacity: 1; gap: 0.75rem; }
+
+        /* ── DOTTED THRESHOLD SEPARATOR ── */
+        .threshold-separator {
+            position: relative;
+            margin: 2.5rem 0 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .threshold-separator::before,
+        .threshold-separator::after {
+            content: '';
+            flex: 1;
+            border-top: 1px dashed var(--border-light);
+            opacity: 0.6;
+        }
+
+        .threshold-label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .threshold-label span {
+            font-size: 0.58rem;
+            font-weight: 600;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* Small chevron icon */
+        .threshold-icon {
+            width: 1.4rem;
+            height: 1.4rem;
+            border-radius: 50%;
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.5;
+        }
+
+        /* ── THRESHOLD PANEL — distinct from the three ── */
+        .threshold-panel {
+            display: block;
+            text-decoration: none;
+            background: linear-gradient(135deg, var(--surface) 0%, rgba(42,39,32,0.6) 100%);
+            border: 1px dashed var(--border-light);
+            border-radius: 1rem;
+            padding: 2.25rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s, transform 0.3s, background 0.3s;
+        }
+
+        .threshold-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent, rgba(212,184,112,0.5), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* Warm glow behind the threshold panel */
+        .threshold-panel::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 60%;
+            background: radial-gradient(ellipse 80% 100% at 50% 100%, rgba(212,184,112,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .threshold-panel:hover {
+            border-color: rgba(212,184,112,0.45);
+            background: linear-gradient(135deg, var(--surface-lift) 0%, rgba(50,46,35,0.8) 100%);
+            transform: translateY(-2px);
+        }
+
+        .threshold-panel:hover::before { opacity: 1; }
+
+        .threshold-panel .panel-numeral {
+            color: var(--gold-bright);
+            opacity: 0.04;
+        }
+
+        .threshold-panel:hover .panel-numeral { opacity: 0.08; }
+        .threshold-panel .panel-number-tag { color: var(--gold-bright); opacity: 0.8; }
+        .threshold-panel .panel-title-word { color: var(--gold-bright); }
+        .threshold-panel:hover .panel-title-word { color: #f0d898; }
+        .threshold-panel .panel-subtitle { color: #6a6040; }
+        .threshold-panel .panel-body { color: #7a7258; }
+        .threshold-panel .panel-cta { color: var(--gold-bright); }
+
+        /* ── CLOSING VERSE ── */
+        .verse-section {
+            border-top: 1px solid var(--border);
+            padding: 5rem 1.5rem 4rem;
+            text-align: center;
+        }
+
+        .verse-section blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.05rem, 2.5vw, 1.45rem);
+            font-style: italic;
+            color: #4a4430;
+            max-width: 36rem;
+            margin: 0 auto 1.25rem;
+            line-height: 1.65;
+        }
+
+        .verse-ref {
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+
+        /* ── FOOTER OVERRIDE ── */
+        #footer-placeholder, #footer-placeholder > *, #footer-placeholder footer, #footer-placeholder section, #footer-placeholder div {
+            background-color: transparent !important;
+            color: var(--text-muted) !important;
+            border-color: var(--border) !important;
+        }
+
+        #footer-placeholder a { color: var(--text-muted) !important; }
+        #footer-placeholder a:hover { color: var(--gold-bright) !important; }
+        #footer-placeholder h2, #footer-placeholder h3, #footer-placeholder p { color: var(--text-muted) !important; }
+
+        .footer-glow-wrap {
+            position: relative;
+            background-color: var(--bg);
+            border-top: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .footer-glow-wrap::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 80%; height: 1px;
+            background: linear-gradient(to right, transparent, rgba(212,184,112,0.3), transparent);
+            pointer-events: none;
+        }
+
+        .footer-glow-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 18rem;
+            background: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(212,184,112,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+        .reveal-d1 { transition-delay: 0.08s; }
+        .reveal-d2 { transition-delay: 0.16s; }
+        .reveal-d3 { transition-delay: 0.24s; }
+        .reveal-d4 { transition-delay: 0.32s; }
+    </style>
+</head>
+<body class="antialiased" data-current="">
+
+    <div id="header-placeholder"></div>
+
+    <!-- ── HERO ── -->
+    <section class="hero">
+        <div class="hero-fracture" aria-hidden="true">
+            <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="700" y1="0" x2="570" y2="900" stroke="#d4b870" stroke-width="0.7" opacity="0.09"/>
+                <line x1="700" y1="0" x2="830" y2="900" stroke="#d4b870" stroke-width="0.5" opacity="0.07"/>
+                <line x1="570" y1="900" x2="360" y2="540" stroke="#d4b870" stroke-width="0.4" opacity="0.05"/>
+                <line x1="830" y1="900" x2="1050" y2="480" stroke="#d4b870" stroke-width="0.4" opacity="0.05"/>
+                <line x1="360" y1="540" x2="180" y2="900" stroke="#d4b870" stroke-width="0.3" opacity="0.04"/>
+                <line x1="1050" y1="480" x2="1270" y2="900" stroke="#d4b870" stroke-width="0.3" opacity="0.04"/>
+                <ellipse cx="700" cy="920" rx="200" ry="130" fill="#d4b870" opacity="0.05"/>
+            </svg>
+        </div>
+
+        <p class="series-eyebrow">A Holy Week Series</p>
+
+        <div class="hero-title" aria-label="The Weight, The Price, The Dawn">
+            <span class="title-line t-weight">The Weight</span>
+            <span class="title-sep" aria-hidden="true">· · ·</span>
+            <span class="title-line t-price">The Price</span>
+            <span class="title-sep" aria-hidden="true">· · ·</span>
+            <span class="title-line t-dawn">The Dawn</span>
+        </div>
+
+        <p class="hero-sub">Three questions. One story. And one decision.</p>
+
+        <div class="scroll-cue" aria-hidden="true">
+            <span>Explore</span>
+            <div class="scroll-cue-line"></div>
+        </div>
+    </section>
+
+    <!-- ── INTRO BAND ── -->
+    <div class="intro-band">
+        <p>
+            <em>He suffered.</em> &nbsp;&bull;&nbsp; <em>He died.</em> &nbsp;&bull;&nbsp; <em>He rose.</em>
+            <br><br>
+            Three deep dives &nbsp;+&nbsp; one invitation.
+        </p>
+    </div>
+
+    <!-- ── INVITATION ── -->
+    <div class="content-section">
+        <div class="invitation reveal">
+            <span class="invitation-tag">Holy Week</span>
+            <h2>Take your time with this.<br>There is no rush and <em>no wrong place to start</em>.</h2>
+            <p>Most people know the shape of the Easter story. Fewer have sat inside it slowly — with the history, the theology, and the questions that don't get asked in a Sunday service. This is for the quiet moments of this week. A commute. An evening. The space before things get loud again.</p>
+            <p>Read one piece today. Come back for another tomorrow. Or sit with all three in a single sitting. <strong>Bring your questions.</strong> Bring your doubts. The texts are old enough to have heard them before — and honest enough to not look away.</p>
+            <p>And if you have a friend who says they already know this story — share it with them anyway. There is always more to find in it. That is the nature of things that are actually true.</p>
+            <button class="share-nudge" id="shareBtn" onclick="handleShare()">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <circle cx="11" cy="2.5" r="1.5" stroke="#d4b870" stroke-width="1"/>
+                    <circle cx="11" cy="11.5" r="1.5" stroke="#d4b870" stroke-width="1"/>
+                    <circle cx="2.5" cy="7" r="1.5" stroke="#d4b870" stroke-width="1"/>
+                    <line x1="3.8" y1="6.2" x2="9.7" y2="3.2" stroke="#d4b870" stroke-width="0.8"/>
+                    <line x1="3.8" y1="7.8" x2="9.7" y2="10.8" stroke="#d4b870" stroke-width="0.8"/>
+                </svg>
+                <span id="shareBtnLabel">Share this with someone</span>
+            </button>
+        </div>
+
+        <!-- ── THREE PANELS ── -->
+        <div class="panel-grid">
+
+            <a href="holy-week-01-suffer.html" class="deep-dive-panel reveal reveal-d1" style="--panel-accent: #c5a059;">
+                <span class="panel-numeral" aria-hidden="true">I</span>
+                <div class="panel-meta">
+                    <span class="panel-number-tag">Part One</span>
+                    <span class="panel-dot"></span>
+                    <span class="panel-read">4–5 min</span>
+                </div>
+                <span class="panel-title-word">The Weight</span>
+                <div class="panel-subtitle">Why did He have to suffer?</div>
+                <p class="panel-body">Human suffering has many faces. What is striking about the Passion narrative is that Jesus did not encounter one form — He encountered every form. Grief, injustice, shame, abandonment, betrayal, fear. He entered all of it. And the interactive map lets you explore exactly where.</p>
+                <span class="panel-cta">Read →</span>
+            </a>
+
+            <a href="holy-week-02-die.html" class="deep-dive-panel reveal reveal-d2" style="--panel-accent: #8b2020;">
+                <span class="panel-numeral" aria-hidden="true">II</span>
+                <div class="panel-meta">
+                    <span class="panel-number-tag">Part Two</span>
+                    <span class="panel-dot"></span>
+                    <span class="panel-read">4–5 min</span>
+                </div>
+                <span class="panel-title-word">The Price</span>
+                <div class="panel-subtitle">Why did He have to die?</div>
+                <p class="panel-body">Death is not simply a physical event — it is separation from God. The sentence for sin was not pain but exile. To settle the account permanently, the solution had to go all the way to the bottom. A scroll through a thousand years of sacrifice shows where it was always heading.</p>
+                <span class="panel-cta">Read →</span>
+            </a>
+
+            <a href="holy-week-03-rise.html" class="deep-dive-panel reveal reveal-d3" style="--panel-accent: #e8c882;">
+                <span class="panel-numeral" aria-hidden="true">III</span>
+                <div class="panel-meta">
+                    <span class="panel-number-tag">Part Three</span>
+                    <span class="panel-dot"></span>
+                    <span class="panel-read">4–5 min</span>
+                </div>
+                <span class="panel-title-word">The Dawn</span>
+                <div class="panel-subtitle">Why did He rise?</div>
+                <p class="panel-body">A dead Messiah is a failed Messiah. The resurrection is not a bonus — it is the verdict that validates everything that came before it. The strongest objections get the honest responses they deserve. And the power that raised Him is not past tense.</p>
+                <span class="panel-cta">Read →</span>
+            </a>
+
+        </div>
+
+        <!-- ── DOTTED THRESHOLD SEPARATOR ── -->
+        <div class="threshold-separator reveal">
+            <div class="threshold-label">
+                <div class="threshold-icon" aria-hidden="true">
+                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+                        <path d="M4 1v6M1 4l3 3 3-3" stroke="#d4b870" stroke-width="1" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <span>If the three bring you here</span>
+            </div>
+        </div>
+
+        <!-- ── THRESHOLD PANEL ── -->
+        <a href="holy-week-04-threshold.html" class="threshold-panel reveal reveal-d4">
+            <span class="panel-numeral" aria-hidden="true">IV</span>
+            <div class="panel-meta">
+                <span class="panel-number-tag">The Threshold</span>
+                <span class="panel-dot"></span>
+                <span class="panel-read">What do I do with this?</span>
+            </div>
+            <span class="panel-title-word">Believe in Jesus.</span>
+            <div class="panel-subtitle">One sentence. No conditions. An open door.</div>
+            <p class="panel-body">You have read the case. You know what He suffered, what it cost, and what the empty tomb means. This page is for when the questions have done their work — and you're ready to ask what comes next.</p>
+            <span class="panel-cta">Step in →</span>
+        </a>
+
+    </div>
+
+    <!-- ── CLOSING VERSE ── -->
+    <div class="verse-section reveal">
+        <blockquote>"He suffered. He died. He rose.<br>This Jesus I'm telling you about is the Messiah."</blockquote>
+        <p class="verse-ref">Acts 17:3</p>
+    </div>
+
+    <div style="padding-bottom: 6rem;"></div>
+    <div class="footer-glow-wrap">
+        <div id="footer-placeholder"></div>
+    </div>
+    <script src="/js/main.js" defer></script>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(el => observer.observe(el));
+
+        async function handleShare() {
+            const btn = document.getElementById('shareBtn');
+            const label = document.getElementById('shareBtnLabel');
+
+            const shareData = {
+                title: 'The Weight, The Price, The Dawn',
+                text: 'Been sitting with this Holy Week series — thought you might find it worth reading. Three questions about what actually happened, and why it matters.',
+                url: window.location.href
+            };
+
+            // Try native share sheet first (works great on mobile)
+            if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+                try {
+                    await navigator.share(shareData);
+                    return;
+                } catch (e) {
+                    // User cancelled — do nothing
+                    if (e.name === 'AbortError') return;
+                }
+            }
+
+            // Fallback: copy link to clipboard
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+                label.textContent = 'Link copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    label.textContent = 'Share this with someone';
+                    btn.classList.remove('copied');
+                }, 2500);
+            } catch (e) {
+                // Last resort: select a temporary input
+                const input = document.createElement('input');
+                input.value = window.location.href;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+                label.textContent = 'Link copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    label.textContent = 'Share this with someone';
+                    btn.classList.remove('copied');
+                }, 2500);
+            }
+        }
+    </script>
+
+</body>
+</html>
