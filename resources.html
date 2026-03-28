@@ -72,6 +72,389 @@
             </p>
         </section>
 
+<!-- ── HOLY WEEK FEATURED SERIES CARD ── -->
+<!-- To comment out: select all lines, Cmd+/ (Mac) or Ctrl+/ (Windows) -->
+<section class="hw-card-section">
+
+    <style>
+        .hw-card-section {
+            max-width: 72rem;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .hw-card-label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .hw-card-label span {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #c5a059;
+            font-family: 'Outfit', sans-serif;
+            white-space: nowrap;
+        }
+
+        .hw-card-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        /* Card is a simple block — inner handles the layout */
+        .hw-card {
+            position: relative;
+            background-color: #1a1812;
+            border-radius: 1.25rem;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            transition: transform 0.35s ease;
+        }
+
+        .hw-card:hover { transform: translateY(-3px); }
+
+        .hw-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 100% 70% at 50% 110%, rgba(212,184,112,0.16) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 0% 60%, rgba(180,150,80,0.05) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hw-card-fracture {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .hw-card-fracture svg { width: 100%; height: 100%; }
+
+        /* Row layout — stretches to card height */
+        .hw-card-inner {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: stretch;
+            min-height: 26rem;
+        }
+
+        /* LEFT */
+        .hw-card-left {
+            flex: 1;
+            min-width: 0;
+            padding: 2.75rem 2.5rem 2.75rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hw-card-eyebrow {
+            font-size: 0.58rem;
+            font-weight: 600;
+            letter-spacing: 0.45em;
+            text-transform: uppercase;
+            color: #d4b870;
+            opacity: 0.65;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .hw-card-titles { padding: 1.25rem 0; }
+
+        .hw-card-line {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: clamp(1.9rem, 4vw, 3rem);
+            letter-spacing: -0.01em;
+            line-height: 1.1;
+            opacity: 0;
+        }
+
+        .hw-card-sep {
+            display: block;
+            font-size: 0.5rem;
+            letter-spacing: 0.4em;
+            color: #c5a059;
+            margin: 0.25rem 0;
+            font-family: 'Outfit', sans-serif;
+            opacity: 0;
+            animation: hwFade 0.5s ease 0.65s forwards;
+        }
+
+        .hw-line-1 { color: #f2ead8; animation: hwRise 0.8s ease 0.15s forwards; }
+        .hw-line-2 { color: #b09070; animation: hwRise 0.8s ease 0.4s forwards; }
+        .hw-line-3 { color: #d4b870; animation: hwRise 0.8s ease 0.65s forwards; }
+
+        .hw-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hw-card-desc {
+            font-size: 0.88rem;
+            color: #6a6450;
+            font-weight: 300;
+            line-height: 1.65;
+            font-family: 'Outfit', sans-serif;
+            opacity: 0;
+            animation: hwFade 0.8s ease 0.9s forwards;
+        }
+
+        .hw-card-btn {
+            display: inline-block;
+            flex-shrink: 0;
+            padding: 0.65rem 1.5rem;
+            background: rgba(212,184,112,0.1);
+            border: 1px solid rgba(212,184,112,0.35);
+            color: #d4b870;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            border-radius: 100px;
+            transition: background 0.2s, border-color 0.2s;
+            opacity: 0;
+            animation: hwFade 0.8s ease 1.05s forwards;
+        }
+
+        .hw-card:hover .hw-card-btn {
+            background: rgba(212,184,112,0.2);
+            border-color: rgba(212,184,112,0.65);
+        }
+
+        /* RIGHT — no separate background, sits on the card dark bg */
+        .hw-card-right {
+            width: 22rem;
+            flex-shrink: 0;
+            align-self: stretch;
+            border-left: 1px solid rgba(212,184,112,0.1);
+            padding: 2.5rem 1.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.7rem;
+        }
+
+        .hw-chapter {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.1rem 1.1rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(212,184,112,0.08);
+            border-radius: 0.6rem;
+            text-decoration: none;
+            transition: background 0.2s, border-color 0.2s;
+            opacity: 0;
+        }
+
+        .hw-chapter:nth-child(1) { animation: hwSlide 0.55s ease 0.3s forwards; }
+        .hw-chapter:nth-child(2) { animation: hwSlide 0.55s ease 0.44s forwards; }
+        .hw-chapter:nth-child(3) { animation: hwSlide 0.55s ease 0.58s forwards; }
+        .hw-chapter:nth-child(4) {
+            animation: hwSlide 0.55s ease 0.72s forwards;
+            border-style: dashed;
+            border-color: rgba(212,184,112,0.15);
+            margin-top: 0.2rem;
+        }
+
+        .hw-chapter:hover {
+            background: rgba(212,184,112,0.07);
+            border-color: rgba(212,184,112,0.3);
+        }
+
+        .hw-chapter-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: rgba(212,184,112,0.22);
+            width: 1.5rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .hw-chapter:nth-child(4) .hw-chapter-num { color: rgba(212,184,112,0.5); }
+
+        .hw-chapter-info { flex: 1; min-width: 0; }
+
+        .hw-chapter-title {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: #9a9080;
+            line-height: 1.2;
+        }
+
+        .hw-chapter:nth-child(4) .hw-chapter-title { color: #c8a060; }
+
+        .hw-chapter-sub {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #504538;
+            margin-top: 0.2rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .hw-chapter:nth-child(4) .hw-chapter-sub { color: #6a5030; }
+
+        .hw-chapter-arrow {
+            font-size: 0.75rem;
+            color: #504538;
+            flex-shrink: 0;
+            transition: transform 0.2s, color 0.2s;
+        }
+
+        .hw-chapter:hover .hw-chapter-arrow {
+            transform: translateX(3px);
+            color: #d4b870;
+        }
+
+        /* Keyframes */
+        @keyframes hwRise {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: none; }
+        }
+
+        @keyframes hwFade {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        @keyframes hwSlide {
+            from { opacity: 0; transform: translateX(8px); }
+            to   { opacity: 1; transform: none; }
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            .hw-card-inner { flex-direction: column; min-height: auto; }
+
+            .hw-card-left { padding: 2.5rem 2rem 2rem; }
+
+            .hw-card-line { font-size: clamp(2.2rem, 10vw, 3rem); }
+
+            .hw-card-right {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid rgba(212,184,112,0.1);
+                padding: 1.75rem 2rem 2.5rem;
+                gap: 0.5rem;
+            }
+
+            .hw-card-footer { flex-direction: row; align-items: center; }
+
+            .hw-card::before {
+                background:
+                    radial-gradient(ellipse 140% 50% at 50% 100%, rgba(212,184,112,0.18) 0%, transparent 60%),
+                    radial-gradient(ellipse 80% 30% at 50% 100%, rgba(240,210,140,0.1) 0%, transparent 45%);
+            }
+        }
+    </style>
+
+    <div class="hw-card-label">
+        <span>Featured Series</span>
+    </div>
+
+    <a href="/res/deep/2026/the-weight-the-price-the-dawn.html" class="hw-card">
+
+        <div class="hw-card-fracture" aria-hidden="true">
+            <svg viewBox="0 0 1100 700" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="380" y1="0" x2="280" y2="700" stroke="#d4b870" stroke-width="0.6" opacity="0.09"/>
+                <line x1="380" y1="0" x2="480" y2="700" stroke="#d4b870" stroke-width="0.4" opacity="0.07"/>
+                <line x1="280" y1="700" x2="120" y2="360" stroke="#d4b870" stroke-width="0.3" opacity="0.05"/>
+                <line x1="480" y1="700" x2="660" y2="320" stroke="#d4b870" stroke-width="0.3" opacity="0.05"/>
+                <ellipse cx="380" cy="720" rx="180" ry="90" fill="#d4b870" opacity="0.06"/>
+                <ellipse cx="380" cy="700" rx="80" ry="40" fill="#d4b870" opacity="0.04"/>
+            </svg>
+        </div>
+
+        <div class="hw-card-inner">
+
+            <!-- Left -->
+            <div class="hw-card-left">
+                <span class="hw-card-eyebrow">Holy Week &nbsp;·&nbsp; The Living Room</span>
+
+                <div class="hw-card-titles">
+                    <span class="hw-card-line hw-line-1">The Weight</span>
+                    <span class="hw-card-sep">· · ·</span>
+                    <span class="hw-card-line hw-line-2">The Price</span>
+                    <span class="hw-card-sep">· · ·</span>
+                    <span class="hw-card-line hw-line-3">The Dawn</span>
+                </div>
+
+                <div class="hw-card-footer">
+                    <p class="hw-card-desc">Three questions. One story.<br>Take this week to sit with it.</p>
+                    <span class="hw-card-btn">Explore →</span>
+                </div>
+            </div>
+
+            <!-- Right — click intercepted so individual links work -->
+            <div class="hw-card-right" onclick="event.stopPropagation()">
+
+                <a href="/res/deep/2026/holy-week-01-suffer.html" class="hw-chapter" onclick="event.stopPropagation()">
+                    <span class="hw-chapter-num">I</span>
+                    <div class="hw-chapter-info">
+                        <span class="hw-chapter-title">The Weight</span>
+                        <span class="hw-chapter-sub">Why did He suffer?</span>
+                    </div>
+                    <span class="hw-chapter-arrow">→</span>
+                </a>
+
+                <a href="/res/deep/2026/holy-week-02-die.html" class="hw-chapter" onclick="event.stopPropagation()">
+                    <span class="hw-chapter-num">II</span>
+                    <div class="hw-chapter-info">
+                        <span class="hw-chapter-title">The Price</span>
+                        <span class="hw-chapter-sub">Why did He die?</span>
+                    </div>
+                    <span class="hw-chapter-arrow">→</span>
+                </a>
+
+                <a href="/res/deep/2026/holy-week-03-rise.html" class="hw-chapter" onclick="event.stopPropagation()">
+                    <span class="hw-chapter-num">III</span>
+                    <div class="hw-chapter-info">
+                        <span class="hw-chapter-title">The Dawn</span>
+                        <span class="hw-chapter-sub">Why did He rise?</span>
+                    </div>
+                    <span class="hw-chapter-arrow">→</span>
+                </a>
+
+                <a href="/res/deep/2026/holy-week-04-threshold.html" class="hw-chapter" onclick="event.stopPropagation()">
+                    <span class="hw-chapter-num">↳</span>
+                    <div class="hw-chapter-info">
+                        <span class="hw-chapter-title">The Threshold</span>
+                        <span class="hw-chapter-sub">Believe in Jesus.</span>
+                    </div>
+                    <span class="hw-chapter-arrow">→</span>
+                </a>
+
+            </div>
+        </div>
+    </a>
+
+</section>
+<!-- ── END HOLY WEEK CARD ── -->
+        
 <section class="max-w-6xl mx-auto px-4 md:px-6 py-20"> <div class="glass-card bg-zinc-600 text-white overflow-hidden p-0 relative border-none shadow-2xl">
         <div class="grid md:grid-cols-2 items-stretch">
             <div class="px-6 py-12 md:p-16 flex flex-col justify-center">
