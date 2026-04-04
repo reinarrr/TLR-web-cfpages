@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Resurrected Life | Acts 17:1–4 | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:title"       content="My Resurrected Life">
+    <meta property="og:description" content="Resurrection is not the last chapter. It is the one you are in right now. The same power that opened a sealed tomb is the power you woke up with today.">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/my-resurrected-life.html">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #faf9f6; }
+
+        .scripture-box  { border-left: 3px solid #2d5a5a; background: #f0f6f6; }
+        .lead-quote     { border-left: 3px solid #c5a059; }
+        .editorial-header { border-bottom: 1px solid #e5e7eb; }
+        .section-entry  { border-top: 1px solid #e5e7eb; padding-top: 4rem; margin-top: 4rem; }
+        .section-entry:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+        .section-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(5rem, 14vw, 9rem);
+            line-height: 1; color: #2d5a5a; opacity: 0.08;
+            letter-spacing: -0.03em; user-select: none;
+        }
+        .dark-callout {
+            background: #1a1a1a; color: white;
+            border-radius: 2rem; padding: 2.5rem 3rem;
+            position: relative; overflow: hidden;
+        }
+        .dark-callout::after {
+            content: ''; position: absolute;
+            bottom: -20px; right: -20px;
+            width: 120px; height: 120px;
+            background: #2d5a5a; opacity: 0.2;
+            border-radius: 50%; filter: blur(30px);
+        }
+
+        /* HERO */
+        .hero-wrap {
+            background: linear-gradient(160deg, #eaf5f5 0%, #faf9f6 55%, #fdf8ee 100%);
+            border-bottom: 1px solid #e5e7eb;
+            padding: 6rem 1.5rem 5rem;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .hero-wrap::before {
+            content: ''; position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 70% 50% at 50% 0%, rgba(45,90,90,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 30% at 80% 80%, rgba(197,160,89,0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .hero-bg-word {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(8rem, 22vw, 18rem); font-weight: 700;
+            color: #2d5a5a; opacity: 0.03;
+            white-space: nowrap; pointer-events: none; user-select: none;
+            letter-spacing: -0.04em;
+        }
+
+        /* THREE TRUTHS BANNER */
+        .alive-banner {
+            display: flex; align-items: stretch;
+            border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb;
+            background: white;
+        }
+        .alive-panel {
+            flex: 1; text-align: center;
+            padding: 1.5rem 1rem;
+            border-right: 1px solid #e5e7eb;
+        }
+        .alive-panel:last-child { border-right: none; }
+        .alive-panel.active { background: #2d5a5a; }
+        .alive-panel .panel-label {
+            font-size: 0.6rem; font-weight: 700;
+            letter-spacing: 0.35em; text-transform: uppercase;
+            color: #9ca3af; display: block; margin-bottom: 0.3rem;
+        }
+        .alive-panel.active .panel-label { color: rgba(255,255,255,0.55); }
+        .alive-panel .panel-truth {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            font-style: italic; color: #374151;
+        }
+        .alive-panel.active .panel-truth { color: white; }
+
+        /* CONTRAST GRID */
+        .contrast-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            border: 1px solid #e5e7eb; border-radius: 2rem; overflow: hidden;
+        }
+        .contrast-grid > div:first-child { border-right: 1px solid #e5e7eb; }
+
+        /* REALITY CARDS */
+        .reality-cards { display: grid; gap: 1rem; }
+        @media (min-width: 640px) { .reality-cards { grid-template-columns: 1fr 1fr; } }
+        .reality-card {
+            border: 1px solid #e5e7eb; border-radius: 1.5rem;
+            padding: 1.75rem 2rem; background: white;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            position: relative; overflow: hidden;
+        }
+        .reality-card::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(to right, #2d5a5a, #c5a059);
+            opacity: 0; transition: opacity 0.2s;
+        }
+        .reality-card:hover { border-color: #2d5a5a; box-shadow: 0 4px 24px rgba(45,90,90,0.08); }
+        .reality-card:hover::before { opacity: 1; }
+        .reality-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem; font-style: italic;
+            color: #2d5a5a; margin-bottom: 0.6rem;
+        }
+        .reality-card p { font-size: 0.95rem; color: #6b7280; line-height: 1.75; margin: 0; }
+
+        /* POWER STATEMENT */
+        .power-statement {
+            background: #1a1a1a; border-radius: 2rem;
+            padding: 3.5rem 3rem; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .power-statement::before {
+            content: ''; position: absolute;
+            bottom: 0; left: 0; right: 0; height: 60%;
+            background: radial-gradient(ellipse 80% 100% at 50% 100%, rgba(45,90,90,0.35) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .power-statement p {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+            font-style: italic; color: #f4eed8;
+            line-height: 1.6; margin: 0; position: relative;
+        }
+        .power-statement p em { color: #c5a059; font-style: normal; }
+
+        /* GOLD PULL */
+        .gold-pull {
+            border-left: 3px solid #c5a059; background: #fffdf7;
+            padding: 2rem 2.5rem; border-radius: 0 1rem 1rem 0; margin: 2.5rem 0;
+        }
+        .gold-pull p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem; font-style: italic;
+            color: #374151; line-height: 1.7; margin-bottom: 0.75rem;
+        }
+        .gold-pull .ref {
+            font-size: 0.65rem; font-weight: 700;
+            letter-spacing: 0.3em; text-transform: uppercase; color: #c5a059;
+        }
+
+        /* SHIFT INTERACTIVE */
+        .shift-section { border: 1px solid #e5e7eb; border-radius: 2rem; overflow: hidden; background: white; }
+        .shift-header { padding: 1.5rem 2rem 1rem; border-bottom: 1px solid #e5e7eb; background: #f9fafb; }
+        .shift-header p { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase; color: #c5a059; margin-bottom: 0.3rem; }
+        .shift-header h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: #374151; font-weight: 400; }
+        .shift-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 1.25rem 1.5rem; border-bottom: 1px solid #e5e7eb; background: white; }
+        .shift-pill {
+            padding: 0.5rem 1.1rem; border: 1px solid #e5e7eb; border-radius: 100px;
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+            color: #9ca3af; cursor: pointer; background: none;
+            font-family: 'Outfit', sans-serif; transition: all 0.2s;
+        }
+        .shift-pill:hover { color: #2d5a5a; border-color: #2d5a5a; }
+        .shift-pill.active { color: white; border-color: #2d5a5a; background: #2d5a5a; }
+        .shift-pane { display: none; animation: shiftIn 0.3s ease; }
+        .shift-pane.active { display: block; }
+        @keyframes shiftIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+        .shift-before { padding: 1.75rem 2rem; border-bottom: 1px solid #e5e7eb; background: #fafafa; }
+        .shift-before .s-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase; color: #d1d5db; margin-bottom: 0.5rem; }
+        .shift-before .s-text { font-size: 1rem; color: #9ca3af; font-style: italic; line-height: 1.7; }
+        .shift-after { padding: 1.75rem 2rem; border-bottom: 1px solid #e5e7eb; position: relative; }
+        .shift-after::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, #2d5a5a, #c5a059, transparent); }
+        .shift-after .s-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase; color: #2d5a5a; margin-bottom: 0.5rem; }
+        .shift-after .s-text { font-size: 1rem; color: #374151; line-height: 1.8; }
+        .shift-after .s-text strong { color: #1a1a1a; font-weight: 600; }
+        .shift-verse { padding: 1.25rem 2rem; background: #f0f6f6; }
+        .shift-verse p { font-size: 0.85rem; font-style: italic; color: #4b5563; margin-bottom: 0.25rem; }
+        .shift-verse .ref { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: #2d5a5a; }
+
+        /* QUIZ */
+        .test-option { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border: 1px solid #e8e4dc; border-radius: 12px; cursor: pointer; transition: all 0.2s; background: #faf9f6; margin-bottom: 10px; }
+        .test-option:hover { border-color: #2d5a5a; background: #f0f6f6; }
+        .test-option.selected { border-color: #2d5a5a; background: #eaf2f2; }
+        .test-option-dot { width: 18px; height: 18px; min-width: 18px; border-radius: 50%; border: 1.5px solid #ccc; margin-top: 2px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .test-option.selected .test-option-dot { border-color: #2d5a5a; background: #2d5a5a; }
+        .test-option.selected .test-option-dot::after { content: ''; width: 6px; height: 6px; background: white; border-radius: 50%; display: block; }
+        .test-option-text { font-size: 14px; line-height: 1.6; color: #444; }
+        .test-verse-box { border-left: 3px solid #c5a059; background: #fffdf7; padding: 10px 16px; border-radius: 0 8px 8px 0; margin-bottom: 1.25rem; }
+        .test-verse-text { font-family: 'Playfair Display', serif; font-style: italic; font-size: 13px; color: #666; line-height: 1.6; }
+        .test-verse-ref { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #c5a059; margin-top: 4px; }
+        .test-q-card { display: none; animation: testFadeUp 0.4s ease forwards; }
+        .test-q-card.active { display: block; }
+        @keyframes testFadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .test-btn-next { width: 100%; padding: 13px; background: #2d5a5a; color: white; border: none; border-radius: 10px; font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; opacity: 0.3; pointer-events: none; }
+        .test-btn-next.ready { opacity: 1; pointer-events: all; }
+        .test-btn-next:hover { background: #1e3e3e; }
+        .test-result { display: none; animation: testFadeUp 0.5s ease forwards; }
+        .test-result.active { display: block; }
+        .progress-track { height: 3px; background: #e8e4dc; border-radius: 2px; overflow: hidden; margin-bottom: 2rem; }
+        .progress-fill { height: 100%; background: #2d5a5a; border-radius: 2px; transition: width 0.5s ease; }
+
+        /* CLOSING BANNER */
+        .closing-truth {
+            background: linear-gradient(135deg, #2d5a5a 0%, #1e3e3e 100%);
+            border-radius: 3rem; padding: 4rem 3rem;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .closing-truth::before {
+            content: ''; position: absolute;
+            top: -60px; right: -60px; width: 200px; height: 200px;
+            background: #c5a059; opacity: 0.08; border-radius: 50%;
+        }
+        .closing-truth::after {
+            content: ''; position: absolute;
+            bottom: -40px; left: -40px; width: 150px; height: 150px;
+            background: #c5a059; opacity: 0.05; border-radius: 50%;
+        }
+
+        .word-display { font-family: 'Playfair Display', serif; letter-spacing: 0.02em; line-height: 1; color: #d4d4d8; }
+        .word-meta { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; }
+    </style>
+</head>
+
+<body class="antialiased bg-cream font-body" data-current="">
+
+    <div id="header-placeholder"></div>
+
+    <!-- HERO -->
+    <section class="hero-wrap">
+        <div class="hero-bg-word" aria-hidden="true">Alive</div>
+        <div class="relative max-w-4xl mx-auto">
+            <p class="text-[0.65rem] font-bold tracking-[0.45em] uppercase mb-8" style="color:#2d5a5a;opacity:0.7;">The Acts Journey &nbsp;&middot;&nbsp; Acts 17:1&ndash;4</p>
+            <h1 class="font-bold text-charcoal mb-6 leading-[1.05] tracking-tight" style="font-size:clamp(3.5rem,10vw,7rem);">
+                My <span class="accent-teal italic font-display font-normal">Resurrected</span> Life.
+            </h1>
+            <p class="text-2xl md:text-3xl text-charcoal font-light leading-relaxed italic lead-quote pl-8 text-left mx-auto max-w-3xl py-4 mb-10">
+                Resurrection is not the last chapter. It is the one you are in right now. The same power that opened a sealed tomb is the power you woke up with today.
+            </p>
+            <div class="flex items-center justify-center gap-6 flex-wrap">
+                <span class="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-zinc-400">5 min read</span>
+                <span class="text-zinc-300">&middot;</span>
+                <span class="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-zinc-400">Acts 17:1&ndash;4 &middot; NLT</span>
+                <span class="text-zinc-300">&middot;</span>
+                <span class="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-zinc-400">Resurrection Sunday</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- THREE TRUTHS BANNER -->
+    <div class="alive-banner">
+        <div class="alive-panel">
+            <span class="panel-label">Because He Suffered</span>
+            <span class="panel-truth">You are not alone in your pain</span>
+        </div>
+        <div class="alive-panel">
+            <span class="panel-label">Because He Died</span>
+            <span class="panel-truth">You carry no debt</span>
+        </div>
+        <div class="alive-panel active">
+            <span class="panel-label">Because He Rose</span>
+            <span class="panel-truth">You are not living a dead life</span>
+        </div>
+    </div>
+
+    <main class="max-w-4xl mx-auto px-6 py-24">
+
+        <!-- VIDEO EMBED -->
+        <section class="mb-32" id="yt-section" style="display:none">
+            <div class="relative rounded-[3rem] overflow-hidden shadow-2xl bg-zinc-200 aspect-video">
+                <iframe id="yt-iframe" class="absolute inset-0 w-full h-full" src="" title="My Resurrected Life" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <p id="yt-caption" class="text-center text-zinc-400 text-[0.65rem] mt-8 tracking-[0.3em] uppercase italic"></p>
+        </section>
+        <script>
+            (async function () {
+                const PROXY = 'https://ghost-proxy.reinar-6fd.workers.dev';
+                const KEY   = 'c306251d7f0f57012025d2fdc4';
+                const slug  = location.pathname.split('/').pop().replace('.html', '');
+                try {
+                    const res  = await fetch(`${PROXY}/ghost/api/content/posts/slug/${slug}/?key=${KEY}`);
+                    if (!res.ok) return;
+                    const data = await res.json();
+                    const post = data.posts?.[0];
+                    if (!post?.codeinjection_head) return;
+                    const match = post.codeinjection_head.match(/<script[^>]*id="dd-meta"[^>]*>([\s\S]*?)<\/script>/);
+                    if (!match) return;
+                    const meta = JSON.parse(match[1]);
+                    if (meta.youtubeId) {
+                        document.getElementById('yt-iframe').src = `https://www.youtube.com/embed/${meta.youtubeId}`;
+                        if (meta.caption) document.getElementById('yt-caption').textContent = meta.caption;
+                        document.getElementById('yt-section').style.display = 'block';
+                    }
+                } catch (e) {}
+            })();
+        </script>
+
+        <!-- INTRO -->
+        <section class="mb-24 space-y-8">
+            <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase">Where We Are</h4>
+            <h2 class="text-4xl font-bold text-charcoal leading-tight">Paul makes a case. The case lands on you.</h2>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                Paul arrives in Thessalonica with no building, no platform, and no institutional backing. He walks into a synagogue and does something deceptively simple: he opens the texts. For three Sabbaths he places the ancient prophecies alongside the life of Jesus and says &mdash; <em>look at the match.</em>
+            </p>
+            <p class="text-zinc-600 text-xl leading-relaxed">
+                His case has three parts. The Messiah had to suffer. He had to die. And he rose from the dead. Two thousand years later, the case is still open. And it is not asking for your intellectual agreement. It is asking for your life.
+            </p>
+        </section>
+
+        <!-- ARTICLE -->
+        <article class="mb-32">
+
+            <!-- I -->
+            <section class="section-entry space-y-8">
+                <div class="flex items-start gap-2 mb-2"><span class="section-number">I</span></div>
+                <h2 class="text-4xl font-bold text-charcoal leading-tight -mt-6">Everyone treats resurrection like the last chapter.</h2>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    The finale. The thing that happens after everything else is done &mdash; the dying, the waiting, the holding on. One day, when this life is over, you will be raised. That is the version most people carry.
+                </p>
+                <p class="text-zinc-600 text-xl leading-relaxed">Paul does not write it that way. Not even close.</p>
+
+                <div class="dark-callout">
+                    <p class="text-zinc-300 text-2xl md:text-3xl font-display italic leading-tight relative z-10">
+                        &ldquo;Since you have been raised with Christ, set your hearts on things above.&rdquo;
+                    </p>
+                    <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mt-6">Colossians 3:1 &mdash; past tense. Already done.</p>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    Not <em>will be.</em> Not <em>might be if you endure long enough.</em> <strong class="text-charcoal">Have been.</strong> The moment you came to Christ, the transaction was complete. Resurrection is not the chapter coming up. It is the chapter you are currently in.
+                </p>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    Which means the grave has already lost its argument with you. Not eventually. Now. On whatever ordinary day you are standing in at this moment.
+                </p>
+
+                <div class="contrast-grid mt-8">
+                    <div class="p-8 bg-zinc-50">
+                        <h4 class="text-zinc-400 font-bold uppercase tracking-widest text-[0.65rem] mb-5">The common reading</h4>
+                        <div class="space-y-4 text-zinc-500 text-base leading-relaxed">
+                            <p>Resurrection is a future event</p>
+                            <p>Something to look forward to</p>
+                            <p>Reserved for after death</p>
+                            <p>A reward for enduring</p>
+                        </div>
+                    </div>
+                    <div class="p-8 bg-white">
+                        <h4 class="text-teal font-bold uppercase tracking-widest text-[0.65rem] mb-5">What Paul actually says</h4>
+                        <div class="space-y-4 text-zinc-500 text-base leading-relaxed">
+                            <p>Resurrection is a present reality</p>
+                            <p>Something to live from, now</p>
+                            <p>Available to the living</p>
+                            <p>The power you already carry</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- II -->
+            <section class="section-entry space-y-8">
+                <div class="flex items-start gap-2 mb-2"><span class="section-number">II</span></div>
+                <h2 class="text-4xl font-bold text-charcoal leading-tight -mt-6">The power is not past tense.</h2>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    Paul builds his case in Thessalonica from the Old Testament alone &mdash; Psalm 16, Isaiah 53, the suffering servant. He lays the evidence week by week until it becomes impossible to dismiss. And then, later, he writes to another church &mdash; not about the argument, but about what he personally wants:
+                </p>
+
+                <div class="gold-pull">
+                    <p>&ldquo;I want to know Christ &mdash; yes, to know the power of his resurrection.&rdquo;</p>
+                    <span class="ref">Philippians 3:10</span>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    Present tense. Ongoing. Available. Paul is not writing about a power that was active in the first century and has since been archived. He is describing something that can be <em>known personally, right now</em> &mdash; the same power that reversed death itself.
+                </p>
+
+                <div class="word-display font-bold mb-2" style="font-size:clamp(3rem,10vw,6rem);">dunamis</div>
+                <p class="word-meta text-zinc-400 mb-8">Greek &nbsp;&middot;&nbsp; &delta;&upsilon;&nu;&alpha;&mu;&iota;&sigmaf; &nbsp;&middot;&nbsp; power, might, the energy that produces results &mdash; root of our word &ldquo;dynamite&rdquo;</p>
+
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    Not potential power. Not theoretical power. Operative, active, demonstrable power &mdash; the kind that produces results you can see. And Paul says this is what raised Jesus from the dead. Romans 8:11 tells you where it is now:
+                </p>
+
+                <div class="scripture-box p-8 rounded-r-xl">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Romans 8:11 (NLT)</strong>
+                    <em>&ldquo;The Spirit of God, who raised Jesus from the dead, lives in you. And just as God raised Christ Jesus from the dead, he will give life to your mortal bodies by this same Spirit living within you.&rdquo;</em></p>
+                </div>
+
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    Not sitting in a museum. Not reserved for the first century. <strong class="text-charcoal">In you.</strong> Right now. The same measurable, historical, death-defeating force that cracked a Roman tomb open on a Sunday morning &mdash; resident in every person who belongs to Christ.
+                </p>
+
+                <div class="power-statement my-10">
+                    <p>You are not running on your own power.<br>You are running on <em>resurrection power</em>.</p>
+                </div>
+            </section>
+
+            <!-- III -->
+            <section class="section-entry space-y-8">
+                <div class="flex items-start gap-2 mb-2"><span class="section-number">III</span></div>
+                <h2 class="text-4xl font-bold text-charcoal leading-tight -mt-6">What this actually changes.</h2>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    A resurrected life does not mean a painless life. It does not mean your circumstances improve or the hard things stop being hard. It means your life has the same orientation as the resurrection &mdash; through death to life, through loss to gain, through the end of something to the beginning of something better.
+                </p>
+
+                <div class="reality-cards mt-4">
+                    <div class="reality-card">
+                        <h4>Failure is not final.</h4>
+                        <p>The God who turned a crucifixion into a resurrection is not finished with your worst chapter. Failure is a moment in a story still being written &mdash; by someone who specialises in turning endings into beginnings.</p>
+                    </div>
+                    <div class="reality-card">
+                        <h4>Fear has lost its authority.</h4>
+                        <p>The thing you fear most has already been walked through by the one who walks with you. You are not heading toward an uncertain outcome. The ending of the story has already been secured.</p>
+                    </div>
+                    <div class="reality-card">
+                        <h4>Your old self has a death certificate.</h4>
+                        <p>Romans 6:4 &mdash; you were buried with him, and raised to walk in newness of life. You are not improving the old version. You are living a new one. Your past is not your identity. His resurrection is.</p>
+                    </div>
+                    <div class="reality-card">
+                        <h4>Monday looks different.</h4>
+                        <p>Resurrection power is not a Sunday phenomenon. It lives in you on a Tuesday at 3pm in a hard meeting, an exhausting season, the work nobody sees. You are not white-knuckling your way through life. You are resourced.</p>
+                    </div>
+                </div>
+
+                <div class="scripture-box p-8 rounded-r-xl mt-8">
+                    <p class="text-zinc-500 text-base leading-relaxed"><strong class="text-charcoal block mb-3">Ephesians 1:19&ndash;20 (NLT)</strong>
+                    <em>&ldquo;I also pray that you will understand the incredible greatness of God&rsquo;s power for us who believe him. This is the same mighty power that raised Christ from the dead.&rdquo;</em></p>
+                </div>
+            </section>
+
+            <!-- IV — SHIFT INTERACTIVE -->
+            <section class="section-entry space-y-8">
+                <div class="flex items-start gap-2 mb-2"><span class="section-number">IV</span></div>
+                <h2 class="text-4xl font-bold text-charcoal leading-tight -mt-6">The shift from dead thinking to resurrected living.</h2>
+                <p class="text-zinc-600 text-xl leading-relaxed">
+                    Resurrection life is not automatic. You carry the power &mdash; but you can still choose to live as if you don&rsquo;t. Most of us carry thought patterns that belong to the old life. Here are five common ones, and what the shift looks like when resurrection becomes present tense.
+                </p>
+
+                <div class="shift-section">
+                    <div class="shift-header">
+                        <p>Interactive</p>
+                        <h3>Select a thought pattern to see the shift.</h3>
+                    </div>
+                    <div class="shift-pills" role="tablist">
+                        <button class="shift-pill active" data-sh="identity" role="tab">Who I am</button>
+                        <button class="shift-pill" data-sh="failure" role="tab">When I fail</button>
+                        <button class="shift-pill" data-sh="fear" role="tab">When I&rsquo;m afraid</button>
+                        <button class="shift-pill" data-sh="monday" role="tab">Ordinary days</button>
+                        <button class="shift-pill" data-sh="waiting" role="tab">Still waiting</button>
+                    </div>
+                    <div>
+                        <div class="shift-pane active" id="sh-identity">
+                            <div class="shift-before">
+                                <div class="s-label">Dead thinking</div>
+                                <div class="s-text">&ldquo;I am defined by my past, my failures, my worst moments. I am trying to become a better version of who I was.&rdquo;</div>
+                            </div>
+                            <div class="shift-after">
+                                <div class="s-label">Resurrected living</div>
+                                <div class="s-text">You are not a renovated version of the old self. <strong>You are a new creation.</strong> The old person has a death certificate. Romans 6:4 says you were raised to walk in newness of life &mdash; not improved life, <em>new</em> life. Your identity is not built from your history. It is built from his resurrection.</div>
+                            </div>
+                            <div class="shift-verse">
+                                <p>&ldquo;Therefore, if anyone is in Christ, he is a new creation. The old has passed away; behold, the new has come.&rdquo;</p>
+                                <div class="ref">2 Corinthians 5:17</div>
+                            </div>
+                        </div>
+                        <div class="shift-pane" id="sh-failure">
+                            <div class="shift-before">
+                                <div class="s-label">Dead thinking</div>
+                                <div class="s-text">&ldquo;When I fail, that is the real verdict on who I am. I should have known better. This is what I keep coming back to.&rdquo;</div>
+                            </div>
+                            <div class="shift-after">
+                                <div class="s-label">Resurrected living</div>
+                                <div class="s-text">The God who turned a crucifixion into a resurrection is <strong>not finished with your worst chapter.</strong> Failure is a moment in a story still being written &mdash; by someone who specialises in turning endings into beginnings. The grave does not get the last word on your story any more than it got the last word on his.</div>
+                            </div>
+                            <div class="shift-verse">
+                                <p>&ldquo;And we know that God causes everything to work together for the good of those who love God.&rdquo;</p>
+                                <div class="ref">Romans 8:28 (NLT)</div>
+                            </div>
+                        </div>
+                        <div class="shift-pane" id="sh-fear">
+                            <div class="shift-before">
+                                <div class="s-label">Dead thinking</div>
+                                <div class="s-text">&ldquo;The future is uncertain and I am not sure I have what it takes. The worst might happen. I need to protect myself.&rdquo;</div>
+                            </div>
+                            <div class="shift-after">
+                                <div class="s-label">Resurrected living</div>
+                                <div class="s-text">The thing you fear most has already been walked through by the one who walks with you. <strong>The outcome of the story is already secured.</strong> That does not remove the hard things. It removes the terror from them. You are not heading toward an uncertain ending. You are living inside a story that has already been decided.</div>
+                            </div>
+                            <div class="shift-verse">
+                                <p>&ldquo;I am the Living One; I was dead, and now look, I am alive for ever and ever. And I hold the keys of death and Hades.&rdquo;</p>
+                                <div class="ref">Revelation 1:18</div>
+                            </div>
+                        </div>
+                        <div class="shift-pane" id="sh-monday">
+                            <div class="shift-before">
+                                <div class="s-label">Dead thinking</div>
+                                <div class="s-text">&ldquo;Faith is for Sundays. The rest of the week I am on my own &mdash; grinding through life with whatever I can muster.&rdquo;</div>
+                            </div>
+                            <div class="shift-after">
+                                <div class="s-label">Resurrected living</div>
+                                <div class="s-text">The Spirit of God &mdash; the one who raised Jesus from the dead &mdash; does not take Monday off. <strong>The same power lives in you on Tuesday at 3pm</strong> in a difficult meeting, in an exhausting season, in the work nobody sees and nobody applauds. You are not white-knuckling your way through the ordinary. You are resourced by the extraordinary, every single day.</div>
+                            </div>
+                            <div class="shift-verse">
+                                <p>&ldquo;The Spirit of God, who raised Jesus from the dead, lives in you.&rdquo;</p>
+                                <div class="ref">Romans 8:11 (NLT)</div>
+                            </div>
+                        </div>
+                        <div class="shift-pane" id="sh-waiting">
+                            <div class="shift-before">
+                                <div class="s-label">Dead thinking</div>
+                                <div class="s-text">&ldquo;I am waiting for the right moment, the right circumstances, the right version of myself before I can really start living.&rdquo;</div>
+                            </div>
+                            <div class="shift-after">
+                                <div class="s-label">Resurrected living</div>
+                                <div class="s-text">The resurrection already happened. The power has already been released. The new life has already begun. <strong>You are not in the waiting room.</strong> You are already on the other side of the most important event in human history. Stop asking for permission to live from what is already yours. The door is open. You can walk through it right now.</div>
+                            </div>
+                            <div class="shift-verse">
+                                <p>&ldquo;Since you have been raised with Christ, set your hearts on things above, where Christ is, seated at the right hand of God.&rdquo;</p>
+                                <div class="ref">Colossians 3:1</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </article>
+
+        <!-- QUIZ -->
+        <section class="mb-32">
+            <div class="max-w-2xl mx-auto">
+                <div class="text-center mb-16">
+                    <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">Interactive</h4>
+                    <h2 class="text-4xl md:text-5xl font-bold text-charcoal mb-8">Am I Living <span class="accent-teal italic font-display font-normal">Risen</span>?</h2>
+                    <p class="text-zinc-600 text-xl leading-relaxed">You cannot lose your resurrection life &mdash; it was given, not earned, and cannot be revoked. But there is a gap worth naming: the gap between <em>having</em> it and <em>living from it</em>. Five honest questions. Not a verdict &mdash; an invitation.</p>
+                </div>
+
+                <div class="bg-white border border-zinc-200 rounded-[2rem] p-8 md:p-12 shadow-sm">
+                    <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+                    <div class="flex justify-between items-center mb-8">
+                        <span id="prog-label" class="text-[0.65rem] font-bold tracking-[0.2em] uppercase text-zinc-400">Question 1 of 5</span>
+                        <span id="prog-pct"   class="text-[0.65rem] font-bold tracking-[0.2em] uppercase text-zinc-400">0%</span>
+                    </div>
+
+                    <div id="tq1" class="test-q-card active">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Question 01</p>
+                        <p class="text-charcoal font-bold text-xl leading-snug mb-6" style="font-family:'Playfair Display',serif;">When you fail &mdash; really fail &mdash; where does your mind go first?</p>
+                        <div class="test-verse-box"><p class="test-verse-text">&ldquo;Therefore, if anyone is in Christ, he is a new creation. The old has passed away; behold, the new has come.&rdquo;</p><p class="test-verse-ref">2 Corinthians 5:17</p></div>
+                        <div id="opts1">
+                            <div class="test-option" onclick="tSelect(this,1,3)"><div class="test-option-dot"></div><p class="test-option-text">Shame and self-condemnation. I replay what went wrong and wonder what it says about who I am.</p></div>
+                            <div class="test-option" onclick="tSelect(this,1,2)"><div class="test-option-dot"></div><p class="test-option-text">I know grace is real, but it takes me a while to get there. My first response is usually guilt.</p></div>
+                            <div class="test-option" onclick="tSelect(this,1,1)"><div class="test-option-dot"></div><p class="test-option-text">To grace. I can acknowledge failure honestly without it becoming a verdict on my identity.</p></div>
+                        </div>
+                        <button class="test-btn-next mt-6" id="tbtn1" onclick="tNext(1)">Next Question &rarr;</button>
+                    </div>
+
+                    <div id="tq2" class="test-q-card">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Question 02</p>
+                        <p class="text-charcoal font-bold text-xl leading-snug mb-6" style="font-family:'Playfair Display',serif;">Does your Monday feel connected to your Sunday &mdash; or are they two separate lives?</p>
+                        <div class="test-verse-box"><p class="test-verse-text">&ldquo;The Spirit of God, who raised Jesus from the dead, lives in you.&rdquo;</p><p class="test-verse-ref">Romans 8:11</p></div>
+                        <div id="opts2">
+                            <div class="test-option" onclick="tSelect(this,2,3)"><div class="test-option-dot"></div><p class="test-option-text">Completely separate. Faith is for Sunday. The rest of the week I am basically on my own.</p></div>
+                            <div class="test-option" onclick="tSelect(this,2,2)"><div class="test-option-dot"></div><p class="test-option-text">Partly connected. I bring faith to the big moments but ordinary days feel pretty disconnected.</p></div>
+                            <div class="test-option" onclick="tSelect(this,2,1)"><div class="test-option-dot"></div><p class="test-option-text">Connected. My faith is not a weekend category &mdash; it is the operating system underneath everything.</p></div>
+                        </div>
+                        <button class="test-btn-next mt-6" id="tbtn2" onclick="tNext(2)">Next Question &rarr;</button>
+                    </div>
+
+                    <div id="tq3" class="test-q-card">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Question 03</p>
+                        <p class="text-charcoal font-bold text-xl leading-snug mb-6" style="font-family:'Playfair Display',serif;">When fear shows up &mdash; about the future, about what you might lose &mdash; how do you carry it?</p>
+                        <div class="test-verse-box"><p class="test-verse-text">&ldquo;I am the Living One; I was dead, and now look, I am alive for ever and ever. And I hold the keys of death and Hades.&rdquo;</p><p class="test-verse-ref">Revelation 1:18</p></div>
+                        <div id="opts3">
+                            <div class="test-option" onclick="tSelect(this,3,3)"><div class="test-option-dot"></div><p class="test-option-text">It consumes me. Fear about the future is one of my biggest ongoing struggles.</p></div>
+                            <div class="test-option" onclick="tSelect(this,3,2)"><div class="test-option-dot"></div><p class="test-option-text">I manage it, but I am still doing a lot of the carrying myself.</p></div>
+                            <div class="test-option" onclick="tSelect(this,3,1)"><div class="test-option-dot"></div><p class="test-option-text">I feel it, but I carry it differently. The outcome of my story is not uncertain &mdash; and that settles something.</p></div>
+                        </div>
+                        <button class="test-btn-next mt-6" id="tbtn3" onclick="tNext(3)">Next Question &rarr;</button>
+                    </div>
+
+                    <div id="tq4" class="test-q-card">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Question 04</p>
+                        <p class="text-charcoal font-bold text-xl leading-snug mb-6" style="font-family:'Playfair Display',serif;">Are you waiting for something to change before you really start living?</p>
+                        <div class="test-verse-box"><p class="test-verse-text">&ldquo;Since you have been raised with Christ, set your hearts on things above.&rdquo;</p><p class="test-verse-ref">Colossians 3:1</p></div>
+                        <div id="opts4">
+                            <div class="test-option" onclick="tSelect(this,4,3)"><div class="test-option-dot"></div><p class="test-option-text">Yes. There are things that feel unresolved that I am waiting on before I can move forward.</p></div>
+                            <div class="test-option" onclick="tSelect(this,4,2)"><div class="test-option-dot"></div><p class="test-option-text">Sometimes. I know the truth but I still find myself in a holding pattern more than I&rsquo;d like.</p></div>
+                            <div class="test-option" onclick="tSelect(this,4,1)"><div class="test-option-dot"></div><p class="test-option-text">No. I am living from what is already true, not toward something I am waiting to receive.</p></div>
+                        </div>
+                        <button class="test-btn-next mt-6" id="tbtn4" onclick="tNext(4)">Next Question &rarr;</button>
+                    </div>
+
+                    <div id="tq5" class="test-q-card">
+                        <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Question 05</p>
+                        <p class="text-charcoal font-bold text-xl leading-snug mb-6" style="font-family:'Playfair Display',serif;">Would the people closest to you say your life has a joy that does not depend on circumstances?</p>
+                        <div class="test-verse-box"><p class="test-verse-text">&ldquo;Always be full of joy in the Lord. I say it again &mdash; rejoice!&rdquo;</p><p class="test-verse-ref">Philippians 4:4 (NLT)</p></div>
+                        <div id="opts5">
+                            <div class="test-option" onclick="tSelect(this,5,3)"><div class="test-option-dot"></div><p class="test-option-text">Honestly, no. My joy is mostly circumstantial &mdash; it rises and falls with how things are going.</p></div>
+                            <div class="test-option" onclick="tSelect(this,5,2)"><div class="test-option-dot"></div><p class="test-option-text">Sometimes. There are seasons of real joy, but it is not consistent enough for others to name first.</p></div>
+                            <div class="test-option" onclick="tSelect(this,5,1)"><div class="test-option-dot"></div><p class="test-option-text">Yes. People around me would describe me as someone with a settled, genuine joy &mdash; even in hard seasons.</p></div>
+                        </div>
+                        <button class="test-btn-next mt-6" id="tbtn5" onclick="tFinish()">See My Results &rarr;</button>
+                    </div>
+
+                    <div id="tresult" class="test-result">
+                        <div class="bg-charcoal rounded-[1.5rem] p-8 text-center mb-6">
+                            <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-3">Your Resurrection Profile</p>
+                            <p id="t-score" class="text-white font-bold mb-1" style="font-family:'Playfair Display',serif;font-size:clamp(2.5rem,8vw,4rem);line-height:1;"></p>
+                            <p id="t-verdict" class="text-zinc-400 italic text-lg" style="font-family:'Playfair Display',serif;"></p>
+                        </div>
+                        <div class="border border-zinc-200 rounded-[1.5rem] p-8 mb-6 bg-zinc-50">
+                            <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-4">What This Shows</p>
+                            <p id="t-body" class="text-zinc-600 text-base leading-relaxed"></p>
+                        </div>
+                        <div class="bg-teal rounded-[1.5rem] p-8 mb-6">
+                            <p class="text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-5" style="color:#9ecece;">Your Invitation This Week</p>
+                            <div id="t-challenge" class="text-white/90 text-base leading-relaxed space-y-4"></div>
+                        </div>
+                        <button onclick="tRestart()" class="w-full py-3 bg-transparent border border-teal text-teal rounded-xl font-bold uppercase tracking-[0.15em] text-xs cursor-pointer hover:bg-teal hover:text-white transition-all" style="font-family:'Outfit',sans-serif;">&#8635; Take It Again</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DISCUSSION -->
+        <section class="bg-charcoal text-white rounded-[3.5rem] p-12 md:p-20 shadow-2xl relative mb-16">
+            <div class="text-center mb-20">
+                <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.5em] uppercase mb-4">The Living Room Circle</h3>
+                <h2 class="text-4xl md:text-6xl font-bold">Discussion &amp; Reflection</h2>
+                <div class="h-1 w-16 bg-teal mx-auto mt-10"></div>
+            </div>
+            <div class="space-y-16 max-w-2xl mx-auto">
+                <div class="group">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">01</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Paul says in Colossians 3 that you <em>have been</em> raised &mdash; past tense, already done. Does that feel true in how you actually live day to day? Where is the gap between the theology and the experience?</p>
+                </div>
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">02</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Romans 8:11 says the Spirit who raised Jesus from the dead lives in you. What would change about how you approached this week if you took that seriously &mdash; not as a comforting idea but as an operational reality?</p>
+                </div>
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">03</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Which of the five shifts is hardest for you right now &mdash; identity, failure, fear, Monday, or waiting? What would it look like to make that specific shift this week? Be concrete.</p>
+                </div>
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">04</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed italic"><strong class="text-white not-italic block mb-2 underline decoration-gold/50 underline-offset-8">Family Prompt:</strong> Ask each person: if we genuinely believed resurrection power is alive in us right now &mdash; what would we do differently at home this week? Be specific. Then try one of those things before next Sunday.</p>
+                </div>
+                <div class="group border-t border-white/10 pt-12">
+                    <span class="text-teal font-display text-6xl italic opacity-20 block mb-6 group-hover:opacity-100 transition-opacity">05</span>
+                    <p class="text-xl md:text-2xl text-zinc-300 font-light leading-relaxed">Paul didn&rsquo;t argue for the resurrection so people could believe a historical fact and move on. He argued for it because a historical fact became a present reality. Who in your world needs to hear that the life they have been waiting for has already started?</p>
+                </div>
+            </div>
+            <div class="mt-24 text-center">
+                <a href="/deepdives.html" class="inline-block border border-teal text-teal px-12 py-4 rounded-full font-bold uppercase tracking-[0.2em] text-[0.7rem] hover:bg-teal hover:text-white transition-all">Back to Library</a>
+            </div>
+        </section>
+
+        <!-- CLOSING -->
+        <section class="mt-0 text-center max-w-2xl mx-auto border-t border-zinc-100 pt-20 mb-16">
+            <h3 class="text-gold text-[0.7rem] font-bold tracking-[0.4em] uppercase mb-10">A Thought to Take Home</h3>
+            <div class="space-y-6 text-2xl text-charcoal font-light italic leading-relaxed mb-12">
+                <p>He suffered &mdash; so you are not alone in your pain.</p>
+                <p>He died &mdash; so you carry no debt.</p>
+                <p>He rose &mdash; and because he rose, so did you.</p>
+                <p>Resurrection is not the last chapter.<br>It is the one you are in right now.</p>
+                <p>You are not waiting to be raised.<br>In Christ, you already are.</p>
+            </div>
+
+            <div class="closing-truth">
+                <p class="text-white/50 text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-6">Live Like It</p>
+                <p class="text-white font-bold mb-2 italic" style="font-family:'Playfair Display',serif;font-size:clamp(1.4rem,4vw,2rem);line-height:1.4;position:relative;z-index:1;">
+                    &ldquo;The Spirit of God, who raised Jesus from the dead,<br>lives in you.&rdquo;
+                </p>
+                <p class="text-white/40 font-bold uppercase tracking-[0.25em] mt-4" style="font-size:0.65rem;position:relative;z-index:1;">Romans 8:11</p>
+            </div>
+
+            <div class="scripture-box p-10 text-left rounded-r-xl mt-16 text-zinc-600 leading-relaxed text-lg not-italic">
+                <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-6 not-italic">A Prayer for Those Still Living Like the Grave is Winning</h4>
+                <p class="italic">
+                    Father, forgive us for treating the resurrection like a history lesson when you intended it to be a power source.<br><br>
+                    We confess that we have been living beneath what is already true. We have carried guilt that was cancelled, fear that has already been defeated, and identities that were buried when the old life died. We have been waiting for permission to arrive when the door has been open all along.<br><br>
+                    Today we choose to believe &mdash; not just that Jesus rose, but that we rose with him. That the same Spirit who raised him from the dead is alive in us right now. That Monday is not separate from Sunday. That failure is not our verdict. That the grave does not get the last word.<br><br>
+                    Teach us what it means to live resurrected. Not a better version of the old life &mdash; a genuinely new one. Starting today. Starting now.<br><br>
+                    In the name of Jesus &mdash; who is not dead, and neither are we. Amen.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="/js/main.js" defer></script>
+
+    <script>
+        // SHIFT INTERACTIVE
+        document.querySelectorAll('.shift-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                const id = pill.dataset.sh;
+                document.querySelectorAll('.shift-pill').forEach(p => p.classList.remove('active'));
+                document.querySelectorAll('.shift-pane').forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                const pane = document.getElementById('sh-' + id);
+                if (pane) pane.classList.add('active');
+            });
+        });
+
+        // QUIZ
+        const tScores = {};
+        function tSelect(el, q, val) {
+            document.getElementById('opts'+q).querySelectorAll('.test-option').forEach(o => o.classList.remove('selected'));
+            el.classList.add('selected');
+            tScores[q] = val;
+            const btn = document.getElementById('tbtn'+q);
+            if (btn) btn.classList.add('ready');
+        }
+        function tNext(q) {
+            if (!tScores[q]) return;
+            document.getElementById('tq'+q).classList.remove('active');
+            const next = document.getElementById('tq'+(q+1));
+            if (next) { next.classList.add('active'); tUpdateProgress(q+1); }
+        }
+        function tUpdateProgress(q) {
+            const pct = Math.round(((q-1)/5)*100);
+            document.getElementById('prog-fill').style.width = pct+'%';
+            document.getElementById('prog-label').textContent = 'Question '+q+' of 5';
+            document.getElementById('prog-pct').textContent = pct+'%';
+        }
+        function tFinish() {
+            if (!tScores[5]) return;
+            document.getElementById('tq5').classList.remove('active');
+            document.getElementById('prog-fill').style.width = '100%';
+            document.getElementById('prog-label').textContent = 'Complete';
+            document.getElementById('prog-pct').textContent = '100%';
+            const living = Object.values(tScores).filter(v => v === 1).length;
+            let verdict, body, challenges;
+            if (living >= 4) {
+                verdict = 'Living from resurrection';
+                body = 'Something real has taken root. You carry faith into Monday. You know grace before you know guilt. Fear has not disappeared, but it does not have the authority it once did. You are living from what is already true. The invitation now is not to achieve more &mdash; it is to help others find what you have found.';
+                challenges = ['This week, name it for someone who is still living like the grave is winning. Not a sermon &mdash; just a conversation. Tell them what changed when resurrection became present tense for you.', 'Reflect: Who in your world is still waiting for permission to arrive? What is one specific thing you can do to show them the door is already open?'];
+            } else if (living >= 2) {
+                verdict = 'Knowing it, not yet living it';
+                body = 'The theology is right &mdash; you know the resurrection is real and the power is available. But there is a gap. Some days it is present tense. Other days it feels like a future hope you are managing toward. That gap is not a failure. It is an invitation. The truth is already yours. The work now is letting it reach the parts of your life that have not heard it yet.';
+                challenges = ['Identify the one area where dead thinking shows up most. Sit with Romans 8:11 every morning this week. Read it slowly. Let "lives in you" land somewhere new.', 'Take one action this week that only makes sense if resurrection power is real and active in you right now &mdash; something generous, courageous, or vulnerable that the old version of you would not have risked.'];
+            } else {
+                verdict = 'Still in the waiting room';
+                body = 'Much of your life is still running on the old operating system &mdash; guilt after failure, fear about the future, faith that belongs to Sunday but not Monday. That is not a verdict against you. It is a description of where you are right now. The good news is that your resurrection life was not earned and cannot be revoked. The door is already open. You do not have to keep knocking.';
+                challenges = ['Start with one truth this week: the Spirit of God who raised Jesus from the dead lives in you (Romans 8:11). Write it somewhere you will see it every day. Do not try to feel it yet &mdash; just let it be true.', 'Choose one of the five shifts and focus on just that one this week. Small movement is still movement.', 'Talk to someone in your community about where you are. Resurrection life was never meant to be lived alone.'];
+            }
+            document.getElementById('t-score').innerHTML = living + '<span style="color:#c5a059">/5</span>';
+            document.getElementById('t-verdict').textContent = verdict;
+            document.getElementById('t-body').textContent = body;
+            const challengeEl = document.getElementById('t-challenge');
+            challengeEl.innerHTML = '';
+            challenges.forEach(c => { const p = document.createElement('p'); p.textContent = c; challengeEl.appendChild(p); });
+            document.getElementById('tresult').classList.add('active');
+        }
+        function tRestart() {
+            Object.keys(tScores).forEach(k => delete tScores[k]);
+            document.querySelectorAll('.test-q-card').forEach(c => { c.classList.remove('active'); c.querySelectorAll('.test-option').forEach(o => o.classList.remove('selected')); });
+            document.querySelectorAll('.test-btn-next').forEach(b => b.classList.remove('ready'));
+            document.getElementById('tresult').classList.remove('active');
+            document.getElementById('tq1').classList.add('active');
+            document.getElementById('prog-fill').style.width = '0%';
+            document.getElementById('prog-label').textContent = 'Question 1 of 5';
+            document.getElementById('prog-pct').textContent = '0%';
+        }
+    </script>
+
+</body>
+</html>
