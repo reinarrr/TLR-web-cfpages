@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Seventy Sevens — Daniel 9:24–27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f0e0c;
+    --surface: #1a1916;
+    --surface2: #222118;
+    --border: rgba(255,255,255,0.08);
+    --border-active: rgba(255,255,255,0.2);
+    --text: #e8e4d8;
+    --text-muted: #8a8578;
+    --text-dim: #5a5650;
+    --gold: #c9a84c;
+    --gold-light: #e8c87a;
+    --gold-dim: rgba(201,168,76,0.15);
+    --teal: #5a9e8a;
+    --teal-light: #7dc4ad;
+    --teal-dim: rgba(90,158,138,0.15);
+    --amber: #d4874a;
+    --amber-light: #f0a870;
+    --amber-dim: rgba(212,135,74,0.15);
+    --coral: #c4625a;
+    --coral-light: #e07870;
+    --coral-dim: rgba(196,98,90,0.15);
+    --purple: #7a6eb0;
+    --purple-light: #9d90d0;
+    --purple-dim: rgba(122,110,176,0.15);
+    --font-display: 'Spectral', Georgia, serif;
+    --font-body: 'Barlow', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 4rem 2rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 200px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .header-sub {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto 1.5rem;
+    font-style: italic;
+    font-family: var(--font-display);
+  }
+  .lesson-aim {
+    display: inline-block;
+    background: var(--gold-dim);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 4px;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.85rem;
+    color: var(--gold-light);
+    letter-spacing: 0.03em;
+  }
+
+  /* ── LAYOUT ── */
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ── TIMELINE SECTION ── */
+  .timeline-section {
+    padding: 3rem 0 2rem;
+  }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+  }
+
+  /* ── TIMELINE VISUAL ── */
+  .timeline-wrap {
+    position: relative;
+    padding: 1rem 0 2.5rem;
+  }
+  .timeline-spine {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    position: relative;
+    margin-bottom: 0;
+  }
+
+  .phase {
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .phase:hover { transform: translateY(-2px); }
+  .phase:hover .phase-inner { border-color: var(--border-active); }
+  .phase.active .phase-inner { border-color: var(--border-active); }
+
+  .phase-inner {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    transition: border-color 0.2s, background 0.2s;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .phase-connector {
+    flex: 0 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .phase-connector::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    height: 1px;
+    background: var(--border);
+    transform: translateY(-50%);
+  }
+  .phase-connector.gap {
+    flex: 0 0 40px;
+  }
+  .phase-connector.gap::after {
+    background: repeating-linear-gradient(90deg, var(--amber) 0, var(--amber) 4px, transparent 4px, transparent 8px);
+  }
+
+  .phase-label-top {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .phase-label-main {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 400;
+    margin-bottom: 0.15rem;
+  }
+  .phase-label-sub {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+  .phase-label-date {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-top: 0.2rem;
+  }
+
+  /* phase colour variants */
+  .phase-teal .phase-inner { background: var(--teal-dim); }
+  .phase-teal .phase-label-top { color: var(--teal-light); }
+  .phase-teal.active .phase-inner,
+  .phase-teal:hover .phase-inner { background: rgba(90,158,138,0.22); }
+
+  .phase-amber .phase-inner { background: var(--amber-dim); }
+  .phase-amber .phase-label-top { color: var(--amber-light); }
+  .phase-amber.active .phase-inner,
+  .phase-amber:hover .phase-inner { background: rgba(212,135,74,0.25); }
+  .phase-amber .phase-label-sub { color: var(--amber-light); font-weight: 500; }
+
+  .phase-coral .phase-inner { background: var(--coral-dim); border-style: dashed; }
+  .phase-coral .phase-label-top { color: var(--coral-light); }
+  .phase-coral.active .phase-inner,
+  .phase-coral:hover .phase-inner { background: rgba(196,98,90,0.22); }
+
+  /* date markers below -->  */
+  .date-markers {
+    display: flex;
+    margin-top: 0.75rem;
+    position: relative;
+    height: 48px;
+  }
+  .date-marker {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX(-50%);
+  }
+  .date-marker-tick {
+    width: 1px;
+    height: 10px;
+    background: var(--text-dim);
+    margin-bottom: 4px;
+  }
+  .date-marker-text {
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    text-align: center;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+  .date-marker-text.highlight { color: var(--gold); }
+
+  /* ── SIX PURPOSES ── */
+  .purposes-section {
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .purposes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    margin-top: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .purpose-item {
+    padding: 1.25rem 1.4rem;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+  }
+  .purpose-item:hover { background: rgba(255,255,255,0.03); }
+  .purpose-item:nth-child(3n) { border-right: none; }
+  .purpose-item:nth-last-child(-n+3):not(.purposes-divider) { border-bottom: none; }
+  .purposes-divider + .purpose-item:nth-child(3n+2),
+  .purposes-divider + .purpose-item + .purpose-item:nth-child(3n+3) { border-right: 1px solid var(--border); }
+  .purpose-number {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+  .purpose-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+  }
+  .purpose-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .purposes-first .purpose-number { color: var(--purple-light); }
+  .purposes-second .purpose-number { color: var(--teal-light); }
+  .purposes-divider {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.6rem 1.25rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .purposes-divider span { flex: 1; height: 1px; background: var(--border); display: block; }
+
+  /* ── DETAIL PANEL ── */
+  .detail-panel {
+    margin: 2rem 0;
+    border: 1px solid var(--border-active);
+    border-radius: 8px;
+    overflow: hidden;
+    display: none;
+    animation: slideIn 0.25s ease;
+  }
+  .detail-panel.visible { display: block; }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .detail-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .detail-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .detail-title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 300;
+    line-height: 1.3;
+  }
+  .detail-close {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 0.2rem;
+    flex-shrink: 0;
+    transition: color 0.15s;
+  }
+  .detail-close:hover { color: var(--text); }
+  .detail-body {
+    padding: 1.5rem;
+  }
+  .detail-body p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .detail-body p:last-child { margin-bottom: 0; }
+  .detail-body strong {
+    font-weight: 500;
+    color: var(--text);
+  }
+  .detail-body em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .detail-highlight {
+    border-left: 2px solid;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+    background: rgba(255,255,255,0.02);
+    border-radius: 0 4px 4px 0;
+    font-size: 0.96rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  /* colour variants for detail panel */
+  .detail-teal { border-color: rgba(90,158,138,0.4); }
+  .detail-teal .detail-header { background: rgba(90,158,138,0.06); }
+  .detail-teal .detail-tag { background: var(--teal-dim); color: var(--teal-light); }
+  .detail-teal .detail-highlight { border-color: var(--teal); }
+
+  .detail-amber { border-color: rgba(212,135,74,0.4); }
+  .detail-amber .detail-header { background: rgba(212,135,74,0.06); }
+  .detail-amber .detail-tag { background: var(--amber-dim); color: var(--amber-light); }
+  .detail-amber .detail-highlight { border-color: var(--amber); }
+
+  .detail-coral { border-color: rgba(196,98,90,0.4); }
+  .detail-coral .detail-header { background: rgba(196,98,90,0.06); }
+  .detail-coral .detail-tag { background: var(--coral-dim); color: var(--coral-light); }
+  .detail-coral .detail-highlight { border-color: var(--coral); }
+
+  .detail-purple { border-color: rgba(122,110,176,0.4); }
+  .detail-purple .detail-header { background: rgba(122,110,176,0.06); }
+  .detail-purple .detail-tag { background: var(--purple-dim); color: var(--purple-light); }
+  .detail-purple .detail-highlight { border-color: var(--purple); }
+
+  .detail-gold { border-color: rgba(201,168,76,0.4); }
+  .detail-gold .detail-header { background: rgba(201,168,76,0.06); }
+  .detail-gold .detail-tag { background: var(--gold-dim); color: var(--gold-light); }
+  .detail-gold .detail-highlight { border-color: var(--gold); }
+
+  /* ── FOOTER NOTE ── */
+  .footer-note {
+    padding: 2.5rem 0 4rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-style: italic;
+    font-family: var(--font-display);
+    text-align: center;
+    line-height: 1.7;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    h1 { font-size: 1.75rem; }
+    .timeline-spine { flex-direction: column; gap: 0.5rem; }
+    .phase-connector { display: none; }
+    .phase-inner { white-space: normal; }
+    .date-markers { display: none; }
+    .purposes-grid { grid-template-columns: 1fr; }
+    .purpose-item { border-right: none !important; }
+    .purpose-item:last-child { border-bottom: none !important; }
+    .purpose-item:nth-last-child(-n+3) { border-bottom: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="page">
+    <p class="header-eyebrow">Daniel 9:24–27 · Study Notes</p>
+    <h1>The <em>Seventy Sevens</em></h1>
+    <p class="header-sub">"Seventy sevens are decreed for your people and your holy city..."</p>
+    <span class="lesson-aim">Lesson aim: look at today's life through the lens of God's future prophecies</span>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- TIMELINE -->
+  <section class="timeline-section">
+    <p class="section-label">The prophetic timeline — click any phase to explore</p>
+
+    <div class="timeline-wrap">
+      <div class="timeline-spine" id="timeline">
+
+        <!-- Phase 1: 7 sevens -->
+        <div class="phase phase-teal" id="ph-7" onclick="showDetail('d-7')" style="flex: 1.2;">
+          <div class="phase-inner">
+            <div class="phase-label-top">7 sevens</div>
+            <div class="phase-label-main">49 years</div>
+            <div class="phase-label-sub">Rebuilding Jerusalem</div>
+            <div class="phase-label-date">444 – 395 BC</div>
+          </div>
+        </div>
+
+        <div class="phase-connector"></div>
+
+        <!-- Phase 2: 62 sevens -->
+        <div class="phase phase-teal" id="ph-62" onclick="showDetail('d-62')" style="flex: 2.5;">
+          <div class="phase-inner">
+            <div class="phase-label-top">62 sevens</div>
+            <div class="phase-label-main">434 years</div>
+            <div class="phase-label-sub">The long wait · OT silence</div>
+            <div class="phase-label-date">395 BC – AD 33</div>
+          </div>
+        </div>
+
+        <div class="phase-connector gap"></div>
+
+        <!-- Gap: Church Age -->
+        <div class="phase phase-amber" id="ph-gap" onclick="showDetail('d-gap')" style="flex: 2;">
+          <div class="phase-inner">
+            <div class="phase-label-top">The hidden gap</div>
+            <div class="phase-label-main">Church Age</div>
+            <div class="phase-label-sub">← You are here</div>
+            <div class="phase-label-date">AD 33 – present</div>
+          </div>
+        </div>
+
+        <div class="phase-connector gap"></div>
+
+        <!-- Phase 3: 70th seven -->
+        <div class="phase phase-coral" id="ph-70" onclick="showDetail('d-70')" style="flex: 1.2;">
+          <div class="phase-inner">
+            <div class="phase-label-top">1 seven</div>
+            <div class="phase-label-main">7 years</div>
+            <div class="phase-label-sub">The final tribulation</div>
+            <div class="phase-label-date">Future</div>
+          </div>
+        </div>
+
+      </div><!-- /timeline-spine -->
+
+      <!-- Date markers -->
+      <div class="date-markers" id="date-markers">
+        <!-- positioned by JS after layout -->
+      </div>
+
+    </div><!-- /timeline-wrap -->
+
+    <!-- Detail panel for timeline phases -->
+    <div id="d-7" class="detail-panel detail-teal">
+      <div class="detail-header">
+        <div>
+          <span class="detail-tag">7 sevens · 49 years</span>
+          <div class="detail-title">The rebuilding of Jerusalem</div>
+        </div>
+        <button class="detail-close" onclick="closeDetail('d-7')">✕</button>
+      </div>
+      <div class="detail-body">
+        <p>The 490-year clock starts not in 538 BC when Cyrus decreed the Jews could return, but in <strong>444 BC</strong> when Artaxerxes specifically authorized Nehemiah to rebuild the city walls and streets. Daniel 9:25 is precise: <em>"from the issuing of the decree to restore and rebuild Jerusalem."</em> The temple had already been rebuilt — but a city without walls is not yet a city.</p>
+        <div class="detail-highlight">The first seven sevens (49 years) covers the full reconstruction of Jerusalem as a functioning, defended city — what Nehemiah's account describes as building with a tool in one hand and a weapon in the other.</div>
+        <p>Why separate the first 7 from the 62 that follow? Most likely because it marks something complete in itself: the city is rebuilt, and then — around 430 BC — the voice of Old Testament prophecy falls silent with Malachi. The first phase ends where the OT ends. Four hundred years of prophetic silence follow.</p>
+        <p>Worth noting for discussion: <strong>the people living through this 49-year rebuilding had no idea they were at the start of a 490-year prophetic clock.</strong> They just knew they needed to rebuild walls — in hard circumstances, under opposition. Faithfulness in the immediate task was participation in a plan they couldn't yet see.</p>
+      </div>
+    </div>
+
+    <div id="d-62" class="detail-panel detail-teal">
+      <div class="detail-header">
+        <div>
+          <span class="detail-tag">62 sevens · 434 years</span>
+          <div class="detail-title">The long wait — 400 years of silence</div>
+        </div>
+        <button class="detail-close" onclick="closeDetail('d-62')">✕</button>
+      </div>
+      <div class="detail-body">
+        <p>After the city is rebuilt, 62 more sevens pass — 434 years — before the next prophetic landmark. These are the years of the intertestamental period: no prophet speaks, no new scripture is written. God is not absent, but He is silent in a particular way.</p>
+        <div class="detail-highlight">The 62 sevens end with the appearance of the Anointed One — and then, the prophecy says, "he will be put to death." That single line, written in the 6th century BC, describes the crucifixion of Jesus Christ.</div>
+        <p>The literal calculation: <strong>69 sevens = 483 years</strong> from 444 BC lands at approximately AD 33 — within a generation of the crucifixion. This is not vague symbolic poetry. It's a specific date given five centuries in advance.</p>
+        <p>The precision matters theologically: when a prophecy this specific comes true this exactly, it lends enormous credibility to the prophecies that haven't yet been fulfilled — particularly the final seven still ahead.</p>
+      </div>
+    </div>
+
+    <div id="d-gap" class="detail-panel detail-amber">
+      <div class="detail-header">
+        <div>
+          <span class="detail-tag">The hidden gap</span>
+          <div class="detail-title">The Church Age — 2,000+ years and counting</div>
+        </div>
+        <button class="detail-close" onclick="closeDetail('d-gap')">✕</button>
+      </div>
+      <div class="detail-body">
+        <p>Between the 69th and 70th seven there is a gap — and it is not mentioned anywhere in the Old Testament. The OT prophets saw the 69 sevens, and they saw the final seven, but the vast expanse between them was hidden. <strong>This gap is where we live.</strong></p>
+        <div class="detail-highlight">We are not observers of this prophecy. We are participants in it — living in the "hidden" period that wasn't revealed until the New Testament, a parenthesis God inserted between the crucifixion and the final chapter.</div>
+        <p>The gap is the Church Age: the period when God extends grace to the Gentiles, the gospel goes to the nations, and believers are gathered from every tongue and tribe. This was always part of God's plan — it just wasn't announced in advance.</p>
+        <p>This is the point where the lesson aim bites hardest. <strong>Prophecy is not just something to understand — it's a lens that changes how we live right now.</strong> Knowing we are in the gap, knowing what the final chapter holds, knowing whose hands history is in — this is meant to produce a particular kind of steadiness and purposefulness in the present.</p>
+      </div>
+    </div>
+
+    <div id="d-70" class="detail-panel detail-coral">
+      <div class="detail-header">
+        <div>
+          <span class="detail-tag">The 70th seven · 7 years</span>
+          <div class="detail-title">The final tribulation period</div>
+        </div>
+        <button class="detail-close" onclick="closeDetail('d-70')">✕</button>
+      </div>
+      <div class="detail-body">
+        <p>The 70th seven is still future. It begins when <em>"he"</em> — the Antichrist — confirms a covenant with Israel for seven years, centred on the restoration of temple worship. Daniel 9:27 describes what follows.</p>
+        <div class="detail-highlight">At the midpoint — three and a half years in — the covenant is broken. Sacrifices are ended. An abomination is set up in the temple. What began as a peace agreement reveals its true nature.</div>
+        <p>Scholars throughout history have offered different interpretations of 9:27 — it is worth holding this with humility rather than pressing for precision. The point is not to map current events onto specific predictions. The point is that the final chapter is certain, the Antichrist's defeat is certain, and the establishment of God's kingdom is certain.</p>
+        <p>The pattern to hold onto: the Antichrist emerges first as a peacemaker — someone who appears to solve an intractable problem. Evil rarely announces itself. This is a warning for how we evaluate leadership and promises of peace in our own time, not just in the end times.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- SIX PURPOSES -->
+  <section class="purposes-section">
+    <p class="section-label">Six things accomplished across the 490 years — 9:24</p>
+    <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem; font-family: var(--font-display); font-style: italic;">Gabriel declares six specific purposes to be fulfilled. The first three address the problem of sin; the last three establish the kingdom. The cross decisively initiated 1–3, but their final and complete fulfilment — including Israel's national acceptance of Christ — awaits the second coming. Purposes 4–6 are completed at His return.</p>
+
+    <div class="purposes-grid">
+      <div class="purposes-divider"><span></span>First coming — Christ's atoning work<span></span></div>
+
+      <div class="purpose-item purposes-first" onclick="showDetail('d-p1')">
+        <div class="purpose-number">Purpose 1</div>
+        <div class="purpose-title">Finish transgression</div>
+        <div class="purpose-desc">End humanity's rebellion against God</div>
+      </div>
+      <div class="purpose-item purposes-first" onclick="showDetail('d-p2')">
+        <div class="purpose-number">Purpose 2</div>
+        <div class="purpose-title">Put an end to sin</div>
+        <div class="purpose-desc">End the power and penalty of sin</div>
+      </div>
+      <div class="purpose-item purposes-first" onclick="showDetail('d-p3')">
+        <div class="purpose-number">Purpose 3</div>
+        <div class="purpose-title">Atone for wickedness</div>
+        <div class="purpose-desc">The Redeemer enters the world</div>
+      </div>
+
+      <div class="purposes-divider"><span></span>Second coming — the kingdom established<span></span></div>
+
+      <div class="purpose-item purposes-second" onclick="showDetail('d-p4')">
+        <div class="purpose-number">Purpose 4</div>
+        <div class="purpose-title">Everlasting righteousness</div>
+        <div class="purpose-desc">A new kingdom of righteousness is built</div>
+      </div>
+      <div class="purpose-item purposes-second" onclick="showDetail('d-p5')">
+        <div class="purpose-number">Purpose 5</div>
+        <div class="purpose-title">Seal up vision and prophecy</div>
+        <div class="purpose-desc">God's word fulfilled completely</div>
+      </div>
+      <div class="purpose-item purposes-second" onclick="showDetail('d-p6')">
+        <div class="purpose-number">Purpose 6</div>
+        <div class="purpose-title">Anoint the Most Holy</div>
+        <div class="purpose-desc">The new temple and Saviour appear</div>
+      </div>
+    </div>
+
+    <!-- Purpose detail panels -->
+    <div id="d-p1" class="detail-panel detail-purple">
+      <div class="detail-header">
+        <div><span class="detail-tag">Purpose 1</span><div class="detail-title">Finish transgression</div></div>
+        <button class="detail-close" onclick="closeDetail('d-p1')">✕</button>
+      </div>
+      <div class="detail-body">
+        <p>The word translated <em>transgression</em> carries the sense of wilful rebellion — not just mistake but active defiance. The cross strikes decisively at the root of human rebellion, but this purpose points to something still ahead: at the end of the seventy sevens, <strong>Israel will cease its long rejection of Christ and accept Him as the Messiah</strong>.</p>
+        <p>This points to something still ahead: at the end of the seventy sevens, <strong>Israel will cease its long rejection of Christ and accept Him as the Messiah</strong> — a complete restoration of Israel's relationship with God, not just individual forgiveness but a national turning. The cross makes it possible; the second coming brings it to completion.</p>
+      </div>
+    </div>
+    <div id="d-p2" class="detail-panel detail-purple">
+      <div class="detail-header">
+        <div><span class="detail-tag">Purpose 2</span><div class="detail-title">Put an end to sin</div></div>
+        <button class="detail-close" onclick="closeDetail('d-p2')">✕</button>
+      </div>
+      <div class="detail-body">
+        <p>The phrase <em>"put an end"</em> carries the sense of judgment and punishment — sin being definitively addressed, not just covered. This purpose is <strong>partially completed and still being realized</strong>: through the repentance of individual sinners turning to Christ now, and finally through the complete judgment of sin at the end of the seventy sevens.</p>
+        <div class="detail-highlight">"What the law was powerless to do because it was weakened by the flesh, God did by sending his own Son." — Romans 8:3</div>
+        <p>The cross is the decisive event — but the full and final removal of sin awaits the completion of God's redemptive plan at the second coming. We live between the blow being struck and the victory being complete.</p>
+      </div>
+    </div>
+    <div id="d-p3" class="detail-panel detail-purple">
+      <div class="detail-header">
+        <div><span class="detail-tag">Purpose 3</span><div class="detail-title">Atone for wickedness</div></div>
+        <button class="detail-close" onclick="closeDetail('d-p3')">✕</button>
+      </div>
+      <div class="detail-body">
+        <p>Atonement — the covering and removal of guilt before a holy God. In the Old Testament system, the annual Day of Atonement provided temporary covering. Here the prophecy points to a permanent atonement: the Redeemer entering the world to deal with wickedness once and for all.</p>
+        <p>This is the heart of the gospel announced 500 years before it happened: that God Himself would provide the atoning sacrifice. Not another year of temple ritual — the Anointed One Himself.</p>
+      </div>
+    </div>
+    <div id="d-p4" class="detail-panel detail-teal">
+      <div class="detail-header">
+        <div><span class="detail-tag">Purpose 4</span><div class="detail-title">Bring in everlasting righteousness</div></div>
+        <button class="detail-close" onclick="closeDetail('d-p4')">✕</button>
+      </div>
+      <div class="detail-body">
+        <p>Where purposes 1–3 address what needs to be removed (sin, rebellion, wickedness), purposes 4–6 address what will be established. This purpose is the positive counterpart to the atoning work: not just the removal of sin but the installation of a new order.</p>
+        <p><em>Everlasting righteousness</em> is not a temporary improvement but a permanent reality — the kingdom of God established in completeness. This awaits the second coming. We currently live in the tension between the decisive work of the first coming and the complete establishment of the kingdom at the second.</p>
+      </div>
+    </div>
+    <div id="d-p5" class="detail-panel detail-teal">
+      <div class="detail-header">
+        <div><span class="detail-tag">Purpose 5</span><div class="detail-title">Seal up vision and prophecy</div></div>
+        <button class="detail-close" onclick="closeDetail('d-p5')">✕</button>
+      </div>
+      <div class="detail-body">
+        <p>To <em>seal up</em> here carries the sense of concealment until the appointed time — not closure but hiddenness. The visions and prophecies are sealed because <strong>their full meaning is not yet for people to know</strong>. But at the end of the seventy sevens, all that has been sealed will be opened and fulfilled.</p>
+        <p>This fits the pattern of the whole passage: the Church Age gap was itself hidden — sealed — in the OT. God's purposes are disclosed progressively, not all at once. What is sealed now will become fully visible when the final chapter arrives and all prophecy finds its completion.</p>
+      </div>
+    </div>
+    <div id="d-p6" class="detail-panel detail-teal">
+      <div class="detail-header">
+        <div><span class="detail-tag">Purpose 6</span><div class="detail-title">Anoint the Most Holy</div></div>
+        <button class="detail-close" onclick="closeDetail('d-p6')">✕</button>
+      </div>
+      <div class="detail-body">
+        <p>The phrase <em>Most Holy</em> can refer either to a person (the Most Holy One — Christ himself) or a place (the Most Holy Place — the inner sanctuary of the temple). Scholars differ.</p>
+        <p>Either reading points to the same reality: the full and final presence of God among His people. In the first coming, Christ was the temple (John 2:21). In the second coming, the new Jerusalem itself is described as the dwelling place of God with humanity (Revelation 21:3). The anointing of the Most Holy is the culmination — God fully present, all things made new.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer-note">
+    <p>Daniel 9:20–27 · Core Notes adapted from CCF International Daniel Lecture Series</p>
+    <p style="margin-top: 0.4rem;">The prophecy of the seventy sevens — given c. 536 BC · fulfilled across 25 centuries · still unfolding</p>
+  </div>
+
+</main>
+
+<script>
+  function showDetail(id) {
+    // close all panels first
+    document.querySelectorAll('.detail-panel').forEach(p => p.classList.remove('visible'));
+    const panel = document.getElementById(id);
+    if (panel) {
+      panel.classList.add('visible');
+      setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+    }
+    // highlight active phase
+    document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+    const phaseMap = { 'd-7': 'ph-7', 'd-62': 'ph-62', 'd-gap': 'ph-gap', 'd-70': 'ph-70' };
+    if (phaseMap[id]) document.getElementById(phaseMap[id])?.classList.add('active');
+  }
+
+  function closeDetail(id) {
+    document.getElementById(id)?.classList.remove('visible');
+    document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+  }
+</script>
+
+</body>
+</html>
