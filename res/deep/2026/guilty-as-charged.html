@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guilty As Charged | Deep Dive | The Living Room</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display','serif'], body: ['Outfit','sans-serif'], mono: ['Courier Prime','monospace'], stamp: ['Special Elite','cursive'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root { --paper:#f5f0e8; --paper-dark:#ede6d6; --ink:#1c1a16; --ink-faded:#4a4538; --gold:#c5a059; --teal:#2d5a5a; --red:#8b1a1a; --rule:#c8bfa8; }
+        body { background:#e8e0d0; font-family:'Outfit',sans-serif; }
+
+        .paper { background:var(--paper); position:relative; }
+        .paper::before { content:''; position:absolute; inset:0; background-image:repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(180,160,120,0.12) 27px,rgba(180,160,120,0.12) 28px); pointer-events:none; z-index:0; }
+        .paper > * { position:relative; z-index:1; }
+
+        .case-header { background:var(--paper-dark); border-bottom:3px double var(--rule); }
+        .case-number { font-family:'Courier Prime',monospace; font-size:0.65rem; letter-spacing:0.18em; color:var(--ink-faded); text-transform:uppercase; }
+
+        .stamp { display:inline-block; font-family:'Special Elite',cursive; color:var(--red); border:3px solid var(--red); padding:3px 14px; letter-spacing:0.12em; transform:rotate(-4deg); opacity:0.85; text-transform:uppercase; line-height:1.2; font-size:1.2rem; }
+        .stamp-gold { color:var(--gold); border-color:var(--gold); transform:rotate(2deg); }
+        .stamp-teal { color:var(--teal); border-color:var(--teal); transform:rotate(-1.5deg); }
+        .stamp-sm { font-size:0.75rem; padding:2px 10px; }
+
+        .tab-nav { background:var(--paper-dark); border-bottom:2px solid var(--rule); position:sticky; top:0; z-index:50; }
+        .tab-btn { font-family:'Courier Prime',monospace; font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-faded); padding:11px 14px; border-right:1px solid var(--rule); cursor:pointer; white-space:nowrap; background:transparent; border-bottom:3px solid transparent; transition:all 0.2s; }
+        .tab-btn:hover { color:var(--gold); background:rgba(197,160,89,0.08); }
+        .tab-btn.active { color:var(--gold); border-bottom-color:var(--gold); background:rgba(197,160,89,0.06); }
+
+        .charge-header { background:var(--ink); color:white; font-family:'Courier Prime',monospace; font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; padding:8px 20px; display:flex; justify-content:space-between; align-items:center; }
+        .charge-count { color:var(--gold); }
+
+        .evidence-box { border:1px dashed var(--rule); background:rgba(245,240,232,0.6); }
+        .evidence-label { font-family:'Courier Prime',monospace; font-size:0.55rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--gold); font-weight:700; }
+
+        .inv-note { border-left:3px solid var(--teal); background:rgba(45,90,90,0.05); font-family:'Courier Prime',monospace; }
+        .inv-note-label { font-size:0.55rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--teal); font-weight:700; }
+
+        .redacted { background:var(--ink); color:var(--ink); padding:0 3px; cursor:pointer; border-radius:2px; transition:all 0.3s; }
+        .redacted.revealed { background:rgba(197,160,89,0.2); color:var(--ink); cursor:default; }
+
+        .ruling { border-top:1px solid var(--rule); }
+        .ruling-double { border-top:3px double var(--rule); }
+
+        .section-content { display:none; }
+        .section-content.active { display:block; }
+
+        .case-scripture { border:1px solid var(--rule); background:rgba(245,240,232,0.8); font-family:'Playfair Display',serif; font-style:italic; }
+        .case-scripture-ref { font-family:'Courier Prime',monospace; font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); font-weight:700; font-style:normal; }
+
+        .verdict-box { background:var(--ink); color:white; }
+
+        .fold-mark { border-top:1px dashed var(--rule); margin:1.5rem 0; position:relative; }
+        .fold-mark::before { content:'✂'; position:absolute; left:-12px; top:-10px; font-size:13px; color:var(--rule); transform:rotate(-90deg); }
+
+        .greek-term { font-family:'Playfair Display',serif; font-style:italic; color:var(--teal); }
+
+        .decree-item { border:1px solid var(--rule); border-left:3px solid var(--gold); background:white; transition:all 0.2s; }
+        .decree-item:hover { border-left-color:var(--teal); background:rgba(45,90,90,0.03); }
+        .decree-item.clickable { cursor:pointer; }
+
+        .reflection-num { font-family:'Playfair Display',serif; font-size:3.5rem; line-height:1; color:var(--teal); opacity:0.15; }
+
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+        .animate-in { animation:fadeInUp 0.35s ease forwards; }
+
+        .progress-track { height:3px; background:var(--rule); border-radius:2px; overflow:hidden; }
+        .progress-fill { height:100%; background:var(--gold); border-radius:2px; transition:width 0.5s ease; }
+
+        .quiz-option { border:1px solid var(--rule); background:var(--paper); cursor:pointer; transition:all 0.2s; font-family:'Courier Prime',monospace; font-size:0.82rem; line-height:1.6; }
+        .quiz-option:hover { border-color:var(--teal); background:rgba(45,90,90,0.05); }
+        .quiz-option.selected { border-color:var(--teal); background:rgba(45,90,90,0.08); }
+        .quiz-btn { font-family:'Courier Prime',monospace; font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--teal); color:white; padding:10px 24px; border:none; cursor:pointer; opacity:0.35; pointer-events:none; transition:all 0.2s; }
+        .quiz-btn.ready { opacity:1; pointer-events:all; }
+        .quiz-btn:hover { background:var(--ink); }
+        .quiz-card { display:none; }
+        .quiz-card.active { display:block; animation:fadeInUp 0.35s ease forwards; }
+        .quiz-result { display:none; }
+        .quiz-result.active { display:block; animation:fadeInUp 0.4s ease forwards; }
+
+        @media(max-width:640px) { .tab-btn{padding:10px 9px;font-size:0.55rem} .stamp{font-size:0.95rem} }
+    </style>
+</head>
+<body data-current="resources">
+
+<div id="header-placeholder"></div>
+
+<!-- CASE FILE HEADER -->
+<div class="case-header py-6 px-4 md:px-6">
+    <div class="max-w-4xl mx-auto">
+        <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
+            <div>
+                <div class="case-number mb-1">State of the Kingdom &bull; The Acts Journey &bull; Part 12</div>
+                <div class="case-number mb-1">Case No. <span style="color:var(--gold)">AC-17:05-09</span> &bull; Filed: Thessalonica, Macedonia &bull; c. AD 50</div>
+                <div class="case-number">Complainants: Thessalonian Synagogue Leadership &bull; Presiding: City Politarchs</div>
+            </div>
+            <div class="text-right flex flex-col items-end gap-2">
+                <div class="stamp">Guilty</div>
+                <div class="case-number mt-1" style="color:var(--gold)">All Counts</div>
+            </div>
+        </div>
+        <div class="ruling-double pt-4 mt-2">
+            <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.4rem,7vw,5rem);font-weight:700;color:var(--ink);line-height:1.05;letter-spacing:-0.02em;">
+                Guilty As <span style="color:var(--gold);font-style:italic;">Charged</span>.
+            </h1>
+            <p style="font-family:'Courier Prime',monospace;font-size:0.82rem;color:var(--ink-faded);margin-top:0.6rem;line-height:1.7;">
+                "These men who have turned the world upside down have come here also." — Acts 17:6
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- TAB NAV -->
+<div class="tab-nav">
+    <div class="max-w-4xl mx-auto flex overflow-x-auto">
+        <button class="tab-btn active" onclick="showTab('overview')">Case Overview</button>
+        <button class="tab-btn" onclick="showTab('charge1')">Count I</button>
+        <button class="tab-btn" onclick="showTab('charge2')">Count II</button>
+        <button class="tab-btn" onclick="showTab('charge3')">Count III</button>
+        <button class="tab-btn" onclick="showTab('charge4')">Count IV</button>
+        <button class="tab-btn" onclick="showTab('verdict')">Verdict</button>
+        <button class="tab-btn" onclick="showTab('reflection')">Reflection</button>
+    </div>
+</div>
+
+<main class="max-w-4xl mx-auto px-4 md:px-6 py-10">
+
+<!-- ══ OVERVIEW ══ -->
+<div id="tab-overview" class="section-content active animate-in">
+    <div class="paper p-7 md:p-12 mb-8" style="border:1px solid var(--rule);">
+
+        <div class="flex flex-wrap gap-5 items-start justify-between mb-8 pb-8" style="border-bottom:1px solid var(--rule);">
+            <div>
+                <div class="evidence-label mb-2">Primary Text</div>
+                <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--ink);">Acts 17:5–9</div>
+                <a href="https://www.biblegateway.com/passage/?search=Acts+17%3A5-9&version=NLT" target="_blank" style="font-family:'Courier Prime',monospace;font-size:0.62rem;color:var(--teal);letter-spacing:0.18em;text-transform:uppercase;text-decoration:underline;">Read on Bible Gateway →</a>
+            </div>
+            <div class="flex gap-3 flex-wrap">
+                <div class="stamp stamp-sm stamp-teal">4 Counts</div>
+                <div class="stamp stamp-sm stamp-gold">All True</div>
+            </div>
+        </div>
+
+        <div class="case-scripture p-6 md:p-8 mb-8">
+            <div class="case-scripture-ref mb-4">Acts 17:5–9 · New Living Translation · Primary Evidence</div>
+            <p style="font-size:1rem;line-height:1.85;color:var(--ink-faded);">"But some of the Jews were jealous, so they gathered some troublemakers from the marketplace to form a mob and start a riot. They attacked the home of Jason, searching for Paul and Silas so they could drag them out to the crowd. Not finding them there, they dragged out Jason and some of the other believers instead and took them before the city council.</p>
+            <p style="font-size:1rem;line-height:1.85;color:var(--ink-faded);margin-top:1rem;"><strong style="color:var(--ink);font-style:normal;">"Paul and Silas have caused trouble all over the world,"</strong> they shouted, <strong style="color:var(--ink);font-style:normal;">"and now they are here disturbing our city, too. And Jason has welcomed them into his home. They are all guilty of treason against Caesar, for they profess allegiance to another king, named Jesus."</strong></p>
+            <p style="font-size:1rem;line-height:1.85;color:var(--ink-faded);margin-top:1rem;">The people of the city, as well as the city council, were thrown into turmoil by these reports. So the officials forced Jason and the other believers to post bond, and then released them."</p>
+        </div>
+
+        <div class="verdict-box p-7 md:p-10 mb-8">
+            <div class="evidence-label mb-4" style="color:var(--gold);">The Big Idea · Case Summary</div>
+            <p style="font-family:'Playfair Display',serif;font-size:1.2rem;font-style:italic;line-height:1.75;color:white;">The charges against Paul were meant as an indictment. Every accusation is theologically true. The prosecution accidentally made the case for the defence — and Luke knew exactly what he was doing when he wrote it down.</p>
+            <div class="fold-mark"></div>
+            <p style="font-family:'Courier Prime',monospace;font-size:0.88rem;color:rgba(255,255,255,0.7);line-height:1.8;margin-top:1rem;">The question is not whether the early church was guilty. They were.<br>The question is whether the church today still is.</p>
+        </div>
+
+        <div class="inv-note p-5 mb-8">
+            <div class="inv-note-label mb-3">Investigator's Context Note</div>
+            <p style="font-size:0.85rem;line-height:1.8;color:var(--ink-faded);">We are in Acts 17. Paul and Silas have been supernaturally released from a Philippian prison, crossed the Via Egnatia through Amphipolis and Apollonia, and arrived in Thessalonica — capital of Macedonia. For three Sabbaths Paul reasoned from the Scriptures that Jesus is the Messiah. Some were persuaded. Others were not. And when the city's Jewish leaders could not win the argument, they started a riot instead. The charges they bring are not slander. They are testimony.</p>
+        </div>
+
+        <div class="evidence-label mb-4">Charges Filed · Index</div>
+        <div class="space-y-3">
+            <div class="decree-item clickable p-4" onclick="showTab('charge1')">
+                <div style="font-family:'Courier Prime',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Count I</div>
+                <div style="font-size:1rem;font-weight:600;color:var(--ink);">"These men have turned the world upside down"</div>
+                <div style="font-family:'Courier Prime',monospace;font-size:0.72rem;color:var(--ink-faded);margin-top:4px;">Civil Disruption & Seditious Conduct → <span style="color:var(--teal)">View →</span></div>
+            </div>
+            <div class="decree-item clickable p-4" onclick="showTab('charge2')">
+                <div style="font-family:'Courier Prime',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Count II</div>
+                <div style="font-size:1rem;font-weight:600;color:var(--ink);">"Jason has received them into his house"</div>
+                <div style="font-family:'Courier Prime',monospace;font-size:0.72rem;color:var(--ink-faded);margin-top:4px;">Harbouring Fugitives · Conspiracy → <span style="color:var(--teal)">View →</span></div>
+            </div>
+            <div class="decree-item clickable p-4" onclick="showTab('charge3')">
+                <div style="font-family:'Courier Prime',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Count III</div>
+                <div style="font-size:1rem;font-weight:600;color:var(--ink);">"Acting contrary to the decrees of Caesar"</div>
+                <div style="font-family:'Courier Prime',monospace;font-size:0.72rem;color:var(--ink-faded);margin-top:4px;">Treason · Breach of Imperial Loyalty → <span style="color:var(--teal)">View →</span></div>
+            </div>
+            <div class="decree-item clickable p-4" onclick="showTab('charge4')">
+                <div style="font-family:'Courier Prime',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">Count IV</div>
+                <div style="font-size:1rem;font-weight:600;color:var(--ink);">"There is another king — one Jesus"</div>
+                <div style="font-family:'Courier Prime',monospace;font-size:0.72rem;color:var(--ink-faded);margin-top:4px;">High Treason · Rival Kingship → <span style="color:var(--teal)">View →</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="yt-section" style="display:none" class="mb-8">
+        <div class="relative overflow-hidden shadow-2xl aspect-video rounded-lg">
+            <iframe id="yt-iframe" class="absolute inset-0 w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <p class="text-center mt-4" style="font-family:'Courier Prime',monospace;font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink-faded);">Watch the foundation message · Acts 17:5–9</p>
+    </div>
+</div>
+
+<!-- ══ COUNT I ══ -->
+<div id="tab-charge1" class="section-content">
+    <div class="paper p-7 md:p-12" style="border:1px solid var(--rule);">
+        <div class="charge-header mb-0"><span>Count I of IV · Filed by: Thessalonian Complainants</span><span class="charge-count">ACTS 17:6</span></div>
+        <div class="p-6 md:p-8" style="border:1px solid var(--rule);border-top:none;background:white;">
+
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+                <div style="flex:1;min-width:200px;">
+                    <div class="evidence-label mb-2">The Charge</div>
+                    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3.5vw,2.2rem);font-weight:700;color:var(--ink);line-height:1.25;">"These men who have turned the world upside down have come here also."</h2>
+                </div>
+                <div class="stamp" style="margin-top:6px;">Guilty</div>
+            </div>
+
+            <div class="ruling pt-5 mb-6">
+                <div class="evidence-label mb-2">Theological Assessment</div>
+                <p style="font-size:1.02rem;line-height:1.82;color:var(--ink-faded);">The mob meant this as an accusation. It is the most accurate job description of the apostles in the entire book of Acts. The Gospel has never been designed to make the existing order comfortable. It is not a coping mechanism. It is a reordering agent.</p>
+            </div>
+
+            <div class="inv-note p-5 mb-6">
+                <div class="inv-note-label mb-3">Investigator's Note · Greek Term</div>
+                <div style="font-size:1.05rem;margin-bottom:6px;"><span class="greek-term">anastatoō</span> <span style="font-family:'Courier Prime',monospace;font-size:0.72rem;color:var(--ink-faded);margin-left:8px;">(ἀναστατόω)</span></div>
+                <p style="font-size:0.83rem;line-height:1.8;color:var(--ink-faded);">To unsettle, to drive out, to displace from one's homeland. The same verb appears in Galatians 5:12 and Acts 21:38 — carrying the weight of regime disruption, not mere controversy. It is the experience of a refugee: pulled from the familiar and dropped somewhere disorienting. Luke chose this word deliberately. That is exactly what genuine conversion is. You don't get to stay in the country you came from.</p>
+            </div>
+
+            <div class="evidence-box p-5 mb-6">
+                <div class="evidence-label mb-3">Exhibit A · Matthew 10:34</div>
+                <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;line-height:1.7;color:var(--ink-faded);">"Don't imagine that I came to bring peace to the earth! I came not to bring peace, but a sword."</p>
+                <div class="inv-note p-4 mt-4">
+                    <div class="inv-note-label mb-2">Note on the Sword</div>
+                    <p style="font-size:0.8rem;line-height:1.7;color:var(--ink-faded);">The Greek word is <span class="greek-term">machaira</span> — a short cutting blade, not a battle sword. The same word appears in Hebrews 4:12 for the Word of God that divides soul and spirit. Jesus is not describing violence. He is describing the division of loyalties the Gospel produces wherever it enters. The sword does not create the division — it reveals it.</p>
+                </div>
+            </div>
+
+            <div class="verdict-box p-6 mb-5">
+                <div class="evidence-label mb-3" style="color:var(--gold);">Application · Self-Examination</div>
+                <p style="font-family:'Courier Prime',monospace;font-size:0.87rem;line-height:1.82;color:rgba(255,255,255,0.82);">There is a version of Christianity that has fully assimilated. It does not unsettle anyone. It fits neatly inside the empire's categories — palatable, manageable, domesticated. The Thessalonians were panicking because something genuinely disruptive had entered their city.</p>
+                <div class="fold-mark mt-5"></div>
+                <p style="font-family:'Courier Prime',monospace;font-size:0.9rem;line-height:1.8;color:white;margin-top:1rem;">Is the Christianity you are practising unsettling to anything?<br>Is it unsettling <em>you</em>?</p>
+                <p style="font-family:'Courier Prime',monospace;font-size:0.82rem;line-height:1.8;color:rgba(255,255,255,0.6);margin-top:0.6rem;">Has it cost you a relationship? A financial decision? A version of yourself you were comfortable being? If the honest answer is not much — the Gospel may be functioning more as a comfort than a <span class="greek-term" style="color:var(--gold);">machaira</span>.</p>
+            </div>
+
+            <div style="font-family:'Courier Prime',monospace;font-size:0.82rem;line-height:1.8;color:var(--ink-faded);">
+                <span class="evidence-label">Classified Finding · </span>
+                A Christianity that does not unsettle anything, that fits neatly inside the empire's categories, that would never cause a riot — <span class="redacted" onclick="this.classList.add('revealed')" title="click to reveal">is it the same thing Paul was dragged through the streets for?</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ COUNT II ══ -->
+<div id="tab-charge2" class="section-content">
+    <div class="paper p-7 md:p-12" style="border:1px solid var(--rule);">
+        <div class="charge-header"><span>Count II of IV · Filed by: Thessalonian Complainants</span><span class="charge-count">ACTS 17:7a</span></div>
+        <div class="p-6 md:p-8" style="border:1px solid var(--rule);border-top:none;background:white;">
+
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+                <div style="flex:1;min-width:200px;">
+                    <div class="evidence-label mb-2">The Charge</div>
+                    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3.5vw,2.2rem);font-weight:700;color:var(--ink);line-height:1.25;">"Jason has received them into his house."</h2>
+                </div>
+                <div class="stamp">Guilty</div>
+            </div>
+
+            <div class="ruling pt-5 mb-6">
+                <div class="evidence-label mb-2">Theological Assessment</div>
+                <p style="font-size:1.02rem;line-height:1.82;color:var(--ink-faded);">They did not charge Paul for preaching in the synagogue. That was legally protected — Judaism was a <em>religio licita</em>, a permitted religion. They could not touch him for that. So they went after the host. The crime was hospitality. A door opened. A table set. A movement housed.</p>
+            </div>
+
+            <div class="inv-note p-5 mb-6">
+                <div class="inv-note-label mb-3">Investigator's Note · The Oikos Pattern</div>
+                <p style="font-size:0.83rem;line-height:1.8;color:var(--ink-faded);">The <span class="greek-term">oikos</span> — the household — was the operational base of the early church. An institution can be shut down. A home is everywhere. Every time Acts records the church growing, it grows outward from a household: Cornelius's house (Acts 10), Lydia's house (Acts 16), Jason's house (Acts 17), Priscilla and Aquila's house (Romans 16:5).</p>
+            </div>
+
+            <div class="evidence-box p-5 mb-6">
+                <div class="evidence-label mb-3">Exhibit B · Romans 16:5</div>
+                <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;line-height:1.7;color:var(--ink-faded);">"Also give my greetings to the church that meets in their home."</p>
+            </div>
+
+            <div class="verdict-box p-6 mb-5">
+                <div class="evidence-label mb-3" style="color:var(--gold);">Application · The Living Room</div>
+                <p style="font-family:'Courier Prime',monospace;font-size:0.87rem;line-height:1.82;color:rgba(255,255,255,0.82);">We are not home-centric because it is trendy or convenient. We are home-centric because the <span class="greek-term" style="color:var(--gold);">oikos</span> is the architecture God chose for the expansion of His Kingdom. The early church had no buildings, no clergy class, no institutional infrastructure. It had homes.</p>
+                <div class="fold-mark mt-5"></div>
+                <p style="font-family:'Courier Prime',monospace;font-size:0.9rem;color:white;margin-top:1rem;">Your living room is not a substitute for the "real" church.<br>Your living room IS the church.</p>
+                <p style="font-family:'Courier Prime',monospace;font-size:0.82rem;color:rgba(255,255,255,0.6);margin-top:0.6rem;">The charge against Jason is a compliment. The home is not a stepping stone to a building. It is the destination.</p>
+            </div>
+
+            <div style="font-family:'Courier Prime',monospace;font-size:0.82rem;line-height:1.8;color:var(--ink-faded);">
+                <span class="evidence-label">Filed Note · </span>Jason didn't go looking for disruption. He just opened his door. That single act of hospitality cost him a court appearance, a financial bond, and almost certainly his social standing. The unsettling didn't come from trying to be radical — it came from one concrete, costly choice to align himself with something bigger than his own comfort.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ COUNT III ══ -->
+<div id="tab-charge3" class="section-content">
+    <div class="paper p-7 md:p-12" style="border:1px solid var(--rule);">
+        <div class="charge-header"><span>Count III of IV · Filed by: Thessalonian Complainants</span><span class="charge-count">ACTS 17:7b</span></div>
+        <div class="p-6 md:p-8" style="border:1px solid var(--rule);border-top:none;background:white;">
+
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+                <div style="flex:1;min-width:200px;">
+                    <div class="evidence-label mb-2">The Charge</div>
+                    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3.5vw,2.2rem);font-weight:700;color:var(--ink);line-height:1.25;">"Acting contrary to the decrees of Caesar."</h2>
+                </div>
+                <div class="stamp">Guilty</div>
+            </div>
+
+            <div class="ruling pt-5 mb-6">
+                <div class="evidence-label mb-2">Theological Assessment</div>
+                <p style="font-size:1.02rem;line-height:1.82;color:var(--ink-faded);">The Pax Romana came with a theological claim: Caesar is Lord. Caesar is the son of god. Caesar brings peace. Every title the church gave Jesus — <span class="greek-term">Kyrios</span>, <span class="greek-term">Soter</span>, <span class="greek-term">Divi Filius</span> — was already taken. Already assigned. Already enforced with imperial power. To say "Jesus is Lord" was not a bumper sticker. It was sedition.</p>
+            </div>
+
+            <div class="inv-note p-5 mb-6">
+                <div class="inv-note-label mb-3">Investigator's Note · Roman Imperial Theology</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;font-family:'Courier Prime',monospace;font-size:0.78rem;">
+                    <div><div class="evidence-label mb-1">Caesar's Titles</div><div style="color:var(--ink-faded);line-height:1.9;">Kyrios (Lord)<br>Soter (Saviour)<br>Divi Filius (Son of God)<br>Bringer of Pax Romana</div></div>
+                    <div><div class="evidence-label mb-1" style="color:var(--teal);">Christ's Titles</div><div style="color:var(--teal);line-height:1.9;">Kyrios (Lord)<br>Soter (Saviour)<br>Son of God<br>Prince of Peace</div></div>
+                </div>
+                <p style="font-size:0.8rem;line-height:1.8;color:var(--ink-faded);margin-top:0.75rem;">These were not metaphors. They were inscribed on coins, temples, and public monuments. When Paul preached "Jesus is Lord," every Roman citizen in the room heard the direct counter-claim.</p>
+            </div>
+
+            <div class="evidence-label mb-3">Modern Decrees of Caesar · Filed for Examination</div>
+            <div class="space-y-2 mb-6">
+                <div class="decree-item p-4"><div style="font-family:'Courier Prime',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:3px;">Decree 01 · Productivity as Identity</div><div style="font-size:0.95rem;font-weight:600;color:var(--ink);margin-bottom:3px;">Your worth is measured by your output.</div><p style="font-family:'Courier Prime',monospace;font-size:0.78rem;line-height:1.7;color:var(--ink-faded);">Counter-claim: <em style="color:var(--teal);">You are God's poiēma — His masterpiece — before you do anything for Him. (Eph 2:10)</em></p></div>
+                <div class="decree-item p-4"><div style="font-family:'Courier Prime',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:3px;">Decree 02 · Upward Mobility</div><div style="font-size:0.95rem;font-weight:600;color:var(--ink);margin-bottom:3px;">Progress means accumulation. More is always the direction.</div><p style="font-family:'Courier Prime',monospace;font-size:0.78rem;line-height:1.7;color:var(--ink-faded);">Counter-claim: <em style="color:var(--teal);">The Kingdom consistently moves toward the margins, not away from them.</em></p></div>
+                <div class="decree-item p-4"><div style="font-family:'Courier Prime',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:3px;">Decree 03 · Comfort as the Goal</div><div style="font-size:0.95rem;font-weight:600;color:var(--ink);margin-bottom:3px;">The good life is the frictionless life.</div><p style="font-family:'Courier Prime',monospace;font-size:0.78rem;line-height:1.7;color:var(--ink-faded);">Counter-claim: <em style="color:var(--teal);">Jesus goes through Gethsemane, not around it. The cross is not a detour — it is the mission.</em></p></div>
+                <div class="decree-item p-4"><div style="font-family:'Courier Prime',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:3px;">Decree 04 · The Algorithm</div><div style="font-size:0.95rem;font-weight:600;color:var(--ink);margin-bottom:3px;">Visibility is validity. Engagement is truth.</div><p style="font-family:'Courier Prime',monospace;font-size:0.78rem;line-height:1.7;color:var(--ink-faded);">Counter-claim: <em style="color:var(--teal);">Paul didn't optimise his message. He reasoned from the Scriptures. That is not a scalable content strategy. It is faithfulness.</em></p></div>
+                <div class="decree-item p-4"><div style="font-family:'Courier Prime',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:3px;">Decree 05 · The Autonomous Self</div><div style="font-size:0.95rem;font-weight:600;color:var(--ink);margin-bottom:3px;">You are the final authority on your own life.</div><p style="font-family:'Courier Prime',monospace;font-size:0.78rem;line-height:1.7;color:var(--ink-faded);">Counter-claim: <em style="color:var(--teal);">"There is another King — one Jesus." (Acts 17:7)</em></p></div>
+            </div>
+
+            <div class="verdict-box p-6">
+                <div class="evidence-label mb-3" style="color:var(--gold);">Application</div>
+                <p style="font-family:'Courier Prime',monospace;font-size:0.87rem;line-height:1.82;color:rgba(255,255,255,0.82);">If your faith is not occasionally acting contrary to something — if it fits too neatly inside every system that makes demands on your time, money, and identity — you may have confused the Kingdom of God with the kingdom you are already living in.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ COUNT IV ══ -->
+<div id="tab-charge4" class="section-content">
+    <div class="paper p-7 md:p-12" style="border:1px solid var(--rule);">
+        <div class="charge-header"><span>Count IV of IV · Filed by: Thessalonian Complainants</span><span class="charge-count">ACTS 17:7c</span></div>
+        <div class="p-6 md:p-8" style="border:1px solid var(--rule);border-top:none;background:white;">
+
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+                <div style="flex:1;min-width:200px;">
+                    <div class="evidence-label mb-2">The Charge</div>
+                    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3.5vw,2.2rem);font-weight:700;color:var(--ink);line-height:1.25;">"There is another king — one Jesus."</h2>
+                </div>
+                <div class="stamp">Guilty</div>
+            </div>
+
+            <div class="ruling pt-5 mb-6">
+                <div class="evidence-label mb-2">Theological Assessment</div>
+                <p style="font-size:1.02rem;line-height:1.82;color:var(--ink-faded);">Five words. The most compressed, most accurate summary of Christian theology in the entire book of Acts. And it came from the mouth of the opposition. Notice what they do not deny: they do not say Jesus is dead. They do not dispute the resurrection. They call him a rival king — which means they concede he exists, he has followers, and his movement is real enough to threaten the existing order.</p>
+            </div>
+
+            <div class="inv-note p-5 mb-6">
+                <div class="inv-note-label mb-3">Investigator's Note · Basileus vs. Kyrios</div>
+                <p style="font-size:0.83rem;line-height:1.8;color:var(--ink-faded);">The word used here is <span class="greek-term">basileus</span> — king, in the full political sense. Not a spiritual authority but a ruling monarch. This is the same charge brought before Pilate in John 19:12. In the ancient Near East, <em>King of Kings</em> was the title of whichever empire had conquered all the others — Babylon, Persia, Rome. When Revelation 19:16 places that title on the robe of the returning Christ — at his thigh, where the sword rests — every empire that ever carried it is being told: you were placeholders. He is the real one.</p>
+            </div>
+
+            <div class="inv-note p-5 mb-6">
+                <div class="inv-note-label mb-3">Investigator's Note · The Rightful King</div>
+                <p style="font-size:0.83rem;line-height:1.8;color:var(--ink-faded);">"Rival" is the wrong word. In Genesis 3, humanity abandoned the viceregency God gave them. Into that vacancy, an occupying power moved in — Paul calls him "the god of this age" (2 Cor 4:4). He holds the territory but not the title deed. The cross was the eviction notice. The resurrection was the new locks on the door. When Jesus declares in Matthew 28:18 — <em>"All authority in heaven and on earth has been given to me"</em> — He is not receiving something new. He is reasserting what was always true. Jesus is not the challenger. He is the rightful King reclaiming what was always His.</p>
+            </div>
+
+            <div class="evidence-box p-5 mb-6">
+                <div class="evidence-label mb-3">Exhibit C · Revelation 19:16</div>
+                <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;line-height:1.7;color:var(--ink-faded);">"On his robe at his thigh was written this title: King of all kings and Lord of all lords."</p>
+            </div>
+
+            <div class="verdict-box p-6">
+                <div class="evidence-label mb-3" style="color:var(--gold);">Application · The Operative Question</div>
+                <p style="font-family:'Courier Prime',monospace;font-size:0.87rem;line-height:1.82;color:rgba(255,255,255,0.82);">The title King of Kings doesn't just exalt Jesus. It relativizes everything else. Every other king in our life has a subordinate position — the king of our finances, our career, our comfort, our reputation, our political allegiance. All of them answer to Him. All of them can be overruled by Him.</p>
+                <div class="fold-mark mt-5"></div>
+                <p style="font-family:'Courier Prime',monospace;font-size:0.92rem;color:var(--gold);margin-top:1rem;font-weight:700;">The question is not whether He's King of Kings. He is.<br>The question is whether you're living like it.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ VERDICT ══ -->
+<div id="tab-verdict" class="section-content">
+    <div class="paper p-7 md:p-12" style="border:1px solid var(--rule);">
+        <div class="charge-header mb-0"><span>Final Ruling · Kingdom Court · All Counts</span><span class="charge-count">ACTS 17:5–9</span></div>
+        <div class="p-6 md:p-8" style="border:1px solid var(--rule);border-top:none;background:white;">
+
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+                <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;color:var(--ink);">Still Guilty?</h2>
+                <div class="flex gap-3"><div class="stamp">Guilty</div><div class="stamp stamp-sm stamp-gold">All Counts</div></div>
+            </div>
+
+            <p style="font-size:1.05rem;line-height:1.85;color:var(--ink-faded);margin-bottom:1.5rem;">Luke records these charges with no editorial comment. He doesn't need to. He has already shown us, across seventeen chapters, that everything the mob said is true. The Gospel does turn the world upside down. The home is the base of operations. The movement operates contrary to Caesar's claims. And there is another King.</p>
+
+            <div class="verdict-box p-8 md:p-10 mb-8 text-center">
+                <p style="font-family:'Playfair Display',serif;font-size:clamp(1.1rem,3vw,1.6rem);font-style:italic;color:rgba(255,255,255,0.6);margin-bottom:0.75rem;">The prophetic question this passage puts to the Church is not historical.</p>
+                <p style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3.5vw,2rem);font-style:italic;font-weight:700;color:var(--gold);">It is present tense.</p>
+                <div style="height:1px;background:rgba(255,255,255,0.1);margin:1.75rem 0;"></div>
+                <p style="font-family:'Special Elite',cursive;font-size:clamp(1.8rem,5vw,3rem);color:white;letter-spacing:0.05em;">Are we still guilty?</p>
+            </div>
+
+            <div class="evidence-label mb-4">The Four Counts — A Confession</div>
+            <div class="space-y-3 mb-8">
+                <div class="evidence-box p-4 flex gap-4 items-start"><div class="stamp" style="font-size:0.65rem;transform:rotate(-2deg);flex-shrink:0;">✓</div><p style="font-family:'Courier Prime',monospace;font-size:0.84rem;line-height:1.7;color:var(--ink-faded);">We have been turned upside down by the Gospel.</p></div>
+                <div class="evidence-box p-4 flex gap-4 items-start"><div class="stamp" style="font-size:0.65rem;transform:rotate(-2deg);flex-shrink:0;">✓</div><p style="font-family:'Courier Prime',monospace;font-size:0.84rem;line-height:1.7;color:var(--ink-faded);">Our homes are open to the movement.</p></div>
+                <div class="evidence-box p-4 flex gap-4 items-start"><div class="stamp" style="font-size:0.65rem;transform:rotate(-2deg);flex-shrink:0;">✓</div><p style="font-family:'Courier Prime',monospace;font-size:0.84rem;line-height:1.7;color:var(--ink-faded);">We live contrary to the empire's assumptions.</p></div>
+                <div class="evidence-box p-4 flex gap-4 items-start"><div class="stamp" style="font-size:0.65rem;transform:rotate(-2deg);flex-shrink:0;">✓</div><p style="font-family:'Courier Prime',monospace;font-size:0.84rem;line-height:1.7;color:var(--ink-faded);">We answer to a different King.</p></div>
+            </div>
+
+            <div class="ruling-double pt-8">
+                <p style="font-size:1.05rem;line-height:1.85;color:var(--ink-faded);margin-bottom:1rem;">The mob at Thessalonica accidentally wrote the most faithful summary of the Gospel in Acts. The charge was true then.</p>
+                <p style="font-family:'Playfair Display',serif;font-size:1.4rem;font-style:italic;color:var(--teal);">May it be true of us.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══ REFLECTION ══ -->
+<div id="tab-reflection" class="section-content">
+    <div class="paper p-7 md:p-12 mb-8" style="border:1px solid var(--rule);">
+        <div class="charge-header mb-6"><span>Self-Examination · Filed for Personal Review</span><span class="charge-count">Confidential</span></div>
+
+        <div class="space-y-8 mb-12">
+            <div><div class="reflection-num">01</div><p style="font-size:1.08rem;line-height:1.8;color:var(--ink-faded);margin-top:-1rem;">Of the four charges, which one most convicts or challenges you personally — and why?</p></div>
+            <div class="ruling pt-8"><div class="reflection-num">02</div><p style="font-size:1.08rem;line-height:1.8;color:var(--ink-faded);margin-top:-1rem;">What does it look like for a church to "turn the world upside down" in a digital, online-first context? What is our version of <span class="greek-term">anastatoō</span>?</p></div>
+            <div class="ruling pt-8"><div class="reflection-num">03</div><p style="font-size:1.08rem;line-height:1.8;color:var(--ink-faded);margin-top:-1rem;">Jason's crime was opening his home. Who are you hosting? Who has access to your table, your living room, your community?</p></div>
+            <div class="ruling pt-8"><div class="reflection-num">04</div><p style="font-size:1.08rem;line-height:1.8;color:var(--ink-faded);margin-top:-1rem;">Which decree of Caesar are you most susceptible to — productivity, mobility, comfort, the algorithm, or autonomy?</p></div>
+            <div class="ruling pt-8"><div class="reflection-num">05</div><p style="font-size:1.08rem;line-height:1.8;color:var(--ink-faded);margin-top:-1rem;">"There is another King — one Jesus." Is that functionally true in the decisions you made this week?</p></div>
+        </div>
+
+        <div class="ruling-double pt-8">
+            <div class="charge-header mb-6"><span>Self-Examination · Are You Still Guilty?</span><span class="charge-count">4 Questions</span></div>
+
+            <div class="progress-track mb-2"><div class="progress-fill" id="q-prog" style="width:0%"></div></div>
+            <div style="font-family:'Courier Prime',monospace;font-size:0.62rem;letter-spacing:0.15em;color:var(--ink-faded);margin-bottom:1.5rem;" id="q-label">Question 1 of 4</div>
+
+            <div class="quiz-card active" id="qq1">
+                <div class="inv-note p-4 mb-4"><div class="inv-note-label mb-1">Count I · Disruption</div><p style="font-size:0.83rem;line-height:1.7;color:var(--ink-faded);">In the past month, has your faith cost you anything real — a relationship, a financial decision, a version of yourself you were comfortable being?</p></div>
+                <div id="qopts1" class="space-y-2 mb-4">
+                    <div class="quiz-option p-3" onclick="qSelect(this,1,'guilty')">Yes — and I felt it.</div>
+                    <div class="quiz-option p-3" onclick="qSelect(this,1,'partial')">Somewhat — minor friction, nothing major.</div>
+                    <div class="quiz-option p-3" onclick="qSelect(this,1,'not')">Honestly, not much. It has been comfortable.</div>
+                </div>
+                <button class="quiz-btn" id="qbtn1" onclick="qNext(1)">Next →</button>
+            </div>
+
+            <div class="quiz-card" id="qq2">
+                <div class="inv-note p-4 mb-4"><div class="inv-note-label mb-1">Count II · Hospitality</div><p style="font-size:0.83rem;line-height:1.7;color:var(--ink-faded);">Is your home — physically or digitally — genuinely open to the movement? Do people gather, find community, encounter faith in your space?</p></div>
+                <div id="qopts2" class="space-y-2 mb-4">
+                    <div class="quiz-option p-3" onclick="qSelect(this,2,'guilty')">Yes — my home or space is a regular gathering point.</div>
+                    <div class="quiz-option p-3" onclick="qSelect(this,2,'partial')">Occasionally — but it could be more intentional.</div>
+                    <div class="quiz-option p-3" onclick="qSelect(this,2,'not')">Not really — I keep my space mostly private.</div>
+                </div>
+                <button class="quiz-btn" id="qbtn2" onclick="qNext(2)">Next →</button>
+            </div>
+
+            <div class="quiz-card" id="qq3">
+                <div class="inv-note p-4 mb-4"><div class="inv-note-label mb-1">Count III · The Decrees</div><p style="font-size:0.83rem;line-height:1.7;color:var(--ink-faded);">Which decree of Caesar most shapes your actual daily decisions?</p></div>
+                <div id="qopts3" class="space-y-2 mb-4">
+                    <div class="quiz-option p-3" onclick="qSelect(this,3,'prod')">Productivity — my worth feels tied to output.</div>
+                    <div class="quiz-option p-3" onclick="qSelect(this,3,'mobile')">Upward mobility — more is always the direction.</div>
+                    <div class="quiz-option p-3" onclick="qSelect(this,3,'comfort')">Comfort — I avoid friction in relationships and faith.</div>
+                    <div class="quiz-option p-3" onclick="qSelect(this,3,'algo')">The algorithm — visibility feels like validity.</div>
+                </div>
+                <button class="quiz-btn" id="qbtn3" onclick="qNext(3)">Next →</button>
+            </div>
+
+            <div class="quiz-card" id="qq4">
+                <div class="inv-note p-4 mb-4"><div class="inv-note-label mb-1">Count IV · The King</div><p style="font-size:0.83rem;line-height:1.7;color:var(--ink-faded);">Is Jesus functionally King over the area of your life that costs the most to surrender?</p></div>
+                <div id="qopts4" class="space-y-2 mb-4">
+                    <div class="quiz-option p-3" onclick="qSelect(this,4,'guilty')">Yes — and surrendering it was genuinely costly.</div>
+                    <div class="quiz-option p-3" onclick="qSelect(this,4,'partial')">In process — I know it needs to be, but I am still holding on.</div>
+                    <div class="quiz-option p-3" onclick="qSelect(this,4,'not')">No — there are areas I have not handed over yet.</div>
+                </div>
+                <button class="quiz-btn" id="qbtn4" onclick="qFinish()">Submit →</button>
+            </div>
+
+            <div class="quiz-result" id="qresult">
+                <div class="verdict-box p-7 md:p-8">
+                    <div class="evidence-label mb-2" style="color:var(--gold);">Your Verdict</div>
+                    <div style="font-family:'Special Elite',cursive;font-size:1.9rem;color:white;margin-bottom:1rem;" id="q-verdict-title"></div>
+                    <p style="font-family:'Courier Prime',monospace;font-size:0.87rem;line-height:1.8;color:rgba(255,255,255,0.78);margin-bottom:1.5rem;" id="q-verdict-body"></p>
+                    <div class="fold-mark"></div>
+                    <div class="evidence-label mt-4 mb-3" style="color:var(--gold);">Filed Challenge</div>
+                    <div id="q-challenge" style="font-family:'Courier Prime',monospace;font-size:0.84rem;line-height:1.8;color:rgba(255,255,255,0.7);"></div>
+                    <button onclick="qRestart()" style="margin-top:1.75rem;font-family:'Courier Prime',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;background:transparent;border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.55);padding:8px 18px;cursor:pointer;">Restart Examination</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-6 mb-12">
+        <a href="/deepdives.html" style="font-family:'Courier Prime',monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);border-bottom:1px solid var(--teal);padding-bottom:2px;">← Back to Library</a>
+    </div>
+</div>
+
+</main>
+
+<div id="footer-placeholder"></div>
+<script src="/js/main.js" defer></script>
+
+<script>
+function showTab(id) {
+    document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    const el = document.getElementById('tab-'+id);
+    if (el) { el.classList.add('active'); }
+    const map = {overview:0,charge1:1,charge2:2,charge3:3,charge4:4,verdict:5,reflection:6};
+    const btns = document.querySelectorAll('.tab-btn');
+    if (btns[map[id]] !== undefined) btns[map[id]].classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+
+(async function(){
+    try {
+        const res = await fetch('https://ghost-proxy.reinar-6fd.workers.dev/ghost/api/content/posts/slug/guilty-as-charged/?key=c306251d7f0f57012025d2fdc4');
+        if (!res.ok) return;
+        const data = await res.json();
+        const post = data.posts?.[0];
+        if (!post) return;
+        const match = (post.html||'').match(/(?:youtube\.com\/embed\/|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+        if (!match) return;
+        const iframe = document.getElementById('yt-iframe');
+        const section = document.getElementById('yt-section');
+        if (iframe && section) { iframe.src='https://www.youtube.com/embed/'+match[1]; section.style.display='block'; }
+    } catch(e){}
+})();
+
+const qScores = {};
+
+function qSelect(el, q, val) {
+    document.getElementById('qopts'+q).querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    qScores[q] = val;
+    const btn = document.getElementById('qbtn'+q);
+    if (btn) btn.classList.add('ready');
+}
+
+function qNext(q) {
+    if (!qScores[q]) return;
+    document.getElementById('qq'+q).classList.remove('active');
+    const next = document.getElementById('qq'+(q+1));
+    if (next) {
+        next.classList.add('active');
+        document.getElementById('q-prog').style.width = Math.round((q/4)*100)+'%';
+        document.getElementById('q-label').textContent = 'Question '+(q+1)+' of 4';
+    }
+}
+
+function qFinish() {
+    if (!qScores[4]) return;
+    document.getElementById('qq4').classList.remove('active');
+    document.getElementById('q-prog').style.width = '100%';
+    document.getElementById('q-label').textContent = 'Complete';
+
+    const guiltyCount = Object.values(qScores).filter(v => v==='guilty').length;
+    const partialCount = Object.values(qScores).filter(v => v==='partial').length;
+    const decreeNames = {prod:'productivity',mobile:'upward mobility',comfort:'comfort',algo:'the algorithm'};
+    const decree = decreeNames[qScores[3]] || 'the empire';
+
+    let title, body, challenge;
+    if (guiltyCount >= 3) {
+        title = 'Still Guilty.';
+        body = 'The charges hold. Your faith is costing you something real, your home is open, and you are actively surrendering ground to the King. This is what it looks like when the Gospel is operating rather than decorating. The invitation now is not to achieve more — it is to stay aware. Comfort is always nearby, waiting to negotiate a settlement.';
+        challenge = 'Name what the Gospel has cost you recently — specifically. Write it down. Then name one person who needs to see that kind of faith from close up. Show up for them this week.';
+    } else if (guiltyCount + partialCount >= 3) {
+        title = 'Partially Guilty.';
+        body = 'You have the conviction right — you know what the charges should look like. But there is a gap between knowing and living. The decree of '+decree+' is where the gap is widest. That is not a failure — it is where the real work is. The King\'s claim reaches all the way there too.';
+        challenge = 'Identify the one area where the decree of '+decree+' most governs your actual decisions. Sit with Matthew 6:33 every morning this week. Then take one action that only makes sense if Jesus is genuinely King of that area.';
+    } else {
+        title = 'Not Yet Guilty.';
+        body = 'Your Christianity has been, on the whole, quite comfortable. That is not a verdict against you — it is a description of where you are. The good news is that the Gospel does not require you to have it together first. It requires only that you stop negotiating with the empire and start taking the charges seriously.';
+        challenge = 'Start with one charge this week: open your home — physically or digitally — to one person who needs community. No agenda. No programme. Just a door open and a table set. That is how it started in Thessalonica.';
+    }
+
+    document.getElementById('q-verdict-title').textContent = title;
+    document.getElementById('q-verdict-body').textContent = body;
+    document.getElementById('q-challenge').textContent = challenge;
+    document.getElementById('qresult').classList.add('active');
+}
+
+function qRestart() {
+    Object.keys(qScores).forEach(k => delete qScores[k]);
+    document.querySelectorAll('.quiz-card').forEach(c => { c.classList.remove('active'); c.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected')); });
+    document.querySelectorAll('.quiz-btn').forEach(b => b.classList.remove('ready'));
+    document.getElementById('qresult').classList.remove('active');
+    document.getElementById('qq1').classList.add('active');
+    document.getElementById('q-prog').style.width = '0%';
+    document.getElementById('q-label').textContent = 'Question 1 of 4';
+}
+</script>
+</body>
+</html>
