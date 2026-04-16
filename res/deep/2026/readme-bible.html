@@ -3,8 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>readme.bible — The Living Room</title>
+<title>readme.bible | Deep Dive | The Living Room</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/css/style.css">
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                fontFamily: { display: ['Playfair Display','serif'], body: ['Outfit','sans-serif'] }
+            }
+        }
+    }
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -43,12 +62,12 @@ body::after{
   opacity:0.4;pointer-events:none;z-index:999;
 }
 
-/* ── HEADER ── */
-.site-header{
-  position:sticky;top:0;z-index:200;
-  background:rgba(5,5,5,0.95);
+/* ── PAGE CIPHER HEADER (below site nav) ── */
+.page-header{
+  position:sticky;top:0;z-index:90;
+  background:rgba(5,5,5,0.97);
   border-bottom:1px solid var(--encrypted-border);
-  padding:1rem 2rem;
+  padding:0.85rem 2rem;
   display:flex;align-items:center;justify-content:space-between;
   backdrop-filter:blur(10px);
 }
@@ -260,10 +279,12 @@ body::after{
 }
 </style>
 </head>
-<body>
+<body data-current="" class="antialiased">
 
-<header class="site-header">
-  <span class="hdr-brand">readme<span>.bible</span> // acts journey</span>
+<div id="header-placeholder"></div>
+
+<header class="page-header">
+  <span class="hdr-brand">readme<span>.bible</span> <span style="color:rgba(232,160,48,0.3)">//</span> acts journey · part 13</span>
   <div class="progress-strip">
     <div class="prog-node" id="prog-0" title="Section I"></div>
     <div class="prog-node" id="prog-1" title="Section II"></div>
@@ -374,7 +395,7 @@ body::after{
         <span class="ref">Isaiah 55:1 (NLT)</span>
         <p>"Is anyone thirsty? Come and drink — even if you have no money! Come, take your choice of wine or milk — it's all free!"</p>
       </div>
-      <p class="dec-body">From Isaiah to Revelation, the invitation is the same word: come. No prerequisites. No closing time. No version of the text where the door is shut. Whatever you're carrying right now — that's exactly what you bring.</p>
+      <p class="dec-body">The first word of the Bible's invitation is <em>come</em>. The last word is <em>come</em>. From Genesis to Revelation the door has never been anything other than open. Whatever you're carrying right now — that's exactly what you bring.</p>
       <div class="dec-greek">
         <span class="gt">dianoigō (Greek · Acts 17:3 / Luke 24:45)</span>
         <p>To open. To crack open. Paul did in Berea what the risen Christ did in the upper room — he <em>opened</em> the Scriptures. It is the same word in both passages. When Scripture is faithfully taught, something is always being unlocked.</p>
@@ -780,5 +801,8 @@ window.addEventListener('load',()=>{
   animateBg();
 });
 </script>
+
+<div id="footer-placeholder"></div>
+<script src="/js/main.js" defer></script>
 </body>
 </html>
