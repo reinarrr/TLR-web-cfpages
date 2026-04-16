@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>readme.bible — The Living Room</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#faf9f6;
+  --charcoal:#1a1a1a;
+  --gold:#c5a059;
+  --gold-dim:rgba(197,160,89,0.6);
+  --teal:#2d5a5a;
+  --teal-light:#e8f0f0;
+  --amber:#e8a030;
+  --amber-dim:rgba(232,160,48,0.5);
+  --green:#39ff14;
+  --green-dim:rgba(57,255,20,0.15);
+  --red:#ff4444;
+  --zinc-200:#e4e4e7;
+  --zinc-500:#71717a;
+  --encrypted-bg:#050505;
+  --encrypted-surface:#0a0a0a;
+  --encrypted-border:rgba(232,160,48,0.15);
+}
+
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--encrypted-bg);color:var(--amber);line-height:1.7;overflow-x:hidden;cursor:default}
+
+/* ── SCANLINE EFFECT ── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.08) 2px,rgba(0,0,0,0.08) 4px);
+  pointer-events:none;z-index:1000;
+}
+
+/* ── NOISE OVERLAY ── */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity:0.4;pointer-events:none;z-index:999;
+}
+
+/* ── HEADER ── */
+.site-header{
+  position:sticky;top:0;z-index:200;
+  background:rgba(5,5,5,0.95);
+  border-bottom:1px solid var(--encrypted-border);
+  padding:1rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  backdrop-filter:blur(10px);
+}
+.hdr-brand{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--amber);letter-spacing:0.12em}
+.hdr-brand span{color:rgba(232,160,48,0.4)}
+.progress-strip{display:flex;gap:0.4rem;align-items:center}
+.prog-node{width:8px;height:8px;border-radius:50%;border:1px solid rgba(232,160,48,0.3);background:transparent;transition:all 0.4s ease}
+.prog-node.unlocked{background:var(--amber);border-color:var(--amber);box-shadow:0 0 6px var(--amber)}
+.prog-node.cascaded{background:var(--gold);border-color:var(--gold);box-shadow:0 0 10px var(--gold)}
+.hdr-decrypt-all{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:rgba(232,160,48,0.3);letter-spacing:0.1em;display:none}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:4rem 2rem;text-align:center;position:relative;overflow:hidden;
+}
+.hero-bg-text{
+  position:absolute;inset:0;font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  color:rgba(232,160,48,0.04);line-height:1.2;word-break:break-all;
+  pointer-events:none;overflow:hidden;padding:1rem;
+}
+.hero-tag{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(232,160,48,0.5);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:2rem;display:block}
+.hero h1{font-family:'JetBrains Mono',monospace;font-size:clamp(2.5rem,8vw,5rem);font-weight:700;color:var(--amber);line-height:1;margin-bottom:1rem;text-shadow:0 0 40px rgba(232,160,48,0.3)}
+.hero-sub{font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.5vw,1.5rem);color:rgba(232,160,48,0.55);font-style:italic;margin-bottom:3rem;max-width:600px}
+.hero-instruction{
+  background:rgba(232,160,48,0.06);border:1px solid var(--encrypted-border);
+  border-radius:0.5rem;padding:1.25rem 2rem;max-width:560px;margin:0 auto 3rem;
+}
+.hero-instruction p{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:rgba(232,160,48,0.7);line-height:1.7}
+.hero-instruction p strong{color:var(--amber)}
+.scroll-cta{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(232,160,48,0.4);letter-spacing:0.15em;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+
+/* ── MAIN ── */
+.main{max-width:860px;margin:0 auto;padding:2rem 2rem 6rem}
+
+/* ── SECTION BLOCK ── */
+.cipher-section{
+  margin-bottom:3rem;border:1px solid var(--encrypted-border);
+  border-radius:0.75rem;overflow:hidden;transition:all 0.6s ease;
+  position:relative;
+}
+.cipher-section.decrypted{
+  border-color:rgba(197,160,89,0.25);
+  background:var(--cream);
+  color:var(--charcoal);
+}
+.cipher-section.decrypted *{color:inherit}
+
+/* Section header */
+.cs-header{
+  background:var(--encrypted-surface);border-bottom:1px solid var(--encrypted-border);
+  padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:0.5rem;
+}
+.cipher-section.decrypted .cs-header{
+  background:var(--charcoal);border-bottom-color:rgba(197,160,89,0.2);
+}
+.cs-title{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.12em;color:rgba(232,160,48,0.6)}
+.cipher-section.decrypted .cs-title{color:var(--gold);letter-spacing:0.15em;text-transform:uppercase}
+.cs-status{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:rgba(232,160,48,0.35);letter-spacing:0.1em}
+.cipher-section.decrypted .cs-status{color:rgba(197,160,89,0.6)}
+.cs-lock{width:14px;height:14px;opacity:0.4;flex-shrink:0}
+
+/* Encrypted body */
+.cs-encrypted{padding:1.5rem}
+.encrypted-text{
+  font-family:'JetBrains Mono',monospace;font-size:0.82rem;
+  color:rgba(232,160,48,0.35);line-height:1.8;letter-spacing:0.06em;
+  margin-bottom:1.5rem;word-break:break-all;
+  text-shadow:0 0 8px rgba(232,160,48,0.1);
+}
+.glyph{color:rgba(232,160,48,0.2);display:inline}
+.readable{color:var(--amber);font-weight:500}
+
+/* Verse clue */
+.verse-clue{
+  background:rgba(232,160,48,0.04);border:1px solid rgba(232,160,48,0.12);
+  border-radius:0.4rem;padding:1rem 1.25rem;margin-bottom:1.25rem;
+}
+.vc-label{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:rgba(232,160,48,0.4);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.5rem;display:block}
+.vc-ref{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--amber);margin-bottom:0.5rem;display:block}
+.vc-instruction{font-size:0.82rem;color:rgba(232,160,48,0.6);line-height:1.6;margin-bottom:0.75rem}
+.vc-link{
+  font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--amber);
+  text-decoration:none;border:1px solid rgba(232,160,48,0.3);padding:0.3rem 0.75rem;
+  border-radius:0.25rem;display:inline-block;transition:all 0.2s;letter-spacing:0.06em;
+}
+.vc-link:hover{background:rgba(232,160,48,0.1);border-color:var(--amber)}
+
+/* Input area */
+.cipher-input-area{display:flex;gap:0.6rem;flex-wrap:wrap;align-items:center}
+.cipher-input{
+  flex:1;min-width:200px;background:rgba(232,160,48,0.05);
+  border:1px solid rgba(232,160,48,0.25);border-radius:0.35rem;
+  padding:0.6rem 1rem;font-family:'JetBrains Mono',monospace;font-size:0.82rem;
+  color:var(--amber);outline:none;letter-spacing:0.06em;
+  transition:all 0.2s;
+}
+.cipher-input:focus{border-color:var(--amber);background:rgba(232,160,48,0.08);box-shadow:0 0 0 2px rgba(232,160,48,0.1)}
+.cipher-input::placeholder{color:rgba(232,160,48,0.25)}
+.cipher-input.error{border-color:var(--red);animation:shake 0.3s ease}
+.cipher-input.success{border-color:var(--green);box-shadow:0 0 12px rgba(57,255,20,0.2)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+.cipher-submit{
+  font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;
+  background:transparent;border:1px solid rgba(232,160,48,0.4);color:var(--amber);
+  padding:0.6rem 1.25rem;border-radius:0.35rem;cursor:pointer;transition:all 0.2s;
+  white-space:nowrap;
+}
+.cipher-submit:hover{background:rgba(232,160,48,0.1);border-color:var(--amber)}
+
+/* Attempts counter */
+.attempts-left{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:rgba(232,160,48,0.3);letter-spacing:0.08em;margin-top:0.5rem;display:block}
+.attempts-left.warning{color:rgba(255,68,68,0.6)}
+
+/* Force decrypt fallback */
+.force-decrypt{
+  margin-top:1rem;display:none;
+  font-family:'JetBrains Mono',monospace;font-size:0.68rem;
+  color:rgba(255,68,68,0.6);letter-spacing:0.08em;
+  background:rgba(255,68,68,0.05);border:1px solid rgba(255,68,68,0.2);
+  padding:0.6rem 1rem;border-radius:0.35rem;cursor:pointer;
+  transition:all 0.2s;width:100%;text-align:center;
+}
+.force-decrypt:hover{background:rgba(255,68,68,0.1);color:rgba(255,68,68,0.9)}
+.force-decrypt.visible{display:block}
+
+/* Decrypted body */
+.cs-decrypted{display:none;padding:2rem}
+.cipher-section.decrypted .cs-encrypted{display:none}
+.cipher-section.decrypted .cs-decrypted{display:block}
+
+/* Decrypted content styling */
+.dec-section-num{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;display:block}
+.dec-title{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:var(--charcoal);margin-bottom:1rem;line-height:1.2}
+.dec-body{font-size:1rem;color:#444;line-height:1.8;margin-bottom:1.25rem;font-weight:300}
+.dec-body strong{color:var(--charcoal);font-weight:500}
+.dec-scripture{
+  background:var(--teal-light);border-left:3px solid var(--teal);
+  border-radius:0 0.5rem 0.5rem 0;padding:1rem 1.25rem;margin:1.25rem 0;
+}
+.dec-scripture .ref{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--teal);letter-spacing:0.1em;margin-bottom:0.4rem;display:block}
+.dec-scripture p{font-family:'Playfair Display',serif;font-size:0.95rem;font-style:italic;color:#333;line-height:1.65}
+.dec-greek{
+  background:rgba(197,160,89,0.08);border:1px solid rgba(197,160,89,0.2);
+  border-radius:0.5rem;padding:0.9rem 1.1rem;margin:1rem 0;
+}
+.dec-greek .gt{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--gold);letter-spacing:0.12em;margin-bottom:0.35rem;display:block}
+.dec-greek p{font-size:0.85rem;color:#555;line-height:1.6}
+.dec-greek em{color:var(--charcoal);font-style:italic}
+
+/* Unlock animation */
+@keyframes decryptReveal{
+  0%{opacity:0;filter:blur(4px);transform:translateY(6px)}
+  100%{opacity:1;filter:blur(0);transform:translateY(0)}
+}
+.cipher-section.decrypted .cs-decrypted{animation:decryptReveal 0.6s ease both}
+
+/* Cascade flash */
+@keyframes cascadeFlash{
+  0%{box-shadow:none}
+  30%{box-shadow:0 0 40px rgba(197,160,89,0.4),inset 0 0 40px rgba(197,160,89,0.05)}
+  100%{box-shadow:none}
+}
+.cipher-section.cascade-flash{animation:cascadeFlash 1.2s ease}
+
+/* ── GLYPH ANIMATION ── */
+@keyframes glyphFlicker{0%,100%{opacity:0.2}50%{opacity:0.4}}
+.glyph{animation:glyphFlicker 3s ease-in-out infinite;animation-delay:calc(var(--i,0)*0.1s)}
+
+/* ── FINAL UNLOCK ── */
+.final-unlock{
+  display:none;text-align:center;padding:4rem 2rem;
+  border:1px solid rgba(197,160,89,0.2);border-radius:1rem;
+  margin-top:3rem;background:var(--cream);
+}
+.final-unlock.visible{display:block;animation:decryptReveal 1s ease both}
+.fu-label{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.5rem;display:block}
+.fu-quote{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,3vw,1.75rem);color:var(--charcoal);font-style:italic;line-height:1.55;margin-bottom:2rem;max-width:640px;margin-left:auto;margin-right:auto}
+.fu-sub{font-size:0.95rem;color:var(--zinc-500);max-width:500px;margin:0 auto 2rem;font-weight:300;line-height:1.7}
+.fu-communion{
+  background:var(--charcoal);border-radius:0.75rem;padding:1.75rem 2rem;
+  max-width:500px;margin:0 auto;
+}
+.fu-communion p{font-family:'Playfair Display',serif;font-size:1rem;color:rgba(232,216,163,0.85);font-style:italic;line-height:1.7;margin-bottom:0.75rem}
+.fu-communion p:last-child{margin-bottom:0;color:var(--gold)}
+
+/* Discussion */
+.discussion{
+  display:none;margin-top:3rem;border:1px solid rgba(197,160,89,0.2);
+  border-radius:1rem;overflow:hidden;
+}
+.discussion.visible{display:block;animation:decryptReveal 0.8s ease 0.5s both}
+.disc-header{background:var(--charcoal);padding:1.25rem 2rem}
+.disc-header h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:white;font-style:italic}
+.disc-body{background:var(--cream);padding:2rem}
+.disc-q{display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--zinc-200)}
+.disc-q:last-child{border-bottom:none}
+.disc-q .q-num{font-family:'JetBrains Mono',monospace;font-size:1.5rem;color:var(--zinc-200);font-weight:700;flex-shrink:0;line-height:1.2}
+.disc-q p{font-size:0.95rem;color:#444;line-height:1.65;font-weight:300}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .cipher-input-area{flex-direction:column}
+  .cipher-submit{width:100%}
+  .hero h1{font-size:2.5rem}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="hdr-brand">readme<span>.bible</span> // acts journey</span>
+  <div class="progress-strip">
+    <div class="prog-node" id="prog-0" title="Section I"></div>
+    <div class="prog-node" id="prog-1" title="Section II"></div>
+    <div class="prog-node" id="prog-2" title="Section III"></div>
+    <div class="prog-node" id="prog-3" title="Section IV"></div>
+    <div class="prog-node" id="prog-4" title="Section V"></div>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg-text" id="bgText"></div>
+  <span class="hero-tag">Acts Journey · Part 13 · Acts 17:10–15</span>
+  <h1>readme.bible</h1>
+  <p class="hero-sub">The file has always been open. You just have to know how to read it.</p>
+  <div class="hero-instruction">
+    <p>This page is <strong>encrypted</strong>.<br>
+    Each section contains a hidden key.<br>
+    Follow the clue. Open the passage. Solve the cipher.<br>
+    The more you put in — the more unlocks.</p>
+  </div>
+  <span class="scroll-cta">↓ begin decryption ↓</span>
+</section>
+
+<main class="main">
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION I — easiest, invitation -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="cipher-section" id="section-0">
+    <div class="cs-header">
+      <span class="cs-title">// SECTION_I :: encrypted</span>
+      <span class="cs-status">[ LOCKED ]</span>
+    </div>
+    <div class="cs-encrypted">
+      <div class="encrypted-text" id="enc-0"></div>
+
+      <div class="verse-clue">
+        <span class="vc-label">cipher key</span>
+        <span class="vc-ref">John 20:31 (NLT)</span>
+        <p class="vc-instruction">Open the passage. Find the <strong>4th word of the verse</strong>. That is your key.</p>
+        <a href="https://www.bible.com/bible/116/JHN.20.31.NLT" target="_blank" class="vc-link">↗ open John 20:31 in NLT</a>
+      </div>
+
+      <div class="cipher-input-area">
+        <input type="text" class="cipher-input" id="input-0" placeholder="enter the key word..." autocomplete="off" spellcheck="false">
+        <button class="cipher-submit" onclick="attempt(0)">decrypt →</button>
+      </div>
+      <span class="attempts-left" id="attempts-0">3 attempts remaining</span>
+      <button class="force-decrypt" id="force-0" onclick="forceDecrypt(0)">⚠ emergency override — force decrypt</button>
+    </div>
+
+    <div class="cs-decrypted">
+      <span class="dec-section-num">I · The Invitation</span>
+      <h2 class="dec-title">The File You Were Always Supposed to Open</h2>
+      <p class="dec-body">God didn't have to explain Himself. He is the unnamed force behind everything — never accountable to anyone, never close enough to be questioned. And yet.</p>
+      <p class="dec-body">He wrote a book. About Himself. On purpose. <strong>Every page is a voluntary act of self-disclosure from a God who decided He wanted to be found.</strong></p>
+      <div class="dec-scripture">
+        <span class="ref">John 20:31 (NLT)</span>
+        <p>"But these are written so that you may continue to believe that Jesus is the Messiah, the Son of God, and that by believing in him you will have life by the power of his name."</p>
+      </div>
+      <p class="dec-body">Paul Little calls the Bible God's autobiography. Not a biography — an autobiography. A biography is researched from the outside. An autobiography is written from the inside. The author controls what is revealed.</p>
+      <p class="dec-body">God chose what He wanted us to know about Him. Then He wrote it down. The Bible is not a religious system to master. It is a door into a Person.</p>
+      <div class="dec-greek">
+        <span class="gt">galah (Hebrew · Deut 29:29)</span>
+        <p>To uncover. To remove a veil. To lay bare. God's act of making Himself findable is described in Hebrew as <em>galah</em> — the same word used of removing a covering. What He has revealed is not a glimpse behind a curtain. It is a genuine uncovering. He made Himself findable on purpose.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION II — slightly harder -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="cipher-section" id="section-1">
+    <div class="cs-header">
+      <span class="cs-title">// SECTION_II :: encrypted</span>
+      <span class="cs-status">[ LOCKED ]</span>
+    </div>
+    <div class="cs-encrypted">
+      <div class="encrypted-text" id="enc-1"></div>
+
+      <div class="verse-clue">
+        <span class="vc-label">cipher key</span>
+        <span class="vc-ref">Isaiah 55:1 (NLT)</span>
+        <p class="vc-instruction">Open the passage. The key is the <strong>3rd word of the verse</strong>.</p>
+        <a href="https://www.bible.com/bible/116/ISA.55.1.NLT" target="_blank" class="vc-link">↗ open Isaiah 55:1 in NLT</a>
+      </div>
+
+      <div class="cipher-input-area">
+        <input type="text" class="cipher-input" id="input-1" placeholder="enter the key word..." autocomplete="off" spellcheck="false">
+        <button class="cipher-submit" onclick="attempt(1)">decrypt →</button>
+      </div>
+      <span class="attempts-left" id="attempts-1">3 attempts remaining</span>
+      <button class="force-decrypt" id="force-1" onclick="forceDecrypt(1)">⚠ emergency override — force decrypt</button>
+    </div>
+
+    <div class="cs-decrypted">
+      <span class="dec-section-num">II · The Open Door</span>
+      <h2 class="dec-title">That Very Night</h2>
+      <p class="dec-body">Paul and Silas had just been run out of Thessalonica. A riot. A midnight escape. Displacement.</p>
+      <p class="dec-body">And Luke tells us: <strong>that very night</strong> they arrived in Berea and went to the synagogue. No recovery period. No waiting for ideal conditions. No "we'll start fresh on Monday." The Word was open. They were ready. That was enough.</p>
+      <div class="dec-scripture">
+        <span class="ref">Acts 17:10 (NLT)</span>
+        <p>"That very night the believers sent Paul and Silas to Berea. When they arrived there, they went to the Jewish synagogue."</p>
+      </div>
+      <p class="dec-body">The synagogue wasn't a members-only club. God-fearing Greeks, prominent women, people on the margins — all in the room. The Word has never had a waiting list.</p>
+      <div class="dec-scripture">
+        <span class="ref">Isaiah 55:1 (NLT)</span>
+        <p>"Is anyone thirsty? Come and drink — even if you have no money! Come, take your choice of wine or milk — it's all free!"</p>
+      </div>
+      <p class="dec-body">From Isaiah to Revelation, the invitation is the same word: come. No prerequisites. No closing time. No version of the text where the door is shut. Whatever you're carrying right now — that's exactly what you bring.</p>
+      <div class="dec-greek">
+        <span class="gt">dianoigō (Greek · Acts 17:3 / Luke 24:45)</span>
+        <p>To open. To crack open. Paul did in Berea what the risen Christ did in the upper room — he <em>opened</em> the Scriptures. It is the same word in both passages. When Scripture is faithfully taught, something is always being unlocked.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION III — medium -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="cipher-section" id="section-2">
+    <div class="cs-header">
+      <span class="cs-title">// SECTION_III :: encrypted</span>
+      <span class="cs-status">[ LOCKED ]</span>
+    </div>
+    <div class="cs-encrypted">
+      <div class="encrypted-text" id="enc-2"></div>
+
+      <div class="verse-clue">
+        <span class="vc-label">cipher key — difficulty increasing</span>
+        <span class="vc-ref">Hebrews 4:12 (NLT)</span>
+        <p class="vc-instruction">Open the passage. Find the <strong>last word of the first sentence</strong>. That is your key.</p>
+        <a href="https://www.bible.com/bible/116/HEB.4.12.NLT" target="_blank" class="vc-link">↗ open Hebrews 4:12 in NLT</a>
+      </div>
+
+      <div class="cipher-input-area">
+        <input type="text" class="cipher-input" id="input-2" placeholder="enter the key word..." autocomplete="off" spellcheck="false">
+        <button class="cipher-submit" onclick="attempt(2)">decrypt →</button>
+      </div>
+      <span class="attempts-left" id="attempts-2">3 attempts remaining</span>
+      <button class="force-decrypt" id="force-2" onclick="forceDecrypt(2)">⚠ emergency override — force decrypt</button>
+    </div>
+
+    <div class="cs-decrypted">
+      <span class="dec-section-num">III · The Living Word</span>
+      <h2 class="dec-title">It Responds to Whoever Is Reaching</h2>
+      <p class="dec-body">A child opens it and it speaks to a child. A scholar opens it and it meets the scholar. A couple opens it together and it speaks into the middle of their marriage. A person who hasn't been to church in twenty years opens it and it knows exactly where they are.</p>
+      <div class="dec-scripture">
+        <span class="ref">Hebrews 4:12 (NLT)</span>
+        <p>"For the word of God is alive and powerful. It is sharper than the sharpest two-edged sword, cutting between soul and spirit, between joint and marrow. It exposes our innermost thoughts and desires."</p>
+      </div>
+      <div class="dec-greek">
+        <span class="gt">zōn (Greek · Heb 4:12) — present active participle</span>
+        <p>The word for "living" here is <em>zōn</em> — the present active participle of <em>zaō</em>. It does not mean "it was alive when written." It means currently, actively, continuously alive right now. The same word used of the living God. Of Christ risen from the dead. The Word shares the same category of existence as the resurrection. It is not an archive. It is a living thing that responds.</p>
+      </div>
+      <p class="dec-body">The Bereans were called <em>eugenesteroi</em> — more noble. Not "open-minded." Better-born. A term of intellectual character: the capacity to reason without being driven by crowd pressure or social fear. Real nobility.</p>
+      <p class="dec-body">The Word didn't dumb itself down for Berea. It engaged their rigour. <strong>The Word is never threatened by a sharp mind — it was made for one.</strong> But it also meets the person who comes with nothing but honesty. It is adequate in every direction.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION IV — hard, the wrestle -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="cipher-section" id="section-3">
+    <div class="cs-header">
+      <span class="cs-title">// SECTION_IV :: encrypted</span>
+      <span class="cs-status">[ LOCKED ]</span>
+    </div>
+    <div class="cs-encrypted">
+      <div class="encrypted-text" id="enc-3"></div>
+
+      <div class="verse-clue">
+        <span class="vc-label">cipher key — the wrestle begins</span>
+        <span class="vc-ref">Acts 17:11 (NLT)</span>
+        <p class="vc-instruction">Open the passage. Read the second sentence. Find the <strong>3rd word of that sentence</strong>. That is your key.</p>
+        <a href="https://www.bible.com/bible/116/ACT.17.11.NLT" target="_blank" class="vc-link">↗ open Acts 17:11 in NLT</a>
+      </div>
+
+      <div class="cipher-input-area">
+        <input type="text" class="cipher-input" id="input-3" placeholder="enter the key word..." autocomplete="off" spellcheck="false">
+        <button class="cipher-submit" onclick="attempt(3)">decrypt →</button>
+      </div>
+      <span class="attempts-left" id="attempts-3">3 attempts remaining</span>
+      <button class="force-decrypt" id="force-3" onclick="forceDecrypt(3)">⚠ emergency override — force decrypt</button>
+    </div>
+
+    <div class="cs-decrypted">
+      <span class="dec-section-num">IV · The Courtroom</span>
+      <h2 class="dec-title">Bring Your Hardest Questions</h2>
+      <p class="dec-body">The Bereans didn't just read. They interrogated. The Greek word is <em>anakrinontes</em> — a forensic, judicial term. Cross-examination. The same word used in legal hearings, in Pilate's examination of Jesus, in Peter's interrogation before the Sanhedrin.</p>
+      <div class="dec-greek">
+        <span class="gt">anakrinontes (Greek · Acts 17:11)</span>
+        <p>Forensic, judicial examination of evidence. The Bereans applied courtroom methodology to Scripture — not to disprove Paul, but to verify him. They brought their hardest questions. And they stayed in the fight day after day until they had a verdict. <em>That</em> is the right posture.</p>
+      </div>
+      <div class="dec-scripture">
+        <span class="ref">Acts 17:11 (NLT)</span>
+        <p>"And the people of Berea were more open-minded than those in Thessalonica, and they listened eagerly to Paul's message. They searched the Scriptures day after day to see if Paul and Silas were teaching the truth."</p>
+      </div>
+      <p class="dec-body">There is an ancient story of a man who grabbed hold of God in the dark and refused to let go until he received a blessing. He didn't approach reverently. He <em>wrestled</em>. All night. Until daybreak. And God didn't disengage — He stayed in the fight, met the wrestle, and blessed the man who refused to quit.</p>
+      <p class="dec-body"><strong>The Word has never lost a fight it was invited into.</strong> Bring your hardest questions. The Thessalonians could dismiss an emotional crowd. They couldn't dismiss exegesis — which is why they traveled 75km to shut down what was happening in Berea.</p>
+      <p class="dec-body">What you build through investigation, opposition can't shake. What you build through atmosphere alone can collapse the next morning. Faith built on examination is stronger than faith built on emotion.</p>
+      <p class="dec-body">Sunday messages are someone else's encounter with the Word. They are good. They are useful. But they are not yours. You cannot live on someone else's meal and wonder why you're hungry.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SECTION V — final, cascade trigger -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="cipher-section" id="section-4">
+    <div class="cs-header">
+      <span class="cs-title">// SECTION_V :: encrypted — final cipher</span>
+      <span class="cs-status">[ LOCKED ]</span>
+    </div>
+    <div class="cs-encrypted">
+      <div class="encrypted-text" id="enc-4"></div>
+
+      <div class="verse-clue">
+        <span class="vc-label">cipher key — final decryption</span>
+        <span class="vc-ref">John 1:1 (NLT)</span>
+        <p class="vc-instruction">Open the passage. The key is <strong>the last word of the verse</strong>. Solve this — and everything unlocks.</p>
+        <a href="https://www.bible.com/bible/116/JHN.1.1.NLT" target="_blank" class="vc-link">↗ open John 1:1 in NLT</a>
+      </div>
+
+      <div class="cipher-input-area">
+        <input type="text" class="cipher-input" id="input-4" placeholder="final key..." autocomplete="off" spellcheck="false">
+        <button class="cipher-submit" onclick="attempt(4)">decrypt all →</button>
+      </div>
+      <span class="attempts-left" id="attempts-4">3 attempts remaining</span>
+      <button class="force-decrypt" id="force-4" onclick="forceDecrypt(4)">⚠ emergency override — force decrypt</button>
+    </div>
+
+    <div class="cs-decrypted">
+      <span class="dec-section-num">V · What It Does</span>
+      <h2 class="dec-title">The Word Will Accomplish What God Sent It to Do</h2>
+      <div class="dec-scripture">
+        <span class="ref">Isaiah 55:10–11 (NLT)</span>
+        <p>"The rain and snow come down from the heavens... They cause the grain to grow... It is the same with my word. I send it out, and it always produces fruit. It will accomplish all I want it to, and it will prosper everywhere I send it."</p>
+      </div>
+      <p class="dec-body">The Word went into Berea. People believed. A church formed. Opposition came. Paul left. And the church was still there. Silas and Timothy stayed. The Word kept working after the messenger was gone.</p>
+      <p class="dec-body">The Thessalonian agitators traveled 75km to shut this down. You don't make that journey for something that isn't working. What the Word had done in Berea was too real to ignore.</p>
+      <div class="dec-scripture">
+        <span class="ref">John 1:1 (NLT)</span>
+        <p>"In the beginning the Word already existed. The Word was with God, and the Word was God."</p>
+      </div>
+      <p class="dec-body"><strong>When you open your Bible you are not opening a book. You are entering the presence of a Person.</strong> The same Person who spoke the world into existence. The same Person who opened the minds of the disciples in the upper room. The same Person who is present every time the text is opened honestly.</p>
+      <p class="dec-body">The Berean church held without Paul. No building. No apostle in residence. No institutional infrastructure. Just people, text, and Spirit. That is the blueprint. That is what we are.</p>
+      <p class="dec-body">The Word will do in you what it came to do. In your marriage. In the thing you've been carrying for years that you haven't told anyone. He knows. He wrote the book. And if you come to it honestly — He will accomplish exactly what He sent it to accomplish.</p>
+      <p class="dec-body">Which is why we end at the table.</p>
+    </div>
+  </div>
+
+  <!-- ── FINAL UNLOCK ── -->
+  <div class="final-unlock" id="finalUnlock">
+    <span class="fu-label">// decryption complete — all sections unlocked</span>
+    <p class="fu-quote">"It was never just a book. It's the place where a Person shows up — and He's been waiting every time you almost opened it and didn't."</p>
+    <p class="fu-sub">The Bereans searched the Scriptures and found a Person. They examined the evidence and concluded it was true. This is where every genuine encounter with the Word ends.</p>
+    <div class="fu-communion">
+      <p>The Word is not ink on a page.</p>
+      <p>It's a Person. And He shows up every time you open it.</p>
+      <p>Come to the table.</p>
+      <p>He has been waiting.</p>
+    </div>
+  </div>
+
+  <!-- ── DISCUSSION ── -->
+  <div class="discussion" id="discussion">
+    <div class="disc-header">
+      <h3>Discussion & Reflection</h3>
+    </div>
+    <div class="disc-body">
+      <div class="disc-q">
+        <span class="q-num">01</span>
+        <p>When did reading Scripture last feel like an encounter rather than an exercise? What was different about that moment?</p>
+      </div>
+      <div class="disc-q">
+        <span class="q-num">02</span>
+        <p>What is the hardest question you've brought to God's Word? Did you stay in the fight until you received something — or did you let go?</p>
+      </div>
+      <div class="disc-q">
+        <span class="q-num">03</span>
+        <p>Who are you living on — your own encounter with the Word, or someone else's? What would it look like to make it your own this week?</p>
+      </div>
+      <div class="disc-q">
+        <span class="q-num">04</span>
+        <p>The Word accomplished something specific in the Bereans — they believed, they gathered, they held. What do you sense it is trying to accomplish in you right now?</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ── CIPHER CONFIG ──
+// answers: normalized lowercase, plus accepted alternatives for fuzzy match
+const SECTIONS = [
+  {
+    answer: 'written',      // John 20:31 NLT — 5th word
+    alt: ['write','wrote'],
+  },
+  {
+    answer: 'thirsty',      // Isaiah 55:1 NLT — 3rd word: "Is anyone thirsty?"
+    alt: ['anyone','come','drink'],
+  },
+  {
+    answer: 'powerful',     // Hebrews 4:12 NLT last word of first sentence
+    alt: ['active','alive','power'],
+  },
+  {
+    answer: 'searched',     // Acts 17:11 NLT 2nd sentence 3rd word: "They searched the Scriptures..."
+    alt: ['scriptures','truth','day'],
+  },
+  {
+    answer: 'god',          // John 1:1 NLT last word
+    alt: ['word','existed'],
+  },
+];
+
+const MAX_ATTEMPTS = 3;
+let attemptsLeft = [3,3,3,3,3];
+let unlocked = [false,false,false,false,false];
+
+// ── GLYPH CHARACTERS ──
+const GLYPHS = '█▓▒░▄▀■□◆◇●○△▲▼▽◈◉◎⬡⬢⬣⬤⬥⬦⬧⬨⬩⬪⬫⬬⬭⬮⬯╔╗╚╝╠╣╦╩╬║═╒╓╕╖╘╙╛╜╞╟╡╢╤╥╧╨╪╫⌂⌀⌁⌃⌄⌅⌆⌇⌈⌉⌊⌋⌌⌍⌎⌏⌐⌑⌒⌓⌔⌕⌖⌗⌘⌙⌚⌛⌜⌝⌞⌟⌠⌡∀∁∂∃∄∅∆∇∈∉∊∋∌∍∎∏∐∑−∓∔∕∖∗∘∙√∛∜∝∞∟∠∡∢∣∤∥∦∧∨∩∪∫∬∭∮∯∰∱∲∳∴∵∶∷∸∹∺∻∼∽∾∿≀≁≂≃≄≅≆≇≈≉≊≋≌≍≎≏≐≑≒≓≔≕≖≗≘≙≚≛≜≝≞≟';
+
+const READABLE_WORDS = [
+  ['The','file','■▓▒','■▓■','been','■▓▒▄','█▓■','you'],
+  ['That','very','night','■▓▒','■▓■','open','■▓▒▄','everyone'],
+  ['A','living','thing','■▓▒','■▓■','reaches','■▓▒▄','you'],
+  ['Bring','your','■▓▒','■▓■','questions','■▓▒▄','wrestle'],
+  ['The','Word','■▓▒','■▓■','accomplish','■▓▒▄','God'],
+];
+
+function randGlyph(){return GLYPHS[Math.floor(Math.random()*GLYPHS.length)]}
+
+function generateEncryptedText(sectionIdx){
+  const words = READABLE_WORDS[sectionIdx];
+  let html = '';
+  const totalWords = 60 + sectionIdx * 15;
+  for(let i=0;i<totalWords;i++){
+    const isReadable = words.some((w,wi)=> i===wi*8);
+    if(isReadable){
+      const w = words[Math.floor(i/8)%words.length];
+      if(w&&!w.includes('■')){
+        html+=`<span class="readable">${w}</span> `;
+      } else {
+        html+=`<span class="glyph" style="--i:${i%20}">${w||randGlyph()+randGlyph()+randGlyph()}</span> `;
+      }
+    } else {
+      const len = 3+Math.floor(Math.random()*7);
+      let g='';
+      for(let j=0;j<len;j++) g+=randGlyph();
+      html+=`<span class="glyph" style="--i:${i%20}">${g}</span> `;
+    }
+    if(i>0&&i%12===0) html+='<br>';
+  }
+  return html;
+}
+
+// ── INIT ──
+function init(){
+  // Background fill
+  const bg = document.getElementById('bgText');
+  let bgContent='';
+  for(let i=0;i<2000;i++) bgContent+=randGlyph();
+  bg.textContent=bgContent;
+
+  // Encrypted previews
+  for(let i=0;i<5;i++){
+    document.getElementById('enc-'+i).innerHTML=generateEncryptedText(i);
+    document.getElementById('input-'+i).addEventListener('keydown',function(e){
+      if(e.key==='Enter') attempt(i);
+    });
+  }
+}
+
+// ── NORMALIZE ──
+function normalize(str){
+  return str.trim().toLowerCase().replace(/[^a-z]/g,'');
+}
+
+// ── FUZZY MATCH ──
+function fuzzyMatch(input, target){
+  const a = normalize(input);
+  const b = normalize(target);
+  if(a===b) return true;
+  if(Math.abs(a.length-b.length)>2) return false;
+  let errors=0;
+  const maxLen=Math.max(a.length,b.length);
+  for(let i=0;i<maxLen;i++){
+    if(a[i]!==b[i]) errors++;
+    if(errors>1) return false;
+  }
+  return true;
+}
+
+// ── ATTEMPT ──
+function attempt(idx){
+  if(unlocked[idx]) return;
+  const input = document.getElementById('input-'+idx);
+  const val = input.value;
+  const section = SECTIONS[idx];
+
+  const isCorrect = fuzzyMatch(val, section.answer) ||
+    section.alt.some(a=>fuzzyMatch(val,a));
+
+  if(isCorrect){
+    decryptSection(idx);
+  } else {
+    attemptsLeft[idx]--;
+    input.classList.add('error');
+    setTimeout(()=>input.classList.remove('error'),500);
+
+    const attemptsEl = document.getElementById('attempts-'+idx);
+    if(attemptsLeft[idx]>0){
+      attemptsEl.textContent = attemptsLeft[idx]+' attempt'+(attemptsLeft[idx]===1?'':'s')+' remaining';
+      if(attemptsLeft[idx]===1) attemptsEl.classList.add('warning');
+    } else {
+      attemptsEl.textContent = 'no attempts remaining';
+      attemptsEl.classList.add('warning');
+      document.getElementById('force-'+idx).classList.add('visible');
+    }
+  }
+}
+
+function forceDecrypt(idx){
+  decryptSection(idx, true);
+}
+
+// ── DECRYPT SECTION ──
+function decryptSection(idx, forced=false){
+  if(unlocked[idx]) return;
+  unlocked[idx]=true;
+
+  const section = document.getElementById('section-'+idx);
+  const input = document.getElementById('input-'+idx);
+  if(!forced) input.classList.add('success');
+
+  // If this is the final section, cascade everything
+  if(idx===4){
+    cascadeAll();
+    return;
+  }
+
+  setTimeout(()=>{
+    section.classList.add('decrypted');
+    const header = section.querySelector('.cs-header');
+    header.querySelector('.cs-title').textContent = '// SECTION_'+(toRoman(idx+1))+' :: decrypted';
+    header.querySelector('.cs-status').textContent = '[ UNLOCKED ]';
+    updateProgress(idx);
+  }, forced ? 0 : 300);
+}
+
+// ── CASCADE ALL ──
+function cascadeAll(){
+  let delay=0;
+  for(let i=0;i<5;i++){
+    if(!unlocked[i]){
+      unlocked[i]=true;
+    }
+    const s=document.getElementById('section-'+i);
+    const d=delay;
+    setTimeout(()=>{
+      s.classList.add('decrypted','cascade-flash');
+      s.querySelector('.cs-title').textContent='// SECTION_'+toRoman(i+1)+' :: decrypted';
+      s.querySelector('.cs-status').textContent='[ UNLOCKED ]';
+      updateProgress(i, true);
+    }, d);
+    delay+=250;
+  }
+
+  setTimeout(()=>{
+    document.getElementById('finalUnlock').classList.add('visible');
+    document.getElementById('discussion').classList.add('visible');
+    document.getElementById('finalUnlock').scrollIntoView({behavior:'smooth',block:'center'});
+  }, delay+400);
+}
+
+// ── PROGRESS ──
+function updateProgress(idx, cascade=false){
+  const node = document.getElementById('prog-'+idx);
+  if(cascade){
+    node.classList.add('cascaded');
+  } else {
+    node.classList.add('unlocked');
+  }
+
+  // Check if all unlocked
+  if(unlocked.every(u=>u)){
+    if(!cascade){
+      document.getElementById('finalUnlock').classList.add('visible');
+      document.getElementById('discussion').classList.add('visible');
+    }
+  }
+}
+
+function toRoman(n){
+  return ['I','II','III','IV','V'][n-1]||n;
+}
+
+// Animate background text
+function animateBg(){
+  const bg=document.getElementById('bgText');
+  if(!bg) return;
+  const text=bg.textContent.split('');
+  const idx=Math.floor(Math.random()*text.length);
+  text[idx]=randGlyph();
+  bg.textContent=text.join('');
+  setTimeout(animateBg, 50);
+}
+
+window.addEventListener('load',()=>{
+  init();
+  animateBg();
+});
+</script>
+</body>
+</html>
