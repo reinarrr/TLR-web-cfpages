@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TLR Stack — How We're Connected</title>
+<style>
+:root {
+  --bg: #09090f;
+  --surface: #0f0f1c;
+  --surface2: #141423;
+  --border: #1c1c2e;
+  --text: #dde0f2;
+  --muted: #5c5c7e;
+  --dim: #252540;
+  --cf: #f6821f;
+  --ghost: #a855f7;
+  --github: #60a5fa;
+  --youtube: #f87171;
+  --green: #34d399;
+  --mono: 'SF Mono','Cascadia Code','Fira Code','Consolas',monospace;
+  --sans: -apple-system,BlinkMacSystemFont,'Helvetica Neue',system-ui,sans-serif;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 70% 45% at 50% -5%, rgba(168,85,247,0.09) 0%, transparent 65%),
+    radial-gradient(circle, rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-size: 100% auto, 26px 26px;
+  padding-bottom: 100px;
+}
+
+/* ─── HEADER ─── */
+header {
+  padding: 56px 64px 44px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.header-left h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: #fff;
+}
+.header-left h1 em { color: var(--cf); font-style: normal; }
+.header-left p {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+}
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.pill-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+
+/* ─── SECTION HEADER ─── */
+.sec-head {
+  padding: 52px 64px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.sec-num {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  padding: 3px 8px;
+  border: 1px solid var(--dim);
+  border-radius: 3px;
+}
+.sec-head h2 {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ─── DIAGRAM ─── */
+.diagram-wrap {
+  padding: 0 64px;
+  overflow-x: auto;
+}
+.arch-svg {
+  width: 100%;
+  max-width: 1040px;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* SVG node fills */
+.nd-ghost  { fill: rgba(168,85,247,0.1);  stroke: rgba(168,85,247,0.55); stroke-width:1.5; }
+.nd-cf     { fill: rgba(246,130,31,0.1);  stroke: rgba(246,130,31,0.55); stroke-width:1.5; }
+.nd-github { fill: rgba(96,165,250,0.1);  stroke: rgba(96,165,250,0.55); stroke-width:1.5; }
+.nd-yt     { fill: rgba(248,113,113,0.1); stroke: rgba(248,113,113,0.55); stroke-width:1.5; }
+.nd-green  { fill: rgba(52,211,153,0.1);  stroke: rgba(52,211,153,0.55); stroke-width:1.5; }
+.nd-ref    { fill: none; stroke: var(--dim); stroke-width:1.5; stroke-dasharray:5 4; }
+
+.nt  { font-family: var(--mono); font-size:12px; fill:var(--text); font-weight:600; }
+.ns  { font-family: var(--mono); font-size:10px; fill:var(--muted); }
+.nsm { font-family: var(--mono); font-size:9px;  fill:#42425e; }
+.ll  { font-family: var(--mono); font-size:9.5px; letter-spacing:1.5px; text-transform:uppercase; }
+
+/* Arrow paths */
+.al {
+  fill:none; stroke:var(--green); stroke-width:1.5;
+  stroke-dasharray:5 3;
+  animation: flow-l 1.8s linear infinite;
+  marker-end: url(#mh-green);
+}
+.as {
+  fill:none; stroke:var(--cf); stroke-width:1.5;
+  stroke-dasharray:5 3;
+  animation: flow-s 2.4s linear infinite;
+  marker-end: url(#mh-cf);
+}
+
+@keyframes flow-l { to { stroke-dashoffset: -16; } }
+@keyframes flow-s { to { stroke-dashoffset: -16; } }
+
+/* ─── CARDS GRID ─── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 64px;
+  background: var(--border);
+  gap: 1px;
+}
+.card {
+  background: var(--surface);
+  padding: 28px 28px 24px;
+  position: relative;
+  transition: background 0.15s;
+}
+.card::before {
+  content:'';
+  position:absolute;
+  top:0; left:0;
+  width:3px; height:100%;
+}
+.card:hover { background: var(--surface2); }
+.card.c-cf::before     { background:var(--cf); }
+.card.c-ghost::before  { background:var(--ghost); }
+.card.c-github::before { background:var(--github); }
+.card.c-yt::before     { background:var(--youtube); }
+
+.card-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.card-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.card a {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 14px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.card.c-cf a:hover     { color:var(--cf);     border-color:var(--cf); }
+.card.c-ghost a:hover  { color:var(--ghost);  border-color:var(--ghost); }
+.card.c-github a:hover { color:var(--github); border-color:var(--github); }
+.card.c-yt a:hover     { color:var(--youtube);border-color:var(--youtube); }
+.card-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.card-desc code {
+  font-family: var(--mono);
+  font-size: 0.8em;
+  padding: 1px 5px;
+  background: var(--dim);
+  border-radius: 3px;
+}
+.card-tags {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.tag {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  padding: 3px 8px;
+  background: var(--dim);
+  border-radius: 3px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+/* ─── DATA FLOW ─── */
+.flows {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 0 64px;
+}
+.flow-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px;
+}
+.flow-box h3 {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fdot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.fdot-live { background: var(--green); box-shadow: 0 0 6px var(--green); }
+.fdot-sync { background: var(--cf);   box-shadow: 0 0 6px var(--cf); }
+.steps { display:flex; flex-direction:column; }
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  position: relative;
+}
+.step:not(:last-child)::after {
+  content:'';
+  position: absolute;
+  left: 11px; top: 26px;
+  width: 1px;
+  height: calc(100% - 4px);
+  background: var(--dim);
+}
+.step-n {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--dim);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--muted);
+  background: var(--bg);
+  z-index: 1;
+}
+.step-body { padding-bottom: 22px; }
+.step-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}
+.step-sub {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+/* ─── QUICK ACCESS ─── */
+.urls {
+  margin: 0 64px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.url-row {
+  display: grid;
+  grid-template-columns: 190px 1fr 110px;
+  align-items: center;
+  padding: 13px 24px;
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+  transition: background 0.1s;
+}
+.url-row:last-child { border-bottom: none; }
+.url-row:hover { background: var(--surface2); }
+.url-name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+}
+.url-href {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.url-href:hover { color: var(--text); }
+.url-badge {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  text-align: right;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.ub-cf     { color: var(--cf); }
+.ub-ghost  { color: var(--ghost); }
+.ub-github { color: var(--github); }
+
+/* ─── PRINT ─── */
+@media print {
+  body { background: #fff !important; color: #111 !important; background-image: none !important; }
+  .al, .as { animation: none !important; }
+  .nd-ghost  { fill: #f3e8ff; stroke: #9333ea; }
+  .nd-cf     { fill: #fff7ed; stroke: #ea580c; }
+  .nd-github { fill: #eff6ff; stroke: #2563eb; }
+  .nd-yt     { fill: #fef2f2; stroke: #dc2626; }
+  .nd-green  { fill: #f0fdf4; stroke: #16a34a; }
+  .nt  { fill: #111; }
+  .ns  { fill: #555; }
+  .nsm { fill: #888; }
+  .ll  { fill: #555; }
+  .al  { stroke: #16a34a; }
+  .as  { stroke: #ea580c; }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  header, .sec-head, .diagram-wrap { padding-left: 24px; padding-right: 24px; }
+  .cards, .flows, .urls { margin-left: 24px; margin-right: 24px; }
+  .cards { grid-template-columns: 1fr 1fr; }
+  header { padding-top: 36px; padding-bottom: 28px; }
+  .header-left h1 { font-size: 2.4rem; }
+}
+@media (max-width: 640px) {
+  .cards { grid-template-columns: 1fr; }
+  .flows { grid-template-columns: 1fr; }
+  .url-row { grid-template-columns: 1fr auto; }
+  .url-name { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-left">
+    <h1>TLR <em>Stack</em></h1>
+    <p>Service map for The Living Room web team &middot; tlrhd.com</p>
+  </div>
+  <div class="header-right">
+    <span class="pill"><span class="pill-dot" style="background:var(--green)"></span>6 services</span>
+    <span class="pill"><span class="pill-dot" style="background:var(--cf)"></span>April 2026</span>
+  </div>
+</header>
+
+
+<!-- 01 — ARCHITECTURE DIAGRAM -->
+<div class="sec-head">
+  <span class="sec-num">01</span>
+  <h2>Architecture</h2>
+</div>
+
+<div class="diagram-wrap">
+<svg class="arch-svg" viewBox="0 0 1020 390" xmlns="http://www.w3.org/2000/svg" aria-label="TLR service architecture diagram">
+  <defs>
+    <marker id="mh-green" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <polygon points="0 0,7 2.5,0 5" fill="#34d399"/>
+    </marker>
+    <marker id="mh-cf" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <polygon points="0 0,7 2.5,0 5" fill="#f6821f"/>
+    </marker>
+  </defs>
+
+  <!-- Lane 1 background — Live Path -->
+  <rect x="8" y="8" width="1004" height="170" rx="8"
+        fill="rgba(52,211,153,0.025)" stroke="rgba(52,211,153,0.12)" stroke-width="1"/>
+  <text x="22" y="27" class="ll" fill="#2d8c68">LIVE PATH — browser</text>
+
+  <!-- Lane 2 background — Sync Path -->
+  <rect x="8" y="192" width="1004" height="170" rx="8"
+        fill="rgba(246,130,31,0.025)" stroke="rgba(246,130,31,0.12)" stroke-width="1"/>
+  <text x="22" y="211" class="ll" fill="#8a4a10">SYNC PATH — every 2 hours</text>
+
+  <!-- ═══ LIVE LANE ═══ -->
+
+  <!-- Ghost CMS -->
+  <rect x="28" y="36" width="148" height="56" rx="6" class="nd-ghost"/>
+  <text x="102" y="61" text-anchor="middle" class="nt">Ghost CMS</text>
+  <text x="102" y="77" text-anchor="middle" class="ns">cms.tlrhd.com</text>
+
+  <!-- Ghost → ghost-proxy arrow -->
+  <line x1="176" y1="64" x2="224" y2="64" class="al"/>
+
+  <!-- ghost-proxy Worker -->
+  <rect x="226" y="36" width="156" height="56" rx="6" class="nd-cf"/>
+  <text x="304" y="59" text-anchor="middle" class="nt">ghost-proxy</text>
+  <text x="304" y="73" text-anchor="middle" class="ns">Cloudflare Worker</text>
+  <text x="304" y="85" text-anchor="middle" class="nsm">CORS · WAF bypass</text>
+
+  <!-- ghost-proxy → Browser -->
+  <path d="M382,64 Q428,64 440,100" fill="none" stroke="#34d399" stroke-width="1.5"
+        stroke-dasharray="5 3" marker-end="url(#mh-green)"
+        style="animation:flow-l 1.8s linear infinite"/>
+
+  <!-- YouTube -->
+  <rect x="28" y="114" width="148" height="56" rx="6" class="nd-yt"/>
+  <text x="102" y="139" text-anchor="middle" class="nt">YouTube</text>
+  <text x="102" y="155" text-anchor="middle" class="ns">video hosting</text>
+
+  <!-- YouTube → yt-proxy -->
+  <line x1="176" y1="142" x2="224" y2="142" class="al"/>
+
+  <!-- yt-proxy Worker -->
+  <rect x="226" y="114" width="156" height="56" rx="6" class="nd-cf"/>
+  <text x="304" y="137" text-anchor="middle" class="nt">yt-proxy</text>
+  <text x="304" y="151" text-anchor="middle" class="ns">Cloudflare Worker</text>
+  <text x="304" y="163" text-anchor="middle" class="nsm">YouTube channel data</text>
+
+  <!-- yt-proxy → Browser -->
+  <path d="M382,142 Q428,142 440,130" fill="none" stroke="#34d399" stroke-width="1.5"
+        stroke-dasharray="5 3" marker-end="url(#mh-green)"
+        style="animation:flow-l 1.8s linear infinite"/>
+
+  <!-- Browser JS node -->
+  <rect x="442" y="68" width="148" height="94" rx="6" class="nd-green"/>
+  <text x="516" y="106" text-anchor="middle" class="nt">Browser JS</text>
+  <text x="516" y="122" text-anchor="middle" class="ns">ghost.js · main.js</text>
+  <text x="516" y="136" text-anchor="middle" class="nsm">client-side render</text>
+
+  <!-- Browser → CF Pages -->
+  <line x1="590" y1="115" x2="638" y2="100" class="al"/>
+
+  <!-- CF Pages (live) -->
+  <rect x="640" y="64" width="144" height="56" rx="6" class="nd-cf"/>
+  <text x="712" y="89" text-anchor="middle" class="nt">CF Pages</text>
+  <text x="712" y="105" text-anchor="middle" class="ns">tlrhd.com</text>
+  <text x="712" y="117" text-anchor="middle" class="nsm">static host</text>
+
+  <!-- Fallback note -->
+  <line x1="638" y1="130" x2="592" y2="140" fill="none" stroke="var(--dim)" stroke-width="1"
+        stroke-dasharray="3 4"/>
+  <text x="610" y="153" text-anchor="middle" class="nsm">fallback JSON</text>
+
+  <!-- Legend -->
+  <rect x="820" y="36" width="182" height="106" rx="6"
+        fill="rgba(255,255,255,0.025)" stroke="var(--border)" stroke-width="1"/>
+  <text x="911" y="54" text-anchor="middle" class="ll" fill="var(--muted)">Legend</text>
+  <!-- live -->
+  <line x1="838" y1="70" x2="870" y2="70" stroke="#34d399" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="878" y="74" class="ns">live path</text>
+  <!-- sync -->
+  <line x1="838" y1="88" x2="870" y2="88" stroke="#f6821f" stroke-width="1.5" stroke-dasharray="5 3"/>
+  <text x="878" y="92" class="ns">sync path</text>
+  <!-- color dots -->
+  <circle cx="842" cy="108" r="5" fill="#a855f7"/><text x="852" y="112" class="nsm">Ghost</text>
+  <circle cx="887" cy="108" r="5" fill="#f6821f"/><text x="897" y="112" class="nsm">CF</text>
+  <circle cx="922" cy="108" r="5" fill="#60a5fa"/><text x="932" y="112" class="nsm">GH</text>
+  <circle cx="957" cy="108" r="5" fill="#f87171"/><text x="967" y="112" class="nsm">YT</text>
+
+  <!-- ═══ SYNC LANE ═══ -->
+
+  <!-- Ghost CMS (reference, dashed) -->
+  <rect x="28" y="222" width="148" height="56" rx="6" class="nd-ref"/>
+  <text x="102" y="247" text-anchor="middle" class="ns" fill="#42425e" font-weight="600">Ghost CMS</text>
+  <text x="102" y="263" text-anchor="middle" class="nsm">same instance</text>
+  <text x="102" y="275" text-anchor="middle" class="nsm">↑ see live path</text>
+
+  <!-- Ghost(ref) → GitHub Actions -->
+  <line x1="176" y1="250" x2="218" y2="250" class="as"/>
+
+  <!-- GitHub Actions -->
+  <rect x="220" y="222" width="156" height="56" rx="6" class="nd-github"/>
+  <text x="298" y="247" text-anchor="middle" class="nt">GitHub Actions</text>
+  <text x="298" y="261" text-anchor="middle" class="ns">sync-ghost.js</text>
+  <text x="298" y="274" text-anchor="middle" class="nsm">cron: 0 */2 * * *</text>
+
+  <!-- Actions → Repo -->
+  <line x1="376" y1="250" x2="418" y2="250" class="as"/>
+
+  <!-- GitHub Repo + JSON -->
+  <rect x="420" y="222" width="156" height="56" rx="6" class="nd-github"/>
+  <text x="498" y="247" text-anchor="middle" class="nt">GitHub Repo</text>
+  <text x="498" y="261" text-anchor="middle" class="ns">messages.json</text>
+  <text x="498" y="274" text-anchor="middle" class="nsm">deepdives.json</text>
+
+  <!-- Repo → CF Pages -->
+  <line x1="576" y1="250" x2="618" y2="250" class="as"/>
+
+  <!-- CF Pages (auto-deploy) -->
+  <rect x="620" y="222" width="148" height="56" rx="6" class="nd-cf"/>
+  <text x="694" y="247" text-anchor="middle" class="nt">CF Pages</text>
+  <text x="694" y="261" text-anchor="middle" class="ns">auto-deploys</text>
+  <text x="694" y="274" text-anchor="middle" class="nsm">on push to main</text>
+
+  <!-- CF Pages → Site -->
+  <line x1="768" y1="250" x2="818" y2="250" class="as"/>
+
+  <!-- Site -->
+  <rect x="820" y="222" width="128" height="56" rx="6" class="nd-cf"/>
+  <text x="884" y="247" text-anchor="middle" class="nt">tlrhd.com</text>
+  <text x="884" y="261" text-anchor="middle" class="ns">live site</text>
+  <text x="884" y="274" text-anchor="middle" class="nsm">updated</text>
+
+  <!-- timing note -->
+  <text x="498" y="308" text-anchor="middle" class="nsm">ghost-sync[bot] commits changes · triggers redeploy automatically</text>
+</svg>
+</div>
+
+
+<!-- 02 — SERVICES -->
+<div class="sec-head">
+  <span class="sec-num">02</span>
+  <h2>Services</h2>
+</div>
+
+<div class="cards">
+
+  <div class="card c-ghost">
+    <div class="card-label">Content · Self-hosted Docker</div>
+    <div class="card-name">Ghost CMS</div>
+    <a href="https://cms.tlrhd.com/ghost" target="_blank" rel="noopener">cms.tlrhd.com/ghost</a>
+    <p class="card-desc">
+      The single source of truth for all published content.
+      Deep-dive studies use tag <code>deep-dive</code>, Sunday messages use tag <code>sunday-message</code>.
+      New posts flow to the site automatically through the sync.
+    </p>
+    <div class="card-tags">
+      <span class="tag">Docker</span>
+      <span class="tag">admin login required</span>
+      <span class="tag">cms.tlrhd.com</span>
+    </div>
+  </div>
+
+  <div class="card c-cf">
+    <div class="card-label">Hosting · Cloudflare Pages</div>
+    <div class="card-name">CF Pages — Live Site</div>
+    <a href="https://tlrhd.com" target="_blank" rel="noopener">tlrhd.com</a>
+    <p class="card-desc">
+      Hosts the static site and auto-deploys whenever the <code>main</code> branch receives a new commit —
+      including the JSON files written by GitHub Actions every 2 hours.
+      No manual deploy needed.
+    </p>
+    <div class="card-tags">
+      <span class="tag">auto-deploy on push</span>
+      <span class="tag">static</span>
+      <span class="tag">free tier</span>
+    </div>
+  </div>
+
+  <div class="card c-cf">
+    <div class="card-label">Proxy · Cloudflare Workers (×2)</div>
+    <div class="card-name">ghost-proxy &amp; yt-proxy</div>
+    <a href="https://ghost-proxy.reinar-6fd.workers.dev" target="_blank" rel="noopener">ghost-proxy.reinar-6fd.workers.dev</a>
+    <p class="card-desc">
+      Two Workers act as API bridges.
+      <strong style="color:var(--text)">ghost-proxy</strong> lets browser JS reach Ghost without CORS errors and bypasses the WAF firewall via a shared secret.
+      <strong style="color:var(--text)">yt-proxy</strong> fetches YouTube channel data.
+    </p>
+    <div class="card-tags">
+      <span class="tag">CORS</span>
+      <span class="tag">WAF bypass</span>
+      <span class="tag">ghost-proxy · yt-proxy</span>
+    </div>
+  </div>
+
+  <div class="card c-github">
+    <div class="card-label">Source code · GitHub</div>
+    <div class="card-name">GitHub Repo</div>
+    <a href="https://github.com/reinarrr/TLR-web-cfpages" target="_blank" rel="noopener">github.com/reinarrr/TLR-web-cfpages</a>
+    <p class="card-desc">
+      All HTML, CSS, and JS live here. Also stores the JSON fallback files
+      (<code>messages.json</code>, <code>res/deep/*/deepdives.json</code>)
+      that are auto-committed by GitHub Actions every 2 hours so the site works even if Ghost goes down.
+    </p>
+    <div class="card-tags">
+      <span class="tag">reinarrr/TLR-web-cfpages</span>
+      <span class="tag">main branch</span>
+    </div>
+  </div>
+
+  <div class="card c-github">
+    <div class="card-label">Automation · GitHub Actions</div>
+    <div class="card-name">Ghost Sync Workflow</div>
+    <a href="https://github.com/reinarrr/TLR-web-cfpages/actions" target="_blank" rel="noopener">github.com/.../actions</a>
+    <p class="card-desc">
+      Runs <code>scripts/sync-ghost.js</code> every 2 hours.
+      Fetches fresh posts from Ghost CMS, writes updated JSON fallback files,
+      and commits them — which triggers a CF Pages redeploy automatically.
+      Can also be triggered manually.
+    </p>
+    <div class="card-tags">
+      <span class="tag">every 2 hours</span>
+      <span class="tag">sync-ghost.yml</span>
+      <span class="tag">ghost-sync[bot]</span>
+    </div>
+  </div>
+
+  <div class="card c-yt">
+    <div class="card-label">Video · External</div>
+    <div class="card-name">YouTube</div>
+    <a href="#" style="pointer-events:none;opacity:0.4">youtube.com channel</a>
+    <p class="card-desc">
+      Primary video library for all messages and replays.
+      The site fetches channel data via the <code>yt-proxy</code> Worker.
+      Ghost CMS enriches recent videos with cleaner titles and dates — YouTube is the source of record for the full history.
+    </p>
+    <div class="card-tags">
+      <span class="tag">video hosting</span>
+      <span class="tag">full library</span>
+      <span class="tag">enriched by Ghost</span>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- 03 — DATA FLOW -->
+<div class="sec-head">
+  <span class="sec-num">03</span>
+  <h2>Data Flow</h2>
+</div>
+
+<div class="flows">
+
+  <div class="flow-box">
+    <h3><span class="fdot fdot-live"></span>Live Path — browser</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-body">
+          <div class="step-title">Browser opens a page</div>
+          <div class="step-sub">JS runs in ghost.js / main.js</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-body">
+          <div class="step-title">Calls ghost-proxy Worker</div>
+          <div class="step-sub">ghost-proxy.reinar-6fd.workers.dev</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-body">
+          <div class="step-title">Worker fetches Ghost CMS</div>
+          <div class="step-sub">Adds CORS headers · passes WAF secret</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <div class="step-body">
+          <div class="step-title">Content rendered in browser</div>
+          <div class="step-sub">Always fresh from Ghost</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n" style="font-size:0.75rem">↩</div>
+        <div class="step-body">
+          <div class="step-title">Fallback: use local JSON</div>
+          <div class="step-sub">messages.json / deepdives.json if Ghost or Worker is unreachable</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-box">
+    <h3><span class="fdot fdot-sync"></span>Sync Path — every 2 hours</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div class="step-body">
+          <div class="step-title">GitHub Actions triggers</div>
+          <div class="step-sub">Cron: 0 */2 * * * · or manual dispatch</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div class="step-body">
+          <div class="step-title">sync-ghost.js runs</div>
+          <div class="step-sub">Node 20 · server-side, no CORS restrictions</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div class="step-body">
+          <div class="step-title">JSON fallbacks written</div>
+          <div class="step-sub">messages.json · res/deep/{year}/deepdives.json</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <div class="step-body">
+          <div class="step-title">Committed to repo</div>
+          <div class="step-sub">ghost-sync[bot] pushes to main — only if files changed</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">5</div>
+        <div class="step-body">
+          <div class="step-title">CF Pages auto-redeploys</div>
+          <div class="step-sub">New commit triggers build · tlrhd.com updated within ~30s</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- 04 — QUICK ACCESS -->
+<div class="sec-head">
+  <span class="sec-num">04</span>
+  <h2>Quick Access</h2>
+</div>
+
+<div class="urls">
+  <div class="url-row">
+    <span class="url-name">Live site</span>
+    <a href="https://tlrhd.com" class="url-href" target="_blank" rel="noopener">https://tlrhd.com</a>
+    <span class="url-badge ub-cf">Cloudflare</span>
+  </div>
+  <div class="url-row">
+    <span class="url-name">Ghost Admin</span>
+    <a href="https://cms.tlrhd.com/ghost" class="url-href" target="_blank" rel="noopener">https://cms.tlrhd.com/ghost</a>
+    <span class="url-badge ub-ghost">Ghost</span>
+  </div>
+  <div class="url-row">
+    <span class="url-name">Ghost Content API</span>
+    <a href="https://cms.tlrhd.com/ghost/api/content" class="url-href" target="_blank" rel="noopener">https://cms.tlrhd.com/ghost/api/content</a>
+    <span class="url-badge ub-ghost">Ghost</span>
+  </div>
+  <div class="url-row">
+    <span class="url-name">ghost-proxy Worker</span>
+    <a href="https://ghost-proxy.reinar-6fd.workers.dev" class="url-href" target="_blank" rel="noopener">https://ghost-proxy.reinar-6fd.workers.dev</a>
+    <span class="url-badge ub-cf">Cloudflare</span>
+  </div>
+  <div class="url-row">
+    <span class="url-name">yt-proxy Worker</span>
+    <a href="https://youtube-proxy.reinar-6fd.workers.dev" class="url-href" target="_blank" rel="noopener">https://youtube-proxy.reinar-6fd.workers.dev</a>
+    <span class="url-badge ub-cf">Cloudflare</span>
+  </div>
+  <div class="url-row">
+    <span class="url-name">GitHub Repo</span>
+    <a href="https://github.com/reinarrr/TLR-web-cfpages" class="url-href" target="_blank" rel="noopener">https://github.com/reinarrr/TLR-web-cfpages</a>
+    <span class="url-badge ub-github">GitHub</span>
+  </div>
+  <div class="url-row">
+    <span class="url-name">GitHub Actions</span>
+    <a href="https://github.com/reinarrr/TLR-web-cfpages/actions" class="url-href" target="_blank" rel="noopener">https://github.com/reinarrr/TLR-web-cfpages/actions</a>
+    <span class="url-badge ub-github">GitHub</span>
+  </div>
+</div>
+
+</body>
+</html>
