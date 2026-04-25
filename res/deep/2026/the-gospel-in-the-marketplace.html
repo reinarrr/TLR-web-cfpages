@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Gospel In The Marketplace | Deep Dive | The Living Room</title>
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="/css/style.css">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+        fontFamily: { display: ['Playfair Display','serif'], body: ['Outfit','sans-serif'] }
+      }
+    }
+  }
+</script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #faf9f6;
+  --charcoal: #1a1a1a;
+  --gold: #c5a059;
+  --teal: #2d5a5a;
+  --teal-mid: #3a7070;
+  --amber: #e8a030;
+  --h-empty:     #1c1812;
+  --h-ground:    #e8a030;
+  --h-territory: #2d5a5a;
+  --h-available: #1a1a1a;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--cream); color: var(--charcoal); font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+
+/* ── HERO ── */
+.hero { max-width: 820px; margin: 0 auto; padding: 5rem 2rem 3rem; text-align: center; }
+.hero-eyebrow { font-size: 0.78rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 600; display: block; margin-bottom: 1.5rem; }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 700; line-height: 1.05; color: var(--charcoal); margin-bottom: 1.25rem; }
+.hero h1 em { color: var(--teal); font-style: italic; }
+.hero-sub { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.25rem; color: rgba(26,26,26,0.45); font-weight: 300; margin-bottom: 0.75rem; }
+.hero-ref { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(26,26,26,0.28); display: block; margin-bottom: 2.5rem; }
+.hero-rule { width: 48px; height: 2px; background: var(--gold); margin: 0 auto; }
+
+/* ── VIDEO ── */
+.video-wrap { max-width: 860px; margin: 3rem auto; padding: 0 2rem; }
+.video-container { position: relative; padding-bottom: 56.25%; border-radius: 1.5rem; overflow: hidden; background: #000; box-shadow: 0 20px 60px rgba(26,26,26,0.15); border: 1px solid rgba(26,26,26,0.08); }
+.video-container iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+.video-caption { text-align: center; font-size: 0.7rem; color: rgba(26,26,26,0.3); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 1rem; font-style: italic; }
+
+/* ── PASSAGE ── */
+.passage-wrap { text-align: center; padding: 0 2rem 1rem; }
+.passage-wrap a { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal-mid); text-decoration: none; border-bottom: 1px solid rgba(45,90,90,0.3); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+.passage-wrap a:hover { color: var(--gold); border-color: rgba(197,160,89,0.4); }
+
+/* ── DIVIDER ── */
+.section-divider { max-width: 860px; margin: 3rem auto; padding: 0 2rem; display: flex; align-items: center; gap: 1.5rem; }
+.section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: rgba(26,26,26,0.1); }
+.section-divider span { font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(26,26,26,0.3); white-space: nowrap; }
+
+/* ══════════════════════════════════
+   HEX MAP
+══════════════════════════════════ */
+.hex-section { padding: 0 1rem 2rem; display: flex; flex-direction: column; align-items: center; }
+.hex-intro { text-align: center; margin-bottom: 2rem; max-width: 500px; }
+.hex-intro h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3.5vw, 2.2rem); color: var(--charcoal); margin-bottom: 0.5rem; }
+.hex-intro p { font-size: 1.05rem; color: rgba(26,26,26,0.42); font-weight: 300; line-height: 1.6; }
+
+.progress-row { display: flex; align-items: center; justify-content: center; gap: 0.65rem; margin-bottom: 2rem; }
+.prog-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid rgba(26,26,26,0.18); background: transparent; transition: all 0.4s ease; }
+.prog-dot.claimed { background: var(--teal); border-color: var(--teal); box-shadow: 0 0 6px rgba(45,90,90,0.5); }
+.prog-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(26,26,26,0.3); }
+
+#hexMapWrap { width: 100%; display: flex; justify-content: center; }
+#hexMap { display: block; max-width: 100%; height: auto; overflow: visible; }
+
+/* Hex states via CSS */
+.hex-cell .h-poly { transition: fill 0.3s ease, stroke 0.3s ease; }
+
+.hex-cell.state-empty    .h-poly { fill: var(--h-empty);     stroke: rgba(197,160,89,0.05); stroke-width: 1; }
+.hex-cell.state-ground   .h-poly { fill: var(--h-ground);    stroke: rgba(232,160,48,0.4);  stroke-width: 1.5; }
+.hex-cell.state-available .h-poly { fill: var(--h-available); stroke: rgba(197,160,89,0.55); stroke-width: 1.5; cursor: pointer; }
+.hex-cell.state-claimed  .h-poly { fill: var(--h-territory); stroke: rgba(45,90,90,0.8);    stroke-width: 2; cursor: pointer; }
+
+/* Pulse animation on available territory tiles only */
+.hex-cell.state-available.is-territory .h-poly {
+  animation: hexPulse 1.8s ease-in-out infinite;
+}
+.hex-cell.state-available.is-territory:hover .h-poly {
+  animation: none;
+  fill: #2a2219;
+  stroke: var(--gold);
+  stroke-width: 2;
+}
+.hex-cell.state-claimed.is-territory:hover .h-poly {
+  fill: #3a6f6f;
+}
+
+@keyframes hexPulse {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0.55; }
+}
+
+/* Ground flip keyframe */
+@keyframes groundFlip {
+  0%   { fill: var(--h-empty); }
+  50%  { fill: #f5c060; }
+  100% { fill: var(--h-ground); }
+}
+.hex-cell.state-ground .h-poly { animation: groundFlip 0.45s ease forwards; }
+
+/* Claimed flash */
+@keyframes claimFlash {
+  0%   { fill: #80c0c0; }
+  100% { fill: var(--h-territory); }
+}
+.hex-cell.state-claimed .h-poly { animation: claimFlash 0.5s ease forwards; }
+
+/* Text in territory hexes */
+.hex-label-group { pointer-events: none; }
+.hex-t-label  { font-family: 'Outfit', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; fill: rgba(197,160,89,0.6); }
+.hex-t-name   { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700; font-style: italic; fill: rgba(250,249,246,0.92); }
+.hex-t-tap    { font-family: 'Outfit', sans-serif; font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; fill: rgba(197,160,89,0.5); }
+.hex-cell.state-empty .hex-label-group,
+.hex-cell.state-ground .hex-label-group { display: none; }
+
+/* ══════════════════════════════════
+   CONTENT PANEL
+══════════════════════════════════ */
+.content-area { max-width: 960px; margin: 1rem auto 0; padding: 0 2rem 4rem; }
+.content-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; background: var(--charcoal); border-radius: 2rem; padding: 3rem; min-height: 260px; transition: opacity 0.22s ease; }
+@media (max-width: 680px) { .content-panel { grid-template-columns: 1fr; padding: 2rem 1.5rem; } }
+.content-panel.fading { opacity: 0; }
+
+.cp-empty { grid-column: 1/-1; display: flex; align-items: center; justify-content: center; text-align: center; }
+.cp-empty p { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: rgba(250,249,246,0.2); line-height: 1.7; }
+
+.cp-left { display: flex; flex-direction: column; justify-content: center; border-right: 1px solid rgba(250,249,246,0.07); padding-right: 2rem; }
+@media (max-width: 680px) { .cp-left { border-right: none; border-bottom: 1px solid rgba(250,249,246,0.07); padding-right: 0; padding-bottom: 1.5rem; } }
+
+.cp-territory { font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1rem; font-weight: 600; }
+.cp-declaration { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 2.5vw, 1.65rem); color: var(--cream); line-height: 1.4; font-weight: 700; margin-bottom: 1.5rem; }
+.cp-scripture { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(197,160,89,0.4); font-weight: 600; }
+
+.cp-right { display: flex; flex-direction: column; justify-content: center; padding-left: 0.5rem; }
+@media (max-width: 680px) { .cp-right { padding-left: 0; } }
+.cp-body { font-size: 1.05rem; color: rgba(250,249,246,0.6); line-height: 1.85; font-weight: 300; margin-bottom: 1.5rem; }
+.cp-body strong { color: var(--cream); font-weight: 600; }
+.cp-question { font-family: 'Playfair Display', serif; font-size: 1.0rem; font-style: italic; color: rgba(197,160,89,0.6); line-height: 1.65; border-left: 2px solid rgba(197,160,89,0.25); padding-left: 1rem; }
+
+/* Complete banner */
+.all-open-banner { display: none; max-width: 960px; margin: 0 auto 1rem; padding: 0 2rem; text-align: center; }
+.all-open-banner.visible { display: block; animation: fadeUp 0.6s ease; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+.aob-inner { background: rgba(197,160,89,0.08); border: 1px solid rgba(197,160,89,0.2); border-radius: 1.5rem; padding: 2.5rem 2rem; }
+.aob-inner p { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.7rem); color: var(--charcoal); line-height: 1.5; }
+.aob-inner em { color: var(--teal); font-style: italic; }
+.aob-inner span { display: block; font-size: 0.95rem; color: rgba(26,26,26,0.38); font-style: italic; margin-top: 0.5rem; font-family: 'Playfair Display', serif; }
+
+/* ── DISCUSSION ── */
+.discussion-wrap { max-width: 860px; margin: 0 auto; padding: 0 2rem 6rem; }
+.discussion { background: var(--charcoal); border-radius: 2.5rem; padding: 4rem 3rem; }
+@media (max-width: 640px) { .discussion { padding: 3rem 1.5rem; } }
+.disc-header { text-align: center; margin-bottom: 3rem; }
+.disc-eyebrow { font-size: 0.75rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(45,160,120,0.45); display: block; margin-bottom: 0.75rem; font-weight: 600; }
+.disc-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--cream); }
+.disc-rule { width: 36px; height: 2px; background: var(--teal-mid); margin: 1rem auto 0; }
+.dq { padding: 1.75rem 0; border-top: 1px solid rgba(250,249,246,0.06); }
+.dq:first-of-type { border-top: none; padding-top: 0; }
+.dq-n { font-family: 'Playfair Display', serif; font-size: 2.75rem; color: rgba(45,90,90,0.3); display: block; margin-bottom: 0.4rem; font-style: italic; line-height: 1; transition: color 0.3s; }
+.dq:hover .dq-n { color: var(--teal-mid); }
+.dq p { font-size: 1.05rem; color: rgba(250,249,246,0.55); line-height: 1.8; font-weight: 300; }
+.dq p strong { color: var(--cream); font-weight: 600; display: block; margin-bottom: 0.2rem; text-decoration: underline; text-decoration-color: rgba(197,160,89,0.35); text-underline-offset: 4px; }
+.back-wrap { text-align: center; padding-top: 2.5rem; }
+.back-link { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal-mid); border: 1px solid rgba(45,90,90,0.35); padding: 0.8rem 2rem; border-radius: 100px; text-decoration: none; transition: all 0.3s; display: inline-block; font-weight: 600; }
+.back-link:hover { background: rgba(45,90,90,0.15); border-color: var(--teal-mid); color: var(--cream); }
+
+/* ── SEND ── */
+.the-send { max-width: 600px; margin: 0 auto; padding: 4rem 2rem 6rem; text-align: center; border-top: 1px solid rgba(26,26,26,0.1); }
+.send-label { font-size: 0.75rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(197,160,89,0.5); display: block; margin-bottom: 2rem; font-weight: 600; }
+.the-send p { font-family: 'Playfair Display', serif; font-size: clamp(1.05rem, 2.2vw, 1.3rem); font-style: italic; color: rgba(26,26,26,0.45); line-height: 1.85; margin-bottom: 1.25rem; }
+</style>
+</head>
+
+<body data-current="">
+<div id="header-placeholder"></div>
+
+<header class="hero">
+  <span class="hero-eyebrow">Acts Journey &bull; Deep Dive</span>
+  <h1>The Gospel In The<br><em>Marketplace</em>.</h1>
+  <p class="hero-sub">What happens when the Resurrection gets out of church and into daily life?</p>
+  <span class="hero-ref">Acts 17:16–34</span>
+  <div class="hero-rule"></div>
+</header>
+
+<div class="video-wrap">
+  <div class="video-container">
+    <iframe src="https://youtube.com/live/vuKqFsz92cM" title="The Gospel In The Marketplace" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <p class="video-caption">Watch the foundation message &bull; Acts 17:16–34</p>
+</div>
+
+<div class="passage-wrap">
+  <a href="https://www.biblegateway.com/passage/?search=Acts+17%3A16-34&version=NLT" target="_blank">Read Acts 17:16–34 on Bible Gateway →</a>
+</div>
+
+<div class="section-divider"><span>Explore the territory</span></div>
+
+<div class="hex-section">
+  <div class="hex-intro">
+    <h2>The Resurrection occupies ground.</h2>
+    <p>One territory is ready. Tap it and see what spreads.</p>
+  </div>
+  <div class="progress-row">
+    <span class="prog-label">Territories claimed</span>
+    <div id="progDots" style="display:flex;gap:5px;"></div>
+    <span class="prog-label" id="progCount">0 of 7</span>
+  </div>
+  <div id="hexMapWrap"></div>
+</div>
+
+<div class="all-open-banner" id="allOpenBanner">
+  <div class="aob-inner">
+    <p>This is what the Resurrection looks like when it <em>gets out of church</em> and into your actual life.</p>
+    <span>Every territory. Every day. Every room.</span>
+  </div>
+</div>
+
+<div class="content-area">
+  <div class="content-panel" id="contentPanel">
+    <div class="cp-empty">
+      <p>A territory is pulsing above.<br>Tap it to begin.</p>
+    </div>
+  </div>
+</div>
+
+<div class="discussion-wrap">
+  <div class="discussion">
+    <div class="disc-header">
+      <span class="disc-eyebrow">The Living Room Circle</span>
+      <h2>Discussion & Reflection</h2>
+      <div class="disc-rule"></div>
+    </div>
+    <div class="dq">
+      <span class="dq-n">01</span>
+      <p>Paul felt something visceral walking into Athens — not polite theological disapproval. When did you last feel genuinely moved by the world around you, the way God is moved? What happened when you did?</p>
+    </div>
+    <div class="dq">
+      <span class="dq-n">02</span>
+      <p>The two schools in the agora said: the universe doesn't care, so live well — or — there's something bigger, but it won't disturb you. Which of those answers do you find yourself defaulting to, even as a believer?</p>
+    </div>
+    <div class="dq">
+      <span class="dq-n">03</span>
+      <p>Look back at the territories. Which one is hardest to believe the Resurrection actually changes? Name it honestly. Why do you think that is?</p>
+    </div>
+    <div class="dq">
+      <span class="dq-n">04</span>
+      <p>Paul carried news, not arguments. Think of a real conversation you've had about faith recently — which one were you doing?</p>
+    </div>
+    <div class="dq">
+      <span class="dq-n">05</span>
+      <p><strong>Family Prompt:</strong> The Resurrection is not Sunday news — it's everyday reality. Where in your family's week this week could you carry the news instead of an argument?</p>
+    </div>
+    <div class="back-wrap">
+      <a href="/deepdives.html" class="back-link">← Back to Library</a>
+    </div>
+  </div>
+</div>
+
+<div class="the-send">
+  <span class="send-label">The Send</span>
+  <p>The world's marketplace of ideas has always had answers. The question is whether we show up with another opinion — or with the Good News.</p>
+  <p>Christ's Resurrection doesn't need defending. It needs to be shared.</p>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="/js/main.js" defer></script>
+
+<script>
+// ═══════════════════════════════════════════════
+// TERRITORY DATA
+// ═══════════════════════════════════════════════
+const TERRITORIES = {
+  0: { name:"Work",          label:"Monday",        declaration:"Your weekday is not secular time.",                                                              body:"You are not just earning. You are <strong>occupying</strong> for God's Kingdom. Every hour of honest work in contested space is a Romans 12:1 act — your body, offered. The risen Christ doesn't clock out at 5pm. And neither do you.",                                                                                scripture:"Romans 12:1",         question:"What would change about how you show up tomorrow if you believed your workplace was ground the Resurrection has a claim on?" },
+  1: { name:"Relationships",  label:"People",        declaration:"You cannot give people what they ultimately need — but you bring the Good Newws that can meet all need.",               body:"Every relationship is a potential encounter with the risen Christ. You are not the answer. You are the one <strong>carrying it</strong>. That takes the pressure off — and puts the invitation on.",                                                                                                    scripture:"2 Corinthians 5:20",  question:"Is there someone in your life right now who needs the Good News, not your arguments?" },
+  2: { name:"Finances",       label:"Money",         declaration:"Generosity only makes sense if death is not the end.",                                          body:"The Resurrection makes <strong>radical giving rational</strong>. If Christ is raised, nothing you hold loosely is actually lost. Greed is just death-fear with better branding. Generosity is Resurrection logic in action.",                                                                    scripture:"2 Corinthians 9:6",   question:"Where is your relationship with money being shaped more by death-fear than Resurrection confidence?" },
+  3: { name:"Family",         label:"Home",          declaration:"The dinner table is contested ground.",                                                         body:"Ordinary family life — meals, conflict, repair, showing up — is <strong>Kingdom work</strong> when the Resurrection is the premise. Your living room is not a retreat from the world. It's a strategic position inside it.",                                                                               scripture:"Colossians 3:17",     question:"What would it look like for your home to be a held territory this week — not a refuge from the contest, but a base inside it?" },
+  4: { name:"Suffering",      label:"Pain",          declaration:"The Resurrection doesn't explain your pain. It outlasts it.",                                   body:"The empty tomb is not a metaphor for feeling better. It is evidence that <strong>the worst thing is never the last thing</strong>. Paul didn't say suffering is good. He said it produces something — because the story doesn't end where it looks like it ends.",                       scripture:"Romans 8:18",         question:"Where in your life right now does it feel like the story has ended? What does the Resurrection say to that place?" },
+  5: { name:"Identity",       label:"Who You Are",   declaration:"You are not who your history says you are.",                                                    body:"The Resurrection is God's <strong>definitive statement</strong> about what a human life is worth — and what it can become. Whatever has been spoken over you, whatever you've done or had done to you — the risen Christ walked out of a tomb, and that changes the category you belong to.",   scripture:"2 Corinthians 5:17",  question:"What is the old story about yourself that the Resurrection is asking you to stop living inside of?" },
+  6: { name:"Death",          label:"The Last Word", declaration:"This is what the Resurrection was always actually about.",                                     body:"Not comfort — <strong>conquest</strong>. Death has been entered, inhabited, and exited. The last enemy has already been defeated. Everything else on this map flows from here. Remove this one — and nothing else holds.",                                                             scripture:"1 Corinthians 15:54", question:"How differently would you live this week if you genuinely believed death had already lost?" },
+};
+
+// ═══════════════════════════════════════════════
+// EXPLICIT REVEAL MAP
+// When tid X is claimed, these ground cells flood (listed as [q,r] pairs)
+// then these territory tids become available
+// Ground cells are hand-picked to be only the immediate neighbours
+// ═══════════════════════════════════════════════
+const REVEAL = {
+  3: { // Family — start tile — reveals Work, Finances, Relationships
+    flood: [ [3,3],[2,3],[4,3],[2,4],[4,4],[1,3],[5,3],[1,4],[5,4] ],
+    unlocks: [0, 1, 2]
+  },
+  0: { // Work — reveals Suffering
+    flood: [ [1,3],[0,3],[1,5],[0,5],[0,4] ],
+    unlocks: [4]
+  },
+  1: { // Relationships [3,0] — reveals Identity [3,1] — bridge: cells between them
+    flood: [ [2,0],[4,0],[2,1],[4,1],[4,2],[3,2],[2,2] ],
+    unlocks: [5]
+  },
+  2: { // Finances [5,2] — reveals Suffering [1,5] — bridge down the right then across
+    flood: [ [5,3],[6,3],[6,4],[5,4],[4,4],[3,4],[2,4],[1,4],[0,4],[0,5] ],
+    unlocks: [4]
+  },
+  4: { // Suffering [1,5] — reveals Death [5,5] — bridge across row 5
+    flood: [ [2,5],[3,5],[4,5],[4,6],[5,6],[6,6],[6,5] ],
+    unlocks: [6]
+  },
+  5: { // Identity [3,1] — reveals Death [5,5] — bridge diagonally down-right
+    flood: [ [4,2],[5,3],[6,3],[6,4],[6,5],[5,4],[4,4],[4,5],[5,5] ],
+    unlocks: [6]
+  },
+  6: { // Death — no more unlocks, completes map
+    flood: [ [3,7],[4,7],[3,8],[4,8] ],
+    unlocks: []
+  },
+};
+
+// ═══════════════════════════════════════════════
+// HEX GEOMETRY — pointy-top
+// ═══════════════════════════════════════════════
+const R   = 44;
+const W   = R * Math.sqrt(3);
+const DX  = W;
+const DY  = R * 1.5;
+const OX  = W / 2;
+const PAD = 16;
+
+// All cells in the grid
+// type: 'territory' | 'ground'
+// tid: territory index (territory cells only)
+const GRID_CELLS = [
+  // Row 0
+  { q:1, r:0, type:'ground' },
+  { q:2, r:0, type:'ground' },
+  { q:3, r:0, type:'territory', tid:1 }, // Relationships
+  { q:4, r:0, type:'ground' },
+  { q:5, r:0, type:'ground' },
+  // Row 1
+  { q:0, r:1, type:'ground' },
+  { q:1, r:1, type:'ground' },
+  { q:2, r:1, type:'ground' },
+  { q:3, r:1, type:'territory', tid:5 }, // Identity (hidden initially)
+  { q:4, r:1, type:'ground' },
+  { q:5, r:1, type:'ground' },
+  { q:6, r:1, type:'ground' },
+  // Row 2
+  { q:0, r:2, type:'ground' },
+  { q:1, r:2, type:'territory', tid:0 }, // Work (hidden initially)
+  { q:2, r:2, type:'ground' },
+  { q:3, r:2, type:'ground' },
+  { q:4, r:2, type:'ground' },
+  { q:5, r:2, type:'territory', tid:2 }, // Finances (hidden initially)
+  { q:6, r:2, type:'ground' },
+  // Row 3
+  { q:0, r:3, type:'ground' },
+  { q:1, r:3, type:'ground' },
+  { q:2, r:3, type:'ground' },
+  { q:3, r:3, type:'territory', tid:3 }, // Family — START
+  { q:4, r:3, type:'ground' },
+  { q:5, r:3, type:'ground' },
+  { q:6, r:3, type:'ground' },
+  // Row 4
+  { q:0, r:4, type:'ground' },
+  { q:1, r:4, type:'ground' },
+  { q:2, r:4, type:'ground' },
+  { q:3, r:4, type:'ground' },
+  { q:4, r:4, type:'ground' },
+  { q:5, r:4, type:'ground' },
+  { q:6, r:4, type:'ground' },
+  // Row 5
+  { q:0, r:5, type:'ground' },
+  { q:1, r:5, type:'territory', tid:4 }, // Suffering (hidden initially)
+  { q:2, r:5, type:'ground' },
+  { q:3, r:5, type:'ground' },
+  { q:4, r:5, type:'ground' },
+  { q:5, r:5, type:'territory', tid:6 }, // Death (hidden initially — wait for Identity/Suffering)
+  { q:6, r:5, type:'ground' },
+  // Row 6
+  { q:1, r:6, type:'ground' },
+  { q:2, r:6, type:'ground' },
+  { q:3, r:6, type:'ground' },
+  { q:4, r:6, type:'ground' },
+  { q:5, r:6, type:'ground' },
+  { q:6, r:6, type:'ground' },
+];
+
+// State for each cell
+const cellStates = {};      // key -> 'empty'|'ground'|'available'|'claimed'
+const tidToKey   = {};      // tid  -> cellKey
+let claimedCount = 0;
+
+function ck(q, r) { return q + ',' + r; }
+
+function hexCentre(q, r) {
+  return {
+    x: q * DX + (r % 2 === 1 ? OX : 0),
+    y: r * DY
+  };
+}
+
+function hexPoints(cx, cy) {
+  const pts = [];
+  for (let i = 0; i < 6; i++) {
+    const a = Math.PI / 3 * i - Math.PI / 6;
+    pts.push(`${(cx + R * Math.cos(a)).toFixed(2)},${(cy + R * Math.sin(a)).toFixed(2)}`);
+  }
+  return pts.join(' ');
+}
+
+// ═══════════════════════════════════════════════
+// BUILD
+// ═══════════════════════════════════════════════
+function buildMap() {
+  // Compute SVG extents
+  let minX=Infinity, maxX=-Infinity, minY=Infinity, maxY=-Infinity;
+  GRID_CELLS.forEach(c => {
+    const {x,y} = hexCentre(c.q, c.r);
+    minX = Math.min(minX, x-R); maxX = Math.max(maxX, x+R);
+    minY = Math.min(minY, y-R); maxY = Math.max(maxY, y+R);
+  });
+  const svgW = maxX - minX + PAD*2;
+  const svgH = maxY - minY + PAD*2;
+  const ox = -minX + PAD;
+  const oy = -minY + PAD;
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('id','hexMap');
+  svg.setAttribute('viewBox',`0 0 ${svgW} ${svgH}`);
+  svg.setAttribute('width', svgW);
+  svg.setAttribute('height', svgH);
+
+  // Initialise states
+  GRID_CELLS.forEach(c => {
+    const k = ck(c.q, c.r);
+    cellStates[k] = 'empty';
+    if (c.type === 'territory') tidToKey[c.tid] = k;
+  });
+
+  // Build progress dots
+  const dotWrap = document.getElementById('progDots');
+  dotWrap.style.display = 'flex'; dotWrap.style.gap = '5px';
+  for (let i = 0; i < 7; i++) {
+    const d = document.createElement('div');
+    d.className = 'prog-dot'; d.id = 'pdot-' + i;
+    dotWrap.appendChild(d);
+  }
+
+  // Render all cells
+  GRID_CELLS.forEach(c => {
+    const k = ck(c.q, c.r);
+    const {x,y} = hexCentre(c.q, c.r);
+    const cx = x + ox, cy = y + oy;
+
+    const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.setAttribute('id','cell-'+k);
+    g.setAttribute('class','hex-cell state-empty' + (c.type==='territory' ? ' is-territory' : ''));
+    if (c.type==='territory') g.setAttribute('data-tid', c.tid);
+
+    const poly = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+    poly.setAttribute('class','h-poly');
+    poly.setAttribute('points', hexPoints(cx, cy));
+    g.appendChild(poly);
+
+    if (c.type === 'territory') {
+      const t = TERRITORIES[c.tid];
+      const lg = document.createElementNS('http://www.w3.org/2000/svg','g');
+      lg.setAttribute('class','hex-label-group');
+
+      const lbl = makeSVGText(cx, cy-15, 'hex-t-label', t.label);
+      const nm  = makeSVGText(cx, cy+2,  'hex-t-name',  t.name);
+      const tap = makeSVGText(cx, cy+18, 'hex-t-tap',   '');
+      tap.setAttribute('id','tap-'+c.tid);
+
+      lg.appendChild(lbl); lg.appendChild(nm); lg.appendChild(tap);
+      g.appendChild(lg);
+    }
+
+    svg.appendChild(g);
+  });
+
+  document.getElementById('hexMapWrap').appendChild(svg);
+
+  // Set start tile
+  activateTerritoryTile(3);
+}
+
+function makeSVGText(x, y, cls, text) {
+  const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+  t.setAttribute('class', cls);
+  t.setAttribute('x', x); t.setAttribute('y', y);
+  t.setAttribute('text-anchor','middle');
+  t.setAttribute('dominant-baseline','middle');
+  t.textContent = text;
+  return t;
+}
+
+// ═══════════════════════════════════════════════
+// ACTIVATE — make a territory tile available/pulsing
+// ═══════════════════════════════════════════════
+function activateTerritoryTile(tid) {
+  const k = tidToKey[tid];
+  if (!k) return;
+  if (cellStates[k] === 'claimed') return; // already done
+  cellStates[k] = 'available';
+  const g = document.getElementById('cell-' + k);
+  if (!g) return;
+  g.setAttribute('class','hex-cell state-available is-territory');
+  const tap = document.getElementById('tap-' + tid);
+  if (tap) tap.textContent = 'tap';
+  g.style.cursor = 'pointer';
+  // Add click — both available and already-claimed tiles should respond
+  g.addEventListener('click', () => onTerritoryClick(tid));
+}
+
+// ═══════════════════════════════════════════════
+// CLICK HANDLER
+// ═══════════════════════════════════════════════
+function onTerritoryClick(tid) {
+  const k = tidToKey[tid];
+  const state = cellStates[k];
+
+  // If already claimed — just show content again, no re-wave
+  if (state === 'claimed') {
+    showContent(tid);
+    return;
+  }
+
+  // First claim
+  cellStates[k] = 'claimed';
+  claimedCount++;
+
+  const g = document.getElementById('cell-' + k);
+  g.setAttribute('class','hex-cell state-claimed is-territory');
+  const tap = document.getElementById('tap-' + tid);
+  if (tap) tap.textContent = '';
+
+  // Update progress
+  const dot = document.getElementById('pdot-' + (claimedCount - 1));
+  if (dot) dot.classList.add('claimed');
+  document.getElementById('progCount').textContent = claimedCount + ' of 7';
+
+  // Show content
+  showContent(tid);
+
+  // Flood limited ground tiles then unlock next territories
+  const reveal = REVEAL[tid];
+  if (!reveal) return;
+
+  const floodCells = reveal.flood || [];
+  const toUnlock   = reveal.unlocks || [];
+
+  // Stagger ground flip
+  floodCells.forEach((pair, i) => {
+    const [fq, fr] = pair;
+    const fk = ck(fq, fr);
+    if (cellStates[fk] === 'empty') {
+      setTimeout(() => {
+        cellStates[fk] = 'ground';
+        const el = document.getElementById('cell-' + fk);
+        if (el) el.setAttribute('class','hex-cell state-ground');
+      }, i * 70 + 80);
+    }
+  });
+
+  // After flood settles, unlock next territories
+  const delay = floodCells.length * 70 + 300;
+  setTimeout(() => {
+    toUnlock.forEach(nextTid => {
+      const nk = tidToKey[nextTid];
+      if (nk && cellStates[nk] !== 'claimed' && cellStates[nk] !== 'available') {
+        activateTerritoryTile(nextTid);
+      }
+    });
+  }, delay);
+
+  // Complete check
+  if (claimedCount === 7) {
+    setTimeout(() => {
+      const banner = document.getElementById('allOpenBanner');
+      banner.classList.add('visible');
+      banner.scrollIntoView({ behavior:'smooth', block:'center' });
+    }, delay + 400);
+  }
+}
+
+// ═══════════════════════════════════════════════
+// CONTENT PANEL
+// ═══════════════════════════════════════════════
+function showContent(tid) {
+  const t = TERRITORIES[tid];
+  const panel = document.getElementById('contentPanel');
+
+  panel.classList.add('fading');
+  setTimeout(() => {
+    panel.innerHTML = `
+      <div class="cp-left">
+        <span class="cp-territory">${t.label}</span>
+        <h3 class="cp-declaration">${t.declaration}</h3>
+        <span class="cp-scripture">${t.scripture}</span>
+      </div>
+      <div class="cp-right">
+        <p class="cp-body">${t.body}</p>
+        <p class="cp-question">${t.question}</p>
+      </div>`;
+    panel.classList.remove('fading');
+    panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }, 200);
+}
+
+buildMap();
+</script>
+</body>
+</html>
