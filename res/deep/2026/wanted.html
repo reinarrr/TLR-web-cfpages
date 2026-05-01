@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanted — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --cream: #faf9f6;
+            --charcoal: #1a1a1a;
+            --gold: #c5a059;
+            --teal: #2d5a5a;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+
+        .hero-eyebrow {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 9vw, 7rem);
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            color: var(--charcoal);
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--teal);
+            font-weight: 400;
+        }
+
+        .hero-sub {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+            color: rgba(26,26,26,0.55);
+            max-width: 38rem;
+            margin: 2rem auto 0;
+            line-height: 1.5;
+        }
+
+        /* Article prose */
+        .article-prose p {
+            font-size: 1.2rem;
+            line-height: 1.75;
+            color: rgba(26,26,26,0.8);
+            margin-bottom: 1.5rem;
+        }
+
+        .article-prose p.lead {
+            font-size: 1.45rem;
+            line-height: 1.6;
+            color: var(--charcoal);
+            font-weight: 300;
+        }
+
+        .article-prose h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--charcoal);
+            margin: 4rem 0 1.5rem;
+        }
+
+        .article-prose h2 em {
+            font-style: italic;
+            color: var(--teal);
+            font-weight: 400;
+        }
+
+        .section-eyebrow {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Pull quote */
+        .pull-quote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            line-height: 1.4;
+            color: var(--charcoal);
+            border-left: 3px solid var(--gold);
+            padding: 0.5rem 0 0.5rem 2rem;
+            margin: 3rem 0;
+        }
+
+        /* Side-note callout (gold) */
+        .side-note {
+            background: rgba(197,160,89,0.06);
+            border-left: 4px solid var(--gold);
+            padding: 2rem 2.25rem;
+            margin: 3rem 0;
+            border-radius: 0 0.75rem 0.75rem 0;
+        }
+        .side-note-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        .side-note-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+        .side-note p {
+            font-size: 1.05rem !important;
+            line-height: 1.65 !important;
+            margin-bottom: 1rem !important;
+            color: rgba(26,26,26,0.78) !important;
+        }
+        .side-note p:last-child { margin-bottom: 0 !important; }
+
+        /* Greek term inline */
+        .greek-term {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--teal);
+            font-weight: 700;
+        }
+
+        /* Scripture block */
+        .scripture-block {
+            background: white;
+            border-top: 2px solid var(--teal);
+            border-bottom: 1px solid rgba(45,90,90,0.15);
+            padding: 2rem 2.5rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+        .scripture-block p {
+            font-family: 'Playfair Display', serif !important;
+            font-style: italic;
+            font-size: clamp(1.15rem, 2vw, 1.4rem) !important;
+            color: var(--charcoal) !important;
+            line-height: 1.55 !important;
+            margin: 0 0 1rem 0 !important;
+        }
+        .scripture-ref {
+            display: inline-block;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--teal);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+        /* The Line — dark featured callout */
+        .the-line {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: clamp(3rem, 6vw, 5rem) clamp(2rem, 5vw, 4rem);
+            border-radius: 1.5rem;
+            margin: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .the-line::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at top, rgba(197,160,89,0.18), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .the-line-label {
+            position: relative;
+            z-index: 1;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            display: block;
+        }
+        .the-line-text {
+            position: relative;
+            z-index: 1;
+            font-family: 'Playfair Display', serif !important;
+            font-style: italic;
+            font-size: clamp(1.5rem, 3vw, 2.1rem) !important;
+            line-height: 1.45 !important;
+            font-weight: 400;
+            color: var(--cream) !important;
+            max-width: 50rem;
+            margin: 0 auto !important;
+        }
+
+        /* ========== ALTAR INTERACTIVE ========== */
+        .altar-section {
+            background: linear-gradient(180deg, var(--cream) 0%, #f4f0e6 100%);
+            padding: 6rem 0;
+            margin: 6rem 0;
+            position: relative;
+        }
+
+        .altar-intro {
+            max-width: 42rem;
+            margin: 0 auto 4rem;
+            text-align: center;
+            padding: 0 1.5rem;
+        }
+        .altar-intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 4.5vw, 3rem);
+            line-height: 1.15;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+        }
+        .altar-intro h2 em {
+            color: var(--teal);
+            font-style: italic;
+        }
+        .altar-intro p {
+            font-size: 1.15rem;
+            line-height: 1.65;
+            color: rgba(26,26,26,0.65);
+        }
+
+        .altar-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 56rem;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .altar-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.25rem;
+            }
+        }
+
+        .altar-card {
+            background: white;
+            border: 1px solid rgba(26,26,26,0.08);
+            border-radius: 1rem;
+            padding: 2rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .altar-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .altar-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--gold);
+            box-shadow: 0 16px 40px -12px rgba(197,160,89,0.25);
+        }
+        .altar-card:hover::before { transform: scaleX(1); }
+        .altar-card.active {
+            border-color: var(--teal);
+            background: var(--teal);
+            color: white;
+        }
+        .altar-card.active::before {
+            background: var(--gold);
+            transform: scaleX(1);
+        }
+        .altar-card.active .altar-card-label {
+            color: var(--gold);
+        }
+        .altar-card.active .altar-card-name {
+            color: white;
+        }
+
+        .altar-card-label {
+            display: block;
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: rgba(26,26,26,0.4);
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s ease;
+        }
+        .altar-card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            line-height: 1.2;
+            transition: color 0.3s ease;
+        }
+
+        /* Altar response panel */
+        .altar-response {
+            max-width: 42rem;
+            margin: 3rem auto 0;
+            padding: 0 1.5rem;
+            min-height: 1px;
+            transition: all 0.5s ease;
+        }
+        .altar-response-card {
+            background: white;
+            border: 2px solid var(--teal);
+            border-radius: 1.25rem;
+            padding: clamp(2.5rem, 5vw, 3.5rem);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .altar-response-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .altar-response-eyebrow {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        .altar-response-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            font-weight: 700;
+            color: var(--charcoal);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        .altar-response-title em {
+            font-style: italic;
+            color: var(--teal);
+        }
+        .altar-response-card p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: rgba(26,26,26,0.8);
+            margin-bottom: 1.25rem;
+        }
+        .altar-response-card p:last-child { margin-bottom: 0; }
+        .altar-response-card .closing {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.25rem;
+            color: var(--teal);
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(45,90,90,0.15);
+        }
+
+        /* Discussion block (charcoal) */
+        .discussion-block {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: clamp(4rem, 8vw, 7rem) 1.5rem;
+            margin: 6rem 0 0;
+        }
+        .discussion-inner {
+            max-width: 48rem;
+            margin: 0 auto;
+        }
+        .discussion-eyebrow {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .discussion-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        .discussion-title em {
+            font-style: italic;
+            color: var(--gold);
+            font-weight: 400;
+        }
+        .discussion-rule {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto 4rem;
+        }
+        .dq {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .dq-num {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 2.5rem;
+            color: var(--gold);
+            line-height: 1;
+            flex-shrink: 0;
+            min-width: 4rem;
+        }
+        .dq-text {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: rgba(250,249,246,0.85);
+        }
+
+        /* Closing prayer */
+        .closing-section {
+            padding: 6rem 1.5rem;
+            text-align: center;
+            background: var(--cream);
+        }
+        .closing-section .scripture-block {
+            background: transparent;
+            border: none;
+            margin: 3rem auto;
+            max-width: 42rem;
+        }
+        .prayer-block {
+            max-width: 38rem;
+            margin: 4rem auto 0;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(26,26,26,0.1);
+            border-bottom: 1px solid rgba(26,26,26,0.1);
+        }
+        .prayer-block .label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+        .prayer-block p {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            line-height: 1.7;
+            color: var(--charcoal);
+        }
+
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            padding: 5rem 1.5rem;
+            background: var(--cream);
+        }
+        .cta-link {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--teal);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--teal);
+            padding-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+        .cta-link:hover {
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        /* Mobile refinements */
+        @media (max-width: 640px) {
+            .article-prose p { font-size: 1.1rem; }
+            .article-prose p.lead { font-size: 1.25rem; }
+            .pull-quote { padding-left: 1.25rem; margin: 2.5rem 0; }
+            .side-note { padding: 1.5rem 1.5rem; margin: 2rem 0; }
+            .scripture-block { padding: 1.5rem 1.25rem; margin: 2rem 0; }
+            .altar-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; padding: 0 1rem; }
+            .altar-card { padding: 1.5rem 1rem; }
+            .altar-card-name { font-size: 1.15rem; }
+            .dq { gap: 1.25rem; }
+            .dq-num { font-size: 2rem; min-width: 2.5rem; }
+        }
+    </style>
+</head>
+<body class="antialiased" data-current="">
+
+<div id="header-placeholder"></div>
+
+<!-- ============================================ -->
+<!-- HERO -->
+<!-- ============================================ -->
+<header class="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center">
+    <span class="hero-eyebrow">Acts Journey &bull; Deep Dive</span>
+    <h1 class="hero-title">
+        <em>Wanted</em>.
+    </h1>
+    <p class="hero-sub">
+        The strange story behind one altar in Athens — and what it reveals about the God every human being has been reaching for.
+    </p>
+</header>
+
+<!-- ============================================ -->
+<!-- FOUNDATION SCRIPTURE -->
+<!-- ============================================ -->
+<section class="max-w-2xl mx-auto px-6 text-center mb-20">
+    <h4 class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">The Foundation</h4>
+    <h2 class="text-3xl font-bold mb-6 italic">Acts 17:22–34</h2>
+    <a href="https://www.biblegateway.com/passage/?search=Acts+17%3A22-34&version=NLT" target="_blank" class="text-teal font-bold uppercase tracking-[0.2em] text-[0.7rem] border-b border-teal/30 pb-1 hover:text-gold hover:border-gold transition-all">
+        Read on Bible Gateway &rarr;
+    </a>
+</section>
+
+<!-- ============================================ -->
+<!-- VIDEO (Ghost proxy) -->
+<!-- ============================================ -->
+<section class="max-w-5xl mx-auto px-6 mb-32" id="yt-section" style="display:none">
+    <div class="relative rounded-[2rem] overflow-hidden shadow-2xl bg-zinc-200 aspect-video">
+        <iframe id="yt-iframe" class="absolute inset-0 w-full h-full" src="" title="Wanted — Acts 17:22–34" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <p id="yt-caption" class="text-center text-zinc-400 text-[0.65rem] mt-6 tracking-[0.3em] uppercase italic">Watch the message</p>
+</section>
+
+<script>
+    (async function () {
+        const PROXY = 'https://ghost-proxy.reinar-6fd.workers.dev';
+        const KEY   = 'c306251d7f0f57012025d2fdc4';
+        const slug  = location.pathname.split('/').pop().replace('.html', '');
+        try {
+            const res  = await fetch(`${PROXY}/ghost/api/content/posts/slug/${slug}/?key=${KEY}`);
+            if (!res.ok) return;
+            const data = await res.json();
+            const post = data.posts?.[0];
+            if (!post?.codeinjection_head) return;
+            const match = post.codeinjection_head.match(/<script[^>]*id="dd-meta"[^>]*>([\s\S]*?)<\/script>/);
+            if (!match) return;
+            const meta = JSON.parse(match[1]);
+            if (meta.youtubeId) {
+                document.getElementById('yt-iframe').src =
+                    `https://www.youtube.com/embed/${meta.youtubeId}`;
+                if (meta.videoCaption)
+                    document.getElementById('yt-caption').textContent = meta.videoCaption;
+                document.getElementById('yt-section').style.display = 'block';
+            }
+        } catch (e) {}
+    })();
+</script>
+
+<!-- ============================================ -->
+<!-- ARTICLE BODY -->
+<!-- ============================================ -->
+<article class="article-prose max-w-2xl mx-auto px-6">
+
+    <!-- ======= SECTION 1: THE ALTAR THAT STOPPED PAUL ======= -->
+    <span class="section-eyebrow">Part One</span>
+    <h2>The Altar That <em>Stopped</em> Paul.</h2>
+
+    <p class="lead">
+        Walking through Athens in the first century, you would pass thousands of altars. Most were named. One specific kind wasn't — and one of them stopped Paul in his tracks.
+    </p>
+
+    <p>
+        Paul has just arrived in Athens. The book of Acts tells us what he saw — and the word Luke uses is not the kind that shows up anywhere else in the New Testament. <span class="greek-term">kateidōlos</span>. Literally, "drowning in idols." Not "full of." Submerged by.
+    </p>
+
+    <p>
+        Pliny the Elder — a Roman writer from the same century — recorded that there were over thirty thousand public statues in Athens. Add the private ones in homes, the household shrines, the altars at every street corner, and the count climbs higher. The city's population at the time was somewhere around ten thousand people. That's roughly three gods for every man, woman, and child.
+    </p>
+
+    <p>
+        A contemporary of Paul, the Roman writer Petronius, joked that it was easier to find a god than a man in the city of Athens.
+    </p>
+
+    <p>
+        Luke tells us that as Paul walked through this city, his spirit was stirred. The Greek word is <span class="greek-term">paroxynō</span> — where we get our English word <em>paroxysm</em>. A storm in the spirit. Not detached observation. Something visceral.
+    </p>
+
+    <p>
+        But notice what kind of storm it was. He didn't preach against the city. He didn't denounce it. He looked at every altar, every shrine, every name carved into stone — and what he saw was capacity. Hunger. A whole city full of people reaching toward something they couldn't quite name. Each idol was a piece of evidence that these men and women had been built for God, and were trying — in every direction at once — to find him.
+    </p>
+
+    <p>
+        So when Paul finds an altar with a strange inscription right in the middle of all of it — one that doesn't have a god's name on it, that has these words instead:
+    </p>
+
+    <div class="scripture-block">
+        <p>To An Unknown God.</p>
+        <span class="scripture-ref">Acts 17:23</span>
+    </div>
+
+    <p>
+        — it doesn't confuse him. It moves him.
+    </p>
+
+    <p>
+        Stop and feel the weight of it. You don't accidentally build an altar. Building an altar in the ancient world was expensive. It required stone, masonry, dedication ceremonies, ongoing maintenance, sometimes priesthood. And here is one — built deliberately, paid for carefully, maintained intentionally — with the dedication line left blank.
+    </p>
+
+    <p>
+        The most sophisticated city in the ancient world had built a shrine and refused to put a name on it. They knew there was someone they hadn't yet met. They had built a place to honour him before they knew who he was.
+    </p>
+
+    <p>
+        Paul finds his sermon in that altar. But to understand what he saw, we have to go back about six hundred years before he ever set foot in the city.
+    </p>
+
+
+    <!-- ======= SECTION 2: A PLAGUE, A SEER, AND SOME SHEEP ======= -->
+    <span class="section-eyebrow">Part Two</span>
+    <h2>A Plague, a Seer, and <em>Some Sheep</em>.</h2>
+
+    <p>
+        Sometime around the 6th century BCE — the exact date is fuzzy, the way all ancient legends are — a plague broke out in Athens. People were dying. The city's priests did what ancient priests did: they sacrificed to every god they could think of. Zeus. Apollo. Athena. Demeter. Every name on the official list.
+    </p>
+
+    <p>
+        Nothing worked.
+    </p>
+
+    <p>
+        The plague kept spreading. So in desperation, the Athenians sent a ship to Crete to get a man named Epimenides. He was a poet, a seer, and the kind of figure ancient cultures kept around for problems they couldn't solve any other way. Think wise man meets consultant meets last resort.
+    </p>
+
+    <p>
+        Epimenides arrived in Athens and gave them a diagnosis nobody had considered. He told them: <em>your problem isn't that you haven't tried hard enough. Your problem is that the god you've offended isn't on your list. You're sacrificing to gods you know — and the one you need to reach is one you don't.</em>
+    </p>
+
+    <p>
+        His solution, preserved nine hundred years later by a Greek biographer named Diogenes Laertius, went like this:
+    </p>
+
+    <div class="pull-quote">
+        He took sheep, some black and some white, and brought them to the Areopagus. He let them go where they pleased, instructing those who followed them to mark the spot where each sheep lay down and offer a sacrifice to the local divinity. And thus, it is said, the plague was stayed.
+    </div>
+
+    <p>
+        The sheep wandered. Wherever each one lay down, the Athenians built an altar on that spot. But here was the problem — they didn't know which god the sheep had wandered into the territory of. So they couldn't put a name on the altar. They left the dedication line blank.
+    </p>
+
+    <p>
+        The plague stopped.
+    </p>
+
+    <p>
+        For the next six centuries, those altars stayed standing — anonymous shrines scattered around the city, dedicated to gods nobody could identify. Five hundred years later, Paul walks past one of them and stops. He has just found his way in.
+    </p>
+
+    <div class="side-note">
+        <span class="side-note-label">A note on history</span>
+        <div class="side-note-title">How sure are we?</div>
+        <p>
+            Diogenes Laertius wrote in the 3rd century CE — about nine hundred years after the events he describes. Whether the plague-and-sheep story is literally what happened, or a tradition that grew up to explain why these unnamed altars existed, is genuinely uncertain.
+        </p>
+        <p>
+            What we know for sure: altars dedicated to "unknown gods" did exist in Athens. Multiple ancient sources confirm this. Archaeologists have not found one with the singular inscription Paul references, but inscriptions to "unknown gods" in the plural have been recovered. Paul saw one. The story Diogenes preserves is the explanation Athens itself gave for why they were there.
+        </p>
+        <p>
+            Whether the story is fact or folk-memory, it tells us something true: the Athenians had a category for a god they didn't know how to name. That category is the most honest religious instinct ever recorded in stone.
+        </p>
+    </div>
+
+
+    <!-- ======= SECTION 3: THE MOST HONEST ALTAR EVER BUILT ======= -->
+    <span class="section-eyebrow">Part Three</span>
+    <h2>The Most Honest Altar <em>Ever Built</em>.</h2>
+
+    <p>
+        Strip the legend back. Ignore the sheep. Forget the plague. What you're left with is one of the most revealing artefacts in human history.
+    </p>
+
+    <p>
+        Athens — the most sophisticated civilisation the ancient world ever produced, the birthplace of philosophy, the home of Socrates and Plato and Aristotle, the city that gave us democracy and tragedy and the foundations of Western thought — admitted in stone, in a dedication carved by master craftsmen, that <em>they did not know who they were reaching for.</em>
+    </p>
+
+    <p>
+        That isn't ignorance. That's honesty.
+    </p>
+
+    <p>
+        Most cultures fill in the blanks. They cover their gaps with confident-sounding mythology. They build out their pantheons until every question has a god attached to it. Athens did all of that — thirty thousand statues' worth — and still left a slot open.
+    </p>
+
+    <p>
+        Whoever you are. This is for you.
+    </p>
+
+    <div class="pull-quote">
+        That altar is the most universal religious artefact in human history. Every person has built one. Most of us just don't carve it in stone.
+    </div>
+
+    <p>
+        Look at the human story across every continent and every century. Every culture in history — every one — has built altars. The forms change. The materials change. The names change. The instinct never does.
+    </p>
+
+    <p>
+        Every human pleasure has a ceiling. Food satisfies, until it doesn't. Achievement lands, then immediately asks "what's next." Even the people you love most can't quite fill the room inside you that keeps echoing.
+    </p>
+
+    <p>
+        We're the only species that buries our dead with flowers. That grieves like something which mattered here should matter somewhere else too. No one taught us that. We arrived with it.
+    </p>
+
+    <p>
+        When something overwhelmingly good happens — a child is born, you survive something you shouldn't have, a sunset stops you cold — the instinct is to say <em>thank you</em>. To someone. The strange thing is, most of us don't know who we're saying it to. But we keep saying it anyway.
+    </p>
+
+    <p>
+        That's not religion. That's the human condition.
+    </p>
+
+    <p>
+        Athens just had the honesty to put it in writing.
+    </p>
+
+
+    <!-- ======= SECTION 4: THE GOD WHO DOESN'T NEED THE ALTAR ======= -->
+    <span class="section-eyebrow">Part Four</span>
+    <h2>The God Who Doesn't <em>Need</em> the Altar.</h2>
+
+    <p>
+        Paul stands on Mars Hill — the Areopagus, the very place where Epimenides had let the sheep loose six hundred years earlier — and starts to speak.
+    </p>
+
+    <p>
+        Behind him, on the hill above, sits the Parthenon. The most magnificent religious building of the ancient world. Eight hundred talents — roughly the cost of building an entire mid-sized city — devoted to housing a twelve-metre statue of Athena made of gold and ivory. A god who needed to be dressed, fed, and tended by appointed priests every day.
+    </p>
+
+    <p>
+        And Paul says this:
+    </p>
+
+    <div class="scripture-block">
+        <p>"He is the God who made the world and everything in it. Since he is Lord of heaven and earth, he doesn't live in man-made temples, and human hands can't serve his needs — for he has no needs. He himself gives life and breath to everything, and he satisfies every need."</p>
+        <span class="scripture-ref">Acts 17:24–25 NLT</span>
+    </div>
+
+    <p>
+        Sit with what he just did.
+    </p>
+
+    <p>
+        Every religion in Athens — every shrine on every corner, every offering at every altar, every ritual at every temple — ran on a single assumption: the gods are hungry, and humans are the feeding mechanism. You bring sacrifices because the god requires them. You perform rituals because the god demands them. You build the building because the god needs somewhere to live.
+    </p>
+
+    <p>
+        Paul walks into the most religious city on earth and dismantles the entire system in one sentence. The God I am telling you about, he says, doesn't live in any of this. And he doesn't need anything you have.
+    </p>
+
+    <div class="side-note">
+        <span class="side-note-label">Greek term</span>
+        <div class="side-note-title">aprosdeēs — without need of anything</div>
+        <p>
+            The philosophical weight behind Paul's phrase "for he has no needs" is the Greek concept of <span class="greek-term">aprosdeēs</span> — literally "without need of anything." God is the only being in existence who is not a net consumer. Every other being in creation — human, animal, even the gods of Athens — takes in order to exist. God alone gives without needing to receive.
+        </p>
+        <p>
+            This was scandalous to both major schools of Athenian philosophy. The Stoics believed in an impersonal divine force woven into the universe. The Epicureans believed in distant gods who didn't care. Paul is saying: he is personal, he is involved, and he needs absolutely nothing from you.
+        </p>
+    </div>
+
+    <p>
+        Now follow what that actually means.
+    </p>
+
+    <p>
+        If a god needs you, then everything that god does toward you is, on some level, transactional. He helps you because he wants something. He blesses you because you've been useful. He pays attention because the temple economy is going well.
+    </p>
+
+    <p>
+        But a God who needs nothing — who is fully satisfied in himself, who gives life and breath to everything that exists, including the people standing on Mars Hill arguing with him — a God like that has no transactional reason to come for you.
+    </p>
+
+    <p>
+        Which means everything he does toward you is something else entirely.
+    </p>
+
+    <p>
+        It is <em>want</em>. Pure want. Not need. Not requirement. Not maintenance. Want.
+    </p>
+
+    <div class="pull-quote">
+        You cannot earn the attention of a God who is already fully satisfied in himself. Which means everything he does toward you is grace, abundance, and overflow. He chose you out of fullness, not need.
+    </div>
+
+
+    <!-- ======= SECTION 5: HE FILLED IN THE BLANK ======= -->
+    <span class="section-eyebrow">Part Five</span>
+    <h2>He Filled <em>In</em> the Blank.</h2>
+
+    <p>
+        Notice what Paul does next. He does not tear the altar down.
+    </p>
+
+    <p>
+        He fills it in.
+    </p>
+
+    <div class="scripture-block">
+        <p>"This God, whom you worship without knowing, is the one I am telling you about."</p>
+        <span class="scripture-ref">Acts 17:23 NLT</span>
+    </div>
+
+    <p>
+        The reach was right. The address was wrong. So Paul takes the unnamed altar — the slot Athens left open six centuries earlier — and writes a name in it. The unknown becomes known. The hunger gets a destination. The God they had been groping toward in the dark steps into the light.
+    </p>
+
+    <p>
+        And then Paul does something almost gentle. He keeps speaking, and a few verses later he lands the sentence that turns everything:
+    </p>
+
+    <div class="scripture-block">
+        <p>"His purpose was for the nations to seek after God and perhaps feel their way toward him and find him — though he is not far from any one of us."</p>
+        <span class="scripture-ref">Acts 17:27 NLT</span>
+    </div>
+
+    <p>
+        The phrase "feel their way toward him" is one Greek word: <span class="greek-term">psēlaphaō</span>. To grope. To feel around in the dark. Hands out. Can't see. But moving.
+    </p>
+
+    <p>
+        Paul does not mock that instinct. He honours it. Every person who has ever prayed to "the universe," lit a candle, felt something in the silence, kept a private suspicion that there has to be something more — that's the word he's using. The reach of every human heart toward whatever might be out there.
+    </p>
+
+    <p>
+        And then the line that lands the whole speech: <em>he is not far from any one of us.</em>
+    </p>
+
+    <p>
+        You have been groping in the dark — toward someone who has been standing right next to you the whole time. The distance was never on his side.
+    </p>
+
+    <p>
+        Which means the most accurate name for the God of the Bible is one we already had in our language. <em>Emmanuel.</em> God with us. Not God above us. Not God at a distance requiring approach. God who stepped in.
+    </p>
+
+    <p>
+        Paul is wrapping up his sermon when he drops one more thing — a claim that broke a rule the Areopagus court was literally founded to enforce. He says God has confirmed all of this <em>by raising a man from the dead.</em>
+    </p>
+
+    <p>
+        For some in the crowd, that was where they stopped listening. The resurrection was the line they couldn't cross. But for others — Dionysius, a member of the council itself, and a woman named Damaris, and a few others Luke doesn't name — the line was where everything started.
+    </p>
+
+    <div class="the-line">
+        <span class="the-line-label">The Line</span>
+        <p class="the-line-text">
+            The God you've been reaching for has been standing right next to you the whole time — and he didn't come because he needed you. He came because he wanted you.
+        </p>
+    </div>
+
+</article>
+
+
+<!-- ============================================ -->
+<!-- INTERACTIVE: YOUR ALTAR -->
+<!-- ============================================ -->
+<section class="altar-section">
+    <div class="altar-intro">
+        <span class="section-eyebrow" style="display:inline-block; margin-bottom:1rem;">Part Six</span>
+        <h2>Your <em>Altar</em>.</h2>
+        <p>
+            Athens left a slot open for a god they didn't know how to name. Most of us have done some version of the same thing. We don't carve it in stone — but the reach is there. Pick the one that's closest to where you've been pointing yourself.
+        </p>
+    </div>
+
+    <div class="altar-grid" id="altarGrid">
+        <button class="altar-card" data-altar="achievement">
+            <span class="altar-card-label">Altar 01</span>
+            <span class="altar-card-name">Achievement</span>
+        </button>
+        <button class="altar-card" data-altar="approval">
+            <span class="altar-card-label">Altar 02</span>
+            <span class="altar-card-name">Approval</span>
+        </button>
+        <button class="altar-card" data-altar="control">
+            <span class="altar-card-label">Altar 03</span>
+            <span class="altar-card-name">Control</span>
+        </button>
+        <button class="altar-card" data-altar="love">
+            <span class="altar-card-label">Altar 04</span>
+            <span class="altar-card-name">Love</span>
+        </button>
+        <button class="altar-card" data-altar="meaning">
+            <span class="altar-card-label">Altar 05</span>
+            <span class="altar-card-name">Meaning</span>
+        </button>
+        <button class="altar-card" data-altar="unnamed">
+            <span class="altar-card-label">Altar 06</span>
+            <span class="altar-card-name">Something I Can't Name Yet</span>
+        </button>
+    </div>
+
+    <div class="altar-response" id="altarResponse"></div>
+</section>
+
+<script>
+    const altarContent = {
+        achievement: {
+            title: "The altar of <em>being enough</em>.",
+            paragraphs: [
+                "You have been reaching for the moment when you finally arrive. The promotion. The result. The achievement that proves it. You have been telling yourself for years that once you get there, the room inside you will go quiet.",
+                "But every ceiling becomes a floor. Every win becomes the new baseline. The achievement always satisfies — until it doesn't.",
+                "The God who made you doesn't grade your worth on the curve you've been measuring yourself against. He doesn't need you to be impressive. He doesn't need you to perform. He decided you mattered before you had achieved anything at all."
+            ],
+            closing: "He didn't come because he needed your impressive life. He came because he wanted you."
+        },
+        approval: {
+            title: "The altar of <em>being chosen</em>.",
+            paragraphs: [
+                "You have been reaching for someone to finally see you. To pick you. To say <em>yes, you</em>. You have been adjusting yourself for years, hoping the right version would be enough.",
+                "And every time you got the approval you were after, it satisfied for a while — and then quietly stopped working. Because human approval is rented, never owned. It has to be re-earned every season.",
+                "The God of Acts 17 doesn't pick you because of the version you've been performing. He saw the real you long before you started editing yourself for the room. And he wanted you anyway."
+            ],
+            closing: "He didn't come because he needed your best version. He came because he wanted you."
+        },
+        control: {
+            title: "The altar of <em>holding it together</em>.",
+            paragraphs: [
+                "You have been reaching for safety. The plan that covers every contingency. The version of life where nothing surprises you because you've already accounted for it. You have been performing competence for so long you can't always tell where it ends and you begin.",
+                "But control is exhausting. Because the universe doesn't actually cooperate. And every time something slips, the room inside you gets louder.",
+                "The God who made the world and everything in it — who decided beforehand when nations would rise and fall — is not asking you to manage what only he can hold. The invitation isn't to a more elaborate spreadsheet. It's to lay down the weight of pretending you can carry everything."
+            ],
+            closing: "He didn't come because he needed your management. He came because he wanted you."
+        },
+        love: {
+            title: "The altar of <em>finally being known</em>.",
+            paragraphs: [
+                "You have been reaching for someone to know you all the way through and stay. To love you not despite the parts you don't show people, but with full sight of them. The longing is older than any specific person you've put it on.",
+                "Sometimes a person comes close. Sometimes the closeness lasts a while. But human love — even the best of it — has a ceiling. No one human being is built to be the answer to everything you carry.",
+                "The God who is not far from any one of us is the only one who can love you with a love that doesn't run out. Not because he tolerates you. Because he wanted you specifically. Knew you fully. Came for you anyway."
+            ],
+            closing: "He didn't come because he needed your love returned. He came because he wanted you."
+        },
+        meaning: {
+            title: "The altar of <em>making it count</em>.",
+            paragraphs: [
+                "You have been reaching for a life that matters. Something that doesn't disappear when you do. You feel the weight of one life and one chance, and you've been pointing yourself at the things that might justify it.",
+                "But meaning made for yourself is hard to hold. Eventually you wonder whether anything you do here actually outlasts you. The gratitude instinct shows up — the sunsets that stop you cold, the moments that ask to be thanked — and you don't know who to thank.",
+                "The God of Acts 17 is the someone you've been thanking. The address you've been groping toward. Meaning isn't something you have to build out of nothing. It's something you receive when you find out you were known and wanted before you ever asked the question."
+            ],
+            closing: "He didn't come because he needed your life to count. He came because he wanted you."
+        },
+        unnamed: {
+            title: "The altar with <em>no name on it</em>.",
+            paragraphs: [
+                "You have been reaching for something you don't have words for. There is a longing in you that pre-dates any specific desire. Sometimes it's a homesickness for somewhere you've never been. Sometimes it's an ache that arrives without warning. You have suspected for a long time that you were made for something the visible world doesn't quite contain.",
+                "That instinct is not delusion. It is the most honest part of you.",
+                "Athens left a slot open for a god they didn't know how to name. Paul looked at it and said: <em>this — this exact slot — is what I came to fill in.</em> The reach you've been carrying, the longing you can't articulate, the unnamed altar you've been visiting your whole life — has a name. And he has been waiting every time you nearly opened the door and didn't."
+            ],
+            closing: "He didn't come because you finally figured out what to call him. He came because he wanted you."
+        }
+    };
+
+    const cards = document.querySelectorAll('.altar-card');
+    const responseEl = document.getElementById('altarResponse');
+
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            const altar = card.dataset.altar;
+            const data = altarContent[altar];
+
+            cards.forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+
+            responseEl.innerHTML = `
+                <div class="altar-response-card">
+                    <span class="altar-response-eyebrow">A word for this altar</span>
+                    <h3 class="altar-response-title">${data.title}</h3>
+                    ${data.paragraphs.map(p => `<p>${p}</p>`).join('')}
+                    <p class="closing">${data.closing}</p>
+                </div>
+            `;
+
+            requestAnimationFrame(() => {
+                const cardEl = responseEl.querySelector('.altar-response-card');
+                if (cardEl) cardEl.classList.add('visible');
+                setTimeout(() => {
+                    responseEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            });
+        });
+    });
+</script>
+
+
+<!-- ============================================ -->
+<!-- CLOSING PROSE -->
+<!-- ============================================ -->
+<article class="article-prose max-w-2xl mx-auto px-6 mt-24">
+
+    <span class="section-eyebrow">Part Seven</span>
+    <h2>He Has a <em>Name</em>.</h2>
+
+    <p>
+        Athens built one altar honestly. Most cultures didn't. They filled in their blanks with confident-sounding mythology and pretended the gaps had been solved. Athens left the gap open and admitted, in stone, what every person has known privately for as long as humans have been alive.
+    </p>
+
+    <p>
+        We're reaching for something we can't quite name.
+    </p>
+
+    <p>
+        The good news of Acts 17 is that the reach has a destination. The God you've been pointing yourself toward — under whatever altar, with whatever language, in whatever season of your life — has been close enough to hear every prayer you didn't know how to finish.
+    </p>
+
+    <p>
+        He doesn't need you. He never did. Which is exactly why his coming for you is the most stunning thing in the universe.
+    </p>
+
+    <p>
+        Pure want. Not maintenance. Not transaction. Not need.
+    </p>
+
+    <p>
+        Want.
+    </p>
+
+</article>
+
+
+<!-- ============================================ -->
+<!-- DISCUSSION & REFLECTION -->
+<!-- ============================================ -->
+<section class="discussion-block">
+    <div class="discussion-inner">
+        <span class="discussion-eyebrow">The Living Room Circle</span>
+        <h2 class="discussion-title">Discussion &amp; <em>Reflection</em></h2>
+        <div class="discussion-rule"></div>
+
+        <div class="dq">
+            <span class="dq-num">01</span>
+            <p class="dq-text">What altar have you built in your life — what have you been reaching for, hoping it would finally make you okay? Be specific. Naming it is the first move.</p>
+        </div>
+
+        <div class="dq">
+            <span class="dq-num">02</span>
+            <p class="dq-text">Where in your story has there been a sense of something near you that you couldn't quite name? Looking back, what do you make of those moments now?</p>
+        </div>
+
+        <div class="dq">
+            <span class="dq-num">03</span>
+            <p class="dq-text">Most of us were taught — explicitly or by osmosis — that God's love is conditional on what we bring to the table. What does it shift in you to consider that he doesn't need anything from you, and wants you anyway?</p>
+        </div>
+
+        <div class="dq">
+            <span class="dq-num">04</span>
+            <p class="dq-text">There should be no other altar. What in your life have you been treating as one — and what would it take to bring it down, so that nothing stands between you and God who has been waiting for you?</p>
+        </div>
+
+        <div class="dq">
+            <span class="dq-num">05</span>
+            <p class="dq-text">There were three responses on Mars Hill: mockery, curiosity, and belief. Honestly — which row are you sitting in today? And what would it look like to move one row closer?</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- CLOSING PRAYER -->
+<!-- ============================================ -->
+<section class="closing-section">
+    <div class="prayer-block">
+        <span class="label">A prayer to close</span>
+        <p>
+            God — if you are who Paul said you are: not far, not needing, not waiting to be impressed — then meet me here. I have been reaching. I didn't always know what for. Fill in the slot I left open. Be the name on the altar I've been visiting my whole life. I came in wanting. I leave knowing I was wanted first.
+        </p>
+    </div>
+</section>
+
+
+<!-- ============================================ -->
+<!-- CTA -->
+<!-- ============================================ -->
+<section class="cta-section">
+    <a href="https://thelivingroom.io/deepdives" class="cta-link">More Deep Dives &rarr;</a>
+</section>
+
+
+<div id="footer-placeholder"></div>
+<script src="/js/main.js" defer></script>
+
+</body>
+</html>
