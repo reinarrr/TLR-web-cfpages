@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>East to West — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root { --cream:#faf9f6; --charcoal:#1a1a1a; --gold:#c5a059; --teal:#2d5a5a; }
+        body { font-family:'Outfit',sans-serif; background:var(--cream); color:var(--charcoal); }
+
+        .hero-eyebrow { display:block; font-size:0.65rem; font-weight:700; color:var(--gold); letter-spacing:0.4em; text-transform:uppercase; margin-bottom:2rem; }
+        .hero-title { font-family:'Playfair Display',serif; font-size:clamp(3.5rem,9vw,7rem); font-weight:700; line-height:0.95; letter-spacing:-0.02em; color:var(--charcoal); }
+        .hero-title em { font-style:italic; color:var(--teal); }
+        .hero-sub { font-size:clamp(1.1rem,2.5vw,1.4rem); color:#666; font-weight:300; line-height:1.7; max-width:680px; margin:2rem auto 0; }
+
+        .diolkos-bar { position:sticky; top:0; z-index:50; background:var(--charcoal); padding:0.75rem 1.5rem; display:flex; align-items:center; gap:1rem; opacity:0; transition:opacity 0.4s; }
+        .diolkos-bar.visible { opacity:1; }
+        .diolkos-track { flex:1; height:3px; background:rgba(255,255,255,0.15); border-radius:2px; position:relative; overflow:hidden; }
+        .diolkos-ship { position:absolute; left:0; top:-3px; height:9px; width:24px; background:var(--gold); border-radius:9px; transition:left 0.15s ease-out; }
+        .diolkos-label-left,.diolkos-label-right { font-size:0.6rem; font-weight:700; letter-spacing:0.35em; text-transform:uppercase; white-space:nowrap; }
+        .diolkos-label-left { color:rgba(255,255,255,0.4); }
+        .diolkos-label-right { color:var(--gold); }
+
+        .section-marker { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; }
+        .section-num { font-family:'Playfair Display',serif; font-weight:700; font-size:3rem; color:var(--gold); line-height:1; opacity:0.3; }
+        .section-eyebrow { font-size:0.6rem; font-weight:700; color:var(--gold); letter-spacing:0.4em; text-transform:uppercase; }
+        .section-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,2.8rem); font-weight:700; line-height:1.1; margin-bottom:2rem; }
+        .section-title em { font-style:italic; color:var(--teal); }
+        .prose-body { font-size:1.1rem; line-height:1.8; color:#444; }
+        .prose-body p { margin-bottom:1.25rem; }
+
+        .greek-box { border-left:4px solid var(--gold); background:rgba(197,160,89,0.06); padding:1.25rem 1.5rem; margin:2rem 0; border-radius:0 0.75rem 0.75rem 0; }
+        .greek-word { font-family:'Playfair Display',serif; font-style:italic; font-size:1.3rem; color:var(--charcoal); font-weight:700; }
+        .greek-trans { font-size:0.7rem; font-weight:700; color:var(--gold); letter-spacing:0.3em; text-transform:uppercase; margin-top:0.25rem; }
+        .greek-def { font-size:0.95rem; color:#555; margin-top:0.5rem; line-height:1.6; }
+
+        .verse-callout { text-align:center; padding:2rem 1.5rem; margin:2.5rem 0; border-top:1px solid #e8e4dc; border-bottom:1px solid #e8e4dc; }
+        .verse-callout blockquote { font-family:'Playfair Display',serif; font-style:italic; font-size:1.3rem; line-height:1.5; color:var(--charcoal); max-width:560px; margin:0 auto 0.75rem; }
+        .verse-callout cite { font-style:normal; font-size:0.65rem; font-weight:700; color:var(--teal); letter-spacing:0.3em; text-transform:uppercase; }
+
+        .section-divider { display:flex; align-items:center; justify-content:center; gap:1.5rem; padding:4rem 0; }
+        .section-divider span { height:1px; width:60px; background:#d4d0c8; }
+        .divider-icon { width:8px; height:8px; background:var(--gold); transform:rotate(45deg); }
+
+        .shift-grid { display:grid; grid-template-columns:1fr; gap:1rem; }
+        @media(min-width:640px) { .shift-grid { grid-template-columns:1fr 1fr; } }
+        .shift-card { border:2px solid #e8e4dc; border-radius:1.25rem; padding:1.5rem; cursor:pointer; transition:all 0.3s; text-align:left; }
+        .shift-card:hover { border-color:var(--teal); background:rgba(45,90,90,0.03); }
+        .shift-card.selected { border-color:var(--teal); background:rgba(45,90,90,0.06); }
+        .shift-card h4 { font-family:'Playfair Display',serif; font-weight:700; font-size:1.15rem; margin-bottom:0.4rem; color:var(--charcoal); }
+        .shift-card p { font-size:0.9rem; color:#777; line-height:1.5; }
+        .shift-response { display:none; margin-top:2rem; padding:2rem; background:var(--charcoal); color:white; border-radius:1.5rem; animation:fadeUp 0.5s ease; }
+        .shift-response.visible { display:block; }
+        .shift-response h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; color:var(--gold); margin-bottom:1rem; }
+        .shift-response p { font-size:1rem; line-height:1.8; color:rgba(255,255,255,0.8); margin-bottom:1rem; }
+        .shift-response .shift-verse { font-style:italic; color:var(--gold); font-size:0.95rem; border-left:3px solid var(--gold); padding-left:1rem; margin-top:1rem; }
+
+        .discuss-card { border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.04); border-radius:1.25rem; padding:1.5rem; margin-bottom:1rem; }
+        .discuss-num { font-family:'Playfair Display',serif; font-weight:700; color:var(--gold); font-size:1.5rem; margin-bottom:0.5rem; }
+
+        @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    </style>
+</head>
+
+<body class="antialiased" data-current="">
+
+    <div id="header-placeholder"></div>
+
+    <!-- HERO -->
+    <section class="max-w-4xl mx-auto px-6 pt-24 pb-12 text-center">
+        <span class="hero-eyebrow">Acts Journey &middot; Part 14 &middot; Deep Dive</span>
+        <h1 class="hero-title mb-6">East <em>to West</em></h1>
+        <p class="hero-sub">What the most strategically located city in the ancient world teaches us about how God moves &mdash; through empires, through resistance, and through the people He places at the crossroads.</p>
+        <div class="flex items-center justify-center gap-6 flex-wrap mt-8">
+            <span class="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-zinc-400">8 min read</span>
+            <span class="text-zinc-300">&middot;</span>
+            <span class="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-zinc-400">Acts 18:1&ndash;9 &middot; NLT</span>
+        </div>
+    </section>
+
+    <!-- FOUNDATION SCRIPTURE -->
+    <section class="max-w-2xl mx-auto px-6 text-center mb-12">
+        <a href="https://www.biblegateway.com/passage/?search=Acts+18%3A1-9&version=NLT" target="_blank" class="text-teal font-bold uppercase tracking-[0.2em] text-[0.7rem] border-b border-teal/30 pb-1 hover:text-gold hover:border-gold transition-all">Read Acts 18:1&ndash;9 on Bible Gateway &rarr;</a>
+    </section>
+
+    <!-- THE LINE -->
+    <section class="max-w-3xl mx-auto px-6 mb-16">
+        <div class="verse-callout">
+            <blockquote>&ldquo;God&rsquo;s purposes don&rsquo;t go around. They cut through.&rdquo;</blockquote>
+        </div>
+    </section>
+
+    <!-- VIDEO (Ghost proxy) -->
+    <section class="max-w-5xl mx-auto px-6 mb-24" id="yt-section" style="display:none">
+        <div class="relative rounded-[2rem] overflow-hidden shadow-2xl bg-zinc-200 aspect-video">
+            <iframe id="yt-iframe" class="absolute inset-0 w-full h-full" src="" title="East to West — Acts 18:1–9" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <p id="yt-caption" class="text-center text-zinc-400 text-[0.65rem] mt-6 tracking-[0.3em] uppercase italic">Watch the message</p>
+    </section>
+    <script>
+        (async function(){
+            const PROXY='https://ghost-proxy.reinar-6fd.workers.dev';
+            const KEY='c306251d7f0f57012025d2fdc4';
+            const slug=location.pathname.split('/').pop().replace('.html','');
+            try{
+                const res=await fetch(`${PROXY}/ghost/api/content/posts/slug/${slug}/?key=${KEY}`);
+                if(!res.ok)return;
+                const data=await res.json();
+                const post=data.posts?.[0];
+                if(!post?.codeinjection_head)return;
+                const match=post.codeinjection_head.match(/<script[^>]*id="dd-meta"[^>]*>([\s\S]*?)<\/script>/);
+                if(!match)return;
+                const meta=JSON.parse(match[1]);
+                if(meta.youtubeId){
+                    document.getElementById('yt-iframe').src=`https://www.youtube.com/embed/${meta.youtubeId}`;
+                    if(meta.caption)document.getElementById('yt-caption').textContent=meta.caption;
+                    document.getElementById('yt-section').style.display='block';
+                }
+            }catch(e){}
+        })();
+    </script>
+
+    <!-- DIOLKOS PROGRESS BAR -->
+    <div class="diolkos-bar" id="diolkos">
+        <span class="diolkos-label-left">East</span>
+        <div class="diolkos-track" id="diolkos-track"><div class="diolkos-ship" id="diolkos-ship"></div></div>
+        <span class="diolkos-label-right">West</span>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-3xl mx-auto px-6" id="journey-content">
+
+        <!-- I: The Haul-Across -->
+        <section class="py-20" id="section-1">
+            <div class="section-marker"><span class="section-num">I</span><span class="section-eyebrow">The Haul-Across</span></div>
+            <h2 class="section-title">Ships on <em>Dry Land</em></h2>
+            <div class="prose-body">
+                <p>In the ancient world, there was a city built on a narrow strip of land between two seas. East on one side &mdash; toward Asia, Syria, Egypt. West on the other &mdash; toward Italy, Spain, the edges of the known world. Everything that moved across the Mediterranean passed through this strip. And the way they moved ships from one side to the other was brutal.</p>
+                <p>They hauled them out of the water, set them on wooden rails greased with animal fat, and dragged them across land. Six kilometres. Through terrain a ship was never designed for.</p>
+                <div class="greek-box">
+                    <p class="greek-word">diolkos &mdash; διόλκος</p>
+                    <p class="greek-trans">The Haul-Across</p>
+                    <p class="greek-def">From <em>dia</em> (through) + <em>helkō</em> (to drag, to haul). The paved stone trackway across the Corinthian isthmus. The city&rsquo;s entire economy was built on the idea of going through rather than going around. The shortest path. The unconventional method. The same destination.</p>
+                </div>
+                <p>The alternative was to sail around the southern cape of the Peloponnese &mdash; weeks of open water, one of the most treacherous routes in the ancient Mediterranean. Or you could cut through. Shortest line. Same destination.</p>
+                <p>The city was called Corinth. Strabo, the ancient geographer, called it the <em>&ldquo;master of two harbours.&rdquo;</em> Lechaeum to the west. Cenchreae to the east. One city controlling both seas. Every trade route. Every kind of person. Every culture on earth passing through the same narrow strip of land.</p>
+                <p>And that is exactly where God planted the church.</p>
+            </div>
+        </section>
+
+        <div class="section-divider"><span></span><div class="divider-icon"></div><span></span></div>
+
+        <!-- II: The Crossroads -->
+        <section class="py-20" id="section-2">
+            <div class="section-marker"><span class="section-num">II</span><span class="section-eyebrow">The Crossroads</span></div>
+            <h2 class="section-title">Where Everything <em>Meets</em></h2>
+            <div class="prose-body">
+                <p>Corinth was not a quiet posting. The city&rsquo;s name had become a Greek verb. <em>Korinthiazomai</em> &mdash; to act like a Corinthian &mdash; was ancient slang for sexual immorality. The city was so notorious for its moral permissiveness that its name entered the language as a synonym for vice.</p>
+                <p>A note of scholarly honesty: much of Corinth&rsquo;s lurid reputation &mdash; including the famous claim of a thousand temple prostitutes &mdash; comes from Strabo writing about the old Greek city, destroyed in 146 BC. The city Paul entered was a Roman colonial rebuild, roughly a century old. Still commercially aggressive. Still morally permissive. But the extreme claims belong to the older city. What Paul walked into was less exotic and more familiar: a prosperous, ambitious, pleasure-seeking port city. The ancient world&rsquo;s version of a global transit hub.</p>
+                <p>Which is actually the sharper point. God didn&rsquo;t plant the church in the ancient equivalent of Las Vegas. He planted it in the ancient equivalent of an airport. The place where <em>everyone</em> passes through. The intersection of everything.</p>
+                <div class="verse-callout">
+                    <blockquote>&ldquo;God has never been interested in planting the church somewhere safe. He plants it somewhere strategic. The crossroads is not a compromise &mdash; it&rsquo;s the point.&rdquo;</blockquote>
+                </div>
+                <p>Not in Jerusalem&rsquo;s shadow. Not in Athens&rsquo; philosophical refinement. At the crossroads. Where the cargo of the Gospel could reach the most people in the shortest distance. The diolkos principle applied to mission: cut through.</p>
+            </div>
+        </section>
+
+        <div class="section-divider"><span></span><div class="divider-icon"></div><span></span></div>
+
+        <!-- III: The Corinth Team -->
+        <section class="py-20" id="section-3">
+            <div class="section-marker"><span class="section-num">III</span><span class="section-eyebrow">The Corinth Team</span></div>
+            <h2 class="section-title">Assembled from <em>Wreckage</em></h2>
+            <div class="prose-body">
+                <p>Nobody on this team chose Corinth.</p>
+                <p>Emperor Claudius expelled all Jews from Rome around AD 49. The Roman historian Suetonius records the reason: constant rioting <em>&ldquo;at the instigation of Chrestus&rdquo;</em> &mdash; almost certainly a garbled Latin reference to <em>Christos</em>. The Gospel had already been causing trouble in Rome&rsquo;s synagogues. Claudius&rsquo;s solution: remove all Jews. Every one of them.</p>
+                <p>Among them: a couple named Aquila and Priscilla. They lost everything. Their home. Their business. Their city. Their community. They landed in Corinth &mdash; a city whose name was a synonym for everything their faith stood against &mdash; and rebuilt from scratch. A workshop. A household. Starting over in a place they didn&rsquo;t choose.</p>
+                <div class="greek-box">
+                    <p class="greek-word">skēnopoios &mdash; σκηνοποιός</p>
+                    <p class="greek-trans">Tentmaker / Leather Worker</p>
+                    <p class="greek-def">A hapax legomenon &mdash; appears only once in the entire New Testament (Acts 18:3). Paul&rsquo;s home province of Cilicia was famous for <em>cilicium</em>, a coarse goat-hair cloth used in tent manufacture. The workshop was not the pause between the ministry. It was the ministry. The bench where Paul cut leather was the first Corinthian church.</p>
+                </div>
+                <p>And Paul &mdash; he arrived alone. Fresh from Athens, where the philosophers mostly shrugged. Separated from Silas and Timothy, still behind in Macedonia. Carrying the cumulative weight of beatings in Philippi, mobs in Thessalonica, midnight escapes from Berea. He tells us himself how he arrived:</p>
+                <div class="verse-callout">
+                    <blockquote>&ldquo;I came to you in weakness &mdash; timid and trembling.&rdquo;</blockquote>
+                    <cite>1 Corinthians 2:3 &middot; NLT</cite>
+                </div>
+                <p>So here is God&rsquo;s church-planting team for the most strategically important city in the ancient world: two refugees and a man who could barely hold himself together. That&rsquo;s the roster. And it works. Not in spite of the displacement &mdash; <em>because</em> of it.</p>
+                <div class="greek-box">
+                    <p class="greek-word">Genesis 50:20</p>
+                    <p class="greek-trans">The Displacement Pattern</p>
+                    <p class="greek-def"><em>&ldquo;You intended to harm me, but God intended it all for good.&rdquo;</em> Joseph sold into Egypt. Believers scattered after Stephen. Aquila and Priscilla expelled from Rome. Paul broken by the road. The pattern is consistent: what the empire uses to suppress the Gospel, God uses to spread it. Persecution doesn&rsquo;t extinguish the fire. It carries the embers.</p>
+                </div>
+                <p>The team God assembles is almost never the team you&rsquo;d recruit. It is the team that has been through enough to know they can&rsquo;t do this alone. Displacement didn&rsquo;t disqualify them. It prepared them.</p>
+            </div>
+        </section>
+
+        <div class="section-divider"><span></span><div class="divider-icon"></div><span></span></div>
+
+        <!-- IV: The Corinth Shuffle -->
+        <section class="py-20" id="section-4">
+            <div class="section-marker"><span class="section-num">IV</span><span class="section-eyebrow">The Corinth Shuffle</span></div>
+            <h2 class="section-title">Every Piece <em>Shifts</em></h2>
+            <div class="prose-body">
+                <p>Paul spends weeks in the synagogue. Reasoning. Persuading. Patient, respectful, methodical. He gives the institution every opportunity.</p>
+                <p>They oppose him. They insult him. And Paul does something theatrical and theologically loaded &mdash; he shakes out his garments. This is a prophetic gesture from the Hebrew tradition (Nehemiah 5:13; Ezekiel 33). It means: <em>I am no longer responsible for what happens here. The account is yours now.</em></p>
+                <p>Then the declaration:</p>
+                <div class="verse-callout">
+                    <blockquote>&ldquo;From now on I will go to the Gentiles.&rdquo;</blockquote>
+                    <cite>Acts 18:6 &middot; NLT</cite>
+                </div>
+                <div class="greek-box">
+                    <p class="greek-word">apo tou nyn &mdash; ἀπὸ τοῦ νῦν</p>
+                    <p class="greek-trans">&ldquo;From Now On&rdquo;</p>
+                    <p class="greek-def">A hinge phrase in Luke&rsquo;s writing, marking irreversible turning points. It appears in Luke 22:69 &mdash; <em>&ldquo;from now on the Son of Man will be seated at the right hand of power.&rdquo;</em> This is not a mood. It is a direction. Something has permanently shifted.</p>
+                </div>
+                <p>This is the second of three times Paul makes this declaration across Acts. Pisidian Antioch first (Acts 13:46): <em>&ldquo;we turn.&rdquo;</em> Corinth second: <em>&ldquo;from now on.&rdquo;</em> Rome last (Acts 28:28): <em>&ldquo;it is done.&rdquo;</em> Each one escalates. Each one is in a bigger city. Luke is building something deliberately &mdash; the Gospel shifting progressively from the edge of the Jewish world to the centre of the Gentile one. East to west.</p>
+                <p>Then the shuffle begins. Paul moves &mdash; not far, not dramatically. <strong>One wall over.</strong> Into the house of Titius Justus, a Gentile God-fearer whose house shares a wall with the synagogue that just rejected Paul. The church doesn&rsquo;t leave the neighbourhood. It just changes address.</p>
+                <p>And then the detail Luke drops almost casually: Crispus &mdash; the leader of the synagogue, the man responsible for the very institution that just said no &mdash; converts. With his entire household. The institution doesn&rsquo;t just lose a member. It loses the man in charge. To the house next door.</p>
+                <p>Step back and look at the board. In the space of a few verses: Paul has moved. Titius Justus has opened. Crispus has defected. The Gentiles are receiving. Every piece has shifted. And the church &mdash; which didn&rsquo;t exist in Corinth at the start of the chapter &mdash; is now meeting in a house, next to the synagogue, led in part by the man who used to run the synagogue.</p>
+                <p>That&rsquo;s the Corinth Shuffle. It looked like chaos. It was choreography.</p>
+                <div class="verse-callout">
+                    <blockquote>&ldquo;The Gospel has always taken the shortest line between where it is and where it needs to be.&rdquo;</blockquote>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- THE SHIFT SELECTOR -->
+    <section class="max-w-3xl mx-auto px-6 py-32">
+        <div class="text-center mb-12">
+            <span class="section-eyebrow">Where Are You?</span>
+            <h2 class="section-title mt-4">Find Your <em>Shift</em></h2>
+            <p class="text-zinc-500 text-lg font-light max-w-xl mx-auto">Every person in Acts 18 was being moved. Where are you in the journey right now? Select the one that resonates most.</p>
+        </div>
+        <div class="shift-grid" id="shift-grid">
+            <div class="shift-card" data-shift="displaced"><h4>I feel displaced</h4><p>Uprooted. The city I&rsquo;m in, the season I&rsquo;m in &mdash; I didn&rsquo;t choose this.</p></div>
+            <div class="shift-card" data-shift="crossroads"><h4>I&rsquo;m at a crossroads</h4><p>Everything is converging. I don&rsquo;t know which direction is next.</p></div>
+            <div class="shift-card" data-shift="wall"><h4>I&rsquo;m hitting a wall</h4><p>I&rsquo;ve been working at something and the door isn&rsquo;t opening.</p></div>
+            <div class="shift-card" data-shift="close"><h4>I&rsquo;m one wall over</h4><p>I feel close to something. The next thing is right there. I just can&rsquo;t see it yet.</p></div>
+            <div class="shift-card" data-shift="shifted"><h4>I&rsquo;ve already been shifted</h4><p>Looking back, I&rsquo;m starting to see the placement in my displacement.</p></div>
+        </div>
+
+        <div class="shift-response" id="resp-displaced">
+            <h3>The Advance Team Didn&rsquo;t Choose Corinth Either</h3>
+            <p>Aquila and Priscilla were expelled from Rome by an emperor&rsquo;s decree. They didn&rsquo;t petition for a better outcome. They didn&rsquo;t get an explanation. They just got Corinth &mdash; a city that was a synonym for everything their faith stood against.</p>
+            <p>And Corinth got the Gospel partly because they were there. The displacement was the delivery mechanism. What felt like exile was actually positioning.</p>
+            <p>You may not have chosen where you are. But the God who hauled ships across land to get the cargo where it needed to be is the same God who is working your displacement right now. Stay in it long enough to ask: <em>what is He positioning me for?</em></p>
+            <div class="shift-verse">&ldquo;You intended to harm me, but God intended it all for good. He brought me to this position so I could save the lives of many people.&rdquo; &mdash; Genesis 50:20 NLT</div>
+        </div>
+        <div class="shift-response" id="resp-crossroads">
+            <h3>The Crossroads Is the Point</h3>
+            <p>Corinth existed because it sat between two seas. Everything passed through it. The city didn&rsquo;t thrive in spite of being at the intersection &mdash; it thrived because of it.</p>
+            <p>When everything in your life is converging and the direction isn&rsquo;t clear, consider the possibility that you&rsquo;re not lost. You&rsquo;re at the crossroads. And God has always planted His most significant work at the intersection of everything &mdash; not in the quiet corner where it would be comfortable.</p>
+            <p>The crossroads feels chaotic. It is actually strategic.</p>
+            <div class="shift-verse">&ldquo;For I know the plans I have for you,&rdquo; says the Lord. &ldquo;They are plans for good and not for disaster, to give you a future and a hope.&rdquo; &mdash; Jeremiah 29:11 NLT</div>
+        </div>
+        <div class="shift-response" id="resp-wall">
+            <h3>The Breakthrough Is on the Other Side</h3>
+            <p>Paul worked the synagogue for weeks. Reasoning. Persuading. Patient. Methodical. And the wall didn&rsquo;t move. The institution said no.</p>
+            <p>But the breakthrough was never behind the wall. It was beside it. One wall over. The house of Titius Justus was right there the whole time &mdash; full of people God already called His own.</p>
+            <p>Peter fished all night and caught nothing. Jesus said: cast on the other side. Same boat. Same water. Just shift. Sometimes the breakthrough you&rsquo;re waiting for isn&rsquo;t a new city. It&rsquo;s the other side of where you&rsquo;re already standing.</p>
+            <div class="shift-verse">&ldquo;Do not be afraid! Speak out! Don&rsquo;t be silent! For I am with you, and no one will attack you to harm you, for many people in this city belong to me.&rdquo; &mdash; Acts 18:9&ndash;10 NLT</div>
+        </div>
+        <div class="shift-response" id="resp-close">
+            <h3>One Wall Over</h3>
+            <p>The distance between the synagogue that rejected Paul and the household that received the Gospel was measured in steps, not miles. The church didn&rsquo;t retreat to the suburbs. It stayed at the intersection. One wall between rejection and reception.</p>
+            <p>If you feel close to something &mdash; trust that instinct. The shift God is asking for may be the smallest move you&rsquo;ve ever made. Not a new career. Not a new city. A conversation. A step. An open door that has been right beside the closed one the whole time.</p>
+            <div class="shift-verse">&ldquo;Look! I stand at the door and knock. If you hear my voice and open the door, I will come in, and we will share a meal together as friends.&rdquo; &mdash; Revelation 3:20 NLT</div>
+        </div>
+        <div class="shift-response" id="resp-shifted">
+            <h3>You&rsquo;re Living the Pattern</h3>
+            <p>If you&rsquo;re looking back and starting to see how the pieces fit &mdash; how the closed door led to the open one, how the city you didn&rsquo;t choose became the city where God built something &mdash; you&rsquo;re seeing what Joseph saw, what Aquila and Priscilla saw, what Paul eventually saw from Corinth.</p>
+            <p>The displacement was the placement. It always was. And now you&rsquo;re in a position to be the advance team for someone else &mdash; the person who is currently in their displacement and can&rsquo;t see the purpose yet. Your story is their proof.</p>
+            <div class="shift-verse">&ldquo;And we know that God causes everything to work together for the good of those who love God and are called according to his purpose for them.&rdquo; &mdash; Romans 8:28 NLT</div>
+        </div>
+    </section>
+
+    <!-- DISCUSSION QUESTIONS -->
+    <section class="max-w-3xl mx-auto px-6 pb-20">
+        <div class="bg-charcoal text-white rounded-[2rem] p-10 md:p-16">
+            <p class="text-gold text-[0.6rem] font-bold tracking-[0.4em] uppercase mb-6">Go Deeper Together</p>
+            <h2 class="font-display text-3xl font-bold mb-10">Discussion <em class="text-gold">Questions</em></h2>
+            <div class="discuss-card"><p class="discuss-num">01</p><p class="text-white/80">Where in your life has a closed door functioned as a redirect rather than a dead end? What did you have to lose first before you could see that?</p></div>
+            <div class="discuss-card"><p class="discuss-num">02</p><p class="text-white/80">Who is the Aquila and Priscilla in your story &mdash; the person who was already in position when you arrived, whose presence felt like provision?</p></div>
+            <div class="discuss-card"><p class="discuss-num">03</p><p class="text-white/80">What does it look like for your home or workspace to be the primary site of your mission &mdash; not a support system for something that happens elsewhere?</p></div>
+            <div class="discuss-card"><p class="discuss-num">04</p><p class="text-white/80">Whose name deserves to come first in your community &mdash; the person whose work is invisible but load-bearing? Have you told them?</p></div>
+        </div>
+    </section>
+
+    <!-- SERIES NAV -->
+    <section class="max-w-3xl mx-auto px-6 pb-20">
+        <div class="text-center mb-10">
+            <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Acts Journey</p>
+            <p class="text-zinc-400 text-sm">Explore more from the series</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4">
+            <a href="/res/deep/2026/wanted.html" class="border border-zinc-200 rounded-[1.5rem] p-6 text-center hover:border-teal/30 transition-all">
+                <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3"></p>
+                <p class="text-charcoal font-bold text-lg leading-tight">Wanted</p>
+                <p class="text-zinc-400 text-sm mt-2 font-light">The God who doesn&rsquo;t need you &mdash; but wanted you anyway</p>
+            </a>
+            <div class="border-2 border-teal/30 bg-teal/5 rounded-[1.5rem] p-6 text-center">
+                <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3"></p>
+                <p class="text-charcoal font-bold text-lg leading-tight">East to West</p>
+                <p class="text-zinc-400 text-sm mt-2 font-light">How God moves through resistance, not around it</p>
+            </div>
+            <div class="border border-zinc-200 rounded-[1.5rem] p-6 text-center opacity-50">
+                <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-3">Next Sunday</p>
+                <p class="text-charcoal font-bold text-lg leading-tight">Coming Soon</p>
+                <p class="text-zinc-400 text-sm mt-2 font-light">&nbsp;</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="max-w-3xl mx-auto px-6 pb-32 text-center">
+        <div class="border-t border-zinc-200 pt-16">
+            <p class="text-gold text-[0.6rem] font-bold tracking-[0.3em] uppercase mb-4">Continue the Journey</p>
+            <h2 class="font-display text-3xl font-bold mb-6">Explore All <em class="text-teal">Deep Dives</em></h2>
+            <a href="https://thelivingroom.io/deepdives" class="inline-block bg-teal text-white font-bold uppercase tracking-[0.2em] text-[0.75rem] px-10 py-4 rounded-full hover:bg-charcoal transition-all">All Deep Dives &rarr;</a>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+    // Diolkos progress bar
+    (function(){
+        const bar=document.getElementById('diolkos');
+        const ship=document.getElementById('diolkos-ship');
+        const track=document.getElementById('diolkos-track');
+        const content=document.getElementById('journey-content');
+        function update(){
+            const rect=content.getBoundingClientRect();
+            const contentTop=rect.top+window.scrollY;
+            const contentHeight=rect.height;
+            const scrolled=window.scrollY-contentTop;
+            const viewHeight=window.innerHeight;
+            if(scrolled>-viewHeight&&scrolled<contentHeight){bar.classList.add('visible')}else{bar.classList.remove('visible')}
+            const progress=Math.max(0,Math.min(1,scrolled/(contentHeight-viewHeight)));
+            const trackWidth=track.offsetWidth-ship.offsetWidth;
+            ship.style.left=(progress*trackWidth)+'px';
+        }
+        window.addEventListener('scroll',update,{passive:true});
+        window.addEventListener('resize',update,{passive:true});
+        update();
+    })();
+
+    // Shift selector
+    (function(){
+        const cards=document.querySelectorAll('.shift-card');
+        const responses=document.querySelectorAll('.shift-response');
+        cards.forEach(card=>{
+            card.addEventListener('click',()=>{
+                const shift=card.dataset.shift;
+                cards.forEach(c=>c.classList.remove('selected'));
+                responses.forEach(r=>r.classList.remove('visible'));
+                card.classList.add('selected');
+                const resp=document.getElementById('resp-'+shift);
+                if(resp){resp.classList.add('visible');setTimeout(()=>{resp.scrollIntoView({behavior:'smooth',block:'nearest'})},100)}
+            });
+        });
+    })();
+    </script>
+
+    <script src="/js/main.js" defer></script>
+</body>
+</html>
