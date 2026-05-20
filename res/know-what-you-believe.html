@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know What You Believe | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Outfit', sans-serif; }
+
+        /* Scroll-triggered reveals */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger children */
+        .reveal-stagger > * {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .reveal-stagger.visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+        .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.1s; }
+        .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.15s; }
+        .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.2s; }
+        .reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.25s; }
+        .reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.3s; }
+        .reveal-stagger.visible > *:nth-child(7) { transition-delay: 0.35s; }
+        .reveal-stagger.visible > *:nth-child(8) { transition-delay: 0.4s; }
+        .reveal-stagger.visible > *:nth-child(9) { transition-delay: 0.45s; }
+        .reveal-stagger.visible > *:nth-child(10) { transition-delay: 0.5s; }
+        .reveal-stagger.visible > *:nth-child(11) { transition-delay: 0.55s; }
+
+        /* Topic cards hover */
+        .topic-card {
+            transition: all 0.3s ease;
+        }
+        .topic-card:hover {
+            background: rgba(45, 90, 90, 0.03);
+            transform: translateY(-2px);
+        }
+        .topic-card:hover .topic-num {
+            color: #2d5a5a;
+        }
+
+        /* Timezone table row highlight */
+        .tz-row {
+            transition: background 0.2s ease;
+        }
+        .tz-row:hover {
+            background: rgba(45, 90, 90, 0.04);
+        }
+
+        /* Form inputs consistent with the about page */
+        .form-input {
+            width: 100%;
+            background: rgba(250, 249, 246, 0.5);
+            border: 1px solid #e4e4e7;
+            border-radius: 9999px;
+            padding: 1rem 1.5rem;
+            font-size: 0.875rem;
+            font-family: 'Outfit', sans-serif;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+        .form-input:focus {
+            border-color: #2d5a5a;
+        }
+        .form-textarea {
+            border-radius: 2rem;
+        }
+
+        /* Hero gradient overlay */
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(26,26,26,0.92) 0%, rgba(26,26,26,0.75) 100%);
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-cream text-charcoal" data-current="study">
+
+    <!-- ===================== HEADER ===================== -->
+    <div id="header-placeholder"></div>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="relative min-h-[85vh] w-full overflow-hidden flex items-center justify-center bg-charcoal">
+        <!-- Subtle pattern overlay -->
+        <div class="absolute inset-0 z-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,<svg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;><path d=&quot;M30 0v60M0 30h60&quot; stroke=&quot;white&quot; stroke-width=&quot;0.5&quot; fill=&quot;none&quot;/></svg>'); background-size: 60px 60px;"></div>
+        <div class="hero-gradient absolute inset-0 z-10"></div>
+
+        <div class="relative z-20 text-center px-6 max-w-4xl">
+            <!-- Cross mark -->
+            <div class="mb-8 opacity-0 animate-[fadeIn_1s_0.2s_ease_forwards]">
+                <svg class="mx-auto w-8 h-8 text-gold/60" viewBox="0 0 32 32" fill="none">
+                    <rect x="14" y="4" width="4" height="24" rx="1" fill="currentColor"/>
+                    <rect x="8" y="10" width="16" height="4" rx="1" fill="currentColor"/>
+                </svg>
+            </div>
+
+            <p class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-6 opacity-0 animate-[fadeIn_1s_0.4s_ease_forwards]">
+                A 22-Week Study
+            </p>
+
+            <h1 class="font-display text-5xl md:text-7xl font-bold text-white mb-4 leading-[1.1] opacity-0 animate-[fadeIn_1s_0.6s_ease_forwards]">
+                Know What You<br><span class="italic text-gold">Believe</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl text-white/80 font-light mb-10 opacity-0 animate-[fadeIn_1s_0.8s_ease_forwards]">
+                Based on the book by <span class="font-semibold text-white/95">Paul E. Little</span>
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-12 text-sm text-white/70 opacity-0 animate-[fadeIn_1s_1s_ease_forwards]">
+                <span class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Starting Wed 10 June 2026
+                </span>
+                <span class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Wednesdays 8 PM AEST
+                </span>
+                <span class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                    1 Hour Weekly
+                </span>
+            </div>
+
+            <a href="#join" class="btn-teal inline-block px-12 py-4 text-sm tracking-[0.2em] uppercase font-bold bg-teal text-white rounded-full hover:bg-teal/80 transition-all opacity-0 animate-[fadeIn_1s_1.2s_ease_forwards]">
+                Join the Study
+            </a>
+        </div>
+    </section>
+
+    <!-- ===================== TAGLINE BAR ===================== -->
+    <section class="max-w-4xl mx-auto px-6 py-12 text-center border-y border-zinc-200 mt-20">
+        <p class="text-xl tracking-widest uppercase font-bold text-zinc-400 mb-0">
+            <span class="accent-teal italic">Every doctrine explored</span> &bull; 10 Chapters &bull; <span class="accent-teal italic">One faith Christ-centred</span>
+        </p>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+    <main class="max-w-6xl mx-auto px-6 py-24">
+
+        <section class="max-w-3xl mx-auto mb-24 reveal">
+            <p class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">About This Study</p>
+            <h2 class="font-display text-4xl md:text-5xl font-bold mb-8">
+                Explore the <span class="accent-teal italic">foundations</span> of the Christian faith.
+            </h2>
+            <div class="space-y-5 text-lg text-zinc-600 leading-relaxed">
+                <p>What do Christians actually believe, and why does it matter? Over 22 weeks, we'll walk through Paul E. Little's classic book <strong class="text-charcoal">Know What You Believe</strong>, unpacking the core doctrines of the Christian faith in a way that's accessible, honest, and rooted in Scripture.</p>
+                <p>Whether you're newer to the faith and want a solid grounding, or you've been a Christian for years and want to revisit the essentials with fresh eyes — this study is for you. Each session is designed for real conversation, not lectures. Come with your questions.</p>
+                <p><strong class="text-charcoal">No prior knowledge required.</strong> Just bring a Bible, an open mind, and a willingness to learn together.</p>
+            </div>
+        </section>
+
+        <!-- ===================== TOPICS GRID ===================== -->
+        <section class="mb-32">
+            <div class="text-center mb-12 reveal">
+                <p class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">What We'll Cover</p>
+                <h2 class="font-display text-4xl md:text-5xl font-bold">10 Chapters. 22 Sessions. <span class="accent-teal italic">One Faith.</span></h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal-stagger">
+                <div class="topic-card glass-card p-8">
+                    <span class="topic-num font-display text-4xl font-bold text-zinc-200 block mb-2">01</span>
+                    <h3 class="text-xl font-bold mb-1">The Bible</h3>
+                    <p class="text-sm text-zinc-400">2 sessions</p>
+                </div>
+                <div class="topic-card glass-card p-8">
+                    <span class="topic-num font-display text-4xl font-bold text-zinc-200 block mb-2">02</span>
+                    <h3 class="text-xl font-bold mb-1">God</h3>
+                    <p class="text-sm text-zinc-400">2 sessions</p>
+                </div>
+                <div class="topic-card glass-card p-8">
+                    <span class="topic-num font-display text-4xl font-bold text-zinc-200 block mb-2">03</span>
+                    <h3 class="text-xl font-bold mb-1">Jesus Christ</h3>
+                    <p class="text-sm text-zinc-400">3 sessions</p>
+                </div>
+                <div class="topic-card glass-card p-8">
+                    <span class="topic-num font-display text-4xl font-bold text-zinc-200 block mb-2">04</span>
+                    <h3 class="text-xl font-bold mb-1">Christ's Death</h3>
+                    <p class="text-sm text-zinc-400">2 sessions</p>
+                </div>
+                <div class="topic-card glass-card p-8">
+                    <span class="topic-num font-display text-4xl font-bold text-zinc-200 block mb-2">05</span>
+                    <h3 class="text-xl font-bold mb-1">The Holy Spirit</h3>
+                    <p class="text-sm text-zinc-400">2 sessions</p>
+                </div>
+                <div class="topic-card glass-card p-8">
+                    <span class="topic-num font-display text-4xl font-bold text-zinc-200 block mb-2">06</span>
+                    <h3 class="text-xl font-bold mb-1">Man &amp; Sin</h3>
+                    <p class="text-sm text-zinc-400">2 sessions</p>
+                </div>
+                <div class="topic-card glass-card p-8">
+                    <span class="topic-num font-display text-4xl font-bold text-zinc-200 block mb-2">07</span>
+                    <h3 class="text-xl font-bold mb-1">Salvation</h3>
+                    <p class="text-sm text-zinc-400">3 sessions</p>
+                </div>
+                <div class="topic-card glass-card p-8">
+                    <span class="topic-num font-display text-4xl font-bold text-zinc-200 block mb-2">08</span>
+                    <h3 class="text-xl font-bold mb-1">Angels, Satan &amp; Demons</h3>
+                    <p class="text-sm text-zinc-400">1 session</p>
+                </div>
+                <div class="topic-card glass-card p-8">
+                    <span class="topic-num font-display text-4xl font-bold text-zinc-200 block mb-2">09</span>
+                    <h3 class="text-xl font-bold mb-1">The Church</h3>
+                    <p class="text-sm text-zinc-400">2 sessions</p>
+                </div>
+                <div class="topic-card glass-card p-8">
+                    <span class="topic-num font-display text-4xl font-bold text-zinc-200 block mb-2">10</span>
+                    <h3 class="text-xl font-bold mb-1">Things to Come</h3>
+                    <p class="text-sm text-zinc-400">2 sessions</p>
+                </div>
+                <div class="topic-card glass-card p-8 border-2 border-teal/10 bg-teal/[0.02]">
+                    <span class="topic-num font-display text-4xl font-bold text-teal/30 block mb-2">✦</span>
+                    <h3 class="text-xl font-bold mb-1">Capstone Session</h3>
+                    <p class="text-sm text-zinc-400">1 session · reflection &amp; commissioning</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== DETAILS + TIMEZONE ===================== -->
+        <section class="mb-32">
+            <div class="grid md:grid-cols-2 gap-16">
+                <!-- Left: details -->
+                <div class="reveal">
+                    <p class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">The Details</p>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-8">Everything you <span class="accent-teal italic">need</span> to know</h2>
+                    <div class="space-y-8">
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full border border-teal/15">
+                                <svg class="w-5 h-5 text-teal" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-teal">Starts Wednesday 10 June</h4>
+                                <p class="text-zinc-500">Runs weekly for 22 weeks through late October 2026</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full border border-teal/15">
+                                <svg class="w-5 h-5 text-teal" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-teal">Wednesdays, 8:00 – 9:00 PM</h4>
+                                <p class="text-zinc-500">Melbourne time (AEST) · see times for your zone below</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full border border-teal/15">
+                                <svg class="w-5 h-5 text-teal" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-teal">The Book</h4>
+                                <p class="text-zinc-500"><em>Know What You Believe</em> by Paul E. Little (IVP). Helpful but not required — notes provided each week.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full border border-teal/15">
+                                <svg class="w-5 h-5 text-teal" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-teal">Open to Everyone</h4>
+                                <p class="text-zinc-500">No prior knowledge needed. Come as you are.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: timezone table -->
+                <div class="reveal">
+                    <p class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">Session Times Worldwide</p>
+                    <h3 class="font-display text-2xl font-bold mb-6">Find your <span class="accent-teal italic">time zone</span></h3>
+                    <div class="glass-card overflow-hidden">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="border-b border-zinc-200">
+                                    <th class="px-6 py-4 text-[0.65rem] font-bold tracking-[0.3em] uppercase text-zinc-400">Location</th>
+                                    <th class="px-6 py-4 text-[0.65rem] font-bold tracking-[0.3em] uppercase text-zinc-400 text-right">Time</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm">
+                                <tr class="tz-row border-b border-zinc-100 bg-teal/[0.03]">
+                                    <td class="px-6 py-3.5 font-semibold text-teal">🇦🇺 Melbourne, Australia</td>
+                                    <td class="px-6 py-3.5 text-right font-semibold text-teal">8:00 PM <span class="text-zinc-400 font-normal">AEST · Wed</span></td>
+                                </tr>
+                                <tr class="tz-row border-b border-zinc-100">
+                                    <td class="px-6 py-3.5">🇯🇵 Tokyo, Japan</td>
+                                    <td class="px-6 py-3.5 text-right">7:00 PM <span class="text-zinc-400">JST · Wed</span></td>
+                                </tr>
+                                <tr class="tz-row border-b border-zinc-100">
+                                    <td class="px-6 py-3.5">🇭🇰 Hong Kong</td>
+                                    <td class="px-6 py-3.5 text-right">6:00 PM <span class="text-zinc-400">HKT · Wed</span></td>
+                                </tr>
+                                <tr class="tz-row border-b border-zinc-100">
+                                    <td class="px-6 py-3.5">🇹🇼 Taipei, Taiwan</td>
+                                    <td class="px-6 py-3.5 text-right">6:00 PM <span class="text-zinc-400">CST · Wed</span></td>
+                                </tr>
+                                <tr class="tz-row border-b border-zinc-100">
+                                    <td class="px-6 py-3.5">🇵🇭 Manila, Philippines</td>
+                                    <td class="px-6 py-3.5 text-right">6:00 PM <span class="text-zinc-400">PHT · Wed</span></td>
+                                </tr>
+                                <tr class="tz-row border-b border-zinc-100">
+                                    <td class="px-6 py-3.5">🇦🇪 Dubai, Middle East</td>
+                                    <td class="px-6 py-3.5 text-right">2:00 PM <span class="text-zinc-400">GST · Wed</span></td>
+                                </tr>
+                                <tr class="tz-row border-b border-zinc-100">
+                                    <td class="px-6 py-3.5">🇺🇸 New York, US East</td>
+                                    <td class="px-6 py-3.5 text-right">6:00 AM <span class="text-zinc-400">EDT · Wed</span></td>
+                                </tr>
+                                <tr class="tz-row">
+                                    <td class="px-6 py-3.5">🇺🇸 Los Angeles, US West</td>
+                                    <td class="px-6 py-3.5 text-right">3:00 AM <span class="text-zinc-400">PDT · Wed</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-zinc-400 mt-3 px-1">Times shown for June–August (AEST). Adjust for daylight saving changes in your region.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SCRIPTURE FEATURE ===================== -->
+        <section class="my-24 px-6">
+            <div class="max-w-4xl mx-auto relative group reveal">
+                <div class="absolute -inset-4 bg-teal/5 rounded-[3rem] -rotate-1 transition-transform group-hover:rotate-0 duration-700"></div>
+                <div class="relative glass-card border-2 border-teal/10 p-12 md:p-20 text-center overflow-hidden">
+                    <h2 class="text-2xl md:text-4xl font-display font-bold leading-[1.4] mb-12 italic text-charcoal/90 tracking-tight">
+                        "All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness, so that the servant of God may be thoroughly equipped for every good work."
+                    </h2>
+                    <div class="flex items-center justify-center gap-4">
+                        <div class="h-[1px] w-6 bg-zinc-200"></div>
+                        <p class="text-[0.7rem] font-body font-bold uppercase tracking-[0.4em] text-teal/70">2 Timothy 3:16–17</p>
+                        <div class="h-[1px] w-6 bg-zinc-200"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================== SIGN-UP FORM ===================== -->
+    <section id="join" class="max-w-4xl mx-auto px-6 py-24">
+        <div class="glass-card border-2 border-teal/5 p-10 md:p-16 shadow-sm relative reveal">
+            <div class="text-center mb-12">
+                <p class="text-gold text-[0.65rem] font-bold tracking-[0.4em] uppercase mb-4">Register</p>
+                <h2 class="text-4xl font-bold mb-4">Join the <span class="accent-teal italic font-display">Study</span></h2>
+                <p class="text-lg text-zinc-500 font-light">Sign up below and we'll send you everything you need before we begin.</p>
+            </div>
+
+            <form action="https://formspree.io/f/xrealdyd" method="POST" class="space-y-6">
+                <!-- Hidden field to identify this form -->
+                <input type="hidden" name="_subject" value="Know What You Believe Study — New Registration">
+                <input type="hidden" name="form_source" value="know-what-you-believe-study">
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <input type="text" name="name" required class="form-input" placeholder="Your Name">
+                    <input type="email" name="_replyto" required class="form-input" placeholder="Email Address">
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <select name="timezone" required class="form-input text-zinc-500 appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%23999%22%20d%3D%22M2%204l4%204%204-4%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_1.5rem_center]">
+                        <option value="" disabled selected>Your Time Zone</option>
+                        <option value="AEST">🇦🇺 Melbourne (8:00 PM AEST)</option>
+                        <option value="JST">🇯🇵 Tokyo (7:00 PM JST)</option>
+                        <option value="HKT">🇭🇰 Hong Kong (6:00 PM HKT)</option>
+                        <option value="CST-TW">🇹🇼 Taipei (6:00 PM CST)</option>
+                        <option value="PHT">🇵🇭 Manila (6:00 PM PHT)</option>
+                        <option value="GST">🇦🇪 Middle East (2:00 PM GST)</option>
+                        <option value="EDT">🇺🇸 US East (6:00 AM EDT)</option>
+                        <option value="PDT">🇺🇸 US West (3:00 AM PDT)</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <select name="have_book" class="form-input text-zinc-500 appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%23999%22%20d%3D%22M2%204l4%204%204-4%22%2F%3E%3C%2Fsvg%3E')] bg-no-repeat bg-[right_1.5rem_center]">
+                        <option value="" disabled selected>Do you have the book?</option>
+                        <option value="yes">Yes, I have it</option>
+                        <option value="planning">Planning to get it</option>
+                        <option value="no">No, just using notes</option>
+                    </select>
+                </div>
+
+                <textarea name="message" rows="3" class="form-input form-textarea" placeholder="Any questions or anything you'd like us to know? (optional)"></textarea>
+
+                <div class="text-center pt-4">
+                    <button type="submit" class="btn-teal px-12 py-4 text-sm tracking-[0.2em] uppercase font-bold bg-teal text-white rounded-full hover:bg-teal/80 transition-all cursor-pointer">
+                        Register My Interest
+                    </button>
+                </div>
+            </form>
+
+            <p class="text-center text-xs text-zinc-400 mt-6">You'll receive details and session materials before we begin on 10 June.</p>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <div id="footer-placeholder"></div>
+
+    <!-- ===================== SCRIPTS ===================== -->
+    <script src="/js/main.js" defer></script>
+
+    <script>
+        // Scroll reveal observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+    </script>
+
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</body>
+</html>
