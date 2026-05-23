@@ -501,8 +501,8 @@
     <!-- VIDEO -->
     <!-- ═══════════════════════════════════════════ -->
     <section class="max-w-4xl mx-auto px-6 mb-24 fade-section">
-        <div class="video-wrapper" id="video-container">
-            <p style="color: #666; text-align: center; padding-top: 4rem;">Loading video...</p>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/AsyMp2sfdf0" frameborder="0" allowfullscreen></iframe>
         </div>
     </section>
 
@@ -915,28 +915,6 @@
     <script src="/js/main.js" defer></script>
 
     <script>
-        // ── Ghost Proxy Video ──
-        (async () => {
-            try {
-                const slug = 'more-accurately';
-                const res = await fetch(
-                    `https://ghost-proxy.reinar-6fd.workers.dev/ghost/api/content/posts/slug/${slug}/?key=c306251d7f0f57012025d2fdc4&fields=html`
-                );
-                const json = await res.json();
-                const html = json?.posts?.[0]?.html || '';
-                const match = html.match(/src="(https:\/\/www\.youtube\.com\/embed\/[^"]+)"/);
-                if (match) {
-                    document.getElementById('video-container').innerHTML =
-                        `<iframe src="${match[1]}" frameborder="0" allowfullscreen></iframe>`;
-                } else {
-                    document.getElementById('video-container').innerHTML =
-                        '<p style="color:#999;text-align:center;padding-top:4rem;">Video coming soon.</p>';
-                }
-            } catch {
-                document.getElementById('video-container').innerHTML =
-                    '<p style="color:#999;text-align:center;padding-top:4rem;">Video coming soon.</p>';
-            }
-        })();
 
         // ── Timeline Interactions ──
         function toggleNode(node) {
