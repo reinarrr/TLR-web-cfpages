@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Accurately — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                    fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --cream: #faf9f6;
+            --charcoal: #1a1a1a;
+            --gold: #c5a059;
+            --teal: #2d5a5a;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+
+        .hero-eyebrow {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 9vw, 7rem);
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            color: var(--charcoal);
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--teal);
+        }
+
+        .section-eyebrow {
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .body-text {
+            font-size: 1.15rem;
+            line-height: 1.85;
+            color: #3a3a3a;
+            max-width: 680px;
+        }
+
+        .body-text + .body-text { margin-top: 1.5rem; }
+
+        .pullquote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3.5vw, 2rem);
+            font-style: italic;
+            line-height: 1.4;
+            color: var(--teal);
+            border-left: 3px solid var(--gold);
+            padding-left: 2rem;
+            margin: 3rem 0;
+        }
+
+        .greek-callout {
+            background: #f5f0e8;
+            border-left: 4px solid var(--gold);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .greek-callout .label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .greek-callout .term {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .greek-callout .def {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .scripture-block {
+            background: #f0efec;
+            padding: 2rem 2.5rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+        }
+
+        .scripture-block .ref {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--teal);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .scripture-block .text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        /* ── TIMELINE ── */
+        .timeline-container {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 28px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--gold), var(--teal));
+        }
+
+        .timeline-node {
+            position: relative;
+            padding-left: 72px;
+            padding-bottom: 3rem;
+            cursor: pointer;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 16px;
+            top: 4px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--cream);
+            border: 3px solid var(--gold);
+            transition: all 0.4s ease;
+            z-index: 2;
+        }
+
+        .timeline-node.known .timeline-dot {
+            background: var(--gold);
+            box-shadow: 0 0 0 6px rgba(197, 160, 89, 0.15);
+        }
+
+        .timeline-node.gap .timeline-dot {
+            border-color: var(--teal);
+            background: var(--cream);
+            border-style: dashed;
+        }
+
+        .timeline-node.gap.revealed .timeline-dot {
+            background: var(--teal);
+            border-style: solid;
+            box-shadow: 0 0 0 6px rgba(45, 90, 90, 0.15);
+        }
+
+        .timeline-status {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-node.known .timeline-status { color: var(--gold); }
+        .timeline-node.gap .timeline-status { color: var(--teal); }
+
+        .timeline-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-body {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .timeline-reveal {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease, opacity 0.4s ease;
+            opacity: 0;
+        }
+
+        .timeline-node.revealed .timeline-reveal,
+        .timeline-node.known .timeline-reveal {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        .gap-cover {
+            background: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 8px,
+                rgba(45, 90, 90, 0.04) 8px,
+                rgba(45, 90, 90, 0.04) 16px
+            );
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            border: 2px dashed rgba(45, 90, 90, 0.2);
+            margin-top: 0.75rem;
+            transition: all 0.5s ease;
+        }
+
+        .timeline-node.gap.revealed .gap-cover {
+            background: rgba(45, 90, 90, 0.04);
+            border-style: solid;
+            border-color: rgba(45, 90, 90, 0.15);
+        }
+
+        .gap-label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--teal);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ── INTERACTIVE: WHERE ARE YOU ── */
+        .posture-card {
+            border: 2px solid #e8e4de;
+            border-radius: 16px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .posture-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+        }
+
+        .posture-card.selected {
+            border-color: var(--teal);
+            background: rgba(45, 90, 90, 0.03);
+            box-shadow: 0 0 0 4px rgba(45, 90, 90, 0.08);
+        }
+
+        .posture-card .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .posture-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .posture-card p {
+            font-size: 0.9rem;
+            color: #777;
+            line-height: 1.6;
+        }
+
+        .posture-response {
+            background: var(--charcoal);
+            border-radius: 20px;
+            padding: 3rem;
+            color: white;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .posture-response.active { display: block; }
+
+        .posture-response h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .posture-response p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.85);
+        }
+
+        /* ── PIPELINE ── */
+        .pipeline-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+        }
+
+        .pipeline-step + .pipeline-step {
+            border-top: 1px solid #e8e4de;
+        }
+
+        .pipeline-num {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pipeline-arrow {
+            text-align: center;
+            color: var(--gold);
+            font-size: 1.2rem;
+            padding: 0.5rem 0;
+        }
+
+        /* ── DISCUSSION ── */
+        .discussion-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #e8e4de;
+        }
+
+        .discussion-item:last-child { border-bottom: none; }
+
+        .discussion-num {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 0.3em;
+            margin-bottom: 0.5rem;
+        }
+
+        .discussion-q {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        /* ── CTA ── */
+        .cta-block {
+            background: var(--charcoal);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-block h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .cta-block p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--gold);
+            color: var(--charcoal);
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-btn:hover { transform: scale(1.05); }
+
+        /* ── VIDEO ── */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 16px;
+            background: #111;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        /* ── FADE IN ── */
+        .fade-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 640px) {
+            .posture-grid { grid-template-columns: 1fr !important; }
+            .pipeline-step { flex-direction: column; gap: 0.75rem; }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <div id="header-placeholder"></div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- HERO -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="max-w-5xl mx-auto px-6 pt-24 pb-16 text-center">
+        <span class="hero-eyebrow">Acts Journey &bull; Acts 18:18–28 &bull; Pentecost Sunday</span>
+        <h1 class="hero-title mb-8">More <em>Accurately</em></h1>
+        <p class="text-2xl text-zinc-400 max-w-3xl mx-auto font-light leading-relaxed">
+            He had the education. He had the fire. He had the Scriptures.<br>
+            He was missing the one thing that changed everything.
+        </p>
+    </section>
+
+    <section class="max-w-5xl mx-auto px-6 py-8 text-center border-y border-zinc-200 mb-20">
+        <p class="text-sm tracking-widest uppercase font-bold text-zinc-400 mb-0">
+            <span style="color: var(--teal)" class="italic">Pentecost</span> &bull; Kitchen Tables &bull; <span style="color: var(--teal)" class="italic">The Full Picture</span>
+        </p>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- VIDEO -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="max-w-4xl mx-auto px-6 mb-24 fade-section">
+        <div class="video-wrapper" id="video-container">
+            <p style="color: #666; text-align: center; padding-top: 4rem;">Loading video...</p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECTION 1: THE PRIVATE ALTAR -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="max-w-3xl mx-auto px-6 mb-28 fade-section">
+        <p class="section-eyebrow">Part One</p>
+        <h2 class="section-title">The Private <em style="color: var(--teal); font-style: italic;">Altar</em></h2>
+
+        <p class="body-text">Paul shaves his head at a port town called Cenchreae. Luke gives us no fanfare, no explanation, no theological commentary. Just the act. A man completing a vow at the end of the most intense season of his career.</p>
+
+        <p class="body-text">Eighteen months in Corinth. A night vision from God addressing his fear. A courtroom appearance before the Roman proconsul. A synagogue that split down the middle. And now, quietly, at the harbor — before he even gets on the boat — he marks what God did.</p>
+
+        <div class="greek-callout">
+            <p class="label">Greek</p>
+            <p class="term">euchē (εὐχή)</p>
+            <p class="def">A vow — a voluntary promise made to God. This was likely a Nazirite vow (Numbers 6:1–21), a period of intense consecration involving abstaining from grape products and letting one's hair grow. At its completion, the hair was cut and offered as a sacrifice. Luke doesn't name the vow explicitly, but the pattern fits. Three layers sit beneath it: an act of thanksgiving for God's protection through Corinth, a commitment to purity while navigating one of the most morally corrosive cities in the empire, and a cultural conciliation — visually demonstrating to Jewish believers that despite his radical Gentile ministry, Paul had not abandoned the Law of Moses.</p>
+        </div>
+
+        <p class="body-text">Paul — the great theologian of grace, who argued more forcefully than anyone that the law cannot save — is voluntarily practicing an Old Testament discipline. Not because the Torah required it. Because gratitude required it. He was free <em>from</em> the law but still free <em>to</em> use its forms when they served devotion rather than obligation.</p>
+
+        <div class="pullquote">Some of the most important things you do with God will never make a testimony, a post, or a Sunday story. They are between you and Him.</div>
+
+        <p class="body-text">Then Paul sails. He touches Ephesus briefly — the synagogue wants him to stay — and he says no. "I will come back, God willing." The Greek is <em>tou theou thelontos</em> — a surrender of the schedule to the Scheduler. Not every open door is a <em>now</em> door. Paul sees the opportunity, and defers it. That's not indecision. That's maturity.</p>
+
+        <p class="body-text">And then Luke compresses what may have been months of travel into a single breath: Caesarea, Jerusalem, Antioch, Galatia, Phrygia — all in two verses. Paul is gone. Third missionary journey, underway.</p>
+
+        <p class="body-text">But the camera doesn't follow him.</p>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECTION 2: THE SEED ON THE GROUND -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="max-w-3xl mx-auto px-6 mb-28 fade-section">
+        <p class="section-eyebrow">Part Two</p>
+        <h2 class="section-title">The Seed on the <em style="color: var(--teal); font-style: italic;">Ground</em></h2>
+
+        <p class="body-text">Paul deposits Priscilla and Aquila in Ephesus. This is not abandonment — it's deployment. He is placing a trusted team in the most strategically important city in Asia Minor before he has even done ministry there. He's seeding the ground.</p>
+
+        <p class="body-text">Luke's camera makes a deliberate editorial choice. Paul heads off on his third journey — strengthening churches, revisiting communities, consolidating the work. And Luke doesn't follow him. The camera stays in Ephesus. With the tentmakers. With the refugees.</p>
+
+        <p class="body-text">The rest of Acts 18 doesn't belong to the apostle. It belongs to the people he left behind.</p>
+
+        <div class="greek-callout">
+            <p class="label">Greek</p>
+            <p class="term">epistērizō (ἐπιστηρίζω)</p>
+            <p class="def">To strengthen further, to confirm, to establish more firmly. The prefix epi- intensifies the root stērizō (to fix, to make stable). This is what Paul is doing on his return loop through Galatia and Phrygia — not starting new work, but reinforcing what's already there. The same root word Jesus uses when he tells Peter: "When you have turned back, strengthen your brothers" (Luke 22:32).</p>
+        </div>
+
+        <div class="pullquote">The measure of your ministry is not what happens when you're in the room. It's what happens after you leave.</div>
+
+        <!-- Pipeline -->
+        <div style="background: white; border-radius: 20px; padding: 2.5rem; margin: 2.5rem 0; border: 1px solid #e8e4de;">
+            <p class="section-eyebrow" style="margin-bottom: 1.5rem;">The Pipeline</p>
+
+            <div class="pipeline-step">
+                <div class="pipeline-num">1</div>
+                <div>
+                    <p style="font-weight: 600; margin-bottom: 0.25rem;">Rome — Displacement</p>
+                    <p style="font-size: 0.95rem; color: #777;">Claudius expels Jews from Rome. Aquila and Priscilla lose everything.</p>
+                </div>
+            </div>
+            <div class="pipeline-arrow">↓</div>
+            <div class="pipeline-step">
+                <div class="pipeline-num">2</div>
+                <div>
+                    <p style="font-weight: 600; margin-bottom: 0.25rem;">Corinth — Provision</p>
+                    <p style="font-size: 0.95rem; color: #777;">They meet Paul. Same trade, same table, same theology. Formation begins.</p>
+                </div>
+            </div>
+            <div class="pipeline-arrow">↓</div>
+            <div class="pipeline-step">
+                <div class="pipeline-num">3</div>
+                <div>
+                    <p style="font-weight: 600; margin-bottom: 0.25rem;">Ephesus — Deployment</p>
+                    <p style="font-size: 0.95rem; color: #777;">Paul deposits them in the most strategic city in Asia Minor. The seed is planted.</p>
+                </div>
+            </div>
+            <div class="pipeline-arrow">↓</div>
+            <div class="pipeline-step">
+                <div class="pipeline-num">4</div>
+                <div>
+                    <p style="font-weight: 600; margin-bottom: 0.25rem;">Ephesus — Multiplication</p>
+                    <p style="font-size: 0.95rem; color: #777;">They teach Apollos. The refugees become the faculty.</p>
+                </div>
+            </div>
+            <div class="pipeline-arrow">↓</div>
+            <div class="pipeline-step">
+                <div class="pipeline-num">5</div>
+                <div>
+                    <p style="font-weight: 600; margin-bottom: 0.25rem;">Corinth — Harvest</p>
+                    <p style="font-size: 0.95rem; color: #777;">Apollos goes to Corinth and powerfully strengthens the church Paul planted.</p>
+                </div>
+            </div>
+
+            <p style="font-size: 0.9rem; color: #999; margin-top: 1.5rem; text-align: center; font-style: italic;">Nobody in this pipeline chose their assignment. Every link was providential.</p>
+        </div>
+
+        <p class="body-text">A refugee couple who never wrote a line of Scripture, never held a title, never received a letter of commendation from Jerusalem — hosting churches on two continents and shaping the most eloquent preacher in the eastern Mediterranean.</p>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECTION 3: THE TIMELINE APOLLOS DIDN'T HAVE -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="max-w-3xl mx-auto px-6 mb-12 fade-section">
+        <p class="section-eyebrow">Part Three &bull; The Heart</p>
+        <h2 class="section-title">The Timeline Apollos <em style="color: var(--teal); font-style: italic;">Didn't Have</em></h2>
+
+        <p class="body-text">Luke introduces Apollos with stacked credentials. <em>Anēr logios</em> — a learned man, trained in rhetoric and argumentation. <em>Dunatos en tais graphais</em> — powerful in the Scriptures. <em>Zeōn tō pneumati</em> — boiling in spirit. He taught about Jesus with accuracy and with fire.</p>
+
+        <p class="body-text">He was from Alexandria — the intellectual capital of the ancient world. Home to the Great Library. Birthplace of the Septuagint. Home to Philo, the most prominent Jewish philosopher of the first century. Apollos was not a backwater preacher. He was a product of the most rigorous intellectual environment in the ancient world.</p>
+
+        <p class="body-text">And then Luke drops the devastating qualifier: <em>"However, he knew only about John's baptism."</em></p>
+
+        <p class="body-text">His theology stopped before the cross. Before the resurrection. Before Pentecost. He was preaching the right person from an incomplete story. And an incomplete story — no matter how passionately you tell it — leaves people short of where God wants them to be.</p>
+
+        <div class="scripture-block">
+            <p class="ref">Acts 18:24–25 (NLT)</p>
+            <p class="text">"Meanwhile, a Jew named Apollos, an eloquent speaker who knew the Scriptures well, had arrived in Ephesus from Alexandria in Egypt. He had been taught the way of the Lord, and he taught others about Jesus with an enthusiastic spirit and with accuracy. However, he knew only about John's baptism."</p>
+        </div>
+    </section>
+
+    <!-- ── THE INTERACTIVE TIMELINE ── -->
+    <section class="max-w-3xl mx-auto px-6 mb-28 fade-section">
+        <div style="background: white; border-radius: 24px; padding: 2.5rem; border: 1px solid #e8e4de;">
+            <p class="section-eyebrow" style="margin-bottom: 0.5rem;">Interactive</p>
+            <p style="font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">What Apollos Knew — and What He Was Missing</p>
+            <p style="font-size: 0.9rem; color: #999; margin-bottom: 2rem;">Tap each event to explore. Gold markers are what Apollos knew. Teal markers are the gaps Priscilla and Aquila filled.</p>
+
+            <div class="timeline-container" id="timeline">
+                <div class="timeline-line"></div>
+
+                <!-- KNOWN: John's Ministry -->
+                <div class="timeline-node known" onclick="toggleNode(this)">
+                    <div class="timeline-dot"></div>
+                    <p class="timeline-status">Apollos Knew This</p>
+                    <p class="timeline-heading">John's Baptism in the Jordan</p>
+                    <p class="timeline-body">The call to repentance. The preparing of the way. "Someone greater is coming."</p>
+                    <div class="timeline-reveal">
+                        <p class="timeline-body" style="margin-top: 0.75rem;">John's baptism was water and repentance — an act of turning around, admitting you need God, getting ready. It pointed forward to the Messiah. But that's where it stopped. It was the road being cleared. Not the arrival.</p>
+                    </div>
+                </div>
+
+                <!-- KNOWN: Jesus's Ministry -->
+                <div class="timeline-node known" onclick="toggleNode(this)">
+                    <div class="timeline-dot"></div>
+                    <p class="timeline-status">Apollos Knew This</p>
+                    <p class="timeline-heading">Jesus's Life and Teaching</p>
+                    <p class="timeline-body">The miracles. The parables. The radical claims. The Messiah had come.</p>
+                    <div class="timeline-reveal">
+                        <p class="timeline-body" style="margin-top: 0.75rem;">Apollos knew the historical facts about Jesus's earthly ministry. He was familiar with His teaching, His claims, His identity as the Messiah. He wasn't confused about <em>who</em> Jesus was. He had the right person.</p>
+                    </div>
+                </div>
+
+                <!-- GAP: The Cross -->
+                <div class="timeline-node gap" onclick="revealGap(this)">
+                    <div class="timeline-dot"></div>
+                    <p class="timeline-status">The Gap Begins</p>
+                    <p class="timeline-heading">The Cross</p>
+                    <p class="timeline-body">Where Apollos's timeline likely stopped — or stopped short of its full meaning.</p>
+                    <div class="timeline-reveal">
+                        <div class="gap-cover">
+                            <p class="gap-label">What Was Missing</p>
+                            <p class="timeline-body">The cross as the inauguration of the new covenant. Not just a death — but the sacrificial act that made forgiveness of sins possible for all people, not through the temple system, but through the blood of Jesus. Christian baptism builds on John's — it symbolizes identification with Christ's death, burial, and resurrection. Apollos had the preparation. He didn't have the fulfillment.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GAP: The Resurrection -->
+                <div class="timeline-node gap" onclick="revealGap(this)">
+                    <div class="timeline-dot"></div>
+                    <p class="timeline-status">The Gap</p>
+                    <p class="timeline-heading">The Resurrection</p>
+                    <p class="timeline-body">The event that validated everything Jesus claimed.</p>
+                    <div class="timeline-reveal">
+                        <div class="gap-cover">
+                            <p class="gap-label">What Was Missing</p>
+                            <p class="timeline-body">Without the resurrection, the cross is a tragedy. With it, it's a victory. The resurrection is not an epilogue — it's the thesis. It is God's declaration that death does not have the final word, that the new creation has begun, and that Jesus is exactly who He said He was. This is the hinge of history that Apollos's timeline hadn't fully reckoned with.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GAP: The Ascension -->
+                <div class="timeline-node gap" onclick="revealGap(this)">
+                    <div class="timeline-dot"></div>
+                    <p class="timeline-status">The Gap</p>
+                    <p class="timeline-heading">The Ascension</p>
+                    <p class="timeline-body">Jesus doesn't just rise — He reigns.</p>
+                    <div class="timeline-reveal">
+                        <div class="gap-cover">
+                            <p class="gap-label">What Was Missing</p>
+                            <p class="timeline-body">The ascension means Jesus is not a historical figure to remember — He is a reigning King to follow. He is seated at the right hand of the Father, actively interceding, actively ruling. The early church didn't preach a dead hero or even a risen teacher. They preached a living King. That's the claim that turned the world upside down.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GAP: Pentecost -->
+                <div class="timeline-node gap" onclick="revealGap(this)">
+                    <div class="timeline-dot"></div>
+                    <p class="timeline-status">The Gap &bull; Pentecost Sunday</p>
+                    <p class="timeline-heading">Pentecost — The Spirit Poured Out</p>
+                    <p class="timeline-body">The arrival. The moment God stopped being out there and started being in here.</p>
+                    <div class="timeline-reveal">
+                        <div class="gap-cover">
+                            <p class="gap-label">What Was Missing — And What This Day Celebrates</p>
+                            <p class="timeline-body">This is the big one. The Holy Spirit poured out on all flesh — not reserved for prophets and kings anymore, but living inside fishermen, tentmakers, and anyone who receives Him. Pentecost is not just an event on a church calendar. It's the moment the presence of God moved from the temple into people. John's baptism said: turn around, God is coming. Pentecost said: He's here. He's inside you. He's not leaving.</p>
+                            <p class="timeline-body" style="margin-top: 0.75rem;">Apollos was preaching from the right book but from the wrong chapter. He was still in the introduction. His theology was tethered to the old epoch of John the Baptist. Priscilla and Aquila took him to the rest of the story — the chapter that begins with fire falling on a room and ends with the church being born.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GAP: The Church -->
+                <div class="timeline-node gap" onclick="revealGap(this)">
+                    <div class="timeline-dot"></div>
+                    <p class="timeline-status">The Gap</p>
+                    <p class="timeline-heading">The Birth of the Church</p>
+                    <p class="timeline-body">A new community. The Body of Christ. Not an institution — a living organism.</p>
+                    <div class="timeline-reveal">
+                        <div class="gap-cover">
+                            <p class="gap-label">What Was Missing</p>
+                            <p class="timeline-body">Christian baptism doesn't just symbolize repentance — it symbolizes entry into the Body of Christ. You are buried with Him, raised with Him, and made part of a community the world had never seen before: Jew and Gentile, slave and free, male and female, all one in Christ. Apollos's theology hadn't arrived here yet. He had the water. He didn't yet have the fire. He didn't yet have the family.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 1rem;">
+                <button onclick="revealAll()" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); background: none; border: 2px solid var(--teal); padding: 0.75rem 2rem; border-radius: 100px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='var(--teal)'; this.style.color='white'" onmouseout="this.style.background='none'; this.style.color='var(--teal)'">Reveal The Full Timeline</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECTION 3 CONTINUED: THE KITCHEN TABLE -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="max-w-3xl mx-auto px-6 mb-28 fade-section">
+        <p class="section-eyebrow">Part Three Continued</p>
+        <h2 class="section-title">The Kitchen <em style="color: var(--teal); font-style: italic;">Table</em></h2>
+
+        <p class="body-text">When Priscilla and Aquila heard Apollos preaching boldly in the synagogue, they didn't stand up and correct him publicly. They didn't post a rebuttal. They didn't whisper about his gaps to the congregation.</p>
+
+        <p class="body-text">They invited him home.</p>
+
+        <p class="body-text">The Greek <em>proselabonto auton</em> means they "took him to themselves" — they brought him into their household. Over a kitchen table, they filled in what was missing. The most important theological education in Acts 18 didn't happen in a synagogue, a lecture hall, or a school in Alexandria. It happened in a living room.</p>
+
+        <div class="greek-callout">
+            <p class="label">Greek</p>
+            <p class="term">akribesteron (ἀκριβέστερον)</p>
+            <p class="def">The comparative form of akribēs — more precisely, more exactly, more accurately. The "-teron" suffix indicates degree: not wrong-to-right, but good-to-better. Apollos was already teaching akribōs (accurately). Priscilla and Aquila added precision. Some of the most important spiritual growth in your life won't feel like a dramatic conversion. It'll feel like someone adding precision to what you already believed — moving you from the right city to the right door.</p>
+        </div>
+
+        <p class="body-text">Priscilla is named first. Luke does this deliberately — and Paul follows the same convention in Romans 16:3 and 2 Timothy 4:19. In Greco-Roman writing, name order reflected prominence. She and Aquila together taught the most educated man in Ephesus.</p>
+
+        <p class="body-text">Two tentmakers. Refugees. No title. No ordination. No letter from Jerusalem. Just a kitchen table and the full story.</p>
+
+        <p class="body-text">They didn't have what Apollos had — the education, the eloquence, the rhetorical training from Alexandria. But they had what Apollos didn't — the complete picture. And it turns out, the full picture in uncredentialed hands is more valuable than a partial picture in brilliant ones.</p>
+
+        <div class="pullquote">The synagogue was where Apollos performed. The household was where he was formed. The platform gave him an audience. The kitchen table gave him the theology to actually serve them.</div>
+
+        <p class="body-text">And this is what the Spirit does. Pentecost was never about credentials. The Spirit fell on fishermen, tax collectors, ordinary people in an ordinary room. And those ordinary people turned the world upside down. Now two of their spiritual descendants — refugees with a tent-making trade — are completing the education of the most eloquent man in the eastern Mediterranean. The Spirit doesn't wait for your title. He equips you at the table before anyone recognizes you on the stage.</p>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECTION 4: WHAT HE BECAME -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="max-w-3xl mx-auto px-6 mb-28 fade-section">
+        <p class="section-eyebrow">Part Four</p>
+        <h2 class="section-title">What He <em style="color: var(--teal); font-style: italic;">Became</em></h2>
+
+        <p class="body-text">The result is immediate and dramatic. Apollos goes to Corinth. He "proved to be of great benefit to those who, by God's grace, had believed." He "refuted the Jews with powerful arguments in public debate, using the Scriptures to explain that Jesus was the Messiah."</p>
+
+        <p class="body-text">Same eloquence. Same fire. Same Scriptures. But now — the full picture. The cross. The resurrection. And the Spirit. The Holy Spirit poured out on all flesh — not reserved for prophets and kings anymore, but living inside fishermen and tentmakers and anyone who receives Him.</p>
+
+        <p class="body-text">Priscilla and Aquila didn't give him new passion. They gave him the precision to aim it. And that precision had a source — the same Spirit that fell on that room in Jerusalem, the same Spirit we celebrate today, the same Spirit that turned two refugees into the faculty Apollos never knew he needed.</p>
+
+        <div class="scripture-block">
+            <p class="ref">1 Corinthians 3:6–7 (NLT)</p>
+            <p class="text">"I planted the seed in your hearts, and Apollos watered it, but it was God who made it grow. It's not important who does the planting, or who does the watering. What's important is that God makes the seed grow."</p>
+        </div>
+
+        <p class="body-text">Apollos becomes so effective in Corinth that the church begins to split into factions — "I follow Paul," "I follow Apollos." And Paul's response is a rebuke of personality-driven ministry: I planted. Apollos watered. But God — not the preacher — gave the growth. The whole pipeline, from Claudius's edict to Apollos's pulpit, is held together not by any one person's brilliance but by the Spirit working through every link in the chain.</p>
+
+        <div class="pullquote">He had the water. He didn't yet have the fire. Priscilla and Aquila gave him Pentecost.</div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECTION 5: WHERE DOES YOUR TIMELINE STOP? -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="max-w-3xl mx-auto px-6 mb-28 fade-section">
+        <p class="section-eyebrow">Part Five &bull; The Pentecost Question</p>
+        <h2 class="section-title">Where Does Your <em style="color: var(--teal); font-style: italic;">Timeline</em> Stop?</h2>
+
+        <p class="body-text">Apollos's story raises a question — not just for him, but for anyone who takes faith seriously. Where does your timeline stop? Are you living in the full reality of what the Spirit makes possible? Or are you operating on an older, smaller version of the faith — passionate, maybe even accurate, but pre-Pentecost?</p>
+
+        <p class="body-text" style="margin-bottom: 2.5rem;">Be honest. Choose the posture that best describes where you are right now.</p>
+
+        <div class="posture-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;" id="posture-selector">
+            <div class="posture-card" onclick="selectPosture(this, 'curious')">
+                <div class="icon">🔍</div>
+                <h4>Curious</h4>
+                <p>I'm exploring. I know about God but I'm not sure about this "Spirit living inside me" part.</p>
+            </div>
+            <div class="posture-card" onclick="selectPosture(this, 'stuck')">
+                <div class="icon">⏸️</div>
+                <h4>Stuck</h4>
+                <p>I believe, but something feels incomplete. Like I'm running on knowledge without power.</p>
+            </div>
+            <div class="posture-card" onclick="selectPosture(this, 'hungry')">
+                <div class="icon">🔥</div>
+                <h4>Hungry</h4>
+                <p>I want more. I know there's a deeper reality with the Spirit and I want to live in it.</p>
+            </div>
+            <div class="posture-card" onclick="selectPosture(this, 'full')">
+                <div class="icon">🌊</div>
+                <h4>Walking in It</h4>
+                <p>I know the Spirit. I depend on Him daily. But I want to help others find what I've found.</p>
+            </div>
+        </div>
+
+        <!-- Responses -->
+        <div class="posture-response" id="resp-curious">
+            <h3>The invitation is open.</h3>
+            <p>Apollos was curious too — deeply so. He had studied, he had searched, he had committed his mind to understanding God. What he hadn't yet encountered was the full reality of what God had done. You're in good company. The fact that you're here, reading this, asking questions — that's not distance from God. That's the beginning of encounter. The Spirit doesn't require expertise. He requires honesty. And you've just been honest.</p>
+            <p style="margin-top: 1rem;">Start here: Ask God to show you what you're missing. Not what you're doing wrong — what you haven't yet seen. He's been waiting for that prayer.</p>
+        </div>
+
+        <div class="posture-response" id="resp-stuck">
+            <h3>You might be where Apollos was.</h3>
+            <p>Accurate. Sincere. Even passionate. But operating on a version of the faith that stops before the Spirit fully takes over. That's not failure — it's the gap between knowing about God and living in the daily, present-tense reality of His Spirit inside you. The difference is not more information. It's surrender. The Spirit doesn't need you to understand Him fully before He moves. He needs you to stop holding the reins.</p>
+            <p style="margin-top: 1rem;">Start here: Tell God you're tired of running on your own fuel. Ask Him to fill what's been empty. He won't turn that prayer down.</p>
+        </div>
+
+        <div class="posture-response" id="resp-hungry">
+            <h3>That hunger is the Spirit's invitation.</h3>
+            <p>The fact that you want more is itself evidence that the Spirit is already at work. He creates the hunger He intends to satisfy. You are not far from the fire — you're standing at the edge of it, and the only thing between you and the full reality is the willingness to step in. Don't wait for the right feelings. Don't wait for the right moment. The Spirit meets hunger, not perfection.</p>
+            <p style="margin-top: 1rem;">Start here: Open your hands. Literally. Ask the Spirit to fill you — not with information, but with Himself. And then expect Him to move. He will.</p>
+        </div>
+
+        <div class="posture-response" id="resp-full">
+            <h3>You might be someone's Priscilla and Aquila.</h3>
+            <p>Here's what's remarkable about this story: Priscilla and Aquila didn't hold what they had. They gave it away. They saw a man with fire and no framework, and they invited him to dinner and filled in the gaps. You know the Spirit. You walk in Him. The question is no longer about your own timeline — it's about who you're helping complete theirs. Somewhere near you is an Apollos — passionate, sincere, maybe even leading — and they're missing what you carry.</p>
+            <p style="margin-top: 1rem;">Start here: Look around your life. Who is on fire but incomplete? That person doesn't need your platform. They need your table.</p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- DISCUSSION QUESTIONS -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="max-w-3xl mx-auto px-6 mb-28 fade-section">
+        <div style="background: white; border-radius: 24px; padding: 3rem; border: 1px solid #e8e4de;">
+            <p class="section-eyebrow">For Your Living Room</p>
+            <h2 class="section-title" style="font-size: 1.8rem;">Discussion <em style="color: var(--teal); font-style: italic;">Questions</em></h2>
+
+            <div class="discussion-item">
+                <p class="discussion-num">Question 01</p>
+                <p class="discussion-q">Apollos was passionate, accurate, and educated — but incomplete. Where in your own faith journey have you realized you were operating on a partial picture? What filled the gap?</p>
+            </div>
+
+            <div class="discussion-item">
+                <p class="discussion-num">Question 02</p>
+                <p class="discussion-q">Priscilla and Aquila corrected Apollos privately, over a meal, in their home — not publicly. Why does the setting of discipleship matter? What's the difference between being corrected on a platform and being completed at a kitchen table?</p>
+            </div>
+
+            <div class="discussion-item">
+                <p class="discussion-num">Question 03</p>
+                <p class="discussion-q">On Pentecost Sunday: What does it actually mean to live in the full reality of the Holy Spirit? What does a "pre-Pentecost" faith look like in practice — and how do you know if that's where you are?</p>
+            </div>
+
+            <div class="discussion-item">
+                <p class="discussion-num">Question 04</p>
+                <p class="discussion-q">Who in your life is your Priscilla and Aquila — someone without the title but with the truth? And who might you be that for — someone with fire who needs the full picture?</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SERMON EXCERPT -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="max-w-3xl mx-auto px-6 mb-28 fade-section">
+        <div style="background: var(--charcoal); border-radius: 24px; padding: 3rem; text-align: center;">
+            <p style="font-size: 0.6rem; font-weight: 700; color: var(--gold); letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 2rem;">The Message In Five Lines</p>
+
+            <p style="font-family: 'Playfair Display', serif; font-size: 1.2rem; color: rgba(255,255,255,0.85); line-height: 2; max-width: 520px; margin: 0 auto;">
+                Paul completes his vow and sails away.<br>
+                The camera stays with the seed he planted.<br>
+                A man from Alexandria had everything except the full story.<br>
+                Two refugees took him home and gave him Pentecost.<br>
+                <span style="color: var(--gold);">The church grows at kitchen tables, not just on stages.</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- CTA -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="max-w-3xl mx-auto px-6 mb-20 fade-section">
+        <div class="cta-block">
+            <h2>Go Deeper Together</h2>
+            <p>This deep dive is designed for your living room. Gather your people, open the text, and ask the hard questions together.</p>
+            <a href="https://thelivingroom.io/deepdives" class="cta-btn">Explore More Deep Dives</a>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SCRIPTS -->
+    <!-- ═══════════════════════════════════════════ -->
+    <script src="/js/main.js" defer></script>
+
+    <script>
+        // ── Ghost Proxy Video ──
+        (async () => {
+            try {
+                const slug = 'more-accurately';
+                const res = await fetch(
+                    `https://ghost-proxy.reinar-6fd.workers.dev/ghost/api/content/posts/slug/${slug}/?key=c306251d7f0f57012025d2fdc4&fields=html`
+                );
+                const json = await res.json();
+                const html = json?.posts?.[0]?.html || '';
+                const match = html.match(/src="(https:\/\/www\.youtube\.com\/embed\/[^"]+)"/);
+                if (match) {
+                    document.getElementById('video-container').innerHTML =
+                        `<iframe src="${match[1]}" frameborder="0" allowfullscreen></iframe>`;
+                } else {
+                    document.getElementById('video-container').innerHTML =
+                        '<p style="color:#999;text-align:center;padding-top:4rem;">Video coming soon.</p>';
+                }
+            } catch {
+                document.getElementById('video-container').innerHTML =
+                    '<p style="color:#999;text-align:center;padding-top:4rem;">Video coming soon.</p>';
+            }
+        })();
+
+        // ── Timeline Interactions ──
+        function toggleNode(node) {
+            node.classList.toggle('revealed');
+        }
+
+        function revealGap(node) {
+            node.classList.add('revealed');
+        }
+
+        function revealAll() {
+            document.querySelectorAll('.timeline-node').forEach(n => n.classList.add('revealed'));
+        }
+
+        // ── Posture Selector ──
+        function selectPosture(card, id) {
+            document.querySelectorAll('.posture-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            document.querySelectorAll('.posture-response').forEach(r => r.classList.remove('active'));
+            const resp = document.getElementById('resp-' + id);
+            if (resp) {
+                resp.classList.add('active');
+                resp.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // ── Fade In on Scroll ──
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-section').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
