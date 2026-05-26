@@ -45,7 +45,245 @@
         </div>
     </section>
 
- <!--   
+<!-- ── KNOW WHAT YOU BELIEVE · MAIN FEATURE BANNER ── -->
+<section class="kwyb-banner">
+    <style>
+        .kwyb-banner {
+            position: relative;
+            background-color: #0c1e1e;
+            overflow: hidden;
+            padding: 6rem 1.5rem;
+            text-align: center;
+        }
+        .kwyb-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 110% 70% at 50% 110%, rgba(45,90,90,0.45) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 35% at 80% 10%, rgba(197,160,89,0.07) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .kwyb-deco {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .kwyb-deco svg { width: 100%; height: 100%; }
+        .kwyb-inner {
+            position: relative;
+            max-width: 52rem;
+            margin: 0 auto;
+        }
+        .kwyb-cross {
+            margin: 0 auto 1.75rem;
+            opacity: 0;
+            animation: kwybFade 0.8s ease 0.15s forwards;
+        }
+        .kwyb-eyebrow {
+            display: block;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: #c5a059;
+            margin-bottom: 2rem;
+            font-family: 'Outfit', sans-serif;
+            opacity: 0;
+            animation: kwybFade 0.8s ease 0.3s forwards;
+        }
+        .kwyb-titles { margin-bottom: 0.75rem; line-height: 1.05; }
+        .kwyb-line {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: clamp(2.8rem, 9vw, 7rem);
+            letter-spacing: -0.02em;
+            opacity: 0;
+        }
+        .kwyb-sep {
+            display: block;
+            font-size: 0.55rem;
+            font-weight: 600;
+            letter-spacing: 0.5em;
+            color: rgba(45,90,90,0.5);
+            margin: 0.4rem 0;
+            font-family: 'Outfit', sans-serif;
+            opacity: 0;
+            animation: kwybFade 0.5s ease 0.9s forwards;
+        }
+        .kwyb-line-1 { color: #e8e4d8; animation: kwybRise 0.9s ease 0.4s forwards; }
+        .kwyb-line-2 { color: #c5a059; font-style: italic; animation: kwybRise 0.9s ease 0.65s forwards; }
+        .kwyb-subtitle {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.3);
+            font-family: 'Outfit', sans-serif;
+            margin: 1.25rem 0 2rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            opacity: 0;
+            animation: kwybFade 0.9s ease 1s forwards;
+        }
+        .kwyb-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
+            font-family: 'Outfit', sans-serif;
+            flex-wrap: wrap;
+            margin-bottom: 2.75rem;
+            opacity: 0;
+            animation: kwybFade 0.9s ease 1.1s forwards;
+        }
+        .kwyb-meta strong { color: rgba(197,160,89,0.65); font-weight: 600; }
+        .kwyb-meta .dot { opacity: 0.3; }
+        .kwyb-btn {
+            display: inline-block;
+            padding: 0.9rem 2.75rem;
+            background: rgba(45,90,90,0.3);
+            border: 1px solid rgba(45,90,90,0.7);
+            color: rgba(255,255,255,0.85);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 100px;
+            transition: background 0.2s, border-color 0.2s;
+            opacity: 0;
+            animation: kwybFade 0.9s ease 1.3s forwards;
+        }
+        .kwyb-btn:hover { background: rgba(45,90,90,0.55); border-color: rgba(45,90,90,1); }
+        @keyframes kwybRise {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: none; }
+        }
+        @keyframes kwybFade {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+    </style>
+
+    <div class="kwyb-deco" aria-hidden="true">
+        <svg viewBox="0 0 1400 600" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="697" y="60" width="6" height="200" rx="3" fill="#c5a059" opacity="0.06"/>
+            <rect x="644" y="113" width="112" height="6" rx="3" fill="#c5a059" opacity="0.06"/>
+            <line x1="0" y1="598" x2="1400" y2="598" stroke="#2d5a5a" stroke-width="0.6" opacity="0.25"/>
+        </svg>
+    </div>
+
+    <div class="kwyb-inner">
+        <div class="kwyb-cross">
+            <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
+                <rect x="14" y="4" width="4" height="24" rx="1.5" fill="#c5a059" opacity="0.45"/>
+                <rect x="8" y="10" width="16" height="4" rx="1.5" fill="#c5a059" opacity="0.45"/>
+            </svg>
+        </div>
+        <span class="kwyb-eyebrow">22-Week Study · Starting 10 June 2026</span>
+        <div class="kwyb-titles" aria-label="Know What You Believe">
+            <span class="kwyb-line kwyb-line-1">Know What You</span>
+            <span class="kwyb-sep">· · ·</span>
+            <span class="kwyb-line kwyb-line-2">Believe</span>
+        </div>
+        <p class="kwyb-subtitle">Based on the book by Paul E. Little</p>
+        <div class="kwyb-meta">
+            <strong>Wednesdays</strong>
+            <span class="dot">·</span>
+            8 PM AEST
+            <span class="dot">·</span>
+            <strong>22 Sessions · 1 Hour Each</strong>
+        </div>
+        <a href="/res/know-what-you-believe.html" class="kwyb-btn">Join the Study &nbsp;→</a>
+    </div>
+</section>
+<!-- ── END KNOW WHAT YOU BELIEVE BANNER ── -->
+
+<div style="height: 4rem; background: #faf9f6;"></div>
+
+<!-- ── MOTHER'S DAY SUB-BANNER ── -->
+<div class="mds-strip">
+    <style>
+        .mds-strip {
+            background: #f5ede0;
+            border-bottom: 1px solid rgba(197,160,89,0.15);
+        }
+        .mds-inner {
+            max-width: 64rem;
+            margin: 0 auto;
+            padding: 1.1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .mds-left {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+        }
+        .mds-eyebrow {
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #c5a059;
+            font-family: 'Outfit', sans-serif;
+            white-space: nowrap;
+        }
+        .mds-divider {
+            width: 1px;
+            height: 1.4rem;
+            background: rgba(197,160,89,0.3);
+            flex-shrink: 0;
+        }
+        .mds-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        .mds-title em { color: #2d5a5a; font-style: italic; }
+        .mds-actions { display: flex; align-items: center; gap: 0.75rem; }
+        .mds-btn {
+            display: inline-block;
+            padding: 0.45rem 1.1rem;
+            border-radius: 100px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .mds-btn-primary { background: #2d5a5a; color: white; }
+        .mds-btn-primary:hover { background: #1e3e3e; }
+        .mds-btn-sec { color: #2d5a5a; border: 1px solid rgba(45,90,90,0.25); }
+        .mds-btn-sec:hover { border-color: #2d5a5a; background: rgba(45,90,90,0.05); }
+    </style>
+    <div class="mds-inner">
+        <div class="mds-left">
+            <span class="mds-eyebrow">Mother's Day · 2026</span>
+            <div class="mds-divider"></div>
+            <span class="mds-title">Their children rise and call them <em>blessed</em>.</span>
+        </div>
+        <div class="mds-actions">
+            <a href="https://mothersday.thelivingroom.io/wall" class="mds-btn mds-btn-sec">See the wall →</a>
+        </div>
+    </div>
+</div>
+<!-- ── END MOTHER'S DAY SUB-BANNER ── -->
+
+ <!--
     <section class="holy-week-banner">
 
         <style>
@@ -223,258 +461,6 @@
     </section>
 -->
 
-<!-- MOTHER'S DAY WALL PREVIEW -->
-
-
-<style>
-  .wp-section {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 3rem 1.5rem 2rem;
-    font-family: 'Outfit', sans-serif;
-  }
-  .wp-header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  .wp-eyebrow {
-    font-size: 0.6rem;
-    font-weight: 600;
-    letter-spacing: 0.45em;
-    text-transform: uppercase;
-    color: #c5a059;
-    margin-bottom: 0.75rem;
-  }
-  .wp-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: 700;
-    color: #1a1a1a;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-  .wp-title em { color: #2d5a5a; font-style: italic; font-weight: 400; }
-
-  .wp-frame {
-    position: relative;
-    height: 420px;
-    overflow: hidden;
-    border-radius: 1.5rem;
-    background: #f4f4f5;
-  }
-  .wp-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.75rem;
-    padding: 0.75rem;
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-  }
-  .wp-card {
-    border-radius: 1rem;
-    overflow: hidden;
-    position: relative;
-    background: #e4e4e7;
-    cursor: pointer;
-  }
-  .wp-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s;
-  }
-  .wp-card:hover img { transform: scale(1.04); }
-  .wp-card-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 60%);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0.75rem;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-  .wp-card:hover .wp-card-overlay { opacity: 1; }
-  .wp-card-name {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 0.9rem;
-    color: white;
-    font-weight: 700;
-  }
-  .wp-card-line {
-    font-size: 0.7rem;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.4;
-    margin-top: 0.15rem;
-  }
-
-  /* Fade top and bottom */
-  .wp-fade-top {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 80px;
-    background: linear-gradient(to bottom, #faf9f6, transparent);
-    z-index: 2;
-    pointer-events: none;
-    border-radius: 1.5rem 1.5rem 0 0;
-  }
-  .wp-fade-bottom {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 120px;
-    background: linear-gradient(to top, #faf9f6, transparent);
-    z-index: 2;
-    pointer-events: none;
-    border-radius: 0 0 1.5rem 1.5rem;
-  }
-
-  .wp-cta {
-    text-align: center;
-    margin-top: 1.75rem;
-  }
-  .wp-btn {
-    display: inline-block;
-    padding: 0.8rem 2rem;
-    border-radius: 100px;
-    background: #2d5a5a;
-    color: white;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.2s;
-    cursor: pointer;
-    border: none;
-  }
-  .wp-btn:hover { background: #1e3e3e; }
-  .wp-count {
-    display: block;
-    font-size: 0.7rem;
-    color: #a1a1aa;
-    margin-top: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-  .wp-loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: #a1a1aa;
-  }
-</style>
-
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-<div class="wp-section">
-  <div class="wp-header">
-    <p class="wp-eyebrow">The Mother's Day Wall · The Living Room</p>
-    <h2 class="wp-title">Their children rise and call them <em>blessed</em>.</h2>
-  </div>
-
-  <div class="wp-frame">
-    <div class="wp-fade-top"></div>
-    <div class="wp-grid" id="wp-grid">
-      <div class="wp-loading">Loading portraits...</div>
-    </div>
-    <div class="wp-fade-bottom"></div>
-  </div>
-
-  <div class="wp-cta">
-    <a class="wp-btn" href="https://mothersday.thelivingroom.io/wall">See all portraits on the wall →</a>
-    <span class="wp-count" id="wp-count"></span>
-  </div>
-</div>
-
-<script>
-async function loadWallPreview() {
-  try {
-    const res = await fetch('https://mothersday.thelivingroom.io/api/wall?page=0&limit=8');
-    const data = await res.json();
-    const grid = document.getElementById('wp-grid');
-
-    if (!data.portraits?.length) {
-      grid.innerHTML = '<div class="wp-loading">Portraits coming soon...</div>';
-      return;
-    }
-
-    if (data.total) {
-      document.getElementById('wp-count').textContent = `${data.total} portrait${data.total === 1 ? '' : 's'} and counting`;
-    }
-
-    grid.innerHTML = '';
-    data.portraits.forEach(p => {
-      const slug = p.name.toLowerCase().replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-').substring(0,30);
-      const shortId = p.id.replace(/-/g,'').substring(0,8);
-      const card = document.createElement('a');
-      card.className = 'wp-card';
-      card.href = `https://mothersday.thelivingroom.io/mothersday/${slug}-${shortId}`;
-      card.target = '_blank';
-      card.innerHTML = `
-        <img src="${p.imageUrl}" alt="${p.name}" loading="lazy">
-        <div class="wp-card-overlay">
-          <span class="wp-card-name">${p.name}</span>
-          <span class="wp-card-line">${p.firstLine}</span>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-  } catch(e) {
-    document.getElementById('wp-grid').innerHTML = '<div class="wp-loading">Could not load portraits</div>';
-  }
-}
-loadWallPreview();
-</script>
-
-<!-- END MOTHER'S DAY WALL PREVIEW -->
- 
-
-<!-- ── MOTHER'S DAY SECTION ── -->
-<section class="max-w-6xl mx-auto px-6 py-20">
-  <div class="glass-card p-0 overflow-hidden border-none shadow-2xl" style="background:#f5ede0;">
-    <div class="grid md:grid-cols-2">
-
-      <div class="p-12 md:p-16 flex flex-col justify-center">
-        <div class="flex items-center gap-3 mb-6">
-          <span class="h-[1px] w-8 bg-teal"></span>
-          <h3 class="text-teal text-[0.7rem] font-bold tracking-[0.4em] uppercase">Mother's Day · 2026</h3>
-        </div>
-        <h2 class="text-4xl md:text-5xl font-bold mb-6 font-display">A Portrait <span class="text-teal italic font-display">in Words</span>.</h2>
-        <p class="text-lg mb-10 font-light leading-relaxed text-zinc-500">
-          She is worth far more than rubies. Paint her portrait this Mother's Day — upload her photo, choose the words that capture her, and we'll write a poem just for her.
-        </p>
-        <div class="flex flex-wrap gap-4">
-          <a href="https://mothersday.thelivingroom.io/" class="btn-teal px-8">Create her portrait →</a>
-          <a href="https://mothersday.thelivingroom.io/wall" class="btn-teal !bg-transparent border-2 border-teal !text-teal hover:!bg-teal hover:!text-white px-8">See the wall →</a>
-        </div>
-        <p class="mt-8 pt-8 border-t border-teal/10 text-zinc-400 text-sm italic font-display">"Her children rise up and call her blessed." — Proverbs 31:28</p>
-      </div>
-
-      <div class="relative h-80 md:h-auto overflow-hidden flex items-center justify-center p-12 md:p-16" style="background:#2d5a5a;">
-        <div style="border-left: 2px solid rgba(255,255,255,0.25); padding-left: 1.5rem;">
-          <p class="font-display italic text-lg leading-loose" style="color:#f0e8d5;">
-            Still hands, soft and sure —<br>
-            she taught me how the world works<br>
-            without saying words.
-          </p>
-          <span class="block mt-4 text-[0.55rem] font-bold tracking-[0.4em] uppercase" style="color:rgba(240,232,213,0.4);">A portrait in words · haiku</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-<!-- ── END MOTHER'S DAY SECTION ── -->
 
     <section id="messages" class="max-w-6xl mx-auto px-6 py-32 border-t border-zinc-100">
         <div class="mb-16 text-center">
