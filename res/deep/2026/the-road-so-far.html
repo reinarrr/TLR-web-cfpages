@@ -123,7 +123,7 @@
         .tl-scroll::-webkit-scrollbar { height:3px; }
         .tl-scroll::-webkit-scrollbar-thumb { background:rgba(0,0,0,.1); border-radius:2px; }
         .tl-track { display:inline-flex; align-items:flex-start; padding:0 2.5rem; min-width:100%; position:relative; }
-        .tl-track::before { content:''; position:absolute; top:calc(2.5rem + 7px); left:2.5rem; right:2.5rem; height:1.5px; opacity:.2; z-index:0; }
+        .tl-track::before { content:''; position:absolute; top:calc(2.5rem + 7px); left:2.5rem; width:var(--line-w,0px); height:1.5px; opacity:.2; z-index:0; }
         .j1-track::before { background:var(--gold); }
         .j2-track::before { background:var(--terra); }
 
@@ -780,21 +780,24 @@ const TL_J2 = [
       { t:'Red Light, Green Light Part 2', ref:'Acts 16:6–10', kl:"God doesn't compete with your plans — He patiently waits until they fall silent.", yt:'iZGO60hHVqA', dd:'/res/deep/2026/redlight-greenlight.html' },
       { t:'The Open Road', ref:'Acts 16:10–13', kl:'Rome built the road to move armies. Paul used it to move the gospel.', yt:'Lx0ImALqnOc', dd:'/res/deep/2026/the-open-road.html' }
     ] },
-  { id:'t12', j:2, city:'Philippi', sub:"Lydia's Heart", ref:'Acts 16:13–15', weight:'major',
-    summary:"Women praying by a river. The Lord opens Lydia's heart. The first house church in Europe.",
-    moment:"God opened her heart with dianoigō — to thoroughly open what was stuck. The happiest letter in the Bible was written to a church that started in a guest room.",
-    sermons:[{ t:'Open Hearts, Open Homes', ref:'Acts 16:13–15', kl:'Your house is not a monument to your success. It is a mission base for the Kingdom.', yt:'HOozOcQ2130', dd:'/res/deep/2026/open-heart-open-home.html' }] },
-  { id:'t13', j:2, city:'Philippi', sub:'The Slave Girl', ref:'Acts 16:16–24', weight:'standard',
-    moment:'A girl set free. Her masters drag Paul to court — not for theology, but for economics.',
-    sermons:[{ t:'Net Worth', ref:'Acts 16:16–24', kl:'When Jesus sets someone free, those who profit from bondage get angry.', yt:'XRw__sD20Zc', dd:'/res/deep/2026/net-worth.html' }] },
-  { id:'t14', j:2, city:'Philippi', sub:'Midnight Worship', ref:'Acts 16:25–28', weight:'major',
-    summary:'Beaten. Chained. Midnight. They sing. The foundations shake. Every door opens. Not after the earthquake — before it.',
-    moment:"The enemy had a strategy for the soldiers. He had no strategy for the choir. The earthquake was for the jailer — Paul's freedom was never the point.",
-    sermons:[{ t:"We're All Here", ref:'Acts 16:25–28', kl:'The enemy had a strategy for the soldiers. He had no strategy for the choir.', yt:'FawJQy6-3Vc', dd:'/res/deep/2026/we-are-all-here.html' }] },
-  { id:'t15', j:2, city:'Philippi', sub:'The Jailer Saved', ref:'Acts 16:29–34', weight:'major',
-    summary:'"What must I do to be saved?" Believe. By sunrise the whole household is baptised.',
-    moment:'Pisteuō — a full transfer of weight. Available right now, on the floor, in the dark.',
-    sermons:[{ t:'Believe in Jesus', ref:'Acts 16:29–34', kl:'The gospel is the most accessible thing in the room.', yt:'me3GPZMPcME', dd:'/res/deep/2026/believe-in-jesus.html' }] },
+  // ── Philippi: four moments, one city ────────────────────────────────────────
+  { id:'t12', j:2, city:'Philippi', sub:'Four Chapters, One City', ref:'Acts 16:13–34', weight:'major',
+    summary:'A heart opened by a river. A girl freed from bondage. A midnight earthquake. A jailer saved by sunrise. Four sermons — one city.',
+    moment:'Every chapter of Philippi is God writing the character of the gospel in different ink.',
+    visits:[
+      { sub:"Lydia's Heart", ref:'Acts 16:13–15',
+        moment:"God opened her heart with dianoigō — to thoroughly open what was stuck. The happiest letter in the Bible was written to a church that started in a guest room.",
+        sermons:[{ t:'Open Hearts, Open Homes', ref:'Acts 16:13–15', kl:'Your house is not a monument to your success. It is a mission base for the Kingdom.', yt:'HOozOcQ2130', dd:'/res/deep/2026/open-heart-open-home.html' }] },
+      { sub:'The Slave Girl', ref:'Acts 16:16–24',
+        moment:'A girl set free. Her masters drag Paul to court — not for theology, but for economics.',
+        sermons:[{ t:'Net Worth', ref:'Acts 16:16–24', kl:'When Jesus sets someone free, those who profit from bondage get angry.', yt:'XRw__sD20Zc', dd:'/res/deep/2026/net-worth.html' }] },
+      { sub:'Midnight Worship', ref:'Acts 16:25–28',
+        moment:"The enemy had a strategy for the soldiers. He had no strategy for the choir. The earthquake was for the jailer — Paul's freedom was never the point.",
+        sermons:[{ t:"We're All Here", ref:'Acts 16:25–28', kl:'The enemy had a strategy for the soldiers. He had no strategy for the choir.', yt:'FawJQy6-3Vc', dd:'/res/deep/2026/we-are-all-here.html' }] },
+      { sub:'The Jailer Saved', ref:'Acts 16:29–34',
+        moment:'Pisteuō — a full transfer of weight. Available right now, on the floor, in the dark.',
+        sermons:[{ t:'Believe in Jesus', ref:'Acts 16:29–34', kl:'The gospel is the most accessible thing in the room.', yt:'me3GPZMPcME', dd:'/res/deep/2026/believe-in-jesus.html' }] }
+    ] },
   { id:'t16', j:2, city:'Thessalonica', sub:'The World Upside Down', ref:'Acts 17:1–9', weight:'standard',
     moment:'The charge is true. The gospel is inherently disruptive.',
     sermons:[
@@ -810,16 +813,21 @@ const TL_J2 = [
       { t:'Wanted', ref:'Acts 17:16–34', kl:"The God who made the world doesn't need us — but He wants us.", yt:'7W7hfMMGDi8', dd:'/res/deep/2026/wanted.html' },
       { t:'The Gospel in the Marketplace', ref:'Acts 17:16–34', kl:"We don't cede ground. We contest it.", yt:'vuKqFsz92cM', dd:'/res/deep/2026/the-gospel-in-the-marketplace.html' }
     ] },
-  { id:'t19', j:2, city:'Corinth', sub:'Arrival: Afraid', ref:'Acts 18:1–4', weight:'standard',
-    moment:"Paul arrives exhausted. He meets refugees. God builds the church from wreckage.",
-    sermons:[{ t:'From East to West', ref:'Acts 18:1–4', kl:"God's purposes don't go around. They cut through.", yt:'Vc7wIQmmuj0', dd:'/res/deep/2026/east-to-west.html' }] },
-  { id:'t20', j:2, city:'Corinth', sub:'"I Have People Here"', ref:'Acts 18:9–11', weight:'major',
-    summary:"God speaks at night: 'Don't be afraid. I have many people in this city.' Paul stays 18 months.",
+  // ── Corinth: 18 months, two scenes ──────────────────────────────────────────
+  { id:'t19', j:2, city:'Corinth', sub:'18 Months in One City', ref:'Acts 18:1–17', weight:'major',
+    summary:'"I have many people in this city." Paul arrives afraid, meets refugees, and stays longer than anywhere else.',
     moment:"He doesn't say 'be strong.' He says 'I'm here, and I have people you haven't met yet.'",
-    sermons:[
-      { t:'I Have People Here', ref:'Acts 18:9–11', kl:'Stop being afraid. I have people in this city.', yt:'babLW7KH8Sk', dd:'/res/deep/2026/i-have-people-here.html' },
-      { t:'Mind Your Business', ref:'Acts 18:1–11', kl:'Your bank statement is a theological document.', yt:'2l1y1IH_-A8', dd:'/res/deep/2026/mind-your-business.html' },
-      { t:'Guilty As Charged', ref:'Acts 18:12–17', kl:'The charge is true. There is another King.', yt:'642VovUfNLs', dd:'/res/deep/2026/guilty-as-charged.html' }
+    visits:[
+      { sub:'Arrival: Afraid', ref:'Acts 18:1–4',
+        moment:'Paul arrives exhausted. He meets refugees. God builds the church from wreckage.',
+        sermons:[{ t:'From East to West', ref:'Acts 18:1–4', kl:"God's purposes don't go around. They cut through.", yt:'Vc7wIQmmuj0', dd:'/res/deep/2026/east-to-west.html' }] },
+      { sub:'"I Have People Here"', ref:'Acts 18:9–17',
+        moment:"God speaks at night: 'Don't be afraid. I have many people in this city.' Paul stays 18 months.",
+        sermons:[
+          { t:'I Have People Here', ref:'Acts 18:9–11', kl:'Stop being afraid. I have people in this city.', yt:'babLW7KH8Sk', dd:'/res/deep/2026/i-have-people-here.html' },
+          { t:'Mind Your Business', ref:'Acts 18:1–11', kl:'Your bank statement is a theological document.', yt:'2l1y1IH_-A8', dd:'/res/deep/2026/mind-your-business.html' },
+          { t:'Guilty As Charged', ref:'Acts 18:12–17', kl:'The charge is true. There is another King.', yt:'642VovUfNLs', dd:'/res/deep/2026/guilty-as-charged.html' }
+        ] }
     ] },
   { id:'t21', j:2, city:'Cenchreae', sub:'The Vow', ref:'Acts 18:18', weight:'transit',
     moment:'A private altar. A chapter marked and closed.',
@@ -834,7 +842,7 @@ const TL_J2 = [
 ];
 
 function renderNode(n) {
-    const sc = n.sermons.length;
+    const sc = n.visits ? n.visits.reduce((a,v) => a + v.sermons.length, 0) : n.sermons.length;
     return `<div class="tnode j${n.j} ${n.weight}" onclick="openTLPanel('${n.id}')">
       <div class="tnode-dot"></div>
       <div class="tnode-content">
@@ -849,6 +857,13 @@ function renderNode(n) {
 
 document.getElementById('j1track').innerHTML = TL_J1.map(renderNode).join('');
 document.getElementById('j2track').innerHTML = TL_J2.map(renderNode).join('');
+// Set track connecting-line width from actual scroll content width
+requestAnimationFrame(() => {
+    ['j1track','j2track'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.setProperty('--line-w', Math.max(0, el.scrollWidth - 40) + 'px');
+    });
+});
 document.getElementById('pause-wrap').innerHTML = `
 <div class="pause-card" onclick="openTLPause()">
   <div class="pause-icon">✦</div>
@@ -868,7 +883,8 @@ function openTLPanel(id) {
     if (!n) return;
     const col = n.j===1?'#c5a059':'#6ba8d4';
     const jLbl = n.j===1?'Journey One':'Journey Two';
-    const sermonCards = n.sermons.map(s => {
+
+    function mkSermonCard(s) {
         const links = [
             s.yt ? `<a href="https://www.youtube.com/watch?v=${s.yt}" target="_blank" class="plbtn watch" style="font-size:.55rem;">▶&nbsp;Watch</a>` : '',
             s.dd ? `<a href="${s.dd}" class="plbtn dive" style="font-size:.55rem;">↗&nbsp;Deep Dive</a>` : ''
@@ -879,20 +895,41 @@ function openTLPanel(id) {
           <div class="keyline" style="margin-bottom:.65rem;">${s.kl}</div>
           ${links ? `<div style="display:flex;gap:.4rem;flex-wrap:wrap;">${links}</div>` : ''}
         </div>`;
-    }).join('');
+    }
 
-    document.getElementById('tl-content').innerHTML = `
-      <div style="padding:1.4rem 1.4rem 3rem;">
-        <p style="font-size:.52rem;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:${col};margin-bottom:.3rem;">${jLbl} · ${n.ref}</p>
-        <h2 style="font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:#1a1a1a;line-height:1.15;margin-bottom:.2rem;">${n.city}</h2>
-        <p style="font-size:.72rem;color:#a1a1aa;font-weight:300;margin-bottom:1rem;">${n.sub}</p>
-        <div style="padding:.85rem;background:rgba(0,0,0,.04);border-radius:.6rem;margin-bottom:1rem;">
-          <p style="font-size:.5rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#a1a1aa;margin-bottom:.35rem;">The Moment</p>
-          <p style="font-size:.78rem;color:#374151;line-height:1.65;">${n.moment}</p>
-        </div>
-        ${n.sermons.length > 0 ? `<p style="font-size:.5rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#a1a1aa;margin-bottom:.55rem;">Sermon${n.sermons.length>1?'s':''}</p>${sermonCards}` : '<p style="font-size:.75rem;color:#a1a1aa;text-align:center;padding:1.5rem 0;">The journey continues.</p>'}
-      </div>`;
+    let bodyHTML;
+    if (n.visits) {
+        const visitBlocks = n.visits.map((v, i) => `
+          ${i > 0 ? '<div style="height:1px;background:rgba(0,0,0,.07);margin:1.1rem 0 1rem;"></div>' : ''}
+          <p style="font-size:.5rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:${col};margin-bottom:.2rem;">${v.ref}</p>
+          <p style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#1a1a1a;margin-bottom:.35rem;">${v.sub}</p>
+          <div style="padding:.75rem;background:rgba(0,0,0,.04);border-radius:.5rem;margin-bottom:.65rem;">
+            <p style="font-size:.75rem;color:#374151;line-height:1.65;">${v.moment}</p>
+          </div>
+          ${v.sermons.map(s => mkSermonCard(s)).join('')}`).join('');
+        bodyHTML = `
+          <p style="font-size:.52rem;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:${col};margin-bottom:.3rem;">${jLbl} · ${n.ref}</p>
+          <h2 style="font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:#1a1a1a;line-height:1.15;margin-bottom:.2rem;">${n.city}</h2>
+          <p style="font-size:.72rem;color:#a1a1aa;font-weight:300;margin-bottom:.9rem;">${n.sub}</p>
+          <div style="padding:.85rem;background:rgba(0,0,0,.04);border-radius:.6rem;margin-bottom:1.1rem;">
+            <p style="font-size:.5rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#a1a1aa;margin-bottom:.35rem;">The Story</p>
+            <p style="font-size:.78rem;color:#374151;line-height:1.65;">${n.moment}</p>
+          </div>
+          ${visitBlocks}`;
+    } else {
+        const sermonCards = n.sermons.map(s => mkSermonCard(s)).join('');
+        bodyHTML = `
+          <p style="font-size:.52rem;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:${col};margin-bottom:.3rem;">${jLbl} · ${n.ref}</p>
+          <h2 style="font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:#1a1a1a;line-height:1.15;margin-bottom:.2rem;">${n.city}</h2>
+          <p style="font-size:.72rem;color:#a1a1aa;font-weight:300;margin-bottom:1rem;">${n.sub}</p>
+          <div style="padding:.85rem;background:rgba(0,0,0,.04);border-radius:.6rem;margin-bottom:1rem;">
+            <p style="font-size:.5rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#a1a1aa;margin-bottom:.35rem;">The Moment</p>
+            <p style="font-size:.78rem;color:#374151;line-height:1.65;">${n.moment}</p>
+          </div>
+          ${n.sermons.length > 0 ? `<p style="font-size:.5rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#a1a1aa;margin-bottom:.55rem;">Sermon${n.sermons.length>1?'s':''}</p>${sermonCards}` : '<p style="font-size:.75rem;color:#a1a1aa;text-align:center;padding:1.5rem 0;">The journey continues.</p>'}`;
+    }
 
+    document.getElementById('tl-content').innerHTML = `<div style="padding:1.4rem 1.4rem 3rem;">${bodyHTML}</div>`;
     closeAllPanels();
     document.getElementById('tl-panel').classList.add('ready','open');
 }
