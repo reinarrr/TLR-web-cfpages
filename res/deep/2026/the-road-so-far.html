@@ -24,7 +24,7 @@
         }
     </script>
     <style>
-        :root { --gold:#c5a059; --teal:#2d5a5a; --terra:#e07a55; --cream:#faf9f6; --dark:#0c1e1e; }
+        :root { --gold:#c5a059; --teal:#2d5a5a; --terra:#6ba8d4; --cream:#faf9f6; --dark:#0c1e1e; }
         html { scroll-behavior:smooth; }
         body { background:var(--cream); font-family:'Outfit',sans-serif; }
 
@@ -72,7 +72,7 @@
         .city-marker { display:flex; align-items:center; justify-content:center; border-radius:50%; cursor:pointer; position:relative; transition:transform .2s; }
         .city-marker:hover { transform:scale(1.35); }
         .cm-j1  { background:rgba(197,160,89,.9); box-shadow:0 0 10px rgba(197,160,89,.5); }
-        .cm-j2  { background:rgba(224,122,85,.9);  box-shadow:0 0 10px rgba(224,122,85,.5); }
+        .cm-j2  { background:rgba(107,168,212,.9);  box-shadow:0 0 10px rgba(107,168,212,.5); }
         .cm-between { background:rgba(45,90,90,.9); box-shadow:0 0 10px rgba(45,90,90,.5); }
         .cm-major   { width:14px; height:14px; }
         .cm-standard{ width:10px; height:10px; }
@@ -88,7 +88,7 @@
         .jbtn { padding:.4rem 1rem; border-radius:100px; font-family:'Outfit',sans-serif; font-size:.58rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; cursor:pointer; border:none; background:transparent; color:rgba(255,255,255,.4); transition:all .2s; white-space:nowrap; }
         .jbtn.ab { background:rgba(255,255,255,.1); color:#fff; }
         .jbtn.a1 { background:rgba(197,160,89,.22); color:var(--gold); }
-        .jbtn.a2 { background:rgba(224,122,85,.22);  color:var(--terra); }
+        .jbtn.a2 { background:rgba(107,168,212,.22);  color:var(--terra); }
 
         /* Permanent city label — always visible, no background */
         .city-label {
@@ -137,7 +137,7 @@
         .tnode.major .tnode-dot::after { content:''; position:absolute; inset:-2px; border-radius:50%; animation:tl-pulse 2.4s ease-out infinite; opacity:0; }
         @keyframes tl-pulse { 0%{transform:scale(1);opacity:.5} 100%{transform:scale(2.8);opacity:0} }
         .tnode.j1 .tnode-dot { background:var(--gold); box-shadow:0 0 12px rgba(197,160,89,.45); }
-        .tnode.j2 .tnode-dot { background:var(--terra); box-shadow:0 0 12px rgba(224,122,85,.45); }
+        .tnode.j2 .tnode-dot { background:var(--terra); box-shadow:0 0 12px rgba(107,168,212,.45); }
         .tnode.j1.major .tnode-dot::after { border:1.5px solid var(--gold); }
         .tnode.j2.major .tnode-dot::after { border:1.5px solid var(--terra); }
         .tnode-ref  { font-size:.5rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#a1a1aa; display:block; margin-bottom:.2rem; }
@@ -288,7 +288,7 @@
         </div>
 
         <div style="background:rgba(197,160,89,.08);border:1px solid rgba(197,160,89,.2);border-radius:1rem;padding:1.25rem 1.5rem;">
-            <p style="font-size:.56rem;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;">Gold = Journey 1 &nbsp;·&nbsp; Terracotta = Journey 2 &nbsp;·&nbsp; Teal = Between Journeys</p>
+            <p style="font-size:.56rem;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;">Gold = Journey 1 &nbsp;·&nbsp; Blue = Journey 2 &nbsp;·&nbsp; Teal = Between Journeys</p>
             <p style="font-size:.76rem;color:#4b5563;line-height:1.6;">Colours are consistent across all three layers — what's gold on the map is gold on the timeline and connects to the same themes panel.</p>
         </div>
     </div>
@@ -615,7 +615,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const R1 = [[36.20,36.15],[36.12,35.94],[35.19,33.90],[34.76,32.42],[36.96,30.85],[38.30,31.19],[37.87,32.49],[37.57,32.42],[37.35,33.32],[37.57,32.42],[37.87,32.49],[38.30,31.19],[36.96,30.85],[36.88,30.61],[36.20,36.15]];
     const R2 = [[36.20,36.15],[37.35,33.32],[37.57,32.42],[38.50,30.50],[40.00,29.00],[39.95,26.24],[40.47,25.52],[40.94,24.40],[41.01,24.29],[40.82,23.85],[40.71,23.39],[40.63,22.94],[40.52,22.20],[37.97,23.73],[37.91,22.88],[37.88,23.05],[37.94,27.34],[32.50,34.89],[31.62,35.10],[36.20,36.40]];
     const line1 = L.polyline(R1, rStyle('#c5a059')).addTo(map);
-    const line2 = L.polyline(R2, rStyle('#e07a55')).addTo(map);
+    const line2 = L.polyline(R2, rStyle('#6ba8d4')).addTo(map);
 
     function animDash() {
         document.querySelectorAll('.leaflet-overlay-pane path').forEach(p => {
@@ -676,7 +676,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function renderCityPanel(city, si) {
         const s = city.sermons[si];
-        const col = city.j==='between'?'#2d5a5a':city.j===1?'#c5a059':'#e07a55';
+        const col = city.j==='between'?'#2d5a5a':city.j===1?'#c5a059':'#6ba8d4';
         const jLbl = city.j==='between'?'Between Journeys':city.j===1?'First Journey':'Second Journey';
 
         const tabs = city.sermons.length > 1
@@ -863,7 +863,7 @@ const tlMap = {};
 function openTLPanel(id) {
     const n = tlMap[id];
     if (!n) return;
-    const col = n.j===1?'#c5a059':'#e07a55';
+    const col = n.j===1?'#c5a059':'#6ba8d4';
     const jLbl = n.j===1?'Journey One':'Journey Two';
     const sermonCards = n.sermons.map(s => {
         const links = [

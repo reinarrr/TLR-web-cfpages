@@ -29,14 +29,14 @@
         .city-marker { display:flex; align-items:center; justify-content:center; border-radius:50%; cursor:pointer; position:relative; transition:transform 0.2s; }
         .city-marker:hover { transform:scale(1.35); }
         .cm-j1 { background:rgba(197,160,89,0.9); box-shadow:0 0 10px rgba(197,160,89,0.5); }
-        .cm-j2 { background:rgba(224,122,85,0.9); box-shadow:0 0 10px rgba(224,122,85,0.5); }
+        .cm-j2 { background:rgba(107,168,212,0.9); box-shadow:0 0 10px rgba(107,168,212,0.5); }
         .cm-between { background:rgba(45,90,90,0.9); box-shadow:0 0 10px rgba(45,90,90,0.5); }
         .cm-major { width:14px; height:14px; }
         .cm-standard { width:10px; height:10px; }
         .cm-transit { width:6px; height:6px; opacity:0.65; }
         .cm-major::after { content:''; position:absolute; width:100%; height:100%; border-radius:50%; animation:pulse-r 2s ease-out infinite; opacity:0; }
         .cm-j1.cm-major::after { border:1.5px solid #c5a059; }
-        .cm-j2.cm-major::after { border:1.5px solid #e07a55; }
+        .cm-j2.cm-major::after { border:1.5px solid #6ba8d4; }
         .cm-between.cm-major::after { border:1.5px solid #2d5a5a; }
         @keyframes pulse-r { 0%{transform:scale(1);opacity:.6} 100%{transform:scale(2.8);opacity:0} }
         @keyframes dash-flow { from{stroke-dashoffset:28} to{stroke-dashoffset:0} }
@@ -45,7 +45,7 @@
         .jbtn { padding:.4rem 1rem; border-radius:100px; font-family:'Outfit',sans-serif; font-size:.58rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; cursor:pointer; border:none; background:transparent; color:rgba(255,255,255,.4); transition:all .2s; white-space:nowrap; }
         .jbtn.ab { background:rgba(255,255,255,.1); color:#fff; }
         .jbtn.a1 { background:rgba(197,160,89,.22); color:#c5a059; }
-        .jbtn.a2 { background:rgba(224,122,85,.22); color:#e07a55; }
+        .jbtn.a2 { background:rgba(107,168,212,.22); color:#6ba8d4; }
 
         #city-panel { position:fixed; z-index:2000; background:#faf9f6; overflow-y:auto; transition:transform .32s cubic-bezier(.4,0,.2,1); }
         @media(max-width:767px){
@@ -103,7 +103,7 @@
     <div class="jtoggle">
         <button class="jbtn ab" data-j="both">Both Journeys</button>
         <button class="jbtn" data-j="1"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#c5a059;margin-right:.3rem;vertical-align:middle;"></span>Journey I</button>
-        <button class="jbtn" data-j="2"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#e07a55;margin-right:.3rem;vertical-align:middle;"></span>Journey II</button>
+        <button class="jbtn" data-j="2"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#6ba8d4;margin-right:.3rem;vertical-align:middle;"></span>Journey II</button>
     </div>
     <div id="map"></div>
     <!-- Legend -->
@@ -113,7 +113,7 @@
             <span style="font-size:.53rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);">First Journey (AD 46–48)</span>
         </div>
         <div style="display:flex;align-items:center;gap:.55rem;">
-            <div style="width:20px;height:2px;background:#e07a55;border-radius:1px;"></div>
+            <div style="width:20px;height:2px;background:#6ba8d4;border-radius:1px;"></div>
             <span style="font-size:.53rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);">Second Journey (AD 49–52)</span>
         </div>
     </div>
@@ -414,7 +414,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_D
 
 const rStyle = (color) => ({ color, weight:2.5, opacity:.8, dashArray:'8 5', lineCap:'round', lineJoin:'round' });
 const line1 = L.polyline(R1, rStyle('#c5a059')).addTo(map);
-const line2 = L.polyline(R2, rStyle('#e07a55')).addTo(map);
+const line2 = L.polyline(R2, rStyle('#6ba8d4')).addTo(map);
 
 function animDash(){
   document.querySelectorAll('.leaflet-overlay-pane path').forEach(p=>{
@@ -480,7 +480,7 @@ document.querySelectorAll('[data-j]').forEach(btn=>{
 // ── PANEL ─────────────────────────────────────────────────────────────────────
 
 function jLabel(j){ return j==='between'?'Between Journeys':j===1?'First Missionary Journey':'Second Missionary Journey'; }
-function jColor(j){ return j==='between'?'#2d5a5a':j===1?'#c5a059':'#e07a55'; }
+function jColor(j){ return j==='between'?'#2d5a5a':j===1?'#c5a059':'#6ba8d4'; }
 
 function openPanel(city){
   renderPanel(city,0);
