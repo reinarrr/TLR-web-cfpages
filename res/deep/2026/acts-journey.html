@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acts Journey: The Map | The Living Room</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: { extend: {
+                colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                fontFamily: { display: ['Playfair Display','serif'], body: ['Outfit','sans-serif'] }
+            }}
+        }
+    </script>
+    <style>
+        #map { width:100%; height:calc(100vh - 130px); min-height:520px; background:#0d1117; }
+
+        .city-marker { display:flex; align-items:center; justify-content:center; border-radius:50%; cursor:pointer; position:relative; transition:transform 0.2s; }
+        .city-marker:hover { transform:scale(1.35); }
+        .cm-j1 { background:rgba(197,160,89,0.9); box-shadow:0 0 10px rgba(197,160,89,0.5); }
+        .cm-j2 { background:rgba(224,122,85,0.9); box-shadow:0 0 10px rgba(224,122,85,0.5); }
+        .cm-between { background:rgba(45,90,90,0.9); box-shadow:0 0 10px rgba(45,90,90,0.5); }
+        .cm-major { width:14px; height:14px; }
+        .cm-standard { width:10px; height:10px; }
+        .cm-transit { width:6px; height:6px; opacity:0.65; }
+        .cm-major::after { content:''; position:absolute; width:100%; height:100%; border-radius:50%; animation:pulse-r 2s ease-out infinite; opacity:0; }
+        .cm-j1.cm-major::after { border:1.5px solid #c5a059; }
+        .cm-j2.cm-major::after { border:1.5px solid #e07a55; }
+        .cm-between.cm-major::after { border:1.5px solid #2d5a5a; }
+        @keyframes pulse-r { 0%{transform:scale(1);opacity:.6} 100%{transform:scale(2.8);opacity:0} }
+        @keyframes dash-flow { from{stroke-dashoffset:28} to{stroke-dashoffset:0} }
+
+        .jtoggle { position:absolute; top:1rem; left:50%; transform:translateX(-50%); z-index:1000; display:flex; gap:.3rem; background:rgba(10,15,20,.88); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.09); border-radius:100px; padding:.3rem; }
+        .jbtn { padding:.4rem 1rem; border-radius:100px; font-family:'Outfit',sans-serif; font-size:.58rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; cursor:pointer; border:none; background:transparent; color:rgba(255,255,255,.4); transition:all .2s; white-space:nowrap; }
+        .jbtn.ab { background:rgba(255,255,255,.1); color:#fff; }
+        .jbtn.a1 { background:rgba(197,160,89,.22); color:#c5a059; }
+        .jbtn.a2 { background:rgba(224,122,85,.22); color:#e07a55; }
+
+        #city-panel { position:fixed; z-index:2000; background:#faf9f6; overflow-y:auto; transition:transform .32s cubic-bezier(.4,0,.2,1); }
+        @media(max-width:767px){
+            #city-panel { bottom:0; left:0; right:0; max-height:74vh; border-radius:1.5rem 1.5rem 0 0; transform:translateY(100%); box-shadow:0 -6px 36px rgba(0,0,0,.18); }
+            #city-panel.open { transform:translateY(0); }
+        }
+        @media(min-width:768px){
+            #city-panel { top:0; right:0; bottom:0; width:390px; border-left:1px solid rgba(0,0,0,.07); transform:translateX(100%); box-shadow:-6px 0 36px rgba(0,0,0,.1); }
+            #city-panel.open { transform:translateX(0); }
+            #map.shifted { transition:none; }
+        }
+
+        .drag-handle { width:36px; height:3px; background:rgba(0,0,0,.12); border-radius:2px; margin:.7rem auto 0; }
+        .pclose { position:absolute; top:.9rem; right:.9rem; width:30px; height:30px; border-radius:50%; border:none; background:rgba(0,0,0,.07); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:.85rem; color:#666; transition:background .2s; }
+        .pclose:hover { background:rgba(0,0,0,.13); }
+
+        .stabs { display:flex; border-bottom:1px solid rgba(0,0,0,.08); overflow-x:auto; scrollbar-width:none; }
+        .stabs::-webkit-scrollbar { display:none; }
+        .stab { padding:.55rem .9rem; font-family:'Outfit',sans-serif; font-size:.57rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; border:none; background:transparent; color:#a1a1aa; border-bottom:2px solid transparent; margin-bottom:-1px; white-space:nowrap; transition:all .2s; }
+        .stab.on { color:#2d5a5a; border-bottom-color:#2d5a5a; }
+
+        .keyline { border-left:3px solid #c5a059; padding:.7rem 1rem; background:rgba(197,160,89,.07); border-radius:0 .5rem .5rem 0; font-family:'Playfair Display',serif; font-style:italic; font-size:.93rem; color:#1a1a1a; line-height:1.55; }
+        .plbtn { display:inline-flex; align-items:center; gap:.35rem; padding:.42rem .9rem; border-radius:100px; font-family:'Outfit',sans-serif; font-size:.58rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase; text-decoration:none; border:1px solid; transition:all .2s; white-space:nowrap; }
+        .plbtn.watch { background:#1a1a1a; color:#fff; border-color:#1a1a1a; }
+        .plbtn.watch:hover { background:#333; }
+        .plbtn.dive { background:transparent; color:#2d5a5a; border-color:rgba(45,90,90,.3); }
+        .plbtn.dive:hover { background:rgba(45,90,90,.06); border-color:#2d5a5a; }
+
+        .city-tooltip { background:rgba(10,15,20,.9)!important; border:1px solid rgba(255,255,255,.1)!important; border-radius:6px!important; color:#fff!important; font-family:'Outfit',sans-serif!important; font-size:.62rem!important; font-weight:600!important; letter-spacing:.08em!important; padding:.28rem .6rem!important; box-shadow:none!important; }
+        .leaflet-tooltip-top.city-tooltip::before { display:none!important; }
+        .leaflet-control-attribution { display:none; }
+        .leaflet-control-zoom { border:none!important; margin:.85rem!important; }
+        .leaflet-control-zoom a { background:rgba(10,15,20,.88)!important; backdrop-filter:blur(12px)!important; color:#fff!important; border:1px solid rgba(255,255,255,.09)!important; }
+        .leaflet-control-zoom a:hover { background:rgba(40,40,50,.95)!important; }
+    </style>
+</head>
+<body class="antialiased" data-current="resources">
+<div id="header-placeholder"></div>
+
+<!-- HERO -->
+<div style="background:#0c1e1e;padding:2.75rem 1.5rem 2rem;text-align:center;">
+    <p style="font-family:'Outfit',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.5em;text-transform:uppercase;color:#c5a059;margin-bottom:.6rem;">Acts Journey · The Living Room</p>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:.5rem;">The Map <span style="color:#c5a059;font-style:italic;">Layer</span></h1>
+    <p style="font-family:'Outfit',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);font-weight:300;">Acts 13–18 &nbsp;·&nbsp; 32 Sermons &nbsp;·&nbsp; Two Journeys &nbsp;·&nbsp; One Mission</p>
+</div>
+
+<!-- MAP WRAPPER -->
+<div style="position:relative;">
+    <div class="jtoggle">
+        <button class="jbtn ab" data-j="both">Both Journeys</button>
+        <button class="jbtn" data-j="1"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#c5a059;margin-right:.3rem;vertical-align:middle;"></span>Journey I</button>
+        <button class="jbtn" data-j="2"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#e07a55;margin-right:.3rem;vertical-align:middle;"></span>Journey II</button>
+    </div>
+    <div id="map"></div>
+    <!-- Legend -->
+    <div style="position:absolute;bottom:1.25rem;left:.9rem;z-index:1000;background:rgba(10,15,20,.88);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.09);border-radius:.65rem;padding:.65rem .9rem;font-family:'Outfit',sans-serif;">
+        <div style="display:flex;align-items:center;gap:.55rem;margin-bottom:.35rem;">
+            <div style="width:20px;height:2px;background:#c5a059;border-radius:1px;"></div>
+            <span style="font-size:.53rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);">First Journey (AD 46–48)</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:.55rem;">
+            <div style="width:20px;height:2px;background:#e07a55;border-radius:1px;"></div>
+            <span style="font-size:.53rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);">Second Journey (AD 49–52)</span>
+        </div>
+    </div>
+</div>
+
+<!-- CITY PANEL -->
+<div id="city-panel">
+    <div class="drag-handle md:hidden"></div>
+    <button class="pclose" id="pclose">✕</button>
+    <div id="pcontent" style="padding:1.4rem 1.4rem 2.5rem;"></div>
+</div>
+
+<!-- BACK TO LIBRARY -->
+<div style="text-align:center;padding:2.5rem 1.5rem;background:#faf9f6;border-top:1px solid rgba(0,0,0,.06);">
+    <a href="/deepdives.html" style="font-family:'Outfit',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#2d5a5a;text-decoration:none;border-bottom:1px solid rgba(45,90,90,.25);padding-bottom:.25rem;">← Back to Library</a>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLEk=" crossorigin=""></script>
+<script src="/js/main.js" defer></script>
+<script>
+// ── DATA ─────────────────────────────────────────────────────────────────────
+
+const CITIES = [
+
+  // ── JOURNEY 1 ──
+
+  { id:'antioch-j1', name:'Antioch (Syrian)', sub:'The Sending', lat:36.20, lng:36.15, j:1, sz:'major',
+    moment:'The Holy Spirit interrupts a worship service and names two men. The church fasts, prays, lays hands on Barnabas and Saul, and sends them out. The first Spirit-commissioned mission in history begins — not from a committee, but from a posture of worship.',
+    sermons:[{ t:'Like An Arrow', ref:'Acts 13:1–12',
+      syn:'The first missionary journey didn\'t begin with a strategy meeting — it began with worship. While the church at Antioch was fasting and ministering to the Lord, the Spirit spoke. The Greek word ekpempō carries the imagery of a bow releasing an arrow — they weren\'t just sent, they were launched. The most effective Christian is not the busiest one — it\'s the one who has been sent by the Spirit and knows why they\'re there.',
+      kl:'The arrow doesn\'t choose its path. The Archer aims it.', dd:null, yt:null }] },
+
+  { id:'seleucia', name:'Seleucia', sub:'Port of Departure', lat:36.12, lng:35.94, j:1, sz:'transit',
+    moment:'The port city 25km from Antioch. Barnabas and Saul set sail from here toward Cyprus. The first footsteps of the mission leave land.',
+    sermons:[{ t:'Like An Arrow', ref:'Acts 13:4',
+      syn:'Seleucia is the threshold — the moment obedience becomes irreversible. They stepped onto a boat and the shore of the familiar fell away behind them.',
+      kl:'The arrow doesn\'t choose its path. The Archer aims it.', dd:null, yt:null }] },
+
+  { id:'salamis', name:'Salamis, Cyprus', sub:'First Mission Field', lat:35.19, lng:33.90, j:1, sz:'standard',
+    moment:'First stop on the first journey. Barnabas and Saul preach in the Jewish synagogues across the island. John Mark is with them as a helper.',
+    sermons:[{ t:'Like An Arrow', ref:'Acts 13:5',
+      syn:'Salamis is where the theory becomes practice. The synagogue is their first platform — familiar ground, but new territory. They carried the same message they always had, but now they were commissioned to carry it to the world.',
+      kl:'The arrow doesn\'t choose its path. The Archer aims it.', dd:null, yt:null }] },
+
+  { id:'paphos', name:'Paphos, Cyprus', sub:'The Sorcerer & the Proconsul', lat:34.76, lng:32.42, j:1, sz:'standard',
+    moment:'Confrontation with Elymas Bar-Jesus, a sorcerer who tries to prevent the proconsul Sergius Paulus from hearing the gospel. Paul strikes him blind. The proconsul believes. Saul is now called Paul for the first time.',
+    sermons:[{ t:'Like An Arrow', ref:'Acts 13:6–12',
+      syn:'The first opposition isn\'t from a crowd — it\'s from a court insider who knows that changed beliefs mean changed power structures. Paul\'s response is direct and authoritative. The proconsul witnesses both the darkness of resistance and the light of the gospel — and chooses the light.',
+      kl:'The arrow doesn\'t choose its path. The Archer aims it.', dd:null, yt:null }] },
+
+  { id:'perga-j1', name:'Perga', sub:'John Mark Departs', lat:36.96, lng:30.85, j:1, sz:'transit',
+    moment:'The team sails north to the mainland. John Mark departs and returns to Jerusalem. A decision that will later fracture the team and multiply the mission.',
+    sermons:[{ t:'You Go That Way, I\'ll Go This Way', ref:'Acts 13:13',
+      syn:'John Mark\'s departure is painful — and it plants the seed of the conflict that will split Paul and Barnabas later. But God works with the results of human weakness, not around them.',
+      kl:'Conflict handled with integrity can multiply the mission rather than destroy it.', dd:null, yt:null }] },
+
+  { id:'pisidian-antioch', name:'Pisidian Antioch', sub:'The Thread of Grace', lat:38.30, lng:31.19, j:1, sz:'major',
+    moment:'Paul\'s first major sermon — tracing Israel\'s entire history from Abraham to David to Jesus. Many believe across multiple Sabbaths; the whole city gathers. The synagogue leaders grow jealous. Paul and Barnabas declare they are turning to the Gentiles and shake the dust from their feet.',
+    sermons:[
+      { t:'The Thread of Grace', ref:'Acts 13:14–43',
+        syn:'Paul stands in the synagogue and traces the entire story of Israel — from Abraham to Egypt to the wilderness to David — and shows that every thread leads to one name: Jesus. Grace chose Israel. Grace carried them in the wilderness. Grace fulfilled every promise in Jesus. Grace didn\'t start at Calvary — it culminated there.',
+        kl:'Grace didn\'t start at Calvary — it culminated there.', dd:null, yt:null },
+      { t:'Thread of Grace Part 2', ref:'Acts 13:38–43',
+        syn:'Paul lands the sermon with the sharpest claim in Acts 13: everyone who believes in Jesus is made right in God\'s sight — something the law of Moses could never do. Paul and Barnabas urge the new believers to "continue in the grace of God" — grace is not a moment, it\'s a movement. The warning from Habakkuk isn\'t for the rebellious — it\'s for the religious.',
+        kl:'The greatest tragedy is not rejecting grace — it\'s receiving it and remaining the same.', dd:null, yt:null },
+      { t:'Worthy of Eternal Life', ref:'Acts 13:44–49',
+        syn:'The whole city gathers. The synagogue leaders grow jealous. Paul\'s response is devastating: "Since you reject this message and judge yourselves unworthy of eternal life, we now turn to the Gentiles." God didn\'t reject Israel — they judged themselves. The door of faith swung wide open, and the people nobody expected walked through it.',
+        kl:'They judged themselves unworthy — and the door swung open to those who would walk through it.', dd:null, yt:null },
+      { t:'Shake It Off', ref:'Acts 13:50–52',
+        syn:'Influential leaders drive Paul and Barnabas out of town. Their response: they shake the dust from their feet — not in bitterness, but in obedience. Dust-shaking is not rejection of people; it\'s release from responsibility. The stunning postscript: the believers they left behind were filled with joy and the Holy Spirit.',
+        kl:'You can\'t walk into your next season with old dust on your feet.', dd:null, yt:null }
+    ] },
+
+  { id:'iconium', name:'Iconium', sub:'Between Promise and Purpose', lat:37.87, lng:32.49, j:1, sz:'standard',
+    moment:'Bold preaching, a great number believe, and opposition rises to match. The city divides. Paul and Barnabas stay a long time — this isn\'t hit-and-run evangelism. When they learn of a plot to stone them, they flee.',
+    sermons:[{ t:'Between Promise and Purpose', ref:'Acts 14:1–7',
+      syn:'Iconium is the pattern emerging: bold preaching, a great number believe, and opposition rises to match. The space between what God has promised and what God is still unfolding is where faith is forged. Hardship doesn\'t hinder the Kingdom — it becomes the surface the Kingdom advances on.',
+      kl:'The space between promise and purpose is where faith is forged.', dd:null, yt:null }] },
+
+  { id:'lystra-j1', name:'Lystra', sub:'But Paul Got Up', lat:37.57, lng:32.42, j:1, sz:'major',
+    moment:'Paul heals a man lame from birth. The crowd tries to worship Paul and Barnabas as Zeus and Hermes. Then Jews arrive from Antioch and Iconium — they stone Paul and drag him out of the city, thinking he\'s dead. "But as the believers gathered around him, he got up."',
+    sermons:[
+      { t:'In The Middle of It All', ref:'Acts 14:8–18',
+        syn:'Paul heals a man lame from birth, and the crowd does the last thing he expects — they try to worship him as Zeus. The very people who will stone Paul in the next scene are building altars to him in this one. Acts is not the story of what the early church did. It\'s the story of what Jesus is still doing through ordinary, breakable people.',
+        kl:'Acts is not what the early church did — it\'s what Jesus is still doing.', dd:null, yt:null },
+      { t:'Worthy of it All', ref:'Acts 14:19–22',
+        syn:'Jews arrive from Antioch and Iconium. They stone Paul and drag him out of the city. And then one of the most understated lines in all of Acts: "But as the believers gathered around him, he got up." Faith isn\'t pretending the pain isn\'t real. It\'s refusing to let it redefine your calling.',
+        kl:'But Paul got up.', dd:null, yt:null }
+    ] },
+
+  { id:'derbe-j1', name:'Derbe', sub:'The Furthest Point', lat:37.35, lng:33.32, j:1, sz:'standard',
+    moment:'They preach the Good News and make many disciples. Derbe is the furthest point east of the first journey — the end of the road before they turn back and retrace every step.',
+    sermons:[{ t:'Worthy of it All', ref:'Acts 14:20–21',
+      syn:'Paul walks to Derbe the day after being stoned. That alone is the sermon. The furthest point is not a failure to go further — it\'s where you discover that the mission was never about geography. Through many tribulations we must enter the Kingdom of God.',
+      kl:'But Paul got up.', dd:null, yt:null }] },
+
+  { id:'attalia', name:'Attalia', sub:'Port of Return', lat:36.88, lng:30.61, j:1, sz:'transit',
+    moment:'The port city from which they sail back to Syrian Antioch after preaching in Perga on the return. A chapter closes.',
+    sermons:[{ t:'The Ministry of Encouragement', ref:'Acts 14:25',
+      syn:'From Attalia they sailed back to Antioch — the sending church. They return not with trophies but with a report: "everything God had done through them."',
+      kl:'God doesn\'t just free people — He sends people to help them walk forward.', dd:null, yt:null }] },
+
+  // ── BETWEEN ──
+
+  { id:'jerusalem-council', name:'Jerusalem', sub:'The Jerusalem Council', lat:31.77, lng:35.23, j:'between', sz:'major',
+    moment:'The Jerusalem Council faces the defining question: must Gentile believers be circumcised to be saved? Peter stands and settles it. James confirms. A letter is sent. The burden is lifted. The gospel is declared free of all additional conditions.',
+    sermons:[
+      { t:'Unburdened', ref:'Acts 15:1–11',
+        syn:'The Jerusalem Council faces the defining question: must Gentile believers be circumcised to be saved? Peter stands and settles it: if God already gave them His Spirit — who are we to add conditions? The law diagnoses. Grace delivers. What saved you will sustain you.',
+        kl:'If God already gave His Spirit, who are we to add conditions?', dd:null, yt:null },
+      { t:'The Ministry of Encouragement', ref:'Acts 15:22–35',
+        syn:'The church doesn\'t just issue a ruling — they send trusted people with the right tone. They own the hurt caused by false teachers. God doesn\'t just free people; He sends people to help them walk forward without picking the burdens back up. Encouragement is not a personality trait — it\'s a ministry.',
+        kl:'God doesn\'t just free people — He sends people to help them walk forward.', dd:null, yt:null }
+    ] },
+
+  // ── JOURNEY 2 ──
+
+  { id:'antioch-j2', name:'Antioch (Syrian)', sub:'The Split', lat:36.05, lng:36.30, j:2, sz:'major',
+    moment:'Paul and Barnabas plan to revisit the churches they planted. But they disagree sharply — paroxysmos — over John Mark. One team becomes two. Barnabas takes Mark to Cyprus; Paul takes Silas overland. The second journey begins from fracture.',
+    sermons:[{ t:'You Go That Way, I\'ll Go This Way', ref:'Acts 15:36–41',
+      syn:'The split is real and it\'s painful. But God works with the results of human frailty: the breakup of one team produces two missionary journeys instead of one. Conflict handled with integrity doesn\'t destroy the mission — it multiplies it.',
+      kl:'Conflict handled with integrity can multiply the mission rather than destroy it.', dd:null, yt:null }] },
+
+  { id:'lystra-j2', name:'Lystra', sub:'Timothy Joins', lat:37.67, lng:32.52, j:2, sz:'standard',
+    moment:'Paul meets Timothy — son of a Jewish mother and Greek father. Not fully accepted by either world. Paul circumcises Timothy — not for salvation, but to remove an unnecessary barrier to ministry. Timothy joins the team.',
+    sermons:[{ t:'Mixed-Mixed', ref:'Acts 16:1–5',
+      syn:'Paul meets Timothy — Jewish mother, Greek father. Not fully accepted by either world. And Paul looks at him and says: you\'re exactly who I need. Timothy\'s in-between identity isn\'t a liability; it\'s positioning. God doesn\'t only work through people who feel like they fully belong. He uses people who can move between worlds — because the gospel has to cross every border.',
+      kl:'What feels mixed in you is not a mistake — it\'s often the very way God moves His mission forward.', dd:null, yt:null }] },
+
+  { id:'phrygia', name:'Phrygia / Galatia', sub:'Spirit Says No', lat:38.50, lng:30.50, j:2, sz:'transit',
+    moment:'Delivering the Jerusalem Council\'s decisions to the churches. The Holy Spirit prevents them from preaching in the province of Asia. Every logical direction is blocked.',
+    sermons:[{ t:'Red Light, Green Light', ref:'Acts 16:6',
+      syn:'Paul tries Asia — the Spirit says no. Geography becomes a divine funnel, squeezing the team toward the coast until they reach Troas. Closed doors are not failures — they\'re redirections. The red light is not punishment; it\'s positioning.',
+      kl:'Not every open door is a now door.', dd:'/res/deep/2026/redlight-greenlight.html', yt:'iZGO60hHVqA' }] },
+
+  { id:'bithynia', name:'Mysia / Bithynia', sub:'Every Door Closed', lat:40.00, lng:29.00, j:2, sz:'transit',
+    moment:'They try to enter Bithynia. The Spirit of Jesus does not allow them. They pass through Mysia. The Spirit is funneling the team toward a continent-crossing call.',
+    sermons:[{ t:'Red Light, Green Light', ref:'Acts 16:7–8',
+      syn:'He tries Bithynia — the Spirit says no again. When every door closes, it\'s not rejection — it\'s direction. God doesn\'t compete with your plans. He patiently waits until they fall silent.',
+      kl:'Not every open door is a now door.', dd:'/res/deep/2026/redlight-greenlight.html', yt:'iZGO60hHVqA' }] },
+
+  { id:'troas', name:'Troas', sub:'The Macedonian Vision', lat:39.95, lng:26.24, j:2, sz:'major',
+    moment:'At the coast with nowhere left to go. In the night, a Macedonian man appears: "Come over and help us." The team concludes God is calling them to Europe. Luke joins — the "we" passages begin.',
+    sermons:[
+      { t:'Red Light, Green Light Part 2', ref:'Acts 16:6–10',
+        syn:'Troas is the end of land travel — the place where all your skills have taken you as far as they can go. Paul\'s plans fell silent, and in the silence God spoke through a vision. The shift from "they" to "we" tells us Luke joins the team here. God gives a call, not a map.',
+        kl:'God doesn\'t compete with your plans — He patiently waits until they fall silent.', dd:'/res/deep/2026/redlight-greenlight.html', yt:'iZGO60hHVqA' },
+      { t:'The Open Road', ref:'Acts 16:10–13',
+        syn:'Crossing from Troas to Neapolis wasn\'t just a boat ride — it was a continental threshold. Paul stepped off the ship onto the Via Egnatia, a 600-mile military highway built by Rome to move legions. Rome built the road for armies; Paul used it for the gospel.',
+        kl:'Rome built the road to move armies. Paul used it to move the gospel.', dd:'/res/deep/2026/the-open-road.html', yt:'Lx0ImALqnOc' }
+    ] },
+
+  { id:'samothrace', name:'Samothrace', sub:'Overnight Crossing', lat:40.47, lng:25.52, j:2, sz:'transit',
+    moment:'An overnight stop on a rocky island. Favourable wind drives the crossing — 150 miles in just two days. The gospel is on the move toward Europe.',
+    sermons:[{ t:'The Open Road', ref:'Acts 16:11',
+      syn:'A brief stop before the coast of Europe. The favourable wind feels like the Spirit itself — when God is moving, even geography cooperates.',
+      kl:'Rome built the road to move armies. Paul used it to move the gospel.', dd:'/res/deep/2026/the-open-road.html', yt:'Lx0ImALqnOc' }] },
+
+  { id:'neapolis', name:'Neapolis', sub:'The Gospel Lands in Europe', lat:40.94, lng:24.40, j:2, sz:'standard',
+    moment:'The port of entry into Europe (modern Kavalla, Greece). From here, a 10-mile walk inland along the Via Egnatia to Philippi. The gospel sets foot on European soil for the first time.',
+    sermons:[{ t:'The Open Road', ref:'Acts 16:11',
+      syn:'The moment the ship touches shore at Neapolis, something changes. The gospel is in Europe. The road from here leads not just to Philippi — but to Rome, to Britain, to every corner of the world the Kingdom has reached since.',
+      kl:'Rome built the road to move armies. Paul used it to move the gospel.', dd:'/res/deep/2026/the-open-road.html', yt:'Lx0ImALqnOc' }] },
+
+  { id:'philippi', name:'Philippi', sub:'The European Church is Born', lat:41.01, lng:24.29, j:2, sz:'major',
+    moment:'Four defining moments: Lydia\'s heart opened at the riverside — her home becomes the first house church in Europe. A slave girl is freed; her masters drag Paul to court. Paul and Silas are beaten and jailed. Midnight worship. Earthquake. The jailer\'s conversion. "Believe in the Lord Jesus and you will be saved." The happiest letter in the Bible was written to this church.',
+    sermons:[
+      { t:'Open Hearts, Open Homes', ref:'Acts 16:13–15',
+        syn:'There wasn\'t even a synagogue in Philippi — just a handful of women praying by a river. And God chose that place to birth the European church. Lydia was a merchant of purple cloth, but her heart had a bolt on the inside that only God could open. When God unbolted her heart, her front door opened next. Her showroom became a sanctuary.',
+        kl:'Your house is not a monument to your success. It is a mission base for the Kingdom.', dd:'/res/deep/2026/open-heart-open-home.html', yt:'HOozOcQ2130' },
+      { t:'Net Worth', ref:'Acts 16:16–24',
+        syn:'A slave girl follows Paul through the streets. Paul delivers her — and her masters immediately drag him to court. Not because a girl was freed, but because their revenue stream was disrupted. When Jesus sets someone free, those who profit from bondage get angry. Your net worth is not what you accumulate — it\'s what you\'re willing to release.',
+        kl:'When Jesus sets someone free, those who profit from bondage get angry.', dd:'/res/deep/2026/net-worth.html', yt:null },
+      { t:'We\'re All Here', ref:'Acts 16:25–28',
+        syn:'Midnight. The deepest, darkest cell. Chains still on. And Paul and Silas are worshipping — not after the earthquake, but before it. The earthquake shakes the prison open, but Paul doesn\'t leave. He stays. That\'s the real miracle — not the shaking, but the staying. The earthquake wasn\'t for Paul. It was for the jailer.',
+        kl:'The enemy had a strategy for the soldiers. He had no strategy for the choir.', dd:'/res/deep/2026/we-are-all-here.html', yt:null },
+      { t:'Believe in Jesus', ref:'Acts 16:29–34',
+        syn:'The jailer falls trembling and asks the most important question in Acts: "What must I do to be saved?" Paul\'s answer: "Believe in the Lord Jesus." The Greek pisteuō means a full transfer of weight — not leaning, not appreciating. Full weight. Available right now, on the floor, in the dark. By sunrise the whole household is baptised.',
+        kl:'The gospel is the most accessible thing in the room.', dd:'/res/deep/2026/believe-in-jesus.html', yt:null },
+      { t:'Citizens of Heaven', ref:'Acts 16:35–40',
+        syn:'Paul drops a bombshell: "We are Roman citizens." This isn\'t pride — it\'s precedent. Paul uses his earthly citizenship to protect the church he\'s leaving behind. But the deeper truth: we carry a citizenship that outranks Rome. Philippi was a Roman colony proud of its status — and Paul tells them their real citizenship is in heaven.',
+        kl:'Our citizenship outranks every empire.', dd:'/res/deep/2026/citizens-of-heaven.html', yt:null }
+    ] },
+
+  { id:'amphipolis', name:'Amphipolis', sub:'Passing Through', lat:40.82, lng:23.85, j:2, sz:'transit',
+    moment:'Passing through on the Via Egnatia. ~35 miles from Philippi. The mission moves westward.',
+    sermons:[{ t:'Christmas Starts Here', ref:'Acts 17:1', syn:'The Via Egnatia became the spine of a Kingdom that outlasted the empire that built it.', kl:'They turned the world upside down.', dd:null, yt:null }] },
+
+  { id:'apollonia', name:'Apollonia', sub:'Passing Through', lat:40.71, lng:23.39, j:2, sz:'transit',
+    moment:'Another 30 miles along the road. Thessalonica is the next major city.',
+    sermons:[{ t:'Christmas Starts Here', ref:'Acts 17:1', syn:'Each step of the Via Egnatia is a step the gospel takes toward the western world.', kl:'They turned the world upside down.', dd:null, yt:null }] },
+
+  { id:'thessalonica', name:'Thessalonica', sub:'These Men Who Turned the World Upside Down', lat:40.63, lng:22.94, j:2, sz:'major',
+    moment:'Paul reasons in the synagogue for three Sabbaths. Many believe — including prominent Greek women. Opposition rises. Jason\'s house is attacked. The charge: "These people who have turned the world upside down have come here also." Paul and Silas are sent away by night.',
+    sermons:[
+      { t:'My Resurrected Life', ref:'Acts 17:1–4',
+        syn:'Paul reasons in the synagogue, explaining that the Messiah had to suffer and rise from the dead. The resurrection isn\'t a postscript to the gospel — it\'s the thesis. If Jesus stayed dead, we have a martyr. Because He rose, we have a Lord. And a resurrected Lord demands a resurrected life.',
+        kl:'The resurrection isn\'t the end of the story — it\'s the beginning of yours.', dd:'/res/deep/2026/my-resurrected-life.html', yt:null },
+      { t:'Christmas Starts Here', ref:'Acts 17:1–9',
+        syn:'The accusation reveals what the gospel actually does: "These people who have turned the world upside down have come here also, saying there is another king — Jesus." The gospel is inherently disruptive. It doesn\'t ask for a seat at the table — it flips the table. Christmas started here — not in December sentimentality, but in the dangerous announcement that Jesus outranks every Caesar.',
+        kl:'They turned the world upside down.', dd:null, yt:null },
+      { t:'What\'s In A Name?', ref:'Acts 17:1–9',
+        syn:'The name of Jesus isn\'t a brand — it\'s an authority. When Paul proclaimed "another king, Jesus," he wasn\'t offering an alternative lifestyle. He was announcing a regime change. Caesar\'s name opened doors, funded armies, controlled economies. But there is a name above every name — and it doesn\'t belong to any Caesar.',
+        kl:'There is a name above every name — and it doesn\'t belong to any Caesar.', dd:null, yt:null }
+    ] },
+
+  { id:'berea', name:'Berea', sub:'More Noble', lat:40.52, lng:22.20, j:2, sz:'standard',
+    moment:'The Bereans receive the word with eagerness and examine the Scriptures daily. Luke calls them "more noble" — not because they were sceptical, but because they were hungry. Jews from Thessalonica follow and stir up trouble. Paul is sent to the coast.',
+    sermons:[{ t:'Readme.Bible', ref:'Acts 17:10–15',
+      syn:'The Bereans received the word with eagerness and examined the Scriptures daily. They didn\'t just evaluate Paul\'s message; they searched and found a Person. The Bible is not a textbook to master — it\'s God\'s autobiography, His voluntary decision to be known. The Bereans searched the Scriptures and found a Person, not just correct doctrine.',
+      kl:'The Bereans searched the Scriptures and found a Person, not just correct doctrine.', dd:'/res/deep/2026/readme-bible.html', yt:null }] },
+
+  { id:'athens', name:'Athens', sub:'To An Unknown God', lat:37.97, lng:23.73, j:2, sz:'major',
+    moment:'Paul\'s spirit is provoked by a city swamped with idols. He reasons in the synagogue and the agora daily. He addresses the Areopagus. Some sneer, some believe — including Dionysius and Damaris.',
+    sermons:[
+      { t:'Wanted', ref:'Acts 17:16–34',
+        syn:'Paul\'s spirit is provoked — paroxynō — by a city saturated with idols. He walks into the Areopagus and finds the altar "To An Unknown God." His sermon pivots on a single truth: the God who made everything doesn\'t need anything — but He wants you. Humanity has been reaching for God with outstretched hands. And the God they\'ve been groping for is not far from any one of them.',
+        kl:'The God who made the world doesn\'t need us — but He wants us. That changes everything.', dd:'/res/deep/2026/wanted.html', yt:null },
+      { t:'The Marketplace and the Gospel', ref:'Acts 17:16–34',
+        syn:'Paul didn\'t look for the exit when he entered the most intellectually intimidating city in the ancient world — he looked for the opening. He engaged the Stoics and Epicureans on their own turf, quoting their own poets. The Agora hasn\'t closed — it\'s moved to our screens, our feeds, our workplaces. We are not called to win the argument; we are called to make the announcement.',
+        kl:'We don\'t cede ground. We contest it.', dd:'/res/deep/2026/the-gospel-in-the-marketplace.html', yt:'vuKqFsz92cM' }
+    ] },
+
+  { id:'corinth', name:'Corinth', sub:'I Have People in This City', lat:37.91, lng:22.88, j:2, sz:'major',
+    moment:'Paul arrives afraid and exhausted. He meets Aquila and Priscilla — refugees expelled from Rome. They share a trade and a table. God speaks in a night vision: "Don\'t be afraid. I have many people in this city." Paul stays 18 months. Brought before Gallio — the case is dismissed. The church takes root.',
+    sermons:[
+      { t:'From East to West', ref:'Acts 18:1–4',
+        syn:'Paul arrives in Corinth beaten, exhausted, and afraid. He meets Aquila and Priscilla — refugees expelled from Rome by Claudius\'s edict. They didn\'t choose Corinth; displacement chose them. And God builds the church from this wreckage. God\'s purposes don\'t go around — they cut through.',
+        kl:'God\'s purposes don\'t go around. They cut through.', dd:'/res/deep/2026/east-to-west.html', yt:null },
+      { t:'I Have People Here', ref:'Acts 18:9–11',
+        syn:'Paul is afraid. God speaks in a night vision: "Don\'t be afraid. Speak out. Don\'t be silent. For I am with you — because I have many people in this city." God doesn\'t say "be strong." He says "I\'m here, and I have people you haven\'t met yet." The encouragement isn\'t about Paul\'s capacity — it\'s about God\'s prior work.',
+        kl:'Stop being afraid. I have people in this city.', dd:'/res/deep/2026/i-have-people-here.html', yt:null },
+      { t:'Mind Your Business', ref:'Acts 18:1–11',
+        syn:'Paul makes tents to fund his preaching. His hands and his theology work together. Your bank statement is a theological document. Honour in business is the evidence of your faith. The gospel doesn\'t just save your soul — it audits your ledger.',
+        kl:'Your bank statement is a theological document.', dd:'/res/deep/2026/mind-your-business.html', yt:null },
+      { t:'More Than Enough', ref:'Acts 18:1–17',
+        syn:'Even if God gave us nothing else — no answered prayer, no open door, no breakthrough — Jesus alone would still be more than enough. Paul\'s time in Corinth strips ministry down to its most essential question: is Jesus sufficient when everything else is taken away? Jesus is not the means to a better life. He is the life.',
+        kl:'If God gave us nothing else but Jesus, He would still be more than enough.', dd:null, yt:null },
+      { t:'Guilty As Charged', ref:'Acts 18:12–17',
+        syn:'The Jews drag Paul before Gallio. Gallio throws the case out. The irony: the charge is true. Paul is guilty of exactly what they accuse him of — proclaiming another King. The court dismisses it as irrelevant. But the gospel is never irrelevant. The One Paul preaches will one day stand as judge over every court that ever dismissed Him.',
+        kl:'The charge is true. There is another King.', dd:'/res/deep/2026/guilty-as-charged.html', yt:null }
+    ] },
+
+  { id:'cenchreae', name:'Cenchreae', sub:'A Private Altar', lat:37.88, lng:23.05, j:2, sz:'standard',
+    moment:'The eastern port of Corinth. Paul shaves his head — completing a Nazirite vow. A season marked, a chapter closed. This port later produces Phoebe (Romans 16:1–2), who hand-carries Paul\'s letter to Rome.',
+    sermons:[{ t:'More Accurately', ref:'Acts 18:18',
+      syn:'Paul shaves his head at Cenchreae — completing a Nazirite vow. A private altar at the end of a brutal season. You don\'t always know what vow someone is completing. What looks like a haircut is sometimes a memorial.',
+      kl:'You don\'t need a platform to shape the future of the church. You need a kitchen table and something true to say.', dd:'/res/deep/2026/more-accurately.html', yt:'AsyMp2sfdf0' }] },
+
+  { id:'ephesus', name:'Ephesus', sub:'A Seed & A Kitchen Table', lat:37.94, lng:27.34, j:2, sz:'major',
+    moment:'Paul makes a brief visit; the synagogue responds warmly but he says he must move on. He deposits Priscilla and Aquila here. Later, Apollos arrives from Alexandria — eloquent, powerful, but theologically incomplete. Priscilla and Aquila invite him home and teach him the way of God more accurately.',
+    sermons:[
+      { t:'More Accurately', ref:'Acts 18:19–21',
+        syn:'Paul preaches in the synagogue to a warm reception. They ask him to stay. He says no — "I will come back, God willing." He deposits Priscilla and Aquila here. This is a seed on the ground. Not every open door is a now door — but every closed door has a reason, and sometimes that reason has a name.',
+        kl:'Not every open door is a now door.', dd:'/res/deep/2026/more-accurately.html', yt:'AsyMp2sfdf0' },
+      { t:'More Accurately (Apollos)', ref:'Acts 18:24–28',
+        syn:'Apollos arrives from Alexandria with fire, eloquence, and a theology that stopped before the cross. He\'s accurate — but incomplete. Priscilla and Aquila don\'t correct him publicly. They invite him home. Over a kitchen table, they give him what was missing. A refugee couple who never wrote a line of Scripture shaped the most eloquent preacher in the region.',
+        kl:'You don\'t need a platform to shape the future of the church. You need a kitchen table and something true to say.', dd:'/res/deep/2026/more-accurately.html', yt:'AsyMp2sfdf0' }
+    ] },
+
+  { id:'caesarea', name:'Caesarea', sub:'Brief Stop', lat:32.50, lng:34.89, j:2, sz:'transit',
+    moment:'A brief stop on the return journey. Paul is heading back to Antioch — the sending church — to report what God has done.',
+    sermons:[{ t:'More Accurately', ref:'Acts 18:22', syn:'A brief stop before home. The return is not a retirement — it\'s a reload.', kl:'The report is never a retirement. It\'s a reload.', dd:null, yt:null }] },
+
+  { id:'jerusalem-j2', name:'Jerusalem', sub:'Brief Visit', lat:31.62, lng:35.10, j:2, sz:'transit',
+    moment:'Paul went up and greeted the church. A brief visit. The connection to the mother church is maintained. The second journey is almost complete.',
+    sermons:[{ t:'More Accurately', ref:'Acts 18:22', syn:'The briefest visit. But it matters — the mission was never independent of the body.', kl:'The report is never a retirement. It\'s a reload.', dd:null, yt:null }] },
+
+  { id:'antioch-j2-return', name:'Antioch (Return)', sub:'End of the Second Journey', lat:36.20, lng:36.30, j:2, sz:'standard',
+    moment:'Paul returns to Antioch — the sending church. End of the second missionary journey. The report is delivered: here is what God did. And then the third journey will begin.',
+    sermons:[{ t:'More Accurately', ref:'Acts 18:22', syn:'The return to the sending church completes the circle. But it\'s not really an ending — it\'s a reload. Every report is a runway for the next departure.', kl:'The report is never a retirement. It\'s a reload.', dd:null, yt:null }] }
+
+]; // end CITIES
+
+// ── ROUTES ───────────────────────────────────────────────────────────────────
+
+const R1 = [[36.20,36.15],[36.12,35.94],[35.19,33.90],[34.76,32.42],[36.96,30.85],[38.30,31.19],[37.87,32.49],[37.57,32.42],[37.35,33.32],[37.57,32.42],[37.87,32.49],[38.30,31.19],[36.96,30.85],[36.88,30.61],[36.20,36.15]];
+const R2 = [[36.20,36.15],[37.35,33.32],[37.57,32.42],[38.50,30.50],[40.00,29.00],[39.95,26.24],[40.47,25.52],[40.94,24.40],[41.01,24.29],[40.82,23.85],[40.71,23.39],[40.63,22.94],[40.52,22.20],[37.97,23.73],[37.91,22.88],[37.88,23.05],[37.94,27.34],[32.50,34.89],[31.62,35.10],[36.20,36.30]];
+
+// ── MAP ───────────────────────────────────────────────────────────────────────
+
+const map = L.map('map',{ center:[38.5,27.5], zoom:6, zoomControl:true, attributionControl:false });
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_matter_nolabels/{z}/{x}/{y}{r}.png',{ maxZoom:19 }).addTo(map);
+
+const rStyle = (color) => ({ color, weight:2.5, opacity:.8, dashArray:'8 5', lineCap:'round', lineJoin:'round' });
+const line1 = L.polyline(R1, rStyle('#c5a059')).addTo(map);
+const line2 = L.polyline(R2, rStyle('#e07a55')).addTo(map);
+
+function animDash(){
+  document.querySelectorAll('.leaflet-overlay-pane path').forEach(p=>{
+    p.style.animation='none';
+    void p.offsetWidth;
+    p.style.strokeDashoffset='28';
+    p.style.animation='dash-flow 1.6s linear infinite';
+  });
+}
+setTimeout(animDash,400);
+
+// ── MARKERS ───────────────────────────────────────────────────────────────────
+
+const mkrs = {};
+
+CITIES.forEach(c => {
+  const jc = c.j==='between'?'cm-between':`cm-j${c.j}`;
+  const sc = `cm-${c.sz}`;
+  const sizes = { major:[14,14], standard:[10,10], transit:[6,6] };
+  const [w,h] = sizes[c.sz];
+
+  const icon = L.divIcon({
+    className:'',
+    html:`<div class="city-marker ${jc} ${sc}"></div>`,
+    iconSize:[w,h], iconAnchor:[w/2,h/2]
+  });
+
+  const m = L.marker([c.lat,c.lng],{ icon, zIndexOffset: c.sz==='major'?200:c.sz==='standard'?100:0 })
+    .addTo(map)
+    .on('click',()=>openPanel(c));
+
+  if(c.sz!=='transit'){
+    m.bindTooltip(c.name,{ permanent:false, direction:'top', offset:[0,-8], className:'city-tooltip' });
+  }
+
+  mkrs[c.id]=m;
+});
+
+// ── TOGGLE ────────────────────────────────────────────────────────────────────
+
+let activeJ='both';
+
+document.querySelectorAll('[data-j]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    activeJ=btn.dataset.j;
+    document.querySelectorAll('[data-j]').forEach(b=>b.className='jbtn');
+    btn.classList.add(activeJ==='both'?'ab':activeJ==='1'?'a1':'a2');
+
+    if(activeJ==='both'){ map.addLayer(line1); map.addLayer(line2); }
+    else if(activeJ==='1'){ map.addLayer(line1); map.removeLayer(line2); }
+    else { map.removeLayer(line1); map.addLayer(line2); }
+
+    CITIES.forEach(c=>{
+      const m=mkrs[c.id];
+      const show = activeJ==='both' || String(c.j)===activeJ || c.j==='between';
+      show ? map.addLayer(m) : map.removeLayer(m);
+    });
+
+    setTimeout(animDash,100);
+  });
+});
+
+// ── PANEL ─────────────────────────────────────────────────────────────────────
+
+function jLabel(j){ return j==='between'?'Between Journeys':j===1?'First Missionary Journey':'Second Missionary Journey'; }
+function jColor(j){ return j==='between'?'#2d5a5a':j===1?'#c5a059':'#e07a55'; }
+
+function openPanel(city){
+  renderPanel(city,0);
+  document.getElementById('city-panel').classList.add('open');
+}
+
+function closePanel(){
+  document.getElementById('city-panel').classList.remove('open');
+}
+
+document.getElementById('pclose').addEventListener('click',closePanel);
+
+function renderPanel(city, si){
+  const s = city.sermons[si];
+  const col = jColor(city.j);
+
+  const tabs = city.sermons.length>1
+    ? `<div class="stabs">${city.sermons.map((x,i)=>`<button class="stab${i===si?' on':''}" onclick="switchS('${city.id}',${i})">${x.t}</button>`).join('')}</div>`
+    : '';
+
+  const links = [
+    s.yt ? `<a href="https://www.youtube.com/watch?v=${s.yt}" target="_blank" class="plbtn watch">▶&nbsp;Watch</a>` : '',
+    s.dd ? `<a href="${s.dd}" class="plbtn dive">↗&nbsp;Deep Dive</a>` : ''
+  ].join('');
+
+  document.getElementById('pcontent').innerHTML = `
+    ${tabs}
+    <div style="padding-top:${city.sermons.length>1?'1.1rem':'0'}">
+      <p style="font-family:'Outfit',sans-serif;font-size:.54rem;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:${col};margin-bottom:.3rem;">${jLabel(city.j)} · ${s.ref}</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:#1a1a1a;line-height:1.15;margin-bottom:.2rem;">${city.name}</h2>
+      <p style="font-family:'Outfit',sans-serif;font-size:.72rem;color:#a1a1aa;font-weight:300;margin-bottom:1.1rem;">${city.sub}</p>
+
+      <div style="padding:.85rem;background:rgba(0,0,0,.04);border-radius:.6rem;margin-bottom:1rem;">
+        <p style="font-family:'Outfit',sans-serif;font-size:.56rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#a1a1aa;margin-bottom:.4rem;">The Moment</p>
+        <p style="font-family:'Outfit',sans-serif;font-size:.82rem;color:#3f3f46;line-height:1.65;font-weight:300;">${city.moment}</p>
+      </div>
+
+      <div style="margin-bottom:1rem;">
+        <p style="font-family:'Outfit',sans-serif;font-size:.56rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#a1a1aa;margin-bottom:.4rem;">The Sermon</p>
+        <p style="font-family:'Outfit',sans-serif;font-size:.82rem;color:#3f3f46;line-height:1.65;font-weight:300;">${s.syn}</p>
+      </div>
+
+      <div class="keyline" style="margin-bottom:1rem;">"${s.kl}"</div>
+
+      ${links?`<div style="display:flex;flex-wrap:wrap;gap:.45rem;">${links}</div>`:''}
+    </div>`;
+}
+
+window.switchS = function(cid, si){
+  const city = CITIES.find(c=>c.id===cid);
+  if(city){ renderPanel(city,si); document.getElementById('city-panel').scrollTop=0; }
+};
+
+// close panel on map click (desktop)
+map.on('click', e=>{ if(!e.originalEvent.target.closest('.city-marker')) closePanel(); });
+
+</script>
+</body>
+</html>
