@@ -76,10 +76,7 @@
 
         .city-tooltip { background:rgba(10,15,20,.9)!important; border:1px solid rgba(255,255,255,.1)!important; border-radius:6px!important; color:#fff!important; font-family:'Outfit',sans-serif!important; font-size:.62rem!important; font-weight:600!important; letter-spacing:.08em!important; padding:.28rem .6rem!important; box-shadow:none!important; }
         .leaflet-tooltip-top.city-tooltip::before { display:none!important; }
-        /* Dark map via inversion filter on OSM tiles */
-        .leaflet-tile-pane {
-            filter: invert(1) hue-rotate(180deg) brightness(0.82) contrast(0.88) saturate(0.25);
-        }
+        /* Esri Dark Gray — natively dark, no filter needed */
         .leaflet-control-attribution { display:none; }
         .leaflet-control-zoom { border:none!important; margin:.85rem!important; }
         .leaflet-control-zoom a { background:rgba(10,15,20,.88)!important; backdrop-filter:blur(12px)!important; color:#fff!important; border:1px solid rgba(255,255,255,.09)!important; }
@@ -399,9 +396,15 @@ const R2 = [[36.20,36.15],[37.35,33.32],[37.57,32.42],[38.50,30.50],[40.00,29.00
 
 const map = L.map('map',{ center:[38.5,27.5], zoom:6, zoomControl:true, attributionControl:false });
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 19,
-  attribution: '&copy; OpenStreetMap contributors'
+// Esri Dark Gray Base — natively dark, English labels, no API key required
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+  maxZoom: 16,
+  attribution: 'Tiles &copy; Esri'
+}).addTo(map);
+// Label overlay — English city/country names on top
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+  maxZoom: 16,
+  opacity: 1
 }).addTo(map);
 
 const rStyle = (color) => ({ color, weight:2.5, opacity:.8, dashArray:'8 5', lineCap:'round', lineJoin:'round' });
