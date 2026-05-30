@@ -309,6 +309,8 @@
             <button class="jbtn" data-j="2"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--terra);margin-right:.3rem;vertical-align:middle;"></span>Journey II</button>
         </div>
         <div id="map"></div>
+        <!-- Scroll-zoom hint -->
+        <div id="map-hint" style="position:absolute;bottom:5.5rem;left:50%;transform:translateX(-50%);z-index:1000;background:rgba(10,15,20,.78);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:.42rem 1.1rem;font-family:'Outfit',sans-serif;font-size:.54rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);white-space:nowrap;pointer-events:none;transition:opacity .4s ease;">↕ Click map to zoom with scroll</div>
         <div style="position:absolute;bottom:1.25rem;left:.9rem;z-index:400;background:rgba(10,15,20,.88);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.09);border-radius:.65rem;padding:.65rem .9rem;">
             <div style="display:flex;align-items:center;gap:.55rem;margin-bottom:.35rem;">
                 <div style="width:20px;height:2px;background:var(--gold);border-radius:1px;"></div>
@@ -606,7 +608,8 @@ const MODERN = {
 // ════════════════════════════════════════════════════════════════════════════
 
 document.addEventListener('DOMContentLoaded', function () {
-    const map = L.map('map', { center:[38.5,27.5], zoom:6, zoomControl:true, attributionControl:false });
+    const map = L.map('map', { center:[38.5,27.5], zoom:6, zoomControl:true, attributionControl:false, scrollWheelZoom:false });
+    window.__tlrMap = map; // expose for click-to-activate handler below
 
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', { maxZoom:16 }).addTo(map);
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', { maxZoom:16 }).addTo(map);
@@ -1066,6 +1069,23 @@ const observer = new IntersectionObserver(entries => {
     });
 }, { threshold: 0.25, rootMargin:'-60px 0px -40% 0px' });
 sections.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+
+// ── Click-to-activate scroll zoom ──────────────────────────────────────────
+(function(){
+    const mapEl   = document.getElementById('map');
+    const mapHint = document.getElementById('map-hint');
+    if (!mapEl || !mapHint) return;
+    mapEl.addEventListener('click', () => {
+        window.__tlrMap && window.__tlrMap.scrollWheelZoom.enable();
+        mapHint.style.opacity = '0';
+    });
+    document.addEventListener('click', e => {
+        if (!mapEl.contains(e.target)) {
+            window.__tlrMap && window.__tlrMap.scrollWheelZoom.disable();
+            mapHint.style.opacity = '1';
+        }
+    });
+})();
 </script>
 </body>
 </html>

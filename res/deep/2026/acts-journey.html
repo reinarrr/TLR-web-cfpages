@@ -106,6 +106,8 @@
         <button class="jbtn" data-j="2"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#6ba8d4;margin-right:.3rem;vertical-align:middle;"></span>Journey II</button>
     </div>
     <div id="map"></div>
+    <!-- Scroll-zoom hint (fades once user clicks in) -->
+    <div id="map-hint" style="position:absolute;bottom:5.5rem;left:50%;transform:translateX(-50%);z-index:1000;background:rgba(10,15,20,.78);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:.42rem 1.1rem;font-family:'Outfit',sans-serif;font-size:.54rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);white-space:nowrap;pointer-events:none;transition:opacity .4s ease;">↕ Click map to zoom with scroll</div>
     <!-- Legend -->
     <div style="position:absolute;bottom:1.25rem;left:.9rem;z-index:1000;background:rgba(10,15,20,.88);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.09);border-radius:.65rem;padding:.65rem .9rem;font-family:'Outfit',sans-serif;">
         <div style="display:flex;align-items:center;gap:.55rem;margin-bottom:.35rem;">
@@ -399,7 +401,7 @@ const R2 = [[36.20,36.15],[37.35,33.32],[37.57,32.42],[38.50,30.50],[40.00,29.00
 
 // ── MAP ───────────────────────────────────────────────────────────────────────
 
-const map = L.map('map',{ center:[38.5,27.5], zoom:6, zoomControl:true, attributionControl:false });
+const map = L.map('map',{ center:[38.5,27.5], zoom:6, zoomControl:true, attributionControl:false, scrollWheelZoom:false });
 
 // Esri Dark Gray Base — natively dark, English labels, no API key required
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
@@ -536,6 +538,20 @@ window.switchS = function(cid, si){
 
 // close panel on map click (desktop)
 map.on('click', e=>{ if(!e.originalEvent.target.closest('.city-marker')) closePanel(); });
+
+// ── Click-to-activate scroll zoom ──────────────────────────────────────────
+const mapEl  = document.getElementById('map');
+const mapHint = document.getElementById('map-hint');
+mapEl.addEventListener('click', () => {
+    map.scrollWheelZoom.enable();
+    mapHint.style.opacity = '0';
+});
+document.addEventListener('click', e => {
+    if (!mapEl.contains(e.target)) {
+        map.scrollWheelZoom.disable();
+        mapHint.style.opacity = '1';
+    }
+});
 
 }); // end DOMContentLoaded
 </script>
