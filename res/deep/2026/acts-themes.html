@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acts Journey: The Themes | The Living Room</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: { extend: {
+                colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                fontFamily: { display: ['Playfair Display','serif'], body: ['Outfit','sans-serif'] }
+            }}
+        }
+    </script>
+    <style>
+        body { background:#faf9f6; font-family:'Outfit',sans-serif; }
+
+        /* ── LAYER NAV ─────────────────────────────────────────────── */
+        .layer-nav { display:flex; gap:.4rem; justify-content:center; margin-top:1.4rem; flex-wrap:wrap; }
+        .lnav { padding:.4rem 1.1rem; border-radius:100px; font-family:'Outfit',sans-serif; font-size:.58rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; border:1px solid rgba(255,255,255,.18); color:rgba(255,255,255,.4); transition:all .2s; }
+        .lnav:hover { border-color:rgba(255,255,255,.4); color:rgba(255,255,255,.7); }
+        .lnav.active { background:rgba(197,160,89,.18); border-color:#c5a059; color:#c5a059; }
+
+        /* ── THEME GRID ────────────────────────────────────────────── */
+        .theme-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; padding:2.5rem; max-width:1100px; margin:0 auto; }
+        @media(max-width:900px){ .theme-grid { grid-template-columns:repeat(2,1fr); } }
+        @media(max-width:580px){ .theme-grid { grid-template-columns:1fr; padding:1.5rem; } }
+
+        /* ── THEME CARD ────────────────────────────────────────────── */
+        .theme-card {
+            background:#fff;
+            border-radius:1.25rem;
+            padding:1.75rem 1.5rem;
+            cursor:pointer;
+            transition:transform .2s, box-shadow .2s;
+            position:relative;
+            overflow:hidden;
+            border:1px solid rgba(0,0,0,.06);
+        }
+        .theme-card:hover { transform:translateY(-3px); box-shadow:0 12px 36px rgba(0,0,0,.09); }
+        .theme-card::before {
+            content:''; position:absolute;
+            top:0; left:0; right:0; height:3px;
+            background:var(--tc);
+        }
+
+        .theme-num { font-family:'Playfair Display',serif; font-size:2.8rem; font-weight:700; color:var(--tc); opacity:.12; line-height:1; margin-bottom:.6rem; }
+        .theme-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:#1a1a1a; line-height:1.2; margin-bottom:.3rem; }
+        .theme-sub { font-family:'Outfit',sans-serif; font-size:.62rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--tc); margin-bottom:.75rem; }
+        .theme-idea { font-family:'Outfit',sans-serif; font-size:.72rem; color:#6b7280; line-height:1.6; margin-bottom:1rem; }
+        .theme-tags { display:flex; flex-wrap:wrap; gap:.35rem; }
+        .theme-tag { font-family:'Outfit',sans-serif; font-size:.52rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; padding:.22rem .6rem; border-radius:100px; background:var(--tc-light); color:var(--tc); border:1px solid var(--tc-border); }
+        .theme-arrow { position:absolute; bottom:1.4rem; right:1.4rem; width:30px; height:30px; border-radius:50%; background:var(--tc-light); display:flex; align-items:center; justify-content:center; font-size:.75rem; transition:all .2s; }
+        .theme-card:hover .theme-arrow { background:var(--tc); color:#fff; transform:translateX(2px); }
+
+        /* ── DETAIL PANEL ──────────────────────────────────────────── */
+        #theme-panel { position:fixed; z-index:2000; background:#faf9f6; overflow-y:auto; transition:transform .32s cubic-bezier(.4,0,.2,1); }
+        @media(max-width:767px){
+            #theme-panel { bottom:0;left:0;right:0;max-height:84vh;border-radius:1.5rem 1.5rem 0 0;transform:translateY(100%);box-shadow:0 -6px 36px rgba(0,0,0,.18); }
+            #theme-panel.open { transform:translateY(0); }
+        }
+        @media(min-width:768px){
+            #theme-panel { top:0;right:0;bottom:0;width:440px;border-left:1px solid rgba(0,0,0,.07);transform:translateX(100%);box-shadow:-6px 0 36px rgba(0,0,0,.1); }
+            #theme-panel.open { transform:translateX(0); }
+        }
+        .drag-handle { width:36px;height:3px;background:rgba(0,0,0,.12);border-radius:2px;margin:.7rem auto 0; }
+        .pclose { position:absolute;top:.9rem;right:.9rem;width:30px;height:30px;border-radius:50%;border:none;background:rgba(0,0,0,.07);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:#666;transition:background .2s; }
+        .pclose:hover { background:rgba(0,0,0,.13); }
+
+        /* Panel internals */
+        .tp-header { padding:2rem 1.5rem 0; position:relative; }
+        .tp-body { padding:1.25rem 1.5rem 3rem; }
+        .tp-num { font-family:'Playfair Display',serif; font-size:3.5rem; font-weight:700; opacity:.08; line-height:1; }
+        .tp-label { font-family:'Outfit',sans-serif; font-size:.52rem; font-weight:700; letter-spacing:.4em; text-transform:uppercase; margin-bottom:.4rem; }
+        .tp-title { font-family:'Playfair Display',serif; font-size:1.45rem; font-weight:700; color:#1a1a1a; line-height:1.15; margin-bottom:.3rem; }
+        .tp-sub { font-family:'Outfit',sans-serif; font-size:.7rem; color:#a1a1aa; font-weight:300; margin-bottom:1rem; }
+        .tp-idea { font-family:'Outfit',sans-serif; font-size:.78rem; color:#374151; line-height:1.7; padding:.9rem 1.1rem; background:rgba(0,0,0,.04); border-radius:.6rem; margin-bottom:1.25rem; }
+
+        .tp-section-label { font-family:'Outfit',sans-serif; font-size:.52rem; font-weight:700; letter-spacing:.3em; text-transform:uppercase; color:#a1a1aa; margin-bottom:.6rem; }
+        .tp-cities { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:1.25rem; }
+        .tp-city-tag { font-family:'Outfit',sans-serif; font-size:.62rem; padding:.3rem .75rem; border-radius:100px; border:1px solid; cursor:pointer; text-decoration:none; transition:all .2s; display:inline-block; }
+
+        .tp-sermon { display:flex; align-items:center; gap:.75rem; padding:.7rem 0; border-bottom:1px solid rgba(0,0,0,.06); }
+        .tp-sermon:last-child { border-bottom:none; }
+        .tp-sermon-title { font-family:'Outfit',sans-serif; font-size:.75rem; font-weight:600; color:#1a1a1a; flex:1; }
+        .tp-sermon-ref { font-family:'Outfit',sans-serif; font-size:.58rem; color:#a1a1aa; }
+        .tp-sermon-links { display:flex; gap:.35rem; }
+        .sl-btn { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%; text-decoration:none; font-size:.65rem; transition:all .2s; border:1px solid; }
+        .sl-btn.yt { background:#1a1a1a; color:#fff; border-color:#1a1a1a; }
+        .sl-btn.yt:hover { background:#333; }
+        .sl-btn.dd { background:transparent; color:#2d5a5a; border-color:rgba(45,90,90,.3); }
+        .sl-btn.dd:hover { background:rgba(45,90,90,.06); }
+
+        .quote-block { font-family:'Playfair Display',serif; font-style:italic; font-size:.92rem; color:#1a1a1a; line-height:1.6; border-left:3px solid var(--qc); padding:.65rem 1rem; background:var(--qbg); border-radius:0 .5rem .5rem 0; margin-bottom:.6rem; }
+
+        .plbtn { display:inline-flex;align-items:center;gap:.35rem;padding:.42rem .9rem;border-radius:100px;font-family:'Outfit',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;border:1px solid;transition:all .2s;white-space:nowrap; }
+        .plbtn.maplink { background:transparent;color:#c5a059;border-color:rgba(197,160,89,.3); }
+        .plbtn.maplink:hover { background:rgba(197,160,89,.06);border-color:#c5a059; }
+        .plbtn.tl { background:transparent;color:#6b7280;border-color:rgba(0,0,0,.15); }
+        .plbtn.tl:hover { background:rgba(0,0,0,.04); }
+    </style>
+</head>
+<body class="antialiased" data-current="resources">
+<div id="header-placeholder"></div>
+
+<!-- HERO -->
+<div style="background:#0c1e1e;padding:2.75rem 1.5rem 2rem;text-align:center;">
+    <p style="font-family:'Outfit',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.5em;text-transform:uppercase;color:#c5a059;margin-bottom:.6rem;">Acts Journey · The Living Room</p>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:.5rem;">The Themes <span style="color:#c5a059;font-style:italic;">Layer</span></h1>
+    <p style="font-family:'Outfit',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);font-weight:300;margin-bottom:0;">Six Threads · Woven Through Both Journeys · "Where Am I in This?"</p>
+    <div class="layer-nav">
+        <a href="/res/deep/2026/acts-journey.html" class="lnav">Map</a>
+        <a href="/res/deep/2026/acts-timeline.html" class="lnav">Timeline</a>
+        <a href="/res/deep/2026/acts-themes.html" class="lnav active">Themes</a>
+    </div>
+</div>
+
+<!-- THEMES GRID -->
+<div class="theme-grid" id="theme-grid">
+    <!-- Injected by JS -->
+</div>
+
+<!-- WHERE ARE YOU -->
+<div style="background:#0c1e1e;margin:0 2.5rem 2.5rem;border-radius:2rem;padding:2.5rem;max-width:1100px;margin-left:auto;margin-right:auto;margin-bottom:2.5rem;">
+    <p style="font-family:'Outfit',sans-serif;font-size:.56rem;font-weight:700;letter-spacing:.45em;text-transform:uppercase;color:#c5a059;margin-bottom:.5rem;text-align:center;">Where Are You?</p>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,1.9rem);font-weight:700;color:#fff;text-align:center;margin-bottom:.6rem;">Which part of the journey mirrors your season?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-size:.78rem;color:rgba(255,255,255,.4);text-align:center;margin-bottom:1.75rem;">Tap the moment that resonates.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.75rem;" id="where-grid">
+        <!-- Injected by JS -->
+    </div>
+</div>
+
+<!-- BACK LINK -->
+<div style="text-align:center;padding:.5rem 1.5rem 3rem;">
+    <a href="/deepdives.html" style="font-family:'Outfit',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#a1a1aa;text-decoration:none;border:1px solid rgba(0,0,0,.1);padding:.5rem 1.2rem;border-radius:100px;transition:all .2s;">← Back to Library</a>
+</div>
+
+<!-- THEME PANEL -->
+<div id="theme-panel" role="dialog" aria-modal="true">
+    <div class="drag-handle"></div>
+    <button class="pclose" id="pclose" aria-label="Close">✕</button>
+    <div id="theme-panel-content"></div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="/js/main.js"></script>
+
+<script>
+// ── THEME DATA ────────────────────────────────────────────────────────────────
+
+const THEMES = [
+  {
+    id: 'spirit-sends',
+    num: '01',
+    title: 'The Spirit Sends',
+    sub: 'Direction and Redirection',
+    color: '#2d5a5a',
+    light: 'rgba(45,90,90,0.08)',
+    border: 'rgba(45,90,90,0.2)',
+    idea: 'The mission is Spirit-led, not strategy-led. Closed doors are not failures — they\'re redirections. God gives a call, not a map.',
+    fullIdea: 'The mission was never Paul\'s idea — it was the Spirit\'s. And the Spirit leads not just through open doors, but through closed ones. Asia blocked. Bithynia blocked. Troas — nowhere left. Then the vision comes. The mission was always heading for Europe; Paul just didn\'t know it yet. And in Corinth, at the moment of greatest fear, God doesn\'t send a plan — He sends His presence. "I am with you. I have people in this city." The arrow doesn\'t choose its path. The Archer aims it.',
+    cities: [
+      { name:'Antioch', note:'the sending', id:'antioch' },
+      { name:'Asia / Bithynia', note:'the block', id:'bithynia' },
+      { name:'Troas', note:'the vision', id:'troas' },
+      { name:'Corinth', note:'the intervention', id:'corinth' }
+    ],
+    sermons: [
+      { t:'Like An Arrow', ref:'Acts 13:1–3', yt:null, dd:null },
+      { t:'Red Light, Green Light', ref:'Acts 16:6–8', yt:'iZGO60hHVqA', dd:'/res/deep/2026/redlight-greenlight.html' },
+      { t:'Red Light, Green Light Part 2', ref:'Acts 16:6–10', yt:'iZGO60hHVqA', dd:'/res/deep/2026/redlight-greenlight.html' },
+      { t:'I Have People Here', ref:'Acts 18:9–11', yt:null, dd:'/res/deep/2026/i-have-people-here.html' }
+    ],
+    quotes: [
+      'The arrow doesn\'t choose its path. The Archer aims it.',
+      'Not every open door is a now door.',
+      'God doesn\'t compete with your plans — He patiently waits until they fall silent.'
+    ]
+  },
+  {
+    id: 'grace-thread',
+    num: '02',
+    title: 'Grace Is the Thread',
+    sub: 'From Abraham to Jesus',
+    color: '#c5a059',
+    light: 'rgba(197,160,89,0.08)',
+    border: 'rgba(197,160,89,0.25)',
+    idea: 'Grace didn\'t start at Calvary — it culminated there. The law diagnoses; grace delivers. What saved you will sustain you.',
+    fullIdea: 'Paul\'s sermon in Pisidian Antioch doesn\'t begin with Jesus — it begins with Abraham. Because grace was always the thread. Grace chose Israel. Grace carried them through the wilderness. Grace fulfilled every promise in Jesus. The Jerusalem Council saw it too: if God already gave the Spirit to the Gentiles, adding the law as a condition for salvation isn\'t faithfulness — it\'s building a barrier over a door God already opened. The law diagnoses. Grace delivers. And what saved you is the same thing that sustains you.',
+    cities: [
+      { name:'Pisidian Antioch', note:'Paul\'s sermon', id:'pisidian_antioch' },
+      { name:'Jerusalem', note:'the Council', id:'jerusalem_council' }
+    ],
+    sermons: [
+      { t:'The Thread of Grace', ref:'Acts 13:14–43', yt:null, dd:null },
+      { t:'Thread of Grace Part 2', ref:'Acts 13:38–43', yt:null, dd:null },
+      { t:'Worthy of Eternal Life', ref:'Acts 13:44–49', yt:null, dd:null },
+      { t:'Unburdened', ref:'Acts 15:1–11', yt:null, dd:null }
+    ],
+    quotes: [
+      'Grace didn\'t start at Calvary — it culminated there.',
+      'The law diagnoses. Grace delivers.',
+      'If God already gave His Spirit, who are we to add conditions?'
+    ]
+  },
+  {
+    id: 'displaced',
+    num: '03',
+    title: 'God Uses the Displaced',
+    sub: 'Identity, Heritage, Availability',
+    color: '#e07a55',
+    light: 'rgba(224,122,85,0.08)',
+    border: 'rgba(224,122,85,0.22)',
+    idea: 'God assembles from wreckage, not strength. What feels mixed is not a mistake — it\'s positioning. You don\'t need a platform. You need a kitchen table.',
+    fullIdea: 'Timothy didn\'t fit cleanly in either world — and Paul chose him specifically because of that. Aquila and Priscilla were refugees, expelled from Rome with nothing, building tents in a strange city — and God built the Corinthian church on their table. Apollos was brilliant, eloquent, and incomplete — and two tentmakers without a title gave him what he was missing. The pattern is consistent: God doesn\'t recruit from the platform. He calls from the margins, the in-between places, the displaced. Because the person who has learned to move between worlds is exactly who the gospel needs to cross every border.',
+    cities: [
+      { name:'Lystra', note:'Timothy', id:'lystra' },
+      { name:'Corinth', note:'Aquila & Priscilla', id:'corinth' },
+      { name:'Ephesus', note:'Apollos', id:'ephesus' }
+    ],
+    sermons: [
+      { t:'Mixed-Mixed', ref:'Acts 16:1–5', yt:null, dd:null },
+      { t:'From East to West', ref:'Acts 18:1–4', yt:null, dd:'/res/deep/2026/east-to-west.html' },
+      { t:'More Accurately', ref:'Acts 18:24–28', yt:'AsyMp2sfdf0', dd:'/res/deep/2026/more-accurately.html' }
+    ],
+    quotes: [
+      'What feels mixed in you is not a mistake — it\'s positioning.',
+      'God assembles from wreckage, not strength.',
+      'You don\'t need a platform to shape the future of the church. You need a kitchen table and something true to say.'
+    ]
+  },
+  {
+    id: 'suffering',
+    num: '04',
+    title: 'Gospel Through Suffering',
+    sub: 'Midnight Worship',
+    color: '#7a4040',
+    light: 'rgba(122,64,64,0.07)',
+    border: 'rgba(122,64,64,0.2)',
+    idea: 'But Paul got up. The enemy has no strategy for your worship. Hardship becomes the surface the Kingdom advances on.',
+    fullIdea: 'In Lystra, Paul is stoned and left for dead. He gets up and walks to Derbe. In Philippi, he is beaten and chained in the inner cell — and sings at midnight. In Corinth, he arrives afraid and exhausted, and God shows up with a night vision. The pattern is not that suffering is good — it\'s that the gospel is unstoppable even through suffering. The enemy had a strategy for the soldiers. He had no strategy for the choir. And the earthquake wasn\'t for Paul. It was for the jailer. Paul\'s freedom was never the point — someone else\'s salvation was.',
+    cities: [
+      { name:'Lystra', note:'the stoning', id:'lystra' },
+      { name:'Philippi', note:'prison & midnight', id:'philippi' },
+      { name:'Corinth', note:'arrival: afraid', id:'corinth' }
+    ],
+    sermons: [
+      { t:'In The Middle of It All', ref:'Acts 14:8–20', yt:null, dd:null },
+      { t:'Worthy of it All', ref:'Acts 14:19–22', yt:null, dd:null },
+      { t:"We're All Here", ref:'Acts 16:25–28', yt:null, dd:'/res/deep/2026/we-are-all-here.html' },
+      { t:'Believe in Jesus', ref:'Acts 16:29–34', yt:null, dd:'/res/deep/2026/believe-in-jesus.html' },
+      { t:'I Have People Here', ref:'Acts 18:9–11', yt:null, dd:'/res/deep/2026/i-have-people-here.html' }
+    ],
+    quotes: [
+      'But Paul got up.',
+      'The enemy had a strategy for the soldiers. He had no strategy for the choir.',
+      'Hardship doesn\'t hinder the Kingdom — it becomes the surface it advances on.'
+    ]
+  },
+  {
+    id: 'home',
+    num: '05',
+    title: 'The Home as Mission Base',
+    sub: 'Forward Operating Bases',
+    color: '#5a7a60',
+    light: 'rgba(90,122,96,0.08)',
+    border: 'rgba(90,122,96,0.2)',
+    idea: 'The European church started in a living room. Your home is not a monument — it\'s a mission base. Every kitchen table is an altar.',
+    fullIdea: 'The European church didn\'t start in a stadium. It started at Lydia\'s riverside, and moved into her guest room. Then into the jailer\'s house, before dawn, with a table set and a whole household baptised. Then into Titius Justus\'s house next door to the synagogue. Then into Priscilla and Aquila\'s living room, where Apollos sat and learned the full gospel. These aren\'t footnotes — they\'re the architecture of the early church. Your home is not a monument to your comfort. It\'s a forward operating base for the Kingdom. Every kitchen table is an altar.',
+    cities: [
+      { name:'Philippi', note:'Lydia\'s home', id:'philippi' },
+      { name:'Philippi', note:'jailer\'s house', id:'philippi' },
+      { name:'Corinth', note:'Priscilla & Aquila', id:'corinth' },
+      { name:'Ephesus', note:'Apollos at the table', id:'ephesus' }
+    ],
+    sermons: [
+      { t:'Open Hearts, Open Homes', ref:'Acts 16:13–15', yt:'HOozOcQ2130', dd:'/res/deep/2026/open-heart-open-home.html' },
+      { t:'Believe in Jesus', ref:'Acts 16:29–34', yt:null, dd:'/res/deep/2026/believe-in-jesus.html' },
+      { t:'More Accurately', ref:'Acts 18:24–28', yt:'AsyMp2sfdf0', dd:'/res/deep/2026/more-accurately.html' }
+    ],
+    quotes: [
+      'The European church didn\'t start in a stadium. It started in a purple-funded living room.',
+      'Your home is not a monument. It\'s a mission base.',
+      'Every kitchen table is an altar.'
+    ]
+  },
+  {
+    id: 'marketplace',
+    num: '06',
+    title: 'Gospel in the Marketplace',
+    sub: 'Economics, Culture, Witness',
+    color: '#4a6785',
+    light: 'rgba(74,103,133,0.08)',
+    border: 'rgba(74,103,133,0.2)',
+    idea: 'Your bank statement is a theological document. We don\'t cede ground — we contest it. The marketplace is contested territory.',
+    fullIdea: 'Paul doesn\'t avoid the marketplace — he enters it. In Philippi, the slave girl\'s freedom disrupts an economy built on bondage. In Athens, Paul walks the Agora daily, reasoning with Stoics and Epicureans. In Corinth, he makes tents — and his hands and his theology work together. The Agora hasn\'t closed. It\'s moved to our screens, our workplaces, our dinner tables. And the call hasn\'t changed: don\'t cede the ground. Contest it. Your bank statement is a theological document. Your workplace is contested territory. The gospel is not a private matter — it is a public announcement.',
+    cities: [
+      { name:'Philippi', note:'the slave girl', id:'philippi' },
+      { name:'Athens', note:'the Agora', id:'athens' },
+      { name:'Corinth', note:'tentmaking', id:'corinth' }
+    ],
+    sermons: [
+      { t:'Net Worth', ref:'Acts 16:16–24', yt:null, dd:'/res/deep/2026/net-worth.html' },
+      { t:'Wanted', ref:'Acts 17:16–34', yt:null, dd:'/res/deep/2026/wanted.html' },
+      { t:'The Gospel in the Marketplace', ref:'Acts 17:16–34', yt:'vuKqFsz92cM', dd:'/res/deep/2026/the-gospel-in-the-marketplace.html' },
+      { t:'Mind Your Business', ref:'Acts 18:1–11', yt:null, dd:'/res/deep/2026/mind-your-business.html' }
+    ],
+    quotes: [
+      'Your bank statement is a theological document.',
+      'We don\'t cede ground. We contest it.',
+      'The marketplace is contested territory.'
+    ]
+  }
+];
+
+// ── WHERE ARE YOU? ────────────────────────────────────────────────────────────
+
+const WHERE = [
+  { prompt: 'I feel like God is about to move something — but I don\'t know what yet.', label:'The Sending', ref:'Acts 13:1–4', theme:'spirit-sends' },
+  { prompt: 'I\'m confused. Doors keep closing and nothing is working.', label:'The Redirection', ref:'Acts 16:6–10', theme:'spirit-sends' },
+  { prompt: 'I\'m in pain. I\'ve been faithful and it\'s cost me everything.', label:'The Midnight', ref:'Acts 16:25', theme:'suffering' },
+  { prompt: 'I feel displaced — like I don\'t fully belong anywhere.', label:'The Displacement', ref:'Acts 18:1–4', theme:'displaced' },
+  { prompt: 'I\'m tired. I\'ve been carrying weight for a long time.', label:'The Intervention', ref:'Acts 18:9–10', theme:'spirit-sends' }
+];
+
+// ── RENDER CARDS ──────────────────────────────────────────────────────────────
+
+const grid = document.getElementById('theme-grid');
+grid.innerHTML = THEMES.map(th => {
+    const tags = [th.sub].concat(th.cities.slice(0,2).map(c => c.name));
+    return `<div class="theme-card" style="--tc:${th.color};--tc-light:${th.light};--tc-border:${th.border};" onclick="openTheme('${th.id}')">
+      <div class="theme-num">${th.num}</div>
+      <div class="theme-title">${th.title}</div>
+      <div class="theme-sub">${th.sub}</div>
+      <div class="theme-idea">${th.idea}</div>
+      <div class="theme-tags">
+        ${th.cities.slice(0,3).map(c=>`<span class="theme-tag">${c.name}</span>`).join('')}
+        <span class="theme-tag">${th.sermons.length} sermons</span>
+      </div>
+      <div class="theme-arrow">→</div>
+    </div>`;
+}).join('');
+
+// ── WHERE ARE YOU PROMPTS ─────────────────────────────────────────────────────
+
+document.getElementById('where-grid').innerHTML = WHERE.map(w => `
+  <div onclick="openTheme('${w.theme}')" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:1rem;padding:1.25rem;cursor:pointer;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,.09)'" onmouseout="this.style.background='rgba(255,255,255,.05)'">
+    <p style="font-family:'Outfit',sans-serif;font-size:.74rem;color:rgba(255,255,255,.65);line-height:1.55;margin-bottom:.75rem;">"${w.prompt}"</p>
+    <p style="font-family:'Outfit',sans-serif;font-size:.52rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#c5a059;">${w.label}</p>
+    <p style="font-family:'Outfit',sans-serif;font-size:.56rem;color:rgba(255,255,255,.3);">${w.ref}</p>
+  </div>`).join('');
+
+// ── PANEL ─────────────────────────────────────────────────────────────────────
+
+function openTheme(id) {
+    const th = THEMES.find(t => t.id === id);
+    if (!th) return;
+
+    const quoteBlocks = th.quotes.map(q =>
+        `<div class="quote-block" style="--qc:${th.color};--qbg:${th.light};">"${q}"</div>`
+    ).join('');
+
+    const cityTags = th.cities.map(c =>
+        `<a href="/res/deep/2026/acts-journey.html" class="tp-city-tag" style="color:${th.color};border-color:${th.border};background:${th.light};">${c.name} <span style="opacity:.55;font-size:.9em;">· ${c.note}</span></a>`
+    ).join('');
+
+    const sermonRows = th.sermons.map(s => {
+        const ytBtn = s.yt ? `<a href="https://www.youtube.com/watch?v=${s.yt}" target="_blank" class="sl-btn yt" title="Watch">▶</a>` : '';
+        const ddBtn = s.dd ? `<a href="${s.dd}" class="sl-btn dd" title="Deep Dive">↗</a>` : '';
+        return `<div class="tp-sermon">
+          <div>
+            <div class="tp-sermon-title">${s.t}</div>
+            <div class="tp-sermon-ref">${s.ref}</div>
+          </div>
+          <div class="tp-sermon-links">${ytBtn}${ddBtn}</div>
+        </div>`;
+    }).join('');
+
+    document.getElementById('theme-panel-content').innerHTML = `
+      <div class="tp-header" style="border-bottom:1px solid rgba(0,0,0,.07);padding-bottom:1.25rem;margin-bottom:.25rem;">
+        <div class="tp-num" style="color:${th.color};">${th.num}</div>
+        <div class="tp-label" style="color:${th.color};">${th.sub}</div>
+        <div class="tp-title">${th.title}</div>
+        <div class="tp-sub">${th.sermons.length} sermons across ${th.cities.length} cities</div>
+      </div>
+      <div class="tp-body">
+        <div class="tp-idea">${th.fullIdea}</div>
+
+        <div class="tp-section-label">Cities in this thread</div>
+        <div class="tp-cities">${cityTags}</div>
+
+        <div class="tp-section-label">Key quotes</div>
+        <div style="margin-bottom:1.25rem;">${quoteBlocks}</div>
+
+        <div class="tp-section-label">Sermons</div>
+        <div style="margin-bottom:1.25rem;">${sermonRows}</div>
+
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;padding-top:.5rem;border-top:1px solid rgba(0,0,0,.06);">
+          <a href="/res/deep/2026/acts-journey.html" class="plbtn maplink">🗺 See on Map</a>
+          <a href="/res/deep/2026/acts-timeline.html" class="plbtn tl">⟳ See on Timeline</a>
+        </div>
+      </div>`;
+
+    document.getElementById('theme-panel').classList.add('open');
+}
+
+function closePanel() { document.getElementById('theme-panel').classList.remove('open'); }
+document.getElementById('pclose').addEventListener('click', closePanel);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+</script>
+</body>
+</html>

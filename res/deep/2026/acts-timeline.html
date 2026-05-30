@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acts Journey: The Timeline | The Living Room</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+        tailwind.config = {
+            theme: { extend: {
+                colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                fontFamily: { display: ['Playfair Display','serif'], body: ['Outfit','sans-serif'] }
+            }}
+        }
+    </script>
+    <style>
+        body { background:#faf9f6; font-family:'Outfit',sans-serif; }
+
+        /* ── LAYER NAV ─────────────────────────────────────────────── */
+        .layer-nav { display:flex; gap:.4rem; justify-content:center; margin-top:1.4rem; flex-wrap:wrap; }
+        .lnav { padding:.4rem 1.1rem; border-radius:100px; font-family:'Outfit',sans-serif; font-size:.58rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; border:1px solid rgba(255,255,255,.18); color:rgba(255,255,255,.4); transition:all .2s; }
+        .lnav:hover { border-color:rgba(255,255,255,.4); color:rgba(255,255,255,.7); }
+        .lnav.active { background:rgba(197,160,89,.18); border-color:#c5a059; color:#c5a059; }
+
+        /* ── JOURNEY SECTION ───────────────────────────────────────── */
+        .tl-journey { padding:2.5rem 0 1rem; }
+        .tl-label { font-family:'Outfit',sans-serif; font-size:.56rem; font-weight:700; letter-spacing:.45em; text-transform:uppercase; padding:0 2.5rem 1.25rem; display:flex; align-items:center; gap:.75rem; }
+        .tl-label span { opacity:.35; }
+        .j1-col { color:#c5a059; }
+        .j2-col { color:#e07a55; }
+
+        /* ── SCROLL CONTAINER ──────────────────────────────────────── */
+        .tl-scroll { overflow-x:auto; padding-bottom:2rem; scrollbar-width:thin; scrollbar-color:rgba(0,0,0,.1) transparent; }
+        .tl-scroll::-webkit-scrollbar { height:3px; }
+        .tl-scroll::-webkit-scrollbar-thumb { background:rgba(0,0,0,.1); border-radius:2px; }
+
+        /* ── TRACK & NODES ─────────────────────────────────────────── */
+        .tl-track { display:inline-flex; align-items:flex-start; padding:0 2.5rem 0; min-width:100%; position:relative; }
+        .tl-track::before {
+            content:''; position:absolute;
+            top:calc(2.5rem + 7px); /* padding-top + half of standard 14px dot */
+            left:2.5rem; right:2.5rem;
+            height:1.5px; opacity:.2; z-index:0;
+        }
+        .j1-track::before { background:#c5a059; }
+        .j2-track::before { background:#e07a55; }
+
+        .tnode { flex:0 0 210px; padding:2.5rem .75rem 0; position:relative; cursor:pointer; }
+        .tnode.major { flex:0 0 240px; }
+        .tnode.transit { flex:0 0 165px; }
+
+        /* Dot */
+        .tnode-dot { width:14px; height:14px; border-radius:50%; margin:0 auto 1rem; position:relative; z-index:2; transition:transform .22s; }
+        .tnode:hover .tnode-dot { transform:scale(1.45); }
+        .tnode.major .tnode-dot { width:20px; height:20px; margin-bottom:1.1rem; }
+        .tnode.transit .tnode-dot { width:8px; height:8px; opacity:.65; }
+
+        /* Pulse ring on major nodes */
+        .tnode.major .tnode-dot::after { content:''; position:absolute; inset:-2px; border-radius:50%; animation:tl-pulse 2.4s ease-out infinite; opacity:0; }
+        @keyframes tl-pulse { 0%{transform:scale(1);opacity:.5} 100%{transform:scale(2.8);opacity:0} }
+
+        /* Journey colors */
+        .tnode.j1 .tnode-dot { background:#c5a059; box-shadow:0 0 12px rgba(197,160,89,.45); }
+        .tnode.j2 .tnode-dot { background:#e07a55; box-shadow:0 0 12px rgba(224,122,85,.45); }
+        .tnode.j1.major .tnode-dot::after { border:1.5px solid #c5a059; }
+        .tnode.j2.major .tnode-dot::after { border:1.5px solid #e07a55; }
+
+        /* Content */
+        .tnode-ref { font-family:'Outfit',sans-serif; font-size:.5rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#a1a1aa; display:block; margin-bottom:.2rem; }
+        .tnode-city { font-family:'Playfair Display',serif; font-size:.95rem; font-weight:700; color:#1a1a1a; line-height:1.2; margin-bottom:.15rem; }
+        .tnode.major .tnode-city { font-size:1.05rem; }
+        .tnode-sub { font-family:'Outfit',sans-serif; font-size:.64rem; color:#6b7280; line-height:1.3; margin-bottom:.55rem; }
+        .tnode-summary { font-family:'Outfit',sans-serif; font-size:.67rem; color:#4b5563; line-height:1.55; display:none; }
+        .tnode.major .tnode-summary { display:block; }
+        .tnode-scount { display:inline-block; margin-top:.6rem; font-family:'Outfit',sans-serif; font-size:.5rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:#a1a1aa; }
+
+        /* Hover highlight */
+        .tnode::before { content:''; position:absolute; inset:-4px 0 -12px; border-radius:.6rem; background:transparent; transition:background .2s; }
+        .tnode:hover::before { background:rgba(0,0,0,.03); }
+
+        /* ── PAUSE NODE (Jerusalem) ─────────────────────────────────── */
+        .pause-wrap { padding:1rem 2.5rem 2rem; }
+        .pause-card {
+            background:rgba(45,90,90,.05);
+            border:1px solid rgba(45,90,90,.15);
+            border-radius:1.5rem;
+            padding:1.5rem 2rem;
+            display:flex; align-items:center; gap:2rem;
+            cursor:pointer; transition:background .2s;
+            max-width:680px; margin:0 auto;
+            position:relative;
+        }
+        .pause-card:hover { background:rgba(45,90,90,.09); }
+        .pause-card::before, .pause-card::after {
+            content:''; position:absolute;
+            top:50%; height:1.5px;
+            background:linear-gradient(to right, transparent, rgba(45,90,90,.2));
+            width:calc(50vw - 340px - 2.5rem);
+        }
+        .pause-card::before { right:100%; background:linear-gradient(to left, transparent, rgba(197,160,89,.3)); }
+        .pause-card::after { left:100%; background:linear-gradient(to right, transparent, rgba(224,122,85,.3)); }
+        .pause-icon { width:38px; height:38px; border-radius:50%; background:#2d5a5a; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:.8rem; color:#fff; }
+        .pause-texts { flex:1; }
+        .pause-label { font-family:'Outfit',sans-serif; font-size:.52rem; font-weight:700; letter-spacing:.35em; text-transform:uppercase; color:#2d5a5a; margin-bottom:.25rem; }
+        .pause-city { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:#1a1a1a; margin-bottom:.2rem; }
+        .pause-ref { font-family:'Outfit',sans-serif; font-size:.62rem; color:#6b7280; }
+        .pause-idea { font-family:'Outfit',sans-serif; font-size:.66rem; color:#4b5563; margin-top:.5rem; max-width:42ch; }
+
+        /* ── PANEL ─────────────────────────────────────────────────── */
+        #info-panel { position:fixed; z-index:2000; background:#faf9f6; overflow-y:auto; transition:transform .32s cubic-bezier(.4,0,.2,1); }
+        @media(max-width:767px){
+            #info-panel { bottom:0;left:0;right:0;max-height:76vh;border-radius:1.5rem 1.5rem 0 0;transform:translateY(100%);box-shadow:0 -6px 36px rgba(0,0,0,.18); }
+            #info-panel.open { transform:translateY(0); }
+        }
+        @media(min-width:768px){
+            #info-panel { top:0;right:0;bottom:0;width:390px;border-left:1px solid rgba(0,0,0,.07);transform:translateX(100%);box-shadow:-6px 0 36px rgba(0,0,0,.1); }
+            #info-panel.open { transform:translateX(0); }
+        }
+        .drag-handle { width:36px;height:3px;background:rgba(0,0,0,.12);border-radius:2px;margin:.7rem auto 0; }
+        .pclose { position:absolute;top:.9rem;right:.9rem;width:30px;height:30px;border-radius:50%;border:none;background:rgba(0,0,0,.07);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:#666;transition:background .2s; }
+        .pclose:hover { background:rgba(0,0,0,.13); }
+        .keyline { border-left:3px solid #c5a059;padding:.7rem 1rem;background:rgba(197,160,89,.07);border-radius:0 .5rem .5rem 0;font-family:'Playfair Display',serif;font-style:italic;font-size:.93rem;color:#1a1a1a;line-height:1.55; }
+        .plbtn { display:inline-flex;align-items:center;gap:.35rem;padding:.42rem .9rem;border-radius:100px;font-family:'Outfit',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;border:1px solid;transition:all .2s;white-space:nowrap; }
+        .plbtn.watch { background:#1a1a1a;color:#fff;border-color:#1a1a1a; }
+        .plbtn.watch:hover { background:#333; }
+        .plbtn.dive { background:transparent;color:#2d5a5a;border-color:rgba(45,90,90,.3); }
+        .plbtn.dive:hover { background:rgba(45,90,90,.06);border-color:#2d5a5a; }
+        .plbtn.maplink { background:transparent;color:#c5a059;border-color:rgba(197,160,89,.3); }
+        .plbtn.maplink:hover { background:rgba(197,160,89,.06);border-color:#c5a059; }
+        .sermon-card { border:1px solid rgba(0,0,0,.06);border-radius:.75rem;padding:1rem;margin-bottom:.65rem;background:#fff; }
+        .sermon-card:last-child { margin-bottom:0; }
+
+        /* ── MOBILE: VERTICAL ──────────────────────────────────────── */
+        @media(max-width:767px){
+            .tl-track { display:flex;flex-direction:column;padding:0 1.5rem; min-width:unset; }
+            .tl-track::before { top:0;left:calc(1.5rem + 7px);right:auto;width:1.5px;height:100%; }
+            .tnode { flex:none;width:100%;display:flex;flex-direction:row;gap:1.1rem;padding:0 0 2rem 0; }
+            .tnode.major, .tnode.transit { flex:none;width:100%; }
+            .tnode-dot { margin:0;flex:0 0 14px;height:14px;margin-top:4px; }
+            .tnode.major .tnode-dot { flex:0 0 20px;height:20px;margin-top:2px; }
+            .tnode.transit .tnode-dot { flex:0 0 8px;height:8px;margin-top:7px; }
+            .tnode-content { flex:1;min-width:0; }
+            .tnode-summary { display:block; }
+            .tnode::before { display:none; }
+        }
+
+        /* ── DIVIDER ───────────────────────────────────────────────── */
+        .journey-divider { display:flex;align-items:center;gap:1.5rem;padding:0 2.5rem;margin:1rem 0; }
+        .journey-divider::before, .journey-divider::after { content:'';flex:1;height:1px;background:rgba(0,0,0,.07); }
+        .journey-divider span { font-family:'Outfit',sans-serif;font-size:.52rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#a1a1aa;white-space:nowrap; }
+    </style>
+</head>
+<body class="antialiased" data-current="resources">
+<div id="header-placeholder"></div>
+
+<!-- HERO -->
+<div style="background:#0c1e1e;padding:2.75rem 1.5rem 2rem;text-align:center;">
+    <p style="font-family:'Outfit',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.5em;text-transform:uppercase;color:#c5a059;margin-bottom:.6rem;">Acts Journey · The Living Room</p>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:.5rem;">The Timeline <span style="color:#c5a059;font-style:italic;">Layer</span></h1>
+    <p style="font-family:'Outfit',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);font-weight:300;margin-bottom:0;">Acts 13–18 &nbsp;·&nbsp; The Story in Sequence &nbsp;·&nbsp; The Cost Made Visible</p>
+    <div class="layer-nav">
+        <a href="/res/deep/2026/acts-journey.html" class="lnav">Map</a>
+        <a href="/res/deep/2026/acts-timeline.html" class="lnav active">Timeline</a>
+        <a href="/res/deep/2026/acts-themes.html" class="lnav">Themes</a>
+    </div>
+</div>
+
+<!-- INTRO -->
+<div style="background:#faf9f6;padding:2rem 1.5rem 0;text-align:center;max-width:600px;margin:0 auto;">
+    <p style="font-family:'Outfit',sans-serif;font-size:.8rem;color:#6b7280;line-height:1.65;">Tap any moment to open the sermon. The line changes from <span style="color:#c5a059;font-weight:600;">gold</span> (Journey 1) to <span style="color:#e07a55;font-weight:600;">terracotta</span> (Journey 2). Scroll right on desktop.</p>
+</div>
+
+<!-- TIMELINE -->
+<div class="tl-outer">
+
+    <!-- JOURNEY 1 -->
+    <div class="tl-journey">
+        <div class="tl-label j1-col">Journey One <span>· AD 46–48 · Acts 13–14 ·</span> First Missionary Journey</div>
+        <div class="tl-scroll">
+            <div class="tl-track j1-track" id="j1track">
+                <!-- nodes injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JERUSALEM PAUSE -->
+    <div class="pause-wrap" id="pause-wrap">
+        <!-- injected by JS -->
+    </div>
+
+    <div class="journey-divider"><span>Second Journey Begins</span></div>
+
+    <!-- JOURNEY 2 -->
+    <div class="tl-journey">
+        <div class="tl-label j2-col">Journey Two <span>· AD 49–52 · Acts 15–18 ·</span> Second Missionary Journey</div>
+        <div class="tl-scroll">
+            <div class="tl-track j2-track" id="j2track">
+                <!-- nodes injected by JS -->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- BACK LINK -->
+<div style="text-align:center;padding:2.5rem 1.5rem 3rem;">
+    <a href="/deepdives.html" style="font-family:'Outfit',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#a1a1aa;text-decoration:none;border:1px solid rgba(0,0,0,.1);padding:.5rem 1.2rem;border-radius:100px;transition:all .2s;">← Back to Library</a>
+</div>
+
+<!-- INFO PANEL -->
+<div id="info-panel" role="dialog" aria-modal="true">
+    <div class="drag-handle"></div>
+    <button class="pclose" id="pclose" aria-label="Close">✕</button>
+    <div id="panel-content" style="padding:1.4rem 1.4rem 3rem;"></div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="/js/main.js"></script>
+
+<script>
+// ── DATA ───────────────────────────────────────────────────────────────────────
+
+const TL_J1 = [
+  { id:'s1', j:1, city:'Antioch', sub:'The Sending', ref:'Acts 13:1–3',
+    summary:'During worship and fasting, the Holy Spirit calls Barnabas and Saul. The church prays, lays hands, and releases them. The first Spirit-sent mission begins.',
+    moment:'The Spirit speaks during a worship gathering and the church obeys. Not a strategy meeting — a surrender.',
+    weight:'major',
+    sermons:[{ t:'Like An Arrow', ref:'Acts 13:1–12', kl:'The arrow doesn\'t choose its path. The Archer aims it.', yt:null, dd:null }] },
+
+  { id:'s2', j:1, city:'Cyprus', sub:'First Mission Field', ref:'Acts 13:4–12',
+    summary:'Across the island. Confrontation with Elymas the sorcerer. The proconsul Sergius Paulus believes. Saul becomes Paul.',
+    moment:'Power confronted. Deception exposed. The proconsul sees and believes.',
+    weight:'standard',
+    sermons:[{ t:'Like An Arrow', ref:'Acts 13:4–12', kl:'The arrow doesn\'t choose its path. The Archer aims it.', yt:null, dd:null }] },
+
+  { id:'s3', j:1, city:'Pisidian Antioch', sub:'The Great Sermon', ref:'Acts 13:14–52',
+    summary:'Paul traces grace from Abraham to Jesus. The whole city gathers the next Sabbath. The turn to the Gentiles begins.',
+    moment:'Grace didn\'t start at Calvary — it culminated there. The synagogue fills. The city listens. The door swings open.',
+    weight:'major',
+    sermons:[
+      { t:'The Thread of Grace', ref:'Acts 13:14–43', kl:'Grace didn\'t start at Calvary — it culminated there.', yt:null, dd:null },
+      { t:'Worthy of Eternal Life', ref:'Acts 13:44–49', kl:'They judged themselves unworthy — and the door swung open to those who would walk through it.', yt:null, dd:null },
+      { t:'Shake It Off', ref:'Acts 13:50–52', kl:'You can\'t walk into your next season with old dust on your feet.', yt:null, dd:null }
+    ]},
+
+  { id:'s4', j:1, city:'Iconium', sub:'The City Divides', ref:'Acts 14:1–7',
+    summary:'Many believe. Opposition rises to match. A plot to stone them forms. They flee toward Lystra.',
+    moment:'The space between promise and purpose is where faith is forged.',
+    weight:'standard',
+    sermons:[{ t:'Between Promise and Purpose', ref:'Acts 14:1–7', kl:'The space between promise and purpose is where faith is forged.', yt:null, dd:null }] },
+
+  { id:'s5', j:1, city:'Lystra', sub:'The Stoning', ref:'Acts 14:8–20',
+    summary:'Worshipped as gods. Then stoned and dragged outside the city. Left for dead. But Paul got up.',
+    moment:'The crowd that built altars to him threw stones at him in the next scene. And then one of the most understated lines in Acts: "But Paul got up."',
+    weight:'major',
+    sermons:[
+      { t:'In The Middle of It All', ref:'Acts 14:8–18', kl:'Acts is not what the early church did — it\'s what Jesus is still doing.', yt:null, dd:null },
+      { t:'Worthy of it All', ref:'Acts 14:19–22', kl:'But Paul got up.', yt:null, dd:null }
+    ]},
+
+  { id:'s6', j:1, city:'Derbe', sub:'The Furthest Point East', ref:'Acts 14:20–21',
+    summary:'Many disciples made. The end of the eastern advance. And then — they turn back through every city that tried to kill them.',
+    moment:'Not home. Back. Through Lystra, Iconium, Antioch — the very cities that stoned and expelled them.',
+    weight:'standard',
+    sermons:[{ t:'In The Middle of It All', ref:'Acts 14:20–21', kl:'Acts is not what the early church did — it\'s what Jesus is still doing.', yt:null, dd:null }] },
+
+  { id:'s7', j:1, city:'The Return', sub:'Strengthening Every Church', ref:'Acts 14:21–23',
+    summary:'They retrace every step: Lystra, Iconium, Pisidian Antioch. Strengthening believers. Appointing elders. God doesn\'t just free people — He sends people to help them walk forward.',
+    moment:'The return journey is not the same as the first. They go back with the same gospel and a deeper understanding of the cost.',
+    weight:'standard',
+    sermons:[{ t:'The Ministry of Encouragement', ref:'Acts 14:21–23', kl:'God doesn\'t just free people — He sends people to help them walk forward.', yt:null, dd:null }] }
+];
+
+const TL_PAUSE = {
+  city:'Jerusalem', sub:'The Jerusalem Council', ref:'Acts 15:1–35',
+  moment:'"We should not make it difficult for the Gentiles who are turning to God." The defining question of the early church — resolved with humility and sent with a letter.',
+  idea:'If God already gave His Spirit — who are we to add conditions? The law diagnoses. Grace delivers. What saved you will sustain you.',
+  sermons:[
+    { t:'Unburdened', ref:'Acts 15:1–11', kl:'If God already gave His Spirit, who are we to add conditions?', yt:null, dd:null },
+    { t:'The Ministry of Encouragement', ref:'Acts 15:22–35', kl:'God doesn\'t just free people — He sends people to help them walk forward.', yt:null, dd:null }
+  ]
+};
+
+const TL_J2 = [
+  { id:'s8', j:2, city:'Antioch', sub:'The Split', ref:'Acts 15:36–41',
+    summary:'Paul and Barnabas divide sharply over John Mark. One team becomes two. Conflict handled with integrity multiplies the mission.',
+    moment:'Paroxysmos — a sharp disagreement. Two men, one mission. God works through the fracture.',
+    weight:'standard',
+    sermons:[{ t:"You Go That Way, I'll Go This Way", ref:'Acts 15:36–41', kl:'Conflict handled with integrity can multiply the mission rather than destroy it.', yt:null, dd:null }] },
+
+  { id:'s9', j:2, city:'Lystra', sub:'Timothy Joins', ref:'Acts 16:1–5',
+    summary:'Paul meets Timothy — Jewish mother, Greek father. Not fully at home in either world. Paul looks at him and says: you\'re exactly who I need.',
+    moment:'What feels mixed is not a mistake — it\'s positioning.',
+    weight:'standard',
+    sermons:[{ t:'Mixed-Mixed', ref:'Acts 16:1–5', kl:'What feels mixed in you is not a mistake — it\'s often the very way God moves His mission forward.', yt:null, dd:null }] },
+
+  { id:'s10', j:2, city:'Asia / Bithynia', sub:'Every Door Closed', ref:'Acts 16:6–8',
+    summary:'The Spirit blocks Asia. The Spirit of Jesus blocks Bithynia. Geography becomes a divine funnel. Nowhere left to go.',
+    moment:'Closed doors are not failures. They\'re redirections. Not every open door is a now door.',
+    weight:'standard',
+    sermons:[{ t:'Red Light, Green Light', ref:'Acts 16:6–8', kl:'Not every open door is a now door.', yt:'iZGO60hHVqA', dd:'/res/deep/2026/redlight-greenlight.html' }] },
+
+  { id:'s11', j:2, city:'Troas', sub:'The Macedonian Vision', ref:'Acts 16:8–10',
+    summary:'At the edge of land travel. In the night, a Macedonian man: "Come over and help us." God gives a call, not a map. The gospel crosses to Europe.',
+    moment:'Troas is the place where all your plans have taken you as far as they can go. Then the vision comes. God was sending the gospel to Europe — but first He had to stop the man who wanted to stay in Asia.',
+    weight:'major',
+    sermons:[
+      { t:'Red Light, Green Light Part 2', ref:'Acts 16:6–10', kl:'God doesn\'t compete with your plans — He patiently waits until they fall silent.', yt:'iZGO60hHVqA', dd:'/res/deep/2026/redlight-greenlight.html' },
+      { t:'The Open Road', ref:'Acts 16:10–13', kl:'Rome built the road to move armies. Paul used it to move the gospel.', yt:'Lx0ImALqnOc', dd:'/res/deep/2026/the-open-road.html' }
+    ]},
+
+  { id:'s12', j:2, city:'Philippi', sub:"Lydia's Heart", ref:'Acts 16:13–15',
+    summary:'A handful of women praying by a river. The Lord opens Lydia\'s heart. Her showroom becomes a sanctuary. The first house church in Europe.',
+    moment:'God opened her heart with dianoigō — to thoroughly open what was previously stuck shut. The happiest letter in the Bible was written to a church that started in a guest room.',
+    weight:'major',
+    sermons:[{ t:'Open Hearts, Open Homes', ref:'Acts 16:13–15', kl:'Your house is not a monument to your success. It is a mission base for the Kingdom.', yt:'HOozOcQ2130', dd:'/res/deep/2026/open-heart-open-home.html' }] },
+
+  { id:'s13', j:2, city:'Philippi', sub:'The Slave Girl', ref:'Acts 16:16–24',
+    summary:'A girl set free. Her masters\' revenue stream disrupted. Paul and Silas dragged to court — not for theology, but for economics.',
+    moment:'When Jesus sets someone free, those who profit from bondage get angry. The charge is dressed in civic duty. The wound is in the ledger.',
+    weight:'standard',
+    sermons:[{ t:'Net Worth', ref:'Acts 16:16–24', kl:'When Jesus sets someone free, those who profit from bondage get angry.', yt:null, dd:'/res/deep/2026/net-worth.html' }] },
+
+  { id:'s14', j:2, city:'Philippi', sub:'Midnight Worship', ref:'Acts 16:25–28',
+    summary:'Beaten. Chained in the inner cell. Midnight. They sing. The foundations shake. Every door opens. Not after the earthquake — before it.',
+    moment:'The enemy had a strategy for the soldiers. He had no strategy for the choir. The earthquake was for the jailer. Paul\'s freedom was never the point.',
+    weight:'major',
+    sermons:[{ t:"We're All Here", ref:'Acts 16:25–28', kl:'The enemy had a strategy for the soldiers. He had no strategy for the choir.', yt:null, dd:'/res/deep/2026/we-are-all-here.html' }] },
+
+  { id:'s15', j:2, city:'Philippi', sub:'The Jailer Saved', ref:'Acts 16:29–34',
+    summary:'"What must I do to be saved?" Believe in the Lord Jesus. By sunrise the whole household is baptised, the table is set, and the house is filled with leaping, exultant joy.',
+    moment:'Pisteuō — a full transfer of weight. Not leaning. Not appreciating. Full weight. And it\'s available right now, on the floor, in the dark, before anything is organised.',
+    weight:'major',
+    sermons:[{ t:'Believe in Jesus', ref:'Acts 16:29–34', kl:'The gospel is the most accessible thing in the room.', yt:null, dd:'/res/deep/2026/believe-in-jesus.html' }] },
+
+  { id:'s16', j:2, city:'Thessalonica', sub:'The World Upside Down', ref:'Acts 17:1–9',
+    summary:'Three Sabbaths. Many believe. The accusation: "These men who have turned the world upside down have come here also." Sent away by night.',
+    moment:'The charge is true. The gospel is inherently disruptive. It doesn\'t ask for a seat at the table — it flips the table.',
+    weight:'standard',
+    sermons:[
+      { t:'Christmas Starts Here', ref:'Acts 17:1–9', kl:'They turned the world upside down.', yt:null, dd:null },
+      { t:"What's In A Name?", ref:'Acts 17:1–9', kl:'There is a name above every name — and it doesn\'t belong to any Caesar.', yt:null, dd:null },
+      { t:'My Resurrected Life', ref:'Acts 17:1–4', kl:'The resurrection isn\'t the end of the story — it\'s the beginning of yours.', yt:null, dd:'/res/deep/2026/my-resurrected-life.html' }
+    ]},
+
+  { id:'s17', j:2, city:'Berea', sub:'Noble Searchers', ref:'Acts 17:10–15',
+    summary:'"More noble than Thessalonica." They received the word eagerly and searched the Scriptures daily — and found a Person, not just correct doctrine.',
+    moment:'They searched the Scriptures and found God, not just a position. Hungry, not sceptical.',
+    weight:'standard',
+    sermons:[{ t:'Readme.Bible', ref:'Acts 17:10–15', kl:'The Bereans searched the Scriptures and found a Person, not just correct doctrine.', yt:null, dd:'/res/deep/2026/readme-bible.html' }] },
+
+  { id:'s18', j:2, city:'Athens', sub:'The Areopagus', ref:'Acts 17:16–34',
+    summary:'Paul\'s spirit is provoked by a city swamped with idols. He finds the altar to an Unknown God and announces: He isn\'t far from any one of us.',
+    moment:'The God who made the world doesn\'t need anything — but He wants you. That changes everything.',
+    weight:'standard',
+    sermons:[
+      { t:'Wanted', ref:'Acts 17:16–34', kl:'The God who made the world doesn\'t need us — but He wants us. That changes everything.', yt:null, dd:'/res/deep/2026/wanted.html' },
+      { t:'The Gospel in the Marketplace', ref:'Acts 17:16–34', kl:'We don\'t cede ground. We contest it.', yt:'vuKqFsz92cM', dd:'/res/deep/2026/the-gospel-in-the-marketplace.html' }
+    ]},
+
+  { id:'s19', j:2, city:'Corinth', sub:'Arrival: Afraid', ref:'Acts 18:1–4',
+    summary:'Paul arrives beaten and afraid. He meets Aquila and Priscilla — refugees expelled from Rome. God builds the church from wreckage.',
+    moment:'Corinth sat on an isthmus where ships were hauled bodily across land. God\'s purposes don\'t go around — they cut through.',
+    weight:'standard',
+    sermons:[{ t:'From East to West', ref:'Acts 18:1–4', kl:'God\'s purposes don\'t go around. They cut through.', yt:null, dd:'/res/deep/2026/east-to-west.html' }] },
+
+  { id:'s20', j:2, city:'Corinth', sub:'"I Have People Here"', ref:'Acts 18:9–11',
+    summary:'God speaks at night: "Don\'t be afraid. Speak. I have many people in this city." Paul stays 18 months. The intervention is about God\'s prior work, not Paul\'s courage.',
+    moment:'Stop being afraid. He doesn\'t say "be strong" — He says "I\'m already here, and I have people you haven\'t met yet." Paul stays 18 months.',
+    weight:'major',
+    sermons:[
+      { t:'I Have People Here', ref:'Acts 18:9–11', kl:'Stop being afraid. I have people in this city.', yt:null, dd:'/res/deep/2026/i-have-people-here.html' },
+      { t:'Mind Your Business', ref:'Acts 18:1–11', kl:'Your bank statement is a theological document.', yt:null, dd:'/res/deep/2026/mind-your-business.html' },
+      { t:'Guilty As Charged', ref:'Acts 18:12–17', kl:'The charge is true. There is another King.', yt:null, dd:'/res/deep/2026/guilty-as-charged.html' }
+    ]},
+
+  { id:'s21', j:2, city:'Cenchreae', sub:'The Vow', ref:'Acts 18:18',
+    summary:'Paul shaves his head — a Nazirite vow. A private altar at the end of a brutal season. A chapter marked and closed.',
+    moment:'This port will later produce Phoebe, who hand-carries the Letter to the Romans to Rome.',
+    weight:'transit',
+    sermons:[{ t:'More Accurately', ref:'Acts 18:18–28', kl:'You don\'t need a platform to shape the future of the church. You need a kitchen table and something true to say.', yt:'AsyMp2sfdf0', dd:'/res/deep/2026/more-accurately.html' }] },
+
+  { id:'s22', j:2, city:'Ephesus', sub:'The Kitchen Table', ref:'Acts 18:24–28',
+    summary:'Apollos arrives: eloquent, powerful, incomplete. Priscilla and Aquila invite him home. Over a kitchen table, a refugee couple gives the most eloquent preacher in the region what he was missing.',
+    moment:'They didn\'t correct him publicly. They took him home. The full picture in uncredentialed hands is more valuable than a partial picture in brilliant ones.',
+    weight:'standard',
+    sermons:[{ t:'More Accurately', ref:'Acts 18:24–28', kl:'You don\'t need a platform to shape the future of the church. You need a kitchen table and something true to say.', yt:'AsyMp2sfdf0', dd:'/res/deep/2026/more-accurately.html' }] },
+
+  { id:'s23', j:2, city:'Antioch', sub:'The Return', ref:'Acts 18:22',
+    summary:'"They reported everything God had done through them." Not what he had done — what God had done through him. The report is never a retirement. It\'s a reload.',
+    moment:'The mission closes where it began. The same church. The same gospel. A different man standing in the doorway.',
+    weight:'major',
+    sermons:[] }
+];
+
+// ── RENDER ─────────────────────────────────────────────────────────────────────
+
+function jColor(j) { return j === 1 ? '#c5a059' : j === 2 ? '#e07a55' : '#2d5a5a'; }
+
+function renderNode(n) {
+    const col = jColor(n.j);
+    const sc = n.sermons.length;
+    const scLabel = sc === 0 ? '' : `<span class="tnode-scount">${sc} sermon${sc !== 1 ? 's' : ''}</span>`;
+    return `<div class="tnode j${n.j} ${n.weight}" data-id="${n.id}" onclick="openPanel('${n.id}')">
+      <div class="tnode-dot"></div>
+      <div class="tnode-content">
+        <span class="tnode-ref">${n.ref}</span>
+        <div class="tnode-city">${n.city}</div>
+        <div class="tnode-sub">${n.sub}</div>
+        <div class="tnode-summary">${n.summary}</div>
+        ${scLabel}
+      </div>
+    </div>`;
+}
+
+document.getElementById('j1track').innerHTML = TL_J1.map(renderNode).join('');
+document.getElementById('j2track').innerHTML = TL_J2.map(renderNode).join('');
+
+// Pause node
+document.getElementById('pause-wrap').innerHTML = `
+<div class="pause-card" onclick="openPausePanel()">
+  <div class="pause-icon">✦</div>
+  <div class="pause-texts">
+    <div class="pause-label">Interlude · Between Journeys</div>
+    <div class="pause-city">${TL_PAUSE.city}</div>
+    <div class="pause-ref">${TL_PAUSE.ref}</div>
+    <div class="pause-idea">${TL_PAUSE.idea}</div>
+  </div>
+</div>`;
+
+// ── PANEL ──────────────────────────────────────────────────────────────────────
+
+const allNodes = [...TL_J1, ...TL_J2];
+const nodeMap = {};
+allNodes.forEach(n => nodeMap[n.id] = n);
+
+function openPanel(id) {
+    const n = nodeMap[id];
+    if (!n) return;
+    const col = jColor(n.j);
+    const jLabel = n.j === 1 ? 'Journey One' : 'Journey Two';
+
+    const sermonCards = n.sermons.map(s => {
+        const links = [
+            s.yt ? `<a href="https://www.youtube.com/watch?v=${s.yt}" target="_blank" class="plbtn watch">▶&nbsp;Watch</a>` : '',
+            s.dd ? `<a href="${s.dd}" class="plbtn dive">↗&nbsp;Deep Dive</a>` : ''
+        ].filter(Boolean).join('');
+        return `<div class="sermon-card">
+          <p style="font-family:'Outfit',sans-serif;font-size:.52rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:${col};margin-bottom:.3rem;">${s.ref}</p>
+          <p style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1a1a1a;margin-bottom:.25rem;">${s.t}</p>
+          <div class="keyline" style="margin-bottom:.75rem;">${s.kl}</div>
+          ${links ? `<div style="display:flex;gap:.5rem;flex-wrap:wrap;">${links}</div>` : ''}
+        </div>`;
+    }).join('');
+
+    const mapLink = `<a href="/res/deep/2026/acts-journey.html" class="plbtn maplink" style="margin-top:.4rem;">🗺 See on Map</a>`;
+
+    document.getElementById('panel-content').innerHTML = `
+      <p style="font-family:'Outfit',sans-serif;font-size:.52rem;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:${col};margin-bottom:.3rem;">${jLabel} · ${n.ref}</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;line-height:1.15;margin-bottom:.2rem;">${n.city}</h2>
+      <p style="font-family:'Outfit',sans-serif;font-size:.75rem;color:#a1a1aa;font-weight:300;margin-bottom:1rem;">${n.sub}</p>
+
+      <div style="padding:.85rem;background:rgba(0,0,0,.04);border-radius:.6rem;margin-bottom:1rem;">
+        <p style="font-family:'Outfit',sans-serif;font-size:.52rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#a1a1aa;margin-bottom:.4rem;">The Moment</p>
+        <p style="font-family:'Outfit',sans-serif;font-size:.76rem;color:#374151;line-height:1.65;">${n.moment}</p>
+      </div>
+
+      ${n.sermons.length > 0 ? `
+        <p style="font-family:'Outfit',sans-serif;font-size:.52rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#a1a1aa;margin-bottom:.6rem;">Sermon${n.sermons.length > 1 ? 's' : ''} from this moment</p>
+        ${sermonCards}
+        <div style="margin-top:.8rem;">${mapLink}</div>
+      ` : `
+        <p style="font-family:'Outfit',sans-serif;font-size:.75rem;color:#a1a1aa;text-align:center;padding:1.5rem 0;">${n.summary}</p>
+        ${mapLink}
+      `}`;
+
+    document.getElementById('info-panel').classList.add('open');
+}
+
+function openPausePanel() {
+    const sermonCards = TL_PAUSE.sermons.map(s => `
+      <div class="sermon-card">
+        <p style="font-family:'Outfit',sans-serif;font-size:.52rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#2d5a5a;margin-bottom:.3rem;">${s.ref}</p>
+        <p style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#1a1a1a;margin-bottom:.25rem;">${s.t}</p>
+        <div class="keyline" style="margin-bottom:.75rem;">${s.kl}</div>
+      </div>`).join('');
+
+    document.getElementById('panel-content').innerHTML = `
+      <p style="font-family:'Outfit',sans-serif;font-size:.52rem;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:#2d5a5a;margin-bottom:.3rem;">Interlude · ${TL_PAUSE.ref}</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#1a1a1a;line-height:1.15;margin-bottom:.2rem;">${TL_PAUSE.city}</h2>
+      <p style="font-family:'Outfit',sans-serif;font-size:.75rem;color:#a1a1aa;font-weight:300;margin-bottom:1rem;">${TL_PAUSE.sub}</p>
+      <div style="padding:.85rem;background:rgba(45,90,90,.05);border-radius:.6rem;margin-bottom:1rem;border:1px solid rgba(45,90,90,.1);">
+        <p style="font-family:'Outfit',sans-serif;font-size:.76rem;color:#374151;line-height:1.65;">${TL_PAUSE.moment}</p>
+      </div>
+      <p style="font-family:'Outfit',sans-serif;font-size:.52rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#a1a1aa;margin-bottom:.6rem;">Sermons</p>
+      ${sermonCards}`;
+
+    document.getElementById('info-panel').classList.add('open');
+}
+
+function closePanel() { document.getElementById('info-panel').classList.remove('open'); }
+document.getElementById('pclose').addEventListener('click', closePanel);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+</script>
+</body>
+</html>
