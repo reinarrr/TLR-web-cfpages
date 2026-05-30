@@ -546,6 +546,43 @@ const CITIES = [
 ];
 
 // ════════════════════════════════════════════════════════════════════════════
+// MODERN CITY NAMES
+// ════════════════════════════════════════════════════════════════════════════
+
+const MODERN = {
+  'antioch-j1':        'Antakya, Turkey',
+  'seleucia':          'Samandag, Turkey',
+  'salamis':           'Near Famagusta, Cyprus',
+  'paphos':            'Paphos, Cyprus',
+  'perga-j1':          'Near Antalya, Turkey',
+  'pisidian-antioch':  'Yalvaç, Turkey',
+  'iconium':           'Konya, Turkey',
+  'lystra-j1':         'Near Hatunsaray, Turkey',
+  'derbe-j1':          'Near Kerti Hüyük, Turkey',
+  'attalia':           'Antalya, Turkey',
+  'jerusalem-council': 'Jerusalem',
+  'antioch-j2':        'Antakya, Turkey',
+  'lystra-j2':         'Near Hatunsaray, Turkey',
+  'phrygia':           'Central Turkey',
+  'bithynia':          'Near Bursa, Turkey',
+  'troas':             'Near Ezine, Turkey',
+  'samothrace':        'Samothrace, Greece',
+  'neapolis':          'Kavala, Greece',
+  'philippi':          'Filippoi, Greece',
+  'amphipolis':        'Near Orfani, Greece',
+  'apollonia':         'Near Pollina, Greece',
+  'thessalonica':      'Thessaloniki, Greece',
+  'berea':             'Veria, Greece',
+  'athens':            'Athens, Greece',
+  'corinth':           'Corinth, Greece',
+  'cenchreae':         'Kechries, Greece',
+  'ephesus':           'Near Selçuk, Turkey',
+  'caesarea':          'Caesarea Maritima, Israel',
+  'jerusalem-j2':      'Jerusalem',
+  'antioch-j2-return': 'Antakya, Turkey'
+};
+
+// ════════════════════════════════════════════════════════════════════════════
 // MAP INIT
 // ════════════════════════════════════════════════════════════════════════════
 
@@ -578,7 +615,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const icon = L.divIcon({ className:'', html:`<div class="city-marker ${jc} ${sc}"></div>`, iconSize:sz, iconAnchor:[sz[0]/2,sz[1]/2] });
         const m = L.marker([c.lat,c.lng], { icon, zIndexOffset: c.sz==='major'?200:c.sz==='standard'?100:0 })
             .addTo(map).on('click', () => openCityPanel(c));
-        if (c.sz !== 'transit') m.bindTooltip(c.name, { permanent:false, direction:'top', offset:[0,-8], className:'city-tooltip' });
+        if (c.sz !== 'transit') {
+            const mod = MODERN[c.id];
+            const ttHtml = mod
+                ? `${c.name}<div style="font-size:.9em;opacity:.55;font-weight:400;margin-top:.1rem;">${mod}</div>`
+                : c.name;
+            m.bindTooltip(ttHtml, { permanent:false, direction:'top', offset:[0,-8], className:'city-tooltip' });
+        }
         mkrs[c.id] = m;
     });
 
@@ -625,7 +668,8 @@ document.addEventListener('DOMContentLoaded', function () {
             ${tabs}
             <div style="padding-top:${city.sermons.length>1?'1.1rem':'0'};">
               <p style="font-size:.54rem;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:${col};margin-bottom:.3rem;">${jLbl} · ${s.ref}</p>
-              <h2 style="font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:#1a1a1a;line-height:1.15;margin-bottom:.2rem;">${city.name}</h2>
+              <h2 style="font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:#1a1a1a;line-height:1.15;margin-bottom:.15rem;">${city.name}</h2>
+              ${MODERN[city.id] ? `<p style="font-size:.65rem;color:#a1a1aa;font-weight:400;margin-bottom:.15rem;letter-spacing:.03em;">Today: ${MODERN[city.id]}</p>` : ''}
               <p style="font-size:.72rem;color:#a1a1aa;font-weight:300;margin-bottom:1rem;">${city.sub}</p>
               <div style="padding:.85rem;background:rgba(0,0,0,.04);border-radius:.6rem;margin-bottom:1rem;">
                 <p style="font-size:.52rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#a1a1aa;margin-bottom:.4rem;">The Moment</p>
