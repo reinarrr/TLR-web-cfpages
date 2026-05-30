@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/css/style.css">
     <script>
@@ -127,7 +127,7 @@
 
 <div id="footer-placeholder"></div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLEk=" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="/js/main.js" defer></script>
 <script>
 // ── DATA ─────────────────────────────────────────────────────────────────────
@@ -384,6 +384,8 @@ const CITIES = [
 
 ]; // end CITIES
 
+document.addEventListener('DOMContentLoaded', function() {
+
 // ── ROUTES ───────────────────────────────────────────────────────────────────
 
 const R1 = [[36.20,36.15],[36.12,35.94],[35.19,33.90],[34.76,32.42],[36.96,30.85],[38.30,31.19],[37.87,32.49],[37.57,32.42],[37.35,33.32],[37.57,32.42],[37.87,32.49],[38.30,31.19],[36.96,30.85],[36.88,30.61],[36.20,36.15]];
@@ -393,7 +395,7 @@ const R2 = [[36.20,36.15],[37.35,33.32],[37.57,32.42],[38.50,30.50],[40.00,29.00
 
 const map = L.map('map',{ center:[38.5,27.5], zoom:6, zoomControl:true, attributionControl:false });
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_matter_nolabels/{z}/{x}/{y}{r}.png',{ maxZoom:19 }).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_matter_nolabels/{z}/{x}/{y}.png',{ maxZoom:19, subdomains:'abcd' }).addTo(map);
 
 const rStyle = (color) => ({ color, weight:2.5, opacity:.8, dashArray:'8 5', lineCap:'round', lineJoin:'round' });
 const line1 = L.polyline(R1, rStyle('#c5a059')).addTo(map);
@@ -520,6 +522,7 @@ window.switchS = function(cid, si){
 // close panel on map click (desktop)
 map.on('click', e=>{ if(!e.originalEvent.target.closest('.city-marker')) closePanel(); });
 
+}); // end DOMContentLoaded
 </script>
 </body>
 </html>
