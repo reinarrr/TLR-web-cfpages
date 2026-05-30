@@ -205,20 +205,65 @@
 </section>
 <!-- ── END KNOW WHAT YOU BELIEVE BANNER ── -->
 
-<div style="height: 4rem; background: #faf9f6;"></div>
+<!-- ── ROAD MARKERS TILE ── -->
+<section style="max-width:58rem;margin:0 auto;padding:2.5rem 1.5rem 0;">
+    <a href="/res/deep/2026/the-road-so-far.html" style="display:block;text-decoration:none;" aria-label="Road Markers — explore Paul's missionary journeys">
+        <div style="position:relative;background:#0d1b1b;border-radius:2rem;overflow:hidden;padding:3.5rem 3rem 3.5rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;transition:transform .25s ease,box-shadow .25s ease;cursor:pointer;"
+             onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 20px 60px rgba(0,0,0,0.35)'"
+             onmouseout="this.style.transform='none';this.style.boxShadow='none'">
 
-<!-- ── MOTHER'S DAY CARD ── -->
-<section class="max-w-4xl mx-auto px-6 pb-8">
-    <div style="background:#f5ede0; border-radius:1.5rem; padding:2.5rem 3rem; display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap;">
-        <div>
-            <p style="font-family:'Outfit',sans-serif; font-size:0.6rem; font-weight:700; letter-spacing:0.4em; text-transform:uppercase; color:#c5a059; margin-bottom:0.6rem;">Mother's Day · 2026</p>
-            <h3 style="font-family:'Playfair Display',serif; font-size:clamp(1.3rem,3vw,1.8rem); font-weight:700; color:#1a1a1a; line-height:1.2; margin-bottom:0.5rem;">Their children rise and call them <em style="color:#2d5a5a; font-style:italic;">blessed</em>.</h3>
-            <p style="font-family:'Outfit',sans-serif; font-size:0.85rem; color:#a1a1aa; font-weight:300;">"Her children rise up and call her blessed." — Proverbs 31:28</p>
+            <!-- Background route decoration -->
+            <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:.55;">
+                <svg viewBox="0 0 900 240" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;">
+                    <!-- Journey 1 route suggestion -->
+                    <path d="M 820 60 Q 700 55 620 90 Q 520 130 440 110 Q 360 90 300 130 Q 240 165 180 140 Q 120 115 60 145" stroke="#c5a059" stroke-width="1.2" stroke-dasharray="6 5" opacity="0.22" fill="none"/>
+                    <!-- Journey 2 route suggestion -->
+                    <path d="M 820 100 Q 730 95 660 130 Q 570 175 470 155 Q 380 140 310 175 Q 230 210 140 190 Q 90 180 50 195" stroke="#e07a55" stroke-width="1" stroke-dasharray="6 5" opacity="0.16" fill="none"/>
+                    <!-- City dots J1 -->
+                    <circle cx="820" cy="60" r="3.5" fill="#c5a059" opacity="0.5"/>
+                    <circle cx="620" cy="90" r="2.5" fill="#c5a059" opacity="0.4"/>
+                    <circle cx="440" cy="110" r="2.5" fill="#c5a059" opacity="0.4"/>
+                    <circle cx="300" cy="130" r="3.5" fill="#c5a059" opacity="0.5"/>
+                    <circle cx="180" cy="140" r="2.5" fill="#c5a059" opacity="0.4"/>
+                    <circle cx="60" cy="145" r="3.5" fill="#c5a059" opacity="0.5"/>
+                    <!-- City dots J2 -->
+                    <circle cx="820" cy="100" r="3" fill="#e07a55" opacity="0.4"/>
+                    <circle cx="660" cy="130" r="2" fill="#e07a55" opacity="0.3"/>
+                    <circle cx="470" cy="155" r="3" fill="#e07a55" opacity="0.4"/>
+                    <circle cx="310" cy="175" r="2.5" fill="#e07a55" opacity="0.35"/>
+                    <circle cx="140" cy="190" r="3" fill="#e07a55" opacity="0.4"/>
+                    <!-- Radial glow -->
+                    <ellipse cx="450" cy="200" rx="380" ry="90" fill="rgba(45,90,90,0.12)"/>
+                </svg>
+            </div>
+
+            <!-- Text content -->
+            <div style="position:relative;z-index:1;">
+                <p style="font-family:'Outfit',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.45em;text-transform:uppercase;color:#c5a059;margin-bottom:0.75rem;">Acts Journey · The Living Room</p>
+                <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:700;color:#fff;line-height:1.1;margin-bottom:0.6rem;">Road <em style="color:#c5a059;">Markers</em></h2>
+                <p style="font-family:'Outfit',sans-serif;font-size:0.88rem;color:rgba(255,255,255,0.45);font-weight:300;line-height:1.6;max-width:36ch;margin-bottom:1.5rem;">32 sermons. 2,000 miles. Two journeys. Trace Paul's footsteps across the ancient world — city by city, moment by moment.</p>
+                <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
+                    <span style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1.25rem;border-radius:100px;border:1px solid rgba(197,160,89,0.4);color:#c5a059;font-family:'Outfit',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;">Explore the Journey →</span>
+                    <span style="font-family:'Outfit',sans-serif;font-size:0.58rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.18);">Map · Timeline · Themes</span>
+                </div>
+            </div>
+
+            <!-- Route legend -->
+            <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:0.65rem;flex-shrink:0;padding-right:0.5rem;" class="hidden md:flex">
+                <div style="display:flex;align-items:center;gap:0.6rem;">
+                    <div style="width:22px;height:2px;background:#c5a059;border-radius:1px;opacity:0.7;"></div>
+                    <span style="font-family:'Outfit',sans-serif;font-size:0.52rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);">Journey I</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:0.6rem;">
+                    <div style="width:22px;height:2px;background:#e07a55;border-radius:1px;opacity:0.7;"></div>
+                    <span style="font-family:'Outfit',sans-serif;font-size:0.52rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);">Journey II</span>
+                </div>
+            </div>
+
         </div>
-        <a href="https://mothersday.thelivingroom.io/wall" style="display:inline-block; padding:0.75rem 1.75rem; border-radius:100px; border:1.5px solid rgba(45,90,90,0.35); color:#2d5a5a; font-family:'Outfit',sans-serif; font-size:0.65rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; white-space:nowrap; transition:all 0.2s;" onmouseover="this.style.background='rgba(45,90,90,0.08)'" onmouseout="this.style.background='transparent'">See the wall →</a>
-    </div>
+    </a>
 </section>
-<!-- ── END MOTHER'S DAY CARD ── -->
+<!-- ── END ROAD MARKERS TILE ── -->
 
  <!--
     <section class="holy-week-banner">
