@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Have You Received? — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/have-you-received.html">
+    <meta property="og:title"       content="Have You Received? — Deep Dive">
+    <meta property="og:description" content="The only re-baptism in the New Testament, and why “sealed once, filled continually” isn’t a compromise but the whole picture. A deep dive into Acts 19:1–7.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Have You Received? — Deep Dive">
+    <meta name="twitter:description" content="A deep dive into Acts 19:1–7 — the Spirit received in full.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = {
+            theme: { extend: {
+                colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+            } }
+        }
+    </script>
+
+    <style>
+        :root {
+            --accent: #2d5a5a;          /* Part I — teal (the Spirit) */
+            --accent-deep: #234848;
+            --gold: #c5a059; --gold-deep: #a8843d;
+            --slate: #7c8a90;
+            --bg: #faf9f6; --bg-warm: #f6f1e7;
+            --surface: #ffffff;
+            --border: rgba(26,26,26,0.08); --border-strong: rgba(26,26,26,0.14);
+            --text-primary: #1a1a1a; --text-body: #52525b; --text-muted: #9a9aa2;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text-primary); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+
+        /* ── HERO ── */
+        .dd-hero { max-width: 48rem; margin: 0 auto; padding: 5rem 1.5rem 3rem; text-align: center; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.75rem; }
+        .dd-title { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 8vw, 5rem); font-weight: 700; line-height: 1.04; margin-bottom: 1.5rem; }
+        .dd-title em { font-style: italic; color: var(--accent); }
+        .dd-lead { font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 300; font-style: italic; color: var(--text-body); line-height: 1.5; max-width: 36rem; margin: 0 auto; border-left: 3px solid var(--accent); padding-left: 1.5rem; text-align: left; }
+
+        /* ── SCRIPTURE BOX ── */
+        .scripture-wrap { max-width: 44rem; margin: 1rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: var(--bg-warm); border-left: 4px solid var(--gold); border-radius: 0 1rem 1rem 0; padding: 2rem 2.2rem; }
+        .sb-ref { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: 0.98rem; color: #44443f; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--text-primary); font-weight: 600; }
+        .sb-v { color: var(--gold-deep); font-weight: 700; font-size: 0.7rem; vertical-align: super; margin-right: 0.15rem; }
+        .read-link { display: inline-block; margin-top: 1.25rem; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(45,90,90,0.3); padding-bottom: 2px; }
+        .read-link:hover { color: var(--gold-deep); border-color: var(--gold); }
+
+        /* ── VIDEO ── */
+        .yt-wrap { max-width: 52rem; margin: 3.5rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.12); background: #e4e4e7; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--text-muted); font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; font-style: italic; margin-top: 1rem; }
+
+        /* ── SECTIONS ── */
+        .dd-body { max-width: 44rem; margin: 0 auto; padding: 4.5rem 1.5rem 1rem; }
+        .dd-section { margin-bottom: 4rem; }
+        .sec-eyebrow { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.7rem; }
+        .sec-eyebrow::before { content: ''; width: 1.8rem; height: 2px; background: var(--accent); opacity: 0.5; }
+        .sec-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4.5vw, 2.3rem); font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; }
+        .sec-title em { font-style: italic; color: var(--accent); }
+        .prose { font-size: 1.08rem; color: var(--text-body); line-height: 1.85; font-weight: 300; margin-bottom: 1.5rem; }
+        .prose strong { color: var(--text-primary); font-weight: 600; }
+        .prose em { font-style: italic; }
+
+        /* ── ICEBERG CALLOUT — the "not easily seen" payoff ── */
+        .iceberg { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 1rem 1rem 0; padding: 1.6rem 1.85rem; margin: 2rem 0; box-shadow: 0 1px 2px rgba(26,26,26,0.03); }
+        .iceberg-label { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.6rem; }
+        .iceberg p { font-size: 1.05rem; color: var(--text-primary); line-height: 1.6; font-weight: 400; }
+        .iceberg p em { font-style: italic; color: var(--accent-deep); }
+
+        /* ── GREEK / TERM CALLOUT ── */
+        .greek { background: var(--bg-warm); border-radius: 1rem; padding: 1.4rem 1.7rem; margin: 2rem 0; }
+        .greek-term { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--gold-deep); }
+        .greek-gloss { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-left: 0.5rem; }
+        .greek p { font-size: 0.98rem; color: var(--text-body); line-height: 1.7; font-weight: 300; margin-top: 0.6rem; }
+
+        /* ── TWIN DIAGRAM (sealed / filled) ── */
+        .twin { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+        @media (max-width: 560px) { .twin { grid-template-columns: 1fr; } }
+        .twin-card { border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem 1.6rem; background: var(--surface); }
+        .twin-card.t-once { border-top: 3px solid var(--gold); }
+        .twin-card.t-cont { border-top: 3px solid var(--accent); }
+        .twin-h { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.3rem; }
+        .twin-tag { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.7rem; }
+        .twin-card p { font-size: 0.92rem; color: var(--text-body); line-height: 1.65; font-weight: 300; }
+        .twin-card .ref { display: block; margin-top: 0.7rem; font-size: 0.72rem; color: var(--gold-deep); font-weight: 600; }
+
+        /* ── PULL QUOTE ── */
+        .pullquote { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.3rem, 3.5vw, 1.7rem); line-height: 1.45; color: var(--text-primary); text-align: center; max-width: 34rem; margin: 3rem auto; }
+        .pullquote::before { content: '“'; color: var(--accent); }
+        .pullquote::after { content: '”'; color: var(--accent); }
+
+        /* ── INTERACTIVE — posture selector ── */
+        .posture { background: var(--bg-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 1.5rem; margin-top: 4rem; }
+        .posture-inner { max-width: 44rem; margin: 0 auto; }
+        .posture-q { text-align: center; margin-bottom: 2.5rem; }
+        .posture-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+        @media (max-width: 560px) { .posture-grid { grid-template-columns: 1fr; } }
+        .posture-card { background: var(--surface); border: 1px solid var(--border); border-radius: 0.9rem; padding: 1.2rem 1.4rem; cursor: pointer; text-align: left; font-family: 'Outfit', sans-serif; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+        .posture-card:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(26,26,26,0.06); }
+        .posture-card.active { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+        .posture-card .pc-label { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: var(--text-primary); display: block; margin-bottom: 0.2rem; }
+        .posture-card .pc-sub { font-size: 0.82rem; color: var(--text-muted); }
+        .posture-response { display: none; margin-top: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 1rem 1rem 0; padding: 1.7rem 1.9rem; animation: respIn 0.5s ease; }
+        .posture-response.show { display: block; }
+        .posture-response h4 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--accent-deep); margin-bottom: 0.7rem; }
+        .posture-response p { font-size: 1rem; color: var(--text-body); line-height: 1.8; font-weight: 300; }
+        @keyframes respIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+        /* ── DISCUSSION ── */
+        .discuss { background: var(--charcoal, #1a1a1a); color: #fff; max-width: 60rem; margin: 4.5rem auto 0; border-radius: 2.5rem; padding: 4rem 2rem; }
+        @media (min-width: 768px) { .discuss { padding: 5rem 4rem; } }
+        .discuss-head { text-align: center; margin-bottom: 3rem; }
+        .discuss-head .eb { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); }
+        .discuss-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-top: 0.8rem; }
+        .discuss-head .bar { width: 3rem; height: 2px; background: var(--accent); margin: 1.5rem auto 0; }
+        .q-list { max-width: 38rem; margin: 0 auto; }
+        .q-item { padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.1); }
+        .q-item:first-child { border-top: none; }
+        .q-num { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2rem; color: var(--gold); display: block; margin-bottom: 0.5rem; }
+        .q-item p { font-size: 1.1rem; color: #d4d4d8; font-weight: 300; line-height: 1.7; }
+        .q-item p strong { color: #fff; font-weight: 600; }
+
+        /* ── THE SEND ── */
+        .send { max-width: 38rem; margin: 4.5rem auto 0; padding: 0 1.5rem; text-align: center; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.25rem; }
+        .send p { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.2rem, 3vw, 1.55rem); color: var(--text-primary); line-height: 1.5; }
+
+        /* ── SERIES STRIP WRAP ── */
+        .strip-wrap { border-top: 1px solid var(--border); margin-top: 5rem; padding: 4rem 0 2rem; }
+        .strip-wrap .strip-eb { text-align: center; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2rem; }
+
+        /* ── BACK ── */
+        .dd-back { text-align: center; padding: 2.5rem 1.5rem 5rem; }
+        .dd-back a { display: inline-block; border: 1px solid var(--accent); color: var(--accent); padding: 0.9rem 2.2rem; border-radius: 100px; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none; transition: color 0.3s, background 0.3s; }
+        .dd-back a:hover { color: #fff; background: var(--accent); }
+
+        /* ── REVEAL ── */
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <!-- ══════════ HERO ══════════ -->
+    <header class="dd-hero">
+        <p class="dd-eyebrow">Acts Journey &nbsp;·&nbsp; Acts 19 &nbsp;·&nbsp; Part I</p>
+        <h1 class="dd-title">Have You <em>Received?</em></h1>
+        <p class="dd-lead">The lead character of the whole book of Acts — the Holy Spirit — turns out to be a stranger to twelve men in Ephesus. Paul asks one question, and everything changes.</p>
+    </header>
+
+    <!-- ══════════ SCRIPTURE ══════════ -->
+    <div class="scripture-wrap">
+        <div class="scripture-box">
+            <span class="sb-ref">The Foundation · Acts 19:1–7 (NLT)</span>
+            <p class="sb-text">
+                <span class="sb-v">1</span>While Apollos was in Corinth, Paul traveled through the interior regions until he reached Ephesus, on the coast, where he found several believers.
+                <span class="sb-v">2</span>“<b>Did you receive the Holy Spirit when you believed?</b>” he asked them. “No,” they replied, “we haven’t even heard that there is a Holy Spirit.”
+                <span class="sb-v">3</span>“Then what baptism did you experience?” he asked. And they replied, “The baptism of John.”
+                <span class="sb-v">4</span>Paul said, “John’s baptism called for repentance from sin. But John himself told the people to believe in the one who would come later, meaning Jesus.”
+                <span class="sb-v">5</span>As soon as they heard this, they were baptized in the name of the Lord Jesus.
+                <span class="sb-v">6</span>Then when Paul laid his hands on them, the Holy Spirit came on them, and they spoke in other tongues and prophesied.
+                <span class="sb-v">7</span>There were about twelve men in all.
+            </p>
+            <a class="read-link" href="https://www.biblegateway.com/passage/?search=Acts%2019%3A1-7&version=NLT" target="_blank" rel="noopener">Read on Bible Gateway →</a>
+        </div>
+    </div>
+
+    <!-- ══════════ VIDEO (auto-shows once an ID is set) ══════════ -->
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame"><div id="yt-mount"></div></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <!-- ══════════ BODY ══════════ -->
+    <main class="dd-body">
+
+        <p class="prose reveal">On Sunday we let Paul’s question land on us. Here we go <em>underneath</em> it — to three things in this short passage that are easy to miss from the pew, and that quietly change what the question even means.</p>
+
+        <!-- 1 -->
+        <section class="dd-section reveal">
+            <p class="sec-eyebrow">One</p>
+            <h2 class="sec-title">The only <em>re-baptism</em> in the New Testament</h2>
+            <p class="prose">Read quickly and verse 5 slides right past you: these men, already baptized, get baptized <em>again</em>. Slow down, because this is the <strong>only place in the entire New Testament</strong> where that happens. Everywhere else, one baptism, full stop. So why here?</p>
+            <p class="prose">Because what they’d had wasn’t yet Christian baptism. John’s baptism “called for repentance from sin” and pointed <em>forward</em> to the One coming after — “meaning Jesus” (vv. 3–4). They had answered the trailer, but never seen the film. They were standing at a threshold they’d never stepped through.</p>
+            <p class="prose">And Luke drops a clue right before this. Just a few verses earlier (18:24–26), Apollos shows up in this same city — brilliant, fiery, accurate about Jesus — and yet “he knew only the baptism of John,” until Priscilla and Aquila pulled him aside and explained the way more accurately. Luke pairs the two stories on purpose: there was a pocket of believers in Ephesus stalled at John’s threshold, and Paul walks straight into it.</p>
+            <div class="iceberg">
+                <span class="iceberg-label">Beneath the surface</span>
+                <p>These twelve aren’t <em>deficient</em> Christians — they’re <em>pre-Pentecost</em> ones. So Paul’s question isn’t “have you got the upgrade?” It’s the far more basic “<em>have you actually crossed over at all?</em>”</p>
+            </div>
+        </section>
+
+        <!-- 2 -->
+        <section class="dd-section reveal">
+            <p class="sec-eyebrow">Two</p>
+            <h2 class="sec-title">Received once. Filled <em>continually.</em></h2>
+            <p class="prose">This is the verse that has split churches for centuries. Do you receive the Spirit <em>when</em> you believe, or in a second experience <em>after</em>? Camps have formed, lines have been drawn. But the New Testament quietly holds two things at once — and once you see both, the fight mostly dissolves.</p>
+            <div class="twin">
+                <div class="twin-card t-once">
+                    <span class="twin-tag">Happens once</span>
+                    <p class="twin-h">Sealed</p>
+                    <p>The moment you believe, you’re marked as God’s own — a finished act, never repeated.</p>
+                    <span class="ref">Ephesians 1:13</span>
+                </div>
+                <div class="twin-card t-cont">
+                    <span class="twin-tag">Happens again and again</span>
+                    <p class="twin-h">Filled</p>
+                    <p>The same believers are filled, and filled again, for what comes next. The command is ongoing: <em>keep on</em> being filled.</p>
+                    <span class="ref">Eph 5:18 · Acts 2:4 → 4:31</span>
+                </div>
+            </div>
+            <p class="prose">Watch it in Acts itself: the crowd “filled with the Holy Spirit” at Pentecost (2:4) are the <em>same people</em> “filled with the Holy Spirit” again a couple of chapters later (4:31). And Paul’s command in Ephesians 5:18 — “be filled with the Holy Spirit” — is a present tense: not a one-time event but a continuous one.</p>
+            <div class="iceberg">
+                <span class="iceberg-label">Beneath the surface</span>
+                <p>“Sealed” is the word that happens <em>once</em>. “Filled” is the word that <em>repeats</em>. They were never two tiers of Christian — they’re two true things about one.</p>
+            </div>
+            <p class="prose">It’s worth saying plainly where we land as a church: we’re <strong>Pentecostal</strong> — we expect, and make room for, the Spirit’s ongoing, sometimes-visible work. But we hold that together with Paul’s seal, so we never end up teaching two classes of Christian — the “real” ones and the ones still waiting for a second something. You were sealed in full the day you believed. You are also being filled, for everything still ahead.</p>
+        </section>
+
+        <!-- 3 -->
+        <section class="dd-section reveal">
+            <p class="sec-eyebrow">Three</p>
+            <h2 class="sec-title">Why the question expects an answer you can <em>see</em></h2>
+            <p class="prose">Notice the shape of Paul’s question: “Did you receive the Holy Spirit <em>when you believed</em>?” He’s not running a doctrine quiz. He’s <em>scanning for a pulse</em> — and he expected to find one.</p>
+            <div class="greek">
+                <span class="greek-term">pisteúsantes</span><span class="greek-gloss">“having believed”</span>
+                <p>Paul’s wording ties receiving the Spirit right to the act of faith — he assumed the Spirit would <em>show</em>. When he met genuine believers, there was a mark on them, something evident. Here, he wasn’t seeing it — so he probed.</p>
+            </div>
+            <p class="prose">That assumption runs all through the New Testament. The Spirit isn’t an optional extra for advanced believers; He is the very <strong>evidence that you belong to Jesus at all</strong> — “those who do not have the Spirit of Christ living in them do not belong to him at all” (Romans 8:9).</p>
+            <p class="pullquote">The issue was never how much of the Spirit you have. You have all of Him. The question is how much of you He has.</p>
+        </section>
+
+    </main>
+
+    <!-- ══════════ INTERACTIVE ══════════ -->
+    <section class="posture">
+        <div class="posture-inner">
+            <div class="posture-q">
+                <p class="sec-eyebrow" style="justify-content:center;">The Interactive</p>
+                <h2 class="sec-title" style="text-align:center;">In the Room, or the <em>Doorway?</em></h2>
+                <p class="prose" style="text-align:center; margin-bottom:0;">Paul’s question still scans for a pulse. Where are you, honestly? Pick the one that fits today.</p>
+            </div>
+
+            <div class="posture-grid">
+                <button class="posture-card" data-target="r-doorway">
+                    <span class="pc-label">Still in the doorway</span>
+                    <span class="pc-sub">I’ve repented, but I’m not sure I’ve crossed over to Jesus.</span>
+                </button>
+                <button class="posture-card" data-target="r-camped">
+                    <span class="pc-label">Just inside, but camped</span>
+                    <span class="pc-sub">Saved — but living in the entryway, not really filled.</span>
+                </button>
+                <button class="posture-card" data-target="r-deep">
+                    <span class="pc-label">Deep in the house</span>
+                    <span class="pc-sub">Walking filled, drawing on the Spirit for what’s next.</span>
+                </button>
+                <button class="posture-card" data-target="r-unsure">
+                    <span class="pc-label">Honestly not sure</span>
+                    <span class="pc-sub">I can’t tell where I am — and that’s the honest answer.</span>
+                </button>
+            </div>
+
+            <div class="posture-response" id="r-doorway">
+                <h4>You don’t have to stay there.</h4>
+                <p>That’s exactly where the twelve were — repentance that pointed at Jesus but had never quite reached Him. The good news of this passage is how <em>fast</em> it changed: they heard, they believed, and the Spirit came in the same breath. There’s no waiting room and no probation. The step from the doorway into the room is one honest “yes” to the Person John was always pointing at. Take it.</p>
+            </div>
+            <div class="posture-response" id="r-camped">
+                <h4>The house is already yours.</h4>
+                <p>Living “received but never filled” is like being handed a fully-furnished house and choosing to camp in the entryway — sealed inside, but never living in the rooms you already own. You’re not waiting on a second blessing to make you a real Christian; you already are one. You’re being invited <em>further in</em> — to give the Spirit more room than you gave Him yesterday.</p>
+            </div>
+            <div class="posture-response" id="r-deep">
+                <h4>Then keep being filled.</h4>
+                <p>Good — and notice the Acts pattern: even the people most full of the Spirit got filled <em>again</em> (2:4 → 4:31). “Filled” is a present tense, not a trophy on the shelf. The invitation isn’t to coast on a past experience but to keep coming back with open hands — for the next person, the next assignment, the next thing only He can fund in you.</p>
+            </div>
+            <div class="posture-response" id="r-unsure">
+                <h4>That’s a faithful place to start.</h4>
+                <p>Paul met twelve men who couldn’t have told you where they stood either — and his response wasn’t a lecture, it was a question and an open hand. The Spirit is a <em>Person you can know</em>, not a feeling you have to manufacture. If you can’t tell whether you’ve received Him, the simplest thing in the world is to ask — plainly, today: “Come. Have all of me.” That prayer has never gone unanswered.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+            <div class="bar"></div>
+        </div>
+        <div class="q-list">
+            <div class="q-item">
+                <span class="q-num">01</span>
+                <p>The Spirit is the “lead character” of Acts who’d become a stranger to these twelve. Is the Holy Spirit a <strong>Person you know</strong>, or a <strong>word you affirm</strong>? Where’s the pulse?</p>
+            </div>
+            <div class="q-item">
+                <span class="q-num">02</span>
+                <p>These men had repented and then <em>stopped</em> — stalled at John’s threshold. Is there a place in your life where you’ve answered the “trailer” of faith but never stepped through to the Person?</p>
+            </div>
+            <div class="q-item">
+                <span class="q-num">03</span>
+                <p>“Sealed once, filled continually.” Have you quietly held a <strong>two-classes-of-Christian</strong> idea — and put yourself in the lower one? How does <em>received in full</em> change that?</p>
+            </div>
+            <div class="q-item">
+                <span class="q-num">04</span>
+                <p><strong>Family prompt:</strong> Picture being handed a big house, fully furnished and completely yours — and then only ever sitting in the entryway by the front door. That’s the picture of a Christian who has received the Spirit but never lives in the rooms. Which “room” do you think God has already given our family that we’ve been leaving shut — and what’s one small way we could step into it this week?</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ THE SEND ══════════ -->
+    <div class="send reveal">
+        <p class="eb">The Send</p>
+        <p>He’s not a stranger to keep at the door, or a second blessing to climb toward. The Spirit is a Person you can know — received in full the day you believed, filling you continually for everything still ahead. He isn’t asking for less room in your life. He’s asking for more.</p>
+    </div>
+
+    <!-- ══════════ SERIES STRIP ══════════ -->
+    <div class="strip-wrap">
+        <p class="strip-eb">The Series · Acts 19</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <!-- ══════════ BACK ══════════ -->
+    <div class="dd-back">
+        <a href="/deepdives.html">← All Deep Dives</a>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-19-series.js" defer></script>
+    <script>
+        // ── Sermon video: paste the YouTube ID here when the message is up ──
+        const SERMON_YT_ID = '';   // e.g. 'dQw4w9WgXcQ'
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="Have You Received?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+
+        // ── Scroll reveal ──
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        // ── Posture selector ──
+        document.querySelectorAll('.posture-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.posture-card').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.posture-response').forEach(r => r.classList.remove('show'));
+                card.classList.add('active');
+                const r = document.getElementById(card.getAttribute('data-target'));
+                if (r) { r.classList.add('show'); }
+            });
+        });
+
+        // ── Series cross-nav strip (from acts-19-series.js) ──
+        window.addEventListener('load', () => {
+            if (typeof acts19RenderStrip === 'function') acts19RenderStrip('#series-strip', 'have-you-received');
+        });
+    </script>
+</body>
+</html>
