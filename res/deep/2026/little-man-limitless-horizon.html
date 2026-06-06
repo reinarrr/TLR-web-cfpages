@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Man, Limitless Horizon — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/little-man-limitless-horizon.html">
+    <meta property="og:title"       content="Little Man, Limitless Horizon — Deep Dive">
+    <meta property="og:description" content="Two quiet verses are the hinge of the whole book of Acts — Luke shaping Paul’s road to mirror Jesus’ road — all driven by a relief offering the narrative barely mentions. A deep dive into Acts 19:21–22.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Little Man, Limitless Horizon — Deep Dive">
+    <meta name="twitter:description" content="A deep dive into Acts 19:21–22 — the love that compels the gospel outward.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --accent: #a8843d;          /* Part V — gold (the horizon / the send) */
+            --accent-deep: #8a6c2f;
+            --gold: #c5a059; --gold-deep: #a8843d;
+            --slate: #7c8a90;
+            --bg: #faf9f6; --bg-warm: #f6f1e7;
+            --surface: #ffffff;
+            --border: rgba(26,26,26,0.08); --border-strong: rgba(26,26,26,0.14);
+            --text-primary: #1a1a1a; --text-body: #52525b; --text-muted: #9a9aa2;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text-primary); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+
+        .dd-hero { max-width: 48rem; margin: 0 auto; padding: 5rem 1.5rem 3rem; text-align: center; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.75rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+        .dd-eyebrow a:hover { color: var(--accent); border-color: var(--accent); }
+        .dd-bridge-tag { display: inline-block; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--border-strong); border-radius: 100px; padding: 0.35rem 1rem; margin-bottom: 1.5rem; }
+        .dd-title { font-family: 'Playfair Display', serif; font-size: clamp(2.3rem, 7vw, 4.4rem); font-weight: 700; line-height: 1.05; margin-bottom: 1.5rem; }
+        .dd-title em { font-style: italic; color: var(--accent); }
+        .dd-lead { font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 300; font-style: italic; color: var(--text-body); line-height: 1.5; max-width: 36rem; margin: 0 auto; border-left: 3px solid var(--accent); padding-left: 1.5rem; text-align: left; }
+
+        .scripture-wrap { max-width: 44rem; margin: 1rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: var(--bg-warm); border-left: 4px solid var(--gold); border-radius: 0 1rem 1rem 0; padding: 2rem 2.2rem; }
+        .sb-ref { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: 0.98rem; color: #44443f; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--text-primary); font-weight: 600; }
+        .sb-v { color: var(--gold-deep); font-weight: 700; font-size: 0.7rem; vertical-align: super; margin-right: 0.15rem; }
+        .read-link { display: inline-block; margin-top: 1.25rem; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(168,132,61,0.4); padding-bottom: 2px; }
+        .read-link:hover { color: var(--gold-deep); border-color: var(--gold); }
+
+        .yt-wrap { max-width: 52rem; margin: 3.5rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.12); background: #e4e4e7; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--text-muted); font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; font-style: italic; margin-top: 1rem; }
+
+        .dd-body { max-width: 44rem; margin: 0 auto; padding: 4.5rem 1.5rem 1rem; }
+        .dd-section { margin-bottom: 4rem; }
+        .sec-eyebrow { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.7rem; }
+        .sec-eyebrow::before { content: ''; width: 1.8rem; height: 2px; background: var(--accent); opacity: 0.5; }
+        .sec-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4.5vw, 2.3rem); font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; }
+        .sec-title em { font-style: italic; color: var(--accent); }
+        .prose { font-size: 1.08rem; color: var(--text-body); line-height: 1.85; font-weight: 300; margin-bottom: 1.5rem; }
+        .prose strong { color: var(--text-primary); font-weight: 600; }
+        .prose em { font-style: italic; }
+
+        .iceberg { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 1rem 1rem 0; padding: 1.6rem 1.85rem; margin: 2rem 0; box-shadow: 0 1px 2px rgba(26,26,26,0.03); }
+        .iceberg-label { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.6rem; }
+        .iceberg p { font-size: 1.05rem; color: var(--text-primary); line-height: 1.6; font-weight: 400; }
+        .iceberg p em { font-style: italic; color: var(--accent-deep); }
+
+        .greek { background: var(--bg-warm); border-radius: 1rem; padding: 1.4rem 1.7rem; margin: 2rem 0; }
+        .greek-term { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--gold-deep); }
+        .greek-gloss { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-left: 0.5rem; }
+        .greek p { font-size: 0.98rem; color: var(--text-body); line-height: 1.7; font-weight: 300; margin-top: 0.6rem; }
+        .greek p strong { color: var(--text-primary); font-weight: 600; }
+
+        .hedge { font-size: 0.85rem; color: var(--text-muted); font-style: italic; line-height: 1.7; border-left: 2px solid var(--border-strong); padding-left: 1rem; margin: 1.5rem 0; }
+
+        .pullquote { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.3rem, 3.5vw, 1.7rem); line-height: 1.45; color: var(--text-primary); text-align: center; max-width: 34rem; margin: 3rem auto; }
+        .pullquote::before { content: '“'; color: var(--accent); }
+        .pullquote::after { content: '”'; color: var(--accent); }
+
+        /* ── INTERACTIVE — the endless horizon ── */
+        .journey { background: var(--bg-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 1.5rem; margin-top: 4rem; }
+        .journey-inner { max-width: 44rem; margin: 0 auto; }
+        .journey-q { text-align: center; margin-bottom: 2.5rem; }
+        .stops { display: flex; flex-wrap: wrap; align-items: stretch; justify-content: center; gap: 0.5rem; }
+        .stop { background: var(--surface); border: 1px solid var(--border); border-radius: 0.8rem; padding: 0.85rem 1.1rem; cursor: pointer; font-family: 'Outfit', sans-serif; text-align: center; min-width: 6.5rem; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+        .stop:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(26,26,26,0.06); }
+        .stop.active { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+        .stop .st-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1rem; color: var(--text-primary); display: block; }
+        .stop .st-here { font-size: 0.5rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+        .stop.edge { border-style: dashed; border-color: var(--accent); }
+        .stop.edge .st-name { color: var(--accent-deep); }
+        .arrow { display: flex; align-items: center; color: var(--accent); opacity: 0.5; font-size: 1rem; }
+        @media (max-width: 560px) { .arrow { transform: rotate(90deg); } .stops { flex-direction: column; } .stop { width: 100%; } }
+        .journey-response { display: none; margin-top: 1.75rem; background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 1rem 1rem 0; padding: 1.7rem 1.9rem; animation: respIn 0.5s ease; }
+        .journey-response.show { display: block; }
+        .journey-response h4 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--accent-deep); margin-bottom: 0.6rem; }
+        .journey-response p { font-size: 1rem; color: var(--text-body); line-height: 1.8; font-weight: 300; }
+        @keyframes respIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+        .discuss { background: #1a1a1a; color: #fff; max-width: 60rem; margin: 4.5rem auto 0; border-radius: 2.5rem; padding: 4rem 2rem; }
+        @media (min-width: 768px) { .discuss { padding: 5rem 4rem; } }
+        .discuss-head { text-align: center; margin-bottom: 3rem; }
+        .discuss-head .eb { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); }
+        .discuss-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-top: 0.8rem; }
+        .discuss-head .bar { width: 3rem; height: 2px; background: var(--accent); margin: 1.5rem auto 0; }
+        .q-list { max-width: 38rem; margin: 0 auto; }
+        .q-item { padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.1); }
+        .q-item:first-child { border-top: none; }
+        .q-num { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2rem; color: var(--gold); display: block; margin-bottom: 0.5rem; }
+        .q-item p { font-size: 1.1rem; color: #d4d4d8; font-weight: 300; line-height: 1.7; }
+        .q-item p strong { color: #fff; font-weight: 600; }
+
+        /* ── BRIDGE-TO-NEXT (this is the send-off into Acts 20–28) ── */
+        .next-series { max-width: 44rem; margin: 4.5rem auto 0; padding: 0 1.5rem; }
+        .next-card { background: #1a1a1a; color: #fff; border-radius: 1.5rem; padding: 2.5rem 2.2rem; text-align: center; position: relative; overflow: hidden; }
+        .next-card::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 80% at 50% 120%, rgba(197,160,89,0.18) 0%, transparent 60%); pointer-events: none; }
+        .next-card .eb { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); position: relative; }
+        .next-card h3 { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.5rem, 4vw, 2.1rem); margin: 0.7rem 0 0.8rem; position: relative; }
+        .next-card p { font-size: 0.98rem; color: #c8c8cc; font-weight: 300; line-height: 1.7; max-width: 30rem; margin: 0 auto; position: relative; }
+
+        .send { max-width: 38rem; margin: 4.5rem auto 0; padding: 0 1.5rem; text-align: center; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.25rem; }
+        .send p { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.2rem, 3vw, 1.55rem); color: var(--text-primary); line-height: 1.5; }
+
+        .strip-wrap { border-top: 1px solid var(--border); margin-top: 5rem; padding: 4rem 0 2rem; }
+        .strip-wrap .strip-eb { text-align: center; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2rem; }
+
+        .dd-back { text-align: center; padding: 2.5rem 1.5rem 5rem; }
+        .dd-back a { display: inline-block; border: 1px solid var(--accent); color: var(--accent); padding: 0.9rem 2.2rem; border-radius: 100px; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none; transition: color 0.3s, background 0.3s; }
+        .dd-back a:hover { color: #fff; background: var(--accent); }
+
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <header class="dd-hero">
+        <p class="dd-eyebrow"><a href="ephesus-power-capital.html">Acts Journey &nbsp;·&nbsp; Acts 19</a> &nbsp;·&nbsp; Part V</p>
+        <span class="dd-bridge-tag">The Bridge → the road to Rome</span>
+        <h1 class="dd-title">Little Man, <em>Limitless Horizon</em></h1>
+        <p class="dd-lead">The smallest man in the empire — a tentmaker about to be run out of town by a mob — quietly says “I must see Rome.” These two verses are the hinge the whole book of Acts turns on.</p>
+    </header>
+
+    <div class="scripture-wrap">
+        <div class="scripture-box">
+            <span class="sb-ref">The Foundation · Acts 19:21–22 (NLT)</span>
+            <p class="sb-text">
+                <span class="sb-v">21</span>Afterward Paul felt compelled by the Spirit to go over to Macedonia and Achaia before going to Jerusalem. “And after that,” he said, “<b>I must go on to Rome!</b>”
+                <span class="sb-v">22</span>He sent his two assistants, Timothy and Erastus, ahead to Macedonia while he stayed awhile longer in the province of Asia.
+            </p>
+            <a class="read-link" href="https://www.biblegateway.com/passage/?search=Acts%2019%3A21-22&version=NLT" target="_blank" rel="noopener">Read on Bible Gateway →</a>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame"><div id="yt-mount"></div></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <main class="dd-body">
+
+        <p class="prose reveal">On Sunday we heard how the love of Christ compels a small man to the ends of the earth. Here we go <em>underneath</em> two verses most readers skim — and find the pivot of the entire book of Acts, a motive Luke barely mentions, and the reason a man named “little” could carry the largest dream in history.</p>
+
+        <!-- 1 -->
+        <section class="dd-section reveal">
+            <p class="sec-eyebrow">One</p>
+            <h2 class="sec-title">Two verses. The <em>hinge</em> of the whole book.</h2>
+            <p class="prose">It reads like a travel note. It’s actually the turning point of Acts. From 19:21 on, the entire back third of the book bends toward one destination: Rome. Everything after this — the arrest, the trials, the shipwreck — is the outworking of this one sentence.</p>
+            <div class="greek">
+                <span class="greek-term">deî</span><span class="greek-gloss">“it is necessary / I must”</span>
+                <p>“I <em>must</em> go on to Rome” isn’t bucket-list language. <strong>deî</strong> is Luke’s word for <em>divine</em> necessity — the same “must” he uses of Jesus: the Son of Man “<em>must</em> suffer” (Luke 24:26). This isn’t Paul’s wanderlust. It’s a compulsion laid on him.</p>
+            </div>
+            <p class="prose">And Luke is doing something deliberate. He shapes Paul’s road to <strong>mirror Jesus’ road</strong>. Just as Jesus “resolutely set out for Jerusalem” (Luke 9:51) and “sent messengers on ahead” (9:52), so Paul resolves on Jerusalem-then-Rome and, in the very next breath, “sent his two assistants… ahead” (v. 22). The same shape, deliberately drawn.</p>
+            <div class="iceberg">
+                <span class="iceberg-label">Beneath the surface</span>
+                <p>The Gospel travels <em>up to</em> Jerusalem; Acts travels <em>out from</em> it to the ends of the earth. This little two-verse “must” is the pivot between them — the little man being conformed to his Master, right down to the pattern of his suffering.</p>
+            </div>
+        </section>
+
+        <!-- 2 -->
+        <section class="dd-section reveal">
+            <p class="sec-eyebrow">Two</p>
+            <h2 class="sec-title">The motive Acts barely <em>mentions</em></h2>
+            <p class="prose">Why loop back through Macedonia and Achaia first? It wasn’t restless wandering. Paul was <strong>collecting a relief offering</strong> — money from the Greek churches for the poor, struggling believers in Judea. Acts only whispers it (24:17), but Paul’s own letters are full of it (1 Corinthians 16, 2 Corinthians 8–9, Romans 15:25–28).</p>
+            <div class="iceberg">
+                <span class="iceberg-label">Beneath the surface</span>
+                <p>So the biggest dream in history has its feet on the ground in <em>care for the poor</em>. The journey begins not in ambition but in an act of love and service. And that’s the engine of the whole thing.</p>
+            </div>
+            <p class="prose">Paul tells us the engine himself — and writes it down on <em>this very trip</em>. Second Corinthians, penned from Macedonia mid-journey, hands us the answer in five words: “Christ’s love controls us” (2 Cor 5:14).</p>
+            <div class="greek">
+                <span class="greek-term">synéchō</span><span class="greek-gloss">“controls / compels / hems in”</span>
+                <p>The verb is physical, almost violent: to <strong>hold together, press in from both sides, grip, hem in</strong>. It’s used of a crowd <em>crushing</em> against Jesus. The love of Christ doesn’t gently suggest a direction to Paul — it presses him, grips him, until there’s only one way left to move: outward, toward the world.</p>
+            </div>
+            <p class="prose">And notice the <em>direction</em> it drives — not toward comfort, toward cost. A chapter later Paul tells the Ephesian elders he’s going to Jerusalem “bound by the Spirit,” though that same Spirit warns him “jail and suffering lie ahead” (Acts 20:22–24). Rome will mean chains, and he knows it, and he goes anyway.</p>
+        </section>
+
+        <!-- 3 -->
+        <section class="dd-section reveal">
+            <p class="sec-eyebrow">Three</p>
+            <h2 class="sec-title">A little man, a <em>limitless</em> horizon</h2>
+            <p class="prose">Here’s the contrast the whole message hangs on. <em>Paulos</em> — the apostle’s name — is the Latin word for “<strong>little</strong>.” The man with the smallest name carried the largest mission on earth.</p>
+            <p class="hedge">A fair flag: “Paulus” was almost certainly his ordinary Roman name from birth, not a humility badge he chose — so we don’t lean on a “he renamed himself” story. But the old commentator Bengel already heard the echo, tying the name to Paul’s own self-description: “less than the least of all God’s people” (Ephesians 3:8). The contrast is a gift even if the etymology is just providence.</p>
+            <p class="prose">So how does someone that small carry something that big? He doesn’t. It was never his <em>bigness</em>. “We are like fragile clay jars containing this great treasure… so that our great power is from God, not from ourselves” (2 Cor 4:7). That’s the little man — the clay jar. The treasure inside is bigger than the jar by a thousand miles, and that’s the whole point.</p>
+            <div class="iceberg">
+                <span class="iceberg-label">Beneath the surface</span>
+                <p>And Rome was never the destination — it was the <em>launchpad</em>. Paul’s real plan (Romans 15:24) was to use Rome as a base and push on to <strong>Spain</strong>, the far western edge of the known world — “to preach where the name of Christ has never been heard” (Rom 15:20). The moment the love reaches one frontier, it’s already looking past it.</p>
+            </div>
+            <p class="prose">Set that against the crowd in Part IV. At Babel, and in that Ephesian theatre, people cried “let us make a name for ourselves” — building inward and upward, to enthrone the self. Here a man whose name means “little” spends his whole life to make much of <em>Christ’s</em> name — pushing outward, to spend the self. Opposite forces entirely.</p>
+            <p class="pullquote">The compulsion in his small chest was never his ambition. It was the gospel’s own gravity — its built-in pull outward, toward the whole world.</p>
+        </section>
+
+    </main>
+
+    <!-- ══════════ INTERACTIVE — the endless horizon ══════════ -->
+    <section class="journey">
+        <div class="journey-inner">
+            <div class="journey-q">
+                <p class="sec-eyebrow" style="justify-content:center;">The Interactive</p>
+                <h2 class="sec-title" style="text-align:center;">The Endless <em>Horizon</em></h2>
+                <p class="prose" style="text-align:center; margin-bottom:0;">Follow the “must” outward — and watch how the goal keeps moving. Tap each stop.</p>
+            </div>
+
+            <div class="stops">
+                <button class="stop active" data-target="j-ephesus">
+                    <span class="st-here">You are here</span>
+                    <span class="st-name">Ephesus</span>
+                </button>
+                <span class="arrow" aria-hidden="true">→</span>
+                <button class="stop" data-target="j-macedonia">
+                    <span class="st-name">Macedonia &amp; Achaia</span>
+                </button>
+                <span class="arrow" aria-hidden="true">→</span>
+                <button class="stop" data-target="j-jerusalem">
+                    <span class="st-name">Jerusalem</span>
+                </button>
+                <span class="arrow" aria-hidden="true">→</span>
+                <button class="stop" data-target="j-rome">
+                    <span class="st-name">Rome</span>
+                </button>
+                <span class="arrow" aria-hidden="true">→</span>
+                <button class="stop edge" data-target="j-spain">
+                    <span class="st-name">Spain</span>
+                </button>
+            </div>
+
+            <div class="journey-response show" id="j-ephesus">
+                <h4>Ephesus — where the “must” is spoken</h4>
+                <p>A tentmaker, about to be chased out by a riot, says out loud: “I must see Rome.” No army, no throne, no platform. Just a clay jar — and a compulsion the size of an empire pressing through it.</p>
+            </div>
+            <div class="journey-response" id="j-macedonia">
+                <h4>Macedonia &amp; Achaia — the detour of love</h4>
+                <p>Not a scenic route. Paul loops back through the Greek churches to gather the relief offering for the poor in Jerusalem (1 Cor 16; 2 Cor 8–9). The huge dream has its feet on the ground in care for the struggling. It begins in love, not ambition.</p>
+            </div>
+            <div class="journey-response" id="j-jerusalem">
+                <h4>Jerusalem — toward the cost</h4>
+                <p>The Spirit warns him in city after city that “jail and suffering lie ahead” (Acts 20:23). He goes anyway — the way Jesus set his face toward Jerusalem and would not be turned. The love that was crucified produces a life poured out.</p>
+            </div>
+            <div class="journey-response" id="j-rome">
+                <h4>Rome — the goal that was only a launchpad</h4>
+                <p>Reaching Rome would be the climax of Acts — but for Paul it was a <em>base</em>, not a finish line. The capital of the world was never big enough to be the destination.</p>
+            </div>
+            <div class="journey-response" id="j-spain">
+                <h4>Spain — the edge that keeps moving</h4>
+                <p>Beyond Rome, Paul was already dreaming of Spain (Romans 15:24) — the far edge of the known world, “where the name of Christ has never been heard.” The “must” never settles down. And it still hasn’t: the same gravity is meant to run through little people like us. <strong>This is where the road to Rome begins — Acts 20–28.</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+            <div class="bar"></div>
+        </div>
+        <div class="q-list">
+            <div class="q-item">
+                <span class="q-num">01</span>
+                <p>Paul’s “I must” was a Spirit-laid <em>necessity</em>, not a someday wish — and it was grounded in love and service (the offering for the poor). Do you have a “must” like that, or only preferences you keep calling “someday”?</p>
+            </div>
+            <div class="q-item">
+                <span class="q-num">02</span>
+                <p>The engine wasn’t ambition Paul worked up; it was “the love of Christ” pressing him out past himself. What actually drives you right now — a love you have to manufacture, or the love that already died for you?</p>
+            </div>
+            <div class="q-item">
+                <span class="q-num">03</span>
+                <p>Paul’s <em>smallness</em> wasn’t a problem for the dream — it was the proof the power came from God, not from him (“fragile clay jars”). Where has feeling “too small” made you count yourself out of something God might be pressing you toward?</p>
+            </div>
+            <div class="q-item">
+                <span class="q-num">04</span>
+                <p><strong>Family prompt:</strong> Paul’s horizon never settled — every frontier he reached, he looked past it to the next. Who is one person, or one “edge,” just beyond our family’s normal circle that we could take a small step toward this month?</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ BRIDGE TO NEXT SERIES ══════════ -->
+    <div class="next-series reveal">
+        <div class="next-card">
+            <span class="eb">To Be Continued</span>
+            <h3>The Road to Rome</h3>
+            <p>Acts 19:21 fires the starting gun. From here Luke follows Paul out of Ephesus and all the way to the capital of the world — arrest, trials, storm, and shipwreck — in Acts 20–28. The little man’s horizon becomes the rest of the book.</p>
+        </div>
+    </div>
+
+    <!-- ══════════ THE SEND ══════════ -->
+    <div class="send reveal">
+        <p class="eb">The Send</p>
+        <p>The gospel did not shrink; the world never outgrew it. The smallness was only ever the vessel — and that was never a problem, it was the point. The love that drove a little man to the ends of the earth has not switched off. Will you let it move you?</p>
+    </div>
+
+    <!-- ══════════ SERIES STRIP ══════════ -->
+    <div class="strip-wrap">
+        <p class="strip-eb">The Series · Acts 19</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back">
+        <a href="/deepdives.html">← All Deep Dives</a>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-19-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';   // paste the YouTube ID when the message is up
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="Little Man, Limitless Horizon" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        // endless horizon
+        document.querySelectorAll('.stop').forEach(stop => {
+            stop.addEventListener('click', () => {
+                document.querySelectorAll('.stop').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.journey-response').forEach(r => r.classList.remove('show'));
+                stop.classList.add('active');
+                const r = document.getElementById(stop.getAttribute('data-target'));
+                if (r) r.classList.add('show');
+            });
+        });
+
+        window.addEventListener('load', () => {
+            if (typeof acts19RenderStrip === 'function') acts19RenderStrip('#series-strip', 'little-man-limitless-horizon');
+        });
+    </script>
+</body>
+</html>

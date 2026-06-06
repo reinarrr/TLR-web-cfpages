@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manufactured Outrage — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/manufactured-outrage.html">
+    <meta property="og:title"       content="Manufactured Outrage — Deep Dive">
+    <meta property="og:description" content="The Greek Old Testament literally named Babel “Synchysis” — the exact word Luke chooses for the riot. One word ties this mob to Babel, and to Pentecost. A deep dive into Acts 19:23–41.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Manufactured Outrage — Deep Dive">
+    <meta name="twitter:description" content="A deep dive into Acts 19:23–41 — counterfeit unity collapses.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --accent: #4a6f99;          /* Part IV — steel blue (the mob) */
+            --accent-deep: #38567a;
+            --warm: #c5a059; --warm-deep: #a8843d;  /* Pentecost / the authentic */
+            --gold: #c5a059; --gold-deep: #a8843d;
+            --slate: #7c8a90;
+            --bg: #faf9f6; --bg-warm: #f6f1e7; --bg-cool: #eef2f6;
+            --surface: #ffffff;
+            --border: rgba(26,26,26,0.08); --border-strong: rgba(26,26,26,0.14);
+            --text-primary: #1a1a1a; --text-body: #52525b; --text-muted: #9a9aa2;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text-primary); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+
+        .dd-hero { max-width: 48rem; margin: 0 auto; padding: 5rem 1.5rem 3rem; text-align: center; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.75rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+        .dd-eyebrow a:hover { color: var(--accent); border-color: var(--accent); }
+        .dd-title { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 8vw, 5rem); font-weight: 700; line-height: 1.04; margin-bottom: 1.5rem; }
+        .dd-title em { font-style: italic; color: var(--accent); }
+        .dd-lead { font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 300; font-style: italic; color: var(--text-body); line-height: 1.5; max-width: 36rem; margin: 0 auto; border-left: 3px solid var(--accent); padding-left: 1.5rem; text-align: left; }
+
+        .scripture-wrap { max-width: 44rem; margin: 1rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: var(--bg-warm); border-left: 4px solid var(--gold); border-radius: 0 1rem 1rem 0; padding: 2rem 2.2rem; }
+        .sb-ref { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: 0.98rem; color: #44443f; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--text-primary); font-weight: 600; }
+        .sb-v { color: var(--gold-deep); font-weight: 700; font-size: 0.7rem; vertical-align: super; margin-right: 0.15rem; }
+        .read-link { display: inline-block; margin-top: 1.25rem; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(74,111,153,0.35); padding-bottom: 2px; }
+        .read-link:hover { color: var(--gold-deep); border-color: var(--gold); }
+
+        .yt-wrap { max-width: 52rem; margin: 3.5rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.12); background: #e4e4e7; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--text-muted); font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; font-style: italic; margin-top: 1rem; }
+
+        .dd-body { max-width: 44rem; margin: 0 auto; padding: 4.5rem 1.5rem 1rem; }
+        .dd-section { margin-bottom: 4rem; }
+        .sec-eyebrow { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.7rem; }
+        .sec-eyebrow::before { content: ''; width: 1.8rem; height: 2px; background: var(--accent); opacity: 0.5; }
+        .sec-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4.5vw, 2.3rem); font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; }
+        .sec-title em { font-style: italic; color: var(--accent); }
+        .prose { font-size: 1.08rem; color: var(--text-body); line-height: 1.85; font-weight: 300; margin-bottom: 1.5rem; }
+        .prose strong { color: var(--text-primary); font-weight: 600; }
+        .prose em { font-style: italic; }
+
+        .iceberg { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 1rem 1rem 0; padding: 1.6rem 1.85rem; margin: 2rem 0; box-shadow: 0 1px 2px rgba(26,26,26,0.03); }
+        .iceberg-label { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.6rem; }
+        .iceberg p { font-size: 1.05rem; color: var(--text-primary); line-height: 1.6; font-weight: 400; }
+        .iceberg p em { font-style: italic; color: var(--accent-deep); }
+
+        .greek { background: var(--bg-warm); border-radius: 1rem; padding: 1.4rem 1.7rem; margin: 2rem 0; }
+        .greek-term { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--gold-deep); }
+        .greek-gloss { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-left: 0.5rem; }
+        .greek p { font-size: 0.98rem; color: var(--text-body); line-height: 1.7; font-weight: 300; margin-top: 0.6rem; }
+        .greek p strong { color: var(--text-primary); font-weight: 600; }
+
+        .hedge { font-size: 0.85rem; color: var(--text-muted); font-style: italic; line-height: 1.7; border-left: 2px solid var(--border-strong); padding-left: 1rem; margin: 1.5rem 0; }
+
+        .pullquote { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.3rem, 3.5vw, 1.7rem); line-height: 1.45; color: var(--text-primary); text-align: center; max-width: 34rem; margin: 3rem auto; }
+        .pullquote::before { content: '“'; color: var(--accent); }
+        .pullquote::after { content: '”'; color: var(--accent); }
+
+        /* big stat */
+        .bigstat { text-align: center; margin: 2rem 0; }
+        .bigstat .n { font-family: 'Playfair Display', serif; font-weight: 700; font-size: clamp(2.6rem, 9vw, 4rem); color: var(--accent); line-height: 1; }
+        .bigstat .u { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); margin-top: 0.5rem; }
+
+        /* ── INTERACTIVE — two crowds ── */
+        .crowds { background: var(--bg-cool); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 1.5rem; margin-top: 4rem; }
+        .crowds-inner { max-width: 44rem; margin: 0 auto; }
+        .crowds-q { text-align: center; margin-bottom: 2.25rem; }
+        .toggle { display: flex; gap: 0.4rem; background: var(--surface); border: 1px solid var(--border); border-radius: 100px; padding: 0.35rem; max-width: 24rem; margin: 0 auto 2rem; }
+        .toggle button { flex: 1; border: none; background: none; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); padding: 0.7rem 1rem; border-radius: 100px; cursor: pointer; transition: background 0.25s, color 0.25s; }
+        .toggle button.active[data-crowd="babel"] { background: var(--accent); color: #fff; }
+        .toggle button.active[data-crowd="pentecost"] { background: var(--warm); color: #fff; }
+        .crowd-card { background: var(--surface); border: 1px solid var(--border); border-top: 4px solid var(--accent); border-radius: 1.25rem; padding: 2rem 2.1rem; box-shadow: 0 1px 2px rgba(26,26,26,0.03); transition: border-color 0.3s; }
+        .crowd-card.pentecost { border-top-color: var(--warm); }
+        .crowd-tag { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); }
+        .crowd-card.pentecost .crowd-tag { color: var(--warm-deep); }
+        .crowd-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.6rem; margin: 0.3rem 0 1.25rem; }
+        .crowd-row { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; padding: 0.85rem 0; border-top: 1px solid var(--border); }
+        .crowd-row:first-of-type { border-top: none; }
+        @media (max-width: 480px) { .crowd-row { grid-template-columns: 1fr; gap: 0.2rem; } }
+        .crow-k { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); padding-top: 0.2rem; }
+        .crow-v { font-size: 0.98rem; color: var(--text-body); line-height: 1.6; font-weight: 300; }
+        .crow-v strong { color: var(--text-primary); font-weight: 600; }
+        .crow-v em { font-style: italic; color: var(--accent-deep); }
+        .crowd-card.pentecost .crow-v em { color: var(--warm-deep); }
+
+        .discuss { background: #1a1a1a; color: #fff; max-width: 60rem; margin: 4.5rem auto 0; border-radius: 2.5rem; padding: 4rem 2rem; }
+        @media (min-width: 768px) { .discuss { padding: 5rem 4rem; } }
+        .discuss-head { text-align: center; margin-bottom: 3rem; }
+        .discuss-head .eb { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); }
+        .discuss-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-top: 0.8rem; }
+        .discuss-head .bar { width: 3rem; height: 2px; background: var(--accent); margin: 1.5rem auto 0; }
+        .q-list { max-width: 38rem; margin: 0 auto; }
+        .q-item { padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.1); }
+        .q-item:first-child { border-top: none; }
+        .q-num { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2rem; color: var(--gold); display: block; margin-bottom: 0.5rem; }
+        .q-item p { font-size: 1.1rem; color: #d4d4d8; font-weight: 300; line-height: 1.7; }
+        .q-item p strong { color: #fff; font-weight: 600; }
+
+        .send { max-width: 38rem; margin: 4.5rem auto 0; padding: 0 1.5rem; text-align: center; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.25rem; }
+        .send p { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.2rem, 3vw, 1.55rem); color: var(--text-primary); line-height: 1.5; }
+
+        .strip-wrap { border-top: 1px solid var(--border); margin-top: 5rem; padding: 4rem 0 2rem; }
+        .strip-wrap .strip-eb { text-align: center; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2rem; }
+
+        .dd-back { text-align: center; padding: 2.5rem 1.5rem 5rem; }
+        .dd-back a { display: inline-block; border: 1px solid var(--accent); color: var(--accent); padding: 0.9rem 2.2rem; border-radius: 100px; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none; transition: color 0.3s, background 0.3s; }
+        .dd-back a:hover { color: #fff; background: var(--accent); }
+
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <header class="dd-hero">
+        <p class="dd-eyebrow"><a href="ephesus-power-capital.html">Acts Journey &nbsp;·&nbsp; Acts 19</a> &nbsp;·&nbsp; Part IV</p>
+        <h1 class="dd-title">Manufactured <em>Outrage</em></h1>
+        <p class="dd-lead">Twenty-five thousand people chant one slogan for two hours — and most don’t even know why they’re there. Luke picks one word for the chaos, and it sends us all the way back to Babel.</p>
+    </header>
+
+    <div class="scripture-wrap">
+        <div class="scripture-box">
+            <span class="sb-ref">The Foundation · Acts 19:23–41 (NLT, abridged)</span>
+            <p class="sb-text">
+                <span class="sb-v">24</span>It began with Demetrius, a silversmith who had a large business manufacturing silver shrines of the Greek goddess Artemis…
+                <span class="sb-v">25</span>“Gentlemen, you know that <b>our wealth comes from this business.</b>
+                <span class="sb-v">26</span>…this man Paul has persuaded many people that handmade gods aren’t really gods at all…
+                <span class="sb-v">28</span>At this their anger boiled, and they began shouting, “Great is Artemis of the Ephesians!”
+                <span class="sb-v">32</span>…<b>Everything was in confusion. In fact, most of them didn’t even know why they were there.</b>
+                <span class="sb-v">40</span>…there is no cause for all this commotion…
+                <span class="sb-v">41</span>Then he dismissed them, and they dispersed.
+            </p>
+            <a class="read-link" href="https://www.biblegateway.com/passage/?search=Acts%2019%3A23-41&version=NLT" target="_blank" rel="noopener">Read on Bible Gateway →</a>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame"><div id="yt-mount"></div></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <main class="dd-body">
+
+        <p class="prose reveal">On Sunday we asked which heart we bring when the gospel comes for our centre. Here we go <em>underneath</em> the riot — to the bank behind the “religious” fury, the single word that ties this mob to the oldest crowd-project in the Bible, and the question the whole scene leaves on us.</p>
+
+        <!-- 1 -->
+        <section class="dd-section reveal">
+            <p class="sec-eyebrow">One</p>
+            <h2 class="sec-title">It was never about religion. It was about the <em>bank.</em></h2>
+            <p class="prose">Listen to what Demetrius leads with. Not the goddess — the <strong>bottom line</strong>: “you know that our wealth comes from this business” (v. 25). The problem is that Paul’s preaching is hurting sales. <em>Then</em> he reaches for the robes: the temple will lose its prestige, the goddess her majesty (v. 27).</p>
+            <p class="prose">And there was a lot of money to protect. His guild made silver <em>shrines</em> — miniature models of Artemis in her temple, sold as souvenirs and votives to the pilgrims who flooded the city. The Temple of Artemis wasn’t just a wonder of the world; it doubled as one of the ancient world’s great <strong>treasuries</strong>, where kings and cities banked their wealth. Ephesus even carried the official title <em>neōkoros</em> — “temple-warden.” Religion, civic pride, and the economy were one single thing.</p>
+            <div class="iceberg">
+                <span class="iceberg-label">Beneath the surface</span>
+                <p>“Great is Artemis of the Ephesians!” was a real cult cry — and the noble-sounding version of “<em>great is the income from the tourists.</em>” When Paul said handmade gods are no gods, he wasn’t touching belief. He was touching the <strong>bank</strong> — and a threatened wallet will always dress itself as devotion.</p>
+            </div>
+        </section>
+
+        <!-- 2 — the bombshell -->
+        <section class="dd-section reveal">
+            <p class="sec-eyebrow">Two</p>
+            <h2 class="sec-title">One word ties this mob to <em>Babel</em></h2>
+            <p class="prose">The crowd floods into the great theatre — a stone amphitheatre that seated around <strong>twenty-five thousand</strong> and still stands in Ephesus today — and roars one line for two hours. Then Luke drops the detail that unlocks the whole scene: “most of them didn’t even know why they were there” (v. 32).</p>
+            <div class="bigstat">
+                <div class="n">25,000</div>
+                <div class="u">Seats in the theatre · two hours · one slogan</div>
+            </div>
+            <p class="prose">His word for the chaos is <em>synchysis</em>, “confusion” (v. 29) — and it appears <strong>nowhere else in the entire New Testament</strong>. Why this rare word? Because of where it comes from.</p>
+            <div class="greek">
+                <span class="greek-term">sýnchysis</span><span class="greek-gloss">“confusion”</span>
+                <p>In the Greek Old Testament, this is the word-group used at <strong>Babel</strong> — and astonishingly, the Greek translators didn’t spell “Babel,” they <em>translated</em> it: in Genesis 11:9 the city is literally named <strong>Sýnchysis</strong>, “Confusion.” Luke reaches for the one word that <em>is</em> the name of Babel.</p>
+            </div>
+            <p class="prose">Lay Babel over the theatre and it lines up beat for beat: a self-exalted <strong>name</strong> they keep shouting; a crowd united <em>against</em> God; the whole thing dissolving into confusion; and at the end — the clerk dismisses them and they <strong>scatter</strong>, exactly as God scattered Babel. It’s Babel in miniature.</p>
+            <div class="iceberg">
+                <span class="iceberg-label">Beneath the surface</span>
+                <p>And there’s a quiet barb: Luke calls this leaderless mob an <em>ekklēsia</em> (v. 32, 39) — the very word the New Testament uses for the <strong>church</strong>. A counterfeit assembly that doesn’t even know why it gathered, set against the real one.</p>
+            </div>
+            <p class="prose">Because the same Greek root has an opposite twin. At <strong>Pentecost</strong> (Acts 2), the Spirit falls and people of every language suddenly <em>understand</em> one another — Babel’s confusion run backwards. Hold the two crowds side by side below.</p>
+            <p class="hedge">A fair flag: reading Pentecost as the “reversal of Babel” is widely held (Keener and others), and the contrast is real. The best way to put it: Pentecost doesn’t erase the languages — it redeems Babel’s <em>division</em>, giving unity-in-diversity rather than one forced tongue.</p>
+        </section>
+
+        <!-- 3 -->
+        <section class="dd-section reveal">
+            <p class="sec-eyebrow">Three</p>
+            <h2 class="sec-title">What you’d riot for is what you <em>worship</em></h2>
+            <p class="prose">One calm voice ends it. The town clerk points out the obvious — these men haven’t robbed the temple or blasphemed the goddess; if Demetrius has a case, the courts are open; and Rome will punish a riot with no cause (vv. 35–40). The moment someone asks what it’s actually <em>about</em>, the whole thing deflates and everyone goes home.</p>
+            <p class="prose">Which tells you there was never anything real underneath it — just a threatened interest that didn’t want to be named. The silversmiths didn’t riot for <strong>truth</strong>. They rioted because the gospel had touched the <em>centre</em> of their lives — their wealth, their god, their identity, all bound together.</p>
+            <div class="iceberg">
+                <span class="iceberg-label">Beneath the surface</span>
+                <p>So their outrage was a <strong>diagnosis</strong>. It told you exactly what they worshipped. And so does ours: what we’ll defend with disproportionate fury — what we’ll riot for, dressed up as principle — is what we actually worship.</p>
+            </div>
+            <p class="pullquote">Show me what makes you rage out of all proportion, and I’ll show you your idol. The outrage is the tell.</p>
+            <p class="prose">Demetrius is the original outrage-merchant — manufacture a crisis, wrap your interest in a sacred cause, whip up a crowd that doesn’t even know why it’s furious. Two hours of noise, nothing true, nothing decided, nobody sure of the point. If that sounds like the air we breathe now, that’s because it is. We’ve all spent our two hours in that theatre.</p>
+        </section>
+
+    </main>
+
+    <!-- ══════════ INTERACTIVE — two crowds ══════════ -->
+    <section class="crowds">
+        <div class="crowds-inner">
+            <div class="crowds-q">
+                <p class="sec-eyebrow" style="justify-content:center;">The Interactive</p>
+                <h2 class="sec-title" style="text-align:center;">Two <em>Crowds</em></h2>
+                <p class="prose" style="text-align:center; margin-bottom:0;">Same Greek root — opposite outcomes. Flip between the mob in Ephesus and the crowd at Pentecost.</p>
+            </div>
+
+            <div class="toggle">
+                <button data-crowd="babel" class="active">Ephesus · the mob</button>
+                <button data-crowd="pentecost">Pentecost · the church</button>
+            </div>
+
+            <div class="crowd-card" id="crowd-card">
+                <span class="crowd-tag" id="c-tag">Babel in miniature · Acts 19</span>
+                <p class="crowd-name" id="c-name">The Roar of the Crowd</p>
+                <div class="crowd-row"><div class="crow-k">The word</div><div class="crow-v" id="c-word"><em>synchysis</em> — “confusion” (19:29). The Greek name for <strong>Babel</strong> itself.</div></div>
+                <div class="crowd-row"><div class="crow-k">The voices</div><div class="crow-v" id="c-voices">One slogan — “Great is Artemis!” — for two hours (vv. 28, 34).</div></div>
+                <div class="crowd-row"><div class="crow-k">The understanding</div><div class="crow-v" id="c-under"><strong>None.</strong> “Most didn’t even know why they were there” (v. 32).</div></div>
+                <div class="crowd-row"><div class="crow-k">The result</div><div class="crow-v" id="c-result"><strong>Scattered.</strong> The clerk dismisses them; the crowd disperses.</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+            <div class="bar"></div>
+        </div>
+        <div class="q-list">
+            <div class="q-item">
+                <span class="q-num">01</span>
+                <p>Demetrius wrapped a money problem in religious language — “Great is Artemis!” was really “great is the income.” Where do you catch yourself dressing up a <strong>self-interest</strong> as a principle — at work, at home, online?</p>
+            </div>
+            <div class="q-item">
+                <span class="q-num">02</span>
+                <p>The mob chanted for two hours, and most couldn’t have told you why. Where have you been swept into a <strong>manufactured outrage</strong> — mistaking volume for truth, and agreement for unity — without asking what was really underneath it?</p>
+            </div>
+            <div class="q-item">
+                <span class="q-num">03</span>
+                <p>Their fury was a <em>diagnosis</em> of what they worshipped. What makes <em>you</em> rage out of all proportion — and what might that be telling you about where your real treasure is?</p>
+            </div>
+            <div class="q-item">
+                <span class="q-num">04</span>
+                <p><strong>Family prompt:</strong> At Babel and in that theatre, a crowd shouted together but understood nothing. At Pentecost, the Spirit made very different people truly understand each other. As a family, where do we settle for just being <em>loud</em> together — and what would it look like to actually <em>understand</em> one another this week?</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ THE SEND ══════════ -->
+    <div class="send reveal">
+        <p class="eb">The Send</p>
+        <p>The tower always falls into confusion. The slogan always shouts itself hoarse. The made-thing can never carry the weight you keep putting on it. So don’t double down on what was always going to fail you — let it burn, and hand the centre back to the God who was never made.</p>
+    </div>
+
+    <!-- ══════════ SERIES STRIP ══════════ -->
+    <div class="strip-wrap">
+        <p class="strip-eb">The Series · Acts 19</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back">
+        <a href="/deepdives.html">← All Deep Dives</a>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-19-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';   // paste the YouTube ID when the message is up
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="Manufactured Outrage" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        // two crowds toggle
+        const CROWDS = {
+            babel: {
+                cls: '', tag: 'Babel in miniature · Acts 19', name: 'The Roar of the Crowd',
+                word: '<em>synchysis</em> — “confusion” (19:29). The Greek name for <strong>Babel</strong> itself.',
+                voices: 'One slogan — “Great is Artemis!” — for two hours (vv. 28, 34).',
+                under: '<strong>None.</strong> “Most didn’t even know why they were there” (v. 32).',
+                result: '<strong>Scattered.</strong> The clerk dismisses them; the crowd disperses.'
+            },
+            pentecost: {
+                cls: 'pentecost', tag: 'Babel reversed · Acts 2', name: 'The Unity of the Spirit',
+                word: 'Same root — <em>syncheō</em> (2:6). But here the crowd is amazed, not confused.',
+                voices: 'Many languages at once, given by the Spirit (2:4).',
+                under: '<strong>Full.</strong> “Each one heard them speaking in his own language” (2:6).',
+                result: '<strong>Gathered.</strong> Three thousand added; one new people formed (2:41).'
+            }
+        };
+        const card = document.getElementById('crowd-card');
+        function setCrowd(key) {
+            const c = CROWDS[key];
+            card.className = 'crowd-card ' + c.cls;
+            document.getElementById('c-tag').textContent = c.tag;
+            document.getElementById('c-name').textContent = c.name;
+            document.getElementById('c-word').innerHTML = c.word;
+            document.getElementById('c-voices').innerHTML = c.voices;
+            document.getElementById('c-under').innerHTML = c.under;
+            document.getElementById('c-result').innerHTML = c.result;
+            document.querySelectorAll('.toggle button').forEach(b => b.classList.toggle('active', b.getAttribute('data-crowd') === key));
+        }
+        document.querySelectorAll('.toggle button').forEach(b => {
+            b.addEventListener('click', () => setCrowd(b.getAttribute('data-crowd')));
+        });
+
+        window.addEventListener('load', () => {
+            if (typeof acts19RenderStrip === 'function') acts19RenderStrip('#series-strip', 'manufactured-outrage');
+        });
+    </script>
+</body>
+</html>

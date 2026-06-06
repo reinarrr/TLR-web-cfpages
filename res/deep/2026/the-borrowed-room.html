@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Borrowed Room — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/the-borrowed-room.html">
+    <meta property="og:title"       content="The Borrowed Room — Deep Dive">
+    <meta property="og:description" content="A wordplay buried in the Greek, and a manuscript that quietly preserves the hours Paul taught — the off-peak window that reached a whole province. A deep dive into Acts 19:8–10.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="The Borrowed Room — Deep Dive">
+    <meta name="twitter:description" content="A deep dive into Acts 19:8–10 — the gospel moves to ordinary space.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --accent: #5a7a60;          /* Part II — sage (open ground) */
+            --accent-deep: #45603f;
+            --gold: #c5a059; --gold-deep: #a8843d;
+            --slate: #7c8a90;
+            --bg: #faf9f6; --bg-warm: #f6f1e7;
+            --surface: #ffffff;
+            --border: rgba(26,26,26,0.08); --border-strong: rgba(26,26,26,0.14);
+            --text-primary: #1a1a1a; --text-body: #52525b; --text-muted: #9a9aa2;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text-primary); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+
+        .dd-hero { max-width: 48rem; margin: 0 auto; padding: 5rem 1.5rem 3rem; text-align: center; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.75rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+        .dd-eyebrow a:hover { color: var(--accent); border-color: var(--accent); }
+        .dd-title { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 8vw, 5rem); font-weight: 700; line-height: 1.04; margin-bottom: 1.5rem; }
+        .dd-title em { font-style: italic; color: var(--accent); }
+        .dd-lead { font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 300; font-style: italic; color: var(--text-body); line-height: 1.5; max-width: 36rem; margin: 0 auto; border-left: 3px solid var(--accent); padding-left: 1.5rem; text-align: left; }
+
+        .scripture-wrap { max-width: 44rem; margin: 1rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: var(--bg-warm); border-left: 4px solid var(--gold); border-radius: 0 1rem 1rem 0; padding: 2rem 2.2rem; }
+        .sb-ref { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: 0.98rem; color: #44443f; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--text-primary); font-weight: 600; }
+        .sb-v { color: var(--gold-deep); font-weight: 700; font-size: 0.7rem; vertical-align: super; margin-right: 0.15rem; }
+        .read-link { display: inline-block; margin-top: 1.25rem; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(90,122,96,0.35); padding-bottom: 2px; }
+        .read-link:hover { color: var(--gold-deep); border-color: var(--gold); }
+
+        .yt-wrap { max-width: 52rem; margin: 3.5rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.12); background: #e4e4e7; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--text-muted); font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; font-style: italic; margin-top: 1rem; }
+
+        .dd-body { max-width: 44rem; margin: 0 auto; padding: 4.5rem 1.5rem 1rem; }
+        .dd-section { margin-bottom: 4rem; }
+        .sec-eyebrow { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.85rem; display: flex; align-items: center; gap: 0.7rem; }
+        .sec-eyebrow::before { content: ''; width: 1.8rem; height: 2px; background: var(--accent); opacity: 0.5; }
+        .sec-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4.5vw, 2.3rem); font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; }
+        .sec-title em { font-style: italic; color: var(--accent); }
+        .prose { font-size: 1.08rem; color: var(--text-body); line-height: 1.85; font-weight: 300; margin-bottom: 1.5rem; }
+        .prose strong { color: var(--text-primary); font-weight: 600; }
+        .prose em { font-style: italic; }
+
+        .iceberg { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 1rem 1rem 0; padding: 1.6rem 1.85rem; margin: 2rem 0; box-shadow: 0 1px 2px rgba(26,26,26,0.03); }
+        .iceberg-label { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.6rem; }
+        .iceberg p { font-size: 1.05rem; color: var(--text-primary); line-height: 1.6; font-weight: 400; }
+        .iceberg p em { font-style: italic; color: var(--accent-deep); }
+
+        .greek { background: var(--bg-warm); border-radius: 1rem; padding: 1.4rem 1.7rem; margin: 2rem 0; }
+        .greek-term { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--gold-deep); }
+        .greek-gloss { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-left: 0.5rem; }
+        .greek p { font-size: 0.98rem; color: var(--text-body); line-height: 1.7; font-weight: 300; margin-top: 0.6rem; }
+        .greek p strong { color: var(--text-primary); font-weight: 600; }
+
+        .pullquote { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.3rem, 3.5vw, 1.7rem); line-height: 1.45; color: var(--text-primary); text-align: center; max-width: 34rem; margin: 3rem auto; }
+        .pullquote::before { content: '“'; color: var(--accent); }
+        .pullquote::after { content: '”'; color: var(--accent); }
+
+        /* ── INTERACTIVE — radiating hub ── */
+        .hub { background: var(--bg-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 1.5rem; margin-top: 4rem; }
+        .hub-inner { max-width: 44rem; margin: 0 auto; }
+        .hub-q { text-align: center; margin-bottom: 2.5rem; }
+        .hub-badge { text-align: center; background: var(--accent); color: #fff; border-radius: 100px; padding: 0.8rem 1.6rem; display: inline-block; margin: 0 auto 0.5rem; box-shadow: 0 8px 20px rgba(90,122,96,0.25); }
+        .hub-badge .hb-eb { display: block; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.8; }
+        .hub-badge .hb-name { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.15rem; }
+        .hub-center { text-align: center; }
+        .hub-spoke { width: 1px; height: 2rem; background: var(--accent); opacity: 0.4; margin: 0 auto; }
+        .hub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+        @media (max-width: 560px) { .hub-grid { grid-template-columns: 1fr; } }
+        .hub-card { background: var(--surface); border: 1px solid var(--border); border-radius: 0.9rem; padding: 1.1rem 1.4rem; cursor: pointer; text-align: left; font-family: 'Outfit', sans-serif; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+        .hub-card:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(26,26,26,0.06); }
+        .hub-card.active { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+        .hub-card .hc-name { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: var(--text-primary); display: block; }
+        .hub-card .hc-sub { font-size: 0.78rem; color: var(--text-muted); }
+        .hub-response { display: none; margin-top: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 1rem 1rem 0; padding: 1.7rem 1.9rem; animation: respIn 0.5s ease; }
+        .hub-response.show { display: block; }
+        .hub-response h4 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--accent-deep); margin-bottom: 0.7rem; }
+        .hub-response p { font-size: 1rem; color: var(--text-body); line-height: 1.8; font-weight: 300; }
+        @keyframes respIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+        .discuss { background: #1a1a1a; color: #fff; max-width: 60rem; margin: 4.5rem auto 0; border-radius: 2.5rem; padding: 4rem 2rem; }
+        @media (min-width: 768px) { .discuss { padding: 5rem 4rem; } }
+        .discuss-head { text-align: center; margin-bottom: 3rem; }
+        .discuss-head .eb { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); }
+        .discuss-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-top: 0.8rem; }
+        .discuss-head .bar { width: 3rem; height: 2px; background: var(--accent); margin: 1.5rem auto 0; }
+        .q-list { max-width: 38rem; margin: 0 auto; }
+        .q-item { padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.1); }
+        .q-item:first-child { border-top: none; }
+        .q-num { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2rem; color: var(--gold); display: block; margin-bottom: 0.5rem; }
+        .q-item p { font-size: 1.1rem; color: #d4d4d8; font-weight: 300; line-height: 1.7; }
+        .q-item p strong { color: #fff; font-weight: 600; }
+
+        .send { max-width: 38rem; margin: 4.5rem auto 0; padding: 0 1.5rem; text-align: center; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.25rem; }
+        .send p { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.2rem, 3vw, 1.55rem); color: var(--text-primary); line-height: 1.5; }
+
+        .strip-wrap { border-top: 1px solid var(--border); margin-top: 5rem; padding: 4rem 0 2rem; }
+        .strip-wrap .strip-eb { text-align: center; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 2rem; }
+
+        .dd-back { text-align: center; padding: 2.5rem 1.5rem 5rem; }
+        .dd-back a { display: inline-block; border: 1px solid var(--accent); color: var(--accent); padding: 0.9rem 2.2rem; border-radius: 100px; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none; transition: color 0.3s, background 0.3s; }
+        .dd-back a:hover { color: #fff; background: var(--accent); }
+
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <header class="dd-hero">
+        <p class="dd-eyebrow"><a href="ephesus-power-capital.html">Acts Journey &nbsp;·&nbsp; Acts 19</a> &nbsp;·&nbsp; Part II</p>
+        <h1 class="dd-title">The Borrowed <em>Room</em></h1>
+        <p class="dd-lead">A hardened heart slammed the synagogue door. So the gospel moved into a rented hall used for hired debate — and from that one ordinary room, a whole province heard.</p>
+    </header>
+
+    <div class="scripture-wrap">
+        <div class="scripture-box">
+            <span class="sb-ref">The Foundation · Acts 19:8–10 (NLT)</span>
+            <p class="sb-text">
+                <span class="sb-v">8</span>Then Paul went to the synagogue and preached boldly for the next three months, arguing persuasively about the Kingdom of God.
+                <span class="sb-v">9</span>But some became stubborn, rejecting his message and publicly speaking against the Way. So Paul left the synagogue and took the believers with him. Then he held daily discussions at <b>the lecture hall of Tyrannus.</b>
+                <span class="sb-v">10</span>This went on for the next two years, so that <b>people throughout the province of Asia — both Jews and Greeks — heard the word of the Lord.</b>
+            </p>
+            <a class="read-link" href="https://www.biblegateway.com/passage/?search=Acts%2019%3A8-10&version=NLT" target="_blank" rel="noopener">Read on Bible Gateway →</a>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame"><div id="yt-mount"></div></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <main class="dd-body">
+
+        <p class="prose reveal">On Sunday we watched two hearts sit under one sermon and walk out in opposite directions. Here we go <em>underneath</em> the text — to a wordplay you can’t see in English, a line an old manuscript preserved that your Bible probably drops, and the quiet miracle hiding in three short verses.</p>
+
+        <!-- 1 -->
+        <section class="dd-section reveal">
+            <p class="sec-eyebrow">One</p>
+            <h2 class="sec-title">The same sun. Two <em>materials.</em></h2>
+            <p class="prose">In English, verse 9 just says “some became stubborn.” In Greek, Luke is doing something far sharper. The word is <em>esklērynonto</em> — from <em>sklēros</em>, “hard.” It’s the root behind our word <strong>sclerosis</strong>: tissue that was meant to stay soft slowly stiffening to stone. And the tense is continuous — this wasn’t one dramatic “no.” It set in <em>gradually</em>, across those three months.</p>
+            <div class="greek">
+                <span class="greek-term">dianoígō</span><span class="greek-gloss">vs. sklērúnō</span>
+                <p>Back in Philippi, Luke says the Lord <em>opened</em> Lydia’s heart — <strong>dianoígō</strong>, a door swinging wide (Acts 16:14). Here the opposite verb: hearts <em>hardening</em>, a door grinding shut. Same gospel, same preacher — the difference was never the message. It was the material.</p>
+            </div>
+            <p class="prose">There’s a second piece of wordplay right beside it. Verse 8 says Paul was <em>persuading</em> (Greek <em>peíthō</em>); verse 9 says they would not <em>be persuaded</em> (<em>apeithéō</em>). Luke plays the words against each other on purpose. They didn’t run out of arguments — <strong>they refused to yield</strong>. Hardening is never an information problem; it’s a will problem.</p>
+            <div class="iceberg">
+                <span class="iceberg-label">Beneath the surface</span>
+                <p>And notice <em>who</em> hardened: not the pagans — the <strong>synagogue</strong>. The people nearest the Scriptures, who’d waited longest for Messiah. Scripture pleads with exactly them: “don’t harden your hearts” while it is still “today” (Hebrews 3:13–15). Nearness to the word is no protection from it.</p>
+            </div>
+        </section>
+
+        <!-- 2 -->
+        <section class="dd-section reveal">
+            <p class="sec-eyebrow">Two</p>
+            <h2 class="sec-title">The hours Luke didn’t write — but a manuscript <em>did</em></h2>
+            <p class="prose">Your Bible says Paul held “daily discussions at the lecture hall of Tyrannus.” It doesn’t say <em>when</em>. But one of the oldest manuscript traditions does — and it’s a detail most readers never meet.</p>
+            <div class="iceberg">
+                <span class="iceberg-label">Beneath the surface</span>
+                <p>The “Western” text of Acts — preserved in <strong>Codex Bezae</strong> (5th century) — adds that Paul taught “<em>from the fifth hour to the tenth</em>”: roughly <strong>11 a.m. to 4 p.m.</strong> That was siesta — the dead middle of the day, when the ancient Mediterranean world stopped to rest and the hall sat empty.</p>
+            </div>
+            <p class="prose">It’s not in every manuscript, so we hold it lightly — but it fits perfectly. The likeliest reason a travelling tentmaker could afford a public lecture hall is that he took it in the hours <strong>nobody else wanted</strong>. Paul worked his trade in the cool of the morning, then taught through the heat while the city slept.</p>
+            <p class="pullquote">The off-peak hour nobody valued became the hour a whole province was reached.</p>
+        </section>
+
+        <!-- 3 -->
+        <section class="dd-section reveal">
+            <p class="sec-eyebrow">Three</p>
+            <h2 class="sec-title">From one room, a <em>whole province</em></h2>
+            <p class="prose">Verse 10 makes a staggering claim: in two years, “all who lived in Asia heard the word of the Lord.” Paul didn’t travel the province to do it. So how?</p>
+            <p class="prose">Ephesus sat at the crossroads of the region — every road ran through it. People came on business, wandered into the hall, were converted, and carried the word <em>home</em>. That’s almost certainly how cities Paul <strong>never personally visited</strong> first heard the gospel — places like Colossae, Laodicea, and Hierapolis in the Lycus Valley, reached not by Paul but by people who’d sat in that borrowed room.</p>
+            <div class="greek">
+                <span class="greek-term">dialégomai</span><span class="greek-gloss">“to reason, to dialogue”</span>
+                <p>Luke’s verb for what Paul did in the hall isn’t “lecture” — it’s <strong>dialégomai</strong>: back-and-forth, reasoning, questions welcome (it’s where we get “dialogue”). A lecture hall let people wander in, push back, wrestle. The hardened synagogue had refused that conversation; the borrowed room made room for it.</p>
+            </div>
+            <div class="iceberg">
+                <span class="iceberg-label">Beneath the surface</span>
+                <p>A rented, secular room with <em>no spiritual pedigree at all</em> became the address of the gospel in Asia — and the launch point for churches Paul would never set foot in. The room never had to be holy for God to make it the place He was heard from.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ══════════ INTERACTIVE — radiating hub ══════════ -->
+    <section class="hub">
+        <div class="hub-inner">
+            <div class="hub-q">
+                <p class="sec-eyebrow" style="justify-content:center;">The Interactive</p>
+                <h2 class="sec-title" style="text-align:center;">One Room. A <em>Whole Province.</em></h2>
+                <p class="prose" style="text-align:center; margin-bottom:0;">From this one borrowed hall, the word travelled to cities Paul never visited. Tap a place to see how it got there.</p>
+            </div>
+
+            <div class="hub-center">
+                <div class="hub-badge">
+                    <span class="hb-eb">The Hub</span>
+                    <span class="hb-name">The Hall of Tyrannus · Ephesus</span>
+                </div>
+                <div class="hub-spoke" aria-hidden="true"></div>
+            </div>
+
+            <div class="hub-grid">
+                <button class="hub-card" data-target="h-colossae">
+                    <span class="hc-name">Colossae</span>
+                    <span class="hc-sub">~100 miles east, up the Lycus Valley</span>
+                </button>
+                <button class="hub-card" data-target="h-laodicea">
+                    <span class="hc-name">Laodicea &amp; Hierapolis</span>
+                    <span class="hc-sub">Neighbouring valley cities</span>
+                </button>
+                <button class="hub-card" data-target="h-seven">
+                    <span class="hc-name">The Seven Churches</span>
+                    <span class="hc-sub">Across the province of Asia</span>
+                </button>
+                <button class="hub-card" data-target="h-you">
+                    <span class="hc-name">Your borrowed room</span>
+                    <span class="hc-sub">The off-hours space you already have</span>
+                </button>
+            </div>
+
+            <div class="hub-response" id="h-colossae">
+                <h4>Paul never went there.</h4>
+                <p>Years later Paul writes to the Colossians and admits he’s never met them face to face (Colossians 2:1). So who planted that church? Epaphras — a local man who, by every indication, met Christ during this Ephesian season and carried the gospel home (Colossians 1:7). One convert from the borrowed room became a whole congregation a hundred miles away.</p>
+            </div>
+            <div class="hub-response" id="h-laodicea">
+                <h4>Reached by the same hands.</h4>
+                <p>Paul tells the Colossians that Epaphras “prays hard for you and also for the believers in Laodicea and Hierapolis” (Colossians 4:12–13) — three valley cities, none of which Paul personally evangelised. The word rippled out from Ephesus through ordinary people who’d simply gone home changed.</p>
+            </div>
+            <div class="hub-response" id="h-seven">
+                <h4>A province, not a building.</h4>
+                <p>“All who lived in Asia heard the word of the Lord” (v. 10). The seven churches Jesus later addresses in Revelation 2–3 — Ephesus, Smyrna, Pergamum, Thyatira, Sardis, Philadelphia, Laodicea — all sit in this same province. The roots of that whole network trace back to a rented hall and two patient years.</p>
+            </div>
+            <div class="hub-response" id="h-you">
+                <h4>You already have one.</h4>
+                <p>You’re probably waiting for a “proper,” sanctioned, impressive space before you’ll let God use you. Paul didn’t have one. He had leftover hours and a borrowed room — and from it reached a province. The living room, the lunch break, the rented hall, the group chat: take what you’ve got, and keep showing up. The room doesn’t have to be holy for God to be heard from it.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+            <div class="bar"></div>
+        </div>
+        <div class="q-list">
+            <div class="q-item">
+                <span class="q-num">01</span>
+                <p>Luke compares two hearts under the same preaching — one opened like a door (Lydia), one hardening like stone. Hardening usually happens slowly, by <strong>calcification</strong>, not one big decision. Under all the preaching you’ve heard across your life, are you growing <em>more</em> pliable — or quietly setting?</p>
+            </div>
+            <div class="q-item">
+                <span class="q-num">02</span>
+                <p>The Greek says they wouldn’t be <em>persuaded</em> — it was the will, not the intellect. Is there a place where you keep telling yourself you “need more answers,” when honestly it’s a place you’re simply refusing to <strong>yield</strong>?</p>
+            </div>
+            <div class="q-item">
+                <span class="q-num">03</span>
+                <p>God reached a whole province from a rented hall in the hours nobody wanted. Where might He be asking to use an <strong>ordinary, off-hours space</strong> in your life — one you’ve overlooked because it isn’t the “proper” one?</p>
+            </div>
+            <div class="q-item">
+                <span class="q-num">04</span>
+                <p><strong>Family prompt:</strong> Paul couldn’t afford a grand venue, so he borrowed a plain lecture hall in the middle of the day when no one else wanted it — and God used it to reach a whole region. What’s one ordinary space in our week — the dinner table, the car, a neighbour’s porch — that we could offer God as our “borrowed room” this month?</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ THE SEND ══════════ -->
+    <div class="send reveal">
+        <p class="eb">The Send</p>
+        <p>A closed door is never the end of the word — only a turn in the road. So don’t be discouraged when the expected door shuts, and don’t despise the small, borrowed room that opens instead. The hours nobody valued are the hours God turns into prime time.</p>
+    </div>
+
+    <!-- ══════════ SERIES STRIP ══════════ -->
+    <div class="strip-wrap">
+        <p class="strip-eb">The Series · Acts 19</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back">
+        <a href="/deepdives.html">← All Deep Dives</a>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-19-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';   // paste the YouTube ID when the message is up
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="The Borrowed Room" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.hub-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.hub-card').forEach(c => c.classList.remove('active'));
+                document.querySelectorAll('.hub-response').forEach(r => r.classList.remove('show'));
+                card.classList.add('active');
+                const r = document.getElementById(card.getAttribute('data-target'));
+                if (r) r.classList.add('show');
+            });
+        });
+
+        window.addEventListener('load', () => {
+            if (typeof acts19RenderStrip === 'function') acts19RenderStrip('#series-strip', 'the-borrowed-room');
+        });
+    </script>
+</body>
+</html>
