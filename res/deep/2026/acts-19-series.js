@@ -29,7 +29,7 @@ const ACTS19 = {
         {
             n: 'II', slug: 'the-borrowed-room',
             title: 'The Borrowed Room', date: 'Jun 14', passage: 'Acts 19:8–10',
-            accent: '#5a7a60', live: false,
+            accent: '#5a7a60', live: true,
             movement: 'The gospel moves to ordinary space',
             interactive: 'From One Room, a Whole Province'
         },
