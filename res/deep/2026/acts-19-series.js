@@ -36,7 +36,7 @@ const ACTS19 = {
         {
             n: 'III', slug: 'borrowed-credentials',
             title: 'Borrowed Credentials', date: 'Jun 21', passage: 'Acts 19:13–20',
-            accent: '#c06a4d', live: false,
+            accent: '#c06a4d', live: true,
             movement: 'The Name can’t be hijacked',
             interactive: 'The Descending Scale'
         },
