@@ -43,7 +43,7 @@ const ACTS19 = {
         {
             n: 'IV', slug: 'manufactured-outrage',
             title: 'Manufactured Outrage', date: 'Jun 28', passage: 'Acts 19:23–41',
-            accent: '#4a6f99', live: false,
+            accent: '#4a6f99', live: true,
             movement: 'Counterfeit unity collapses',
             interactive: 'Two Crowds'
         },
