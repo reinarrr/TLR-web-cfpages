@@ -50,7 +50,7 @@ const ACTS19 = {
         {
             n: 'V', slug: 'little-man-limitless-horizon',
             title: 'Little Man, Limitless Horizon', date: 'Jul 5', passage: 'Acts 19:21–22',
-            accent: '#c5a059', live: false, bridge: true,
+            accent: '#c5a059', live: true, bridge: true,
             movement: 'The love that compels the gospel outward',
             interactive: 'The Endless Horizon'
         }
