@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Mirror — Acts 20 Deep Dives | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/the-mirror.html">
+    <meta property="og:title"       content="The Mirror — Acts 20 Deep Dives">
+    <meta property="og:description" content="Why Luke tells Paul's story like the story of Jesus. Four studies in Acts 20 on the imitatio Christi — one man's life bent into the shape of the cross.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="The Mirror — Acts 20 Deep Dives">
+    <meta name="twitter:description" content="Luke lays Paul's road over Jesus' road on purpose. Four deep dives into the imitatio Christi of Acts 20.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = {
+            theme: { extend: {
+                colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+                fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+            } }
+        }
+    </script>
+
+    <style>
+        :root {
+            --jesus: #2d5a5a; --jesus-deep: #234848;
+            --paul:  #a8843d; --paul-soft: #c5a059;
+            --accent: #2d5a5a; --accent-deep: #234848;
+            --gold: #c5a059; --gold-deep: #a8843d;
+            --bg: #faf9f6; --bg-warm: #f6f1e7;
+            --surface: #ffffff;
+            --border: rgba(26,26,26,0.08); --border-strong: rgba(26,26,26,0.14);
+            --text-primary: #1a1a1a; --text-body: #52525b; --text-muted: #9a9aa2;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text-primary); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--gold-deep); font-weight: 400; }
+
+        /* ── HERO ── */
+        .dd-hero { max-width: 48rem; margin: 0 auto; padding: 5rem 1.5rem 2.5rem; text-align: center; position: relative; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.75rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+        .dd-eyebrow a:hover { color: var(--accent); border-color: var(--accent); }
+        .dd-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 9vw, 5.5rem); font-weight: 700; line-height: 1.02; margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+        .dd-title em { font-style: italic; color: var(--gold-deep); }
+        .dd-lead { font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 300; font-style: italic; color: var(--text-body); line-height: 1.5; max-width: 34rem; margin: 0 auto; border-left: 3px solid var(--accent); padding-left: 1.5rem; text-align: left; }
+        .dd-sub { margin-top: 1.75rem; font-size: 0.9rem; color: var(--text-muted); font-weight: 300; max-width: 34rem; margin-left: auto; margin-right: auto; }
+        .hero-motif { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: -1; opacity: 0.5; }
+
+        /* ── SECTIONS ── */
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.34em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; display: block; }
+        .dd-h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 4.5vw, 2.4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.4rem; letter-spacing: -0.01em; }
+        .dd-h2 em { font-style: italic; color: var(--gold-deep); }
+        .dd-p { font-size: 1.02rem; color: var(--text-body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--text-primary); font-weight: 600; }
+        .dd-p .land { color: var(--accent-deep); font-weight: 600; font-style: italic; }
+        .dd-iceberg-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-deep); }
+
+        .note { background: #f4f5f4; border: 1px solid var(--border); border-radius: 0.9rem; padding: 1.1rem 1.4rem; margin: 0.4rem 0 1.6rem; }
+        .note p { font-size: 0.84rem; color: #5b5f5b; line-height: 1.7; font-weight: 300; }
+        .note .nt-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #9a9aa2; display: block; margin-bottom: 0.4rem; }
+
+        .twin { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0.4rem 0 1.6rem; }
+        @media (max-width: 620px) { .twin { grid-template-columns: 1fr; } }
+        .twin-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem 1.6rem; }
+        .twin-card .tc-eb { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); display: block; margin-bottom: 0.7rem; }
+        .twin-card .tc-ref { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .twin-card p { font-size: 0.86rem; color: var(--text-body); line-height: 1.7; font-weight: 300; }
+
+        /* ── THE MIRROR (signature interactive) ── */
+        .mirror-band { background: linear-gradient(180deg, #f3f5f5 0%, #f6f1e7 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-top: 4rem; padding: 4rem 1.5rem 4.5rem; }
+        .mirror-inner { max-width: 52rem; margin: 0 auto; }
+        .mirror-head { text-align: center; margin-bottom: 2.5rem; }
+        .mirror-head .dd-kicker { color: var(--gold-deep); }
+        .mirror-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 700; line-height: 1.12; }
+        .mirror-head h2 em { font-style: italic; }
+        .mirror-head h2 .j { color: var(--jesus); }
+        .mirror-head h2 .p { color: var(--paul); }
+        .mirror-head p { margin-top: 1rem; font-size: 0.9rem; color: var(--text-body); font-weight: 300; max-width: 34rem; margin-left: auto; margin-right: auto; }
+        .mirror-legend { display: flex; justify-content: center; gap: 1.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
+        .mirror-legend span { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); }
+        .mirror-legend .dot { width: 0.7rem; height: 0.7rem; border-radius: 100px; }
+        .mirror-hint { text-align: center; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-top: 1.4rem; font-style: italic; }
+
+        .mrow { background: var(--surface); border: 1px solid var(--border); border-radius: 1.1rem; margin-bottom: 0.9rem; overflow: hidden; transition: border-color 0.25s, box-shadow 0.25s; cursor: pointer; }
+        .mrow:hover { border-color: var(--border-strong); box-shadow: 0 10px 26px rgba(26,26,26,0.05); }
+        .mrow.is-open { border-color: rgba(45,90,90,0.35); box-shadow: 0 14px 32px rgba(26,26,26,0.08); }
+        .mrow-theme { display: flex; align-items: center; gap: 0.9rem; padding: 1.15rem 1.5rem 0.5rem; }
+        .mrow-theme .m-idx { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: var(--text-muted); width: 1.4rem; flex-shrink: 0; }
+        .mrow-theme .m-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem; color: var(--text-primary); line-height: 1.2; flex: 1; }
+        .mrow-theme .m-caret { font-size: 0.7rem; color: var(--text-muted); transition: transform 0.3s; flex-shrink: 0; }
+        .mrow.is-open .m-caret { transform: rotate(180deg); }
+
+        .mrow-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0; position: relative; padding: 0.4rem 1.5rem 1.2rem; }
+        .mrow-pair::before { content: ''; position: absolute; top: 0.7rem; bottom: 0.9rem; left: 50%; width: 1px; background: linear-gradient(180deg, transparent, var(--border-strong) 20%, var(--border-strong) 80%, transparent); }
+        .m-side { padding: 0.6rem 1.1rem; }
+        .m-side .ms-who { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.4rem; display: block; }
+        .m-side.j .ms-who { color: var(--jesus); }
+        .m-side.p .ms-who { color: var(--paul); }
+        .m-side .ms-ref { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.45rem; }
+        .m-side .ms-line { font-size: 0.86rem; color: var(--text-body); line-height: 1.6; font-weight: 300; }
+        .m-side .ms-line em { font-style: italic; color: var(--text-primary); }
+
+        .mrow-deep { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: #faf8f3; border-top: 1px solid transparent; }
+        .mrow.is-open .mrow-deep { max-height: 420px; border-top-color: var(--border); }
+        .mrow-deep-in { padding: 1.15rem 1.6rem 1.3rem; }
+        .mrow-deep-in .dd-iceberg-label { display: block; margin-bottom: 0.5rem; }
+        .mrow-deep-in p { font-size: 0.86rem; color: var(--text-body); line-height: 1.75; font-weight: 300; }
+        .mrow-deep-in p em { font-style: italic; color: var(--gold-deep); }
+        @media (max-width: 540px) {
+            .mrow-pair { grid-template-columns: 1fr; gap: 0.4rem; }
+            .mrow-pair::before { display: none; }
+            .m-side.p { border-top: 1px dashed var(--border); padding-top: 0.9rem; }
+        }
+
+        /* ── THE FOUR PANELS ── */
+        .panels-wrap { max-width: 48rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .panels-head { text-align: center; margin-bottom: 2.2rem; }
+        .panels-head .dd-kicker { color: var(--gold-deep); }
+        .panels-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: 700; }
+        .panels-head p { margin-top: 0.9rem; font-size: 0.9rem; color: var(--text-body); font-weight: 300; max-width: 32rem; margin-left: auto; margin-right: auto; }
+        .dd-panels { display: grid; gap: 1rem; }
+        .dd-panel { position: relative; display: block; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent, var(--gold)); border-radius: 1rem; padding: 1.7rem 1.9rem; text-decoration: none; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; }
+        .dd-panel.is-live:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(26,26,26,0.07); }
+        .dd-panel.is-locked { opacity: 0.72; cursor: default; }
+        .dd-numeral { position: absolute; top: 1.2rem; right: 1.6rem; font-family: 'Playfair Display', serif; font-style: italic; font-weight: 700; font-size: 1.8rem; color: var(--accent, var(--gold)); opacity: 0.28; }
+        .dd-meta { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+        .dd-part { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent, var(--gold-deep)); }
+        .dd-dot { width: 3px; height: 3px; border-radius: 100px; background: var(--text-muted); }
+        .dd-passage { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+        .dd-ptitle { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.4rem; color: var(--text-primary); line-height: 1.15; display: block; margin-bottom: 0.3rem; }
+        .dd-psub { font-size: 0.78rem; font-style: italic; color: var(--gold-deep); margin-bottom: 0.7rem; }
+        .dd-pbody { font-size: 0.9rem; color: var(--text-body); line-height: 1.7; font-weight: 300; margin-bottom: 1rem; }
+        .dd-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+        .dd-interactive { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.02em; color: var(--text-muted); }
+        .dd-cta { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+        .dd-panel.is-live .dd-cta { color: var(--accent, var(--gold-deep)); }
+
+        /* ── SEND / CLOSE ── */
+        .send { max-width: 40rem; margin: 4rem auto 0; padding: 3rem 2rem; text-align: center; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.2rem; }
+        .send p.body { font-size: 1.05rem; color: var(--text-body); line-height: 1.85; font-weight: 300; }
+        .send .pull { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; line-height: 1.3; color: var(--text-primary); margin-top: 1.6rem; }
+        .send .pull em { font-style: italic; color: var(--gold-deep); }
+
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.8rem; border: 1px solid var(--border-strong); border-radius: 100px; background: var(--surface); color: var(--text-primary); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .share-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .verse-close { max-width: 40rem; margin: 3rem auto 0; padding: 0 1.5rem; text-align: center; }
+        .verse-close p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem; color: var(--text-muted); }
+        .dd-back { text-align: center; padding: 3.5rem 1.5rem 4.5rem; }
+        .dd-back a { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+        .dd-back a:hover { color: var(--accent); border-color: var(--accent); }
+
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- ══════════ HERO ══════════ -->
+    <header class="dd-hero">
+        <div class="hero-motif" aria-hidden="true">
+            <svg viewBox="0 0 900 420" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+                <path d="M60 60 Q 300 200 450 210" stroke="#2d5a5a" stroke-width="1" stroke-dasharray="5 5" opacity="0.16" fill="none"/>
+                <path d="M840 60 Q 600 200 450 210" stroke="#a8843d" stroke-width="1" stroke-dasharray="5 5" opacity="0.16" fill="none"/>
+                <path d="M60 360 Q 300 220 450 210" stroke="#2d5a5a" stroke-width="1" stroke-dasharray="5 5" opacity="0.10" fill="none"/>
+                <path d="M840 360 Q 600 220 450 210" stroke="#a8843d" stroke-width="1" stroke-dasharray="5 5" opacity="0.10" fill="none"/>
+                <line x1="450" y1="40" x2="450" y2="380" stroke="#9a9aa2" stroke-width="0.6" opacity="0.14"/>
+                <circle cx="450" cy="210" r="5" fill="#a8843d" opacity="0.30"/>
+            </svg>
+        </div>
+
+        <p class="dd-eyebrow"><a href="/res/deep/2026/acts-journey.html">Acts Journey</a> &nbsp;·&nbsp; Acts 20 &nbsp;·&nbsp; Four Studies</p>
+        <h1 class="dd-title">The <em>Mirror</em></h1>
+        <p class="dd-lead">"Luke is holding up a mirror — and in it, we are meant to see Jesus."</p>
+        <p class="dd-sub">The hub for the Acts 20 series. Why Luke tells Paul's story like the story of his Master — and four Sundays watching one man's life bent into the shape of the cross.</p>
+    </header>
+
+    <!-- ══════════ INTRO ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">The Thing You Can't Unsee</span>
+        <h2 class="dd-h2">Luke is doing something <em>on purpose</em></h2>
+        <p class="dd-p">Last we saw Paul, a mob was screaming itself hoarse in a theatre in Ephesus. The riot dies down — and the first thing he does in chapter 20 is <b>leave</b>, and turn his face toward Jerusalem. From here to the end of the book, Luke tells the story of Paul's last great journey in a way that <b>deliberately echoes another journey</b> — his Master's journey toward a cross. Same shape. Same resolve. The same feasts in the background. The same tears at the end.</p>
+        <p class="dd-p">Say clearly what this is — and what it isn't. Luke is <b>not</b> writing a second gospel with Paul as a second Christ. <span class="land">There is one Savior, and his name is Jesus, and Paul is not him.</span> What Luke shows us is a man being <b>remade into the image of the first</b> — a disciple so gripped by his Lord that even the way he travels, serves, and leaves begins to look like Jesus. That's the banner over the whole arc, in Paul's own words: <em class="greek">"Be imitators of me, as I am of Christ"</em> (1 Cor 11:1). Not <em>be</em> Christ. <b>Become like</b> him.</p>
+        <p class="dd-p">This hub is the map under all four Sundays — the deliberate craft you can't see from a single message. Below the surface, it has a name.</p>
+    </section>
+
+    <!-- ══════════ SYNCRISIS ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface</span>
+        <h2 class="dd-h2">A craft with a name: <em>syncrisis</em></h2>
+        <p class="dd-p">What feels like a devotional coincidence from the pew is, up close, a recognized ancient technique. Greek and Roman writers built whole works on <em class="greek">synkrisis</em> — deliberate side-by-side comparison to reveal character. Plutarch's famous <b>Parallel Lives</b> paired a Greek with a Roman, life against life, so the reader would measure one by the other.</p>
+        <p class="dd-p">Luke writes two volumes and does the same across them. Volume one — the Gospel — is <b>the life of Jesus</b>. Volume two — Acts — is the <b>life of the Body</b> carrying that same life into the world. Scholars like <b>Charles Talbert</b> have mapped the architectural rhyme in detail; the big beam holding it up is the one <b>Stott</b> names:</p>
+        <div class="twin">
+            <div class="twin-card">
+                <span class="tc-eb">Volume I · The Gospel</span>
+                <div class="tc-ref">Galilee → Jerusalem</div>
+                <p>Jesus sets his face toward the city where he'll suffer, and everything bends toward the cross.</p>
+            </div>
+            <div class="twin-card">
+                <span class="tc-eb">Volume II · Acts</span>
+                <div class="tc-ref">Jerusalem → Rome</div>
+                <p>Paul sets his face toward the city where he'll be bound — and beyond it, the Rome he named back in 19:21.</p>
+            </div>
+        </div>
+        <p class="dd-p">Once you have the frame, the details start to line up: a face set toward suffering, a last meal, repeated warnings of what's coming, a Gethsemane surrender, trials before the same kinds of courts. <span class="land">The little man is walking his Master's road</span> — and Luke wrote it that way so you'd notice.</p>
+        <div class="note">
+            <span class="nt-tag">Handle honestly</span>
+            <p>Not every parallel is equally strong, and careful readers debate how many Luke <em>intends</em> versus how many we find looking back. Hold the individual rungs loosely; the <b>macro-shape</b> — two mirrored journeys, Galilee-to-Jerusalem answered by Jerusalem-to-Rome — is what the whole design rests on, and it's about as secure as literary observations get.</p>
+        </div>
+    </section>
+
+    <!-- ══════════ THE MIRROR — SIGNATURE INTERACTIVE ══════════ -->
+    <section class="mirror-band reveal">
+        <div class="mirror-inner">
+            <div class="mirror-head">
+                <span class="dd-kicker">The Signature</span>
+                <h2>Two Roads, <span class="j">One</span> <span class="p">Shape</span></h2>
+                <p>The mirror, made visible. On the left, Jesus' road through Luke's Gospel. On the right, Paul's road through Acts. Tap a rung to see why the rhyme is deliberate.</p>
+                <div class="mirror-legend">
+                    <span><span class="dot" style="background:#2d5a5a;"></span> Jesus · the Gospel</span>
+                    <span><span class="dot" style="background:#a8843d;"></span> Paul · Acts</span>
+                </div>
+            </div>
+
+            <div class="mrow" tabindex="0">
+                <div class="mrow-theme"><span class="m-idx">i</span><span class="m-name">The face set toward the city</span><span class="m-caret">▾</span></div>
+                <div class="mrow-pair">
+                    <div class="m-side j"><span class="ms-who">Jesus</span><div class="ms-ref">Luke 9:51</div><p class="ms-line">"He <em>set his face</em> to go to Jerusalem."</p></div>
+                    <div class="m-side p"><span class="ms-who">Paul</span><div class="ms-ref">Acts 19:21 · 21:13</div><p class="ms-line">"I must also see Rome." … "I am ready even <em>to die</em> at Jerusalem."</p></div>
+                </div>
+                <div class="mrow-deep"><div class="mrow-deep-in"><span class="dd-iceberg-label">Why it's deliberate</span><p>Luke 9:51 is the hinge that opens the Gospel's long <em>travel narrative</em> — everything after it leans toward the cross. Acts 19:21 is the matching hinge in volume two: <em>"I must see Rome"</em> opens Paul's long road. Same structural pivot, same verb of fixed resolve, placed at the same load-bearing point in each book.</p></div></div>
+            </div>
+
+            <div class="mrow" tabindex="0">
+                <div class="mrow-theme"><span class="m-idx">ii</span><span class="m-name">Bread broken on the last night</span><span class="m-caret">▾</span></div>
+                <div class="mrow-pair">
+                    <div class="m-side j"><span class="ms-who">Jesus</span><div class="ms-ref">Luke 22 · 24:35</div><p class="ms-line">The Last Supper, and Emmaus — known to them <em>in the breaking of bread</em>.</p></div>
+                    <div class="m-side p"><span class="ms-who">Paul</span><div class="ms-ref">Acts 20:7, 11</div><p class="ms-line">Troas — gathered <em>to break bread</em> the night before he leaves.</p></div>
+                </div>
+                <div class="mrow-deep"><div class="mrow-deep-in"><span class="dd-iceberg-label">Why it's deliberate</span><p>The phrase under "share in the Lord's Supper" is <em class="greek">klasai arton</em> — the very words Luke uses for the Last Supper and for Emmaus, the meal where the risen Christ is recognized. When the Troas church breaks bread on the eve of Paul's departure, Luke is reaching for the same three words on purpose. <b>Part I opens this scene all the way up.</b></p></div></div>
+            </div>
+
+            <div class="mrow" tabindex="0">
+                <div class="mrow-theme"><span class="m-idx">iii</span><span class="m-name">Three times, the suffering foretold</span><span class="m-caret">▾</span></div>
+                <div class="mrow-pair">
+                    <div class="m-side j"><span class="ms-who">Jesus</span><div class="ms-ref">Luke 9:22 · 9:44 · 18:31</div><p class="ms-line">Three passion predictions, escalating as Jerusalem nears.</p></div>
+                    <div class="m-side p"><span class="ms-who">Paul</span><div class="ms-ref">Acts 20:23 · 21:4 · 21:11</div><p class="ms-line">The Spirit testifies "prison and hardships"; the disciples warn him; Agabus binds his own hands.</p></div>
+                </div>
+                <div class="mrow-deep"><div class="mrow-deep-in"><span class="dd-iceberg-label">Why it's deliberate</span><p>Both journeys are paced by a drumbeat of warnings that grow louder toward the city. Paul's own <em>"I go bound in the Spirit… not knowing what will happen, except that chains await"</em> is his passion prediction — and like his Master, he keeps walking straight into it. <b>Part II lives here.</b></p></div></div>
+            </div>
+
+            <div class="mrow" tabindex="0">
+                <div class="mrow-theme"><span class="m-idx">iv</span><span class="m-name">"The Lord's will be done"</span><span class="m-caret">▾</span></div>
+                <div class="mrow-pair">
+                    <div class="m-side j"><span class="ms-who">Jesus</span><div class="ms-ref">Luke 22:42</div><p class="ms-line">"Yet I want <em>your will</em> to be done, not mine."</p></div>
+                    <div class="m-side p"><span class="ms-who">Paul</span><div class="ms-ref">Acts 21:14</div><p class="ms-line">"When we couldn't persuade him… we said, <em>'The Lord's will be done.'</em>"</p></div>
+                </div>
+                <div class="mrow-deep"><div class="mrow-deep-in"><span class="dd-iceberg-label">Why it's deliberate — and where the mirror bends</span><p>The same Gethsemane surrender — but watch who prays it. Over Jesus, he prays it himself. Over Paul, it's <em>the church</em> that finally kneels to it, learning to release their teacher the way Jesus released himself. The imitatio spreads outward: the Master's surrender becomes the disciples' surrender.</p></div></div>
+            </div>
+
+            <div class="mrow" tabindex="0">
+                <div class="mrow-theme"><span class="m-idx">v</span><span class="m-name">Kneeling to pray before he goes</span><span class="m-caret">▾</span></div>
+                <div class="mrow-pair">
+                    <div class="m-side j"><span class="ms-who">Jesus</span><div class="ms-ref">Luke 22:41</div><p class="ms-line">In the garden, "he <em>knelt down</em> and prayed."</p></div>
+                    <div class="m-side p"><span class="ms-who">Paul</span><div class="ms-ref">Acts 20:36</div><p class="ms-line">At Miletus, "he <em>knelt</em> and prayed with them all."</p></div>
+                </div>
+                <div class="mrow-deep"><div class="mrow-deep-in"><span class="dd-iceberg-label">Why it's deliberate</span><p>Kneeling to pray is uncommon in the New Testament — standing was the norm. Luke reserves the kneeling posture for a small set of people who look like their Lord: Jesus in the garden, Stephen as he's stoned (Acts 7:60), Peter before he raises Tabitha (9:40), and Paul here. The body itself is being conformed. <b>Part IV kneels here.</b></p></div></div>
+            </div>
+
+            <div class="mrow" tabindex="0">
+                <div class="mrow-theme"><span class="m-idx">vi</span><span class="m-name">Trials before the same courts</span><span class="m-caret">▾</span></div>
+                <div class="mrow-pair">
+                    <div class="m-side j"><span class="ms-who">Jesus</span><div class="ms-ref">Luke 22–23</div><p class="ms-line">Sanhedrin → Pilate (Rome) → <em>Herod</em>. A centurion calls him innocent.</p></div>
+                    <div class="m-side p"><span class="ms-who">Paul</span><div class="ms-ref">Acts 23–26</div><p class="ms-line">Sanhedrin → Felix &amp; Festus (Rome) → <em>Agrippa</em> (a Herod). Rome finds no guilt.</p></div>
+                </div>
+                <div class="mrow-deep"><div class="mrow-deep-in"><span class="dd-iceberg-label">Why it's deliberate</span><p>Here the fingerprint is unmistakable: <em>Luke alone</em> among the four Gospels sends Jesus to a Herod for trial — and <em>Luke alone</em> sends Paul before a Herod (Agrippa II), completing the mirror. Jewish court, Roman governor, Herodian king — and at the end, an official who can find no real charge. The pattern is too precise to be accident.</p></div></div>
+            </div>
+
+            <div class="mrow" tabindex="0">
+                <div class="mrow-theme"><span class="m-idx">vii</span><span class="m-name">The dead raised to life</span><span class="m-caret">▾</span></div>
+                <div class="mrow-pair">
+                    <div class="m-side j"><span class="ms-who">Jesus</span><div class="ms-ref">Luke 7:14 · 8:54</div><p class="ms-line">The widow's son at Nain; Jairus's daughter — "<em>Child, arise.</em>"</p></div>
+                    <div class="m-side p"><span class="ms-who">Paul &amp; Peter</span><div class="ms-ref">Acts 20:10 · 9:40</div><p class="ms-line">Paul over Eutychus; Peter over Tabitha — "<em>Get up.</em>"</p></div>
+                </div>
+                <div class="mrow-deep"><div class="mrow-deep-in"><span class="dd-iceberg-label">Why it's deliberate</span><p>The Head raises the dead; then <em>both</em> apostles do it too — Peter for Tabitha, Paul for Eutychus, each echoing the Master (and, further back, Elijah and Elisha). The Body does what the Head did. <b>Part I opens the Eutychus scene, where this raising carries even more than it first shows.</b></p></div></div>
+            </div>
+
+            <p class="mirror-hint">Seven rungs — tap to open each one</p>
+        </div>
+    </section>
+
+    <!-- ══════════ THE FOUR PANELS ══════════ -->
+    <section class="panels-wrap reveal">
+        <div class="panels-head">
+            <span class="dd-kicker">The Four Deepenings</span>
+            <h2>One shape, growing deeper</h2>
+            <p>The imitatio deepens by a degree each Sunday: his life in us → his faithfulness in us → his death for us → his manner of leaving in us. A new deep dive opens each week.</p>
+        </div>
+
+        <div class="dd-panels">
+
+            <a class="dd-panel is-live" id="panel-life-in-the-room" href="life-in-the-room.html"
+               data-acts20-slug="life-in-the-room" data-acts20-date="Jul 12" style="--accent:#2d5a5a;">
+                <span class="dd-numeral" aria-hidden="true">I</span>
+                <div class="dd-meta"><span class="dd-part">Part I · Jul 12</span><span class="dd-dot"></span><span class="dd-passage">Acts 20:7–12</span></div>
+                <span class="dd-ptitle">Life in the Room</span>
+                <div class="dd-psub">His resurrection life in the ordinary room</div>
+                <p class="dd-pbody"><span class="dd-iceberg-label">Beneath the surface —</span> three Greek phrases hide resurrection morning inside a single sentence, and a boy falls dead and is carried out alive. The gospel, folded into one body in a window — and you are the boy.</p>
+                <div class="dd-foot"><span class="dd-interactive">✦ The Boy in the Window</span><span class="dd-cta" data-acts20-cta>Read the deep dive →</span></div>
+            </a>
+
+            <a class="dd-panel is-locked" id="panel-finish-the-race"
+               data-acts20-slug="finish-the-race" data-acts20-date="Jul 19" style="--accent:#5a7a60;">
+                <span class="dd-numeral" aria-hidden="true">II</span>
+                <div class="dd-meta"><span class="dd-part">Part II · Jul 19</span><span class="dd-dot"></span><span class="dd-passage">Acts 20:17–24</span></div>
+                <span class="dd-ptitle">Finish the Race</span>
+                <div class="dd-psub">His faithfulness, run to the line</div>
+                <p class="dd-pbody"><span class="dd-iceberg-label">Beneath the surface —</span> Paul calls his life a <em class="greek">dromos</em>, a racecourse, and counts it worth nothing beside the finish. His own passion-prediction — and a conscience with nothing hidden.</p>
+                <div class="dd-foot"><span class="dd-interactive">✦ The Course</span><span class="dd-cta" data-acts20-cta>Coming · Jul 19</span></div>
+            </a>
+
+            <a class="dd-panel is-locked" id="panel-the-shepherds-love"
+               data-acts20-slug="the-shepherds-love" data-acts20-date="Jul 26" style="--accent:#c06a4d;">
+                <span class="dd-numeral" aria-hidden="true">III</span>
+                <div class="dd-meta"><span class="dd-part">Part III · Jul 26</span><span class="dd-dot"></span><span class="dd-passage">Acts 20:25–31</span></div>
+                <span class="dd-ptitle">The Shepherd's Love</span>
+                <div class="dd-psub">His death — the flock bought with blood</div>
+                <p class="dd-pbody"><span class="dd-iceberg-label">Beneath the surface —</span> the church was bought "with his own blood," the costliest line in Acts. Peter's shepherd-commission handed on, wolves already at the door, and the cup on the table.</p>
+                <div class="dd-foot"><span class="dd-interactive">✦ The Purchase</span><span class="dd-cta" data-acts20-cta>Coming · Jul 26</span></div>
+            </a>
+
+            <a class="dd-panel is-locked" id="panel-leaving-like-jesus-left"
+               data-acts20-slug="leaving-like-jesus-left" data-acts20-date="Aug 2" style="--accent:#a8843d;">
+                <span class="dd-numeral" aria-hidden="true">IV</span>
+                <div class="dd-meta"><span class="dd-part">Part IV · Aug 2</span><span class="dd-dot"></span><span class="dd-passage">Acts 20:32–38</span></div>
+                <span class="dd-ptitle">Leaving Like Jesus Left</span>
+                <div class="dd-psub">His manner of leaving in us</div>
+                <p class="dd-pbody"><span class="dd-iceberg-label">Beneath the surface —</span> his farewell climaxes not on his own wisdom but on a saying of Jesus found nowhere in the Gospels — an <em class="greek">agraphon</em> — spoken kneeling, in a Gethsemane goodbye.</p>
+                <div class="dd-foot"><span class="dd-interactive">✦ The Agraphon</span><span class="dd-cta" data-acts20-cta>Coming · Aug 2</span></div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- ══════════ CLOSE — JOHN 17 ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">The Prayer Underneath</span>
+        <h2 class="dd-h2">One farewell, shaped like <em>another</em></h2>
+        <p class="dd-p">Underneath all four Sundays runs a single prayer: <b>John 17</b>, Jesus' priestly farewell. "I finished the work you gave me" (17:4) surfaces as Paul's <em class="greek">dromos</em> — "if only I may finish my race" (20:24). "Make them one… keep them" (17:11) becomes "guard the flock… purchased with his own blood" (20:28). And the whole Miletus farewell — <span class="land">the only speech in Acts addressed to Christians</span> — is shaped like Jesus' own upper-room goodbye: a farewell mirroring a farewell, right down to the kneeling.</p>
+        <p class="dd-p">The chapter is one man's life bent into the shape of the cross. But you can't imitate a life you haven't first received — so the series begins, in Part I, not with Paul at all, but with a boy carried out of death. <b>That is where it starts for every one of us.</b></p>
+    </section>
+
+    <!-- ══════════ SEND ══════════ -->
+    <div class="send reveal">
+        <p class="eb">The Invitation</p>
+        <p class="body">Watch the road Paul walks this month, and ask where your own feet are pointed. The imitatio Christi is not theory — it has an itinerary. Luke holds up the mirror not so you'll admire Paul, but so you'll see the shape your own life is being pressed into.</p>
+        <p class="pull">"Be imitators of me, <em>as I am of Christ.</em>" Not <em>be</em> him — become like him.</p>
+    </div>
+
+    <!-- ══════════ SHARE ══════════ -->
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share the series</button>
+    </div>
+
+    <!-- ══════════ CLOSING VERSE ══════════ -->
+    <div class="verse-close reveal">
+        <p>"The closer Paul gets to his own Jerusalem, the more he looks and sounds like his Master."</p>
+    </div>
+
+    <!-- ══════════ BACK ══════════ -->
+    <div class="dd-back">
+        <a href="/deepdives.html">← All Deep Dives</a>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-20-series.js" defer></script>
+    <script>
+        // ── Scroll reveal ──
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        // ── The Mirror: expand/collapse rungs ──
+        document.querySelectorAll('.mrow').forEach(row => {
+            const toggle = () => row.classList.toggle('is-open');
+            row.addEventListener('click', toggle);
+            row.addEventListener('keydown', (ev) => {
+                if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(); }
+            });
+        });
+
+        // ── Panel live/locked state from the manifest ──
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts20DetectLive === 'function') acts20DetectLive(document);
+        });
+
+        // ── Share ──
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = {
+                title: 'The Mirror — Acts 20 Deep Dives | The Living Room',
+                text: 'Why Luke tells Paul’s story like the story of Jesus. Four deep dives into the imitatio Christi of Acts 20.',
+                url: 'https://thelivingroom.io/res/deep/2026/the-mirror.html'
+            };
+            try {
+                if (navigator.share) { await navigator.share(data); }
+                else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share the series', 2000); }
+            } catch (e) { /* dismissed */ }
+        });
+    </script>
+</body>
+</html>

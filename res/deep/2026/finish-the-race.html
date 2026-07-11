@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finish the Race — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/finish-the-race.html">
+    <meta property="og:title"       content="Finish the Race — Deep Dive">
+    <meta property="og:description" content="Paul calls his life a dromos — a racecourse — and borrows his Master's own word for the finish. The goal isn't a place; it's a Person. A deep dive into Acts 20:17–24.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Finish the Race — Deep Dive">
+    <meta name="twitter:description" content="A deep dive into Acts 20:17–24 — running faithful, eyes on the line.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --accent: #5a7a60;          /* Part II — sage (his faithfulness) */
+            --accent-deep: #47624c;
+            --gold: #c5a059; --gold-deep: #a8843d;
+            --bg: #faf9f6; --bg-warm: #f6f1e7;
+            --surface: #ffffff;
+            --border: rgba(26,26,26,0.08); --border-strong: rgba(26,26,26,0.14);
+            --text-primary: #1a1a1a; --text-body: #52525b; --text-muted: #9a9aa2;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text-primary); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--gold-deep); font-weight: 400; }
+
+        .dd-hero { max-width: 48rem; margin: 0 auto; padding: 5rem 1.5rem 3rem; text-align: center; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.75rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+        .dd-eyebrow a:hover { color: var(--accent); border-color: var(--accent); }
+        .dd-title { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 8vw, 5rem); font-weight: 700; line-height: 1.04; margin-bottom: 1.5rem; }
+        .dd-title em { font-style: italic; color: var(--accent); }
+        .dd-lead { font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 300; font-style: italic; color: var(--text-body); line-height: 1.5; max-width: 36rem; margin: 0 auto; border-left: 3px solid var(--accent); padding-left: 1.5rem; text-align: left; }
+
+        .scripture-wrap { max-width: 44rem; margin: 1rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: var(--bg-warm); border-left: 4px solid var(--gold); border-radius: 0 1rem 1rem 0; padding: 2rem 2.2rem; }
+        .sb-ref { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: 0.98rem; color: #44443f; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--text-primary); font-weight: 600; }
+        .sb-v { color: var(--gold-deep); font-weight: 700; font-size: 0.7rem; vertical-align: super; margin-right: 0.15rem; }
+
+        .yt-wrap { max-width: 52rem; margin: 3rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.12); background: #e4e4e7; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--text-muted); font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; font-style: italic; margin-top: 1rem; }
+
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.34em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; display: block; }
+        .dd-h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 4.5vw, 2.4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.4rem; letter-spacing: -0.01em; }
+        .dd-h2 em { font-style: italic; color: var(--gold-deep); }
+        .dd-p { font-size: 1.02rem; color: var(--text-body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--text-primary); font-weight: 600; }
+        .dd-p .land { color: var(--accent-deep); font-weight: 600; font-style: italic; }
+        .dd-iceberg-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-deep); }
+
+        .note { background: #f4f5f4; border: 1px solid var(--border); border-radius: 0.9rem; padding: 1.1rem 1.4rem; margin: 0.4rem 0 1.6rem; }
+        .note p { font-size: 0.84rem; color: #5b5f5b; line-height: 1.7; font-weight: 300; }
+        .note .nt-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #9a9aa2; display: block; margin-bottom: 0.4rem; }
+
+        /* ── SIGNATURE STEPPER ── */
+        .sig-band { background: linear-gradient(180deg, #14211a 0%, #1e2c22 100%); margin-top: 4rem; padding: 4rem 1.5rem 4.5rem; color: #e8ece9; }
+        .sig-inner { max-width: 46rem; margin: 0 auto; }
+        .sig-head { text-align: center; margin-bottom: 2.5rem; }
+        .sig-head .dd-kicker { color: #d4b870; }
+        .sig-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 700; line-height: 1.12; color: #f2ead8; }
+        .sig-head h2 em { font-style: italic; color: #d4b870; }
+        .sig-head p { margin-top: 1rem; font-size: 0.9rem; color: #a9b6b1; font-weight: 300; max-width: 32rem; margin-left: auto; margin-right: auto; }
+        .sig-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 1.6rem; }
+        @media (max-width: 620px) { .sig-steps { grid-template-columns: 1fr; } }
+        .sig-step { background: rgba(255,255,255,0.04); border: 1px solid rgba(212,184,112,0.16); border-radius: 0.9rem; padding: 1.1rem 0.9rem; text-align: center; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+        .sig-step:hover { transform: translateY(-2px); background: rgba(255,255,255,0.07); }
+        .sig-step.active { background: rgba(212,184,112,0.12); border-color: rgba(212,184,112,0.55); }
+        .sig-step .ss-n { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: #9c8a5e; display: block; }
+        .sig-step.active .ss-n { color: #d4b870; }
+        .sig-step .ss-l { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.05rem; color: #e8ece9; margin-top: 0.15rem; }
+        .sig-step .ss-g { display: block; font-size: 0.6rem; font-style: italic; color: #8a978f; margin-top: 0.3rem; }
+        .sig-panel { display: none; background: rgba(255,255,255,0.03); border: 1px solid rgba(212,184,112,0.14); border-left: 3px solid #d4b870; border-radius: 0 1rem 1rem 0; padding: 1.8rem 2rem; animation: sigIn 0.45s ease; }
+        .sig-panel.show { display: block; }
+        @keyframes sigIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+        .sig-panel .sp-greek { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: #d4b870; margin-bottom: 0.2rem; }
+        .sig-panel .sp-gloss { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #8a978f; margin-bottom: 1rem; }
+        .sig-panel p { font-size: 0.95rem; color: #cdd5d1; line-height: 1.8; font-weight: 300; }
+        .sig-panel p em { color: #f2ead8; font-style: italic; }
+        .sig-panel .sp-echo { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px solid rgba(212,184,112,0.14); font-size: 0.82rem; color: #a9b6b1; }
+        .sig-panel .sp-echo b { color: #d4b870; font-weight: 600; }
+
+        .discuss { max-width: 44rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .discuss-head { text-align: center; margin-bottom: 2.2rem; }
+        .discuss-head .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); }
+        .discuss-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: 700; margin-top: 0.6rem; }
+        .discuss-head .bar { width: 3rem; height: 2px; background: var(--gold); margin: 1.2rem auto 0; }
+        .q-item { display: flex; gap: 1.1rem; padding: 1.3rem 0; border-bottom: 1px solid var(--border); }
+        .q-num { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: var(--gold-deep); flex-shrink: 0; width: 1.6rem; }
+        .q-item p { font-size: 0.95rem; color: var(--text-body); line-height: 1.7; font-weight: 300; }
+        .q-item p strong { color: var(--text-primary); font-weight: 600; }
+
+        .send { max-width: 40rem; margin: 4rem auto 0; padding: 3rem 2rem; text-align: center; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.2rem; }
+        .send p.body { font-size: 1.1rem; color: var(--text-body); line-height: 1.85; font-weight: 300; font-style: italic; }
+        .send .pull { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; line-height: 1.3; color: var(--text-primary); margin-top: 1.6rem; }
+        .send .pull em { font-style: italic; color: var(--gold-deep); }
+
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.8rem; border: 1px solid var(--border-strong); border-radius: 100px; background: var(--surface); color: var(--text-primary); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .share-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .strip-wrap { max-width: 56rem; margin: 4.5rem auto 0; padding: 0 0.5rem; }
+        .strip-eb { text-align: center; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .dd-back { text-align: center; padding: 3rem 1.5rem 4.5rem; }
+        .dd-back a { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+        .dd-back a:hover { color: var(--accent); border-color: var(--accent); }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <header class="dd-hero">
+        <p class="dd-eyebrow"><a href="/res/deep/2026/the-mirror.html">Acts Journey &nbsp;·&nbsp; Acts 20</a> &nbsp;·&nbsp; Part II</p>
+        <h1 class="dd-title">Finish the <em>Race</em></h1>
+        <p class="dd-lead">"The finish line isn't a place you arrive. It's a Person you become like."</p>
+    </header>
+
+    <div class="scripture-wrap reveal">
+        <div class="scripture-box">
+            <span class="sb-ref">Acts 20:22–24 · ESV</span>
+            <p class="sb-text">
+                <span class="sb-v">22</span>And now, behold, I am going to Jerusalem, <b>constrained by the Spirit</b>, not knowing what will happen to me there,
+                <span class="sb-v">23</span>except that the Holy Spirit testifies to me in every city that imprisonment and afflictions await me.
+                <span class="sb-v">24</span>But I do not account my life of any value nor as precious to myself, <b>if only I may finish my course</b> and the ministry that I received from the Lord Jesus, to testify to the gospel of the grace of God.
+            </p>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame" id="yt-mount"></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <!-- ══════════ ASSOS ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the setting</span>
+        <h2 class="dd-h2">The twenty miles he walked <em>alone</em></h2>
+        <p class="dd-p">Watch a quiet, aching detail most readers skim right over. After Troas, the team boards the ship — but Paul doesn't. He sends them ahead and <b>walks the twenty miles to Assos on foot, alone</b> (Acts 20:13). <b>Stott</b> wonders whether this was the real beginning of the long road to Jerusalem: a man who needed to be by himself with God before the hardest goodbye of his life.</p>
+        <p class="dd-p">Then the decision that tells you everything — he sails <b>past</b> Ephesus (20:16). He bypasses the city where he poured out three years, where his dearest people are, because stopping would cost him the race to reach Jerusalem by Pentecost. <span class="land">He won't even pause for home. That bypass is a face set toward Jerusalem.</span> Instead he calls the elders thirty miles down the road — and what spills out is the <b>only speech in all of Acts that Paul gives to a room of believers</b>. No crowd to win, no court to answer. Just his own people, and his heart laid bare, standing at the midpoint of his race, looking both ways.</p>
+    </section>
+
+    <!-- ══════════ INTEGRITY ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — one whole life</span>
+        <h2 class="dd-h2">"You yourselves know" — a life with <em>no second face</em></h2>
+        <p class="dd-p">Look at the three words Paul leans his whole defense on: <em class="greek">"You yourselves know."</em> He's calling a roomful of people who lived next to him for three years as <b>eyewitnesses</b> — and you can only do that if the testimony holds from every angle: if the Paul on the synagogue platform was the same as the Paul at their kitchen tables. If the public man and the private man were one man.</p>
+        <p class="dd-p">That's a word we've nearly lost: <b>integrity</b> — from <em class="greek">integer</em>, whole, undivided, one. The opposite is <b>hypocrisy</b>, and the Greek <em class="greek">hypokritēs</em> literally means an <b>actor</b> — a man behind a mask, one face for the crowd and another when the lights go down. <span class="land">Paul is the opposite of the actor. There's no mask, because there's no second face.</span></p>
+        <p class="dd-p">And that is exactly what Christlikeness looks like <b>before</b> it ever looks dramatic. Jesus was the one perfectly undivided life — the same with the crowd of five thousand and with one woman at a well, the same in the temple courts and in the garden in the dark, the same in his words and in his wounds. He didn't perform the truth; he <em>was</em> it. <span class="land">And you don't build that in the highlight reel. You build it in the Tuesdays nobody records.</span></p>
+    </section>
+
+    <!-- ══════════ SIGNATURE — THE COURSE ══════════ -->
+    <section class="sig-band reveal">
+        <div class="sig-inner">
+            <div class="sig-head">
+                <span class="dd-kicker">The Signature</span>
+                <h2>The <em>Course</em></h2>
+                <p>Paul stands at the middle of his life's race and looks both directions — then names the line. Step through the three views.</p>
+            </div>
+
+            <div class="sig-steps">
+                <div class="sig-step active" data-target="sp-1"><span class="ss-n">←</span><span class="ss-l">Behind</span><span class="ss-g">the course run</span></div>
+                <div class="sig-step" data-target="sp-2"><span class="ss-n">→</span><span class="ss-l">Ahead</span><span class="ss-g">the chains</span></div>
+                <div class="sig-step" data-target="sp-3"><span class="ss-n">◎</span><span class="ss-l">The Line</span><span class="ss-g">a Person</span></div>
+            </div>
+
+            <div class="sig-panel show" id="sp-1">
+                <div class="sp-greek">hypesteilamēn</div>
+                <div class="sp-gloss">I did not shrink back — a sail furled in</div>
+                <p>Looking back, Paul names no highlight reel — he served <em class="greek">like a bondslave</em>, with humility, with tears, through plots. He <em>"did not shrink"</em> — the word for reefing a sail — he didn't furl a single inch of the truth. <b>Stott</b> calls it his threefold thoroughness: the <em>whole</em> gospel, to the <em>whole</em> city, with his <em>whole</em> strength.</p>
+                <div class="sp-echo"><b>The mirror —</b> faithfulness before it's ever spectacular: the same person watched and unwatched, Sunday and Tuesday. That is Christlikeness starting where no one is filming.</div>
+            </div>
+            <div class="sig-panel" id="sp-2">
+                <div class="sp-greek">straining forward</div>
+                <div class="sp-gloss">Philippians 3:13–14</div>
+                <p>He turns and the view is hard — the Spirit has told him "in every city" that chains wait. But hear his own letter, written on this very journey: <em>"forgetting what lies behind and straining forward… I press on toward the goal."</em> This isn't only being <em>pushed</em> from behind. <em>He is straining toward something ahead</em> — a runner with his eyes fixed on a line, moving toward the cost, not away from it.</p>
+                <div class="sp-echo"><b>The mirror —</b> "When the days drew near… he set his face to go to Jerusalem" (Luke 9:51). Paul has caught the same expression on his own face — he runs toward the cross because the One he runs toward went there first.</div>
+            </div>
+            <div class="sig-panel" id="sp-3">
+                <div class="sp-greek">teleiōsō ton dromon</div>
+                <div class="sp-gloss">if only I may finish my course</div>
+                <p>Two words carry the verse. <em class="greek">Dromos</em> — the racecourse. And the finishing word <em class="greek">teleioō</em> — which is not Paul's word first. On the night before the cross Jesus prayed, <em>"having accomplished (eteleiōsa) the work you gave me"</em> (John 17:4). <em>Paul borrows his Lord's own vocabulary for the end of a faithful life</em> — not "I survived," but <em>I finished what you gave me.</em> And he weighs his life <em class="greek">oudenos logou</em> — "of no account." <b>You can't scare a man who's already written his life into the loss column.</b></p>
+                <div class="sp-echo"><b>The mirror —</b> he says it here at full strength, and again from a death-cell: <em>"I have finished the race (ton dromon teteleka)"</em> (2 Tim 4:7). Same word, once mid-stride, once across the line — and behind both, the cross: <b>"It is finished" — tetelestai</b> (John 19:30).</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ THE MIRROR CLOSE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">The line that keeps it true</span>
+        <h2 class="dd-h2">You run because he already said <em>"finished"</em></h2>
+        <p class="dd-p">Here's the guardrail that keeps this from becoming a sermon about willpower. Hebrews frames the very same race: <em>"run with endurance the race set before us, <b>looking to Jesus</b>… who for the joy set before him endured the cross"</em> (Heb 12:1–2). You don't run staring at your own feet, white-knuckling your will. <span class="land">You run looking at him — the One who ran first, finished first, and is already standing at the line.</span></p>
+        <p class="dd-p">And notice how it ties back to last week: we run because we were <b>first carried</b>. In Part I, grace came down the stairs and carried a dead boy out living; this week that same carried-out life gets up and runs — toward the One who carried it. So Paul isn't straining to <em>achieve</em> a finish; he's running toward one already won. <span class="land">You don't run to earn "finished." You run because he already said it.</span></p>
+    </section>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss reveal">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+            <div class="bar"></div>
+        </div>
+        <div class="q-list">
+            <div class="q-item"><span class="q-num">01</span><p><strong>The walk to Assos.</strong> Paul walked twenty miles alone before the hardest goodbye of his life. Where do you need to be alone with God before a hard thing you're facing?</p></div>
+            <div class="q-item"><span class="q-num">02</span><p><strong>No second face.</strong> Paul called the people who lived closest to him as eyewitnesses to his life. Where is the gap between your public and private self — and what would it take to close it?</p></div>
+            <div class="q-item"><span class="q-num">03</span><p><strong>Toward, not away.</strong> Paul wasn't only pushed from behind; he was <em>straining toward</em> a Person. What are you actually running toward — a place, a prize, mere survival — or him?</p></div>
+            <div class="q-item"><span class="q-num">04</span><p><strong>Counted as loss.</strong> "I count everything as loss… in order that I may gain Christ." What specific thing would it cost you to write into the loss column this week — and what would it free you to run toward?</p></div>
+            <div class="q-item"><span class="q-num">05</span><p><strong>Family prompt:</strong> A relay race only works when the baton gets passed cleanly, not clutched. Think of one good habit of faith our family is "running" right now — a prayer, a kindness, a rhythm. What's one small way we could keep running it faithfully this week, not to look impressive, but just to finish the day well and hand it on to each other?</p></div>
+        </div>
+    </section>
+
+    <div class="send reveal">
+        <p class="eb">The Send</p>
+        <p class="body">You don't have to be spectacular. You have to be faithful — in the Tuesdays, all the way to the line. Most of us are running to survive: to get through the week, to come out the other side of this season intact. But Paul wasn't running to survive. He was running to <em>finish</em> — found in Christ, like him — and a person running for that line runs differently. Lighter. Braver. Freer. Because they've already counted everything else as loss, and there's nothing left for the road to take.</p>
+        <p class="pull">Fix your eyes on the One who ran first and is already standing at the line — and run not to survive your life, but to <em>finish</em> it, found in him.</p>
+    </div>
+
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share this deep dive</button>
+    </div>
+
+    <div class="strip-wrap reveal">
+        <p class="strip-eb">The Series · Acts 20</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back"><a href="/deepdives.html">← All Deep Dives</a></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-20-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="Finish the Race" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.sig-step').forEach(step => {
+            step.addEventListener('click', () => {
+                document.querySelectorAll('.sig-step').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.sig-panel').forEach(p => p.classList.remove('show'));
+                step.classList.add('active');
+                const t = document.getElementById(step.getAttribute('data-target'));
+                if (t) t.classList.add('show');
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts20RenderStrip === 'function') acts20RenderStrip('#series-strip', 'finish-the-race');
+        });
+
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = { title: 'Finish the Race — Deep Dive | The Living Room', text: 'Paul calls his life a dromos and borrows his Master’s own word for the finish. A deep dive into Acts 20:17–24.', url: 'https://thelivingroom.io/res/deep/2026/finish-the-race.html' };
+            try { if (navigator.share) { await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share this deep dive', 2000); } } catch (e) {}
+        });
+    </script>
+</body>
+</html>

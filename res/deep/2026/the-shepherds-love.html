@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Shepherd's Love — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/the-shepherds-love.html">
+    <meta property="og:title"       content="The Shepherd's Love — Deep Dive">
+    <meta property="og:description" content="The church was bought 'with his own blood' — a line so stark the scribes flinched and softened it. The blood price on every face, and the love that stays when the wolf comes. A deep dive into Acts 20:25–31.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="The Shepherd's Love — Deep Dive">
+    <meta name="twitter:description" content="A deep dive into Acts 20:25–31 — the flock purchased with the blood of God.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --accent: #c06a4d;          /* Part III — terracotta (his death) */
+            --accent-deep: #a4573d;
+            --gold: #c5a059; --gold-deep: #a8843d;
+            --bg: #faf9f6; --bg-warm: #f6f1e7;
+            --surface: #ffffff;
+            --border: rgba(26,26,26,0.08); --border-strong: rgba(26,26,26,0.14);
+            --text-primary: #1a1a1a; --text-body: #52525b; --text-muted: #9a9aa2;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text-primary); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--gold-deep); font-weight: 400; }
+
+        .dd-hero { max-width: 48rem; margin: 0 auto; padding: 5rem 1.5rem 3rem; text-align: center; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.75rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+        .dd-eyebrow a:hover { color: var(--accent); border-color: var(--accent); }
+        .dd-title { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 8vw, 5rem); font-weight: 700; line-height: 1.04; margin-bottom: 1.5rem; }
+        .dd-title em { font-style: italic; color: var(--accent); }
+        .dd-lead { font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 300; font-style: italic; color: var(--text-body); line-height: 1.5; max-width: 36rem; margin: 0 auto; border-left: 3px solid var(--accent); padding-left: 1.5rem; text-align: left; }
+
+        .scripture-wrap { max-width: 44rem; margin: 1rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: var(--bg-warm); border-left: 4px solid var(--gold); border-radius: 0 1rem 1rem 0; padding: 2rem 2.2rem; }
+        .sb-ref { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: 0.98rem; color: #44443f; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--text-primary); font-weight: 600; }
+        .sb-v { color: var(--gold-deep); font-weight: 700; font-size: 0.7rem; vertical-align: super; margin-right: 0.15rem; }
+
+        .yt-wrap { max-width: 52rem; margin: 3rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.12); background: #e4e4e7; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--text-muted); font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; font-style: italic; margin-top: 1rem; }
+
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.34em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; display: block; }
+        .dd-h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 4.5vw, 2.4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.4rem; letter-spacing: -0.01em; }
+        .dd-h2 em { font-style: italic; color: var(--gold-deep); }
+        .dd-p { font-size: 1.02rem; color: var(--text-body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--text-primary); font-weight: 600; }
+        .dd-p .land { color: var(--accent-deep); font-weight: 600; font-style: italic; }
+        .dd-iceberg-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-deep); }
+
+        .note { background: #f4f5f4; border: 1px solid var(--border); border-radius: 0.9rem; padding: 1.1rem 1.4rem; margin: 0.4rem 0 1.6rem; }
+        .note p { font-size: 0.84rem; color: #5b5f5b; line-height: 1.7; font-weight: 300; }
+        .note .nt-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #9a9aa2; display: block; margin-bottom: 0.4rem; }
+
+        .sig-band { background: linear-gradient(180deg, #26140f 0%, #331c15 100%); margin-top: 4rem; padding: 4rem 1.5rem 4.5rem; color: #ecdfd9; }
+        .sig-inner { max-width: 46rem; margin: 0 auto; }
+        .sig-head { text-align: center; margin-bottom: 2.5rem; }
+        .sig-head .dd-kicker { color: #d4b870; }
+        .sig-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 700; line-height: 1.12; color: #f4e7d8; }
+        .sig-head h2 em { font-style: italic; color: #d4b870; }
+        .sig-head p { margin-top: 1rem; font-size: 0.9rem; color: #c2a99f; font-weight: 300; max-width: 32rem; margin-left: auto; margin-right: auto; }
+        .sig-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 1.6rem; }
+        @media (max-width: 620px) { .sig-steps { grid-template-columns: 1fr; } }
+        .sig-step { background: rgba(255,255,255,0.04); border: 1px solid rgba(212,184,112,0.16); border-radius: 0.9rem; padding: 1.1rem 0.9rem; text-align: center; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+        .sig-step:hover { transform: translateY(-2px); background: rgba(255,255,255,0.07); }
+        .sig-step.active { background: rgba(212,184,112,0.12); border-color: rgba(212,184,112,0.55); }
+        .sig-step .ss-n { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: #b08a6e; display: block; }
+        .sig-step.active .ss-n { color: #d4b870; }
+        .sig-step .ss-l { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.05rem; color: #ecdfd9; margin-top: 0.15rem; }
+        .sig-step .ss-g { display: block; font-size: 0.6rem; font-style: italic; color: #a58a80; margin-top: 0.3rem; }
+        .sig-panel { display: none; background: rgba(255,255,255,0.03); border: 1px solid rgba(212,184,112,0.14); border-left: 3px solid #d4b870; border-radius: 0 1rem 1rem 0; padding: 1.8rem 2rem; animation: sigIn 0.45s ease; }
+        .sig-panel.show { display: block; }
+        @keyframes sigIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+        .sig-panel .sp-greek { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: #d4b870; margin-bottom: 0.2rem; }
+        .sig-panel .sp-gloss { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #a58a80; margin-bottom: 1rem; }
+        .sig-panel p { font-size: 0.95rem; color: #ddccc4; line-height: 1.8; font-weight: 300; }
+        .sig-panel p em { color: #f4e7d8; font-style: italic; }
+        .sig-panel .sp-echo { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px solid rgba(212,184,112,0.14); font-size: 0.82rem; color: #c2a99f; }
+        .sig-panel .sp-echo b { color: #d4b870; font-weight: 600; }
+
+        .discuss { max-width: 44rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .discuss-head { text-align: center; margin-bottom: 2.2rem; }
+        .discuss-head .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); }
+        .discuss-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: 700; margin-top: 0.6rem; }
+        .discuss-head .bar { width: 3rem; height: 2px; background: var(--gold); margin: 1.2rem auto 0; }
+        .q-item { display: flex; gap: 1.1rem; padding: 1.3rem 0; border-bottom: 1px solid var(--border); }
+        .q-num { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: var(--gold-deep); flex-shrink: 0; width: 1.6rem; }
+        .q-item p { font-size: 0.95rem; color: var(--text-body); line-height: 1.7; font-weight: 300; }
+        .q-item p strong { color: var(--text-primary); font-weight: 600; }
+
+        .send { max-width: 40rem; margin: 4rem auto 0; padding: 3rem 2rem; text-align: center; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.2rem; }
+        .send p.body { font-size: 1.1rem; color: var(--text-body); line-height: 1.85; font-weight: 300; font-style: italic; }
+        .send .pull { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; line-height: 1.3; color: var(--text-primary); margin-top: 1.6rem; }
+        .send .pull em { font-style: italic; color: var(--gold-deep); }
+
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.8rem; border: 1px solid var(--border-strong); border-radius: 100px; background: var(--surface); color: var(--text-primary); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .share-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .strip-wrap { max-width: 56rem; margin: 4.5rem auto 0; padding: 0 0.5rem; }
+        .strip-eb { text-align: center; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .dd-back { text-align: center; padding: 3rem 1.5rem 4.5rem; }
+        .dd-back a { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+        .dd-back a:hover { color: var(--accent); border-color: var(--accent); }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <header class="dd-hero">
+        <p class="dd-eyebrow"><a href="/res/deep/2026/the-mirror.html">Acts Journey &nbsp;·&nbsp; Acts 20</a> &nbsp;·&nbsp; Part III &nbsp;·&nbsp; Communion</p>
+        <h1 class="dd-title">The Shepherd's <em>Love</em></h1>
+        <p class="dd-lead">"That blood is the price tag hanging on every single face in this room. That is what you cost."</p>
+    </header>
+
+    <div class="scripture-wrap reveal">
+        <div class="scripture-box">
+            <span class="sb-ref">Acts 20:28–31 · ESV</span>
+            <p class="sb-text">
+                <span class="sb-v">28</span>Pay careful attention to yourselves and to all the flock, in which the Holy Spirit has made you overseers, to care for <b>the church of God, which he obtained with his own blood</b>.
+                <span class="sb-v">29</span>I know that after my departure fierce wolves will come in among you, not sparing the flock;
+                <span class="sb-v">30</span>and from among your own selves will arise men speaking twisted things, to draw away the disciples after them.
+                <span class="sb-v">31</span>Therefore be alert, remembering that for three years I did not cease night or day to admonish every one <b>with tears</b>.
+            </p>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame" id="yt-mount"></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <!-- ══════════ THE ONLY CREDENTIAL ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the handoff</span>
+        <h2 class="dd-h2">The one credential Jesus ever <em>asked for</em></h2>
+        <p class="dd-p">The word for "care for" the flock is <em class="greek">poimainein</em> — to shepherd. And it is not a word Paul invented; it's the word the risen Christ laid on Peter by the fire. Remember <b>how</b> Jesus gave it — not "Are you qualified? Do you have a strategy?" but one question, asked three times to heal three denials: <em>"Simon… do you love me?" … "Feed my sheep."</em> (John 21:15–17).</p>
+        <p class="dd-p"><span class="land">Every single time, the commission came riding out on the back of the love.</span> The only credential Jesus ever asks for is love for the Shepherd — not skill, not strategy. <b>Why?</b> Because we become like the One we love; our love for Christ is what patterns us into him. This isn't a leadership seminar — it's an <em>imitatio</em> passage. And that love shepherds wherever it's standing: a kitchen table, the family in your own house, a wider room. <span class="land">The size of the flock was never the point. The love behind the shepherding is.</span> Notice even the order of the charge — <em>yourselves first, then the flock.</em> You can't keep watch over others out of a soul you've stopped keeping watch over.</p>
+    </section>
+
+    <!-- ══════════ THE HIRELING'S MATH ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — two hearts</span>
+        <h2 class="dd-h2">The hireling runs the math. Love <em>doesn't</em></h2>
+        <p class="dd-p">Jesus already told us the difference, and it's the difference between two hearts (John 10:11–13). The hired hand sees the wolf and runs; the shepherd lays down his life. <span class="land">And the difference isn't courage, and it isn't skill — it's love.</span> A hired hand is always doing math: wage against work, reward against risk. He'll stay as long as the staying pays. But the wolf drives the price up past the wage — and the instant staying costs more than it's worth, he's already gone, and doesn't even feel bad. He was never theirs; it was always a transaction.</p>
+        <p class="dd-p">The shepherd doesn't run the math at all, because the sheep are <em>his</em>. <span class="land">Love doesn't ask "what am I getting out of this?" Love stays.</span> And this lands in your own life — not ancient elders, not literal wolves, but people. Every marriage, friendship, family, church reaches a moment when loving this person stops being easy and starts costing you something. Right there, you find out what you are.</p>
+        <div class="note">
+            <span class="nt-tag">The gospel inside it</span>
+            <p>It feels like a weight you don't have the strength to lift — and you're right, you don't. This love isn't summoned; it's <em>received.</em> "God's love has been poured into our hearts through the Holy Spirit" (Romans 5:5); "we love because he first loved us" (1 John 4:19). It's poured in <b>before</b> it's ever poured out. What did three years of that staying look like? "Night and day… with tears" (v.31) — <em class="greek">grēgoreite</em>, keep awake. That's not the résumé of a hireling. That's a shepherd who stayed.</p>
+        </div>
+    </section>
+
+    <!-- ══════════ SIGNATURE — THE PURCHASE ══════════ -->
+    <section class="sig-band reveal">
+        <div class="sig-inner">
+            <div class="sig-head">
+                <span class="dd-kicker">The Signature</span>
+                <h2>The <em>Purchase</em></h2>
+                <p>Five words in verse 28 are so stark that the scribes who copied Acts for centuries actually flinched. Step through what it cost.</p>
+            </div>
+
+            <div class="sig-steps">
+                <div class="sig-step active" data-target="sp-1"><span class="ss-n">i</span><span class="ss-l">The Word</span><span class="ss-g">obtained</span></div>
+                <div class="sig-step" data-target="sp-2"><span class="ss-n">ii</span><span class="ss-l">The Flinch</span><span class="ss-g">the scribes softened it</span></div>
+                <div class="sig-step" data-target="sp-3"><span class="ss-n">iii</span><span class="ss-l">The Price Tag</span><span class="ss-g">every face</span></div>
+            </div>
+
+            <div class="sig-panel show" id="sp-1">
+                <div class="sp-greek">periepoiēsato</div>
+                <div class="sp-gloss">he obtained / purchased / made his own</div>
+                <p>"The church of God, which he <em>obtained</em> with his own blood." The verb is the language of <em>acquisition at a price</em> — a possession bought and kept. The church was not founded on a good idea, a shared interest, or a warm feeling. <em>She was purchased.</em></p>
+                <div class="sp-echo"><b>The mirror —</b> this is the Good Shepherd doing the very thing he said he came to do: "the good shepherd lays down his life for the sheep" (John 10:11).</div>
+            </div>
+            <div class="sig-panel" id="sp-2">
+                <div class="sp-greek">…tou theou / tou kyriou?</div>
+                <div class="sp-gloss">"of God" — or the softened "of the Lord"?</div>
+                <p>Luke writes it so starkly — <em>the blood of God</em> — that some scribes quietly changed "the church of God" to "the church of <em>the Lord</em>" to take the edge off. <b>The hard reading is the true one.</b> It presses the two most staggering things in the universe into one phrase: the God who <em>cannot die</em>, bled — for this.</p>
+                <div class="sp-echo"><b>Handle honestly —</b> the Greek can also be rendered "with the blood of his Own" — that is, the Son. <b>Stott</b> and <b>Hamm</b> sit right here. Either way, deity and cross are welded together in a single line.</div>
+            </div>
+            <div class="sig-panel" id="sp-3">
+                <div class="sp-greek">the price on every face</div>
+                <div class="sp-gloss">what you cost</div>
+                <p>That blood is the price tag hanging on every single face in this room. <em>That is what they cost. That is what you cost.</em> To treat the church as merely social — a club, coffee and handshakes — is to slap a clearance-rack price on the one thing God valued at the cost of his own blood. The camaraderie is a real gift. <em>But it is not the bottom. The bottom is blood.</em></p>
+                <div class="sp-echo"><b>At the table —</b> "you only learn what something is worth by what someone was willing to pay for it." The cup you hold is the answer: <em>I thought so. I paid this much.</em></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ COMMUNION CLOSE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">The table</span>
+        <h2 class="dd-h2">The blood that bought you is the blood that makes us <em>one</em></h2>
+        <p class="dd-p">Watch what the wolves are after: <em class="greek">apospan</em> — to drag the flock <b>apart</b>, to tear off and divide. That is the precise opposite of the last thing the Shepherd prayed before he died: <em>"that they may all be one, just as you, Father, are in me"</em> (John 17:21). The wolf comes for the very oneness Jesus shed his blood to make.</p>
+        <p class="dd-p">And that oneness is remade at the table: <em>"Because there is one bread, we who are many are one body"</em> (1 Cor 10:17). The blood that purchased you is the blood that makes us one. Notice the rhythm running through the whole scene — a <b>handoff</b>: Paul received a flock and handed it on; received love and poured it out; received the watch and passed it to the next shepherds. That is the rhythm of everything holy — <span class="land">it is received before it is ever given</span> — the exact language of the table: <em>"I pass on to you what I received from the Lord…"</em> (1 Cor 11:23). <span class="land">You don't summon a shepherd's heart. You receive his.</span></p>
+    </section>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss reveal">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+            <div class="bar"></div>
+        </div>
+        <div class="q-list">
+            <div class="q-item"><span class="q-num">01</span><p><strong>The credential.</strong> Jesus asked Peter "Do you love me?" — not "Are you qualified?" Where in your care for people are you drawing on strategy or obligation rather than love for Christ?</p></div>
+            <div class="q-item"><span class="q-num">02</span><p><strong>The math.</strong> Where are you running the hireling's calculation right now — weighing whether a person or community is still "worth it"? What would it look like to stop running the math?</p></div>
+            <div class="q-item"><span class="q-num">03</span><p><strong>The wolf and the oneness.</strong> The wolf comes for the unity Christ prayed and bled to make. Who in this community do you need to guard your love for — refusing to let the wolf win by dividing you from them?</p></div>
+            <div class="q-item"><span class="q-num">04</span><p><strong>The price.</strong> "You only learn what something is worth by what someone was willing to pay for it." How does the blood price of the church change how you show up here?</p></div>
+            <div class="q-item"><span class="q-num">05</span><p><strong>Family prompt:</strong> Think of the most expensive thing in our home — and then imagine something worth far, far more than all of it: a person. That's how God sees each of us. This week, pick one person our family finds hard to love right now, and decide together on one concrete kindness we'll show them — not because it's easy, but because of what they're worth.</p></div>
+        </div>
+    </section>
+
+    <div class="send reveal">
+        <p class="eb">The Send</p>
+        <p class="body">Come to the table, and don't come casually. Look at the bread — the broken body she was built on. Look at the cup — the blood she was bought with. When you take the cup, you are holding up to the light exactly what your brother across the aisle is worth, what your sister three rows back is worth, what <em>you</em> are worth. And let the cup make you a shepherd in turn — because the love that commissioned Peter, the love that stays when the wolf comes, is the love being poured into you right now, to be poured back out.</p>
+        <p class="pull">The love that makes you a shepherd is not something you summon — it is something you <em>receive</em>. Come. Hold the price. And be made like him.</p>
+    </div>
+
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share this deep dive</button>
+    </div>
+
+    <div class="strip-wrap reveal">
+        <p class="strip-eb">The Series · Acts 20</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back"><a href="/deepdives.html">← All Deep Dives</a></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-20-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="The Shepherd’s Love" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.sig-step').forEach(step => {
+            step.addEventListener('click', () => {
+                document.querySelectorAll('.sig-step').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.sig-panel').forEach(p => p.classList.remove('show'));
+                step.classList.add('active');
+                const t = document.getElementById(step.getAttribute('data-target'));
+                if (t) t.classList.add('show');
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts20RenderStrip === 'function') acts20RenderStrip('#series-strip', 'the-shepherds-love');
+        });
+
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = { title: 'The Shepherd’s Love — Deep Dive | The Living Room', text: 'The church was bought with the blood of God — a line so stark the scribes flinched. A deep dive into Acts 20:25–31.', url: 'https://thelivingroom.io/res/deep/2026/the-shepherds-love.html' };
+            try { if (navigator.share) { await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share this deep dive', 2000); } } catch (e) {}
+        });
+    </script>
+</body>
+</html>

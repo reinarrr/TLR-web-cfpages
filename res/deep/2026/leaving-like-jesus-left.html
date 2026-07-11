@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaving Like Jesus Left — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/leaving-like-jesus-left.html">
+    <meta property="og:title"       content="Leaving Like Jesus Left — Deep Dive">
+    <meta property="og:description" content="Paul's farewell climaxes not on his own wisdom but on a saying of Jesus found nowhere in the Gospels — an agraphon. The disciple signs his goodbye in the Master's handwriting. A deep dive into Acts 20:32–38.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Leaving Like Jesus Left — Deep Dive">
+    <meta name="twitter:description" content="A deep dive into Acts 20:32–38 — a goodbye shaped like Christ's goodbye.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --accent: #a8843d;          /* Part IV — gold (his leaving) */
+            --accent-deep: #8a6c2e;
+            --gold: #c5a059; --gold-deep: #a8843d;
+            --bg: #faf9f6; --bg-warm: #f6f1e7;
+            --surface: #ffffff;
+            --border: rgba(26,26,26,0.08); --border-strong: rgba(26,26,26,0.14);
+            --text-primary: #1a1a1a; --text-body: #52525b; --text-muted: #9a9aa2;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text-primary); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--gold-deep); font-weight: 400; }
+
+        .dd-hero { max-width: 48rem; margin: 0 auto; padding: 5rem 1.5rem 3rem; text-align: center; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.75rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+        .dd-eyebrow a:hover { color: var(--accent); border-color: var(--accent); }
+        .dd-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 7.5vw, 4.6rem); font-weight: 700; line-height: 1.05; margin-bottom: 1.5rem; }
+        .dd-title em { font-style: italic; color: var(--accent); }
+        .dd-lead { font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 300; font-style: italic; color: var(--text-body); line-height: 1.5; max-width: 36rem; margin: 0 auto; border-left: 3px solid var(--accent); padding-left: 1.5rem; text-align: left; }
+
+        .scripture-wrap { max-width: 44rem; margin: 1rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: var(--bg-warm); border-left: 4px solid var(--gold); border-radius: 0 1rem 1rem 0; padding: 2rem 2.2rem; }
+        .sb-ref { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: 0.98rem; color: #44443f; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--text-primary); font-weight: 600; }
+        .sb-v { color: var(--gold-deep); font-weight: 700; font-size: 0.7rem; vertical-align: super; margin-right: 0.15rem; }
+
+        .yt-wrap { max-width: 52rem; margin: 3rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.12); background: #e4e4e7; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--text-muted); font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; font-style: italic; margin-top: 1rem; }
+
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.34em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; display: block; }
+        .dd-h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 4.5vw, 2.4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.4rem; letter-spacing: -0.01em; }
+        .dd-h2 em { font-style: italic; color: var(--gold-deep); }
+        .dd-p { font-size: 1.02rem; color: var(--text-body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--text-primary); font-weight: 600; }
+        .dd-p .land { color: var(--accent-deep); font-weight: 600; font-style: italic; }
+        .dd-iceberg-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-deep); }
+
+        .note { background: #f4f5f4; border: 1px solid var(--border); border-radius: 0.9rem; padding: 1.1rem 1.4rem; margin: 0.4rem 0 1.6rem; }
+        .note p { font-size: 0.84rem; color: #5b5f5b; line-height: 1.7; font-weight: 300; }
+        .note .nt-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #9a9aa2; display: block; margin-bottom: 0.4rem; }
+
+        .twin { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 0.4rem 0 1.6rem; }
+        @media (max-width: 620px) { .twin { grid-template-columns: 1fr; } }
+        .twin-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem 1.6rem; }
+        .twin-card .tc-eb { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); display: block; margin-bottom: 0.7rem; }
+        .twin-card .tc-ref { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .twin-card p { font-size: 0.86rem; color: var(--text-body); line-height: 1.7; font-weight: 300; }
+
+        .sig-band { background: linear-gradient(180deg, #221b0e 0%, #2e2514 100%); margin-top: 4rem; padding: 4rem 1.5rem 4.5rem; color: #ece5d5; }
+        .sig-inner { max-width: 46rem; margin: 0 auto; }
+        .sig-head { text-align: center; margin-bottom: 2.5rem; }
+        .sig-head .dd-kicker { color: #d4b870; }
+        .sig-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 700; line-height: 1.12; color: #f4ecd8; }
+        .sig-head h2 em { font-style: italic; color: #d4b870; }
+        .sig-head p { margin-top: 1rem; font-size: 0.9rem; color: #b4a988; font-weight: 300; max-width: 32rem; margin-left: auto; margin-right: auto; }
+        .sig-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 1.6rem; }
+        @media (max-width: 620px) { .sig-steps { grid-template-columns: 1fr; } }
+        .sig-step { background: rgba(255,255,255,0.04); border: 1px solid rgba(212,184,112,0.16); border-radius: 0.9rem; padding: 1.1rem 0.9rem; text-align: center; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+        .sig-step:hover { transform: translateY(-2px); background: rgba(255,255,255,0.07); }
+        .sig-step.active { background: rgba(212,184,112,0.12); border-color: rgba(212,184,112,0.55); }
+        .sig-step .ss-n { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: #a89566; display: block; }
+        .sig-step.active .ss-n { color: #d4b870; }
+        .sig-step .ss-l { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.05rem; color: #ece5d5; margin-top: 0.15rem; }
+        .sig-step .ss-g { display: block; font-size: 0.6rem; font-style: italic; color: #9c9075; margin-top: 0.3rem; }
+        .sig-panel { display: none; background: rgba(255,255,255,0.03); border: 1px solid rgba(212,184,112,0.14); border-left: 3px solid #d4b870; border-radius: 0 1rem 1rem 0; padding: 1.8rem 2rem; animation: sigIn 0.45s ease; }
+        .sig-panel.show { display: block; }
+        @keyframes sigIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+        .sig-panel .sp-greek { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: #d4b870; margin-bottom: 0.2rem; }
+        .sig-panel .sp-gloss { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #9c9075; margin-bottom: 1rem; }
+        .sig-panel p { font-size: 0.95rem; color: #ddd4c2; line-height: 1.8; font-weight: 300; }
+        .sig-panel p em { color: #f4ecd8; font-style: italic; }
+        .sig-panel .sp-echo { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px solid rgba(212,184,112,0.14); font-size: 0.82rem; color: #b4a988; }
+        .sig-panel .sp-echo b { color: #d4b870; font-weight: 600; }
+
+        .discuss { max-width: 44rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .discuss-head { text-align: center; margin-bottom: 2.2rem; }
+        .discuss-head .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); }
+        .discuss-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: 700; margin-top: 0.6rem; }
+        .discuss-head .bar { width: 3rem; height: 2px; background: var(--gold); margin: 1.2rem auto 0; }
+        .q-item { display: flex; gap: 1.1rem; padding: 1.3rem 0; border-bottom: 1px solid var(--border); }
+        .q-num { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: var(--gold-deep); flex-shrink: 0; width: 1.6rem; }
+        .q-item p { font-size: 0.95rem; color: var(--text-body); line-height: 1.7; font-weight: 300; }
+        .q-item p strong { color: var(--text-primary); font-weight: 600; }
+
+        .send { max-width: 40rem; margin: 4rem auto 0; padding: 3rem 2rem; text-align: center; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.2rem; }
+        .send p.body { font-size: 1.1rem; color: var(--text-body); line-height: 1.85; font-weight: 300; font-style: italic; }
+        .send .pull { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; line-height: 1.3; color: var(--text-primary); margin-top: 1.6rem; }
+        .send .pull em { font-style: italic; color: var(--gold-deep); }
+
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.8rem; border: 1px solid var(--border-strong); border-radius: 100px; background: var(--surface); color: var(--text-primary); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .share-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .strip-wrap { max-width: 56rem; margin: 4.5rem auto 0; padding: 0 0.5rem; }
+        .strip-eb { text-align: center; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .dd-back { text-align: center; padding: 3rem 1.5rem 4.5rem; }
+        .dd-back a { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+        .dd-back a:hover { color: var(--accent); border-color: var(--accent); }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <header class="dd-hero">
+        <p class="dd-eyebrow"><a href="/res/deep/2026/the-mirror.html">Acts Journey &nbsp;·&nbsp; Acts 20</a> &nbsp;·&nbsp; Part IV</p>
+        <h1 class="dd-title">Leaving Like <em>Jesus</em> Left</h1>
+        <p class="dd-lead">"The Son of God would not make a fist even around his own glory. To be like that Christ is, finally, to unclench."</p>
+    </header>
+
+    <div class="scripture-wrap reveal">
+        <div class="scripture-box">
+            <span class="sb-ref">Acts 20:35–38 · ESV</span>
+            <p class="sb-text">
+                <span class="sb-v">35</span>In all things I have shown you that by working hard in this way we must help the weak and remember the words of the Lord Jesus, how he himself said, <b>"It is more blessed to give than to receive."</b>
+                <span class="sb-v">36</span>And when he had said these things, <b>he knelt down and prayed</b> with them all.
+                <span class="sb-v">37</span>And there was much weeping on the part of all; they embraced Paul and kissed him,
+                <span class="sb-v">38</span>being sorrowful most of all because of the word he had spoken, that they would not see his face again. And they accompanied him to the ship.
+            </p>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame" id="yt-mount"></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <!-- ══════════ OPEN HANDS ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the shape</span>
+        <h2 class="dd-h2">Open hands, <em>three times over</em></h2>
+        <p class="dd-p">Everyone leaves. Every season ends, every assignment is handed off, every life finally sails away from the people on the shore. The only question is <em>how</em> you go — and Paul's whole farewell is one image: <span class="land">open hands.</span> Watch him refuse, three times over, to close his fist on anything.</p>
+        <div class="twin">
+            <div class="twin-card">
+                <span class="tc-eb">1 · The ministry</span>
+                <div class="tc-ref">"I commend you to God"</div>
+                <p><em class="greek">paratithemai</em> — a banking word: to deposit something precious into trusted hands. Notice <em>whose</em> — not the elders, not a successor. He hands the flock <b>up</b> to God, not <b>across</b>.</p>
+            </div>
+            <div class="twin-card">
+                <span class="tc-eb">2 · The silver</span>
+                <div class="tc-ref">"these hands"</div>
+                <p>In a money-soaked city he worked a trade and waived a right he fiercely defended for others — so no one could whisper the apostle was in it for the silver. Integrity, not income.</p>
+            </div>
+        </div>
+        <p class="dd-p">The proof that you've led people to Jesus is that you can let go of them and they'll still stand — because the church was never standing on Paul; it stands on <b>God and the word of his grace</b>. And that first move is exactly the one Jesus made the night before he died: he didn't say "I'll keep them" — he handed them to the Father, <em>"Holy Father, keep them in your name"</em> (John 17:11). <span class="land">Paul learned to leave from watching his Master leave.</span></p>
+        <div class="note">
+            <span class="nt-tag">The deepest shape</span>
+            <p>Look what the open hand finally reflects: <em>"who, though he was in the form of God, did not count equality with God a thing to be grasped"</em> (Phil 2:6). The Greek <em class="greek">harpagmos</em> means a thing you clutch and refuse to release. <b>The Son of God would not make a fist even around his own glory</b> — he emptied himself, and on the cross those hands were held open, nailed open, gripping nothing and giving everything.</p>
+        </div>
+    </section>
+
+    <!-- ══════════ THE NECK ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the goodbye</span>
+        <h2 class="dd-h2">A reunion word, spent on a <em>parting</em></h2>
+        <p class="dd-p">Now the hardest open hand of all — releasing the people he loves. Watch him kneel: <em class="greek">theis ta gonata</em>, "he placed his knees on the ground." That's the Gethsemane posture — the exact way Luke describes Jesus praying the night before the cross (Luke 22:41). A shepherd-priest on his knees, praying over his own one last time — <span class="land">Paul's own John 17.</span></p>
+        <p class="dd-p">And then the room breaks. They "embraced Paul" — but the Greek is stronger and more tender: <em class="greek">epipesontes epi ton trachēlon</em>, they <b>fell on his neck</b>. That exact phrase is the one Luke spends on the father running to the prodigal — <em>"his father saw him… and ran and embraced him"</em> (Luke 15:20). <span class="land">A word made for reunions is being spent on a parting.</span> They weep, they cling, in anguish over one sentence: they will not see his face again.</p>
+        <p class="dd-p">But this is not a tragedy — because letting go is not dropping; <span class="land">it's entrusting.</span> Paul isn't abandoning them to the void; he's releasing them into stronger hands than his own. You know this if you've ever loved anyone enough to let them go — it's the whole vocation of a parent: you don't raise a child to keep them, you raise them to leave. <b>Mature love is releasing love.</b> It was true of Jesus too — he didn't clutch his disciples; he <em>sent</em> them, and even said it was to their advantage that he go (John 16:7). His leaving wasn't the end of them. It was their launch.</p>
+    </section>
+
+    <!-- ══════════ SIGNATURE — THE AGRAPHON ══════════ -->
+    <section class="sig-band reveal">
+        <div class="sig-inner">
+            <div class="sig-head">
+                <span class="dd-kicker">The Signature</span>
+                <h2>The <em>Agraphon</em></h2>
+                <p>Paul ends his last sermon on a sentence of Jesus — and something quiet and astonishing is hiding in it. Step through the reveal.</p>
+            </div>
+
+            <div class="sig-steps">
+                <div class="sig-step active" data-target="sp-1"><span class="ss-n">i</span><span class="ss-l">The Saying</span><span class="ss-g">his final word</span></div>
+                <div class="sig-step" data-target="sp-2"><span class="ss-n">ii</span><span class="ss-l">Nowhere</span><span class="ss-g">not in the Gospels</span></div>
+                <div class="sig-step" data-target="sp-3"><span class="ss-n">iii</span><span class="ss-l">The Tell</span><span class="ss-g">his handwriting</span></div>
+            </div>
+
+            <div class="sig-panel show" id="sp-1">
+                <div class="sp-greek">"It is more blessed to give than to receive"</div>
+                <div class="sp-gloss">the words of the Lord Jesus — Acts 20:35</div>
+                <p>Paul lands his whole farewell on a saying of Jesus. And hear what it actually is — not only a command but <em>a promise</em>: Jesus is telling us where the blessing <em>lives</em> — on the giving end. A clenched fist doesn't merely fail to give; it <em>forfeits</em> the blessing it was clenching to keep. A closed hand can neither give nor receive; it's sealed at both ends.</p>
+                <div class="sp-echo"><b>The open hand —</b> the only posture that can both give and receive. In the kingdom everyone lives this way, because it's the only way the blessing keeps moving.</div>
+            </div>
+            <div class="sig-panel" id="sp-2">
+                <div class="sp-greek">agraphon</div>
+                <div class="sp-gloss">an "unwritten" saying</div>
+                <p>Now the astonishing part: that sentence appears <em>nowhere</em> in the four Gospels. In the whole Bible it's found only here, on Paul's lips, at a goodbye. It's an <b>agraphon</b> — an unwritten word of Jesus that survived only because a disciple who loved him <em>carried it in his chest for thirty years</em> and pulled it out at the end.</p>
+                <div class="sp-echo"><b>Carried, not copied —</b> Paul never walked with the earthly Jesus. This saying reached him the way love travels: mouth to mouth, life to life, held close until it was needed.</div>
+            </div>
+            <div class="sig-panel" id="sp-3">
+                <div class="sp-greek">signed in the Master's hand</div>
+                <div class="sp-gloss">the tell of the whole series</div>
+                <p>This is the tell of the entire mirror. After a lifetime of being shaped into his Master, Paul reaches for his final word — and what comes out is <em>not Paul's wisdom. It's Jesus' own voice.</em> <span style="color:#f4ecd8;">The disciple has become so conformed that his farewell is signed in the Master's handwriting.</span> And notice what the saying is <em>about</em>: the open hand. Giving over getting — the deepest shape of Christ himself.</p>
+                <div class="sp-echo"><b>The mirror, complete —</b> you can tell what a life was really for by what it reaches for at the end. Paul reached for Jesus.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ THE SHIP ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">The last frame</span>
+        <h2 class="dd-h2">The ship grows small — and the gospel <em>sails on</em></h2>
+        <p class="dd-p">Watch the ship slip its anchor and lean out toward open water, and get smaller, and smaller, until the men on the beach can't tell Paul from the rigging. That's the last image Acts 20 gives us — a small ship on a wide sea, getting smaller. And it is not the gospel <em>ending</em>. It's the gospel <b>journeying on</b>. The road that ran from Galilee to Jerusalem, and from Jerusalem toward Rome, kept running — through Ephesus, through every city since, across two thousand years and an entire ocean — <span class="land">until it ran into this room, into you.</span> You're standing on this beach because somebody, somewhere up that long shoreline, held the gospel loosely enough to hand it on.</p>
+        <p class="dd-p">And the leaving Paul imitated was the Master's own goodbye: <em>"lifting up his hands he blessed them. While he blessed them, he parted from them and was carried up"</em> (Luke 24:50–51). Hands lifted, blessing his own, parting — and carried home. <span class="land">That is the exact shape of Paul on the beach: kneeling, blessing, entrusting, gone.</span> Leave like Paul left — because Paul left like Jesus left.</p>
+    </section>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss reveal">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+            <div class="bar"></div>
+        </div>
+        <div class="q-list">
+            <div class="q-item"><span class="q-num">01</span><p><strong>Load-bearing.</strong> Is there a ministry, role, or relationship you've quietly made dependent on <em>you</em>, so that you couldn't let it go? What would it mean to deposit it "with God and the word of his grace" instead?</p></div>
+            <div class="q-item"><span class="q-num">02</span><p><strong>The blessing on the giving end.</strong> Jesus said it is <em>more blessed to give than to receive.</em> Where have you been clenching a blessing to keep it — and what would open up if you let it flow through your hands instead?</p></div>
+            <div class="q-item"><span class="q-num">03</span><p><strong>Signed in his voice.</strong> Paul's final word wasn't his own wisdom but Jesus' own saying. If your life reached for its final word today, whose voice would come out? Where do you long to be more conformed to your Master?</p></div>
+            <div class="q-item"><span class="q-num">04</span><p><strong>The ship.</strong> What — or who — is God asking you to release into stronger hands than yours? What freedom might be waiting on the far side of that open hand?</p></div>
+            <div class="q-item"><span class="q-num">05</span><p><strong>Family prompt:</strong> Try it with your actual hands at dinner — everyone makes a tight fist, then slowly opens it flat. A fist can't give <em>or</em> receive; an open hand can do both. Name one thing our family has been gripping a little too tightly — a schedule, a grudge, a worry, a possession — and one small way we could hold it with an open hand this week.</p></div>
+        </div>
+    </section>
+
+    <div class="send reveal">
+        <p class="eb">The Send</p>
+        <p class="body">Every one of us is somewhere on this beach. There are things in your fist this morning — a season you won't release, a role you've made load-bearing, a person you're gripping instead of entrusting. And one day you will sail away from all of it. The only question the chapter asks is <em>how</em> you'll go: clutching, white-knuckled — or the way Jesus left, hands open, your people deposited with God, your last words shaped like his. You don't have to wait for the end to start. You can open your hands today.</p>
+        <p class="pull">The ship is getting smaller. The journey isn't over. It's just <em>your turn to carry it now.</em></p>
+    </div>
+
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share this deep dive</button>
+    </div>
+
+    <div class="strip-wrap reveal">
+        <p class="strip-eb">The Series · Acts 20</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back"><a href="/deepdives.html">← All Deep Dives</a></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-20-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="Leaving Like Jesus Left" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.sig-step').forEach(step => {
+            step.addEventListener('click', () => {
+                document.querySelectorAll('.sig-step').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.sig-panel').forEach(p => p.classList.remove('show'));
+                step.classList.add('active');
+                const t = document.getElementById(step.getAttribute('data-target'));
+                if (t) t.classList.add('show');
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts20RenderStrip === 'function') acts20RenderStrip('#series-strip', 'leaving-like-jesus-left');
+        });
+
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = { title: 'Leaving Like Jesus Left — Deep Dive | The Living Room', text: 'Paul’s farewell climaxes on a saying of Jesus found nowhere in the Gospels — an agraphon. A deep dive into Acts 20:32–38.', url: 'https://thelivingroom.io/res/deep/2026/leaving-like-jesus-left.html' };
+            try { if (navigator.share) { await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share this deep dive', 2000); } } catch (e) {}
+        });
+    </script>
+</body>
+</html>
