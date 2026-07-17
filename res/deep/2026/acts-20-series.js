@@ -29,7 +29,7 @@ const ACTS20 = {
         {
             n: 'II', slug: 'finish-the-race',
             title: 'Finish the Race', date: 'Jul 19', passage: 'Acts 20:17–24',
-            accent: '#5a7a60', live: false,
+            accent: '#5a7a60', live: true,
             movement: 'His faithfulness, run to the line',
             interactive: 'The Course'
         },
