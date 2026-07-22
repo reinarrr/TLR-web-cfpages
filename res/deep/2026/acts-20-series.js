@@ -36,7 +36,7 @@ const ACTS20 = {
         {
             n: 'III', slug: 'the-shepherds-love',
             title: 'The Shepherd’s Love', date: 'Jul 26', passage: 'Acts 20:25–31',
-            accent: '#c06a4d', live: false,
+            accent: '#c06a4d', live: true,
             movement: 'His death — the flock bought with blood',
             interactive: 'The Purchase'
         },
