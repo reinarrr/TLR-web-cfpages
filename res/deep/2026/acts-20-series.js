@@ -43,7 +43,7 @@ const ACTS20 = {
         {
             n: 'IV', slug: 'leaving-like-jesus-left',
             title: 'Leaving Like Jesus Left', date: 'Aug 2', passage: 'Acts 20:32–38',
-            accent: '#a8843d', live: false,
+            accent: '#a8843d', live: true,
             movement: 'His manner of leaving in us',
             interactive: 'The Agraphon'
         }
