@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lord's Will Be Done — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/the-lords-will-be-done.html">
+    <meta property="og:title"       content="The Lord's Will Be Done — Deep Dive">
+    <meta property="og:description" content="A marked man sails toward the chains — and the hardest prayer falls on the people who love him. The Gethsemane prayer is spoken by the companions, not Paul. A deep dive into Acts 21:1–16.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="The Lord's Will Be Done — Deep Dive">
+    <meta name="twitter:description" content="A deep dive into Acts 21:1–16 — surrender with the eyes wide open.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --accent: #46506b; --accent-deep: #38405a;   /* Part I — Gethsemane dusk (surrender) */
+            --gold: #c5a059; --gold-deep: #a8843d;
+            --bg: #f7f3ec; --bg-warm: #efe6d4;
+            --surface: #fffdf9;
+            --border: rgba(40,32,16,0.10); --border-strong: rgba(40,32,16,0.18);
+            --text-primary: #211d16; --text-body: #55503f; --text-muted: #9a9184;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text-primary); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--gold-deep); font-weight: 400; }
+
+        .dd-hero { max-width: 48rem; margin: 0 auto; padding: 5rem 1.5rem 3rem; text-align: center; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.75rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+        .dd-eyebrow a:hover { color: var(--accent); border-color: var(--accent); }
+        .dd-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 7.5vw, 4.6rem); font-weight: 700; line-height: 1.05; margin-bottom: 1.5rem; }
+        .dd-title em { font-style: italic; color: var(--accent); }
+        .dd-lead { font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 300; font-style: italic; color: var(--text-body); line-height: 1.5; max-width: 36rem; margin: 0 auto; border-left: 3px solid var(--accent); padding-left: 1.5rem; text-align: left; }
+
+        .scripture-wrap { max-width: 44rem; margin: 1rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: var(--bg-warm); border-left: 4px solid var(--gold); border-radius: 0 1rem 1rem 0; padding: 2rem 2.2rem; }
+        .sb-ref { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: 0.98rem; color: #44403a; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--text-primary); font-weight: 600; }
+        .sb-v { color: var(--gold-deep); font-weight: 700; font-size: 0.7rem; vertical-align: super; margin-right: 0.15rem; }
+
+        .yt-wrap { max-width: 52rem; margin: 3rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.14); background: #e4ddd0; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--text-muted); font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; font-style: italic; margin-top: 1rem; }
+
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.34em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; display: block; }
+        .dd-h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 4.5vw, 2.4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.4rem; letter-spacing: -0.01em; }
+        .dd-h2 em { font-style: italic; color: var(--gold-deep); }
+        .dd-p { font-size: 1.02rem; color: var(--text-body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--text-primary); font-weight: 600; }
+        .dd-p .land { color: var(--accent-deep); font-weight: 600; font-style: italic; }
+        .dd-iceberg-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-deep); }
+
+        .note { background: #efe9dc; border: 1px solid var(--border); border-radius: 0.9rem; padding: 1.1rem 1.4rem; margin: 0.4rem 0 1.6rem; }
+        .note p { font-size: 0.84rem; color: #5b5647; line-height: 1.7; font-weight: 300; }
+        .note .nt-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #9a9184; display: block; margin-bottom: 0.4rem; }
+
+        /* signature stepper */
+        .sig-band { background: linear-gradient(180deg, #20232f 0%, #2b2f3f 100%); margin-top: 4rem; padding: 4rem 1.5rem 4.5rem; color: #e5e6ec; }
+        .sig-inner { max-width: 46rem; margin: 0 auto; }
+        .sig-head { text-align: center; margin-bottom: 2.5rem; }
+        .sig-head .dd-kicker { color: #d9b06a; }
+        .sig-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 700; line-height: 1.12; color: #f2eee2; }
+        .sig-head h2 em { font-style: italic; color: #d9b06a; }
+        .sig-head p { margin-top: 1rem; font-size: 0.9rem; color: #a7aab8; font-weight: 300; max-width: 32rem; margin-left: auto; margin-right: auto; }
+        .sig-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 1.6rem; }
+        @media (max-width: 620px) { .sig-steps { grid-template-columns: 1fr; } }
+        .sig-step { background: rgba(255,255,255,0.05); border: 1px solid rgba(217,176,106,0.18); border-radius: 0.9rem; padding: 1.1rem 0.9rem; text-align: center; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+        .sig-step:hover { transform: translateY(-2px); background: rgba(255,255,255,0.08); }
+        .sig-step.active { background: rgba(217,176,106,0.14); border-color: rgba(217,176,106,0.55); }
+        .sig-step .ss-n { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: #9aa0b3; display: block; }
+        .sig-step.active .ss-n { color: #d9b06a; }
+        .sig-step .ss-l { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.05rem; color: #e5e6ec; margin-top: 0.15rem; }
+        .sig-step .ss-g { display: block; font-size: 0.6rem; font-style: italic; color: #8b90a1; margin-top: 0.3rem; }
+        .sig-panel { display: none; background: rgba(255,255,255,0.04); border: 1px solid rgba(217,176,106,0.16); border-left: 3px solid #d9b06a; border-radius: 0 1rem 1rem 0; padding: 1.8rem 2rem; animation: sigIn 0.45s ease; }
+        .sig-panel.show { display: block; }
+        @keyframes sigIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+        .sig-panel .sp-greek { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: #d9b06a; margin-bottom: 0.2rem; }
+        .sig-panel .sp-gloss { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #8b90a1; margin-bottom: 1rem; }
+        .sig-panel p { font-size: 0.95rem; color: #d4d6df; line-height: 1.8; font-weight: 300; }
+        .sig-panel p em { color: #f2eee2; font-style: italic; }
+        .sig-panel .sp-echo { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px solid rgba(217,176,106,0.16); font-size: 0.82rem; color: #a7aab8; }
+        .sig-panel .sp-echo b { color: #d9b06a; font-weight: 600; }
+
+        .discuss { max-width: 44rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .discuss-head { text-align: center; margin-bottom: 2.2rem; }
+        .discuss-head .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); }
+        .discuss-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: 700; margin-top: 0.6rem; }
+        .discuss-head .bar { width: 3rem; height: 2px; background: var(--gold); margin: 1.2rem auto 0; }
+        .q-item { display: flex; gap: 1.1rem; padding: 1.3rem 0; border-bottom: 1px solid var(--border); }
+        .q-num { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: var(--gold-deep); flex-shrink: 0; width: 1.6rem; }
+        .q-item p { font-size: 0.95rem; color: var(--text-body); line-height: 1.7; font-weight: 300; }
+        .q-item p strong { color: var(--text-primary); font-weight: 600; }
+
+        .send { max-width: 40rem; margin: 4rem auto 0; padding: 3rem 2rem; text-align: center; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.2rem; }
+        .send p.body { font-size: 1.1rem; color: var(--text-body); line-height: 1.85; font-weight: 300; font-style: italic; }
+        .send .pull { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; line-height: 1.3; color: var(--text-primary); margin-top: 1.6rem; }
+        .send .pull em { font-style: italic; color: var(--gold-deep); }
+
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.8rem; border: 1px solid var(--border-strong); border-radius: 100px; background: var(--surface); color: var(--text-primary); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .share-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .strip-wrap { max-width: 52rem; margin: 4.5rem auto 0; padding: 0 0.5rem; }
+        .strip-eb { text-align: center; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .dd-back { text-align: center; padding: 3rem 1.5rem 4.5rem; }
+        .dd-back a { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+        .dd-back a:hover { color: var(--accent); border-color: var(--accent); }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <header class="dd-hero">
+        <p class="dd-eyebrow"><a href="/res/deep/2026/the-road-less-travelled.html">Acts Journey &nbsp;·&nbsp; Acts 21</a> &nbsp;·&nbsp; Part I</p>
+        <h1 class="dd-title">The Lord's Will Be <em>Done</em></h1>
+        <p class="dd-lead">"A church on its knees in the surf, because it cannot keep the man it loves — so it holds him up to God instead."</p>
+    </header>
+
+    <div class="scripture-wrap reveal">
+        <div class="scripture-box">
+            <span class="sb-ref">Acts 21:11–14 · NLT</span>
+            <p class="sb-text">
+                <span class="sb-v">11</span>He came over, took Paul's belt, and <b>bound his own feet and hands</b> with it. Then he said, "The Holy Spirit declares, 'So shall the owner of this belt be bound by the Jewish leaders in Jerusalem and turned over to the Gentiles.'"
+                <span class="sb-v">12</span>When we heard this, we and the local believers all begged Paul not to go on to Jerusalem.
+                <span class="sb-v">13</span>But he said, "Why all this weeping? You are breaking my heart! I am ready not only to be jailed at Jerusalem but even to die for the sake of the Lord Jesus."
+                <span class="sb-v">14</span>When it was clear that we couldn't persuade him, we gave up and said, <b>"The Lord's will be done."</b>
+            </p>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame" id="yt-mount"></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <!-- ══════════ THE PACE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the tempo</span>
+        <h2 class="dd-h2">A marked man on a <em>moving ship</em></h2>
+        <p class="dd-p">Feel the tempo change the moment the chapter opens. Place-names come fast — Cos, Rhodes, Patara, Tyre, Ptolemais, Caesarea — the time-stamps are clipped ("stayed a week," "one day"), and Luke's eyewitness <em>"we"</em> is back on the boat. It reads like a travel diary because it is one. <span class="land">And the pace itself is the message:</span> Luke gave <em>Jesus</em> a long, deliberate journey up to Jerusalem in his Gospel (Luke 9:51), and now he films <em>Paul</em> the same way — a man with a Pentecost deadline on a fast boat, and chains at the end of the line.</p>
+        <p class="dd-p">But watch what happens at Tyre. When the ship stops to unload cargo, Paul finds the believers and stays a whole week — he never wastes a harbor. And when it's time to sail, the <b>entire</b> church walks him out, <em>"including women and children,"</em> and they kneel down <b>on the beach, in the sand,</b> to pray. This is the first posture of the whole chapter: not clinging — <b>kneeling.</b> You can't keep him, so you kneel, you commit him to God, and you let the ship take him.</p>
+    </section>
+
+    <!-- ══════════ THE BELT ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the warning</span>
+        <h2 class="dd-h2">The belt, and the script he was <em>handed</em></h2>
+        <p class="dd-p">The warnings stack up port by port — at Tyre the believers say <em>"through the Spirit"</em> that Paul should not go; at Caesarea he lodges with Philip, whose four daughters prophesy; then Agabus arrives from Judea. And Agabus doesn't just <em>say</em> it — he <b>acts it out</b>. He takes Paul's belt (a long cloth sash wound round the body) and ties up his own hands and feet: <em>"So shall the owner of this belt be bound… and turned over to the Gentiles."</em> It's street theater straight out of the Old Testament — as <b>Isaiah</b> walked barefoot and <b>Ezekiel</b> mimed the siege, the prophet <em>shows</em> you the word so you can't unsee it.</p>
+        <p class="dd-p">And listen to the words riding on that belt: <em>"bound… and turned over to the Gentiles."</em> They are the words Jesus used about <b>himself</b> — <em class="greek">"he will be delivered over to the Gentiles"</em> (Luke 18:32). <span class="land">Agabus is describing Paul in the exact language of Jesus' own passion. The servant is being handed the Master's script.</span></p>
+        <div class="note">
+            <span class="nt-tag">Two things at once — don't merge them</span>
+            <p>So if the warning was from God, why did Paul press on? Because two different things were happening (Stott): the <b>warning</b> was divine — the Spirit said <em>this will happen</em>, to steady them for it. The <b>"so don't go!"</b> was human — love and fear, added by people who couldn't bear to lose him. The Spirit foretold the cost; love added the "don't"; and Paul could tell the two apart. As Swindoll names the ache, the loneliest place isn't opposition — it's love that is trying to talk you out of obedience.</p>
+        </div>
+    </section>
+
+    <!-- ══════════ SIGNATURE — WHOSE PRAYER ══════════ -->
+    <section class="sig-band reveal">
+        <div class="sig-inner">
+            <div class="sig-head">
+                <span class="dd-kicker">The Signature</span>
+                <h2>Whose Prayer <em>Is It?</em></h2>
+                <p>"The Lord's will be done" is the most famous line in the scene — and almost everyone assumes Paul says it. Step through who actually prays it.</p>
+            </div>
+
+            <div class="sig-steps">
+                <div class="sig-step active" data-target="sp-1"><span class="ss-n">i</span><span class="ss-l">Not Paul</span><span class="ss-g">settled on the boat</span></div>
+                <div class="sig-step" data-target="sp-2"><span class="ss-n">ii</span><span class="ss-l">The companions</span><span class="ss-g">the garden road</span></div>
+                <div class="sig-step" data-target="sp-3"><span class="ss-n">iii</span><span class="ss-l">Jesus first</span><span class="ss-g">the original</span></div>
+            </div>
+
+            <div class="sig-panel show" id="sp-1">
+                <div class="sp-greek">"I am ready… even to die"</div>
+                <div class="sp-gloss">Acts 21:13</div>
+                <p>Read verse 14 slowly: <em>"When it was clear that we couldn't persuade him, <b>we</b> gave up and said, 'The Lord's will be done.'"</em> It isn't Paul praying it. Paul made his peace out on the boat — <em>"I am ready not only to be jailed but even to die for the Lord Jesus."</em> He isn't the one who has to travel to this prayer.</p>
+                <div class="sp-echo"><b>The surprise —</b> the hardest lesson of the chapter doesn't fall on the man going to the cross. It falls on the ones who love him.</div>
+            </div>
+            <div class="sig-panel" id="sp-2">
+                <div class="sp-greek">the ones who stay</div>
+                <div class="sp-gloss">Acts 21:14 — "we"</div>
+                <p>Here is the sharpest thing in the passage: in this scene it is <em>the companions</em>, not Paul, who walk the Gethsemane road — first resisting, then accepting. And that is usually exactly where <em>we</em> stand: not the one going to the hard place, but the parent, the spouse, the friend at the water's edge who has to <b>let someone go</b> to it. You can't stop it. You shouldn't. And the only prayer left is the hardest one ever prayed.</p>
+                <div class="sp-echo"><b>What it is not —</b> not "I don't care what happens," not numb resignation. It's surrender with the eyes wide open — knowing exactly what it costs, and opening your hands anyway.</div>
+            </div>
+            <div class="sig-panel" id="sp-3">
+                <div class="sp-greek">"not my will, but yours"</div>
+                <div class="sp-gloss">Luke 22:42 — the garden</div>
+                <p>"The Lord's will be done" is not a phrase they cobbled together on a beach. It was prayed first — in a garden, in the dark, under the olive trees — by the Lord himself: <em>"Father… not my will, but yours, be done."</em> Before the companions ever knelt in the sand, the Master knelt among the olives and opened his hands over a cup far heavier than Paul's.</p>
+                <div class="sp-echo"><b>Caught, not summoned —</b> you don't manufacture "your will be done" by gritting your teeth. You catch it from the One who prayed it first, and drank the cup dry.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ CLOSE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">The line that keeps it true</span>
+        <h2 class="dd-h2">Surrender is not the same as <em>giving up</em></h2>
+        <p class="dd-p">It would be easy to hear "the Lord's will be done" as a shrug — a white flag, a way of stopping the pain by stopping the caring. It's the opposite. <span class="land">To surrender is not to stop caring; it is to open your hands with your eyes wide open</span> — knowing precisely what it will cost, and letting go anyway. That is not weakness. It is the deepest thing love ever does: it lets go, into God.</p>
+        <p class="dd-p">And notice the whole chapter has been teaching one posture — <b>open hands</b>. A church on the beach that cannot keep the man it loves, so it kneels in the sand and gives him back. This is the imitatio in a different seat: not only the one walking toward Jerusalem is being conformed to Christ, but everyone standing on the shore — learning the harder role, the one that stays and watches and releases.</p>
+    </section>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss reveal">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+            <div class="bar"></div>
+        </div>
+        <div class="q-list">
+            <div class="q-item"><span class="q-num">01</span><p><strong>The moving ship.</strong> Where is God moving you — or someone you love — toward something costly? Are you sailing with your eyes open, or still pretending the chains aren't ahead?</p></div>
+            <div class="q-item"><span class="q-num">02</span><p><strong>Warning vs. "don't."</strong> Think of your last big obedience. Which voices were <em>divine warnings</em> preparing you for the cost, and which were <em>fearful "don'ts"</em> dressed up as love? How do you tell them apart?</p></div>
+            <div class="q-item"><span class="q-num">03</span><p><strong>Who prays the garden prayer.</strong> Are you the one <em>going</em> to the hard place, or the one who has to <em>let someone go</em> to it? Which is harder for you — and why?</p></div>
+            <div class="q-item"><span class="q-num">04</span><p><strong>Eyes wide open.</strong> Name one "your will be done" you've been avoiding — over a person, a plan, a future — precisely because you already know what it will cost. What would it look like to pray it this week, out loud, over that exact thing?</p></div>
+            <div class="q-item"><span class="q-num">05</span><p><strong>Family prompt:</strong> Picture holding something you love in a tight fist, then slowly turning your hand palm-up and open. As a family, name one thing we've been gripping — a worry, a plan, a person's choices we can't control — and pray one short sentence together over it: "Lord, your will be done." Eyes open, hands open.</p></div>
+        </div>
+    </section>
+
+    <div class="send reveal">
+        <p class="eb">The Send</p>
+        <p class="body">We spent a whole series watching Paul become like Christ as he faced his own Jerusalem. But it isn't only Paul who has to be conformed to the Master. It's everyone on the shore — the ones who stay, and watch, and let go. So go and open your hands. Kneel in your own sand. And over the thing it costs you most, pray the prayer he prayed before you.</p>
+        <p class="pull">To surrender is not to stop caring — it is to open your hands, eyes wide open, and pray the prayer <em>Jesus prayed first.</em></p>
+    </div>
+
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share this deep dive</button>
+    </div>
+
+    <div class="strip-wrap reveal">
+        <p class="strip-eb">The Series · Acts 21</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back"><a href="/deepdives.html">← All Deep Dives</a></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-21-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="The Lord’s Will Be Done" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.sig-step').forEach(step => {
+            step.addEventListener('click', () => {
+                document.querySelectorAll('.sig-step').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.sig-panel').forEach(p => p.classList.remove('show'));
+                step.classList.add('active');
+                const t = document.getElementById(step.getAttribute('data-target'));
+                if (t) t.classList.add('show');
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts21RenderStrip === 'function') acts21RenderStrip('#series-strip', 'the-lords-will-be-done');
+        });
+
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = { title: 'The Lord’s Will Be Done — Deep Dive | The Living Room', text: 'The Gethsemane prayer is spoken by the companions, not Paul. A deep dive into Acts 21:1–16.', url: 'https://thelivingroom.io/res/deep/2026/the-lords-will-be-done.html' };
+            try { if (navigator.share) { await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share this deep dive', 2000); } } catch (e) {}
+        });
+    </script>
+</body>
+</html>

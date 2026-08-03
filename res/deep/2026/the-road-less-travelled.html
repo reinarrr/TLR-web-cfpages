@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Road Less Travelled — Acts 21 Deep Dives | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/the-road-less-travelled.html">
+    <meta property="og:title"       content="The Road Less Travelled — Acts 21 Deep Dives">
+    <meta property="og:description" content="Paul walks his Master's road all the way into Jerusalem and the chains — surrender, accommodation, arrest. Three studies in Acts 21 where the passion echoes peak, then deliberately break.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="The Road Less Travelled — Acts 21 Deep Dives">
+    <meta name="twitter:description" content="Three deep dives into Acts 21 — the face set toward Jerusalem.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --accent: #8a6c2e; --accent-deep: #6f5623;     /* aged gold — the family thread */
+            --gold: #c5a059; --gold-deep: #a8843d;
+            --stone: #d8c19a; --dusk: #46506b; --iron: #2c2b30; --oxblood: #8a3a32;
+            --bg: #f7f3ec; --bg-warm: #efe6d4;             /* warm Jerusalem-limestone ground */
+            --surface: #fffdf9;
+            --border: rgba(40,32,16,0.10); --border-strong: rgba(40,32,16,0.18);
+            --text-primary: #211d16; --text-body: #55503f; --text-muted: #9a9184;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text-primary); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--gold-deep); font-weight: 400; }
+
+        /* ── HERO ── */
+        .dd-hero { max-width: 48rem; margin: 0 auto; padding: 5rem 1.5rem 2.5rem; text-align: center; position: relative; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.75rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+        .dd-eyebrow a:hover { color: var(--accent); border-color: var(--accent); }
+        .dd-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 7.5vw, 4.8rem); font-weight: 700; line-height: 1.03; margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+        .dd-title em { font-style: italic; color: var(--gold-deep); }
+        .dd-lead { font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 300; font-style: italic; color: var(--text-body); line-height: 1.5; max-width: 34rem; margin: 0 auto; border-left: 3px solid var(--dusk); padding-left: 1.5rem; text-align: left; }
+        .dd-sub { margin-top: 1.75rem; font-size: 0.9rem; color: var(--text-muted); font-weight: 300; max-width: 34rem; margin-left: auto; margin-right: auto; }
+        .hero-motif { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: -1; opacity: 0.6; }
+
+        /* ── SECTIONS ── */
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.34em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; display: block; }
+        .dd-h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 4.5vw, 2.4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.4rem; letter-spacing: -0.01em; }
+        .dd-h2 em { font-style: italic; color: var(--gold-deep); }
+        .dd-p { font-size: 1.02rem; color: var(--text-body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--text-primary); font-weight: 600; }
+        .dd-p .land { color: var(--accent-deep); font-weight: 600; font-style: italic; }
+
+        /* ── ECHOES INTERACTIVE (signature) ── */
+        .echo-band { background: linear-gradient(180deg, #efe6d4 0%, #e6dcc4 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-top: 4rem; padding: 4rem 1.5rem 4.5rem; }
+        .echo-inner { max-width: 50rem; margin: 0 auto; }
+        .echo-head { text-align: center; margin-bottom: 2.4rem; }
+        .echo-head .dd-kicker { color: var(--gold-deep); }
+        .echo-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 700; line-height: 1.12; }
+        .echo-head h2 em { font-style: italic; color: var(--gold-deep); }
+        .echo-head p { margin-top: 1rem; font-size: 0.9rem; color: var(--text-body); font-weight: 300; max-width: 34rem; margin-left: auto; margin-right: auto; }
+        .echo-legend { display: flex; justify-content: center; gap: 1.75rem; margin-top: 1.4rem; flex-wrap: wrap; }
+        .echo-legend span { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); }
+        .echo-legend .dot { width: 0.7rem; height: 0.7rem; border-radius: 100px; }
+
+        .echo { background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; margin-bottom: 0.7rem; overflow: hidden; cursor: pointer; transition: border-color 0.25s, box-shadow 0.25s; }
+        .echo:hover { border-color: var(--border-strong); box-shadow: 0 8px 22px rgba(40,32,16,0.06); }
+        .echo.is-open { border-color: rgba(138,108,46,0.4); box-shadow: 0 12px 28px rgba(40,32,16,0.08); }
+        .echo-theme { display: flex; align-items: center; gap: 0.9rem; padding: 1rem 1.4rem; }
+        .echo-theme .e-idx { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.95rem; color: var(--text-muted); width: 1.3rem; flex-shrink: 0; }
+        .echo-theme .e-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.05rem; color: var(--text-primary); flex: 1; line-height: 1.2; }
+        .echo-theme .e-caret { font-size: 0.7rem; color: var(--text-muted); transition: transform 0.3s; }
+        .echo.is-open .e-caret { transform: rotate(180deg); }
+        .echo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0; position: relative; padding: 0 1.4rem 1rem; }
+        .echo-pair::before { content: ''; position: absolute; top: 0.4rem; bottom: 0.7rem; left: 50%; width: 1px; background: var(--border-strong); }
+        .e-side { padding: 0.4rem 1rem; }
+        .e-side .es-who { font-size: 0.54rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 0.35rem; }
+        .e-side.j .es-who { color: var(--dusk); }
+        .e-side.p .es-who { color: var(--oxblood); }
+        .e-side .es-ref { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.4rem; }
+        .e-side .es-line { font-size: 0.85rem; color: var(--text-body); line-height: 1.55; font-weight: 300; }
+        .e-side .es-line em { font-style: italic; color: var(--text-primary); }
+        .echo-deep { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: #fbf7ee; border-top: 1px solid transparent; }
+        .echo.is-open .echo-deep { max-height: 320px; border-top-color: var(--border); }
+        .echo-deep-in { padding: 1rem 1.55rem 1.2rem; font-size: 0.84rem; color: var(--text-body); line-height: 1.7; font-weight: 300; }
+        .echo-deep-in em { font-style: italic; color: var(--gold-deep); }
+        @media (max-width: 540px) { .echo-pair { grid-template-columns: 1fr; gap: 0.3rem; } .echo-pair::before { display: none; } .e-side.p { border-top: 1px dashed var(--border); padding-top: 0.7rem; } }
+
+        .echo-turn { margin-top: 1.4rem; background: #211d16; color: #ece2cf; border-radius: 1.1rem; padding: 1.8rem 2rem; border-left: 4px solid var(--oxblood); }
+        .echo-turn .et-tag { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: #d9b06a; display: block; margin-bottom: 0.7rem; }
+        .echo-turn h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: #f4ecd8; margin-bottom: 0.6rem; }
+        .echo-turn p { font-size: 0.92rem; color: #cfc6b4; line-height: 1.75; font-weight: 300; }
+        .echo-turn p em { color: #f4ecd8; font-style: italic; }
+
+        /* ── PANELS ── */
+        .panels-wrap { max-width: 46rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .panels-head { text-align: center; margin-bottom: 2.2rem; }
+        .panels-head .dd-kicker { color: var(--gold-deep); }
+        .panels-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: 700; }
+        .panels-head p { margin-top: 0.9rem; font-size: 0.9rem; color: var(--text-body); font-weight: 300; max-width: 32rem; margin-left: auto; margin-right: auto; }
+        .dd-panels { display: grid; gap: 1rem; }
+        .dd-panel { position: relative; display: block; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent, var(--gold)); border-radius: 1rem; padding: 1.7rem 1.9rem; text-decoration: none; transition: transform 0.25s, box-shadow 0.25s; }
+        .dd-panel.is-live:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(40,32,16,0.09); }
+        .dd-panel.is-locked { opacity: 0.72; cursor: default; }
+        .dd-numeral { position: absolute; top: 1.2rem; right: 1.6rem; font-family: 'Playfair Display', serif; font-style: italic; font-weight: 700; font-size: 1.8rem; color: var(--accent, var(--gold)); opacity: 0.3; }
+        .dd-meta { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+        .dd-part { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent, var(--gold-deep)); }
+        .dd-dot { width: 3px; height: 3px; border-radius: 100px; background: var(--text-muted); }
+        .dd-passage { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+        .dd-ptitle { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.4rem; color: var(--text-primary); line-height: 1.15; display: block; margin-bottom: 0.3rem; }
+        .dd-psub { font-size: 0.78rem; font-style: italic; color: var(--gold-deep); margin-bottom: 0.7rem; }
+        .dd-pbody { font-size: 0.9rem; color: var(--text-body); line-height: 1.7; font-weight: 300; margin-bottom: 1rem; }
+        .dd-iceberg-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-deep); }
+        .dd-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+        .dd-interactive { font-size: 0.66rem; font-weight: 600; color: var(--text-muted); }
+        .dd-cta { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+        .dd-panel.is-live .dd-cta { color: var(--accent, var(--gold-deep)); }
+
+        /* ── CLOSE ── */
+        .send { max-width: 40rem; margin: 4rem auto 0; padding: 3rem 2rem; text-align: center; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.2rem; }
+        .send p.body { font-size: 1.05rem; color: var(--text-body); line-height: 1.85; font-weight: 300; }
+        .send .pull { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; line-height: 1.3; color: var(--text-primary); margin-top: 1.6rem; }
+        .send .pull em { font-style: italic; color: var(--gold-deep); }
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.8rem; border: 1px solid var(--border-strong); border-radius: 100px; background: var(--surface); color: var(--text-primary); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .share-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .verse-close { max-width: 40rem; margin: 3rem auto 0; padding: 0 1.5rem; text-align: center; }
+        .verse-close p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem; color: var(--text-muted); }
+        .dd-back { text-align: center; padding: 3.5rem 1.5rem 4.5rem; }
+        .dd-back a { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+        .dd-back a:hover { color: var(--accent); border-color: var(--accent); }
+
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <!-- ══════════ HERO ══════════ -->
+    <header class="dd-hero">
+        <div class="hero-motif" aria-hidden="true">
+            <svg viewBox="0 0 900 380" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+                <!-- ascending road toward a walled gate on a hill -->
+                <path d="M60 330 Q 320 300 460 210 T 820 96" stroke="#8a6c2e" stroke-width="1.2" stroke-dasharray="6 6" opacity="0.30" fill="none"/>
+                <circle cx="60" cy="330" r="3.5" fill="#8a6c2e" opacity="0.4"/>
+                <circle cx="300" cy="288" r="3" fill="#8a6c2e" opacity="0.32"/>
+                <circle cx="560" cy="172" r="3" fill="#8a6c2e" opacity="0.32"/>
+                <!-- gate / walls -->
+                <path d="M726 150 L726 96 L742 96 L742 86 L758 86 L758 96 L774 96 L774 86 L790 86 L790 96 L806 96 L806 150" stroke="#7d7466" stroke-width="1" opacity="0.4"/>
+                <path d="M752 150 L752 122 Q766 110 780 122 L780 150" stroke="#7d7466" stroke-width="1" opacity="0.4"/>
+                <circle cx="820" cy="96" r="4.5" fill="#a8843d" opacity="0.42"/>
+            </svg>
+        </div>
+
+        <p class="dd-eyebrow"><a href="/res/deep/2026/acts-journey.html">Acts Journey</a> &nbsp;·&nbsp; Acts 21 &nbsp;·&nbsp; Three Studies</p>
+        <h1 class="dd-title">The Road Less <em>Travelled</em></h1>
+        <p class="dd-lead">"He set his face to go to Jerusalem." — the servant walks the same road as his Master, all the way to the chains.</p>
+        <p class="dd-sub">The hub for the Acts 21 series. Three postures of a life bent into the shape of the cross — surrender, accommodation, arrest — where the passion echoes peak, and then, on purpose, break.</p>
+    </header>
+
+    <!-- ══════════ INTRO ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">The Turn in the Road</span>
+        <h2 class="dd-h2">The pace itself is the <em>message</em></h2>
+        <p class="dd-p">Something shifts the moment Acts 21 opens. The place-names come fast — Cos, Rhodes, Patara, Tyre, Ptolemais, Caesarea, Jerusalem — the time-stamps are clipped, and Luke's eyewitness <em>"we"</em> is back on the boat. It reads like a travel diary because it is one. And Luke is doing it <b>on purpose</b>: he gave <em>Jesus</em> a long, deliberate journey up to Jerusalem in his Gospel — <em class="greek">"he set his face to go to Jerusalem"</em> (Luke 9:51) — and now he gives <em>Paul</em> one.</p>
+        <p class="dd-p">In Acts 19 Paul <b>built</b>; in Acts 20 he <b>became</b> like Christ as he went; here in Acts 21 he <b>walks that likeness</b> all the way in — a marked man sailing knowingly toward the chains, warned by the Spirit at every port. <span class="land">The road is narrowing toward the cost — the same road his Master walked.</span> This is where the whole <em>imitatio</em> stops being a theme and becomes a journey with a mob at the end of it.</p>
+    </section>
+
+    <!-- ══════════ SIGNATURE — RHYME, NOT PHOTOCOPY ══════════ -->
+    <section class="echo-band reveal">
+        <div class="echo-inner">
+            <div class="echo-head">
+                <span class="dd-kicker">The Signature</span>
+                <h2>Rhyme, Not <em>Photocopy</em></h2>
+                <p>In Acts 21 the passion echoes reach their peak — Luke sounds Jesus' final week on purpose. Tap each to see it. Then watch where the rhyme deliberately breaks — and why that break <em>is</em> the gospel.</p>
+                <div class="echo-legend">
+                    <span><span class="dot" style="background:#46506b;"></span> Jesus · the Gospel</span>
+                    <span><span class="dot" style="background:#8a3a32;"></span> Paul · Acts 21</span>
+                </div>
+            </div>
+
+            <div class="echo" tabindex="0">
+                <div class="echo-theme"><span class="e-idx">i</span><span class="e-name">The face set toward the city</span><span class="e-caret">▾</span></div>
+                <div class="echo-pair">
+                    <div class="e-side j"><span class="es-who">Jesus</span><div class="es-ref">Luke 9:51</div><p class="es-line">"He <em>set his face</em> to go to Jerusalem."</p></div>
+                    <div class="e-side p"><span class="es-who">Paul</span><div class="es-ref">Acts 21:1–5</div><p class="es-line">A fast boat, a deadline, and chains at the end of the line — sailing in with his eyes open.</p></div>
+                </div>
+                <div class="echo-deep"><div class="echo-deep-in">Luke gives both men the same deliberate travel-narrative shape — a resolute approach to the city where suffering waits. The clipped itinerary isn't filler; it's Luke saying <em>watch, this is the Master's road again.</em></div></div>
+            </div>
+
+            <div class="echo" tabindex="0">
+                <div class="echo-theme"><span class="e-idx">ii</span><span class="e-name">Delivered to the Gentiles</span><span class="e-caret">▾</span></div>
+                <div class="echo-pair">
+                    <div class="e-side j"><span class="es-who">Jesus</span><div class="es-ref">Luke 18:32</div><p class="es-line">"He will be <em>delivered over to the Gentiles</em>… mocked… spit upon."</p></div>
+                    <div class="e-side p"><span class="es-who">Paul</span><div class="es-ref">Acts 21:11</div><p class="es-line">Agabus binds his own hands with Paul's belt: "bound… and turned over to the Gentiles."</p></div>
+                </div>
+                <div class="echo-deep"><div class="echo-deep-in">Agabus doesn't just say it — he <em>acts it out</em>, an Old-Testament sign-oracle in the line of Isaiah walking barefoot and Ezekiel miming the siege. And the words riding on that belt are the exact language of Jesus' own passion prediction. <em>The servant is handed the Master's script.</em></div></div>
+            </div>
+
+            <div class="echo" tabindex="0">
+                <div class="echo-theme"><span class="e-idx">iii</span><span class="e-name">"The Lord's will be done"</span><span class="e-caret">▾</span></div>
+                <div class="echo-pair">
+                    <div class="e-side j"><span class="es-who">Jesus</span><div class="es-ref">Luke 22:42</div><p class="es-line">"Not my will, but yours, be done." — the garden, in the dark.</p></div>
+                    <div class="e-side p"><span class="es-who">The church</span><div class="es-ref">Acts 21:14</div><p class="es-line">"When we couldn't persuade him… we said, 'The Lord's will be done.'"</p></div>
+                </div>
+                <div class="echo-deep"><div class="echo-deep-in">Watch <em>who</em> prays it — not Paul (he settled it on the boat) but the friends who love him. In this scene it's the companions who walk the Gethsemane road, first resisting, then accepting. <b>Part I opens this.</b></div></div>
+            </div>
+
+            <div class="echo" tabindex="0">
+                <div class="echo-theme"><span class="e-idx">iv</span><span class="e-name">The crowd's shout</span><span class="e-caret">▾</span></div>
+                <div class="echo-pair">
+                    <div class="e-side j"><span class="es-who">Jesus</span><div class="es-ref">Luke 23:18</div><p class="es-line">"They all cried out together, <em>'Away with this man!'</em>"</p></div>
+                    <div class="e-side p"><span class="es-who">Paul</span><div class="es-ref">Acts 21:36</div><p class="es-line">The mob follows the soldiers, shouting, <em>"Kill him, kill him!"</em></p></div>
+                </div>
+                <div class="echo-deep"><div class="echo-deep-in">Bruce does the math: it is "the shout with which Jesus' death had been demanded not far from that spot some twenty-seven years before." Same city, same festival crowds, same words. <em>The servant has walked all the way into his Master's soundtrack.</em> <b>Part III.</b></div></div>
+            </div>
+
+            <div class="echo" tabindex="0">
+                <div class="echo-theme"><span class="e-idx">v</span><span class="e-name">On trial — and still bearing witness</span><span class="e-caret">▾</span></div>
+                <div class="echo-pair">
+                    <div class="e-side j"><span class="es-who">Jesus</span><div class="es-ref">John 18:37</div><p class="es-line">"For this purpose I was born… to bear witness to the truth."</p></div>
+                    <div class="e-side p"><span class="es-who">Paul</span><div class="es-ref">Acts 21:37–40</div><p class="es-line">Bruised, bound, above a murderous crowd: "May I have a word?" — and turns the arrest into a pulpit.</p></div>
+                </div>
+                <div class="echo-deep"><div class="echo-deep-in">Both treat the trial as the testimony, not an interruption of it. The seized servant preaching from the stairs is the image of his seized Master, bearing witness from the dock.</div></div>
+            </div>
+
+            <div class="echo-turn">
+                <span class="et-tag">Where the rhyme breaks</span>
+                <h3>A rhyme, not a photocopy</h3>
+                <p>Agabus said Paul would be handed <em>to</em> the Gentiles — but in the event it is <em>Gentiles who rescue him</em> from his own people. Jesus' road ended on a cross; Paul's runs on — carried alive out of the mob, toward Rome. <b>Paul is spared where the Master was slain — because the Master's cross needed no sequel.</b> And precisely because it needed none, the story keeps moving: out of Jerusalem, down the centuries, all the way into this room.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ THE THREE STUDIES ══════════ -->
+    <section class="panels-wrap reveal">
+        <div class="panels-head">
+            <span class="dd-kicker">Three Postures</span>
+            <h2>The road, in three studies</h2>
+            <p>A life bent into the shape of the cross: hands open on a beach → freedom kneeling low → chains held up like a pulpit. A new deep dive opens each week.</p>
+        </div>
+
+        <div class="dd-panels">
+
+            <a class="dd-panel is-live" id="panel-the-lords-will-be-done" href="the-lords-will-be-done.html"
+               data-acts21-slug="the-lords-will-be-done" data-acts21-date="Aug 9" style="--accent:#46506b;">
+                <span class="dd-numeral" aria-hidden="true">I</span>
+                <div class="dd-meta"><span class="dd-part">Part I · Aug 9</span><span class="dd-dot"></span><span class="dd-passage">Acts 21:1–16</span></div>
+                <span class="dd-ptitle">The Lord's Will Be Done</span>
+                <div class="dd-psub">Surrender — hands open, eyes open</div>
+                <p class="dd-pbody"><span class="dd-iceberg-label">Beneath the surface —</span> the Gethsemane prayer is spoken by the <em>companions</em>, not Paul; Agabus's belt is an acted oracle; and the warning that's divine gets tangled with the "don't" that's only human.</p>
+                <div class="dd-foot"><span class="dd-interactive">✦ Whose Prayer Is It?</span><span class="dd-cta" data-acts21-cta>Read the deep dive →</span></div>
+            </a>
+
+            <a class="dd-panel is-locked" id="panel-all-things-to-all-people"
+               data-acts21-slug="all-things-to-all-people" data-acts21-date="Aug 16" style="--accent:#9a6f2e;">
+                <span class="dd-numeral" aria-hidden="true">II</span>
+                <div class="dd-meta"><span class="dd-part">Part II · Aug 16 · Communion</span><span class="dd-dot"></span><span class="dd-passage">Acts 21:17–26</span></div>
+                <span class="dd-ptitle">All Things to All People</span>
+                <div class="dd-psub">Accommodation — freedom that bends low</div>
+                <p class="dd-pbody"><span class="dd-iceberg-label">Beneath the surface —</span> Paul doesn't take a vow, he <em>sponsors four</em>; freedom that can't bend is bondage; and a real stone wall in the Temple that Christ had already torn down.</p>
+                <div class="dd-foot"><span class="dd-interactive">✦ Flint &amp; Water</span><span class="dd-cta" data-acts21-cta>Coming · Aug 16</span></div>
+            </a>
+
+            <a class="dd-panel is-locked" id="panel-kill-him-kill-him"
+               data-acts21-slug="kill-him-kill-him" data-acts21-date="Aug 23" style="--accent:#8a3a32;">
+                <span class="dd-numeral" aria-hidden="true">III</span>
+                <div class="dd-meta"><span class="dd-part">Part III · Aug 23</span><span class="dd-dot"></span><span class="dd-passage">Acts 21:27–40</span></div>
+                <span class="dd-ptitle">Kill Him, Kill Him</span>
+                <div class="dd-psub">Arrest — the chains become a pulpit</div>
+                <p class="dd-pbody"><span class="dd-iceberg-label">Beneath the surface —</span> three sincere assumptions nobody checks, the surviving <em>soreg</em> warning stone, and one Greek verb that means both "seized to kill" and "seized to save."</p>
+                <div class="dd-foot"><span class="dd-interactive">✦ The Three Assumptions</span><span class="dd-cta" data-acts21-cta>Coming · Aug 23</span></div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- ══════════ SEND ══════════ -->
+    <div class="send reveal">
+        <p class="eb">The Invitation</p>
+        <p class="body">Three postures, and not one of them is natural to us — hands open on a beach, freedom kneeling low, chains held up like a pulpit. Every one of them is <em>caught</em> from the One who walked the road first. Watch where Paul's feet are pointed this month, and ask where your own are.</p>
+        <p class="pull">The servant walks the Master's road — and even the goodbye kneels <em>where Gethsemane knelt.</em></p>
+    </div>
+
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share the series</button>
+    </div>
+
+    <div class="verse-close reveal">
+        <p>"The closer Paul gets to his own Jerusalem, the more he looks and sounds like his Master."</p>
+    </div>
+
+    <div class="dd-back"><a href="/deepdives.html">← All Deep Dives</a></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-21-series.js" defer></script>
+    <script>
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.echo').forEach(row => {
+            const toggle = () => row.classList.toggle('is-open');
+            row.addEventListener('click', toggle);
+            row.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(); } });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts21DetectLive === 'function') acts21DetectLive(document);
+        });
+
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = { title: 'The Road Less Travelled — Acts 21 Deep Dives | The Living Room', text: 'Paul walks his Master’s road into Jerusalem and the chains. Three deep dives into Acts 21.', url: 'https://thelivingroom.io/res/deep/2026/the-road-less-travelled.html' };
+            try { if (navigator.share) { await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share the series', 2000); } } catch (e) {}
+        });
+    </script>
+</body>
+</html>

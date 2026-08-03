@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Things to All People — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/all-things-to-all-people.html">
+    <meta property="og:title"       content="All Things to All People — Deep Dive">
+    <meta property="og:description" content="The man who wrote 'we are not under law' pays for four vows he doesn't need — not compromise, love. Flint on truth, water on preference. And at the table, one loaf, one body. A deep dive into Acts 21:17–26.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="All Things to All People — Deep Dive">
+    <meta name="twitter:description" content="A deep dive into Acts 21:17–26 — freedom that bends low.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --accent: #9a6f2e; --accent-deep: #7d5a24;   /* Part II — warm stone-gold (accommodation) */
+            --gold: #c5a059; --gold-deep: #a8843d;
+            --bg: #f7f3ec; --bg-warm: #efe6d4;
+            --surface: #fffdf9;
+            --border: rgba(40,32,16,0.10); --border-strong: rgba(40,32,16,0.18);
+            --text-primary: #211d16; --text-body: #55503f; --text-muted: #9a9184;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text-primary); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--gold-deep); font-weight: 400; }
+
+        .dd-hero { max-width: 48rem; margin: 0 auto; padding: 5rem 1.5rem 3rem; text-align: center; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.75rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+        .dd-eyebrow a:hover { color: var(--accent); border-color: var(--accent); }
+        .dd-title { font-family: 'Playfair Display', serif; font-size: clamp(2.3rem, 7vw, 4.4rem); font-weight: 700; line-height: 1.05; margin-bottom: 1.5rem; }
+        .dd-title em { font-style: italic; color: var(--accent); }
+        .dd-lead { font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 300; font-style: italic; color: var(--text-body); line-height: 1.5; max-width: 36rem; margin: 0 auto; border-left: 3px solid var(--accent); padding-left: 1.5rem; text-align: left; }
+
+        .scripture-wrap { max-width: 44rem; margin: 1rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: var(--bg-warm); border-left: 4px solid var(--gold); border-radius: 0 1rem 1rem 0; padding: 2rem 2.2rem; }
+        .sb-ref { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: 0.98rem; color: #44403a; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--text-primary); font-weight: 600; }
+        .sb-v { color: var(--gold-deep); font-weight: 700; font-size: 0.7rem; vertical-align: super; margin-right: 0.15rem; }
+
+        .yt-wrap { max-width: 52rem; margin: 3rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.14); background: #e4ddd0; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--text-muted); font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; font-style: italic; margin-top: 1rem; }
+
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.34em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; display: block; }
+        .dd-h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 4.5vw, 2.4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.4rem; letter-spacing: -0.01em; }
+        .dd-h2 em { font-style: italic; color: var(--gold-deep); }
+        .dd-p { font-size: 1.02rem; color: var(--text-body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--text-primary); font-weight: 600; }
+        .dd-p .land { color: var(--accent-deep); font-weight: 600; font-style: italic; }
+        .dd-iceberg-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-deep); }
+
+        .note { background: #efe9dc; border: 1px solid var(--border); border-radius: 0.9rem; padding: 1.1rem 1.4rem; margin: 0.4rem 0 1.6rem; }
+        .note p { font-size: 0.84rem; color: #5b5647; line-height: 1.7; font-weight: 300; }
+        .note .nt-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #9a9184; display: block; margin-bottom: 0.4rem; }
+
+        .sig-band { background: linear-gradient(180deg, #2a2115 0%, #37301f 100%); margin-top: 4rem; padding: 4rem 1.5rem 4.5rem; color: #ece2cf; }
+        .sig-inner { max-width: 46rem; margin: 0 auto; }
+        .sig-head { text-align: center; margin-bottom: 2.5rem; }
+        .sig-head .dd-kicker { color: #d9b06a; }
+        .sig-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 700; line-height: 1.12; color: #f4ead6; }
+        .sig-head h2 em { font-style: italic; color: #d9b06a; }
+        .sig-head p { margin-top: 1rem; font-size: 0.9rem; color: #b8ac93; font-weight: 300; max-width: 32rem; margin-left: auto; margin-right: auto; }
+        .sig-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 1.6rem; }
+        @media (max-width: 620px) { .sig-steps { grid-template-columns: 1fr; } }
+        .sig-step { background: rgba(255,255,255,0.05); border: 1px solid rgba(217,176,106,0.18); border-radius: 0.9rem; padding: 1.1rem 0.9rem; text-align: center; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+        .sig-step:hover { transform: translateY(-2px); background: rgba(255,255,255,0.08); }
+        .sig-step.active { background: rgba(217,176,106,0.14); border-color: rgba(217,176,106,0.55); }
+        .sig-step .ss-n { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: #ad9a72; display: block; }
+        .sig-step.active .ss-n { color: #d9b06a; }
+        .sig-step .ss-l { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.05rem; color: #ece2cf; margin-top: 0.15rem; }
+        .sig-step .ss-g { display: block; font-size: 0.6rem; font-style: italic; color: #9b9075; margin-top: 0.3rem; }
+        .sig-panel { display: none; background: rgba(255,255,255,0.04); border: 1px solid rgba(217,176,106,0.16); border-left: 3px solid #d9b06a; border-radius: 0 1rem 1rem 0; padding: 1.8rem 2rem; animation: sigIn 0.45s ease; }
+        .sig-panel.show { display: block; }
+        @keyframes sigIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+        .sig-panel .sp-greek { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: #d9b06a; margin-bottom: 0.2rem; }
+        .sig-panel .sp-gloss { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #9b9075; margin-bottom: 1rem; }
+        .sig-panel p { font-size: 0.95rem; color: #ddd3c0; line-height: 1.8; font-weight: 300; }
+        .sig-panel p em { color: #f4ead6; font-style: italic; }
+        .sig-panel .sp-echo { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px solid rgba(217,176,106,0.16); font-size: 0.82rem; color: #b8ac93; }
+        .sig-panel .sp-echo b { color: #d9b06a; font-weight: 600; }
+
+        .discuss { max-width: 44rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .discuss-head { text-align: center; margin-bottom: 2.2rem; }
+        .discuss-head .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); }
+        .discuss-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: 700; margin-top: 0.6rem; }
+        .discuss-head .bar { width: 3rem; height: 2px; background: var(--gold); margin: 1.2rem auto 0; }
+        .q-item { display: flex; gap: 1.1rem; padding: 1.3rem 0; border-bottom: 1px solid var(--border); }
+        .q-num { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: var(--gold-deep); flex-shrink: 0; width: 1.6rem; }
+        .q-item p { font-size: 0.95rem; color: var(--text-body); line-height: 1.7; font-weight: 300; }
+        .q-item p strong { color: var(--text-primary); font-weight: 600; }
+
+        .send { max-width: 40rem; margin: 4rem auto 0; padding: 3rem 2rem; text-align: center; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.2rem; }
+        .send p.body { font-size: 1.1rem; color: var(--text-body); line-height: 1.85; font-weight: 300; font-style: italic; }
+        .send .pull { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; line-height: 1.3; color: var(--text-primary); margin-top: 1.6rem; }
+        .send .pull em { font-style: italic; color: var(--gold-deep); }
+
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.8rem; border: 1px solid var(--border-strong); border-radius: 100px; background: var(--surface); color: var(--text-primary); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .share-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .strip-wrap { max-width: 52rem; margin: 4.5rem auto 0; padding: 0 0.5rem; }
+        .strip-eb { text-align: center; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .dd-back { text-align: center; padding: 3rem 1.5rem 4.5rem; }
+        .dd-back a { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+        .dd-back a:hover { color: var(--accent); border-color: var(--accent); }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <header class="dd-hero">
+        <p class="dd-eyebrow"><a href="/res/deep/2026/the-road-less-travelled.html">Acts Journey &nbsp;·&nbsp; Acts 21</a> &nbsp;·&nbsp; Part II &nbsp;·&nbsp; Communion</p>
+        <h1 class="dd-title">All Things to All <em>People</em></h1>
+        <p class="dd-lead">"A man so free he can afford to look unfree — for love."</p>
+    </header>
+
+    <div class="scripture-wrap reveal">
+        <div class="scripture-box">
+            <span class="sb-ref">Acts 21:23–24, 26 · NLT</span>
+            <p class="sb-text">
+                <span class="sb-v">23</span>"Here's what we want you to do. We have four men here who have completed their vow.
+                <span class="sb-v">24</span>Go with them to the Temple and join them in the purification ceremony, <b>paying for them</b> to have their heads ritually shaved. Then everyone will know that the rumors are all false and that you yourself observe the Jewish laws." …
+                <span class="sb-v">26</span>So Paul went to the Temple the next day with the other men. They had already started the purification ritual, so he publicly announced the date when their vows would end and sacrifices would be offered for each of them.
+            </p>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame" id="yt-mount"></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <!-- ══════════ TWO CHURCHES ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the room</span>
+        <h2 class="dd-h2">Two Christianities, face to face — and the first sound is <em>praise</em></h2>
+        <p class="dd-p">Before the tension, catch the miracle we rush past. In one room stand Paul and his Gentile-church delegation; on the other side, James and <em>all</em> the elders of the Jerusalem church. <b>Stott</b> calls it what it is — a moment "fraught with both risk and possibility," the representative leaders of "two Christianities, Jewish and Gentile." Everything could have gone wrong: turf, suspicion, a demand for accounts. Instead, when Paul reports what God did among the Gentiles, the elders' instinct is <b>doxology</b> — the praise was, Stott notes, "not even grudging; it was spontaneous and genuine."</p>
+        <p class="dd-p">And notice how Paul frames the report: <em>"the things <b>God</b> had accomplished among the Gentiles through his ministry"</em> — not "what I built." The report of a whole apostleship, and he files himself under <em>instrument</em>. <span class="land">When the report is about what God has done, the only turf that matters is his.</span></p>
+        <div class="note">
+            <span class="nt-tag">Old tradition, new tradition</span>
+            <p>The sharper tension isn't "different styles" — it's a Christianity <em>rooted in old tradition</em> (Moses, the feasts) meeting one <em>busy building new ones</em> (twenty years old, house-churches, still wet cement). The Greek for tradition, <em class="greek">paradosis</em>, literally means <em>the thing handed over</em> — and it's the very word Paul uses for the gospel itself: "I passed on to you… what was passed on to me" (1 Cor 15:3). So the gospel is the one Tradition; everything else, old or new, is wardrobe. The test of any custom is never its age — it's whether it still <em>hands over Christ.</em></p>
+        </div>
+    </section>
+
+    <!-- ══════════ THE VOW HE DIDN'T TAKE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the detail everyone gets wrong</span>
+        <h2 class="dd-h2">The vow he <em>didn't</em> take</h2>
+        <p class="dd-p">A false rumor is running (v.21): that Paul teaches Jews everywhere to <em>abandon</em> Moses. It's false — he taught that <em>Gentiles</em> needn't become Jews to be saved; he never told <em>Jews</em> to stop being Jewish. So James proposes a public gesture: join four men finishing a vow, undergo purification, and pay their expenses.</p>
+        <p class="dd-p">Here's the detail almost everyone misreads: <span class="land">Paul does not take a Nazirite vow of his own.</span> He <b>sponsors four men</b> who have — <b>Bruce</b> notes that paying a Nazirite's costs was "regarded as a pious and charitable action" — and undergoes the standard purification any Jew took after long residence among Gentiles. <b>Swindoll</b> catches the scale: funding <em>one</em> Nazirite was notable piety; "funding four would have made front-page news." This is the apostle of grace publicly honoring the devotion of brothers who suspect him.</p>
+        <div class="note">
+            <span class="nt-tag">The bending flows one way</span>
+            <p>Don't miss verse 25: in the same breath, James reaffirms that the <em>Gentile</em> believers' freedom stands exactly as agreed — nothing added. Paul yields his own comfort; he does <b>not</b> renegotiate his converts' freedom. As Stott puts it, this was "not a quid pro quo… but rather a sensitive, mutual Christian forbearance" — concession in practice, not one inch in principle. And the brothers whose freedom he just refused to trade could only stand and watch him walk where the barricade wouldn't let them follow — someone spending his standing for them, in a room they weren't allowed to enter.</p>
+        </div>
+    </section>
+
+    <!-- ══════════ SIGNATURE — FLINT & WATER ══════════ -->
+    <section class="sig-band reveal">
+        <div class="sig-inner">
+            <div class="sig-head">
+                <span class="dd-kicker">The Signature</span>
+                <h2>Flint &amp; <em>Water</em></h2>
+                <p>How can the man who wrote "we are not under law" walk into the Temple and pay for vows? Because he had a settled rule for what bends and what never does. Step through it.</p>
+            </div>
+
+            <div class="sig-steps">
+                <div class="sig-step active" data-target="sp-1"><span class="ss-n">i</span><span class="ss-l">The Rumor</span><span class="ss-g">a quarter-turn lie</span></div>
+                <div class="sig-step" data-target="sp-2"><span class="ss-n">ii</span><span class="ss-l">Flint</span><span class="ss-g">on the truth</span></div>
+                <div class="sig-step" data-target="sp-3"><span class="ss-n">iii</span><span class="ss-l">Water</span><span class="ss-g">on preference</span></div>
+            </div>
+
+            <div class="sig-panel show" id="sp-1">
+                <div class="sp-greek">katēcheō</div>
+                <div class="sp-gloss">they have been informed / told</div>
+                <p>The rumor isn't invented from nothing — it's Paul's real teaching bent a quarter-turn into treason. And Luke's word is telling: they were <em>informed</em>, it was passed along — <em>nobody in the story went and asked Paul.</em> Twenty years of ministry, and thousands of brothers hold a settled verdict assembled entirely from hearsay.</p>
+                <div class="sp-echo"><b>The trap —</b> a lie you can trace back to a real fact is the hardest kind to kill.</div>
+            </div>
+            <div class="sig-panel" id="sp-2">
+                <div class="sp-greek">on truth: flint</div>
+                <div class="sp-gloss">Galatians 2:5</div>
+                <p>When the <em>gospel</em> was at stake — a faction demanding Titus be circumcised <em>to be saved</em> — Paul wrote that he "did not yield in submission even for a moment." On the thing that saves, he was immovable. No custom, no pressure, no peace-keeping could buy an inch.</p>
+                <div class="sp-echo"><b>The core never moves —</b> "not being outside the law of God but under the law of Christ" (1 Cor 9:21). The anchor holds; only the comforts flex.</div>
+            </div>
+            <div class="sig-panel" id="sp-3">
+                <div class="sp-greek">on preference: water</div>
+                <div class="sp-gloss">1 Corinthians 9:19–23</div>
+                <p>When only his own <em>liberty</em> was at stake, he'd bend to the floor — he had Timothy circumcised for the mission's sake (Acts 16:3), and here he pays for four men's vows without blinking. "Though I am <em>free</em> from all, I have made myself a <em>servant</em> to all" — the Greek is harder still: <em>I enslaved myself.</em> The free man, freely choosing the servant's floor.</p>
+                <div class="sp-echo"><b>Bruce's line —</b> "a truly emancipated spirit… is not in bondage to its own emancipation." If you <em>can't</em> lay your freedom down for a brother, you don't own your freedom — it owns you. On truth, flint. On preference, water. The tragedy is how often we get those backwards.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ COMMUNION CLOSE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">The table</span>
+        <h2 class="dd-h2">One loaf — and a wall already <em>torn down</em></h2>
+        <p class="dd-p">This chapter says one thing in three languages. The <b>collection</b> Paul carried said it in coins — Gentile money carried hundreds of miles into Jewish hands. The <b>vow</b> said it in custom — the apostle of freedom kneeling into the devotion of brothers who suspected him. And the <b>table</b> says it in blood: <em>"though we are many, we all eat from one loaf of bread, showing that we are one body"</em> (1 Cor 10:17). <span class="land">We are not one because we are alike — we are one because we were bought by the same blood and eat from the same loaf.</span></p>
+        <p class="dd-p">And Paul's bending isn't the deepest bending in the story. He could stoop into a purification rite because his Master had already stooped lower — <em>"he emptied himself, taking the form of a servant"</em> (Phil 2:6–7). The peace between Jew and Gentile was never finally built by tact or vows: <em>"he himself is our peace… who has broken down in his flesh the dividing wall of hostility"</em> (Eph 2:14). <span class="land">Hold that phrase — the dividing wall — because it was not a metaphor.</span> There was a literal stone barrier in that very Temple, with death on its signs, keeping Gentiles out. Christ had already torn the real wall down in his own body — decades before the crowd formed that would seize Paul for allegedly breaching it.</p>
+    </section>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss reveal">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+            <div class="bar"></div>
+        </div>
+        <div class="q-list">
+            <div class="q-item"><span class="q-num">01</span><p><strong>Threat or doxology.</strong> When God blesses a church or believer very unlike you, what happens in your chest before your theology catches up? What would it take for praise to become the reflex?</p></div>
+            <div class="q-item"><span class="q-num">02</span><p><strong>The quarter-turn.</strong> Paul's gospel was twisted a quarter-turn into treason. Where have you passed on — or believed — a quarter-turn version of another believer's convictions without checking?</p></div>
+            <div class="q-item"><span class="q-num">03</span><p><strong>Flint and water.</strong> List your current battles honestly: which belong in the "truth" column and which are really "preference" — and which have you filed in the wrong one?</p></div>
+            <div class="q-item"><span class="q-num">04</span><p><strong>Owned by your freedom.</strong> Is there a liberty — a right, a style, a comfort — you couldn't lay down without resentment? What does that reveal?</p></div>
+            <div class="q-item"><span class="q-num">05</span><p><strong>Family prompt:</strong> Every household builds its own "customs" — the way we do Sundays, meals, holidays. Together, name one family habit that's really just <em>preference</em> (not right or wrong), and pick one small way we could gladly bend it this week to include or bless someone outside our usual circle.</p></div>
+        </div>
+    </section>
+
+    <div class="send reveal">
+        <p class="eb">The Send</p>
+        <p class="body">Come to the table the way Paul walked into the Temple — the freest people on earth, freely bending low. Take the loaf that makes the many one. And let the One who emptied himself make you the kind of free that can kneel — flint on the gospel that saves, water on every preference that would keep you from a brother.</p>
+        <p class="pull">Freedom that cannot bend is bondage. Be made the kind of free that <em>lays itself down</em> for the family the blood has made one.</p>
+    </div>
+
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share this deep dive</button>
+    </div>
+
+    <div class="strip-wrap reveal">
+        <p class="strip-eb">The Series · Acts 21</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back"><a href="/deepdives.html">← All Deep Dives</a></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-21-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="All Things to All People" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.sig-step').forEach(step => {
+            step.addEventListener('click', () => {
+                document.querySelectorAll('.sig-step').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.sig-panel').forEach(p => p.classList.remove('show'));
+                step.classList.add('active');
+                const t = document.getElementById(step.getAttribute('data-target'));
+                if (t) t.classList.add('show');
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts21RenderStrip === 'function') acts21RenderStrip('#series-strip', 'all-things-to-all-people');
+        });
+
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = { title: 'All Things to All People — Deep Dive | The Living Room', text: 'Flint on truth, water on preference — freedom that bends low for the family. A deep dive into Acts 21:17–26.', url: 'https://thelivingroom.io/res/deep/2026/all-things-to-all-people.html' };
+            try { if (navigator.share) { await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share this deep dive', 2000); } } catch (e) {}
+        });
+    </script>
+</body>
+</html>

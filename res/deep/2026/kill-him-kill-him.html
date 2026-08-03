@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kill Him, Kill Him — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/kill-him-kill-him.html">
+    <meta property="og:title"       content="Kill Him, Kill Him — Deep Dive">
+    <meta property="og:description" content="A false charge at the temple wall, a mob chanting what was last shouted at Jesus' trial, and a battered man asking, 'May I have a word?' Three assumptions no one checks — and the arrest becomes a pulpit. A deep dive into Acts 21:27–40.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Kill Him, Kill Him — Deep Dive">
+    <meta name="twitter:description" content="A deep dive into Acts 21:27–40 — the arrest becomes the pulpit.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --accent: #8a3a32; --accent-deep: #6f2e28;   /* Part III — oxblood (arrest) */
+            --gold: #c5a059; --gold-deep: #a8843d;
+            --iron: #2c2b30;
+            --bg: #f7f3ec; --bg-warm: #efe6d4;
+            --surface: #fffdf9;
+            --border: rgba(40,32,16,0.10); --border-strong: rgba(40,32,16,0.18);
+            --text-primary: #211d16; --text-body: #55503f; --text-muted: #9a9184;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text-primary); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--gold-deep); font-weight: 400; }
+
+        .dd-hero { max-width: 48rem; margin: 0 auto; padding: 5rem 1.5rem 3rem; text-align: center; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.75rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+        .dd-eyebrow a:hover { color: var(--accent); border-color: var(--accent); }
+        .dd-title { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 7.5vw, 4.6rem); font-weight: 700; line-height: 1.05; margin-bottom: 1.5rem; }
+        .dd-title em { font-style: italic; color: var(--accent); }
+        .dd-lead { font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 300; font-style: italic; color: var(--text-body); line-height: 1.5; max-width: 36rem; margin: 0 auto; border-left: 3px solid var(--accent); padding-left: 1.5rem; text-align: left; }
+
+        .scripture-wrap { max-width: 44rem; margin: 1rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: var(--bg-warm); border-left: 4px solid var(--gold); border-radius: 0 1rem 1rem 0; padding: 2rem 2.2rem; }
+        .sb-ref { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: 0.98rem; color: #44403a; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--text-primary); font-weight: 600; }
+        .sb-v { color: var(--gold-deep); font-weight: 700; font-size: 0.7rem; vertical-align: super; margin-right: 0.15rem; }
+
+        .yt-wrap { max-width: 52rem; margin: 3rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.14); background: #e4ddd0; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--text-muted); font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; font-style: italic; margin-top: 1rem; }
+
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.34em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; display: block; }
+        .dd-h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 4.5vw, 2.4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.4rem; letter-spacing: -0.01em; }
+        .dd-h2 em { font-style: italic; color: var(--gold-deep); }
+        .dd-p { font-size: 1.02rem; color: var(--text-body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--text-primary); font-weight: 600; }
+        .dd-p .land { color: var(--accent-deep); font-weight: 600; font-style: italic; }
+        .dd-iceberg-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-deep); }
+
+        .note { background: #efe9dc; border: 1px solid var(--border); border-radius: 0.9rem; padding: 1.1rem 1.4rem; margin: 0.4rem 0 1.6rem; }
+        .note p { font-size: 0.84rem; color: #5b5647; line-height: 1.7; font-weight: 300; }
+        .note .nt-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #9a9184; display: block; margin-bottom: 0.4rem; }
+
+        /* carved inscription block (the soreg stone) */
+        .inscription { background: linear-gradient(180deg, #cbb993 0%, #bda87f 100%); border-radius: 0.9rem; padding: 2rem 2rem; margin: 0.6rem 0 1.4rem; box-shadow: inset 0 2px 8px rgba(60,45,20,0.18); position: relative; border: 1px solid rgba(60,45,20,0.2); }
+        .inscription .ins-tag { font-size: 0.54rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: #6b5a34; display: block; margin-bottom: 0.9rem; }
+        .inscription p { font-family: 'Playfair Display', serif; font-size: 1.05rem; line-height: 1.75; color: #3d3117; letter-spacing: 0.02em; text-shadow: 0 1px 0 rgba(255,250,235,0.4); }
+        .inscription .ins-src { display: block; margin-top: 0.9rem; font-family: 'Outfit', sans-serif; font-size: 0.66rem; font-style: italic; color: #7a6a43; }
+
+        .sig-band { background: linear-gradient(180deg, #241417 0%, #33191b 100%); margin-top: 4rem; padding: 4rem 1.5rem 4.5rem; color: #ecdcd8; }
+        .sig-inner { max-width: 46rem; margin: 0 auto; }
+        .sig-head { text-align: center; margin-bottom: 2.5rem; }
+        .sig-head .dd-kicker { color: #d9b06a; }
+        .sig-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 700; line-height: 1.12; color: #f4e6e2; }
+        .sig-head h2 em { font-style: italic; color: #d9b06a; }
+        .sig-head p { margin-top: 1rem; font-size: 0.9rem; color: #c2a49f; font-weight: 300; max-width: 32rem; margin-left: auto; margin-right: auto; }
+        .sig-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 1.6rem; }
+        @media (max-width: 620px) { .sig-steps { grid-template-columns: 1fr; } }
+        .sig-step { background: rgba(255,255,255,0.05); border: 1px solid rgba(217,176,106,0.18); border-radius: 0.9rem; padding: 1.1rem 0.9rem; text-align: center; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.2s; }
+        .sig-step:hover { transform: translateY(-2px); background: rgba(255,255,255,0.08); }
+        .sig-step.active { background: rgba(217,176,106,0.14); border-color: rgba(217,176,106,0.55); }
+        .sig-step .ss-n { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.85rem; color: #b58f88; display: block; }
+        .sig-step.active .ss-n { color: #d9b06a; }
+        .sig-step .ss-l { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.05rem; color: #ecdcd8; margin-top: 0.15rem; }
+        .sig-step .ss-g { display: block; font-size: 0.6rem; font-style: italic; color: #a68a85; margin-top: 0.3rem; }
+        .sig-panel { display: none; background: rgba(255,255,255,0.04); border: 1px solid rgba(217,176,106,0.16); border-left: 3px solid #d9b06a; border-radius: 0 1rem 1rem 0; padding: 1.8rem 2rem; animation: sigIn 0.45s ease; }
+        .sig-panel.show { display: block; }
+        @keyframes sigIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+        .sig-panel .sp-greek { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: #d9b06a; margin-bottom: 0.2rem; }
+        .sig-panel .sp-gloss { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #a68a85; margin-bottom: 1rem; }
+        .sig-panel p { font-size: 0.95rem; color: #ddccc8; line-height: 1.8; font-weight: 300; }
+        .sig-panel p em { color: #f4e6e2; font-style: italic; }
+        .sig-panel .sp-echo { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px solid rgba(217,176,106,0.16); font-size: 0.82rem; color: #c2a49f; }
+        .sig-panel .sp-echo b { color: #d9b06a; font-weight: 600; }
+
+        .discuss { max-width: 44rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .discuss-head { text-align: center; margin-bottom: 2.2rem; }
+        .discuss-head .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); }
+        .discuss-head h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: 700; margin-top: 0.6rem; }
+        .discuss-head .bar { width: 3rem; height: 2px; background: var(--gold); margin: 1.2rem auto 0; }
+        .q-item { display: flex; gap: 1.1rem; padding: 1.3rem 0; border-bottom: 1px solid var(--border); }
+        .q-num { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: var(--gold-deep); flex-shrink: 0; width: 1.6rem; }
+        .q-item p { font-size: 0.95rem; color: var(--text-body); line-height: 1.7; font-weight: 300; }
+        .q-item p strong { color: var(--text-primary); font-weight: 600; }
+
+        .send { max-width: 40rem; margin: 4rem auto 0; padding: 3rem 2rem; text-align: center; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 1.2rem; }
+        .send p.body { font-size: 1.1rem; color: var(--text-body); line-height: 1.85; font-weight: 300; font-style: italic; }
+        .send .pull { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; line-height: 1.3; color: var(--text-primary); margin-top: 1.6rem; }
+        .send .pull em { font-style: italic; color: var(--gold-deep); }
+
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.8rem; border: 1px solid var(--border-strong); border-radius: 100px; background: var(--surface); color: var(--text-primary); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .share-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .strip-wrap { max-width: 52rem; margin: 4.5rem auto 0; padding: 0 0.5rem; }
+        .strip-eb { text-align: center; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
+        .dd-back { text-align: center; padding: 3rem 1.5rem 4.5rem; }
+        .dd-back a { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+        .dd-back a:hover { color: var(--accent); border-color: var(--accent); }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <header class="dd-hero">
+        <p class="dd-eyebrow"><a href="/res/deep/2026/the-road-less-travelled.html">Acts Journey &nbsp;·&nbsp; Acts 21</a> &nbsp;·&nbsp; Part III</p>
+        <h1 class="dd-title">Kill Him, <em>Kill Him</em></h1>
+        <p class="dd-lead">"The most dangerous man on those stairs is not the one with the sword. It's the one asking for the microphone."</p>
+    </header>
+
+    <div class="scripture-wrap reveal">
+        <div class="scripture-box">
+            <span class="sb-ref">Acts 21:35–40 · NLT</span>
+            <p class="sb-text">
+                <span class="sb-v">35</span>As Paul reached the stairs, the mob grew so violent the soldiers had to <b>lift him to their shoulders</b> to protect him.
+                <span class="sb-v">36</span>And the crowd followed behind, shouting, <b>"Kill him, kill him!"</b>
+                <span class="sb-v">37</span>As Paul was about to be taken inside, he said to the commander, <b>"May I have a word with you?"</b> "Do you know Greek?" the commander asked, surprised.
+                <span class="sb-v">38</span>"Aren't you the Egyptian who led a rebellion some time ago and took 4,000 members of the Assassins out into the desert?"
+                <span class="sb-v">39</span>"No," Paul replied, "I am a Jew and a citizen of Tarsus in Cilicia, which is an important city. Please, let me talk to these people."
+                <span class="sb-v">40</span>The commander agreed, so Paul stood on the stairs and motioned to the people to be quiet. Soon a deep silence enveloped the crowd, and he addressed them in their own language, Aramaic.
+            </p>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame" id="yt-mount"></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <!-- ══════════ THE LIE AT THE WALL ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — one word</span>
+        <h2 class="dd-h2">Four true facts, and one word: <em>assumed</em></h2>
+        <p class="dd-p">The men who start the riot are Jews from the province of Asia — Ephesians in town for Pentecost. They'd seen <em>"Trophimus, a Gentile from Ephesus,"</em> with Paul in the city, and <em>"they assumed Paul had taken him into the Temple."</em> Luke chooses the word with care: the Greek is <em class="greek">enomizon</em>, an imperfect — <span class="land">they went on supposing.</span> Not a flash of malice; a settled conclusion, held steadily, acted on with total confidence.</p>
+        <p class="dd-p">And every ingredient was true. Trophimus <b>was</b> a Gentile. He <b>was</b> from Ephesus. He <b>was</b> with Paul in the city. <span class="land">Four true facts and one word — <em>assumed</em> — and a man is nearly torn apart.</span> Trophimus can't defend himself, can't testify, and can't follow Paul past the barricade to prove he never crossed it. He is the accusation — and he isn't allowed in the room where it's being made.</p>
+    </section>
+
+    <!-- ══════════ THE WARNING STONE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the artifact</span>
+        <h2 class="dd-h2">The wall with death posted on it — and it still <em>exists</em></h2>
+        <p class="dd-p">Understand the wall they think Paul breached, because it was deadly real. Gentiles could enter the Temple's outer court — but a stone barricade, the <em class="greek">soreg</em>, sealed the inner courts. This isn't reconstructed from guesswork: archaeologists have <b>recovered the actual warning signs</b> that stood on it. One reads:</p>
+        <div class="inscription">
+            <span class="ins-tag">The soreg inscription · recovered 1871</span>
+            <p>"No foreigner may enter within the barricade which surrounds the temple… whoever is caught will bear personal responsibility for his ensuing death."</p>
+            <span class="ins-src">Rome took this so seriously it was the one offense for which even a Roman citizen could be executed on the spot.</span>
+        </div>
+        <p class="dd-p">Now feel the double irony Luke has built. First: Paul is accused of <em>defiling</em> the Temple <b>at the very moment he is undergoing purification so as not to defile it</b> — the charge is the precise opposite of the truth. And second — <em>"he himself is our peace… who has broken down in his flesh the dividing wall of hostility"</em> (Eph 2:14). <span class="land">Men are about to kill a man for breaching a wall that God himself had already torn down.</span> The cross made the <em class="greek">soreg</em> obsolete decades before this mob formed. They are guarding rubble.</p>
+        <div class="note">
+            <span class="nt-tag">A mirror, before we shake our heads</span>
+            <p>Every church and every generation has walls Christ already demolished that we keep patrolling — the insider/outsider lines, the "their kind/our kind" instincts, the customs quietly promoted to checkpoints. Show me where your outrage lives, and it will show you which wall you're still guarding.</p>
+        </div>
+    </section>
+
+    <!-- ══════════ SIGNATURE — THREE ASSUMPTIONS ══════════ -->
+    <section class="sig-band reveal">
+        <div class="sig-inner">
+            <div class="sig-head">
+                <span class="dd-kicker">The Signature</span>
+                <h2>The Three <em>Assumptions</em></h2>
+                <p>A whole city goes to war over one man — and nobody ever checks. Everything that follows (the riot, the chains, even the ship to Rome) rests on things people <em>supposed</em> were true. Count them.</p>
+            </div>
+
+            <div class="sig-steps">
+                <div class="sig-step active" data-target="sp-1"><span class="ss-n">i</span><span class="ss-l">The Rumor</span><span class="ss-g">the believers</span></div>
+                <div class="sig-step" data-target="sp-2"><span class="ss-n">ii</span><span class="ss-l">Trophimus</span><span class="ss-g">the mob</span></div>
+                <div class="sig-step" data-target="sp-3"><span class="ss-n">iii</span><span class="ss-l">The Egyptian</span><span class="ss-g">Rome</span></div>
+            </div>
+
+            <div class="sig-panel show" id="sp-1">
+                <div class="sp-greek">the traitor to Moses</div>
+                <div class="sp-gloss">Acts 21:21 — the church</div>
+                <p>Thousands of believing Jews had been <em>told</em> Paul teaches Jews to abandon Moses. Nobody asked him. It was his real teaching bent a quarter-turn — a lie you can trace back to a fact, which is the hardest kind to kill.</p>
+                <div class="sp-echo"><b>Assumption one —</b> held by his own family in the faith.</div>
+            </div>
+            <div class="sig-panel" id="sp-2">
+                <div class="sp-greek">the defiler</div>
+                <div class="sp-gloss">Acts 21:29 — the mob</div>
+                <p>They saw Trophimus with Paul in the <em>city</em> and assumed Paul smuggled him past the barricade. Four true facts, one leap — and the fuse is lit. Notice the tribune uses the <em>same Greek verb</em>, <em class="greek">epilambanomai</em>, for the mob <em>"seizing"</em> Paul and himself <em>"arresting"</em> him — same grip, opposite intentions: one to kill, one to save.</p>
+                <div class="sp-echo"><b>Assumption two —</b> and sometimes the hands that grab you are the hands God is using to rescue you.</div>
+            </div>
+            <div class="sig-panel" id="sp-3">
+                <div class="sp-greek">the terrorist</div>
+                <div class="sp-gloss">Acts 21:38 — Rome</div>
+                <p>The commander files Paul under the wrong story too: <em>"Aren't you the Egyptian…?"</em> — a failed revolutionary who'd led thousands into the desert. Riot + ringleader = terrorist. Sensible, professional, completely wrong. To his own people a traitor to Moses; to Rome a nationalist insurgent — the same man, two opposite certainties, both held by people who never asked him a question.</p>
+                <div class="sp-echo"><b>The twist, years later —</b> at his trial Paul notes the men from Asia "ought to be here to bring charges" (Acts 24:19). They never showed up. The charge that cost him his freedom was never examined — because it was never true.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ THE PULPIT ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">The turn</span>
+        <h2 class="dd-h2">The arrest becomes the <em>pulpit</em></h2>
+        <p class="dd-p">Picture him at the top of the stairs — bruised, battered, carried on soldiers' shoulders above a crowd baying <em>"Kill him!"</em> Every reason to be done. And what does he say? <em>"May I have a word with you?"</em> Then watch the languages: Greek to win the tribune, and then <b>Aramaic — their own heart-language</b> — to address a crowd that seconds ago wanted him dead. He is <em>still</em> all things to all people, bending to his audience while the bruises are forming. And <em>"a deep silence enveloped the crowd."</em> The riot could not get him a hearing in Jerusalem; <span class="land">the arrest did.</span></p>
+        <p class="dd-p">Because Paul already understood what he'd later write from another set of chains: <em>"what has happened to me has really served to advance the gospel"</em> (Phil 1:12–13). <span class="land">The chains are not the interruption of the mission. They are its transportation.</span> From these stairs, custody carries him — at Rome's expense, under Rome's guard — to governors, kings, and finally Caesar's city. The road to the Rome he named back in Ephesus runs <em>through</em> these two chains.</p>
+        <div class="note">
+            <span class="nt-tag">Rhyme, not photocopy</span>
+            <p>We have seen this before: a man seized on false witness, accused over the Temple, a crowd shouting for his death — who stood in his own trial and would not stop bearing witness: <em>"For this purpose I was born… to bear witness to the truth"</em> (John 18:37). The seized servant preaching from the steps is the image of his seized Master. But the Master's road ended at a cross that needed no sequel — and precisely because it needed none, the servant is carried out <em>alive</em>, spared where the Master was slain, so the story could keep moving all the way into this room.</p>
+        </div>
+    </section>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss reveal">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+            <div class="bar"></div>
+        </div>
+        <div class="q-list">
+            <div class="q-item"><span class="q-num">01</span><p><strong>The Trophimus test.</strong> Where are you holding an "assumption dressed as fact" about someone — suspicion plus a grain of truth? What would it cost to verify it, or retract it?</p></div>
+            <div class="q-item"><span class="q-num">02</span><p><strong>Guarded rubble.</strong> Christ tore down the dividing wall, yet every generation patrols old lines. Which wall — cultural, generational, personal — are you still standing guard over?</p></div>
+            <div class="q-item"><span class="q-num">03</span><p><strong>The double grip.</strong> The same verb: seized to kill, seized to protect. Looking back, when has something that grabbed you like catastrophe turned out to be protection? Does that change how you read what has you gripped now?</p></div>
+            <div class="q-item"><span class="q-num">04</span><p><strong>Your stairs.</strong> What hard place in your life right now gives you an audience you'd never otherwise have — and who is in it?</p></div>
+            <div class="q-item"><span class="q-num">05</span><p><strong>Family prompt:</strong> Before repeating anything about anyone this week, our family will ask one question together: <em>"Did we see it, or did we assume it?"</em> Name one recent time an assumption ran ahead of the facts in our home — and what checking first would have changed.</p></div>
+        </div>
+    </section>
+
+    <div class="send reveal">
+        <p class="eb">The Send</p>
+        <p class="body">The thing in your life that looks most like the end — the seizure, the setback, the chains you never chose — may be the platform you could never have built. When obedience finally costs what it warned it would, you do not have to flinch and you do not have to vanish. The mob hands you a microphone. The only question is whether, bruised and bound, you'll still ask for it.</p>
+        <p class="pull">When the cross comes for Christ's servant, the arrest becomes the pulpit. The chains are not the end of the mission — <em>they are its next platform.</em></p>
+    </div>
+
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share this deep dive</button>
+    </div>
+
+    <div class="strip-wrap reveal">
+        <p class="strip-eb">The Series · Acts 21</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back"><a href="/deepdives.html">← All Deep Dives</a></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-21-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="Kill Him, Kill Him" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.sig-step').forEach(step => {
+            step.addEventListener('click', () => {
+                document.querySelectorAll('.sig-step').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.sig-panel').forEach(p => p.classList.remove('show'));
+                step.classList.add('active');
+                const t = document.getElementById(step.getAttribute('data-target'));
+                if (t) t.classList.add('show');
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts21RenderStrip === 'function') acts21RenderStrip('#series-strip', 'kill-him-kill-him');
+        });
+
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = { title: 'Kill Him, Kill Him — Deep Dive | The Living Room', text: 'Three assumptions no one checks, and a battered man who turns his arrest into a pulpit. A deep dive into Acts 21:27–40.', url: 'https://thelivingroom.io/res/deep/2026/kill-him-kill-him.html' };
+            try { if (navigator.share) { await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share this deep dive', 2000); } } catch (e) {}
+        });
+    </script>
+</body>
+</html>
