@@ -28,7 +28,7 @@ const ACTS21 = {
         {
             n: 'II', slug: 'all-things-to-all-people',
             title: 'All Things to All People', date: 'Aug 16', passage: 'Acts 21:17–26',
-            accent: '#9a6f2e', live: false,
+            accent: '#9a6f2e', live: true,
             movement: 'Accommodation — freedom that bends low',
             interactive: 'Flint & Water'
         },
