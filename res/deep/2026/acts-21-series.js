@@ -35,7 +35,7 @@ const ACTS21 = {
         {
             n: 'III', slug: 'kill-him-kill-him',
             title: 'Kill Him, Kill Him', date: 'Aug 23', passage: 'Acts 21:27–40',
-            accent: '#8a3a32', live: false,
+            accent: '#8a3a32', live: true,
             movement: 'Arrest — the chains become a pulpit',
             interactive: 'The Three Assumptions'
         }
