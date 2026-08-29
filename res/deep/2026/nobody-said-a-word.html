@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nobody Said a Word — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500;1,6..72,600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/nobody-said-a-word.html">
+    <meta property="og:title"       content="Nobody Said a Word — Deep Dive">
+    <meta property="og:description" content="Paul answers a lynch mob not with an argument but with his life — and a life cannot be cross-examined. The word that opens the trial, the scholar who wasn't fooled, and the one sentence that stopped a whipping. A deep dive into Acts 22:1–29.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Nobody Said a Word — Deep Dive">
+    <meta name="twitter:description" content="Exhibit I of The Gospel on Trial — can a changed life be evidence? Acts 22:1–29.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --bg: #fbfaf7; --surface: #ffffff;
+            --ink: #17181a; --body: #3b3c40; --muted: #9a978f;
+            --red: #b0281f; --red-deep: #85201a;
+            --line: #e4e0d8; --line-strong: #cfcabf;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--red-deep); font-weight: 500; }
+
+        /* ── HERO (flush-left) ── */
+        .dd-hero { max-width: 47rem; margin: 0 auto; padding: 4.5rem 1.5rem 2.5rem; }
+        .hero-inner { border-left: 2px solid var(--red); padding-left: 1.7rem; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .dd-eyebrow a:hover { border-color: var(--red); }
+        .dd-filed { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+        .dd-title { font-family: 'Newsreader', serif; font-size: clamp(2.4rem, 7vw, 4.3rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.018em; color: var(--ink); }
+        .dd-underbar { width: 5rem; height: 3px; background: var(--red); margin: 1.3rem 0 1.4rem; }
+        .dd-lead { font-family: 'Newsreader', serif; font-style: italic; font-weight: 500; font-size: clamp(1.18rem, 3vw, 1.55rem); line-height: 1.5; color: #2b2c30; max-width: 33rem; }
+
+        /* ── SCRIPTURE ── */
+        .scripture-wrap { max-width: 44rem; margin: 1.5rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: #f4f0e8; border-left: 4px solid var(--red); border-radius: 0 0.5rem 0.5rem 0; padding: 1.8rem 2rem; }
+        .sb-ref { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: 0.98rem; color: #33342f; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--ink); font-weight: 600; }
+        .sb-v { color: var(--red); font-weight: 700; font-size: 0.7rem; vertical-align: super; margin-right: 0.15rem; font-family: 'Newsreader', serif; }
+
+        /* ── VIDEO ── */
+        .yt-wrap { max-width: 52rem; margin: 3rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 20px 50px rgba(23,24,26,0.16); background: #e4ddd0; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--muted); font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; font-style: italic; margin-top: 1rem; }
+
+        /* ── SECTIONS ── */
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 0.9rem; display: block; }
+        .dd-h2 { font-family: 'Newsreader', serif; font-size: clamp(1.75rem, 4.6vw, 2.4rem); font-weight: 700; line-height: 1.13; margin-bottom: 1.4rem; letter-spacing: -0.015em; }
+        .dd-h2 em { font-style: italic; color: var(--red-deep); }
+        .dd-p { font-size: 1.02rem; color: var(--body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--ink); font-weight: 600; }
+        .dd-p .land { color: var(--red-deep); font-weight: 600; font-style: italic; }
+        .dd-iceberg-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); }
+
+        .note { background: #f4f0e8; border: 1px solid var(--line); border-radius: 0.5rem; padding: 1.1rem 1.4rem; margin: 0.4rem 0 1.6rem; }
+        .note p { font-size: 0.84rem; color: #4d4b45; line-height: 1.7; font-weight: 300; }
+        .note .nt-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 0.4rem; }
+
+        /* ── SIGNATURE — CROSS-EXAMINATION (light, transcript) ── */
+        .xr-wrap { max-width: 46rem; margin: 4rem auto 0; padding: 0 1.5rem; }
+        .xr-inner { background: var(--surface); border: 1px solid var(--line); border-top: 2px solid var(--ink); border-radius: 0.5rem; padding: 2.2rem 1.9rem 2.4rem; }
+        .xr-head { border-left: 2px solid var(--red); padding-left: 1.3rem; margin-bottom: 1.8rem; }
+        .xr-head .dd-kicker { margin-bottom: 0.6rem; }
+        .xr-head h2 { font-family: 'Newsreader', serif; font-size: clamp(1.6rem, 4.5vw, 2.2rem); font-weight: 700; line-height: 1.12; letter-spacing: -0.01em; }
+        .xr-head h2 em { font-style: italic; color: var(--red-deep); }
+        .xr-head p { margin-top: 0.7rem; font-size: 0.88rem; color: var(--body); font-weight: 300; }
+        .xr-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.55rem; margin-bottom: 1.5rem; }
+        @media (max-width: 600px) { .xr-steps { grid-template-columns: 1fr; } }
+        .xr-step { border: 1px solid var(--line); border-radius: 0.4rem; padding: 0.9rem 1rem; cursor: pointer; transition: border-color 0.2s, background 0.2s; background: #fbfaf7; }
+        .xr-step:hover { border-color: var(--line-strong); }
+        .xr-step.active { border-color: var(--red); background: #fdf4f3; }
+        .xr-step .xs-n { font-family: 'Newsreader', serif; font-weight: 700; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); display: block; }
+        .xr-step.active .xs-n { color: var(--red); }
+        .xr-step .xs-l { font-family: 'Newsreader', serif; font-weight: 700; font-size: 1.02rem; color: var(--ink); margin-top: 0.15rem; line-height: 1.15; }
+        .xr-panel { display: none; animation: xrIn 0.4s ease; }
+        .xr-panel.show { display: block; }
+        @keyframes xrIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        .xr-ref { font-family: 'Newsreader', serif; font-weight: 700; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); margin-bottom: 0.9rem; }
+        .xr-line { display: flex; gap: 0.9rem; margin-bottom: 0.7rem; }
+        .xr-line .xl-n { font-family: 'Newsreader', serif; color: var(--red); font-size: 0.72rem; min-width: 1.2rem; text-align: right; padding-top: 0.28rem; font-variant-numeric: tabular-nums; }
+        .xr-line p { font-size: 0.92rem; color: var(--body); line-height: 1.72; font-weight: 300; }
+        .xr-line p b { color: var(--ink); font-weight: 600; }
+        .xr-line p em { color: var(--ink); font-style: italic; }
+
+        /* ── DISCUSSION ── */
+        .discuss { max-width: 44rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .discuss-head { border-left: 2px solid var(--red); padding-left: 1.3rem; margin-bottom: 1.8rem; }
+        .discuss-head .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); }
+        .discuss-head h2 { font-family: 'Newsreader', serif; font-size: clamp(1.7rem, 5vw, 2.3rem); font-weight: 700; margin-top: 0.5rem; }
+        .q-item { display: flex; gap: 1.1rem; padding: 1.3rem 0; border-bottom: 1px solid var(--line); }
+        .q-num { font-family: 'Newsreader', serif; font-style: italic; font-weight: 700; font-size: 1.1rem; color: var(--red); flex-shrink: 0; width: 1.6rem; }
+        .q-item p { font-size: 0.95rem; color: var(--body); line-height: 1.7; font-weight: 300; }
+        .q-item p strong { color: var(--ink); font-weight: 600; }
+
+        /* ── COMPANION ── */
+        .companion { max-width: 44rem; margin: 2.4rem auto 0; padding: 0 1.5rem; }
+        .companion-in { background: #f4f0e8; border: 1px solid var(--line); border-radius: 0.5rem; padding: 1.2rem 1.5rem; }
+        .companion-in .co-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 0.4rem; }
+        .companion-in p { font-size: 0.85rem; color: var(--body); line-height: 1.65; font-weight: 300; }
+        .companion-in a { color: var(--red); font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .companion-in a:hover { border-color: var(--red); }
+
+        /* ── SEND ── */
+        .send { max-width: 42rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .send-in { border-left: 2px solid var(--red); padding-left: 1.7rem; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 1.1rem; }
+        .send p.body { font-size: 1.04rem; color: var(--body); line-height: 1.85; font-weight: 300; }
+        .send .pull { font-family: 'Newsreader', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; line-height: 1.3; color: var(--ink); margin-top: 1.5rem; letter-spacing: -0.01em; }
+        .send .pull em { font-style: italic; color: var(--red-deep); }
+
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.8rem; border: 1px solid var(--line-strong); border-radius: 100px; background: var(--surface); color: var(--ink); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .share-btn:hover { background: var(--red); color: #fff; border-color: var(--red); }
+
+        .strip-wrap { max-width: 52rem; margin: 4.5rem auto 0; padding: 0 1rem; }
+        .strip-eb { text-align: center; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+        .dd-back { text-align: center; padding: 3rem 1.5rem 4.5rem; }
+        .dd-back a { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+        .dd-back a:hover { color: var(--red); border-color: var(--red); }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <header class="dd-hero">
+        <div class="hero-inner">
+            <p class="dd-eyebrow"><a href="/res/deep/2026/the-gospel-on-trial.html">The Gospel on Trial &nbsp;·&nbsp; Acts 22–26</a></p>
+            <p class="dd-filed">Exhibit I · Aug 30 · Acts 22:1–29</p>
+            <h1 class="dd-title">Nobody Said<br>a Word</h1>
+            <div class="dd-underbar"></div>
+            <p class="dd-lead">Paul answers a lynch mob not with an argument, but with his life — and a life cannot be cross-examined.</p>
+        </div>
+    </header>
+
+    <div class="scripture-wrap reveal">
+        <div class="scripture-box">
+            <span class="sb-ref">Acts 22:14–16 · NLT</span>
+            <p class="sb-text">
+                <span class="sb-v">14</span>"Then he told me, 'The God of our ancestors has chosen you to know his will and to see the Righteous One and hear him speak.
+                <span class="sb-v">15</span><b>For you are to be his witness, telling everyone what you have seen and heard.</b>
+                <span class="sb-v">16</span>What are you waiting for? Get up and be baptized. Have your sins washed away by calling on the name of the Lord.'"
+            </p>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame" id="yt-mount"></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <!-- ══════════ THE WORD THAT OPENS THE TRIAL ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the word</span>
+        <h2 class="dd-h2">The moment the journey becomes a <em>courtroom</em></h2>
+        <p class="dd-p">Paul lifts his hand over the mob and says one word that changes the genre of the whole book: <em>"listen to me as I offer my defense"</em> (22:1). The Greek is <em class="greek">apologia</em> — not an apology, but a <b>legal defense</b>, the speech of the accused in the dock. Luke has used the travel-diary, the sermon, the miracle account. From this verse on, he writes a <b>trial</b>. Commentators note it sets the agenda for the final seven chapters: five hearings, four judges, two years — and the same defendant every time.</p>
+        <p class="dd-p">And notice how Paul actually defends himself: <span class="land">he never once refutes the charge.</span> The accusation that started the riot was that he taught "against our people, the law, and this place" (21:28). Paul answers all three — and he does it by telling the story of his life. He doesn't argue the accusation down. <b>He tells what happened to him, and the accusation dissolves.</b> That is the first clue to what kind of evidence is really on the stand in this book.</p>
+    </section>
+
+    <!-- ══════════ THE WITNESS ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the witness</span>
+        <h2 class="dd-h2">No naïve convert — a <em>trained</em> mind, testifying</h2>
+        <p class="dd-p">It's tempting to picture the man giving this testimony as a wide-eyed enthusiast. He is the opposite. He opens in <b>Aramaic</b>, their own mother tongue — and Bruce catches the effect: the reluctant hush they'd given his raised hand <em>"became deeper still."</em> Then he lays out his credentials: raised at the feet of Gamaliel, <em>"carefully trained"</em> in the law. Swindoll notes the word behind that phrase is <em class="greek">akribeia</em> — precision <em>"as in the case of mathematical accuracy."</em> <span class="land">This is a rigorous scholar of the law describing what happened to him — not a man easily fooled by a bright light.</span></p>
+        <p class="dd-p">And watch his opening address: <em>"Brothers and esteemed fathers"</em> (22:1). Those are the exact words <b>Stephen</b> used, twenty-odd years earlier, before the same kind of crowd stoned him — <em>"Brothers and fathers, listen to me"</em> (Acts 7:2). The young man who stood guarding the coats that day is now standing in Stephen's place, borrowing Stephen's sentence. <b>He puts his own worst day into the record</b>, unprompted, in front of the men most likely to admire him for it. A witness who indicts himself is a witness who is not managing his image — which is exactly what makes him believable.</p>
+        <div class="note">
+            <span class="nt-tag">Who he names as his character witness</span>
+            <p>When Paul needs someone to vouch for him, he doesn't reach for a fellow Christian. He names <b>Ananias</b> — "a godly man, deeply devoted to the law, and well regarded by all the Jews of Damascus" (22:12). The most observant Jew in the city, the one their own people respect, is the man who prayed over him. Paul builds his defense entirely out of witnesses the prosecution already trusts.</p>
+        </div>
+    </section>
+
+    <!-- ══════════ SIGNATURE — A LIFE CAN'T BE CROSS-EXAMINED ══════════ -->
+    <div class="xr-wrap reveal">
+        <div class="xr-inner">
+            <div class="xr-head">
+                <span class="dd-kicker">The Cross-Examination</span>
+                <h2>A Life Can't Be <em>Cross-Examined</em></h2>
+                <p>An argument can be beaten. That's the whole reason testimony is dangerous in a courtroom — and it's the case Paul is quietly making. Step through it.</p>
+            </div>
+
+            <div class="xr-steps">
+                <div class="xr-step active" data-target="xr-1"><span class="xs-n">Line of questioning I</span><span class="xs-l">The argument</span></div>
+                <div class="xr-step" data-target="xr-2"><span class="xs-n">Line of questioning II</span><span class="xs-l">The eyewitness</span></div>
+                <div class="xr-step" data-target="xr-3"><span class="xs-n">Line of questioning III</span><span class="xs-l">Paul's turn</span></div>
+            </div>
+
+            <div class="xr-panel show" id="xr-1">
+                <div class="xr-ref">Exhibit — the thing that can be defeated</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>An <b>argument</b> can always be met with a better one. Paul, of all people, knew this — he had been the sharpest prosecutor the church ever faced, and he had lost, not to a syllogism, but to a Person on a road.</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>So in his defense he offers no proof of doctrine. <em>He tells what happened.</em> You can cross-examine a claim. It is much harder to cross-examine a scar.</p></div>
+            </div>
+            <div class="xr-panel" id="xr-2">
+                <div class="xr-ref">Exhibit — the man born blind · John 9:25</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>The Pharisees interrogated a healed man for a whole chapter and could not break him — because he wasn't holding a theory. He was holding his own eyes:</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p><em>"I don't know whether he is a sinner," the man replied. "But I know this: I was blind, and now I can see!"</em></p></div>
+                <div class="xr-line"><span class="xl-n">03</span><p>They out-ranked him, out-argued him, and threw him out — and still could not make his eyes stop working. <b>Experience is the one exhibit the other side cannot enter a rebuttal against.</b></p></div>
+            </div>
+            <div class="xr-panel" id="xr-3">
+                <div class="xr-ref">Exhibit — and with Paul it isn't even a metaphor</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>Paul was struck literally blind by the risen Christ and given his sight back by a praying Jew. So when he stands before the institution he once served, he is holding the same exhibit as the man in John 9 — <em>and holding it as fact, not figure.</em></p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p><b>This is why the trial can never end in a conviction.</b> You can dismantle every argument for the faith and still be left with a witness who says: I was one thing, and then I met him, and now I am another. That claim doesn't need a friendly jury. It only needs to be true.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════ THE ONE SENTENCE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the citizen</span>
+        <h2 class="dd-h2">One true sentence, at the right <em>moment</em></h2>
+        <p class="dd-p">When the speech ends and the whip comes out, watch how little it costs Paul to stop it. He is stretched out and tied for the <em>flagellum</em> — Bruce describes it plainly: leather thongs weighted with metal and bone, <em>"if a man did not actually die under the scourge, he might well be crippled for life."</em> And its purpose (22:24) was to <b>make him confess</b> — Rome trying to beat the truth out of a man it hadn't tried. Then Paul says one sentence: <em>"Is it legal for you to whip a Roman citizen who hasn't even been tried?"</em> Everything stops. The officer runs. The commander goes pale.</p>
+        <p class="dd-p">Luke can't resist the detail (22:28): the commander bought his citizenship — <em>"it cost me plenty"</em> — with a bribe. Paul, tied to the post and bleeding: <em>"But I am a citizen by birth."</em> <span class="land">The most dignified man in the room is the one on the floor.</span> And the point that carries into the whole trial: his protection was never a crowd or a sword. It was <b>one true sentence, said out loud, at the right moment</b> — and the empire's own law had to honor it. The witness is shielded by the very system putting him on trial.</p>
+    </section>
+
+    <!-- ══════════ CLOSE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Why this is Exhibit I</span>
+        <h2 class="dd-h2">The case narrows to a single <em>fact</em></h2>
+        <p class="dd-p">Testimony is the one kind of evidence a court cannot cross-examine. You can take apart a man's reasoning; you cannot take apart his eyes. That is why, hearing by hearing, this trial keeps narrowing away from every charge that won't stick and toward a single fact no one can argue Paul out of: <span class="land">he met a man who was dead.</span> Everything downstream — the split council, the frightened governor, the bored bureaucrat's one accidental sentence — is the court circling that.</p>
+        <p class="dd-p">And there is a quieter exhibit in this chapter, easy to miss: eleven verses earlier Luke counted <em>tens of thousands</em> of believers in that very city (21:20) — and not one of them appears to say a word for Paul. A whole church that agreed with him in private and went silent in the street. Which sets the question the whole series will keep pressing, on Paul and on us: <b>a conviction you never say out loud eventually stops being a conviction.</b> The gospel's truth was never the thing in doubt. The courage to say it was.</p>
+    </section>
+
+    <!-- companion -->
+    <div class="companion reveal">
+        <div class="companion-in">
+            <span class="co-tag">A companion study</span>
+            <p>This exhibit turns on a question of evidence: <b>how do we actually know?</b> That's the ground the midweek study, <a href="/res/know-what-you-believe.html">Know What You Believe</a>, works through more slowly — how God has made himself known, and what makes a witness trustworthy. Follow it if you'd like to go further; this page stands on its own either way.</p>
+        </div>
+    </div>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss reveal">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+        </div>
+        <div class="q-list">
+            <div class="q-item"><span class="q-num">01</span><p><strong>Argument or eyes.</strong> When you talk about Jesus, do you reach first for what you can <em>prove</em>, or for what you have <em>seen</em>? Which of those has actually changed anyone you know?</p></div>
+            <div class="q-item"><span class="q-num">02</span><p><strong>The self-indicting witness.</strong> Paul put his worst day into the record on purpose. What in your own story are you tempted to edit out — and might that be the very part that makes your testimony believable?</p></div>
+            <div class="q-item"><span class="q-num">03</span><p><strong>Four sentences.</strong> Write, with no theology words, what you were like before, what happened, and what is different now. Then say it out loud to one person this week.</p></div>
+            <div class="q-item"><span class="q-num">04</span><p><strong>The silence.</strong> What do you believe on Sunday that you would not say on Monday — and whose opinion is buying that silence?</p></div>
+            <div class="q-item"><span class="q-num">05</span><p><strong>Family prompt:</strong> Have each person finish the sentence, "I know God is real because I have seen…" — an answer from their own life, not a doctrine. Notice how hard it is to argue with someone else's "I have seen."</p></div>
+        </div>
+    </section>
+
+    <div class="send reveal">
+        <div class="send-in">
+            <p class="eb">The Send</p>
+            <p class="body">The trial of the gospel opens the way it will run for seven chapters: an innocent man in the dock, refusing to defend himself with anything but the truth of what happened to him. You hold the same exhibit he did — a before, a moment, and an after. Don't argue it. Testify to it. A life cannot be cross-examined.</p>
+            <p class="pull">You can lose every argument for the faith and still be left holding the one thing they can't rebut: <em>I was blind, and now I see.</em></p>
+        </div>
+    </div>
+
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share this deep dive</button>
+    </div>
+
+    <div class="strip-wrap reveal">
+        <p class="strip-eb">The Case · Acts 22–26</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back"><a href="/deepdives.html">← All Deep Dives</a></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-22-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="Nobody Said a Word" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.xr-step').forEach(step => {
+            step.addEventListener('click', () => {
+                document.querySelectorAll('.xr-step').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.xr-panel').forEach(p => p.classList.remove('show'));
+                step.classList.add('active');
+                const t = document.getElementById(step.getAttribute('data-target'));
+                if (t) t.classList.add('show');
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts22RenderStrip === 'function') acts22RenderStrip('#series-strip', 'nobody-said-a-word');
+        });
+
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = { title: 'Nobody Said a Word — Deep Dive | The Living Room', text: 'A life cannot be cross-examined. Exhibit I of The Gospel on Trial — Acts 22:1–29.', url: 'https://thelivingroom.io/res/deep/2026/nobody-said-a-word.html' };
+            try { if (navigator.share) { await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share this deep dive', 2000); } } catch (e) {}
+        });
+    </script>
+</body>
+</html>

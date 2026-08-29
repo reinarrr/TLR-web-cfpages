@@ -460,3 +460,26 @@ h1, h2, h3, h4, .font-display {
 .a21-strip-cta { font-size: 0.5rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #9a9aa2; }
 .a21-strip-item.is-live .a21-strip-cta { color: var(--accent, #a8843d); }
 .a21-strip-item.is-current .a21-strip-cta { color: var(--accent, #a8843d); }
+
+/* ============================================================================
+   16. Acts 22–26 "Gospel on Trial" series cross-nav strip  (Transcript skin)
+   Rendered by acts22RenderStrip() in acts-22-series.js. Monochrome ink + a
+   single verdict-red accent; six exhibits in a wrapping grid.
+   ========================================================================== */
+.a22-strip { border: 1px solid #e4e0d8; border-top: 2px solid #17181a; border-radius: 0.4rem; background: #ffffff; overflow: hidden; }
+.a22-strip-hub { display: block; text-decoration: none; padding: 1rem 1.3rem; background: #17181a; }
+.a22-strip-hub-eyebrow { display: block; font-family: 'Outfit', sans-serif; font-size: 0.54rem; font-weight: 700; letter-spacing: 0.34em; text-transform: uppercase; color: #b0281f; }
+.a22-strip-hub-title { display: block; font-family: 'Newsreader', 'Playfair Display', serif; font-weight: 700; font-size: 1.05rem; color: #fbfaf7; margin-top: 0.25rem; letter-spacing: -0.01em; }
+.a22-strip-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: #e4e0d8; }
+@media (max-width: 720px) { .a22-strip-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 460px) { .a22-strip-list { grid-template-columns: 1fr; } }
+.a22-strip-item { display: flex; flex-direction: column; gap: 0.4rem; padding: 0.95rem 1.1rem; background: #ffffff; text-decoration: none; transition: background 0.2s; }
+.a22-strip-item.is-live { cursor: pointer; }
+.a22-strip-item.is-live:hover { background: #faf7f2; }
+.a22-strip-item.is-locked { opacity: 0.6; cursor: default; }
+.a22-strip-item.is-current { background: #faf7f2; box-shadow: inset 3px 0 0 #b0281f; }
+.a22-strip-num { font-family: 'Newsreader', 'Playfair Display', serif; font-weight: 700; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: #b0281f; }
+.a22-strip-title { font-family: 'Newsreader', 'Playfair Display', serif; font-weight: 700; font-size: 0.92rem; color: #17181a; line-height: 1.2; }
+.a22-strip-cta { font-family: 'Outfit', sans-serif; font-size: 0.5rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #a8a59d; margin-top: auto; }
+.a22-strip-item.is-live .a22-strip-cta { color: #b0281f; }
+.a22-strip-item.is-current .a22-strip-cta { color: #b0281f; }

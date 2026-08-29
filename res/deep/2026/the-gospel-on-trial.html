@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Gospel on Trial — Acts 22–26 Deep Dives | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500;1,6..72,600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/the-gospel-on-trial.html">
+    <meta property="og:title"       content="The Gospel on Trial — Acts 22–26 Deep Dives">
+    <meta property="og:description" content="Paul is in the dock — but it is really the gospel that is on trial. Six hearings, four judges, two years, and one question no court could rule on: is a dead man named Jesus alive? Deep dives into Acts 22–26.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="The Gospel on Trial — Acts 22–26 Deep Dives">
+    <meta name="twitter:description" content="Six exhibits from the trial of Paul — and the veracity of the gospel underneath each one.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --bg: #fbfaf7;                 /* court-record paper */
+            --surface: #ffffff;
+            --ink: #17181a; --body: #3b3c40; --muted: #9a978f;
+            --red: #b0281f; --red-deep: #85201a;   /* the verdict red */
+            --line: #e4e0d8; --line-strong: #cfcabf;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--red-deep); font-weight: 500; }
+
+        /* ── HERO (flush-left, red margin rule) ── */
+        .dd-hero { max-width: 47rem; margin: 0 auto; padding: 4.5rem 1.5rem 2.5rem; }
+        .hero-inner { border-left: 2px solid var(--red); padding-left: 1.7rem; }
+        .hero-scale { margin-bottom: 1.4rem; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .dd-eyebrow a:hover { border-color: var(--red); }
+        .dd-filed { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.6rem; }
+        .dd-title { font-family: 'Newsreader', serif; font-size: clamp(2.6rem, 8vw, 4.9rem); font-weight: 700; line-height: 0.98; letter-spacing: -0.018em; color: var(--ink); }
+        .dd-underbar { width: 5.5rem; height: 3px; background: var(--red); margin: 1.4rem 0 1.5rem; }
+        .dd-lead { font-family: 'Newsreader', serif; font-style: italic; font-weight: 500; font-size: clamp(1.2rem, 3vw, 1.6rem); line-height: 1.5; color: #2b2c30; max-width: 32rem; }
+        .dd-sub { margin-top: 1.5rem; font-size: 0.92rem; color: var(--body); font-weight: 300; line-height: 1.75; max-width: 34rem; }
+
+        /* ── SECTIONS (flush-left) ── */
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 0.9rem; display: block; }
+        .dd-h2 { font-family: 'Newsreader', serif; font-size: clamp(1.8rem, 4.8vw, 2.6rem); font-weight: 700; line-height: 1.12; margin-bottom: 1.4rem; letter-spacing: -0.015em; }
+        .dd-h2 em { font-style: italic; color: var(--red-deep); }
+        .dd-p { font-size: 1.02rem; color: var(--body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--ink); font-weight: 600; }
+        .dd-p .land { color: var(--red-deep); font-weight: 600; font-style: italic; }
+
+        /* ── SIGNATURE — THE CHARGE SHEET ── */
+        .charge-band { background: #17181a; color: #e7e6e2; margin-top: 4rem; padding: 4rem 1.5rem 4.5rem; }
+        .charge-inner { max-width: 48rem; margin: 0 auto; }
+        .charge-head { margin-bottom: 2.2rem; border-left: 2px solid var(--red); padding-left: 1.5rem; }
+        .charge-head .dd-kicker { color: #e0554a; }
+        .charge-head h2 { font-family: 'Newsreader', serif; font-size: clamp(1.9rem, 5vw, 2.7rem); font-weight: 700; line-height: 1.1; color: #fbfaf7; }
+        .charge-head h2 em { font-style: italic; color: #e0554a; }
+        .charge-head p { margin-top: 0.9rem; font-size: 0.9rem; color: #b3b1ab; font-weight: 300; max-width: 36rem; }
+        .charge-head p b { color: #e9e8e4; font-weight: 600; }
+
+        .charge { background: #1e1f22; border: 1px solid #33343a; border-radius: 0.5rem; margin-bottom: 0.7rem; overflow: hidden; cursor: pointer; transition: border-color 0.25s; }
+        .charge:hover { border-color: #4a4b52; }
+        .charge.is-open { border-color: rgba(176,40,31,0.6); }
+        .charge-row { display: flex; align-items: center; gap: 1rem; padding: 1.05rem 1.4rem; }
+        .charge-tag { font-family: 'Newsreader', serif; font-weight: 700; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #e0554a; width: 5.4rem; flex-shrink: 0; }
+        .charge-name { font-family: 'Newsreader', serif; font-weight: 700; font-size: 1.08rem; color: #f1f0ec; flex: 1; line-height: 1.2; }
+        .charge-caret { font-size: 0.7rem; color: #7c7d84; transition: transform 0.3s; }
+        .charge.is-open .charge-caret { transform: rotate(180deg); }
+        .charge-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0; position: relative; padding: 0 1.4rem 1rem; }
+        .charge-pair::before { content: ''; position: absolute; top: 0.2rem; bottom: 0.7rem; left: 50%; width: 1px; background: #33343a; }
+        .c-side { padding: 0.3rem 1rem; }
+        .c-side .cs-who { font-size: 0.52rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 0.4rem; }
+        .c-side.j .cs-who { color: #8b90a1; }
+        .c-side.p .cs-who { color: #e0554a; }
+        .c-side .cs-ref { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #6f7078; margin-bottom: 0.4rem; }
+        .c-side .cs-line { font-size: 0.85rem; color: #c8c7c2; line-height: 1.55; font-weight: 300; }
+        .c-side .cs-line em { font-style: italic; color: #f1f0ec; }
+        .charge-deep { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: #17181a; }
+        .charge.is-open .charge-deep { max-height: 300px; }
+        .charge-deep-in { padding: 1rem 1.55rem 1.2rem; font-size: 0.84rem; color: #b3b1ab; line-height: 1.7; font-weight: 300; border-top: 1px solid #33343a; }
+        .charge-deep-in em { font-style: italic; color: #e0554a; }
+        @media (max-width: 540px) { .charge-pair { grid-template-columns: 1fr; gap: 0.3rem; } .charge-pair::before { display: none; } .c-side.p { border-top: 1px dashed #33343a; padding-top: 0.7rem; } }
+
+        .verdict-turn { margin-top: 1.5rem; background: #fbfaf7; color: #17181a; border-radius: 0.5rem; padding: 1.9rem 2rem; border-left: 4px solid var(--red); }
+        .verdict-turn .vt-tag { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 0.7rem; }
+        .verdict-turn h3 { font-family: 'Newsreader', serif; font-size: 1.5rem; font-weight: 700; color: #17181a; margin-bottom: 0.6rem; }
+        .verdict-turn p { font-size: 0.92rem; color: #45464a; line-height: 1.8; font-weight: 300; }
+        .verdict-turn p em { color: #17181a; font-style: italic; }
+        .verdict-turn p b { color: var(--red-deep); font-weight: 600; }
+
+        /* ── THE EXHIBITS ── */
+        .panels-wrap { max-width: 45rem; margin: 0 auto; padding: 3.8rem 1.5rem 0; }
+        .panels-head { margin-bottom: 2rem; border-left: 2px solid var(--red); padding-left: 1.5rem; }
+        .panels-head .dd-kicker { margin-bottom: 0.7rem; }
+        .panels-head h2 { font-family: 'Newsreader', serif; font-size: clamp(1.9rem, 5vw, 2.5rem); font-weight: 700; letter-spacing: -0.015em; }
+        .panels-head p { margin-top: 0.8rem; font-size: 0.9rem; color: var(--body); font-weight: 300; max-width: 34rem; }
+        .dd-panels { display: grid; gap: 0.9rem; }
+        .dd-panel { position: relative; display: block; background: var(--surface); border: 1px solid var(--line); border-top: 2px solid var(--ink); border-radius: 0.4rem; padding: 1.5rem 1.7rem; text-decoration: none; transition: transform 0.22s, box-shadow 0.22s; }
+        .dd-panel.is-live:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(23,24,26,0.08); }
+        .dd-panel.is-locked { opacity: 0.62; cursor: default; }
+        .dd-top { display: flex; align-items: baseline; justify-content: space-between; gap: 0.8rem; margin-bottom: 0.55rem; }
+        .dd-exhibit { font-family: 'Newsreader', serif; font-weight: 700; font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); }
+        .dd-when { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-align: right; }
+        .dd-ptitle { font-family: 'Newsreader', serif; font-weight: 700; font-size: 1.5rem; color: var(--ink); line-height: 1.12; display: block; margin-bottom: 0.7rem; letter-spacing: -0.01em; }
+        .dd-claim { font-size: 0.9rem; color: #2b2c30; line-height: 1.5; margin-bottom: 0.85rem; }
+        .dd-claim-label { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); display: inline-block; margin-right: 0.5rem; }
+        .dd-claim em { font-family: 'Newsreader', serif; font-style: italic; font-weight: 600; color: var(--ink); }
+        .dd-pbody { font-size: 0.88rem; color: var(--body); line-height: 1.7; font-weight: 300; margin-bottom: 1rem; }
+        .dd-pbody em { font-style: italic; color: var(--ink); }
+        .dd-iceberg-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); }
+        .dd-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-top: 0.9rem; border-top: 1px solid var(--line); }
+        .dd-interactive { font-size: 0.66rem; font-weight: 600; color: var(--muted); }
+        .dd-cta { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+        .dd-panel.is-live .dd-cta { color: var(--red); }
+
+        .companion { max-width: 45rem; margin: 1.6rem auto 0; padding: 0 1.5rem; }
+        .companion-in { background: #f4f0e8; border: 1px solid var(--line); border-radius: 0.5rem; padding: 1.2rem 1.5rem; }
+        .companion-in .co-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 0.4rem; }
+        .companion-in p { font-size: 0.85rem; color: var(--body); line-height: 1.65; font-weight: 300; }
+        .companion-in p b { color: var(--ink); font-weight: 600; }
+
+        /* ── SEND ── */
+        .send { max-width: 42rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .send-in { border-left: 2px solid var(--red); padding-left: 1.7rem; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 1.1rem; }
+        .send p.body { font-size: 1.02rem; color: var(--body); line-height: 1.85; font-weight: 300; }
+        .send .pull { font-family: 'Newsreader', serif; font-size: clamp(1.4rem, 4vw, 1.95rem); font-weight: 700; line-height: 1.28; color: var(--ink); margin-top: 1.5rem; letter-spacing: -0.01em; }
+        .send .pull em { font-style: italic; color: var(--red-deep); }
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.8rem; border: 1px solid var(--line-strong); border-radius: 100px; background: var(--surface); color: var(--ink); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .share-btn:hover { background: var(--red); color: #fff; border-color: var(--red); }
+        .verse-close { max-width: 40rem; margin: 3rem auto 0; padding: 0 1.5rem; text-align: center; }
+        .verse-close p { font-family: 'Newsreader', serif; font-style: italic; font-size: 1.05rem; color: var(--muted); }
+        .dd-back { text-align: center; padding: 3.5rem 1.5rem 4.5rem; }
+        .dd-back a { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+        .dd-back a:hover { color: var(--red); border-color: var(--red); }
+
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <!-- ══════════ HERO ══════════ -->
+    <header class="dd-hero">
+        <div class="hero-inner">
+            <div class="hero-scale" aria-hidden="true">
+                <svg width="42" height="42" viewBox="0 0 48 48" fill="none" stroke="#b0281f" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M24 7v34"/><path d="M14 41h20"/><path d="M9 15h30"/>
+                    <circle cx="24" cy="9" r="2" fill="#b0281f" stroke="none"/>
+                    <path d="M9 15l-5 11h10z"/><path d="M39 15l-5 11h10z"/>
+                    <path d="M4 26a5 5 0 0 0 10 0"/><path d="M34 26a5 5 0 0 0 10 0"/>
+                </svg>
+            </div>
+            <p class="dd-eyebrow"><a href="/res/deep/2026/acts-journey.html">Acts Journey</a> &nbsp;·&nbsp; Deep Dives</p>
+            <p class="dd-filed">Acts 22–26 · Six Hearings · Four Judges</p>
+            <h1 class="dd-title">The Gospel<br>on Trial</h1>
+            <div class="dd-underbar"></div>
+            <p class="dd-lead">Paul is in the dock. But it is really the gospel that is on trial.</p>
+            <p class="dd-sub">The hub for the Acts 22–26 series. Six hearings become six exhibits — and under each one, the question the whole case is actually about: is it true?</p>
+        </div>
+    </header>
+
+    <!-- ══════════ INTRO ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">The Genre Changes</span>
+        <h2 class="dd-h2">The journey becomes a <em>courtroom</em></h2>
+        <p class="dd-p">At Acts 22:1 Paul lifts a bleeding hand over a mob and asks for a hearing. The word Luke chooses for what follows is <em class="greek">apologia</em> — a legal defense. From that word to the last page, Acts stops being a missionary journey and turns into a trial: a temple crowd, the Sanhedrin, two Roman governors, and a king. <b>Five hearings. Four judges. Two years in custody.</b></p>
+        <p class="dd-p">And the charges never land. Not one of those courts can make anything stick. <span class="land">What every hearing keeps circling back to isn't a crime — it's a claim:</span> that a man who was executed is alive. So this series reads each hearing for what's really on the stand underneath it. Six Sundays, six exhibits — and beneath each, the veracity question the whole case turns on. <b>The man in the dock is not the one on trial.</b></p>
+    </section>
+
+    <!-- ══════════ SIGNATURE — THE CHARGE SHEET ══════════ -->
+    <section class="charge-band reveal">
+        <div class="charge-inner">
+            <div class="charge-head">
+                <span class="dd-kicker">The Signature</span>
+                <h2>The <em>Charge Sheet</em></h2>
+                <p>Paul faces three charges. They are, almost to the word, the three that were brought against his Master: <b>against the law · against the temple · against Caesar</b> (Acts 25:8). Tap each to see the case tried twice.</p>
+            </div>
+
+            <div class="charge" tabindex="0">
+                <div class="charge-row"><span class="charge-tag">Charge I</span><span class="charge-name">Against the law</span><span class="charge-caret">▾</span></div>
+                <div class="charge-pair">
+                    <div class="c-side j"><span class="cs-who">Jesus</span><div class="cs-ref">Before the Sanhedrin</div><p class="cs-line">Hauled before the high priest and the council; condemned for calling himself the Son of God.</p></div>
+                    <div class="c-side p"><span class="cs-who">Paul</span><div class="cs-ref">Acts 21:28 · 23:1</div><p class="cs-line">"…tells everybody to <em>disobey the Jewish laws</em>" — then stands before the same council.</p></div>
+                </div>
+                <div class="charge-deep"><div class="charge-deep-in">Both men are tried by the same institution on the same ground — fidelity to the law of Moses. One it condemns; the other it cannot even hold together long enough to convict. <em>The court that judged the Master now can't agree on the servant.</em></div></div>
+            </div>
+
+            <div class="charge" tabindex="0">
+                <div class="charge-row"><span class="charge-tag">Charge II</span><span class="charge-name">Against the temple</span><span class="charge-caret">▾</span></div>
+                <div class="charge-pair">
+                    <div class="c-side j"><span class="cs-who">Jesus</span><div class="cs-ref">The false witnesses</div><p class="cs-line">Accused of threatening to destroy the temple and raise it in three days.</p></div>
+                    <div class="c-side p"><span class="cs-who">Paul</span><div class="cs-ref">Acts 21:28</div><p class="cs-line">"He speaks against the Temple — and even <em>defiles this holy place</em> by bringing in Gentiles."</p></div>
+                </div>
+                <div class="charge-deep"><div class="charge-deep-in">Paul's charge was built on an assumption nobody checked — they'd seen him in the city with a Gentile and simply supposed he'd taken him inside. The wall he was accused of breaching was one Christ had already torn down. <em>They were guarding a barrier heaven had removed.</em></div></div>
+            </div>
+
+            <div class="charge" tabindex="0">
+                <div class="charge-row"><span class="charge-tag">Charge III</span><span class="charge-name">Against Caesar</span><span class="charge-caret">▾</span></div>
+                <div class="charge-pair">
+                    <div class="c-side j"><span class="cs-who">Jesus</span><div class="cs-ref">Luke 23:2</div><p class="cs-line">"…<em>telling them not to pay their taxes</em>… claiming he is the Messiah, a king."</p></div>
+                    <div class="c-side p"><span class="cs-who">Paul</span><div class="cs-ref">Acts 24:5</div><p class="cs-line">"…constantly <em>stirring up riots</em> among the Jews all over the world."</p></div>
+                </div>
+                <div class="charge-deep"><div class="charge-deep-in">Sedition for the Roman court, blasphemy for the Jewish one — the same two-front strategy run twice. As Stott notes, the enemies of Jesus <em>"had followed the same ploy."</em> And it ends the same way it began for the Master: an appeal that sends the prisoner to Rome.</div></div>
+            </div>
+
+            <div class="verdict-turn">
+                <span class="vt-tag">The verdict</span>
+                <h3>Innocent — and still in chains</h3>
+                <p>Every judge lands the same way. Pilate, of Jesus: <em>"I find nothing wrong with this man!"</em> (Luke 23:4). Of Paul — Lysias, Festus, and finally Agrippa: nothing worthy of death. Paul says it himself: <em>"I am not guilty of any crime against the Jewish laws or the Temple or the Roman government"</em> (25:8). <b>Innocent — and he keeps the chains, by his own appeal, because the chains are the road to Rome.</b> Strip away every charge that never stuck, and one question is left that no governor could rule on: whether <em>"a dead man named Jesus"</em> is, as Paul insists, alive (25:19). That is the real docket — and it still is.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════ THE EXHIBITS ══════════ -->
+    <section class="panels-wrap reveal">
+        <div class="panels-head">
+            <span class="dd-kicker">The Exhibits</span>
+            <h2>Six hearings. One question.</h2>
+            <p>Each Sunday, a hearing from Acts 22–26 — read for what's really on trial beneath it. A new exhibit opens each week.</p>
+        </div>
+
+        <div class="dd-panels">
+
+            <a class="dd-panel is-live" id="panel-nobody-said-a-word" href="nobody-said-a-word.html"
+               data-acts22-slug="nobody-said-a-word" data-acts22-date="Aug 30">
+                <div class="dd-top"><span class="dd-exhibit">Exhibit I</span><span class="dd-when">Aug 30 · Acts 22:1–29</span></div>
+                <span class="dd-ptitle">Nobody Said a Word</span>
+                <div class="dd-claim"><span class="dd-claim-label">On trial</span><em>Can a changed life be evidence?</em></div>
+                <p class="dd-pbody"><span class="dd-iceberg-label">Beneath the surface —</span> the <em>apologia</em> that turns a journey into a courtroom; why a life can't be cross-examined the way an argument can; and a church of ten thousand that said nothing at all.</p>
+                <div class="dd-foot"><span class="dd-interactive">✦ A Life Can't Be Cross-Examined</span><span class="dd-cta" data-acts22-cta>Read the deep dive →</span></div>
+            </a>
+
+            <a class="dd-panel is-locked" id="panel-a-council-versus-one-sentence"
+               data-acts22-slug="a-council-versus-one-sentence" data-acts22-date="Sep 6">
+                <div class="dd-top"><span class="dd-exhibit">Exhibit II</span><span class="dd-when">Sep 6 · Acts 22:30 – 23:11</span></div>
+                <span class="dd-ptitle">A Council Versus One Sentence</span>
+                <div class="dd-claim"><span class="dd-claim-label">On trial</span><em>Did the dead man rise?</em></div>
+                <p class="dd-pbody"><span class="dd-iceberg-label">Beneath the surface —</span> a united council splits down the middle on a single word — <em>resurrection</em> — and the case stops being about Paul at all.</p>
+                <div class="dd-foot"><span class="dd-interactive">✦ The Word That Split the Court</span><span class="dd-cta" data-acts22-cta>Coming · Sep 6</span></div>
+            </a>
+
+            <a class="dd-panel is-locked" id="panel-forty-men-versus-one-boy"
+               data-acts22-slug="forty-men-versus-one-boy" data-acts22-date="Sep 13">
+                <div class="dd-top"><span class="dd-exhibit">Exhibit III</span><span class="dd-when">Sep 13 · Acts 23:12–35</span></div>
+                <span class="dd-ptitle">Forty Men Versus One Boy</span>
+                <div class="dd-claim"><span class="dd-claim-label">On trial</span><em>Is a hidden hand still a hand?</em></div>
+                <p class="dd-pbody"><span class="dd-iceberg-label">Beneath the surface —</span> forty men swear an oath to kill; a boy undoes it — and there is not one miracle in the room. Providence with the lights off.</p>
+                <div class="dd-foot"><span class="dd-interactive">✦ The Invisible Hand</span><span class="dd-cta" data-acts22-cta>Coming · Sep 13</span></div>
+            </a>
+
+            <a class="dd-panel is-locked" id="panel-a-more-convenient-season"
+               data-acts22-slug="a-more-convenient-season" data-acts22-date="Sep 20">
+                <div class="dd-top"><span class="dd-exhibit">Exhibit IV</span><span class="dd-when">Sep 20 · Communion · Acts 24</span></div>
+                <span class="dd-ptitle">A More Convenient Season</span>
+                <div class="dd-claim"><span class="dd-claim-label">On trial</span><em>Why couldn't God just forgive?</em></div>
+                <p class="dd-pbody"><span class="dd-iceberg-label">Beneath the surface —</span> a governor genuinely moved, genuinely frightened — and two years pass. The most expensive word in the chapter is <em>almost</em>.</p>
+                <div class="dd-foot"><span class="dd-interactive">✦ The Most Expensive Word</span><span class="dd-cta" data-acts22-cta>Coming · Sep 20</span></div>
+            </a>
+
+            <a class="dd-panel is-locked" id="panel-a-certain-jesus"
+               data-acts22-slug="a-certain-jesus" data-acts22-date="Sep 27">
+                <div class="dd-top"><span class="dd-exhibit">Exhibit V</span><span class="dd-when">Sep 27 · Acts 25</span></div>
+                <span class="dd-ptitle">A Certain Jesus</span>
+                <div class="dd-claim"><span class="dd-claim-label">On trial</span><em>Dead — or alive?</em></div>
+                <p class="dd-pbody"><span class="dd-iceberg-label">Beneath the surface —</span> a bored bureaucrat states the whole gospel by accident, and the four ways a mind still ducks the sentence <em>dead, but alive</em>.</p>
+                <div class="dd-foot"><span class="dd-interactive">✦ The Cross-Examination</span><span class="dd-cta" data-acts22-cta>Coming · Sep 27</span></div>
+            </a>
+
+            <a class="dd-panel is-locked" id="panel-except-for-these-chains"
+               data-acts22-slug="except-for-these-chains" data-acts22-date="Oct 4">
+                <div class="dd-top"><span class="dd-exhibit">Exhibit VI</span><span class="dd-when">Oct 4 · Acts 26</span></div>
+                <span class="dd-ptitle">Except For These Chains</span>
+                <div class="dd-claim"><span class="dd-claim-label">On trial</span><em>What is the verdict on you?</em></div>
+                <p class="dd-pbody"><span class="dd-iceberg-label">Beneath the surface —</span> the prisoner stops defending himself and starts evangelizing the room — wishing his own joy on his judges, and subtracting only the chains.</p>
+                <div class="dd-foot"><span class="dd-interactive">✦ Almost Persuaded</span><span class="dd-cta" data-acts22-cta>Coming · Oct 4</span></div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- companion note -->
+    <div class="companion reveal">
+        <div class="companion-in">
+            <span class="co-tag">A companion study</span>
+            <p>Each exhibit stands on its own. But where a hearing raises a question of <b>truth</b> — the resurrection, the cross, the coming judgment — it points next door to <b>Know What You Believe</b>, the midweek study working through the same ground more slowly. Follow the thread if you want to; you'll miss nothing if you don't.</p>
+        </div>
+    </div>
+
+    <!-- ══════════ SEND ══════════ -->
+    <div class="send reveal">
+        <div class="send-in">
+            <p class="eb">The Invitation</p>
+            <p class="body">For seven chapters the gospel is dragged from court to court and never once convicted. The witnesses can't agree, the governors can't decide, the charges won't hold — and the prisoner keeps turning every dock into a pulpit. Watch the trial run its course this autumn, and notice: the question they can't settle about a certain Jesus is the same one still standing in front of you.</p>
+            <p class="pull">Five hearings, four judges, two years — and the verdict on the gospel is still <em>yours to enter.</em></p>
+        </div>
+    </div>
+
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share the series</button>
+    </div>
+
+    <div class="verse-close reveal">
+        <p>"The gospel goes on trial for seven chapters — and is never once convicted."</p>
+    </div>
+
+    <div class="dd-back"><a href="/deepdives.html">← All Deep Dives</a></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-22-series.js" defer></script>
+    <script>
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.charge').forEach(row => {
+            const toggle = () => row.classList.toggle('is-open');
+            row.addEventListener('click', toggle);
+            row.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggle(); } });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts22DetectLive === 'function') acts22DetectLive(document);
+        });
+
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = { title: 'The Gospel on Trial — Acts 22–26 Deep Dives | The Living Room', text: 'Paul is in the dock — but it is really the gospel that is on trial. Six deep dives into Acts 22–26.', url: 'https://thelivingroom.io/res/deep/2026/the-gospel-on-trial.html' };
+            try { if (navigator.share) { await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share the series', 2000); } } catch (e) {}
+        });
+    </script>
+</body>
+</html>
