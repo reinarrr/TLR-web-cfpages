@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Certain Jesus — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500;1,6..72,600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/a-certain-jesus.html">
+    <meta property="og:title"       content="A Certain Jesus — Deep Dive">
+    <meta property="og:description" content="A bored Roman bureaucrat summarizes the case for a visiting king — and accidentally states the whole gospel in one sentence: a dead man named Jesus, who Paul insists is alive. The claim survives total indifference. A deep dive into Acts 25.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="A Certain Jesus — Deep Dive">
+    <meta name="twitter:description" content="Exhibit V of The Gospel on Trial — dead, or alive? Acts 25.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --bg: #fbfaf7; --surface: #ffffff;
+            --ink: #17181a; --body: #3b3c40; --muted: #9a978f;
+            --red: #b0281f; --red-deep: #85201a;
+            --line: #e4e0d8; --line-strong: #cfcabf;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--red-deep); font-weight: 500; }
+
+        .dd-hero { max-width: 47rem; margin: 0 auto; padding: 4.5rem 1.5rem 2.5rem; }
+        .hero-inner { border-left: 2px solid var(--red); padding-left: 1.7rem; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .dd-eyebrow a:hover { border-color: var(--red); }
+        .dd-filed { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+        .dd-title { font-family: 'Newsreader', serif; font-size: clamp(2.4rem, 7vw, 4.3rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.018em; color: var(--ink); }
+        .dd-underbar { width: 5rem; height: 3px; background: var(--red); margin: 1.3rem 0 1.4rem; }
+        .dd-lead { font-family: 'Newsreader', serif; font-style: italic; font-weight: 500; font-size: clamp(1.18rem, 3vw, 1.55rem); line-height: 1.5; color: #2b2c30; max-width: 33rem; }
+
+        .scripture-wrap { max-width: 44rem; margin: 1.5rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: #f4f0e8; border-left: 4px solid var(--red); border-radius: 0 0.5rem 0.5rem 0; padding: 1.8rem 2rem; }
+        .sb-ref { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: 0.98rem; color: #33342f; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--ink); font-weight: 600; }
+        .sb-v { color: var(--red); font-weight: 700; font-size: 0.7rem; vertical-align: super; margin-right: 0.15rem; font-family: 'Newsreader', serif; }
+
+        .yt-wrap { max-width: 52rem; margin: 3rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 20px 50px rgba(23,24,26,0.16); background: #e4ddd0; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--muted); font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; font-style: italic; margin-top: 1rem; }
+
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 0.9rem; display: block; }
+        .dd-h2 { font-family: 'Newsreader', serif; font-size: clamp(1.75rem, 4.6vw, 2.4rem); font-weight: 700; line-height: 1.13; margin-bottom: 1.4rem; letter-spacing: -0.015em; }
+        .dd-h2 em { font-style: italic; color: var(--red-deep); }
+        .dd-p { font-size: 1.02rem; color: var(--body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--ink); font-weight: 600; }
+        .dd-p .land { color: var(--red-deep); font-weight: 600; font-style: italic; }
+        .dd-iceberg-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); }
+
+        .note { background: #f4f0e8; border: 1px solid var(--line); border-radius: 0.5rem; padding: 1.1rem 1.4rem; margin: 0.4rem 0 1.6rem; }
+        .note p { font-size: 0.84rem; color: #4d4b45; line-height: 1.7; font-weight: 300; }
+        .note .nt-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 0.4rem; }
+
+        .xr-wrap { max-width: 46rem; margin: 4rem auto 0; padding: 0 1.5rem; }
+        .xr-inner { background: var(--surface); border: 1px solid var(--line); border-top: 2px solid var(--ink); border-radius: 0.5rem; padding: 2.2rem 1.9rem 2.4rem; }
+        .xr-head { border-left: 2px solid var(--red); padding-left: 1.3rem; margin-bottom: 1.8rem; }
+        .xr-head .dd-kicker { margin-bottom: 0.6rem; }
+        .xr-head h2 { font-family: 'Newsreader', serif; font-size: clamp(1.6rem, 4.5vw, 2.2rem); font-weight: 700; line-height: 1.12; letter-spacing: -0.01em; }
+        .xr-head h2 em { font-style: italic; color: var(--red-deep); }
+        .xr-head p { margin-top: 0.7rem; font-size: 0.88rem; color: var(--body); font-weight: 300; }
+        .xr-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.55rem; margin-bottom: 1.5rem; }
+        @media (max-width: 600px) { .xr-steps { grid-template-columns: 1fr; } }
+        .xr-step { border: 1px solid var(--line); border-radius: 0.4rem; padding: 0.9rem 1rem; cursor: pointer; transition: border-color 0.2s, background 0.2s; background: #fbfaf7; }
+        .xr-step:hover { border-color: var(--line-strong); }
+        .xr-step.active { border-color: var(--red); background: #fdf4f3; }
+        .xr-step .xs-n { font-family: 'Newsreader', serif; font-weight: 700; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); display: block; }
+        .xr-step.active .xs-n { color: var(--red); }
+        .xr-step .xs-l { font-family: 'Newsreader', serif; font-weight: 700; font-size: 1.02rem; color: var(--ink); margin-top: 0.15rem; line-height: 1.15; }
+        .xr-panel { display: none; animation: xrIn 0.4s ease; }
+        .xr-panel.show { display: block; }
+        @keyframes xrIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        .xr-ref { font-family: 'Newsreader', serif; font-weight: 700; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); margin-bottom: 0.9rem; }
+        .xr-line { display: flex; gap: 0.9rem; margin-bottom: 0.7rem; }
+        .xr-line .xl-n { font-family: 'Newsreader', serif; color: var(--red); font-size: 0.72rem; min-width: 1.2rem; text-align: right; padding-top: 0.28rem; font-variant-numeric: tabular-nums; }
+        .xr-line p { font-size: 0.92rem; color: var(--body); line-height: 1.72; font-weight: 300; }
+        .xr-line p b { color: var(--ink); font-weight: 600; }
+        .xr-line p em { color: var(--ink); font-style: italic; }
+
+        .discuss { max-width: 44rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .discuss-head { border-left: 2px solid var(--red); padding-left: 1.3rem; margin-bottom: 1.8rem; }
+        .discuss-head .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); }
+        .discuss-head h2 { font-family: 'Newsreader', serif; font-size: clamp(1.7rem, 5vw, 2.3rem); font-weight: 700; margin-top: 0.5rem; }
+        .q-item { display: flex; gap: 1.1rem; padding: 1.3rem 0; border-bottom: 1px solid var(--line); }
+        .q-num { font-family: 'Newsreader', serif; font-style: italic; font-weight: 700; font-size: 1.1rem; color: var(--red); flex-shrink: 0; width: 1.6rem; }
+        .q-item p { font-size: 0.95rem; color: var(--body); line-height: 1.7; font-weight: 300; }
+        .q-item p strong { color: var(--ink); font-weight: 600; }
+
+        .companion { max-width: 44rem; margin: 2.4rem auto 0; padding: 0 1.5rem; }
+        .companion-in { background: #f4f0e8; border: 1px solid var(--line); border-radius: 0.5rem; padding: 1.2rem 1.5rem; }
+        .companion-in .co-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 0.4rem; }
+        .companion-in p { font-size: 0.85rem; color: var(--body); line-height: 1.65; font-weight: 300; }
+        .companion-in a { color: var(--red); font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .companion-in a:hover { border-color: var(--red); }
+
+        .send { max-width: 42rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .send-in { border-left: 2px solid var(--red); padding-left: 1.7rem; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 1.1rem; }
+        .send p.body { font-size: 1.04rem; color: var(--body); line-height: 1.85; font-weight: 300; }
+        .send .pull { font-family: 'Newsreader', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; line-height: 1.3; color: var(--ink); margin-top: 1.5rem; letter-spacing: -0.01em; }
+        .send .pull em { font-style: italic; color: var(--red-deep); }
+
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.8rem; border: 1px solid var(--line-strong); border-radius: 100px; background: var(--surface); color: var(--ink); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .share-btn:hover { background: var(--red); color: #fff; border-color: var(--red); }
+
+        .strip-wrap { max-width: 52rem; margin: 4.5rem auto 0; padding: 0 1rem; }
+        .strip-eb { text-align: center; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+        .dd-back { text-align: center; padding: 3rem 1.5rem 4.5rem; }
+        .dd-back a { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+        .dd-back a:hover { color: var(--red); border-color: var(--red); }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <header class="dd-hero">
+        <div class="hero-inner">
+            <p class="dd-eyebrow"><a href="/res/deep/2026/the-gospel-on-trial.html">The Gospel on Trial &nbsp;·&nbsp; Acts 22–26</a></p>
+            <p class="dd-filed">Exhibit V · Sep 27 · Acts 25</p>
+            <h1 class="dd-title">A Certain<br>Jesus</h1>
+            <div class="dd-underbar"></div>
+            <p class="dd-lead">A bored Roman bureaucrat tries to summarize the case for a visiting king — and accidentally states the whole gospel in one sentence.</p>
+        </div>
+    </header>
+
+    <div class="scripture-wrap reveal">
+        <div class="scripture-box">
+            <span class="sb-ref">Acts 25:18–19 · NLT</span>
+            <p class="sb-text">
+                <span class="sb-v">18</span>But the accusations made against him weren't any of the crimes I expected.
+                <span class="sb-v">19</span>Instead, it was something about their religion and <b>a dead man named Jesus, who Paul insists is alive.</b>
+            </p>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame" id="yt-mount"></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <!-- ══════════ THE APPEAL ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the appeal</span>
+        <h2 class="dd-h2">Two years on, the ambush is still <em>on the table</em></h2>
+        <p class="dd-p">A brand-new governor arrives, and within three days the chief priests are asking him to transfer Paul to Jerusalem — <em>"planning an ambush to kill him on the way"</em> (25:3). <span class="land">Two years have passed and the forty men's plot is still live.</span> So Paul plays the one card a Roman citizen holds: <em>"I appeal to Caesar!"</em> (25:11). Read the integrity of it — <em>"If I have done something worthy of death, I don't refuse to die. But if I am innocent, no one has a right to turn me over."</em> He isn't dodging execution. <b>He is refusing to be handed to a lynch mob dressed up as a court.</b></p>
+        <p class="dd-p">And notice how the promise gets kept. In Exhibit II the risen Jesus told him, <em>"you must testify in Rome as well"</em> (23:11). Here is how it comes true — not by an angel springing the cell, but by <b>Paul exercising a legal right.</b> The appeal to Caesar is the thing that puts him on the boat to Rome. Providence, again, running through the ordinary machinery: this time, Roman case law.</p>
+    </section>
+
+    <!-- ══════════ THE ACCIDENTAL GOSPEL ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the accidental gospel</span>
+        <h2 class="dd-h2">The whole case, stated by a man who doesn't <em>believe it</em></h2>
+        <p class="dd-p">Then comes the gift. Festus, briefing King Agrippa on a case he clearly finds tedious, says the dispute was really about <em>"a dead man named Jesus, who Paul insists is alive"</em> (25:19). <span class="land">A Roman civil servant, bored and baffled, summarizes Christianity better than most sermons.</span> That is the whole thing. That is what the riots and the oath and the two years and the appeal to Caesar are all <em>about</em> — whether a certain Jesus is dead or alive. Everything else in the file is procedure. <b>This is the case.</b></p>
+        <p class="dd-p">And here is why it belongs at the center of the whole series: the claim is named accurately by a man who <b>does not believe it and does not care.</b> He has no stake, no faith, no reason to spin it — and he still puts his finger on exactly the thing. <span class="land">The gospel's central claim survives contact with total indifference. It does not need a friendly witness.</span> Festus even admits, sending Paul on to Caesar, that he cannot write down what the man actually did wrong (25:27) — a prisoner shipped to the emperor with no chargeable crime, only a question about whether a grave stayed shut.</p>
+    </section>
+
+    <!-- ══════════ SIGNATURE — THE CROSS-EXAMINATION ══════════ -->
+    <div class="xr-wrap reveal">
+        <div class="xr-inner">
+            <div class="xr-head">
+                <span class="dd-kicker">The Cross-Examination</span>
+                <h2>Strip the Case to <em>One Fact</em></h2>
+                <p>Take away every charge, every personality, every procedure. Step through what refuses to go away.</p>
+            </div>
+
+            <div class="xr-steps">
+                <div class="xr-step active" data-target="xr-1"><span class="xs-n">Line of questioning I</span><span class="xs-l">The charges evaporate</span></div>
+                <div class="xr-step" data-target="xr-2"><span class="xs-n">Line of questioning II</span><span class="xs-l">The residue</span></div>
+                <div class="xr-step" data-target="xr-3"><span class="xs-n">Line of questioning III</span><span class="xs-l">The hostile witness</span></div>
+            </div>
+
+            <div class="xr-panel show" id="xr-1">
+                <div class="xr-ref">Exhibit — Acts 25:18</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>Festus, expecting real crimes: <em>"the accusations made against him weren't any of the crimes I expected."</em> Temple, sedition, riot — nothing sticks, again.</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>Four hearings in, the charge sheet is empty. Whatever this case is, it isn't about anything a Roman court can prosecute.</p></div>
+            </div>
+            <div class="xr-panel" id="xr-2">
+                <div class="xr-ref">Exhibit — Acts 25:19</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>What's left when every crime is subtracted? <em>"A dead man named Jesus, who Paul insists is alive."</em> That sentence is the whole irreducible case.</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>It cannot be settled by procedure, because it isn't a legal question. It's a question of fact: <b>did he, or did he not, walk out of the grave?</b></p></div>
+            </div>
+            <div class="xr-panel" id="xr-3">
+                <div class="xr-ref">Exhibit — the tell that it's real</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>The claim is stated correctly by a man with <b>no faith and no interest</b>. Festus isn't preaching; he's filing paperwork — and he still lands on the one thing.</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>A rumor needs friendly retellers. <em>This claim survives a hostile, bored witness stating it accurately.</em> It doesn't need you to like it. It only needs to be true — and everything hinges on whether it is.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════ CLOSE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Why this is Exhibit V</span>
+        <h2 class="dd-h2">The whole trial was always about <em>this</em></h2>
+        <p class="dd-p">Everything the series has traced — the courageous testimony, the split council, the failed plot, the frightened governor — was orbiting one sentence, and here a pagan bureaucrat says it out loud without meaning to. <span class="land">Strip the gospel of everything else, and this is what is left standing: a man who was dead is alive.</span> Not a philosophy, not a moral program, not a private feeling — a claim about an event, in history, with a name attached, that either happened or didn't.</p>
+        <p class="dd-p">And that is oddly steadying. The case for Christ does not rest on how persuasive his followers are on a given day. It rests on a fact that a hostile Roman could state accurately and still walk away from. <b>Your believing it does not make it true; your ignoring it does not make it false.</b> A certain Jesus was dead. Paul insists he is alive. Everything comes down to that — including you.</p>
+    </section>
+
+    <!-- companion -->
+    <div class="companion reveal">
+        <div class="companion-in">
+            <span class="co-tag">A companion study</span>
+            <p>The whole case reduces to one fact — <b>is the resurrection true?</b> That's precisely the question the midweek study, <a href="/res/know-what-you-believe.html">Know What You Believe</a>, takes up head-on: the evidence for the resurrection, the alternatives people reach for, and why Paul stakes everything on it. This page stands on its own; the study weighs the case.</p>
+        </div>
+    </div>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss reveal">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+        </div>
+        <div class="q-list">
+            <div class="q-item"><span class="q-num">01</span><p><strong>The one sentence.</strong> If you had to strip your faith down to a single claim that either happened or didn't, could you say it as plainly as Festus did? Try it in one sentence.</p></div>
+            <div class="q-item"><span class="q-num">02</span><p><strong>The hostile witness.</strong> Festus had no reason to spin it and still named the real issue. Where have you seen the truth about Jesus land accurately on someone who didn't believe it?</p></div>
+            <div class="q-item"><span class="q-num">03</span><p><strong>Fact, not feeling.</strong> "Your believing it doesn't make it true; your ignoring it doesn't make it false." How does treating the resurrection as a question of <em>fact</em> change the way you'd talk about it?</p></div>
+            <div class="q-item"><span class="q-num">04</span><p><strong>Procedure vs. the case.</strong> Everyone around Paul kept managing the procedure and missing the point. Where are you busy with the machinery of religion and avoiding the one question underneath it?</p></div>
+            <div class="q-item"><span class="q-num">05</span><p><strong>It comes down to you.</strong> The claim survives indifference — but it still asks for a verdict. What is yours, and when did you last actually render it?</p></div>
+        </div>
+    </section>
+
+    <div class="send reveal">
+        <div class="send-in">
+            <p class="eb">The Send</p>
+            <p class="body">Strip everything away and the gospel is not advice; it's news — a report about a grave that a man walked out of. You don't have to be clever to carry it. You only have to say the plain thing a bored Roman said by accident, and let it ask for the verdict it has been asking for since the first morning: dead, or alive?</p>
+            <p class="pull">A certain Jesus was dead. Paul insists he is alive. <em>Everything comes down to that.</em></p>
+        </div>
+    </div>
+
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share this deep dive</button>
+    </div>
+
+    <div class="strip-wrap reveal">
+        <p class="strip-eb">The Case · Acts 22–26</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back"><a href="/deepdives.html">← All Deep Dives</a></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-22-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="A Certain Jesus" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.xr-step').forEach(step => {
+            step.addEventListener('click', () => {
+                document.querySelectorAll('.xr-step').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.xr-panel').forEach(p => p.classList.remove('show'));
+                step.classList.add('active');
+                const t = document.getElementById(step.getAttribute('data-target'));
+                if (t) t.classList.add('show');
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts22RenderStrip === 'function') acts22RenderStrip('#series-strip', 'a-certain-jesus');
+        });
+
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = { title: 'A Certain Jesus — Deep Dive | The Living Room', text: 'A bored Roman states the whole gospel by accident: dead, but alive. Exhibit V of The Gospel on Trial.', url: 'https://thelivingroom.io/res/deep/2026/a-certain-jesus.html' };
+            try { if (navigator.share) { await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share this deep dive', 2000); } } catch (e) {}
+        });
+    </script>
+</body>
+</html>

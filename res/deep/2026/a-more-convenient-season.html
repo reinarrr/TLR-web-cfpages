@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A More Convenient Season — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500;1,6..72,600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/a-more-convenient-season.html">
+    <meta property="og:title"       content="A More Convenient Season — Deep Dive">
+    <meta property="og:description" content="The most dangerous response to the gospel in Acts isn't a riot — it's a governor genuinely moved, genuinely frightened, who says 'later' and lets two years pass. The kairos standing in front of him in chains. A deep dive into Acts 24.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="A More Convenient Season — Deep Dive">
+    <meta name="twitter:description" content="Exhibit IV of The Gospel on Trial — the most expensive word. Acts 24.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --bg: #fbfaf7; --surface: #ffffff;
+            --ink: #17181a; --body: #3b3c40; --muted: #9a978f;
+            --red: #b0281f; --red-deep: #85201a;
+            --line: #e4e0d8; --line-strong: #cfcabf;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--red-deep); font-weight: 500; }
+
+        .dd-hero { max-width: 47rem; margin: 0 auto; padding: 4.5rem 1.5rem 2.5rem; }
+        .hero-inner { border-left: 2px solid var(--red); padding-left: 1.7rem; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .dd-eyebrow a:hover { border-color: var(--red); }
+        .dd-filed { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+        .dd-title { font-family: 'Newsreader', serif; font-size: clamp(2.3rem, 6.6vw, 4.1rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.018em; color: var(--ink); }
+        .dd-underbar { width: 5rem; height: 3px; background: var(--red); margin: 1.3rem 0 1.4rem; }
+        .dd-lead { font-family: 'Newsreader', serif; font-style: italic; font-weight: 500; font-size: clamp(1.18rem, 3vw, 1.55rem); line-height: 1.5; color: #2b2c30; max-width: 33rem; }
+
+        .scripture-wrap { max-width: 44rem; margin: 1.5rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: #f4f0e8; border-left: 4px solid var(--red); border-radius: 0 0.5rem 0.5rem 0; padding: 1.8rem 2rem; }
+        .sb-ref { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: 0.98rem; color: #33342f; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--ink); font-weight: 600; }
+        .sb-v { color: var(--red); font-weight: 700; font-size: 0.7rem; vertical-align: super; margin-right: 0.15rem; font-family: 'Newsreader', serif; }
+
+        .yt-wrap { max-width: 52rem; margin: 3rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 20px 50px rgba(23,24,26,0.16); background: #e4ddd0; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--muted); font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; font-style: italic; margin-top: 1rem; }
+
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 0.9rem; display: block; }
+        .dd-h2 { font-family: 'Newsreader', serif; font-size: clamp(1.75rem, 4.6vw, 2.4rem); font-weight: 700; line-height: 1.13; margin-bottom: 1.4rem; letter-spacing: -0.015em; }
+        .dd-h2 em { font-style: italic; color: var(--red-deep); }
+        .dd-p { font-size: 1.02rem; color: var(--body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--ink); font-weight: 600; }
+        .dd-p .land { color: var(--red-deep); font-weight: 600; font-style: italic; }
+        .dd-iceberg-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); }
+
+        .note { background: #f4f0e8; border: 1px solid var(--line); border-radius: 0.5rem; padding: 1.1rem 1.4rem; margin: 0.4rem 0 1.6rem; }
+        .note p { font-size: 0.84rem; color: #4d4b45; line-height: 1.7; font-weight: 300; }
+        .note .nt-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 0.4rem; }
+
+        .xr-wrap { max-width: 46rem; margin: 4rem auto 0; padding: 0 1.5rem; }
+        .xr-inner { background: var(--surface); border: 1px solid var(--line); border-top: 2px solid var(--ink); border-radius: 0.5rem; padding: 2.2rem 1.9rem 2.4rem; }
+        .xr-head { border-left: 2px solid var(--red); padding-left: 1.3rem; margin-bottom: 1.8rem; }
+        .xr-head .dd-kicker { margin-bottom: 0.6rem; }
+        .xr-head h2 { font-family: 'Newsreader', serif; font-size: clamp(1.6rem, 4.5vw, 2.2rem); font-weight: 700; line-height: 1.12; letter-spacing: -0.01em; }
+        .xr-head h2 em { font-style: italic; color: var(--red-deep); }
+        .xr-head p { margin-top: 0.7rem; font-size: 0.88rem; color: var(--body); font-weight: 300; }
+        .xr-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.55rem; margin-bottom: 1.5rem; }
+        @media (max-width: 600px) { .xr-steps { grid-template-columns: 1fr; } }
+        .xr-step { border: 1px solid var(--line); border-radius: 0.4rem; padding: 0.9rem 1rem; cursor: pointer; transition: border-color 0.2s, background 0.2s; background: #fbfaf7; }
+        .xr-step:hover { border-color: var(--line-strong); }
+        .xr-step.active { border-color: var(--red); background: #fdf4f3; }
+        .xr-step .xs-n { font-family: 'Newsreader', serif; font-weight: 700; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); display: block; }
+        .xr-step.active .xs-n { color: var(--red); }
+        .xr-step .xs-l { font-family: 'Newsreader', serif; font-weight: 700; font-size: 1.02rem; color: var(--ink); margin-top: 0.15rem; line-height: 1.15; }
+        .xr-panel { display: none; animation: xrIn 0.4s ease; }
+        .xr-panel.show { display: block; }
+        @keyframes xrIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        .xr-ref { font-family: 'Newsreader', serif; font-weight: 700; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); margin-bottom: 0.9rem; }
+        .xr-line { display: flex; gap: 0.9rem; margin-bottom: 0.7rem; }
+        .xr-line .xl-n { font-family: 'Newsreader', serif; color: var(--red); font-size: 0.72rem; min-width: 1.2rem; text-align: right; padding-top: 0.28rem; font-variant-numeric: tabular-nums; }
+        .xr-line p { font-size: 0.92rem; color: var(--body); line-height: 1.72; font-weight: 300; }
+        .xr-line p b { color: var(--ink); font-weight: 600; }
+        .xr-line p em { color: var(--ink); font-style: italic; }
+
+        .discuss { max-width: 44rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .discuss-head { border-left: 2px solid var(--red); padding-left: 1.3rem; margin-bottom: 1.8rem; }
+        .discuss-head .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); }
+        .discuss-head h2 { font-family: 'Newsreader', serif; font-size: clamp(1.7rem, 5vw, 2.3rem); font-weight: 700; margin-top: 0.5rem; }
+        .q-item { display: flex; gap: 1.1rem; padding: 1.3rem 0; border-bottom: 1px solid var(--line); }
+        .q-num { font-family: 'Newsreader', serif; font-style: italic; font-weight: 700; font-size: 1.1rem; color: var(--red); flex-shrink: 0; width: 1.6rem; }
+        .q-item p { font-size: 0.95rem; color: var(--body); line-height: 1.7; font-weight: 300; }
+        .q-item p strong { color: var(--ink); font-weight: 600; }
+
+        .companion { max-width: 44rem; margin: 2.4rem auto 0; padding: 0 1.5rem; }
+        .companion-in { background: #f4f0e8; border: 1px solid var(--line); border-radius: 0.5rem; padding: 1.2rem 1.5rem; }
+        .companion-in .co-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 0.4rem; }
+        .companion-in p { font-size: 0.85rem; color: var(--body); line-height: 1.65; font-weight: 300; }
+        .companion-in a { color: var(--red); font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .companion-in a:hover { border-color: var(--red); }
+
+        .send { max-width: 42rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .send-in { border-left: 2px solid var(--red); padding-left: 1.7rem; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 1.1rem; }
+        .send p.body { font-size: 1.04rem; color: var(--body); line-height: 1.85; font-weight: 300; }
+        .send .pull { font-family: 'Newsreader', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; line-height: 1.3; color: var(--ink); margin-top: 1.5rem; letter-spacing: -0.01em; }
+        .send .pull em { font-style: italic; color: var(--red-deep); }
+
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.8rem; border: 1px solid var(--line-strong); border-radius: 100px; background: var(--surface); color: var(--ink); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .share-btn:hover { background: var(--red); color: #fff; border-color: var(--red); }
+
+        .strip-wrap { max-width: 52rem; margin: 4.5rem auto 0; padding: 0 1rem; }
+        .strip-eb { text-align: center; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+        .dd-back { text-align: center; padding: 3rem 1.5rem 4.5rem; }
+        .dd-back a { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+        .dd-back a:hover { color: var(--red); border-color: var(--red); }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <header class="dd-hero">
+        <div class="hero-inner">
+            <p class="dd-eyebrow"><a href="/res/deep/2026/the-gospel-on-trial.html">The Gospel on Trial &nbsp;·&nbsp; Acts 22–26</a></p>
+            <p class="dd-filed">Exhibit IV · Sep 20 · Communion · Acts 24</p>
+            <h1 class="dd-title">A More<br>Convenient Season</h1>
+            <div class="dd-underbar"></div>
+            <p class="dd-lead">The most dangerous response to the gospel in the whole book isn't a riot. It's a governor who is genuinely moved, genuinely frightened — and lets two years go by.</p>
+        </div>
+    </header>
+
+    <div class="scripture-wrap reveal">
+        <div class="scripture-box">
+            <span class="sb-ref">Acts 24:24–25 · NLT</span>
+            <p class="sb-text">
+                <span class="sb-v">24</span>A few days later Felix came back with his wife, Drusilla, who was Jewish. Sending for Paul, they listened as he told them about faith in Christ Jesus.
+                <span class="sb-v">25</span>As he reasoned with them about righteousness and self-control and the coming day of judgment, Felix became frightened. <b>"Go away for now," he replied. "When it is more convenient, I'll call for you again."</b>
+            </p>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame" id="yt-mount"></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <!-- ══════════ THE WORD ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the word</span>
+        <h2 class="dd-h2">The knife is hidden in <em>"convenient"</em></h2>
+        <p class="dd-p">Felix isn't hostile. He <em>"became frightened."</em> He sends for Paul again and again — the verb in verse 26 is <em class="greek">homileō</em>, he <em>conversed</em> with him repeatedly; it's the word behind "homily." <span class="land">Felix probably received more private instruction from Paul than anyone else in the book of Acts.</span> And he never once said yes. Stott's plain verdict: <em>"there is no evidence that Felix ever capitulated to Christ."</em> The lesson has an edge you feel: <b>exposure is not conversion.</b> You can be the best-taught person in the room and still be lost.</p>
+        <p class="dd-p">The knife is in one word. <em>"When it is more convenient"</em> — the Greek is <em class="greek">kairon metalabōn</em>, "having found a <em>kairos</em>." That is the New Testament's word for the <b>appointed, God-given moment</b> — the same word behind <em>"now is the favorable time; now is the day of salvation"</em> (2 Corinthians 6:2). <span class="land">Felix postponed the gospel until he could find a convenient kairos — while the kairos was standing in front of him, in chains.</span> Almost is the most expensive word in this chapter.</p>
+    </section>
+
+    <!-- ══════════ THE MIRROR ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the mirror</span>
+        <h2 class="dd-h2">Two governors, two innocent men, one <em>reason</em></h2>
+        <p class="dd-p">Luke wants you to see Felix against Pilate, and the match is exact. Pilate asked <em>"What is truth?"</em> — and didn't wait for the answer; he "went back outside." Felix hears Paul reason about faith in Christ — and doesn't wait either: <em>"Go away for now."</em> Pilate found no guilt; Felix could find no charge. And the last recorded motive of each is the same: Luke says Felix left Paul in prison because he <em>"wanted to gain favor with the Jewish people"</em> (24:27) — Pilate handed Jesus over because <em>"their voices prevailed."</em> <span class="land">Two governors, two men they knew were innocent, both handed over for the same reason: a crowd had to be kept happy. Neither was hostile. Both were evasive.</span></p>
+        <div class="note">
+            <span class="nt-tag">Why "self-control" landed so hard — Drusilla</span>
+            <p>The woman beside Felix was the youngest daughter of Herod Agrippa I — the king of Acts 12 who killed the apostle James. Bruce records that Felix had lured her from her husband; she was sixteen then, and not yet twenty at this hearing. So the three subjects Paul chose — <em>righteousness, self-control, the coming judgment</em> — were surgical. Bruce: "three subjects about which that couple specially needed to be informed. No wonder that Felix trembled." (The couple's son later died in the eruption of Vesuvius — a fact best left sitting quietly in the room, not preached as judgment.)</p>
+        </div>
+    </section>
+
+    <!-- ══════════ SIGNATURE — THE MOST EXPENSIVE WORD ══════════ -->
+    <div class="xr-wrap reveal">
+        <div class="xr-inner">
+            <div class="xr-head">
+                <span class="dd-kicker">The Cross-Examination</span>
+                <h2>The Most Expensive <em>Word</em></h2>
+                <p>Felix is the most relatable man in the whole trial — and the most lost. Step through how a "yes, but later" costs everything.</p>
+            </div>
+
+            <div class="xr-steps">
+                <div class="xr-step active" data-target="xr-1"><span class="xs-n">Line of questioning I</span><span class="xs-l">Convenient</span></div>
+                <div class="xr-step" data-target="xr-2"><span class="xs-n">Line of questioning II</span><span class="xs-l">The mirror</span></div>
+                <div class="xr-step" data-target="xr-3"><span class="xs-n">Line of questioning III</span><span class="xs-l">The cost</span></div>
+            </div>
+
+            <div class="xr-panel show" id="xr-1">
+                <div class="xr-ref">Exhibit — kairos · Acts 24:25</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>"When it is more convenient" hunts for a better <b>kairos</b> — the appointed moment. But Scripture only ever puts that word in the <em>present</em>: "now is the day of salvation."</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>There is no convenient hour coming. There is only the one you're in — and a prisoner in front of you telling the truth.</p></div>
+            </div>
+            <div class="xr-panel" id="xr-2">
+                <div class="xr-ref">Exhibit — Felix in Pilate's shoes</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>Pilate asked his question and walked out before the answer. Felix felt his fear and said "later." <b>The failure isn't disbelief. It's not waiting for the answer.</b></p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>Both were moved. Both were evasive. Both handed an innocent man over to keep a crowd happy. <em>Almost is not a category God recognizes.</em></p></div>
+            </div>
+            <div class="xr-panel" id="xr-3">
+                <div class="xr-ref">Exhibit — two years, and gone</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>Felix kept sending for Paul — and let <b>two years</b> pass (24:27). Then a new governor arrived, and Felix walks off the page, still frightened, still unsaved.</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>He is the most relatable man in the block — moved, curious, busy — and lost. <em>"Almost" is the most expensive word in the chapter, and he could not stop saying it.</em></p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════ CLOSE / COMMUNION ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Why this is Exhibit IV · at the Table</span>
+        <h2 class="dd-h2">Why God couldn't <em>just</em> forgive</h2>
+        <p class="dd-p">What Felix trembled at was real: <em>righteousness, self-control, and a coming day of judgment.</em> That is the quiet answer to the question people ask about the cross — <b>why couldn't God just wave it away?</b> Because a judge who simply ignores evil is not good; a coming judgment that is real cannot be forgiven by pretending it isn't. <span class="land">Forgiveness that costs nothing would mean the wrong never mattered.</span> So it cost a cross. Paul walked out of Felix's two years alive and bound for Rome; Jesus walked out of Pilate's courtroom to a hill — and that is the only reason there is a coming judgment any of us can survive.</p>
+        <p class="dd-p">Which is why this exhibit lands at the Communion table. Paul's own defense turned on it: <em>"I always try to maintain a clear conscience before God and all people"</em> (24:16). Before the bread and the cup, Paul tells another church, <em>"examine yourself"</em> (1 Corinthians 11:28). The table asks the exact question Felix dodged — not <em>someday</em>, but <b>now</b>. Don't leave it for a more convenient season. There isn't one.</p>
+    </section>
+
+    <!-- companion -->
+    <div class="companion reveal">
+        <div class="companion-in">
+            <span class="co-tag">A companion study</span>
+            <p>Felix trembled at a coming judgment — and that raises the oldest question about the cross: <b>why couldn't God just forgive?</b> That's exactly where the midweek study, <a href="/res/know-what-you-believe.html">Know What You Believe</a>, goes on the death of Christ — why holiness and love meet at a cross rather than a shrug. This page stands on its own; the study opens it up.</p>
+        </div>
+    </div>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss reveal">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+        </div>
+        <div class="q-list">
+            <div class="q-item"><span class="q-num">01</span><p><strong>The convenient season.</strong> Where are you telling God "later"? Name the specific thing you keep intending to deal with "when things settle down."</p></div>
+            <div class="q-item"><span class="q-num">02</span><p><strong>Exposure isn't conversion.</strong> Felix heard more of the gospel than almost anyone in Acts and stayed lost. Where might familiarity with the truth be quietly standing in for obedience to it?</p></div>
+            <div class="q-item"><span class="q-num">03</span><p><strong>Not waiting for the answer.</strong> Pilate and Felix were both moved and both evasive. When you feel the pull of a hard truth, what's your version of "going back outside"?</p></div>
+            <div class="q-item"><span class="q-num">04</span><p><strong>Why the cross.</strong> If God simply forgave without a cross, what would that say about how much the wrong mattered? How does that reframe what the cup on the table means?</p></div>
+            <div class="q-item"><span class="q-num">05</span><p><strong>At the table.</strong> "Examine yourself." Before the bread and cup this week, what is the one thing you'd rather leave for a more convenient season — and what would it look like to bring it now?</p></div>
+        </div>
+    </section>
+
+    <div class="send reveal">
+        <div class="send-in">
+            <p class="eb">The Send</p>
+            <p class="body">The riot never converted anyone, and neither did the delay. Felix is the warning the whole book was building toward: you can be moved, informed, even frightened, and still walk off the page lost — for want of a single "yes" you kept postponing. Don't. The kairos is not coming. It's here, and his name is Jesus.</p>
+            <p class="pull">There is no more convenient season. There is only <em>now</em> — and a cross that made <em>now</em> survivable.</p>
+        </div>
+    </div>
+
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share this deep dive</button>
+    </div>
+
+    <div class="strip-wrap reveal">
+        <p class="strip-eb">The Case · Acts 22–26</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back"><a href="/deepdives.html">← All Deep Dives</a></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-22-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="A More Convenient Season" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.xr-step').forEach(step => {
+            step.addEventListener('click', () => {
+                document.querySelectorAll('.xr-step').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.xr-panel').forEach(p => p.classList.remove('show'));
+                step.classList.add('active');
+                const t = document.getElementById(step.getAttribute('data-target'));
+                if (t) t.classList.add('show');
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts22RenderStrip === 'function') acts22RenderStrip('#series-strip', 'a-more-convenient-season');
+        });
+
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = { title: 'A More Convenient Season — Deep Dive | The Living Room', text: 'The most expensive word is almost. Exhibit IV of The Gospel on Trial — Acts 24.', url: 'https://thelivingroom.io/res/deep/2026/a-more-convenient-season.html' };
+            try { if (navigator.share) { await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share this deep dive', 2000); } } catch (e) {}
+        });
+    </script>
+</body>
+</html>

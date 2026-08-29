@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Council Versus One Sentence — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500;1,6..72,600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/a-council-versus-one-sentence.html">
+    <meta property="og:title"       content="A Council Versus One Sentence — Deep Dive">
+    <meta property="og:description" content="A united council splits down the middle on a single word — resurrection. The offense was never a someday hope; it was the claim that it already happened, in a body, with a name. A deep dive into Acts 22:30–23:11.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="A Council Versus One Sentence — Deep Dive">
+    <meta name="twitter:description" content="Exhibit II of The Gospel on Trial — the word that split the court. Acts 22:30–23:11.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --bg: #fbfaf7; --surface: #ffffff;
+            --ink: #17181a; --body: #3b3c40; --muted: #9a978f;
+            --red: #b0281f; --red-deep: #85201a;
+            --line: #e4e0d8; --line-strong: #cfcabf;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--red-deep); font-weight: 500; }
+
+        .dd-hero { max-width: 47rem; margin: 0 auto; padding: 4.5rem 1.5rem 2.5rem; }
+        .hero-inner { border-left: 2px solid var(--red); padding-left: 1.7rem; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .dd-eyebrow a:hover { border-color: var(--red); }
+        .dd-filed { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+        .dd-title { font-family: 'Newsreader', serif; font-size: clamp(2.3rem, 6.6vw, 4.1rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.018em; color: var(--ink); }
+        .dd-underbar { width: 5rem; height: 3px; background: var(--red); margin: 1.3rem 0 1.4rem; }
+        .dd-lead { font-family: 'Newsreader', serif; font-style: italic; font-weight: 500; font-size: clamp(1.18rem, 3vw, 1.55rem); line-height: 1.5; color: #2b2c30; max-width: 33rem; }
+
+        .scripture-wrap { max-width: 44rem; margin: 1.5rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: #f4f0e8; border-left: 4px solid var(--red); border-radius: 0 0.5rem 0.5rem 0; padding: 1.8rem 2rem; }
+        .sb-ref { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: 0.98rem; color: #33342f; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--ink); font-weight: 600; }
+        .sb-v { color: var(--red); font-weight: 700; font-size: 0.7rem; vertical-align: super; margin-right: 0.15rem; font-family: 'Newsreader', serif; }
+
+        .yt-wrap { max-width: 52rem; margin: 3rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 20px 50px rgba(23,24,26,0.16); background: #e4ddd0; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--muted); font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; font-style: italic; margin-top: 1rem; }
+
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 0.9rem; display: block; }
+        .dd-h2 { font-family: 'Newsreader', serif; font-size: clamp(1.75rem, 4.6vw, 2.4rem); font-weight: 700; line-height: 1.13; margin-bottom: 1.4rem; letter-spacing: -0.015em; }
+        .dd-h2 em { font-style: italic; color: var(--red-deep); }
+        .dd-p { font-size: 1.02rem; color: var(--body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--ink); font-weight: 600; }
+        .dd-p .land { color: var(--red-deep); font-weight: 600; font-style: italic; }
+        .dd-iceberg-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); }
+
+        .note { background: #f4f0e8; border: 1px solid var(--line); border-radius: 0.5rem; padding: 1.1rem 1.4rem; margin: 0.4rem 0 1.6rem; }
+        .note p { font-size: 0.84rem; color: #4d4b45; line-height: 1.7; font-weight: 300; }
+        .note .nt-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 0.4rem; }
+
+        .xr-wrap { max-width: 46rem; margin: 4rem auto 0; padding: 0 1.5rem; }
+        .xr-inner { background: var(--surface); border: 1px solid var(--line); border-top: 2px solid var(--ink); border-radius: 0.5rem; padding: 2.2rem 1.9rem 2.4rem; }
+        .xr-head { border-left: 2px solid var(--red); padding-left: 1.3rem; margin-bottom: 1.8rem; }
+        .xr-head .dd-kicker { margin-bottom: 0.6rem; }
+        .xr-head h2 { font-family: 'Newsreader', serif; font-size: clamp(1.6rem, 4.5vw, 2.2rem); font-weight: 700; line-height: 1.12; letter-spacing: -0.01em; }
+        .xr-head h2 em { font-style: italic; color: var(--red-deep); }
+        .xr-head p { margin-top: 0.7rem; font-size: 0.88rem; color: var(--body); font-weight: 300; }
+        .xr-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.55rem; margin-bottom: 1.5rem; }
+        @media (max-width: 600px) { .xr-steps { grid-template-columns: 1fr; } }
+        .xr-step { border: 1px solid var(--line); border-radius: 0.4rem; padding: 0.9rem 1rem; cursor: pointer; transition: border-color 0.2s, background 0.2s; background: #fbfaf7; }
+        .xr-step:hover { border-color: var(--line-strong); }
+        .xr-step.active { border-color: var(--red); background: #fdf4f3; }
+        .xr-step .xs-n { font-family: 'Newsreader', serif; font-weight: 700; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); display: block; }
+        .xr-step.active .xs-n { color: var(--red); }
+        .xr-step .xs-l { font-family: 'Newsreader', serif; font-weight: 700; font-size: 1.02rem; color: var(--ink); margin-top: 0.15rem; line-height: 1.15; }
+        .xr-panel { display: none; animation: xrIn 0.4s ease; }
+        .xr-panel.show { display: block; }
+        @keyframes xrIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        .xr-ref { font-family: 'Newsreader', serif; font-weight: 700; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); margin-bottom: 0.9rem; }
+        .xr-line { display: flex; gap: 0.9rem; margin-bottom: 0.7rem; }
+        .xr-line .xl-n { font-family: 'Newsreader', serif; color: var(--red); font-size: 0.72rem; min-width: 1.2rem; text-align: right; padding-top: 0.28rem; font-variant-numeric: tabular-nums; }
+        .xr-line p { font-size: 0.92rem; color: var(--body); line-height: 1.72; font-weight: 300; }
+        .xr-line p b { color: var(--ink); font-weight: 600; }
+        .xr-line p em { color: var(--ink); font-style: italic; }
+
+        .discuss { max-width: 44rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .discuss-head { border-left: 2px solid var(--red); padding-left: 1.3rem; margin-bottom: 1.8rem; }
+        .discuss-head .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); }
+        .discuss-head h2 { font-family: 'Newsreader', serif; font-size: clamp(1.7rem, 5vw, 2.3rem); font-weight: 700; margin-top: 0.5rem; }
+        .q-item { display: flex; gap: 1.1rem; padding: 1.3rem 0; border-bottom: 1px solid var(--line); }
+        .q-num { font-family: 'Newsreader', serif; font-style: italic; font-weight: 700; font-size: 1.1rem; color: var(--red); flex-shrink: 0; width: 1.6rem; }
+        .q-item p { font-size: 0.95rem; color: var(--body); line-height: 1.7; font-weight: 300; }
+        .q-item p strong { color: var(--ink); font-weight: 600; }
+
+        .companion { max-width: 44rem; margin: 2.4rem auto 0; padding: 0 1.5rem; }
+        .companion-in { background: #f4f0e8; border: 1px solid var(--line); border-radius: 0.5rem; padding: 1.2rem 1.5rem; }
+        .companion-in .co-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 0.4rem; }
+        .companion-in p { font-size: 0.85rem; color: var(--body); line-height: 1.65; font-weight: 300; }
+        .companion-in a { color: var(--red); font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .companion-in a:hover { border-color: var(--red); }
+
+        .send { max-width: 42rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .send-in { border-left: 2px solid var(--red); padding-left: 1.7rem; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 1.1rem; }
+        .send p.body { font-size: 1.04rem; color: var(--body); line-height: 1.85; font-weight: 300; }
+        .send .pull { font-family: 'Newsreader', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; line-height: 1.3; color: var(--ink); margin-top: 1.5rem; letter-spacing: -0.01em; }
+        .send .pull em { font-style: italic; color: var(--red-deep); }
+
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.8rem; border: 1px solid var(--line-strong); border-radius: 100px; background: var(--surface); color: var(--ink); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .share-btn:hover { background: var(--red); color: #fff; border-color: var(--red); }
+
+        .strip-wrap { max-width: 52rem; margin: 4.5rem auto 0; padding: 0 1rem; }
+        .strip-eb { text-align: center; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+        .dd-back { text-align: center; padding: 3rem 1.5rem 4.5rem; }
+        .dd-back a { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+        .dd-back a:hover { color: var(--red); border-color: var(--red); }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <header class="dd-hero">
+        <div class="hero-inner">
+            <p class="dd-eyebrow"><a href="/res/deep/2026/the-gospel-on-trial.html">The Gospel on Trial &nbsp;·&nbsp; Acts 22–26</a></p>
+            <p class="dd-filed">Exhibit II · Sep 6 · Acts 22:30 – 23:11</p>
+            <h1 class="dd-title">A Council Versus<br>One Sentence</h1>
+            <div class="dd-underbar"></div>
+            <p class="dd-lead">Seventy-one judges walk in united against one prisoner. Ten verses later soldiers drag him out — and nothing changed but one word said out loud.</p>
+        </div>
+    </header>
+
+    <div class="scripture-wrap reveal">
+        <div class="scripture-box">
+            <span class="sb-ref">Acts 23:6–8 · NLT</span>
+            <p class="sb-text">
+                <span class="sb-v">6</span>Paul realized that some members of the high council were Sadducees and some were Pharisees, so he shouted, "Brothers, I am a Pharisee, as were my ancestors! And <b>I am on trial because my hope is in the resurrection of the dead!</b>"
+                <span class="sb-v">7</span>This divided the council — the Pharisees against the Sadducees —
+                <span class="sb-v">8</span>for the Sadducees say there is no resurrection or angels or spirits, but the Pharisees believe in all of these.
+            </p>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame" id="yt-mount"></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <!-- ══════════ THE WHITEWASHED WALL ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the wall</span>
+        <h2 class="dd-h2">What looked solid was only <em>paint</em></h2>
+        <p class="dd-p">When the high priest orders Paul struck, Paul fires back: "God will slap you, you corrupt hypocrite!" (23:3). The literal Greek is <em>"you whitewashed wall."</em> It sounds like a temper — and it is — but Swindoll traces its root not to the whitewashed tombs of Matthew 23, but to <b>Ezekiel 13</b>, where God condemns prophets who cry "peace" over a flimsy wall and <em>"reinforce it by covering it with whitewash."</em> The charge against a whitewashed wall isn't that it's dirty. <span class="land">It's that it's been painted to look load-bearing — and it will not survive the first storm.</span></p>
+        <p class="dd-p">Hold that image, because Paul has just told the council exactly what is about to happen to it. Seven verses later the storm hits — one true sentence — and the wall comes down in a brawl the Romans have to break up. <b>What looked like the united supreme court of Israel was a coalition</b>, held together by a shared enemy and the agreement never to name the one thing its members actually disagreed about. It lasted precisely as long as nobody said that thing out loud.</p>
+        <div class="note">
+            <span class="nt-tag">A fair note — this is Paul, not Jesus</span>
+            <p>Luke doesn't tidy up the parallel. Jesus was struck at his own hearing too (John 18:22–23) and answered with startling calm; Paul answers hot, then catches himself and quotes the law he's accused of breaking (Exodus 22:28). Hamm's dry verdict: "Paul comes across as a better exponent of the Law than does its official guardian" — but he is plainly a man being <em>made</em> like his Master, not a copy of him. That should encourage you, not trouble you.</p>
+        </div>
+    </section>
+
+    <!-- ══════════ SOMEDAY VS ALREADY ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the fault line</span>
+        <h2 class="dd-h2">He didn't change parties — he thinks it <em>came true</em></h2>
+        <p class="dd-p">Notice the tense of Paul's sentence: not "I <em>was</em> a Pharisee" but <em>"I <b>am</b> a Pharisee"</em> — present tense, twenty years after Damascus. This isn't a smoke bomb to save his skin (Stott: there's "no need to attribute to Paul either unworthy motives or an untrue statement"). Bruce puts the mechanics exactly: <em>"A Sadducee could not become a Christian without abandoning a distinctive tenet of his party; a Pharisee could become a Christian and remain a Pharisee."</em> Why? Because the Pharisees already believed God raises the dead. Paul believed the same — <span class="land">he just believed it had started.</span></p>
+        <p class="dd-p">And that is the fault line the whole trial runs along. Hamm: the room doesn't divide over whether resurrection is <em>true</em>; it divides over whether it <em>"has already begun concretely in Jesus of Nazareth."</em> Nobody riots over a vague someday — everyone can nod at a general hope that things come right in the end. <b>Christianity is the claim that on a specific morning, outside a specific tomb, it already happened — in a body, with a name.</b> That is the sentence people cannot leave alone. It was prophesied over Jesus when he was eight days old: a sign that would divide, <em>"so that the deepest thoughts of many hearts will be revealed"</em> (Luke 2:34–35). <span class="land">Jesus doesn't manufacture the division. He reveals a fault line that was there all along.</span></p>
+    </section>
+
+    <!-- ══════════ SIGNATURE — THE WORD THAT SPLIT THE COURT ══════════ -->
+    <div class="xr-wrap reveal">
+        <div class="xr-inner">
+            <div class="xr-head">
+                <span class="dd-kicker">The Cross-Examination</span>
+                <h2>The Word That <em>Split the Court</em></h2>
+                <p>One prisoner, one sentence, and the highest court in the land comes apart. Step through why that word — and no other — did it.</p>
+            </div>
+
+            <div class="xr-steps">
+                <div class="xr-step active" data-target="xr-1"><span class="xs-n">Line of questioning I</span><span class="xs-l">The coalition</span></div>
+                <div class="xr-step" data-target="xr-2"><span class="xs-n">Line of questioning II</span><span class="xs-l">The one sentence</span></div>
+                <div class="xr-step" data-target="xr-3"><span class="xs-n">Line of questioning III</span><span class="xs-l">Someday vs already</span></div>
+            </div>
+
+            <div class="xr-panel show" id="xr-1">
+                <div class="xr-ref">Exhibit — a unity that was never one</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>Sadducee and Pharisee had disagreed about resurrection for a <b>century</b>. The council wasn't a body; it was a coalition, welded together by one shared enemy in the dock.</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>A peace that survives only by never naming the true disagreement isn't unity. <em>It's an armistice — and an armistice cannot survive peace.</em></p></div>
+            </div>
+            <div class="xr-panel" id="xr-2">
+                <div class="xr-ref">Exhibit — Acts 23:6</div>
+                <div class="xr-line"><span class="xl-n">01</span><p><em>"I am on trial because my hope is in the resurrection of the dead."</em> Not a trick — a confession. He says it in the present tense, and he means every word.</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>The room goes from one body (v.1) to a brawl the Romans must break up (v.10) in <b>four verses</b>. Nothing entered the room but a sentence.</p></div>
+            </div>
+            <div class="xr-panel" id="xr-3">
+                <div class="xr-ref">Exhibit — the claim you can't leave alone</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>Everyone can accept a <b>someday</b> — a vague hope that things end well. That offends no one, and it saves no one.</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>Christianity says it <b>already</b> happened — on a morning, outside a tomb, in a body, with a name. <em>That</em> is the word that split the court, because it demands a verdict rather than a nod.</p></div>
+                <div class="xr-line"><span class="xl-n">03</span><p>Which is why the whole trial keeps narrowing to it. Strip out the personalities and the procedure, and the case is one question: did the dead man rise, or not?</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════ CLOSE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Why this is Exhibit II</span>
+        <h2 class="dd-h2">The fault line of the whole <em>book</em></h2>
+        <p class="dd-p">Exhibit I showed a life that couldn't be cross-examined. Exhibit II names the fact that life keeps pointing to — and it turns out to be the exact fact the whole trial cannot settle. <span class="land">The gospel is not "be a better person"; it is a claim about an event.</span> You can hold a general hope politely forever. You cannot stay neutral about a specific grave that a specific man walked out of. The council found that out in ten verses.</p>
+        <p class="dd-p">And the day ends the way Exhibit I hinted it would: in total failure — no verdict, no allies, the ten thousand believers in that city nowhere to be seen. And <em>that</em> is the night the risen Jesus comes and, in the older wording, <b>"stood by him"</b> (23:11). The man left alone in the rubble of a false peace is the man Christ comes and stands beside — and hands the rest of his assignment: <em>you must testify in Rome as well.</em></p>
+    </section>
+
+    <!-- companion -->
+    <div class="companion reveal">
+        <div class="companion-in">
+            <span class="co-tag">A companion study</span>
+            <p>This exhibit turns on one claim: the resurrection <b>already happened</b>. Is that fact or fiction? That's the exact question the midweek study, <a href="/res/know-what-you-believe.html">Know What You Believe</a>, weighs when it gets to the resurrection — the evidence, the alternatives, and why Paul stakes everything on it. This page stands on its own; the study takes it further.</p>
+        </div>
+    </div>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss reveal">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+        </div>
+        <div class="q-list">
+            <div class="q-item"><span class="q-num">01</span><p><strong>Someday or already.</strong> Everyone can accept a vague hope that things end well. Why do you think the specific claim — it already happened, in one body, with a name — is the one people can't leave alone?</p></div>
+            <div class="q-item"><span class="q-num">02</span><p><strong>The whitewash.</strong> Ezekiel's wall isn't dirty — it's flimsy and painted to look solid. Where in your life have you been maintaining the paint instead of the wall?</p></div>
+            <div class="q-item"><span class="q-num">03</span><p><strong>Armistice or unity.</strong> Is there a relationship or a room that stays peaceful only because a certain subject never comes up? What would it cost to name it — and what might it be worth?</p></div>
+            <div class="q-item"><span class="q-num">04</span><p><strong>Not far from the kingdom.</strong> Some Pharisees ended up defending Paul. Who have you written off as "on the other side" who may be closer to Christ than you assume?</p></div>
+            <div class="q-item"><span class="q-num">05</span><p><strong>Stood by.</strong> Read Acts 23:11 next to 2 Timothy 4:16–17. When were you last genuinely alone in something — and, looking back, where was Christ standing?</p></div>
+        </div>
+    </section>
+
+    <div class="send reveal">
+        <div class="send-in">
+            <p class="eb">The Send</p>
+            <p class="body">A whole court came apart over one word, because that word asks for a verdict and not a nod. The gospel will do the same wherever it's actually said. Don't soften it into a someday. Say the specific thing — a real morning, a real tomb, a real name — and let it reveal what a room is made of, yours included.</p>
+            <p class="pull">Nobody riots over a someday. They divide over a grave that a man <em>walked out of.</em></p>
+        </div>
+    </div>
+
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share this deep dive</button>
+    </div>
+
+    <div class="strip-wrap reveal">
+        <p class="strip-eb">The Case · Acts 22–26</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back"><a href="/deepdives.html">← All Deep Dives</a></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-22-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="A Council Versus One Sentence" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.xr-step').forEach(step => {
+            step.addEventListener('click', () => {
+                document.querySelectorAll('.xr-step').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.xr-panel').forEach(p => p.classList.remove('show'));
+                step.classList.add('active');
+                const t = document.getElementById(step.getAttribute('data-target'));
+                if (t) t.classList.add('show');
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts22RenderStrip === 'function') acts22RenderStrip('#series-strip', 'a-council-versus-one-sentence');
+        });
+
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = { title: 'A Council Versus One Sentence — Deep Dive | The Living Room', text: 'The word that split the court — resurrection, already begun. Exhibit II of The Gospel on Trial.', url: 'https://thelivingroom.io/res/deep/2026/a-council-versus-one-sentence.html' };
+            try { if (navigator.share) { await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share this deep dive', 2000); } } catch (e) {}
+        });
+    </script>
+</body>
+</html>

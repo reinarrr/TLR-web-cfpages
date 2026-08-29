@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Except For These Chains — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500;1,6..72,600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/except-for-these-chains.html">
+    <meta property="og:title"       content="Except For These Chains — Deep Dive">
+    <meta property="og:description" content="The prisoner stops defending himself and starts evangelizing the room — wishing his own joy on a king, and subtracting only the chains. 'Not done in a corner.' The verdict is handed to the hearer. A deep dive into Acts 26.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Except For These Chains — Deep Dive">
+    <meta name="twitter:description" content="Exhibit VI of The Gospel on Trial — the verdict is yours. Acts 26.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/TLR-LOGO-COL-STACKED.png">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        :root {
+            --bg: #fbfaf7; --surface: #ffffff;
+            --ink: #17181a; --body: #3b3c40; --muted: #9a978f;
+            --red: #b0281f; --red-deep: #85201a;
+            --line: #e4e0d8; --line-strong: #cfcabf;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--red-deep); font-weight: 500; }
+
+        .dd-hero { max-width: 47rem; margin: 0 auto; padding: 4.5rem 1.5rem 2.5rem; }
+        .hero-inner { border-left: 2px solid var(--red); padding-left: 1.7rem; }
+        .dd-eyebrow { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .dd-eyebrow a:hover { border-color: var(--red); }
+        .dd-filed { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+        .dd-title { font-family: 'Newsreader', serif; font-size: clamp(2.3rem, 6.6vw, 4.1rem); font-weight: 700; line-height: 1.0; letter-spacing: -0.018em; color: var(--ink); }
+        .dd-underbar { width: 5rem; height: 3px; background: var(--red); margin: 1.3rem 0 1.4rem; }
+        .dd-lead { font-family: 'Newsreader', serif; font-style: italic; font-weight: 500; font-size: clamp(1.18rem, 3vw, 1.55rem); line-height: 1.5; color: #2b2c30; max-width: 33rem; }
+
+        .scripture-wrap { max-width: 44rem; margin: 1.5rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: #f4f0e8; border-left: 4px solid var(--red); border-radius: 0 0.5rem 0.5rem 0; padding: 1.8rem 2rem; }
+        .sb-ref { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: 0.98rem; color: #33342f; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--ink); font-weight: 600; }
+        .sb-v { color: var(--red); font-weight: 700; font-size: 0.7rem; vertical-align: super; margin-right: 0.15rem; font-family: 'Newsreader', serif; }
+
+        .yt-wrap { max-width: 52rem; margin: 3rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: 0.75rem; overflow: hidden; box-shadow: 0 20px 50px rgba(23,24,26,0.16); background: #e4ddd0; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--muted); font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; font-style: italic; margin-top: 1rem; }
+
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 0.9rem; display: block; }
+        .dd-h2 { font-family: 'Newsreader', serif; font-size: clamp(1.75rem, 4.6vw, 2.4rem); font-weight: 700; line-height: 1.13; margin-bottom: 1.4rem; letter-spacing: -0.015em; }
+        .dd-h2 em { font-style: italic; color: var(--red-deep); }
+        .dd-p { font-size: 1.02rem; color: var(--body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--ink); font-weight: 600; }
+        .dd-p .land { color: var(--red-deep); font-weight: 600; font-style: italic; }
+        .dd-iceberg-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); }
+
+        .note { background: #f4f0e8; border: 1px solid var(--line); border-radius: 0.5rem; padding: 1.1rem 1.4rem; margin: 0.4rem 0 1.6rem; }
+        .note p { font-size: 0.84rem; color: #4d4b45; line-height: 1.7; font-weight: 300; }
+        .note .nt-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 0.4rem; }
+
+        .xr-wrap { max-width: 46rem; margin: 4rem auto 0; padding: 0 1.5rem; }
+        .xr-inner { background: var(--surface); border: 1px solid var(--line); border-top: 2px solid var(--ink); border-radius: 0.5rem; padding: 2.2rem 1.9rem 2.4rem; }
+        .xr-head { border-left: 2px solid var(--red); padding-left: 1.3rem; margin-bottom: 1.8rem; }
+        .xr-head .dd-kicker { margin-bottom: 0.6rem; }
+        .xr-head h2 { font-family: 'Newsreader', serif; font-size: clamp(1.6rem, 4.5vw, 2.2rem); font-weight: 700; line-height: 1.12; letter-spacing: -0.01em; }
+        .xr-head h2 em { font-style: italic; color: var(--red-deep); }
+        .xr-head p { margin-top: 0.7rem; font-size: 0.88rem; color: var(--body); font-weight: 300; }
+        .xr-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.55rem; margin-bottom: 1.5rem; }
+        @media (max-width: 600px) { .xr-steps { grid-template-columns: 1fr; } }
+        .xr-step { border: 1px solid var(--line); border-radius: 0.4rem; padding: 0.9rem 1rem; cursor: pointer; transition: border-color 0.2s, background 0.2s; background: #fbfaf7; }
+        .xr-step:hover { border-color: var(--line-strong); }
+        .xr-step.active { border-color: var(--red); background: #fdf4f3; }
+        .xr-step .xs-n { font-family: 'Newsreader', serif; font-weight: 700; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); display: block; }
+        .xr-step.active .xs-n { color: var(--red); }
+        .xr-step .xs-l { font-family: 'Newsreader', serif; font-weight: 700; font-size: 1.02rem; color: var(--ink); margin-top: 0.15rem; line-height: 1.15; }
+        .xr-panel { display: none; animation: xrIn 0.4s ease; }
+        .xr-panel.show { display: block; }
+        @keyframes xrIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        .xr-ref { font-family: 'Newsreader', serif; font-weight: 700; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); margin-bottom: 0.9rem; }
+        .xr-line { display: flex; gap: 0.9rem; margin-bottom: 0.7rem; }
+        .xr-line .xl-n { font-family: 'Newsreader', serif; color: var(--red); font-size: 0.72rem; min-width: 1.2rem; text-align: right; padding-top: 0.28rem; font-variant-numeric: tabular-nums; }
+        .xr-line p { font-size: 0.92rem; color: var(--body); line-height: 1.72; font-weight: 300; }
+        .xr-line p b { color: var(--ink); font-weight: 600; }
+        .xr-line p em { color: var(--ink); font-style: italic; }
+
+        .discuss { max-width: 44rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .discuss-head { border-left: 2px solid var(--red); padding-left: 1.3rem; margin-bottom: 1.8rem; }
+        .discuss-head .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); }
+        .discuss-head h2 { font-family: 'Newsreader', serif; font-size: clamp(1.7rem, 5vw, 2.3rem); font-weight: 700; margin-top: 0.5rem; }
+        .q-item { display: flex; gap: 1.1rem; padding: 1.3rem 0; border-bottom: 1px solid var(--line); }
+        .q-num { font-family: 'Newsreader', serif; font-style: italic; font-weight: 700; font-size: 1.1rem; color: var(--red); flex-shrink: 0; width: 1.6rem; }
+        .q-item p { font-size: 0.95rem; color: var(--body); line-height: 1.7; font-weight: 300; }
+        .q-item p strong { color: var(--ink); font-weight: 600; }
+
+        .companion { max-width: 44rem; margin: 2.4rem auto 0; padding: 0 1.5rem; }
+        .companion-in { background: #f4f0e8; border: 1px solid var(--line); border-radius: 0.5rem; padding: 1.2rem 1.5rem; }
+        .companion-in .co-tag { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 0.4rem; }
+        .companion-in p { font-size: 0.85rem; color: var(--body); line-height: 1.65; font-weight: 300; }
+        .companion-in a { color: var(--red); font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+        .companion-in a:hover { border-color: var(--red); }
+
+        .send { max-width: 42rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .send-in { border-left: 2px solid var(--red); padding-left: 1.7rem; }
+        .send .eb { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 1.1rem; }
+        .send p.body { font-size: 1.04rem; color: var(--body); line-height: 1.85; font-weight: 300; }
+        .send .pull { font-family: 'Newsreader', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; line-height: 1.3; color: var(--ink); margin-top: 1.5rem; letter-spacing: -0.01em; }
+        .send .pull em { font-style: italic; color: var(--red-deep); }
+
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.8rem; border: 1px solid var(--line-strong); border-radius: 100px; background: var(--surface); color: var(--ink); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .share-btn:hover { background: var(--red); color: #fff; border-color: var(--red); }
+
+        .strip-wrap { max-width: 52rem; margin: 4.5rem auto 0; padding: 0 1rem; }
+        .strip-eb { text-align: center; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+        .dd-back { text-align: center; padding: 3rem 1.5rem 4.5rem; }
+        .dd-back a { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+        .dd-back a:hover { color: var(--red); border-color: var(--red); }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <header class="dd-hero">
+        <div class="hero-inner">
+            <p class="dd-eyebrow"><a href="/res/deep/2026/the-gospel-on-trial.html">The Gospel on Trial &nbsp;·&nbsp; Acts 22–26</a></p>
+            <p class="dd-filed">Exhibit VI · Oct 4 · Acts 26</p>
+            <h1 class="dd-title">Except For<br>These Chains</h1>
+            <div class="dd-underbar"></div>
+            <p class="dd-lead">The prisoner stops defending himself and starts evangelizing the room — wishing his own joy on a king, and subtracting only the chains.</p>
+        </div>
+    </header>
+
+    <div class="scripture-wrap reveal">
+        <div class="scripture-box">
+            <span class="sb-ref">Acts 26:28–29 · NLT</span>
+            <p class="sb-text">
+                <span class="sb-v">28</span>Agrippa interrupted him. "Do you think you can persuade me to become a Christian so quickly?"
+                <span class="sb-v">29</span>Paul replied, "Whether quickly or not, I pray to God that <b>both you and everyone here in this audience might become the same as I am, except for these chains.</b>"
+            </p>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame" id="yt-mount"></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <!-- ══════════ NOT A DEFENSE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the turn</span>
+        <h2 class="dd-h2">It stops being a defense and becomes an <em>altar call</em></h2>
+        <p class="dd-p">This is the <b>third</b> time Luke tells the conversion story (Acts 9, 22, and now 26), and this telling is tuned for a king who knows the Jewish Scriptures. Notice the difference commentators flag: this time the commission comes <em>directly from the risen Jesus</em>, with no Ananias in between — the emphasis this audience needs. And it is the most beautiful statement of the gospel's aim anywhere in Acts: <em>"to open their eyes, so they may turn from darkness to light… receive forgiveness for their sins and be given a place among God's people, who are set apart by faith in me"</em> (26:18). Paul's whole life reduces to the next line: <em>"And so, King Agrippa, I obeyed that vision from heaven"</em> (26:19). <span class="land">That single sentence answers every "why did you go to Jerusalem?" the series has asked since Acts 21.</span></p>
+        <p class="dd-p">And watch what he does with the dock. He isn't defending himself anymore — he's evangelizing the room. He turns to the king mid-trial: <em>"Do you believe the prophets? I know you do."</em> Agrippa, cornered and amused: <em>"Do you think you can persuade me to become a Christian so quickly?"</em> And Paul, a prisoner in chains, wishes his own joy on his judge — <b>"become the same as I am, except for these chains."</b> He wants the king to have everything he has, and subtracts only the suffering. It may be the freest sentence in the New Testament.</p>
+    </section>
+
+    <!-- ══════════ NOT IN A CORNER ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the public claim</span>
+        <h2 class="dd-h2">"This was not done in a <em>corner</em>"</h2>
+        <p class="dd-p">Festus can't take it and shouts him down: <em>"Paul, you are insane. Too much study has made you crazy!"</em> (26:24). Paul's answer is completely calm — he is speaking <em>"true and rational words"</em> — and then he says the line that is the whole series' capstone: <span class="land"><em>"these events… were not done in a corner!"</em> (26:26).</span> The resurrection is not a private mystical experience Paul had alone in a room. It is a <b>public event with public witnesses</b>, argued in open court, in front of a king who "knows about these things." You can dismiss a private feeling. You have to reckon with a claim that says: go and check, the witnesses are still alive.</p>
+        <p class="dd-p">That is why the gospel could stand trial for seven chapters and never once be convicted. It doesn't ask to be believed on the strength of Paul's sincerity. <b>It stakes itself on an event in public history</b> — and then, calmly, in a courtroom, invites the most powerful people in the province to examine it and respond. The trial was never really about whether Paul was guilty. It was about whether the room would believe the thing that actually happened.</p>
+        <div class="note">
+            <span class="nt-tag">The verdict, and the bend</span>
+            <p>They step out and agree: <em>"This man hasn't done anything to deserve death or imprisonment"</em> (26:31). Agrippa to Festus: <em>"He could have been set free if he hadn't appealed to Caesar"</em> (26:32). Innocent — twice over now — and staying in chains, by his own choice, because the chains are the road to Rome. It's the last defense speech in the book. After this verse, Acts changes genre entirely: sea, storm, shipwreck.</p>
+        </div>
+    </section>
+
+    <!-- ══════════ SIGNATURE — ALMOST PERSUADED ══════════ -->
+    <div class="xr-wrap reveal">
+        <div class="xr-inner">
+            <div class="xr-head">
+                <span class="dd-kicker">The Cross-Examination</span>
+                <h2>Almost <em>Persuaded</em></h2>
+                <p>The trial ends by handing the verdict to the people in the room. Step through how it gets handed to you.</p>
+            </div>
+
+            <div class="xr-steps">
+                <div class="xr-step active" data-target="xr-1"><span class="xs-n">Line of questioning I</span><span class="xs-l">The public claim</span></div>
+                <div class="xr-step" data-target="xr-2"><span class="xs-n">Line of questioning II</span><span class="xs-l">The turn</span></div>
+                <div class="xr-step" data-target="xr-3"><span class="xs-n">Line of questioning III</span><span class="xs-l">The verdict is yours</span></div>
+            </div>
+
+            <div class="xr-panel show" id="xr-1">
+                <div class="xr-ref">Exhibit — Acts 26:26</div>
+                <div class="xr-line"><span class="xl-n">01</span><p><em>"Not done in a corner."</em> The claim is public, checkable history — not a private religious feeling that asks only for your respect.</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>Which means neutrality isn't really available. You can walk away from an opinion. A reported <b>event</b> asks you whether it happened.</p></div>
+            </div>
+            <div class="xr-panel" id="xr-2">
+                <div class="xr-ref">Exhibit — Acts 26:28–29</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>Paul stops defending and turns the question on the judge: <em>"do you believe the prophets? I know you do."</em> The prisoner is now the one asking.</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>He wishes his joy on the whole room and keeps only the chains for himself. <b>The freest person in the courtroom is the one who is bound.</b></p></div>
+            </div>
+            <div class="xr-panel" id="xr-3">
+                <div class="xr-ref">Exhibit — "so quickly?"</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>Agrippa's "so quickly?" is the sound of <em>almost</em> — interested, moved, unwilling. He could have been the freest man in the room; he chose to stay the most powerful.</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>And that is where the whole trial has been heading all along: <b>the verdict is no longer about Paul. It's about the hearer.</b> Six exhibits, and the last one is you.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════ CLOSE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Why this is Exhibit VI</span>
+        <h2 class="dd-h2">Never convicted — and the case rests with <em>you</em></h2>
+        <p class="dd-p">The gospel went on trial for seven chapters and was never once found guilty. The witnesses couldn't agree, the governors couldn't decide, the charges wouldn't hold — and the prisoner kept turning every dock into a pulpit, until at the last hearing he simply asked the court to become what he is. <span class="land">That is the freest sentence in the New Testament: a man in chains wishing his own joy on his judges, and subtracting only his suffering.</span> Nothing left to hold. Nothing left to protect.</p>
+        <p class="dd-p">And the case doesn't close so much as get handed over. Agrippa's "so quickly?" is left hanging on purpose. Because the same question the whole book could not settle about a certain Jesus — dead, or alive? — is the one still standing in front of you. <b>You are the last exhibit.</b> Whether short or long, the invitation is exactly the one Paul made to a king: become the same as he is. Free. Forgiven. Eyes opened. Except, please God, for the chains.</p>
+    </section>
+
+    <!-- companion -->
+    <div class="companion reveal">
+        <div class="companion-in">
+            <span class="co-tag">A companion study</span>
+            <p>The trial ends by asking for a <b>verdict</b> — which is finally a question about salvation: what it is, and how a person actually comes to it. That's where the midweek study, <a href="/res/know-what-you-believe.html">Know What You Believe</a>, lands on salvation — grace, faith, and the object faith rests on. This page stands on its own; the study helps you answer the question it leaves open.</p>
+        </div>
+    </div>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss reveal">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+        </div>
+        <div class="q-list">
+            <div class="q-item"><span class="q-num">01</span><p><strong>Not in a corner.</strong> The gospel stakes itself on a public event, not a private feeling. How does that change the way you'd answer someone who says "that's just true for you"?</p></div>
+            <div class="q-item"><span class="q-num">02</span><p><strong>Except the chains.</strong> Paul wished his whole life on the king and subtracted only his suffering. Could you honestly wish your life in Christ on someone else? If not, what's missing?</p></div>
+            <div class="q-item"><span class="q-num">03</span><p><strong>The freest man is bound.</strong> Paul is the freest person in a room full of powerful people. Where in your life are you mistaking control for freedom?</p></div>
+            <div class="q-item"><span class="q-num">04</span><p><strong>"So quickly?"</strong> Agrippa was moved and unwilling — the sound of <em>almost</em>. Where are you saying "so quickly?" to something you already suspect is true?</p></div>
+            <div class="q-item"><span class="q-num">05</span><p><strong>The last exhibit.</strong> The trial hands the verdict to the hearer. If the case really comes down to whether a certain Jesus is alive — what is your verdict, and what does it change on Monday?</p></div>
+        </div>
+    </section>
+
+    <div class="send reveal">
+        <div class="send-in">
+            <p class="eb">The Send</p>
+            <p class="body">Six exhibits, and the case was never really against Paul. It was the gospel in the dock — and it walked out unconvicted every time, because you cannot cross-examine an empty tomb into staying shut. The prisoner asked a king to become what he was. The book leaves the answer blank on purpose, because the pen is in your hand now.</p>
+            <p class="pull">A man in chains wished his freedom on his judges — and the only thing he wouldn't wish on you is <em>the chains.</em></p>
+        </div>
+    </div>
+
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share this deep dive</button>
+    </div>
+
+    <div class="strip-wrap reveal">
+        <p class="strip-eb">The Case · Acts 22–26</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back"><a href="/deepdives.html">← All Deep Dives</a></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-22-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="Except For These Chains" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.xr-step').forEach(step => {
+            step.addEventListener('click', () => {
+                document.querySelectorAll('.xr-step').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.xr-panel').forEach(p => p.classList.remove('show'));
+                step.classList.add('active');
+                const t = document.getElementById(step.getAttribute('data-target'));
+                if (t) t.classList.add('show');
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts22RenderStrip === 'function') acts22RenderStrip('#series-strip', 'except-for-these-chains');
+        });
+
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = { title: 'Except For These Chains — Deep Dive | The Living Room', text: 'A man in chains wished his freedom on his judges. Exhibit VI of The Gospel on Trial — Acts 26.', url: 'https://thelivingroom.io/res/deep/2026/except-for-these-chains.html' };
+            try { if (navigator.share) { await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share this deep dive', 2000); } } catch (e) {}
+        });
+    </script>
+</body>
+</html>
