@@ -46,6 +46,101 @@
     </section>
 
 
+<!-- ── FATHER'S DAY · LEGENDARY DAD BANNER ── -->
+<section class="fd-banner">
+    <style>
+        .fd-banner{position:relative;max-width:58rem;margin:0 auto;padding:3rem 1.5rem 0;}
+        .fd-wrap{position:relative;border-radius:2rem;overflow:hidden;background:radial-gradient(900px 400px at 12% -25%, #fbf1da 0%, transparent 60%), radial-gradient(800px 420px at 106% 0%, #e6f0ef 0%, transparent 55%), #f7f2e8;padding:2.75rem 2.75rem;}
+        .fd-inner{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:center;}
+        .fd-badge{display:inline-flex;align-items:center;gap:.4rem;font-family:'Outfit',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#a8873f;background:#fff7e6;border:1.5px solid #efdcad;padding:.4rem .9rem;border-radius:100px;}
+        .fd-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:900;line-height:1.04;color:#1a1a1a;margin:1rem 0 .7rem;}
+        .fd-title em{background:linear-gradient(100deg,#c5a059,#e0a94e 42%,#2d5a5a);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic;}
+        .fd-sub{font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:300;color:#5b6470;line-height:1.6;max-width:36ch;margin-bottom:1.4rem;}
+        .fd-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.9rem;border-radius:100px;font-family:'Outfit',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff;text-decoration:none;background:linear-gradient(120deg,#d9b25f,#b8873f);box-shadow:0 12px 26px -10px rgba(197,160,89,.75);transition:transform .15s,box-shadow .15s;}
+        .fd-btn:hover{transform:translateY(-2px);box-shadow:0 16px 32px -10px rgba(197,160,89,.85);}
+        .fd-note{font-family:'Outfit',sans-serif;font-size:.66rem;color:#9ca3af;margin-top:.8rem;letter-spacing:.02em;}
+        .fd-cards{position:relative;height:300px;display:flex;align-items:center;justify-content:center;}
+        .fd-banner .card{--c1:#2d5a5a;--c2:#1b3838;--tint:#eef4f2;--ink:#132420;position:absolute;width:196px;border-radius:16px;padding:9px;background:linear-gradient(160deg,var(--c1),var(--c2));box-shadow:0 22px 44px -16px rgba(0,0,0,.5);isolation:isolate;}
+        .fd-banner .card.legendary{--c1:#c5a059;--c2:#7c611f;background:linear-gradient(135deg,#f6e3a8 0%,#c5a059 25%,#8a6d2e 55%,#e8cf8f 80%,#c5a059 100%);}
+        .fd-banner .card-inner{position:relative;border-radius:10px;background:var(--tint);color:var(--ink);padding:9px 10px 8px;display:flex;flex-direction:column;overflow:hidden;}
+        .fd-banner .card.holo .card-inner::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.35) 38%,rgba(180,220,255,.25) 44%,rgba(255,210,240,.28) 50%,rgba(200,255,220,.22) 56%,transparent 72%);mix-blend-mode:screen;opacity:.5;pointer-events:none;background-size:250% 250%;animation:fdHolo 6s ease-in-out infinite;}
+        @keyframes fdHolo{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+        .fd-banner .card-top{display:flex;align-items:flex-end;justify-content:space-between;gap:6px;margin-bottom:6px;}
+        .fd-banner .stage{font-size:.38rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--c1);opacity:.85;}
+        .fd-banner .card-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;line-height:1;color:var(--ink);}
+        .fd-banner .hp{display:flex;align-items:baseline;gap:2px;white-space:nowrap;}
+        .fd-banner .hp .lbl{font-size:.36rem;font-weight:700;color:var(--c1);}
+        .fd-banner .hp .val{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:900;color:var(--ink);}
+        .fd-banner .photo-frame{border-radius:6px;padding:4px;background:linear-gradient(160deg,var(--c1),var(--c2));margin-bottom:6px;}
+        .fd-banner .photo{position:relative;aspect-ratio:4/3;border-radius:4px;overflow:hidden;background:#ccc;}
+        .fd-banner .photo img{width:100%;height:100%;object-fit:cover;display:block;}
+        .fd-banner .type-badge{position:absolute;top:4px;right:4px;display:flex;align-items:center;gap:3px;background:rgba(255,255,255,.92);border-radius:100px;padding:2px 6px 2px 4px;font-size:.42rem;font-weight:700;color:var(--c2);}
+        .fd-banner .rarity{position:absolute;left:4px;bottom:4px;background:rgba(0,0,0,.55);color:#ffe08a;border-radius:100px;padding:1px 6px;font-size:.4rem;font-weight:700;letter-spacing:.06em;}
+        .fd-banner .stats{display:grid;grid-template-columns:1fr 1fr;gap:2px 8px;padding:5px 7px;border-radius:6px;background:rgba(255,255,255,.55);}
+        .fd-banner .stat{display:flex;align-items:center;gap:4px;}
+        .fd-banner .stat .sname{font-size:.36rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--c2);width:22px;flex-shrink:0;}
+        .fd-banner .stat .track{flex:1;height:4px;border-radius:3px;background:rgba(0,0,0,.13);overflow:hidden;}
+        .fd-banner .stat .fill{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--c1),var(--c2));}
+        .fd-banner .card.legendary .stat .fill{background:linear-gradient(90deg,#b8923f,#6f571c);}
+        .fd-banner .stat .sval{font-size:.38rem;font-weight:700;color:var(--ink);width:12px;text-align:right;}
+        .fd-banner .type-wise{--c1:#2d5a5a;--c2:#1b3838;--tint:#eef4f2;--ink:#132420;}
+        .fd-banner .type-grill{--c1:#e0592b;--c2:#a13413;--tint:#fdefe7;--ink:#3a1608;}
+        .fd-banner .type-power{--c1:#c0392b;--c2:#7e2018;--tint:#fceceb;--ink:#3a0f0b;}
+        .fd-hc-l{transform:rotate(-11deg) translate(-72px,10px) scale(.9);z-index:1;}
+        .fd-hc-r{transform:rotate(10deg) translate(72px,2px) scale(.9);z-index:1;}
+        .fd-hc-f{transform:rotate(-3deg);z-index:3;animation:fdFloat 5s ease-in-out infinite;}
+        @keyframes fdFloat{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(-3deg) translateY(-10px)}}
+        @media (max-width:768px){
+            .fd-wrap{padding:2.25rem 1.5rem;}
+            .fd-inner{grid-template-columns:1fr;gap:.75rem;text-align:center;}
+            .fd-sub{margin-left:auto;margin-right:auto;}
+            .fd-badge{margin:0 auto;}
+            .fd-cards{order:-1;height:266px;transform:scale(.9);}
+        }
+    </style>
+
+    <div class="fd-wrap">
+        <div class="fd-inner">
+            <div class="fd-copy">
+                <span class="fd-badge">✦ Father's Day &nbsp;·&nbsp; The Living Room</span>
+                <h2 class="fd-title">He's already a <em>legend</em>.</h2>
+                <p class="fd-sub">Turn your dad into his own collectible trading card — pick a few words, add a photo, and we'll forge his type, stats and signature moves.</p>
+                <a class="fd-btn" href="https://legendarydad.thelivingroom.io">⚡ Make his card &nbsp;→</a>
+                <p class="fd-note">Free · takes about a minute</p>
+            </div>
+
+            <div class="fd-cards" aria-hidden="true">
+                <!-- back left: Wise One -->
+                <div class="card type-wise holo fd-hc-l">
+                    <div class="card-inner">
+                        <div class="card-top"><div><div class="stage">Legendary Dad</div><div class="card-name">Papa Sol</div></div><div class="hp"><span class="lbl">HP</span><span class="val">120</span></div></div>
+                        <div class="photo-frame"><div class="photo"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=360&q=80" alt=""><span class="type-badge">📖 Wise One</span><span class="rarity">◆◆ UNCOMMON</span></div></div>
+                        <div class="stats"><div class="stat"><span class="sname">ATK</span><span class="track"><span class="fill" style="width:55%"></span></span><span class="sval">55</span></div><div class="stat"><span class="sname">DEF</span><span class="track"><span class="fill" style="width:82%"></span></span><span class="sval">82</span></div><div class="stat"><span class="sname">SPD</span><span class="track"><span class="fill" style="width:44%"></span></span><span class="sval">44</span></div><div class="stat"><span class="sname">WIS</span><span class="track"><span class="fill" style="width:95%"></span></span><span class="sval">95</span></div></div>
+                    </div>
+                </div>
+                <!-- back right: Powerhouse (legendary) -->
+                <div class="card type-power holo legendary fd-hc-r">
+                    <div class="card-inner">
+                        <div class="card-top"><div><div class="stage">Legendary Dad</div><div class="card-name">Mighty Marco</div></div><div class="hp"><span class="lbl">HP</span><span class="val">140</span></div></div>
+                        <div class="photo-frame"><div class="photo"><img src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?w=360&q=80" alt=""><span class="type-badge">💪 Powerhouse</span><span class="rarity">★ LEGENDARY</span></div></div>
+                        <div class="stats"><div class="stat"><span class="sname">ATK</span><span class="track"><span class="fill" style="width:96%"></span></span><span class="sval">96</span></div><div class="stat"><span class="sname">DEF</span><span class="track"><span class="fill" style="width:88%"></span></span><span class="sval">88</span></div><div class="stat"><span class="sname">SPD</span><span class="track"><span class="fill" style="width:60%"></span></span><span class="sval">60</span></div><div class="stat"><span class="sname">PWR</span><span class="track"><span class="fill" style="width:90%"></span></span><span class="sval">90</span></div></div>
+                    </div>
+                </div>
+                <!-- front: Grill Master -->
+                <div class="card type-grill holo fd-hc-f">
+                    <div class="card-inner">
+                        <div class="card-top"><div><div class="stage">Legendary Dad</div><div class="card-name">Grillmaster Joe</div></div><div class="hp"><span class="lbl">HP</span><span class="val">110</span></div></div>
+                        <div class="photo-frame"><div class="photo"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=360&q=80" alt=""><span class="type-badge">🔥 Grill Master</span><span class="rarity">◆◆◆ RARE</span></div></div>
+                        <div class="stats"><div class="stat"><span class="sname">ATK</span><span class="track"><span class="fill" style="width:90%"></span></span><span class="sval">90</span></div><div class="stat"><span class="sname">DEF</span><span class="track"><span class="fill" style="width:62%"></span></span><span class="sval">62</span></div><div class="stat"><span class="sname">SPD</span><span class="track"><span class="fill" style="width:55%"></span></span><span class="sval">55</span></div><div class="stat"><span class="sname">HEAT</span><span class="track"><span class="fill" style="width:88%"></span></span><span class="sval">88</span></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ── END FATHER'S DAY BANNER ── -->
+
+
 <!-- ── THE GOSPEL ON TRIAL · ACTS 22–26 DEEP DIVES TILE ── -->
 <section style="max-width:58rem;margin:0 auto;padding:3rem 1.5rem 0;">
     <a href="/res/deep/2026/the-gospel-on-trial.html" style="display:block;text-decoration:none;" aria-label="The Gospel on Trial — Acts 22–26 deep dives">
@@ -95,65 +190,7 @@
 </section>
 <!-- ── END THE GOSPEL ON TRIAL TILE ── -->
 
-<!-- ── ROAD MARKERS TILE ── -->
-<section style="max-width:58rem;margin:0 auto;padding:3rem 1.5rem 0;">
-    <a href="/res/deep/2026/the-road-so-far.html" style="display:block;text-decoration:none;" aria-label="Road Markers — explore Paul's missionary journeys">
-        <div style="position:relative;background:#f5ede0;border-radius:2rem;overflow:hidden;padding:3.25rem 3rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;transition:transform .25s ease,box-shadow .25s ease;cursor:pointer;"
-             onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 16px 48px rgba(0,0,0,0.1)'"
-             onmouseout="this.style.transform='none';this.style.boxShadow='none'">
-
-            <!-- Background route decoration -->
-            <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;">
-                <svg viewBox="0 0 900 240" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;">
-                    <path d="M 820 55 Q 700 50 620 88 Q 520 128 440 108 Q 360 88 300 128 Q 240 162 180 138 Q 120 112 60 142" stroke="#c5a059" stroke-width="1.4" stroke-dasharray="6 5" opacity="0.45" fill="none"/>
-                    <path d="M 820 95 Q 730 90 660 126 Q 570 170 470 150 Q 380 136 310 170 Q 230 206 140 186 Q 90 176 50 192" stroke="#6ba8d4" stroke-width="1.2" stroke-dasharray="6 5" opacity="0.35" fill="none"/>
-                    <!-- City dots J1 -->
-                    <circle cx="820" cy="55" r="4" fill="#c5a059" opacity="0.7"/>
-                    <circle cx="620" cy="88" r="3" fill="#c5a059" opacity="0.55"/>
-                    <circle cx="440" cy="108" r="3" fill="#c5a059" opacity="0.55"/>
-                    <circle cx="300" cy="128" r="4" fill="#c5a059" opacity="0.7"/>
-                    <circle cx="180" cy="138" r="3" fill="#c5a059" opacity="0.55"/>
-                    <circle cx="60" cy="142" r="4" fill="#c5a059" opacity="0.7"/>
-                    <!-- City dots J2 -->
-                    <circle cx="820" cy="95" r="3.5" fill="#6ba8d4" opacity="0.55"/>
-                    <circle cx="660" cy="126" r="2.5" fill="#6ba8d4" opacity="0.45"/>
-                    <circle cx="470" cy="150" r="3.5" fill="#6ba8d4" opacity="0.55"/>
-                    <circle cx="310" cy="170" r="3" fill="#6ba8d4" opacity="0.5"/>
-                    <circle cx="140" cy="186" r="3.5" fill="#6ba8d4" opacity="0.55"/>
-                    <!-- Subtle warm glow bottom-right -->
-                    <ellipse cx="720" cy="220" rx="260" ry="70" fill="rgba(197,160,89,0.07)"/>
-                </svg>
-            </div>
-
-            <!-- Text content -->
-            <div style="position:relative;z-index:1;">
-                <p style="font-family:'Outfit',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.45em;text-transform:uppercase;color:#c5a059;margin-bottom:0.75rem;">Acts Journey · The Living Room</p>
-                <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:700;color:#1a1a1a;line-height:1.1;margin-bottom:0.6rem;">Road <em style="color:#c5a059;font-style:italic;">Markers</em></h2>
-                <p style="font-family:'Outfit',sans-serif;font-size:0.86rem;color:#6b7280;font-weight:300;line-height:1.65;max-width:36ch;margin-bottom:1.5rem;">32 sermons. 2,000 miles. Two journeys. Trace Paul's footsteps across the ancient world — city by city, moment by moment.</p>
-                <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
-                    <span style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.55rem 1.3rem;border-radius:100px;background:#1a1a1a;color:#fff;font-family:'Outfit',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;">Explore the Journey →</span>
-                    <span style="font-family:'Outfit',sans-serif;font-size:0.58rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#a1a1aa;">Map · Timeline · Themes</span>
-                </div>
-            </div>
-
-            <!-- Route legend -->
-            <div style="position:relative;z-index:1;display:flex;flex-direction:column;gap:0.65rem;flex-shrink:0;padding-right:0.5rem;" class="hidden md:flex">
-                <div style="display:flex;align-items:center;gap:0.6rem;">
-                    <div style="width:22px;height:2px;background:#c5a059;border-radius:1px;"></div>
-                    <span style="font-family:'Outfit',sans-serif;font-size:0.52rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#9ca3af;">Journey I</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:0.6rem;">
-                    <div style="width:22px;height:2px;background:#6ba8d4;border-radius:1px;"></div>
-                    <span style="font-family:'Outfit',sans-serif;font-size:0.52rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#9ca3af;">Journey II</span>
-                </div>
-            </div>
-
-        </div>
-    </a>
-</section>
-<!-- ── END ROAD MARKERS TILE ── -->
-
-<!-- ── DEMOTED DUO: KWYB + EPHESUS ── -->
+<!-- ── ALSO RUNNING: KWYB + ROAD MARKERS ── -->
 <section style="max-width:58rem;margin:0 auto;padding:3rem 1.5rem 0;">
     <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
         <span style="font-size:0.6rem;font-weight:700;letter-spacing:0.4em;text-transform:uppercase;color:#9ca3af;font-family:'Outfit',sans-serif;white-space:nowrap;">Also Running</span>
@@ -161,47 +198,6 @@
     </div>
 
     <div class="idx-duo" style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;">
-
-        <!-- The Road Less Travelled (compact) -->
-        <a href="/res/deep/2026/the-road-less-travelled.html" style="position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:16rem;border-radius:1.5rem;overflow:hidden;background:linear-gradient(140deg,#f3ecdb 0%,#e8ddc6 100%);text-decoration:none;padding:1.9rem;transition:transform .3s ease,box-shadow .3s ease;"
-           onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 16px 40px rgba(0,0,0,0.1)'"
-           onmouseout="this.style.transform='none';this.style.boxShadow='none'">
-            <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;">
-                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;">
-                    <path d="M30 250 Q 210 230 330 120" stroke="#8a6c2e" stroke-width="1.1" stroke-dasharray="6 5" opacity="0.28" fill="none"/>
-                    <circle cx="110" cy="238" r="3.5" fill="#46506b" opacity="0.5"/>
-                    <circle cx="220" cy="210" r="3.5" fill="#9a6f2e" opacity="0.5"/>
-                    <circle cx="300" cy="150" r="3.5" fill="#8a3a32" opacity="0.55"/>
-                    <g stroke="#6b5a3a" stroke-width="1" opacity="0.32" fill="none"><rect x="322" y="104" width="34" height="38"/><path d="M322 104 Q 339 90 356 104"/></g>
-                </svg>
-            </div>
-            <div style="position:relative;z-index:1;">
-                <p style="font-family:'Outfit',sans-serif;font-size:0.54rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:#8a6c2e;margin-bottom:0.65rem;">Acts 21 · Deep Dives</p>
-                <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;line-height:1.12;color:#1a1a1a;margin-bottom:0.55rem;">The Road Less <em style="color:#8a6c2e;font-style:italic;">Travelled</em></h3>
-                <p style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:300;color:#6b7280;line-height:1.55;margin-bottom:1rem;">Three studies walking Paul's road into Jerusalem — where the passion echoes peak, then break.</p>
-                <span style="display:inline-block;padding:0.5rem 1.2rem;border:1px solid rgba(138,108,46,0.4);border-radius:100px;color:#8a6c2e;font-family:'Outfit',sans-serif;font-size:0.56rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;">Enter the Series →</span>
-            </div>
-        </a>
-
-        <!-- The Mirror (compact) -->
-        <a href="/res/deep/2026/the-mirror.html" style="position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:16rem;border-radius:1.5rem;overflow:hidden;background:linear-gradient(140deg,#f4f1ea 0%,#eef2f2 100%);text-decoration:none;padding:1.9rem;transition:transform .3s ease,box-shadow .3s ease;"
-           onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 16px 40px rgba(0,0,0,0.1)'"
-           onmouseout="this.style.transform='none';this.style.boxShadow='none'">
-            <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;">
-                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;">
-                    <path d="M40 40 Q 180 150 200 150" stroke="#2d5a5a" stroke-width="1" stroke-dasharray="5 5" opacity="0.22" fill="none"/>
-                    <path d="M360 40 Q 220 150 200 150" stroke="#a8843d" stroke-width="1" stroke-dasharray="5 5" opacity="0.22" fill="none"/>
-                    <line x1="200" y1="24" x2="200" y2="276" stroke="#9aa0a0" stroke-width="0.7" opacity="0.18"/>
-                    <circle cx="200" cy="150" r="4" fill="#a8843d" opacity="0.3"/>
-                </svg>
-            </div>
-            <div style="position:relative;z-index:1;">
-                <p style="font-family:'Outfit',sans-serif;font-size:0.54rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:#a8843d;margin-bottom:0.65rem;">Acts 20 · Deep Dives</p>
-                <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;line-height:1.12;color:#1a1a1a;margin-bottom:0.55rem;">The <em style="color:#a8843d;font-style:italic;">Mirror</em></h3>
-                <p style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:300;color:#6b7280;line-height:1.55;margin-bottom:1rem;">Four studies watching one man's life bent into the shape of the cross.</p>
-                <span style="display:inline-block;padding:0.5rem 1.2rem;border:1px solid rgba(168,132,61,0.4);border-radius:100px;color:#a8843d;font-family:'Outfit',sans-serif;font-size:0.56rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;">Enter the Series →</span>
-            </div>
-        </a>
 
         <!-- Know What You Believe (compact) -->
         <a href="/res/know-what-you-believe.html" style="position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:16rem;border-radius:1.5rem;overflow:hidden;background:#12211f;text-decoration:none;padding:1.9rem;transition:transform .3s ease,box-shadow .3s ease;"
@@ -219,32 +215,33 @@
             </div>
         </a>
 
-        <!-- Ephesus (compact) -->
-        <a href="/res/deep/2026/ephesus-power-capital.html" style="position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:16rem;border-radius:1.5rem;overflow:hidden;background:linear-gradient(140deg,#eef1f0 0%,#e7ece9 100%);text-decoration:none;padding:1.9rem;transition:transform .3s ease,box-shadow .3s ease;"
+        <!-- Road Markers (compact — demoted) -->
+        <a href="/res/deep/2026/the-road-so-far.html" style="position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:16rem;border-radius:1.5rem;overflow:hidden;background:linear-gradient(140deg,#f5ede0 0%,#eee0c8 100%);text-decoration:none;padding:1.9rem;transition:transform .3s ease,box-shadow .3s ease;"
            onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 16px 40px rgba(0,0,0,0.1)'"
            onmouseout="this.style.transform='none';this.style.boxShadow='none'">
             <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;">
-                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMax slice" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;">
-                    <path d="M250 44 L330 20 L410 44 Z" stroke="#8c9aa0" stroke-width="1" opacity="0.3"/>
-                    <rect x="250" y="44" width="160" height="8" stroke="#8c9aa0" stroke-width="0.9" opacity="0.3"/>
-                    <g stroke="#8c9aa0" stroke-width="0.9" opacity="0.24">
-                        <rect x="262" y="52" width="7" height="120"/><rect x="298" y="52" width="7" height="120"/><rect x="334" y="52" width="7" height="120"/><rect x="370" y="52" width="7" height="120"/><rect x="406" y="52" width="7" height="120"/>
-                    </g>
-                    <rect x="244" y="172" width="176" height="7" stroke="#8c9aa0" stroke-width="0.9" opacity="0.32"/>
+                <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;">
+                    <path d="M30 248 Q 170 232 250 150 Q 315 82 382 66" stroke="#c5a059" stroke-width="1.2" stroke-dasharray="6 5" opacity="0.4" fill="none"/>
+                    <path d="M30 274 Q 195 258 295 176 Q 348 128 385 116" stroke="#6ba8d4" stroke-width="1" stroke-dasharray="6 5" opacity="0.3" fill="none"/>
+                    <circle cx="30" cy="248" r="3.5" fill="#c5a059" opacity="0.6"/>
+                    <circle cx="170" cy="230" r="3" fill="#c5a059" opacity="0.5"/>
+                    <circle cx="250" cy="150" r="3.5" fill="#c5a059" opacity="0.6"/>
+                    <circle cx="382" cy="66" r="3.5" fill="#c5a059" opacity="0.6"/>
+                    <circle cx="295" cy="176" r="3" fill="#6ba8d4" opacity="0.5"/>
                 </svg>
             </div>
             <div style="position:relative;z-index:1;">
-                <p style="font-family:'Outfit',sans-serif;font-size:0.54rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:#a8843d;margin-bottom:0.65rem;">Acts 19 · Deep Dives</p>
-                <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;line-height:1.12;color:#1a1a1a;margin-bottom:0.55rem;">Ephesus: The <em style="color:#2d5a5a;font-style:italic;">Power Capital</em></h3>
-                <p style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:300;color:#6b7280;line-height:1.55;margin-bottom:1rem;">Five studies in Acts 19 — authentic vs. counterfeit power in the power capital of the ancient world.</p>
-                <span style="display:inline-block;padding:0.5rem 1.2rem;border:1px solid rgba(45,90,90,0.3);border-radius:100px;color:#2d5a5a;font-family:'Outfit',sans-serif;font-size:0.56rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;">Enter the Series →</span>
+                <p style="font-family:'Outfit',sans-serif;font-size:0.54rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:#c5a059;margin-bottom:0.65rem;">Acts Journey · Map · Timeline</p>
+                <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;line-height:1.12;color:#1a1a1a;margin-bottom:0.55rem;">Road <em style="color:#c5a059;font-style:italic;">Markers</em></h3>
+                <p style="font-family:'Outfit',sans-serif;font-size:0.78rem;font-weight:300;color:#6b7280;line-height:1.55;margin-bottom:1rem;">32 sermons, two journeys, 2,000 miles — trace Paul's footsteps across the ancient world.</p>
+                <span style="display:inline-block;padding:0.5rem 1.2rem;border:1px solid rgba(138,108,46,0.4);border-radius:100px;color:#8a6c2e;font-family:'Outfit',sans-serif;font-size:0.56rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;">Explore the Journey →</span>
             </div>
         </a>
 
     </div>
 </section>
 <style>@media (max-width:768px){ .idx-duo{ grid-template-columns:1fr !important; } }</style>
-<!-- ── END DEMOTED DUO ── -->
+<!-- ── END ALSO RUNNING ── -->
 
 <!-- ── OPERATION JAPAN · PRAYER RESOURCE ── -->
 <section style="max-width:58rem;margin:0 auto;padding:3rem 1.5rem 0;">
