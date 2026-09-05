@@ -28,7 +28,7 @@ const ACTS22 = {
         {
             n: 'II', slug: 'a-council-versus-one-sentence',
             title: 'A Council Versus One Sentence', date: 'Sep 6', passage: 'Acts 22:30 – 23:11',
-            accent: '#b0281f', live: false,
+            accent: '#b0281f', live: true,
             claim: 'Did the dead man rise?',
             interactive: 'The Word That Split the Court'
         },
