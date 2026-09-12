@@ -35,7 +35,7 @@ const ACTS22 = {
         {
             n: 'III', slug: 'forty-men-versus-one-boy',
             title: 'Forty Men Versus One Boy', date: 'Sep 13', passage: 'Acts 23:12–35',
-            accent: '#b0281f', live: false,
+            accent: '#b0281f', live: true,
             claim: 'Is a hidden hand still a hand?',
             interactive: 'The Invisible Hand'
         },
