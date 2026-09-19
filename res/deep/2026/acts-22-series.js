@@ -42,7 +42,7 @@ const ACTS22 = {
         {
             n: 'IV', slug: 'a-more-convenient-season',
             title: 'A More Convenient Season', date: 'Sep 20', passage: 'Acts 24:1–27',
-            accent: '#b0281f', live: false,
+            accent: '#b0281f', live: true,
             claim: 'Why couldn’t God just forgive?',
             interactive: 'The Most Expensive Word'
         },
