@@ -41,21 +41,28 @@ const ACTS22 = {
         },
         {
             n: 'IV', slug: 'a-more-convenient-season',
-            title: 'A More Convenient Season', date: 'Sep 20', passage: 'Acts 24:1–27',
+            title: 'A More Convenient Season · Part 1', date: 'Sep 20', passage: 'Acts 24:1–21',
             accent: '#b0281f', live: true,
-            claim: 'Why couldn’t God just forgive?',
+            claim: 'Raised — to life, or to judgment?',
+            interactive: 'One Voice, Two Destinations'
+        },
+        {
+            n: 'V', slug: 'a-more-convenient-season-part-2',
+            title: 'A More Convenient Season · Part 2', date: 'Sep 27', passage: 'Acts 24:22–27',
+            accent: '#b0281f', live: true,
+            claim: 'Is “later” an answer?',
             interactive: 'The Most Expensive Word'
         },
         {
-            n: 'V', slug: 'a-certain-jesus',
-            title: 'A Certain Jesus', date: 'Sep 27', passage: 'Acts 25:1–27',
+            n: 'VI', slug: 'a-certain-jesus',
+            title: 'A Certain Jesus', date: 'Oct 4', passage: 'Acts 25:1–27',
             accent: '#b0281f', live: false,
             claim: 'Dead — or alive?',
             interactive: 'The Cross-Examination'
         },
         {
-            n: 'VI', slug: 'except-for-these-chains',
-            title: 'Except For These Chains', date: 'Oct 4', passage: 'Acts 26:1–32',
+            n: 'VII', slug: 'except-for-these-chains',
+            title: 'Except For These Chains', date: 'Oct 11', passage: 'Acts 26:1–32',
             accent: '#b0281f', live: false,
             claim: 'What is the verdict on you?',
             interactive: 'Almost Persuaded'
