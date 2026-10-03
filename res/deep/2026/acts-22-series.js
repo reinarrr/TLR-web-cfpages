@@ -56,7 +56,7 @@ const ACTS22 = {
         {
             n: 'VI', slug: 'a-certain-jesus',
             title: 'A Certain Jesus', date: 'Oct 4', passage: 'Acts 25:1–27',
-            accent: '#b0281f', live: false,
+            accent: '#b0281f', live: true,
             claim: 'Dead — or alive?',
             interactive: 'The Cross-Examination'
         },
