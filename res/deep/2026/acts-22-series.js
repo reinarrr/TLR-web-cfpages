@@ -63,7 +63,7 @@ const ACTS22 = {
         {
             n: 'VII', slug: 'except-for-these-chains',
             title: 'Except For These Chains', date: 'Oct 11', passage: 'Acts 26:1–32',
-            accent: '#b0281f', live: false,
+            accent: '#b0281f', live: true,
             claim: 'What is the verdict on you?',
             interactive: 'Almost Persuaded'
         }
