@@ -45,151 +45,57 @@
         </div>
     </section>
 
-
-<!-- ── FATHER'S DAY · LEGENDARY DAD BANNER ── -->
-<section class="fd-banner">
-    <style>
-        .fd-banner{position:relative;max-width:58rem;margin:0 auto;padding:3rem 1.5rem 0;}
-        .fd-wrap{position:relative;border-radius:2rem;overflow:hidden;background:radial-gradient(900px 400px at 12% -25%, #fbf1da 0%, transparent 60%), radial-gradient(800px 420px at 106% 0%, #e6f0ef 0%, transparent 55%), #f7f2e8;padding:2.75rem 2.75rem;}
-        .fd-inner{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:center;}
-        .fd-badge{display:inline-flex;align-items:center;gap:.4rem;font-family:'Outfit',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#a8873f;background:#fff7e6;border:1.5px solid #efdcad;padding:.4rem .9rem;border-radius:100px;}
-        .fd-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:900;line-height:1.04;color:#1a1a1a;margin:1rem 0 .7rem;}
-        .fd-title em{background:linear-gradient(100deg,#c5a059,#e0a94e 42%,#2d5a5a);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic;}
-        .fd-sub{font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:300;color:#5b6470;line-height:1.6;max-width:36ch;margin-bottom:1.4rem;}
-        .fd-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.9rem;border-radius:100px;font-family:'Outfit',sans-serif;font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff;text-decoration:none;background:linear-gradient(120deg,#d9b25f,#b8873f);box-shadow:0 12px 26px -10px rgba(197,160,89,.75);transition:transform .15s,box-shadow .15s;}
-        .fd-btn:hover{transform:translateY(-2px);box-shadow:0 16px 32px -10px rgba(197,160,89,.85);}
-        .fd-note{font-family:'Outfit',sans-serif;font-size:.66rem;color:#9ca3af;margin-top:.8rem;letter-spacing:.02em;}
-        .fd-wall{display:inline-block;margin-left:1.1rem;color:#2d5a5a;font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:700;text-decoration:none;border-bottom:1.5px solid rgba(45,90,90,.3);padding-bottom:2px;transition:color .15s,border-color .15s;}
-        .fd-wall:hover{color:#1e3e3e;border-color:#2d5a5a;}
-        .fd-cards{position:relative;height:300px;display:flex;align-items:center;justify-content:center;}
-        .fd-banner .card{--c1:#2d5a5a;--c2:#1b3838;--tint:#eef4f2;--ink:#132420;position:absolute;width:196px;border-radius:16px;padding:9px;background:linear-gradient(160deg,var(--c1),var(--c2));box-shadow:0 22px 44px -16px rgba(0,0,0,.5);isolation:isolate;}
-        .fd-banner .card.legendary{--c1:#c5a059;--c2:#7c611f;background:linear-gradient(135deg,#f6e3a8 0%,#c5a059 25%,#8a6d2e 55%,#e8cf8f 80%,#c5a059 100%);}
-        .fd-banner .card-inner{position:relative;border-radius:10px;background:var(--tint);color:var(--ink);padding:9px 10px 8px;display:flex;flex-direction:column;overflow:hidden;}
-        .fd-banner .card.holo .card-inner::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.35) 38%,rgba(180,220,255,.25) 44%,rgba(255,210,240,.28) 50%,rgba(200,255,220,.22) 56%,transparent 72%);mix-blend-mode:screen;opacity:.5;pointer-events:none;background-size:250% 250%;animation:fdHolo 6s ease-in-out infinite;}
-        @keyframes fdHolo{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-        .fd-banner .card-top{display:flex;align-items:flex-end;justify-content:space-between;gap:6px;margin-bottom:6px;}
-        .fd-banner .stage{font-size:.38rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--c1);opacity:.85;}
-        .fd-banner .card-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;line-height:1;color:var(--ink);}
-        .fd-banner .hp{display:flex;align-items:baseline;gap:2px;white-space:nowrap;}
-        .fd-banner .hp .lbl{font-size:.36rem;font-weight:700;color:var(--c1);}
-        .fd-banner .hp .val{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:900;color:var(--ink);}
-        .fd-banner .photo-frame{border-radius:6px;padding:4px;background:linear-gradient(160deg,var(--c1),var(--c2));margin-bottom:6px;}
-        .fd-banner .photo{position:relative;aspect-ratio:4/3;border-radius:4px;overflow:hidden;background:#ccc;}
-        .fd-banner .photo img{width:100%;height:100%;object-fit:cover;display:block;}
-        .fd-banner .type-badge{position:absolute;top:4px;right:4px;display:flex;align-items:center;gap:3px;background:rgba(255,255,255,.92);border-radius:100px;padding:2px 6px 2px 4px;font-size:.42rem;font-weight:700;color:var(--c2);}
-        .fd-banner .rarity{position:absolute;left:4px;bottom:4px;background:rgba(0,0,0,.55);color:#ffe08a;border-radius:100px;padding:1px 6px;font-size:.4rem;font-weight:700;letter-spacing:.06em;}
-        .fd-banner .stats{display:grid;grid-template-columns:1fr 1fr;gap:2px 8px;padding:5px 7px;border-radius:6px;background:rgba(255,255,255,.55);}
-        .fd-banner .stat{display:flex;align-items:center;gap:4px;}
-        .fd-banner .stat .sname{font-size:.36rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--c2);width:22px;flex-shrink:0;}
-        .fd-banner .stat .track{flex:1;height:4px;border-radius:3px;background:rgba(0,0,0,.13);overflow:hidden;}
-        .fd-banner .stat .fill{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--c1),var(--c2));}
-        .fd-banner .card.legendary .stat .fill{background:linear-gradient(90deg,#b8923f,#6f571c);}
-        .fd-banner .stat .sval{font-size:.38rem;font-weight:700;color:var(--ink);width:12px;text-align:right;}
-        .fd-banner .type-wise{--c1:#2d5a5a;--c2:#1b3838;--tint:#eef4f2;--ink:#132420;}
-        .fd-banner .type-grill{--c1:#e0592b;--c2:#a13413;--tint:#fdefe7;--ink:#3a1608;}
-        .fd-banner .type-power{--c1:#c0392b;--c2:#7e2018;--tint:#fceceb;--ink:#3a0f0b;}
-        .fd-hc-l{transform:rotate(-11deg) translate(-72px,10px) scale(.9);z-index:1;}
-        .fd-hc-r{transform:rotate(10deg) translate(72px,2px) scale(.9);z-index:1;}
-        .fd-hc-f{transform:rotate(-3deg);z-index:3;animation:fdFloat 5s ease-in-out infinite;}
-        @keyframes fdFloat{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(-3deg) translateY(-10px)}}
-        @media (max-width:768px){
-            .fd-wrap{padding:2.25rem 1.5rem;}
-            .fd-inner{grid-template-columns:1fr;gap:.75rem;text-align:center;}
-            .fd-sub{margin-left:auto;margin-right:auto;}
-            .fd-badge{margin:0 auto;}
-            .fd-cards{order:-1;height:266px;transform:scale(.9);}
-            .fd-wall{display:block;margin:1rem auto 0;}
-        }
-    </style>
-
-    <div class="fd-wrap">
-        <div class="fd-inner">
-            <div class="fd-copy">
-                <span class="fd-badge">✦ Father's Day &nbsp;·&nbsp; The Living Room</span>
-                <h2 class="fd-title">He's already a <em>legend</em>.</h2>
-                <p class="fd-sub">Turn your dad into his own collectible trading card — pick a few words, add a photo, and we'll forge his type, stats and signature moves.</p>
-                <a class="fd-btn" href="https://legendarydad.thelivingroom.io">⚡ Make his card &nbsp;→</a>
-                <a class="fd-wall" href="https://legendarydad.thelivingroom.io/wall">See the Wall of Dads →</a>
-                <p class="fd-note">Free · takes about a minute</p>
-            </div>
-
-            <div class="fd-cards" aria-hidden="true">
-                <!-- back left: Wise One -->
-                <div class="card type-wise holo fd-hc-l">
-                    <div class="card-inner">
-                        <div class="card-top"><div><div class="stage">Legendary Dad</div><div class="card-name">Papa Sol</div></div><div class="hp"><span class="lbl">HP</span><span class="val">120</span></div></div>
-                        <div class="photo-frame"><div class="photo"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=360&q=80" alt=""><span class="type-badge">📖 Wise One</span><span class="rarity">◆◆ UNCOMMON</span></div></div>
-                        <div class="stats"><div class="stat"><span class="sname">ATK</span><span class="track"><span class="fill" style="width:55%"></span></span><span class="sval">55</span></div><div class="stat"><span class="sname">DEF</span><span class="track"><span class="fill" style="width:82%"></span></span><span class="sval">82</span></div><div class="stat"><span class="sname">SPD</span><span class="track"><span class="fill" style="width:44%"></span></span><span class="sval">44</span></div><div class="stat"><span class="sname">WIS</span><span class="track"><span class="fill" style="width:95%"></span></span><span class="sval">95</span></div></div>
-                    </div>
-                </div>
-                <!-- back right: Powerhouse (legendary) -->
-                <div class="card type-power holo legendary fd-hc-r">
-                    <div class="card-inner">
-                        <div class="card-top"><div><div class="stage">Legendary Dad</div><div class="card-name">Mighty Marco</div></div><div class="hp"><span class="lbl">HP</span><span class="val">140</span></div></div>
-                        <div class="photo-frame"><div class="photo"><img src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?w=360&q=80" alt=""><span class="type-badge">💪 Powerhouse</span><span class="rarity">★ LEGENDARY</span></div></div>
-                        <div class="stats"><div class="stat"><span class="sname">ATK</span><span class="track"><span class="fill" style="width:96%"></span></span><span class="sval">96</span></div><div class="stat"><span class="sname">DEF</span><span class="track"><span class="fill" style="width:88%"></span></span><span class="sval">88</span></div><div class="stat"><span class="sname">SPD</span><span class="track"><span class="fill" style="width:60%"></span></span><span class="sval">60</span></div><div class="stat"><span class="sname">PWR</span><span class="track"><span class="fill" style="width:90%"></span></span><span class="sval">90</span></div></div>
-                    </div>
-                </div>
-                <!-- front: Grill Master -->
-                <div class="card type-grill holo fd-hc-f">
-                    <div class="card-inner">
-                        <div class="card-top"><div><div class="stage">Legendary Dad</div><div class="card-name">Grillmaster Joe</div></div><div class="hp"><span class="lbl">HP</span><span class="val">110</span></div></div>
-                        <div class="photo-frame"><div class="photo"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=360&q=80" alt=""><span class="type-badge">🔥 Grill Master</span><span class="rarity">◆◆◆ RARE</span></div></div>
-                        <div class="stats"><div class="stat"><span class="sname">ATK</span><span class="track"><span class="fill" style="width:90%"></span></span><span class="sval">90</span></div><div class="stat"><span class="sname">DEF</span><span class="track"><span class="fill" style="width:62%"></span></span><span class="sval">62</span></div><div class="stat"><span class="sname">SPD</span><span class="track"><span class="fill" style="width:55%"></span></span><span class="sval">55</span></div><div class="stat"><span class="sname">HEAT</span><span class="track"><span class="fill" style="width:88%"></span></span><span class="sval">88</span></div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- ── END FATHER'S DAY BANNER ── -->
-
-
-<!-- ── THE VOYAGE · ACTS 27 DEEP DIVES TILE ── -->
-<section style="max-width:58rem;margin:0 auto;padding:3rem 1.5rem 0;">
+<!-- ── THE VOYAGE · ACTS 27 — FEATURED HERO ── -->
+<section style="max-width:64rem;margin:0 auto;padding:3.5rem 1.5rem 0;">
     <a href="/res/deep/2026/the-voyage.html" style="display:block;text-decoration:none;" aria-label="The Voyage — Acts 27 deep dives">
-        <div style="position:relative;background:linear-gradient(135deg,#132a3c 0%,#0b1b28 100%);border-radius:2rem;overflow:hidden;padding:3.25rem 3rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;transition:transform .25s ease,box-shadow .25s ease;cursor:pointer;"
-             onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 18px 50px rgba(10,20,30,0.35)'"
+        <div class="voyage-hero" style="position:relative;min-height:30rem;border-radius:2rem;overflow:hidden;background:#0b1b28;display:flex;align-items:flex-end;transition:transform .25s ease,box-shadow .25s ease;cursor:pointer;"
+             onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 24px 60px rgba(8,16,24,0.45)'"
              onmouseout="this.style.transform='none';this.style.boxShadow='none'">
 
-            <!-- faint swell + horizon -->
+            <!-- Storm photograph -->
+            <img src="/img/voyage-storm.jpg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;opacity:0.92;">
+
+            <!-- Navy wash for legibility -->
+            <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(90deg, rgba(8,17,26,0.94) 0%, rgba(10,21,33,0.80) 40%, rgba(12,27,40,0.30) 100%), linear-gradient(0deg, rgba(8,17,26,0.88) 0%, rgba(8,17,26,0.10) 55%, transparent 100%);"></div>
+
+            <!-- faint swell lines -->
             <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;">
-                <svg viewBox="0 0 900 240" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;">
-                    <g stroke="#c5984a" stroke-width="0.8" opacity="0.12" fill="none">
-                        <path d="M0 150 Q 75 135 150 150 T 300 150 T 450 150 T 600 150 T 750 150 T 900 150"/>
-                        <path d="M0 176 Q 75 161 150 176 T 300 176 T 450 176 T 600 176 T 750 176 T 900 176"/>
-                        <path d="M0 202 Q 75 187 150 202 T 300 202 T 450 202 T 600 202 T 750 202 T 900 202"/>
+                <svg viewBox="0 0 900 300" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;">
+                    <g stroke="#c5984a" stroke-width="0.8" opacity="0.14" fill="none">
+                        <path d="M0 212 Q 75 197 150 212 T 300 212 T 450 212 T 600 212 T 750 212 T 900 212"/>
+                        <path d="M0 242 Q 75 227 150 242 T 300 242 T 450 242 T 600 242 T 750 242 T 900 242"/>
+                        <path d="M0 272 Q 75 257 150 272 T 300 272 T 450 272 T 600 272 T 750 272 T 900 272"/>
                     </g>
-                    <line x1="86" y1="0" x2="86" y2="240" stroke="#c5984a" stroke-width="1" opacity="0.16"/>
                 </svg>
             </div>
 
-            <!-- Text content -->
-            <div style="position:relative;z-index:1;border-left:2px solid #c5984a;padding-left:1.6rem;">
-                <p style="font-family:'Outfit',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.34em;text-transform:uppercase;color:#c5984a;margin-bottom:0.75rem;">Acts Journey · Deep Dives · Acts 27</p>
-                <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:700;color:#efe7d6;line-height:1.06;margin-bottom:0.6rem;">The <em style="color:#c5984a;font-style:italic;">Voyage</em></h2>
-                <p style="font-family:'Outfit',sans-serif;font-size:0.86rem;color:#aebcc7;font-weight:300;line-height:1.65;max-width:44ch;margin-bottom:1.5rem;">The courtrooms are over — now there is only weather. 276 people no one chose and no one could leave, and the prisoner in the hold is the reason they will live.</p>
-                <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
-                    <span style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.55rem 1.3rem;border-radius:100px;background:#c5984a;color:#0b1b28;font-family:'Outfit',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;">Enter the Series →</span>
-                    <span style="font-family:'Outfit',sans-serif;font-size:0.58rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#7e91a0;">2 Exhibits · New Each Week</span>
-                </div>
-            </div>
-
-            <!-- Compass mark + 276 stamp -->
-            <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.1rem;flex-shrink:0;padding-right:0.5rem;" class="hidden md:flex">
-                <svg width="54" height="54" viewBox="0 0 48 48" fill="none" stroke="#c5984a" stroke-width="1.2">
+            <!-- Compass + 276 stamp, top-right -->
+            <div style="position:absolute;top:2rem;right:2.2rem;z-index:2;display:flex;flex-direction:column;align-items:center;gap:1rem;" class="hidden md:flex">
+                <svg width="60" height="60" viewBox="0 0 48 48" fill="none" stroke="#c5984a" stroke-width="1.2">
                     <circle cx="24" cy="24" r="21"/><circle cx="24" cy="24" r="14" opacity="0.5"/>
                     <path d="M24 4 L27 24 L24 44 L21 24 Z" fill="#c5984a" stroke="none"/>
                     <path d="M4 24 L24 21 L44 24 L24 27 Z" fill="#c5984a" opacity="0.45" stroke="none"/>
                     <circle cx="24" cy="24" r="1.6" fill="#c5984a" stroke="none"/>
                 </svg>
-                <span style="border:1px solid #c5984a;color:#c5984a;font-family:'Outfit',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;padding:0.4rem 0.8rem;border-radius:3px;white-space:nowrap;">276 Souls</span>
+                <span style="border:1px solid #c5984a;color:#c5984a;font-family:'Outfit',sans-serif;font-size:0.52rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;padding:0.4rem 0.85rem;border-radius:3px;white-space:nowrap;background:rgba(8,17,26,0.35);">276 Souls</span>
+            </div>
+
+            <!-- Text content -->
+            <div class="voyage-hero-copy" style="position:relative;z-index:1;padding:3rem 3rem 3.25rem;max-width:40rem;">
+                <p style="font-family:'Outfit',sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.36em;text-transform:uppercase;color:#c5984a;margin-bottom:1rem;">Acts Journey · Deep Dives · Acts 27</p>
+                <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.6rem,7vw,4.5rem);font-weight:700;color:#f3ecdd;line-height:1.02;margin-bottom:0.9rem;">The <em style="color:#c5984a;font-style:italic;">Voyage</em></h2>
+                <p style="font-family:'Outfit',sans-serif;font-size:0.95rem;color:#c7d2db;font-weight:300;line-height:1.7;max-width:40ch;margin-bottom:1.8rem;">The courtrooms are over — now there is only weather. 276 people no one chose and no one could leave, and the prisoner in the hold is the reason they will live.</p>
+                <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
+                    <span style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.6rem;border-radius:100px;background:#c5984a;color:#0b1b28;font-family:'Outfit',sans-serif;font-size:0.66rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;">Enter the Series →</span>
+                    <span style="font-family:'Outfit',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#9fb0bd;">2 Exhibits · New Each Week</span>
+                </div>
             </div>
 
         </div>
     </a>
 </section>
-<!-- ── END THE VOYAGE TILE ── -->
+<style>@media (max-width:640px){ .voyage-hero{min-height:25rem;} .voyage-hero-copy{padding:2.25rem 1.6rem 2.5rem !important;} }</style>
+<!-- ── END THE VOYAGE HERO ── -->
 
 <!-- ── THE GOSPEL ON TRIAL · ACTS 22–26 DEEP DIVES TILE ── -->
 <section style="max-width:58rem;margin:0 auto;padding:3rem 1.5rem 0;">
