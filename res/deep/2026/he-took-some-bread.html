@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>He Took Some Bread — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,500;1,9..144,600&family=Outfit:wght@300;400;600;700&family=Spline+Sans+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/he-took-some-bread.html">
+    <meta property="og:title"       content="He Took Some Bread — Deep Dive">
+    <meta property="og:description" content="The fourteenth night, a ship coming apart, 276 people who haven't eaten. A prisoner in chains takes bread, gives thanks to God out loud in front of them all, and eats — and the whole ship takes heart. Grace said out loud in the worst room you've ever been in is a sermon. A deep dive into Acts 27:27–44.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/voyage-harbor.jpg">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="He Took Some Bread — Deep Dive">
+    <meta name="twitter:description" content="Exhibit II of The Voyage — the three verbs on a sinking ship. Acts 27:27–44.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/voyage-harbor.jpg">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        /* ── THE SHIP'S LOG — aged-parchment body, storm hero, navy night-watch signature ── */
+        :root {
+            --bg: #efeadd; --surface: #f7f3ea; --surface-sink: #efe7d6;
+            --ink: #16262f; --body: #3b4650; --muted: #857f6f;
+            --gold: #936414; --gold-bright: #c5984a;
+            --navy: #112433; --navy-2: #0c1b28; --parch: #efe7d6;
+            --teal: #2d5a5a; --line: #d9d0bc; --line-navy: #294055;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--gold); font-weight: 500; }
+
+        .dd-hero { position: relative; color: var(--parch); background: var(--navy); overflow: hidden; }
+        .dd-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .5; filter: saturate(.74) contrast(1.05); }
+        .dd-hero-sh { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,20,30,.5) 0%, rgba(10,20,30,.28) 34%, rgba(10,20,30,.9) 100%), radial-gradient(130% 85% at 82% 0%, rgba(197,152,74,.16), transparent 55%); }
+        .dd-hero-in { position: relative; max-width: 47rem; margin: 0 auto; padding: 5rem 1.5rem 2.6rem; }
+        .dd-eyebrow { font-family: 'Spline Sans Mono', monospace; font-size: .62rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-bright); margin-bottom: .55rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
+        .dd-eyebrow a:hover { border-color: var(--gold-bright); }
+        .dd-filed { font-family: 'Spline Sans Mono', monospace; font-size: .58rem; font-weight: 400; letter-spacing: .2em; text-transform: uppercase; color: #b4c2cd; margin-bottom: 1.4rem; }
+        .dd-title { font-family: 'Fraunces', serif; font-size: clamp(2.7rem, 8vw, 4.7rem); font-weight: 900; line-height: .98; letter-spacing: -.02em; text-wrap: balance; text-shadow: 0 2px 34px rgba(0,0,0,.4); }
+        .dd-underbar { width: 4.5rem; height: 2px; background: var(--gold-bright); margin: 1.4rem 0 1.5rem; }
+        .dd-lead { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: clamp(1.15rem, 3vw, 1.5rem); line-height: 1.5; color: #f1ead9; max-width: 33rem; }
+        .dd-logline { display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; margin-top: 2rem; padding-top: 1.1rem; border-top: 1px solid rgba(239,231,214,.18); font-family: 'Spline Sans Mono', monospace; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: #93a4b4; }
+        .dd-logline .hot { color: var(--gold-bright); }
+
+        .scripture-wrap { max-width: 44rem; margin: 2.2rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: var(--surface-sink); border-left: 3px solid var(--navy); border-radius: 0 .5rem .5rem 0; padding: 1.8rem 2rem; }
+        .sb-ref { font-family: 'Spline Sans Mono', monospace; font-size: .58rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: .98rem; color: #33342f; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--ink); font-weight: 600; }
+        .sb-v { color: var(--gold); font-weight: 700; font-size: .7rem; vertical-align: super; margin-right: .15rem; font-family: 'Fraunces', serif; }
+
+        .yt-wrap { max-width: 52rem; margin: 3rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: .75rem; overflow: hidden; box-shadow: 0 20px 50px rgba(17,36,51,.22); background: #dcd4c4; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--muted); font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; font-family: 'Spline Sans Mono', monospace; margin-top: 1rem; }
+
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-family: 'Spline Sans Mono', monospace; font-size: .6rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); margin-bottom: .9rem; display: block; }
+        .dd-h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 4.6vw, 2.5rem); font-weight: 700; line-height: 1.12; margin-bottom: 1.4rem; letter-spacing: -.015em; text-wrap: balance; }
+        .dd-h2 em { font-style: italic; color: var(--gold); }
+        .dd-p { font-size: 1.02rem; color: var(--body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--ink); font-weight: 600; }
+        .dd-p .land { color: var(--navy); font-weight: 600; font-style: italic; }
+
+        .note { background: var(--surface-sink); border: 1px solid var(--line); border-radius: .5rem; padding: 1.1rem 1.4rem; margin: .4rem 0 1.6rem; }
+        .note p { font-size: .86rem; color: #4d4b45; line-height: 1.72; font-weight: 300; }
+        .note .nt-tag { font-family: 'Spline Sans Mono', monospace; font-size: .56rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .4rem; }
+
+        /* dawn band — storm turns to shore */
+        .dd-dawn { max-width: 52rem; margin: 3.8rem auto 0; padding: 0 1.5rem; }
+        .dd-dawn-in { position: relative; border-radius: .75rem; overflow: hidden; aspect-ratio: 2 / 1; box-shadow: 0 20px 50px rgba(17,36,51,.22); }
+        .dd-dawn-in img { width: 100%; height: 100%; object-fit: cover; }
+        .dd-dawn-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.5rem 1.6rem; background: linear-gradient(0deg, rgba(10,20,30,.72), transparent); color: var(--parch); font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: clamp(1.05rem, 3vw, 1.45rem); }
+
+        .xr-wrap { max-width: 46rem; margin: 4rem auto 0; padding: 0 1.5rem; }
+        .xr-inner { background: var(--navy); color: var(--parch); border-radius: .6rem; padding: 2.3rem 1.9rem 2.5rem; box-shadow: 0 30px 70px -40px rgba(10,20,30,.7); }
+        .xr-head { border-left: 2px solid var(--gold-bright); padding-left: 1.3rem; margin-bottom: 1.8rem; }
+        .xr-head .dd-kicker { color: var(--gold-bright); margin-bottom: .6rem; }
+        .xr-head h2 { font-family: 'Fraunces', serif; font-size: clamp(1.6rem, 4.5vw, 2.2rem); font-weight: 700; line-height: 1.12; letter-spacing: -.01em; color: var(--parch); }
+        .xr-head h2 em { font-style: italic; color: var(--gold-bright); }
+        .xr-head p { margin-top: .7rem; font-size: .9rem; color: #b4c2cd; font-weight: 300; }
+        .xr-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: .55rem; margin-bottom: 1.5rem; }
+        @media (max-width: 600px) { .xr-steps { grid-template-columns: 1fr; } }
+        .xr-step { border: 1px solid var(--line-navy); border-radius: .4rem; padding: .9rem 1rem; cursor: pointer; transition: border-color .2s, background .2s; background: var(--navy-2); }
+        .xr-step:hover { border-color: #3c5a74; }
+        .xr-step.active { border-color: var(--gold-bright); background: #122c3f; }
+        .xr-step .xs-n { font-family: 'Spline Sans Mono', monospace; font-weight: 600; font-size: .56rem; letter-spacing: .14em; text-transform: uppercase; color: #8296a6; display: block; }
+        .xr-step.active .xs-n { color: var(--gold-bright); }
+        .xr-step .xs-l { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.02rem; color: var(--parch); margin-top: .15rem; line-height: 1.15; }
+        .xr-panel { display: none; animation: xrIn .4s ease; }
+        .xr-panel.show { display: block; }
+        @keyframes xrIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        .xr-ref { font-family: 'Spline Sans Mono', monospace; font-weight: 600; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-bright); margin-bottom: .9rem; }
+        .xr-line { display: flex; gap: .9rem; margin-bottom: .7rem; }
+        .xr-line .xl-n { font-family: 'Spline Sans Mono', monospace; color: var(--gold-bright); font-size: .72rem; min-width: 1.4rem; text-align: right; padding-top: .28rem; font-variant-numeric: tabular-nums; }
+        .xr-line p { font-size: .93rem; color: #c7d2db; line-height: 1.72; font-weight: 300; }
+        .xr-line p b { color: var(--parch); font-weight: 600; }
+        .xr-line p em { color: #f1ead9; font-style: italic; }
+
+        .discuss { max-width: 44rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .discuss-head { border-left: 2px solid var(--gold); padding-left: 1.3rem; margin-bottom: 1.8rem; }
+        .discuss-head .eb { font-family: 'Spline Sans Mono', monospace; font-size: .6rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); }
+        .discuss-head h2 { font-family: 'Fraunces', serif; font-size: clamp(1.7rem, 5vw, 2.3rem); font-weight: 700; margin-top: .5rem; }
+        .q-item { display: flex; gap: 1.1rem; padding: 1.3rem 0; border-bottom: 1px solid var(--line); }
+        .q-num { font-family: 'Fraunces', serif; font-style: italic; font-weight: 700; font-size: 1.1rem; color: var(--gold); flex-shrink: 0; width: 1.6rem; }
+        .q-item p { font-size: .95rem; color: var(--body); line-height: 1.7; font-weight: 300; }
+        .q-item p strong { color: var(--ink); font-weight: 600; }
+
+        .companion { max-width: 44rem; margin: 2.4rem auto 0; padding: 0 1.5rem; }
+        .companion-in { background: var(--surface-sink); border: 1px solid var(--line); border-radius: .5rem; padding: 1.2rem 1.5rem; }
+        .companion-in .co-tag { font-family: 'Spline Sans Mono', monospace; font-size: .56rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .4rem; }
+        .companion-in p { font-size: .85rem; color: var(--body); line-height: 1.65; font-weight: 300; }
+        .companion-in a { color: var(--gold); font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
+        .companion-in a:hover { border-color: var(--gold); }
+
+        .send { max-width: 42rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .send-in { border-left: 2px solid var(--gold); padding-left: 1.7rem; }
+        .send .eb { font-family: 'Spline Sans Mono', monospace; font-size: .6rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.1rem; }
+        .send p.body { font-size: 1.04rem; color: var(--body); line-height: 1.85; font-weight: 300; }
+        .send .pull { font-family: 'Fraunces', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; line-height: 1.3; color: var(--ink); margin-top: 1.5rem; letter-spacing: -.01em; }
+        .send .pull em { font-style: italic; color: var(--gold); }
+
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: .6rem; padding: .75rem 1.8rem; border: 1px solid var(--line); border-radius: 100px; background: var(--surface); color: var(--ink); font-family: 'Spline Sans Mono', monospace; font-size: .6rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+        .share-btn:hover { background: var(--navy); color: var(--parch); border-color: var(--navy); }
+
+        .strip-wrap { max-width: 52rem; margin: 4.5rem auto 0; padding: 0 1rem; }
+        .strip-eb { text-align: center; font-family: 'Spline Sans Mono', monospace; font-size: .6rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+        .dd-back { text-align: center; padding: 3rem 1.5rem 4.5rem; }
+        .dd-back a { font-family: 'Spline Sans Mono', monospace; font-size: .6rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color .2s, border-color .2s; }
+        .dd-back a:hover { color: var(--gold); border-color: var(--gold); }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <header class="dd-hero">
+        <img class="dd-hero-img" src="/img/voyage-storm.jpg" alt="A ship running before a storm at night">
+        <div class="dd-hero-sh"></div>
+        <div class="dd-hero-in">
+            <p class="dd-eyebrow"><a href="/res/deep/2026/the-voyage.html">The Voyage &nbsp;·&nbsp; Acts 27</a></p>
+            <p class="dd-filed">Exhibit II · Oct 25 · Acts 27:27–44</p>
+            <h1 class="dd-title">He Took<br>Some Bread</h1>
+            <div class="dd-underbar"></div>
+            <p class="dd-lead">The fourteenth night, a ship coming apart, 276 who haven't eaten — and a prisoner in chains takes bread, gives thanks to God out loud, and the whole ship takes heart.</p>
+            <div class="dd-logline"><span>Acts 27:27–44</span><span class="hot">the 14th night</span><span>276 souls</span><span>everyone ashore</span></div>
+        </div>
+    </header>
+
+    <div class="scripture-wrap reveal">
+        <div class="scripture-box">
+            <span class="sb-ref">Acts 27:33–36 · NLT</span>
+            <p class="sb-text">
+                <span class="sb-v">33</span>Just as day was dawning, Paul urged everyone to eat. "You have been so worried that you haven't touched food for two weeks," he said.
+                <span class="sb-v">34</span>"Please eat something now for your own good. For not a hair of your heads will perish."
+                <span class="sb-v">35</span><b>Then he took some bread, gave thanks to God before them all, and broke off a piece and ate it.</b>
+                <span class="sb-v">36</span>Then everyone was encouraged and began to eat —
+            </p>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame" id="yt-mount"></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <!-- ══════════ THE FOURTEENTH NIGHT ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the fourteenth night</span>
+        <h2 class="dd-h2">Cut the rope to your own <em>lifeboat</em></h2>
+        <p class="dd-p">Midnight on the fourteenth night, and the sailors can hear something — breakers. They drop a weighted line: 120 feet, then 90. They're being driven onto rocks in the dark, so they throw out four anchors and do the most human thing in the chapter: <em>"and prayed for daylight."</em> <span class="land">Hardened sailors, praying — not for rescue, for morning.</span> Sometimes <em>"Lord, just get me to morning"</em> is the whole prayer you have, and it is a real one.</p>
+        <p class="dd-p">Then the sailors try to slip away in the lifeboat under cover of a lie. Paul to the centurion: <em>"You will all die unless the sailors stay aboard"</em> (v.31). Hold that beside the promise from last week — <em>"none of you will lose your lives"</em> (v.22). <span class="land">God's promise and God's means are not rivals. The guarantee includes the rope.</span> This is the answer to anyone who thinks providence means doing nothing: the sovereignty that promised the outcome is the sovereignty that tells you to keep the crew on deck. So the soldiers cut the ropes and let the lifeboat drift — <b>they acted on the promise by removing their own escape.</b> The lifeboat is always the private exit: <em>I get out, and the rest of you take your chances.</em> Faith on the fourteenth night sometimes looks like cutting the rope to your own. And notice who's obeying whom now: the centurion who ignored Paul at Fair Havens acts on his word within seconds. <b>The prisoner is running the ship.</b></p>
+    </section>
+
+    <!-- ══════════ THE THREE VERBS ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the three verbs</span>
+        <h2 class="dd-h2">Grace said out <em>loud</em></h2>
+        <p class="dd-p">Then the third thing Paul does: he tells them to eat — and his reason is practical before it's spiritual, <em>"for your own good."</em> There's a beach ahead and hard work to reach it. And he hands a storm full of pagans a promise Jesus once made to his own disciples: <em>"not a hair of your heads will perish"</em> (Luke 21:18). But first <b>he does it himself.</b> Words were fine two weeks ago; this time the deed makes the promise concrete — <span class="land">he had the courage to say grace in front of a crowd of hard-bitten pagans.</span> Not a private prayer muttered under his breath: he <em>"gave thanks to God before them all"</em> — grace, out loud, in the worst room any of them had ever been in.</p>
+        <p class="dd-p">And look at the verbs: <em class="greek">labōn</em> (took) — <em class="greek">eucharistēsas</em> (gave thanks) — <em class="greek">klasas</em> (broke). <b>Those are the Last Supper verbs</b> (Luke 22:19) — the same cluster that turns up at Emmaus, where two disciples finally recognized the Stranger the moment he broke the bread (Luke 24:30–31). Was it communion? The scholars split, and the honest answer sits in the middle: Paul did not take it privately. <span class="land">The shape of the Lord's table showed up in a place with no church, no liturgy and three believers</span> — and he gave thanks where all 276 could hear it, then ate with them.</p>
+        <div class="note">
+            <span class="nt-tag">The word that crossed over</span>
+            <p>Verse 36: <em>"then everyone was encouraged and began to eat."</em> That word <em>encouraged</em> is the same one Paul used twice in the storm — <em>take courage</em> (vv.22, 25). He'd commanded it; now they have it. <b>The command became the condition — and what carried it across wasn't the speech. It was the bread.</b> And only now does Luke count them: all <b>276</b>. They were counted, most likely, to share the bread out fairly — <em>every one of them got a piece.</em></p>
+        </div>
+    </section>
+
+    <!-- ══════════ SIGNATURE — TOOK · GAVE THANKS · BROKE ══════════ -->
+    <div class="xr-wrap reveal">
+        <div class="xr-inner">
+            <div class="xr-head">
+                <span class="dd-kicker">The Table on a Sinking Ship</span>
+                <h2>Took · Gave Thanks · <em>Broke</em></h2>
+                <p>Three verbs, in order, done by a prisoner in chains in front of 276 frightened strangers. Step through the sermon he preached without a word.</p>
+            </div>
+
+            <div class="xr-steps">
+                <div class="xr-step active" data-target="xr-1"><span class="xs-n">Verb I</span><span class="xs-l">Took</span></div>
+                <div class="xr-step" data-target="xr-2"><span class="xs-n">Verb II</span><span class="xs-l">Gave thanks</span></div>
+                <div class="xr-step" data-target="xr-3"><span class="xs-n">Verb III</span><span class="xs-l">Broke</span></div>
+            </div>
+
+            <div class="xr-panel show" id="xr-1">
+                <div class="xr-ref">labōn — Acts 27:35a</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>Fourteen days of fear, and the man in chains reaches for bread. <b>He goes first.</b> He doesn't tell them to take heart and then wait to see — he eats, in front of all of them.</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p><em>Words were fine two weeks ago. The deed made the promise of God concrete.</em></p></div>
+            </div>
+            <div class="xr-panel" id="xr-2">
+                <div class="xr-ref">eucharistēsas — Acts 27:35b</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>He <em>"gave thanks to God before them all"</em> — out loud, in the presence of 276 hard-bitten pagans. Not a prayer under his breath; a thanksgiving everyone could hear.</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p><b>Grace said out loud in the worst room you have ever been in is a sermon.</b></p></div>
+            </div>
+            <div class="xr-panel" id="xr-3">
+                <div class="xr-ref">klasas — Acts 27:35c · Luke 24:30</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>Took, gave thanks, broke — the Last Supper verbs, and the same three at Emmaus, where <em>"their eyes were opened, and they recognized him."</em></p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>The shape of the table showed up on a sinking ship. And then <em>"everyone was encouraged"</em> — the same word as the courage he'd commanded. <b>The command became the condition, and the bread carried it across.</b></p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- dawn band -->
+    <div class="dd-dawn reveal">
+        <div class="dd-dawn-in">
+            <img src="/img/voyage-harbor.jpg" alt="A ship reaching a harbor at dawn">
+            <p class="dd-dawn-cap">"Just as day was dawning…" — and every one of the 276 came ashore.</p>
+        </div>
+    </div>
+
+    <!-- ══════════ CLOSE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Why this is Exhibit II · everyone came ashore</span>
+        <h2 class="dd-h2">No two the same way — but every one <em>ashore</em></h2>
+        <p class="dd-p">Morning comes, they run for a beach, hit a shoal too soon, and the stern begins to break apart. The soldiers move to kill the prisoners — by Roman law a guard who lost a prisoner bore the prisoner's own sentence — <em>"but the commanding officer wanted to spare Paul."</em> <span class="land">Julius breaks protocol and risks his own neck for one man, and 275 others live because of it.</span> Watch his whole arc fit inside one chapter: kind at Sidon (v.3) → ignores Paul at Fair Havens (v.11) → obeys Paul at the lifeboat (v.32) → saves Paul on the beach (v.43). Then the last line: some swam, some clung to planks and broken pieces of the ship. <b>No two of them came ashore the same way — but every single one came ashore.</b> Not one of the 276. Exactly as promised — and every one of them got wet.</p>
+        <p class="dd-p">So don't make the ship a picture of the church — most of that company aren't believers, and God said plainly the vessel was going down. <span class="land">The ship is the circumstance. The company is the body.</span> Vessels and seasons and structures all come apart eventually; the people God binds together come ashore. Track the one name the thread hangs on — <b>Aristarchus</b> (v.2): dragged into the Ephesus riot, carrying the collection to Jerusalem, on this ship, and still there years later in Rome, <em>"in prison with me"</em> (Col 4:10). One man who got on early and never got off. Every fellowship has one, and they're usually the ones nobody preaches about. He didn't preach a sermon on that ship either. The bread was the sermon.</p>
+    </section>
+
+    <!-- companion -->
+    <div class="companion reveal">
+        <div class="companion-in">
+            <span class="co-tag">A companion study</span>
+            <p>The shape of the Lord's table surfaced on a sinking ship — took, gave thanks, broke. What that table actually <em>is</em>, and what we're saying when we take it, is where the midweek study, <a href="/res/know-what-you-believe.html">Know What You Believe</a>, goes on the church and the sacraments. This page stands on its own; the study opens it up.</p>
+        </div>
+    </div>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss reveal">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+        </div>
+        <div class="q-list">
+            <div class="q-item"><span class="q-num">01</span><p><strong>Prayed for daylight.</strong> Have you ever prayed only for morning — not for rescue, just to get through the night? What did it look like to keep going?</p></div>
+            <div class="q-item"><span class="q-num">02</span><p><strong>The lifeboat.</strong> What's your "lifeboat" — the private exit that would save you and leave the people God gave you to take their chances? What would it mean to cut the rope?</p></div>
+            <div class="q-item"><span class="q-num">03</span><p><strong>Promise and means.</strong> Compare verse 22 with verse 31. How do God's promise and your own obedience work together in a situation you're facing right now?</p></div>
+            <div class="q-item"><span class="q-num">04</span><p><strong>Grace out loud.</strong> Read verse 35. Where would giving thanks to God out loud feel hardest for you this week — and why there?</p></div>
+            <div class="q-item"><span class="q-num">05</span><p><strong>The same three verbs.</strong> Read Luke 22:19 and Luke 24:30–31 next to Acts 27:35. What does it mean to you that the shape of the Lord's table showed up on a sinking ship?</p></div>
+        </div>
+    </section>
+
+    <div class="send reveal">
+        <div class="send-in">
+            <p class="eb">The Send</p>
+            <p class="body">On the fourteenth night, faith didn't look dramatic. It looked like staying on the ship with the people God gave you, cutting the rope to your own lifeboat, and going first — taking the bread, giving thanks out loud, so the frightened people around you take heart. Do the simple thing in the hard room this week. Say grace somewhere that isn't church, and watch what the bread carries that a speech never could.</p>
+            <p class="pull">He took some bread, gave thanks to God in front of them all, and ate — and the whole ship took heart. <em>Grace said out loud in the worst room you have ever been in is a sermon.</em></p>
+        </div>
+    </div>
+
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share this deep dive</button>
+    </div>
+
+    <div class="strip-wrap reveal">
+        <p class="strip-eb">The Voyage · Acts 27</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back"><a href="/deepdives.html">← All Deep Dives</a></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-27-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="He Took Some Bread" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.xr-step').forEach(step => {
+            step.addEventListener('click', () => {
+                document.querySelectorAll('.xr-step').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.xr-panel').forEach(p => p.classList.remove('show'));
+                step.classList.add('active');
+                const t = document.getElementById(step.getAttribute('data-target'));
+                if (t) t.classList.add('show');
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts27RenderStrip === 'function') acts27RenderStrip('#series-strip', 'he-took-some-bread');
+        });
+
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = { title: 'He Took Some Bread — Deep Dive | The Living Room', text: 'The Last Supper verbs on a sinking ship — grace said out loud in the worst room you have ever been in. Exhibit II of The Voyage, Acts 27.', url: 'https://thelivingroom.io/res/deep/2026/he-took-some-bread.html' };
+            try { if (navigator.share) { await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share this deep dive', 2000); } } catch (e) {}
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Experts Were Wrong — Deep Dive | The Living Room</title>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,500;1,9..144,600&family=Outfit:wght@300;400;600;700&family=Spline+Sans+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:url"         content="https://thelivingroom.io/res/deep/2026/the-experts-were-wrong.html">
+    <meta property="og:title"       content="The Experts Were Wrong — Deep Dive">
+    <meta property="og:description" content="The captain, the owner, the centurion and most of the crew all vote to sail — and they are sincerely, professionally wrong. A soft south wind, a typhoon, and then the one man they overruled stands up: 'I believe God. It will be just as he said.' A deep dive into Acts 27:1–26.">
+    <meta property="og:image"       content="https://thelivingroom.io/img/voyage-storm.jpg">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="The Experts Were Wrong — Deep Dive">
+    <meta name="twitter:description" content="Exhibit I of The Voyage — when the whole room is wrong. Acts 27:1–26.">
+    <meta name="twitter:image"       content="https://thelivingroom.io/img/voyage-storm.jpg">
+
+    <script>
+        tailwind.config = { theme: { extend: {
+            colors: { cream: '#faf9f6', charcoal: '#1a1a1a', gold: '#c5a059', teal: '#2d5a5a' },
+            fontFamily: { display: ['Playfair Display', 'serif'], body: ['Outfit', 'sans-serif'] }
+        } } }
+    </script>
+
+    <style>
+        /* ── THE SHIP'S LOG — aged-parchment body, storm hero, navy night-watch signature ── */
+        :root {
+            --bg: #efeadd; --surface: #f7f3ea; --surface-sink: #efe7d6;
+            --ink: #16262f; --body: #3b4650; --muted: #857f6f;
+            --gold: #936414; --gold-bright: #c5984a;
+            --navy: #112433; --navy-2: #0c1b28; --parch: #efe7d6;
+            --teal: #2d5a5a; --line: #d9d0bc; --line-navy: #294055;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 400; line-height: 1.8; overflow-x: hidden; }
+        em.greek { font-style: italic; color: var(--gold); font-weight: 500; }
+
+        /* ── HERO — full-bleed storm ── */
+        .dd-hero { position: relative; color: var(--parch); background: var(--navy); overflow: hidden; }
+        .dd-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .5; filter: saturate(.74) contrast(1.05); }
+        .dd-hero-sh { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,20,30,.5) 0%, rgba(10,20,30,.28) 34%, rgba(10,20,30,.9) 100%), radial-gradient(130% 85% at 82% 0%, rgba(197,152,74,.16), transparent 55%); }
+        .dd-hero-in { position: relative; max-width: 47rem; margin: 0 auto; padding: 5rem 1.5rem 2.6rem; }
+        .dd-eyebrow { font-family: 'Spline Sans Mono', monospace; font-size: .62rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-bright); margin-bottom: .55rem; }
+        .dd-eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
+        .dd-eyebrow a:hover { border-color: var(--gold-bright); }
+        .dd-filed { font-family: 'Spline Sans Mono', monospace; font-size: .58rem; font-weight: 400; letter-spacing: .2em; text-transform: uppercase; color: #b4c2cd; margin-bottom: 1.4rem; }
+        .dd-title { font-family: 'Fraunces', serif; font-size: clamp(2.7rem, 8vw, 4.7rem); font-weight: 900; line-height: .98; letter-spacing: -.02em; text-wrap: balance; text-shadow: 0 2px 34px rgba(0,0,0,.4); }
+        .dd-underbar { width: 4.5rem; height: 2px; background: var(--gold-bright); margin: 1.4rem 0 1.5rem; }
+        .dd-lead { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: clamp(1.15rem, 3vw, 1.5rem); line-height: 1.5; color: #f1ead9; max-width: 33rem; }
+        .dd-logline { display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; margin-top: 2rem; padding-top: 1.1rem; border-top: 1px solid rgba(239,231,214,.18); font-family: 'Spline Sans Mono', monospace; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: #93a4b4; }
+        .dd-logline .hot { color: var(--gold-bright); }
+
+        /* ── SCRIPTURE ── */
+        .scripture-wrap { max-width: 44rem; margin: 2.2rem auto 0; padding: 0 1.5rem; }
+        .scripture-box { background: var(--surface-sink); border-left: 3px solid var(--navy); border-radius: 0 .5rem .5rem 0; padding: 1.8rem 2rem; }
+        .sb-ref { font-family: 'Spline Sans Mono', monospace; font-size: .58rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 1rem; }
+        .sb-text { font-size: .98rem; color: #33342f; line-height: 1.85; font-weight: 300; }
+        .sb-text b { color: var(--ink); font-weight: 600; }
+        .sb-v { color: var(--gold); font-weight: 700; font-size: .7rem; vertical-align: super; margin-right: .15rem; font-family: 'Fraunces', serif; }
+
+        /* ── VIDEO ── */
+        .yt-wrap { max-width: 52rem; margin: 3rem auto 0; padding: 0 1.5rem; }
+        .yt-frame { position: relative; border-radius: .75rem; overflow: hidden; box-shadow: 0 20px 50px rgba(17,36,51,.22); background: #dcd4c4; aspect-ratio: 16 / 9; }
+        .yt-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .yt-cap { text-align: center; color: var(--muted); font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; font-family: 'Spline Sans Mono', monospace; margin-top: 1rem; }
+
+        /* ── SECTIONS ── */
+        .dd-section { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.5rem 0; }
+        .dd-kicker { font-family: 'Spline Sans Mono', monospace; font-size: .6rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); margin-bottom: .9rem; display: block; }
+        .dd-h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 4.6vw, 2.5rem); font-weight: 700; line-height: 1.12; margin-bottom: 1.4rem; letter-spacing: -.015em; text-wrap: balance; }
+        .dd-h2 em { font-style: italic; color: var(--gold); }
+        .dd-p { font-size: 1.02rem; color: var(--body); line-height: 1.85; font-weight: 300; margin-bottom: 1.3rem; }
+        .dd-p b { color: var(--ink); font-weight: 600; }
+        .dd-p .land { color: var(--navy); font-weight: 600; font-style: italic; }
+
+        .note { background: var(--surface-sink); border: 1px solid var(--line); border-radius: .5rem; padding: 1.1rem 1.4rem; margin: .4rem 0 1.6rem; }
+        .note p { font-size: .86rem; color: #4d4b45; line-height: 1.72; font-weight: 300; }
+        .note .nt-tag { font-family: 'Spline Sans Mono', monospace; font-size: .56rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .4rem; }
+
+        /* ── SIGNATURE — THE NIGHT WATCH (dark) ── */
+        .xr-wrap { max-width: 46rem; margin: 4rem auto 0; padding: 0 1.5rem; }
+        .xr-inner { background: var(--navy); color: var(--parch); border-radius: .6rem; padding: 2.3rem 1.9rem 2.5rem; box-shadow: 0 30px 70px -40px rgba(10,20,30,.7); }
+        .xr-head { border-left: 2px solid var(--gold-bright); padding-left: 1.3rem; margin-bottom: 1.8rem; }
+        .xr-head .dd-kicker { color: var(--gold-bright); margin-bottom: .6rem; }
+        .xr-head h2 { font-family: 'Fraunces', serif; font-size: clamp(1.6rem, 4.5vw, 2.2rem); font-weight: 700; line-height: 1.12; letter-spacing: -.01em; color: var(--parch); }
+        .xr-head h2 em { font-style: italic; color: var(--gold-bright); }
+        .xr-head p { margin-top: .7rem; font-size: .9rem; color: #b4c2cd; font-weight: 300; }
+        .xr-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: .55rem; margin-bottom: 1.5rem; }
+        @media (max-width: 600px) { .xr-steps { grid-template-columns: 1fr; } }
+        .xr-step { border: 1px solid var(--line-navy); border-radius: .4rem; padding: .9rem 1rem; cursor: pointer; transition: border-color .2s, background .2s; background: var(--navy-2); }
+        .xr-step:hover { border-color: #3c5a74; }
+        .xr-step.active { border-color: var(--gold-bright); background: #122c3f; }
+        .xr-step .xs-n { font-family: 'Spline Sans Mono', monospace; font-weight: 600; font-size: .56rem; letter-spacing: .14em; text-transform: uppercase; color: #8296a6; display: block; }
+        .xr-step.active .xs-n { color: var(--gold-bright); }
+        .xr-step .xs-l { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.02rem; color: var(--parch); margin-top: .15rem; line-height: 1.15; }
+        .xr-panel { display: none; animation: xrIn .4s ease; }
+        .xr-panel.show { display: block; }
+        @keyframes xrIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        .xr-ref { font-family: 'Spline Sans Mono', monospace; font-weight: 600; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-bright); margin-bottom: .9rem; }
+        .xr-line { display: flex; gap: .9rem; margin-bottom: .7rem; }
+        .xr-line .xl-n { font-family: 'Spline Sans Mono', monospace; color: var(--gold-bright); font-size: .72rem; min-width: 1.4rem; text-align: right; padding-top: .28rem; font-variant-numeric: tabular-nums; }
+        .xr-line p { font-size: .93rem; color: #c7d2db; line-height: 1.72; font-weight: 300; }
+        .xr-line p b { color: var(--parch); font-weight: 600; }
+        .xr-line p em { color: #f1ead9; font-style: italic; }
+
+        /* ── DISCUSSION ── */
+        .discuss { max-width: 44rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .discuss-head { border-left: 2px solid var(--gold); padding-left: 1.3rem; margin-bottom: 1.8rem; }
+        .discuss-head .eb { font-family: 'Spline Sans Mono', monospace; font-size: .6rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); }
+        .discuss-head h2 { font-family: 'Fraunces', serif; font-size: clamp(1.7rem, 5vw, 2.3rem); font-weight: 700; margin-top: .5rem; }
+        .q-item { display: flex; gap: 1.1rem; padding: 1.3rem 0; border-bottom: 1px solid var(--line); }
+        .q-num { font-family: 'Fraunces', serif; font-style: italic; font-weight: 700; font-size: 1.1rem; color: var(--gold); flex-shrink: 0; width: 1.6rem; }
+        .q-item p { font-size: .95rem; color: var(--body); line-height: 1.7; font-weight: 300; }
+        .q-item p strong { color: var(--ink); font-weight: 600; }
+
+        /* ── COMPANION ── */
+        .companion { max-width: 44rem; margin: 2.4rem auto 0; padding: 0 1.5rem; }
+        .companion-in { background: var(--surface-sink); border: 1px solid var(--line); border-radius: .5rem; padding: 1.2rem 1.5rem; }
+        .companion-in .co-tag { font-family: 'Spline Sans Mono', monospace; font-size: .56rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .4rem; }
+        .companion-in p { font-size: .85rem; color: var(--body); line-height: 1.65; font-weight: 300; }
+        .companion-in a { color: var(--gold); font-weight: 600; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .2s; }
+        .companion-in a:hover { border-color: var(--gold); }
+
+        /* ── SEND ── */
+        .send { max-width: 42rem; margin: 4rem auto 0; padding: 3rem 1.5rem 0; }
+        .send-in { border-left: 2px solid var(--gold); padding-left: 1.7rem; }
+        .send .eb { font-family: 'Spline Sans Mono', monospace; font-size: .6rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.1rem; }
+        .send p.body { font-size: 1.04rem; color: var(--body); line-height: 1.85; font-weight: 300; }
+        .send .pull { font-family: 'Fraunces', serif; font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; line-height: 1.3; color: var(--ink); margin-top: 1.5rem; letter-spacing: -.01em; }
+        .send .pull em { font-style: italic; color: var(--gold); }
+
+        .share-wrap { text-align: center; margin-top: 2.5rem; }
+        .share-btn { display: inline-flex; align-items: center; gap: .6rem; padding: .75rem 1.8rem; border: 1px solid var(--line); border-radius: 100px; background: var(--surface); color: var(--ink); font-family: 'Spline Sans Mono', monospace; font-size: .6rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+        .share-btn:hover { background: var(--navy); color: var(--parch); border-color: var(--navy); }
+
+        .strip-wrap { max-width: 52rem; margin: 4.5rem auto 0; padding: 0 1rem; }
+        .strip-eb { text-align: center; font-family: 'Spline Sans Mono', monospace; font-size: .6rem; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+        .dd-back { text-align: center; padding: 3rem 1.5rem 4.5rem; }
+        .dd-back a { font-family: 'Spline Sans Mono', monospace; font-size: .6rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color .2s, border-color .2s; }
+        .dd-back a:hover { color: var(--gold); border-color: var(--gold); }
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+
+<body class="antialiased" data-current="resources">
+
+    <div id="header-placeholder"></div>
+
+    <header class="dd-hero">
+        <img class="dd-hero-img" src="/img/voyage-storm.jpg" alt="A ship running before a storm">
+        <div class="dd-hero-sh"></div>
+        <div class="dd-hero-in">
+            <p class="dd-eyebrow"><a href="/res/deep/2026/the-voyage.html">The Voyage &nbsp;·&nbsp; Acts 27</a></p>
+            <p class="dd-filed">Exhibit I · Oct 18 · Communion · Acts 27:1–26</p>
+            <h1 class="dd-title">The Experts<br>Were Wrong</h1>
+            <div class="dd-underbar"></div>
+            <p class="dd-lead">Everyone qualified votes to sail. They had real reasons. They were still wrong — and the man they overruled stands up in the wreckage and refuses to make them pay for it.</p>
+            <div class="dd-logline"><span>Acts 27:1–26</span><span class="hot">Fair Havens → open sea</span><span>Eurakylōn · typhoon</span><span>all hope gone</span></div>
+        </div>
+    </header>
+
+    <div class="scripture-wrap reveal">
+        <div class="scripture-box">
+            <span class="sb-ref">Acts 27:21–25 · NLT</span>
+            <p class="sb-text">
+                <span class="sb-v">21</span>"Men, you should have listened to me in the first place and not left Crete. You would have avoided all this damage and loss.
+                <span class="sb-v">22</span>But take courage! None of you will lose your lives, even though the ship will go down.
+                <span class="sb-v">23</span>For last night an angel of the God to whom I belong and whom I serve stood beside me,
+                <span class="sb-v">24</span>and he said, 'Don't be afraid, Paul… God in his goodness has granted safety to everyone sailing with you.'
+                <span class="sb-v">25</span><b>So take courage! For I believe God. It will be just as he said."</b>
+            </p>
+        </div>
+    </div>
+
+    <section class="yt-wrap" id="yt-section" style="display:none;">
+        <div class="yt-frame" id="yt-mount"></div>
+        <p class="yt-cap">Watch the message</p>
+    </section>
+
+    <!-- ══════════ THE VOTE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — the vote</span>
+        <h2 class="dd-h2">A room full of experts, unanimously <em>wrong</em></h2>
+        <p class="dd-p">This wreck wasn't caused by idiots or villains. <b>It was caused by a meeting.</b> At Fair Havens the one man who warns against sailing is a prisoner — and count who is on the other side: the <b>centurion</b> (authority), the <b>captain</b> (expertise), the <b>owner</b> whose grain is in the hold (money), and most of the crew (the majority). <span class="land">Rank, skill, capital and democracy, all lined up against one prisoner.</span> And they weren't reckless — Fair Havens genuinely was an exposed harbor, and Phoenix genuinely was better. Paul wasn't a landlubber with a feeling, either; he'd already been shipwrecked three times (2 Cor 11:25). <b>They had real reasons. They were still wrong.</b></p>
+        <p class="dd-p">And notice the name of the place they left: <em>Fair Havens.</em> The safe harbor had "fair" right there in it. They didn't leave because it was dangerous — they left because it wasn't good enough, chasing a nicer winter up the coast at Phoenix. <span class="land">They never reached it.</span> So be careful what you take from this: it isn't "ignore the experts, trust your gut" — Luke is a doctor, not anti-expertise. The point is narrower and harder — a room full of competent people can be unanimous and still be wrong, and being outvoted doesn't make you wrong. <b>Most shipwrecks aren't decided in storms. They're decided in fair havens</b> — in the calm, in the place called safe, by people who wanted comfort more than safety.</p>
+        <p class="dd-p">Then the detail that preaches itself (v.13): <em>"when a light wind began blowing from the south, the sailors thought they could make it."</em> Read it twice. <span class="land">The confirmation they were waiting for was the weather agreeing with the decision they had already made.</span> It lasted less than a day. A soft breeze is not the same thing as God's approval — <b>circumstances that flatter a decision you've already taken are not guidance.</b> The sailors read the weather as a verdict. Paul read it as weather.</p>
+    </section>
+
+    <!-- ══════════ OVER THE SIDE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Beneath the surface — over the side</span>
+        <h2 class="dd-h2">Everything trusted goes over, in order of <em>value</em></h2>
+        <p class="dd-p">The wind gets a name: <em class="greek">Eurakylōn</em> — half Greek (<em>Euros</em>, the east wind), half Latin (<em>Aquilo</em>, the north). <span class="land">That's sailors' slang, written down by a doctor who heard them shouting it.</span> And then the crew fights for the ship — five measures in a few verses: haul the lifeboat aboard (and Luke writes <em>"we"</em> hoisted it — the passengers were on the ropes too, blisters and all), bind ropes around the hull to hold it together, drop the sea anchor in terror of the African sandbars, throw the cargo over — the owner's grain, the thing the whole trip was <em>for</em> — and finally the ship's own gear. <b>Everything they trusted goes over the side, in order of value.</b></p>
+        <p class="dd-p">Then the worst line in the passage (v.20): <em>"the terrible storm raged for many days, blotting out the sun and the stars, until at last all hope was gone."</em> On an ancient ship, no sun and no stars meant no navigation — no compass, no sextant. <span class="land">They didn't merely feel lost. They were lost, by instrument.</span> And the Greek keeps a small word the NLT trims: all hope of <em>our</em> being saved was abandoned. Luke is one of the "we" — <b>the Christian doctor on that ship tells you, in writing, that he gave up too.</b> He could have written himself as the calm one. He didn't. The word of courage doesn't come before the despair; it comes in the middle of it.</p>
+        <div class="note">
+            <span class="nt-tag">What the order of value tells you</span>
+            <p>Your life is not a grain ship, but people are people: <b>pressure doesn't create your priorities — it reveals them.</b> You find out what you trusted by what goes over the side first, and what you're still clutching at the end. And if that storm has a familiar ring, it should — in Jonah 1:5 the desperate sailors throw the cargo overboard too, while the prophet sleeps in the hold. Hold that picture. Luke's prophet is not asleep.</p>
+        </div>
+    </section>
+
+    <!-- ══════════ SIGNATURE — THE NIGHT WATCH ══════════ -->
+    <div class="xr-wrap reveal">
+        <div class="xr-inner">
+            <div class="xr-head">
+                <span class="dd-kicker">The Night Watch</span>
+                <h2>Everything Over the <em>Side</em></h2>
+                <p>Watch the storm strip the ship, one trusted thing at a time — until there's nothing left to navigate by, and one voice stands up in the dark.</p>
+            </div>
+
+            <div class="xr-steps">
+                <div class="xr-step active" data-target="xr-1"><span class="xs-n">Watch I</span><span class="xs-l">The order of value</span></div>
+                <div class="xr-step" data-target="xr-2"><span class="xs-n">Watch II</span><span class="xs-l">Lost by instrument</span></div>
+                <div class="xr-step" data-target="xr-3"><span class="xs-n">Watch III</span><span class="xs-l">The one voice</span></div>
+            </div>
+
+            <div class="xr-panel show" id="xr-1">
+                <div class="xr-ref">Jettisoned — Acts 27:16–19</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>The towed lifeboat, hauled aboard. The hull, bound with ropes. The sea anchor, dropped. Then <b>the cargo</b> — the owner's grain, the reason for the voyage. Then <b>the ship's own gear.</b></p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>Everything goes over in order of value. <em>Pressure doesn't create what you trust — it shows you, by what you throw over first and what you clutch last.</em></p></div>
+            </div>
+            <div class="xr-panel" id="xr-2">
+                <div class="xr-ref">No sun, no stars — Acts 27:20</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>Blot out the sun and the stars on an ancient ship and you haven't just lost comfort — you've lost your instruments. <b>They were lost, by instrument.</b></p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>And Luke writes it <em>"our</em> hope was gone." The believer on board doesn't exempt himself. <em>Scripture lets a Christian say "I had no hope left" — and leaves it in the record.</em></p></div>
+            </div>
+            <div class="xr-panel" id="xr-3">
+                <div class="xr-ref">Into the dark — Acts 27:25</div>
+                <div class="xr-line"><span class="xl-n">01</span><p>The sailors' first move was <em>bahala na</em> — let the wind take it, whatever happens happens (v.15). Into that, a prisoner stands and says the opposite.</p></div>
+                <div class="xr-line"><span class="xl-n">02</span><p>Not "who knows?" but <b>"he said."</b> <em>"I believe God. It will be just as he said."</em> The courage isn't optimism about the weather — it's a promise, said out loud, twice (vv.22, 25), with the despair still in the room.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════ CLOSE ══════════ -->
+    <section class="dd-section reveal">
+        <span class="dd-kicker">Why this is Exhibit I · same sea, opposite prophet</span>
+        <h2 class="dd-h2">The man they <em>overruled</em></h2>
+        <p class="dd-p">Luke wants you to see Jonah. <b>Same sea, opposite prophet.</b> Jonah's storm came <em>because</em> he disobeyed; Paul's came even though he obeyed — so don't let anyone tell you every storm is a punishment. Jonah slept in the hold; Paul is awake, on his feet, talking to the crew. Jonah's sailors were saved by throwing the prophet out; Paul's crew will be saved by keeping him aboard (v.31). And both point past themselves to one more boat — <span class="land">Jesus asleep in a storm on the lake, who stands up, stills it, and asks, "Where is your faith?"</span> He had already told them where they were going: <em>"Let's cross to the other side."</em> So had God told Paul: <em>you must preach in Rome.</em> Faith in a storm isn't in the boat or the weather. It's in what he already said.</p>
+        <p class="dd-p">And this lands at the Table, because the Table is where we say whose we are. Paul's steadiness started with one phrase — <em>"the God to whom I belong and whom I serve."</em> Belonging first; service follows. <span class="land">You don't come to this table to earn belonging. You come because you already do.</span> And one more sentence is hard to hear beside the bread: <em>"the ship will go down… none of you will lose your lives."</em> Luke doesn't make the ship a picture of Jesus, and neither will we — but a body was given one night so that people like us could come home, and that is the voyage this meal announces: <b>he is coming again. It will be just as he said.</b></p>
+    </section>
+
+    <!-- companion -->
+    <div class="companion reveal">
+        <div class="companion-in">
+            <span class="co-tag">A companion study</span>
+            <p>Paul's courage rests on one thing — that God is trustworthy, and his promises hold: <em>"I believe God, in his character and covenant."</em> That's the ground the midweek study, <a href="/res/know-what-you-believe.html">Know What You Believe</a>, works over when it asks how we can know God has spoken and why his word can be trusted when the sun and stars go out. This page stands on its own; the study takes it further.</p>
+        </div>
+    </div>
+
+    <!-- ══════════ DISCUSSION ══════════ -->
+    <section class="discuss reveal">
+        <div class="discuss-head">
+            <span class="eb">The Living Room Circle</span>
+            <h2>Discussion &amp; Reflection</h2>
+        </div>
+        <div class="q-list">
+            <div class="q-item"><span class="q-num">01</span><p><strong>The vote.</strong> The centurion had good reasons and was still wrong. When have you been outvoted by sensible people — or been the sensible majority and wrong? What did you do next?</p></div>
+            <div class="q-item"><span class="q-num">02</span><p><strong>The south wind.</strong> What decision are you waiting for circumstances to "confirm"? What would you decide if the breeze weren't blowing?</p></div>
+            <div class="q-item"><span class="q-num">03</span><p><strong>Over the side.</strong> When real pressure hits, what goes overboard first in your life — prayer, church, kindness at home — and what are you still clutching at the end? What does that order tell you about what you actually trust?</p></div>
+            <div class="q-item"><span class="q-num">04</span><p><strong>Whose you are.</strong> Paul calls him "the God to whom I belong and whom I serve." Do you serve God in order to belong, or because you already do? What would change this week if you believed you were his?</p></div>
+            <div class="q-item"><span class="q-num">05</span><p><strong>Where is your faith?</strong> Read Luke 8:22–25 next to Acts 27:25. What has God actually said — a real promise in its real context, not a south wind — that you can say <em>"I believe God. It will be just as he said"</em> over this week?</p></div>
+        </div>
+    </section>
+
+    <div class="send reveal">
+        <div class="send-in">
+            <p class="eb">The Send</p>
+            <p class="body">You will get outvoted, and sometimes you'll have to get on the ship anyway. When the stars go out, don't wait for a soft breeze to tell you what you already decided, and don't make anybody pay for being right. Find one thing God has actually said, and say Paul's sentence over it with your whole body — then give courage to the people in the storm with you instead of a lecture.</p>
+            <p class="pull">The experts were wrong, the storm took everything, and the man they overruled stood up and said: <em>I believe God. It will be just as he said.</em></p>
+        </div>
+    </div>
+
+    <div class="share-wrap reveal">
+        <button class="share-btn" id="share-btn">Share this deep dive</button>
+    </div>
+
+    <div class="strip-wrap reveal">
+        <p class="strip-eb">The Voyage · Acts 27</p>
+        <div id="series-strip"></div>
+    </div>
+
+    <div class="dd-back"><a href="/deepdives.html">← All Deep Dives</a></div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/js/main.js" defer></script>
+    <script src="acts-27-series.js" defer></script>
+    <script>
+        const SERMON_YT_ID = '';
+        if (SERMON_YT_ID) {
+            document.getElementById('yt-mount').innerHTML =
+                '<iframe src="https://www.youtube.com/embed/' + SERMON_YT_ID + '" title="The Experts Were Wrong" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+            document.getElementById('yt-section').style.display = 'block';
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+        document.querySelectorAll('.xr-step').forEach(step => {
+            step.addEventListener('click', () => {
+                document.querySelectorAll('.xr-step').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.xr-panel').forEach(p => p.classList.remove('show'));
+                step.classList.add('active');
+                const t = document.getElementById(step.getAttribute('data-target'));
+                if (t) t.classList.add('show');
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (typeof acts27RenderStrip === 'function') acts27RenderStrip('#series-strip', 'the-experts-were-wrong');
+        });
+
+        document.getElementById('share-btn').addEventListener('click', async () => {
+            const data = { title: 'The Experts Were Wrong — Deep Dive | The Living Room', text: 'A room full of experts, unanimously wrong — and the prisoner they overruled: "I believe God." Exhibit I of The Voyage, Acts 27.', url: 'https://thelivingroom.io/res/deep/2026/the-experts-were-wrong.html' };
+            try { if (navigator.share) { await navigator.share(data); } else { await navigator.clipboard.writeText(data.url); const b = document.getElementById('share-btn'); b.textContent = 'Link copied ✓'; setTimeout(() => b.textContent = 'Share this deep dive', 2000); } } catch (e) {}
+        });
+    </script>
+</body>
+</html>
