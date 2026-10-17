@@ -25,11 +25,11 @@ const ACTS27 = {
             interactive: 'Everything Over the Side'
         },
         {
-            n: 'II', slug: 'he-took-some-bread',
-            title: 'He Took Some Bread', date: 'Oct 25', passage: 'Acts 27:27–44',
+            n: 'II', slug: 'the-rope-and-the-promise',
+            title: 'The Rope and the Promise', date: 'Oct 25', passage: 'Acts 27:27–44',
             accent: '#c5984a', live: false,
-            claim: 'What does faith look like on the fourteenth night?',
-            interactive: 'Took · Gave Thanks · Broke'
+            claim: 'Who has God bound you to, and will you stay?',
+            interactive: 'Cut the Rope'
         }
     ]
 };
@@ -76,7 +76,7 @@ function acts27DetectLive(root) {
 /* ----------------------------------------------------------------------------
    DEEP-DIVE PAGES — render a compact cross-nav strip back to the hub and across
    to the sibling study. Call once per page with the current study's slug:
-       acts27RenderStrip('#series-strip', 'he-took-some-bread');
+       acts27RenderStrip('#series-strip', 'the-rope-and-the-promise');
    -------------------------------------------------------------------------- */
 function acts27RenderStrip(selector, currentSlug) {
     const host = document.querySelector(selector);
