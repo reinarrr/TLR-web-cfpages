@@ -20,7 +20,7 @@ const ACTS27 = {
         {
             n: 'I', slug: 'the-experts-were-wrong',
             title: 'The Experts Were Wrong', date: 'Oct 18', passage: 'Acts 27:1–26',
-            accent: '#c5984a', live: false,
+            accent: '#c5984a', live: true,
             claim: 'When the room is wrong, who do you believe?',
             interactive: 'Everything Over the Side'
         },
