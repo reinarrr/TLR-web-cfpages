@@ -27,7 +27,7 @@ const ACTS27 = {
         {
             n: 'II', slug: 'the-rope-and-the-promise',
             title: 'The Rope and the Promise', date: 'Oct 25', passage: 'Acts 27:27–44',
-            accent: '#c5984a', live: false,
+            accent: '#c5984a', live: true,
             claim: 'Who has God bound you to, and will you stay?',
             interactive: 'Cut the Rope'
         }
